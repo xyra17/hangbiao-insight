@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-ca0e9bbeb0ca945f",
+      "review_id": "e164559515767f5209f182f3cadc351084c69524",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "negative",
+      "evidence_span": "It very slow to charge",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "d0091aae-351b-414e-a8db-6cd63b8173fb"
+    },
+    {
+      "prediction_id": "SP-48e91217009d754b",
+      "review_id": "e164559515767f5209f182f3cadc351084c69524",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "positive",
+      "evidence_span": "it doesn't stop charging when the battery is at 100%, which is why I bought it",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "d0091aae-351b-414e-a8db-6cd63b8173fb"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

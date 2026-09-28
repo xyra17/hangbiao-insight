@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7b607a969450eee4",
+      "review_id": "bba31d61e4b33d7f52551501aa841c26e32ebd35",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "dual_port_multi_device",
+      "polarity": "positive",
+      "evidence_span": "Double port is the best",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-rclo6uxyf7c4v1l4pu4f1i"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

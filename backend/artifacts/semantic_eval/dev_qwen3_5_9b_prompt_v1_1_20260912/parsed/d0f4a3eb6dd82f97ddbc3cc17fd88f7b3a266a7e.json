@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7b67e71e81cb1347",
+      "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "positive",
+      "evidence_span": "Very easy to install",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-dfwc64c6c68yd36hua2tpq"
+    },
+    {
+      "prediction_id": "SP-10d70d10869fc13f",
+      "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "positive",
+      "evidence_span": "good protection",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-dfwc64c6c68yd36hua2tpq"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

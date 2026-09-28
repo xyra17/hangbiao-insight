@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-0632d2344be74546",
+      "review_id": "9041b5e62c1e0cc5630f2134c4e5bea6050460f0",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "stopped_working",
+      "polarity": "negative",
+      "evidence_span": "All three have broken within 2 weeks.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-v0jabytcybmzo8c5xtig7j"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

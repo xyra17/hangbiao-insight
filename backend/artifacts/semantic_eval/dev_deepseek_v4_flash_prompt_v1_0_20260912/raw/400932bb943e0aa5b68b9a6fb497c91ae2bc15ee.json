@@ -1,0 +1,216 @@
+{
+  "review_id": "400932bb943e0aa5b68b9a6fb497c91ae2bc15ee",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "82c0d3c8-a861-4a36-b6d0-fc6a4eefbb25",
+  "raw_response": {
+    "id": "82c0d3c8-a861-4a36-b6d0-fc6a4eefbb25",
+    "created_at": 1789211104.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "5e7a23a5-b753-43a4-923c-842f9a6666e0",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema JSON. Review text: \"It is great!\\nWorked out well for me\". Need extract product-review semantic claims. Zero or multiple. Need primary/secondary taxonomy valid pair. Polarity independent. Evidence exact continuous substring from source_text. We need determine if any supported product claim exists. The text is vague: \"It is great!\" and \"Worked out well for me\". Does this constitute product claim? It is general performance? \"Worked out well\" could be general_performance positive. But no specific product feature. Taxonomy has function_performance: general_performance. This is likely supported as general performance? Evidence \"Worked out well for me\" exact substring includes newline? Source: \"It is great!\\nWorked out well for me\". Evidence span can be \"Worked out well for me\" continuous substring. Primary function_performance, secondary general_performance, polarity positive. Also \"It is great!\" could be general? But it's very vague overall product satisfaction. Could be other_unknown uncategorized? We need decide. \"It is great!\" is general sentiment, no product claim? \"Worked out well for me\" implies it functioned well. So one claim function_performance/general_performance positive. Maybe \"It is great!\" also a claim? Could duplicate same general performance. But task says extract claims; if no supported product claim, empty. Since \"Worked out well\" is general performance. We can include one. Need exact evidence. Maybe evidence_span \"Worked out well for me\" without newline. It is continuous substring. Polarity positive. Primary function_performance, secondary general_performance. Could \"It is great!\" be product quality? Hmm not specific. Avoid overextracting. Return JSON only.\n\nNeed ensure valid schema. {\"claims\":[{...}]}. \nLet's craft.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "82c0d3c8-a861-4a36-b6d0-fc6a4eefbb25-0",
+        "status": "completed"
+      },
+      {
+        "id": "b5088751-664f-44e0-b673-c47dae80aa32",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Worked out well for me\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211107.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1028,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 428,
+      "output_tokens_details": {
+        "reasoning_tokens": 389
+      },
+      "total_tokens": 1456
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Worked out well for me\"}]}"
+}

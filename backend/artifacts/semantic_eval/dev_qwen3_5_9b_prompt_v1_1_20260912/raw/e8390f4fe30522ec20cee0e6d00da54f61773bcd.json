@@ -1,0 +1,50 @@
+{
+  "review_id": "e8390f4fe30522ec20cee0e6d00da54f61773bcd",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-7dub1hk8ervc94ve3fb2jk",
+  "raw_response": {
+    "id": "chatcmpl-7dub1hk8ervc94ve3fb2jk",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"Didn't fit iPhone 11 Pro.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"negative\", \"evidence_span\": \"The glass covers were too large to fit properly over the phone screen and didn't adhere to the screen, especially when I placed my otter box on the phone.\"}]}"
+        }
+      }
+    ],
+    "created": 1789185559,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 110,
+      "prompt_tokens": 627,
+      "total_tokens": 737,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 109,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"Didn't fit iPhone 11 Pro.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"negative\", \"evidence_span\": \"The glass covers were too large to fit properly over the phone screen and didn't adhere to the screen, especially when I placed my otter box on the phone.\"}]}"
+}

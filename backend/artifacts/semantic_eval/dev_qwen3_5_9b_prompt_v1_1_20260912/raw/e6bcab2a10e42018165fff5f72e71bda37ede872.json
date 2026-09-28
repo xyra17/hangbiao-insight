@@ -1,0 +1,50 @@
+{
+  "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-b8jy5xqtn2udfisssijdbm",
+  "raw_response": {
+    "id": "chatcmpl-b8jy5xqtn2udfisssijdbm",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"charges slowly\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"overheats my phone sometimes\"}]}"
+        }
+      }
+    ],
+    "created": 1789185707,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 76,
+      "prompt_tokens": 604,
+      "total_tokens": 680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 75,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"charges slowly\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"overheats my phone sometimes\"}]}"
+}

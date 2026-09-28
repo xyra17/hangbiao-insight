@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-75f9fb86ceb3f1ab",
+      "review_id": "0840c321bab59e98a52c37c2f30c8f8d0976ee37",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "power_output",
+      "polarity": "negative",
+      "evidence_span": "It didn't have enough amperage to power my USB devices.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "903db99a-bb4b-48a9-8b9e-de41c7a2d455"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

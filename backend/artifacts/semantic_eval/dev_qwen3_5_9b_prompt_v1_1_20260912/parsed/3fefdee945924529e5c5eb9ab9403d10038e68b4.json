@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-8a394db52173dce7",
+      "review_id": "3fefdee945924529e5c5eb9ab9403d10038e68b4",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "did not work with my phone",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-4rg77qx4bl6zr05ry4fly"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,86 @@
+{
+  "version": "taxonomy-v1-draft",
+  "design": {
+    "unit": "topic_claim",
+    "multi_label": true,
+    "topic_has_fixed_polarity": false,
+    "evidence_span_required": true,
+    "rating_is_not_polarity": true
+  },
+  "polarity": [
+    "positive",
+    "negative",
+    "neutral"
+  ],
+  "topics": {
+    "function_performance": {
+      "definition": "产品核心功能是否能够正常实现，以及性能表现如何。",
+      "subtopics": [
+        "charging_success",
+        "charging_speed",
+        "protection_effectiveness",
+        "general_performance"
+      ]
+    },
+    "reliability_durability": {
+      "definition": "产品是否稳定工作，以及经过一段时间使用后是否失效或损坏。",
+      "subtopics": [
+        "stopped_working",
+        "intermittent_failure",
+        "short_lifespan",
+        "cracking_breakage",
+        "wear_damage"
+      ]
+    },
+    "compatibility_fit": {
+      "definition": "产品与设备、保护壳、接口、尺寸等是否匹配。",
+      "subtopics": [
+        "device_compatibility",
+        "case_compatibility",
+        "size_fit",
+        "port_fit"
+      ]
+    },
+    "safety_thermal": {
+      "definition": "产品是否出现异常发热、融化、起火或异常声音等安全信号。",
+      "subtopics": [
+        "overheating",
+        "melting_fire",
+        "abnormal_noise"
+      ]
+    },
+    "usability_installation": {
+      "definition": "产品安装、定位、操作和日常使用是否方便。",
+      "subtopics": [
+        "positioning_alignment",
+        "installation_difficulty",
+        "bubbles_adhesion",
+        "ease_of_use"
+      ]
+    },
+    "convenience_value": {
+      "definition": "多设备能力、便携性、价格价值以及使用便利性。",
+      "subtopics": [
+        "dual_port_multi_device",
+        "portability_size",
+        "price_value",
+        "general_convenience"
+      ]
+    },
+    "product_quality": {
+      "definition": "材料、做工、出厂状态及附件本身的质量。",
+      "subtopics": [
+        "material_build_quality",
+        "defective_on_arrival",
+        "accessory_condition"
+      ]
+    },
+    "other_unknown": {
+      "definition": "评论信息不足，或者无法可靠归入已有 Topic。",
+      "subtopics": [
+        "insufficient_information",
+        "uncategorized"
+      ]
+    }
+  }
+}

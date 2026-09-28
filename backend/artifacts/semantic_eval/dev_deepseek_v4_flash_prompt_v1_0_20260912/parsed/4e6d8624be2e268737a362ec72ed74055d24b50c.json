@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-6b5219ccb436456e",
+      "review_id": "4e6d8624be2e268737a362ec72ed74055d24b50c",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "Doesn't work with Samsung S7",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "5574fc9a-7f2c-464b-aca1-63655f98e8fb"
+    },
+    {
+      "prediction_id": "SP-185c6c88a7785614",
+      "review_id": "4e6d8624be2e268737a362ec72ed74055d24b50c",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "would not charge my phone.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "5574fc9a-7f2c-464b-aca1-63655f98e8fb"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

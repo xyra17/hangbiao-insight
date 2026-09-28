@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-66036e1c4c308dfd",
+      "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "negative",
+      "evidence_span": "charges slowly",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-b8jy5xqtn2udfisssijdbm"
+    },
+    {
+      "prediction_id": "SP-134ad831b86f1863",
+      "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "overheating",
+      "polarity": "negative",
+      "evidence_span": "overheats my phone sometimes",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-b8jy5xqtn2udfisssijdbm"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5e43750863221df8",
+      "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "Doesn't charge well.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-piqnddnz87jn4k5jnbdzfk"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7b67e71e81cb1347",
+      "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "positive",
+      "evidence_span": "Very easy to install",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "0641e2cf-6a18-4191-ba39-393ce37b2e6c"
+    },
+    {
+      "prediction_id": "SP-10d70d10869fc13f",
+      "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "positive",
+      "evidence_span": "good protection",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "0641e2cf-6a18-4191-ba39-393ce37b2e6c"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

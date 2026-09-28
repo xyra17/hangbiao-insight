@@ -1,0 +1,50 @@
+{
+  "review_id": "2edc45f5509a812a729dbc53fb7ddc10c6780c92",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-88wyoslqcm97v9x9c8ni2c",
+  "raw_response": {
+    "id": "chatcmpl-88wyoslqcm97v9x9c8ni2c",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Worked twice before breaking\"}]}"
+        }
+      }
+    ],
+    "created": 1789177432,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 43,
+      "prompt_tokens": 452,
+      "total_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 42,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Worked twice before breaking\"}]}"
+}

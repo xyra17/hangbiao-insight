@@ -1,0 +1,216 @@
+{
+  "review_id": "93962cf3339e99078fa34842e7e90518b3591da2",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d98dbbd5-50e6-4316-8c73-3593bf9cdb35",
+  "raw_response": {
+    "id": "d98dbbd5-50e6-4316-8c73-3593bf9cdb35",
+    "created_at": 1789210794.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "8860e32f-71ea-46c5-a1a2-e9d896e6def3",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims JSON. Need parse review. Source_text: \"One didn’t work\\nI paid for two, but only one works. Do want to return it because my son really needs one now, but very disappointed with the other one not working.\"\n\nNeed identify semantic claims. Product likely charging? B0BYJ8ZVWH unknown. \"One didn’t work\", \"paid for two, but only one works\", \"other one not working\". Claims about reliability_durability stopped_working? defective_on_arrival? Need taxonomy. Review says one didn't work, only one works, other not working. This is product malfunction. Primary reliability_durability, secondary stopped_working. Polarity negative. Evidence span exact substring continuous. Could use \"One didn’t work\" or \"only one works\" or \"other one not working\". Need maybe one claim per issue? Multiple claims? It mentions paid for two but only one works, one didn't work, other not working. These are same claim likely. Could extract one claim: reliability_durability / stopped_working negative evidence \"One didn’t work\" or \"only one works\". But \"One didn’t work\" indicates one unit didn't work. The \"other one not working\" duplicate. Need exact continuous substring from SOURCE_TEXT. Could use \"One didn’t work\" includes curly apostrophe. Ensure exact from source. Source has \"One didn’t work\\nI paid...\" yes.\n\nCould also claim product_quality defective_on_arrival? \"One didn’t work\" could be defective on arrival. But given taxonomy: reliability_durability stopped_working more specific. Need exactly one valid pair per claim. The review states product didn't work, not necessarily stopped after use. \"stopped_working\" implies stopped working; \"defective_on_arrival\" if arrived broken. Text doesn't specify arrival? \"paid for two, but only one works\" could be DOA. But title \"One didn’t work\". Hmm. Need independent determine. Should primary reliability_durability secondary stopped_working or product_quality defective_on_arrival? The taxonomy includes stopped_working under reliability_durability; defective_on_arrival under product_quality. \"One didn’t work\" is nonfunctional, could be defective on arrival. But \"stopped_working\" isn't exactly \"didn't work\" unless it stopped. The text: \"only one works\" and \"other one not working\" from outset. So product_quality defective_on_arrival maybe more apt? However \"not working\" usually general reliability. Let's examine definitions: reliability_durability: general_durability, stopped_working, intermittent_failure, short_lifespan, cracking_breakage, wear_damage. product_quality: material_build_quality, defective_on_arrival, accessory_condition. Since bought two, one didn't work upon receipt/use, likely defective_on_arrival. But the title \"One didn’t work\" not \"arrived broken\". There is no explicit arrival. Could choose stopped_working as broad. Polarity negative. Evidence \"One didn’t work\". That is likely expected.\n\nNeed maybe include claim about return desire? \"Do want to return it because...\" Not product claim? Could be convenience? Return due to malfunction not separate. \"my son really needs one now\" no.\n\nNeed maybe multiple claims: paid for two but only one works = quantity/defective, and other one not working = stopped_working. They are same. Could include one claim to avoid duplication. The schema allows multiple but no need.\n\nNeed exact evidence continuous substring. Could use \"only one works\" but that's positive? Actually \"only one works\" negative because implies one doesn't. But evidence span can be \"One didn’t work\" exact. Let's produce JSON with claims array one claim.\n\nNeed ensure apostrophe curly in evidence_span. Use exact character from source: \"One didn’t work\" includes ’. We can copy from source text: One didn’t work. JSON UTF-8 okay.\n\nPrimary topic: reliability_durability. Secondary: stopped_working. Polarity negative. Evidence span: \"One didn’t work\". Or \"the other one not working\" exact. The latter clearly \"not working\", but \"stopped_working\" perhaps. Use \"the other one not working\" maybe exact substring. It's negative and references product. But title \"One didn’t work\" exact. Which is better? Either. If we choose stopped_working, evidence \"other one not working\" contains \"not working\" more direct. But \"stopped_working\" maybe not. Hmm.\n\nMaybe taxonomy \"defective_on_arrival\" if \"One didn’t work\" initial. Let's think.\n\nProduct likely two-pack charger? \"One didn't work. I paid for two, but only one works.\" This indicates one unit defective. Product quality defective_on_arrival. The secondary taxonomy has \"defective_on_arrival\" under product_quality. If no indication arrival, \"didn't work\" is nonfunction. But \"paid for two, but only one works\" = one is defective. Reviews often claim DOA. We need choose exactly one valid primary/secondary pair. Which would human annotator choose? The review says \"One didn’t work\" in title, \"other one not working\". It is about a product not working. Could map reliability_durability > stopped_working. The taxonomy has stopped_working as reliability issue. I'd lean reliability_durability/stopped_working because \"not working\" directly. \"Defective_on_arrival\" requires arrival context; absent. So use stopped_working.\n\nCould there be claim about value? \"I paid for two, but only one works\" might indicate price_value negative because paid for two only one works. But it's same defect. Price_value not directly about price vs value? \"paid for two, but only one works\" is more defective/quantity. Could extract convenience_value price_value negative? Evidence \"I paid for two, but only one works.\" But \"paid for two\" and only one works implies poor value. However instructions not over-infer. It is a product claim? Maybe but primary issue is defect. Avoid.\n\nNeed final only JSON. Ensure no markdown. Use curly apostrophe. Let's craft:\n\n{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"One didn’t work\"}]}\n\nCheck if schema requires additionalProperties false. Good.\n\nPotential issue: Evidence span must be exact continuous substring from SOURCE_TEXT. Source starts \"One didn’t work\\n...\" yes.\n\nNeed if source_text with newline but evidence \"One didn’t work\" exact. Good.\n\nFinal.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d98dbbd5-50e6-4316-8c73-3593bf9cdb35-0",
+        "status": "completed"
+      },
+      {
+        "id": "b54e1cde-249d-451a-a2b4-bf203e30626f",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"One didn’t work\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210801.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1054,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1471,
+      "output_tokens_details": {
+        "reasoning_tokens": 1429
+      },
+      "total_tokens": 2525
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"One didn’t work\"}]}"
+}

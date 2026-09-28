@@ -1,0 +1,50 @@
+{
+  "review_id": "ee23bbc909708e163ab29057c72f303ca56717bb",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-osk1e50kc4c7816vriryff",
+  "raw_response": {
+    "id": "chatcmpl-osk1e50kc4c7816vriryff",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"You have to tear the box apart to get it out!\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"I have used two of these from a prior purchase, and they both lasted quite well.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Then I accidentally dropped my phone, and third one shattered.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Then I accidentally dropped my phone, and third one shattered.\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"The vendor should have a decent way to open the dumb box without tearing it apart.\"}]}"
+        }
+      }
+    ],
+    "created": 1789187201,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 242,
+      "prompt_tokens": 676,
+      "total_tokens": 918,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 241,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"You have to tear the box apart to get it out!\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"I have used two of these from a prior purchase, and they both lasted quite well.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Then I accidentally dropped my phone, and third one shattered.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Then I accidentally dropped my phone, and third one shattered.\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"The vendor should have a decent way to open the dumb box without tearing it apart.\"}]}"
+}

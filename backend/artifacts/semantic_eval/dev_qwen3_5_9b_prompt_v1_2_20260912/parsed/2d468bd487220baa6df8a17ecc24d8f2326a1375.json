@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-d80655985a5f6402",
+      "review_id": "2d468bd487220baa6df8a17ecc24d8f2326a1375",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "dual_port_multi_device",
+      "polarity": "positive",
+      "evidence_span": "made it more easy to plug two plugs in instead of just one",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-pfwgku12eli0qf7s2ddb"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

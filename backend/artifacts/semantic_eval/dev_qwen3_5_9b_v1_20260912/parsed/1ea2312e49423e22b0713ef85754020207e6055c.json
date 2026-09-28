@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-96fd57bce988a785",
+      "review_id": "1ea2312e49423e22b0713ef85754020207e6055c",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "general_convenience",
+      "polarity": "positive",
+      "evidence_span": "Very practical and easy but nothing out of the ordinary, it works wonderful.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-ae4zs3pd0fh3ish1exbtha"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

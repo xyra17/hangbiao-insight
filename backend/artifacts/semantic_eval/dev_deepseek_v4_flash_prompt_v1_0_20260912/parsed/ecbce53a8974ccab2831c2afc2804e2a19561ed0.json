@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-562b53df213265e0",
+      "review_id": "ecbce53a8974ccab2831c2afc2804e2a19561ed0",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Works as it should\nWorks like it should.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "bc25a027-12c0-42d7-80f3-a72796c9b431"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

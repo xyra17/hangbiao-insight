@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-2c1c59a834260007",
+      "review_id": "9b10481adce4385dfed6dfa51810c5f1413f443e",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "stopped_working",
+      "polarity": "negative",
+      "evidence_span": "One of my boxes just stopped working :( after only having it for almost 4 months!",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-k7pnw2x6hjo7y010dt3max"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

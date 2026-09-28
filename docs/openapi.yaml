@@ -1,0 +1,5843 @@
+openapi: 3.0.3
+info:
+  title: 航标经营工作台
+  version: 2.0.0
+paths:
+  /api/v1/action-tasks/:
+    get:
+      operationId: action_tasks_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - action-tasks
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedActionTaskList'
+          description: ''
+    post:
+      operationId: action_tasks_create
+      tags:
+      - action-tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionTaskCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ActionTaskCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ActionTaskCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTask'
+          description: ''
+  /api/v1/action-tasks/{id}/:
+    get:
+      operationId: action_tasks_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 action task 的 UUID 字符串。
+        required: true
+      tags:
+      - action-tasks
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTask'
+          description: ''
+  /api/v1/action-tasks/{id}/complete/:
+    post:
+      operationId: action_tasks_complete_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 action task 的 UUID 字符串。
+        required: true
+      tags:
+      - action-tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutionCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExecutionCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExecutionCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTask'
+          description: ''
+  /api/v1/action-tasks/{id}/review/:
+    post:
+      operationId: action_tasks_review_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 action task 的 UUID 字符串。
+        required: true
+      tags:
+      - action-tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReviewCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReviewCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTask'
+          description: ''
+  /api/v1/action-tasks/{id}/revise-draft/:
+    post:
+      operationId: action_tasks_revise_draft_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 action task 的 UUID 字符串。
+        required: true
+      tags:
+      - action-tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftRevisionCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DraftRevisionCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DraftRevisionCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionTask'
+          description: ''
+  /api/v1/audit/:
+    get:
+      operationId: audit_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - audit
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuditList'
+          description: ''
+  /api/v1/audit/{id}/:
+    get:
+      operationId: audit_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 audit entry 的 UUID 字符串。
+        required: true
+      tags:
+      - audit
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+          description: ''
+  /api/v1/change-proposals/:
+    get:
+      operationId: change_proposals_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - change-proposals
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedChangeProposalList'
+          description: ''
+    post:
+      operationId: change_proposals_create
+      tags:
+      - change-proposals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProposalCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProposalCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProposalCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProposal'
+          description: ''
+  /api/v1/change-proposals/{id}/:
+    get:
+      operationId: change_proposals_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 change proposal 的 UUID 字符串。
+        required: true
+      tags:
+      - change-proposals
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProposal'
+          description: ''
+  /api/v1/change-proposals/{id}/authorize-manual/:
+    post:
+      operationId: change_proposals_authorize_manual_create
+      description: Record a human hand-off for an external proposal without calling
+        Amazon.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 change proposal 的 UUID 字符串。
+        required: true
+      tags:
+      - change-proposals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualAuthorizationCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ManualAuthorizationCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ManualAuthorizationCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProposal'
+          description: ''
+  /api/v1/change-proposals/{id}/execute/:
+    post:
+      operationId: change_proposals_execute_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 change proposal 的 UUID 字符串。
+        required: true
+      tags:
+      - change-proposals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProposalExecuteCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProposalExecuteCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProposalExecuteCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProposal'
+          description: ''
+  /api/v1/change-proposals/{id}/review/:
+    post:
+      operationId: change_proposals_review_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 change proposal 的 UUID 字符串。
+        required: true
+      tags:
+      - change-proposals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProposalReviewCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProposalReviewCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProposalReviewCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeProposal'
+          description: ''
+  /api/v1/events/:
+    get:
+      operationId: events_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - events
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventList'
+          description: ''
+  /api/v1/events/{id}/:
+    get:
+      operationId: events_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 business event 的 UUID 字符串。
+        required: true
+      tags:
+      - events
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+  /api/v1/events/{id}/command/:
+    post:
+      operationId: events_command_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 business event 的 UUID 字符串。
+        required: true
+      tags:
+      - events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EventCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EventCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: ''
+  /api/v1/events/{id}/evidence/:
+    get:
+      operationId: events_evidence_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 business event 的 UUID 字符串。
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - events
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEvidenceList'
+          description: ''
+  /api/v1/events/{id}/group-command/:
+    post:
+      operationId: events_group_command_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 business event 的 UUID 字符串。
+        required: true
+      tags:
+      - events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResult'
+          description: ''
+  /api/v1/events/{id}/related/:
+    get:
+      operationId: events_related_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 business event 的 UUID 字符串。
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - events
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventList'
+          description: ''
+  /api/v1/events/export/:
+    get:
+      operationId: events_export_retrieve
+      tags:
+      - events
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/v1/evidence-search/:
+    post:
+      operationId: evidence_search_create
+      tags:
+      - evidence-search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceSearchCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EvidenceSearchCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EvidenceSearchCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceSearchResult'
+          description: ''
+  /api/v1/fact-rows/{row_id}/:
+    get:
+      operationId: fact_rows_retrieve
+      parameters:
+      - in: path
+        name: row_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - fact-rows
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Row'
+          description: ''
+  /api/v1/health/:
+    get:
+      operationId: health_retrieve
+      tags:
+      - health
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+          description: ''
+  /api/v1/imports/:
+    get:
+      operationId: imports_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - imports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBatchList'
+          description: ''
+  /api/v1/imports/{id}/:
+    get:
+      operationId: imports_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      tags:
+      - imports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch'
+          description: ''
+  /api/v1/imports/{id}/error-file/:
+    get:
+      operationId: imports_error_file_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      tags:
+      - imports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            text/csv:
+              schema:
+                type: string
+          description: ''
+  /api/v1/imports/{id}/original-file/:
+    get:
+      operationId: imports_original_file_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      tags:
+      - imports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/v1/imports/{id}/publish/:
+    post:
+      operationId: imports_publish_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      tags:
+      - imports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PublishCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PublishCommandRequest'
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/imports/{id}/rows/:
+    get:
+      operationId: imports_rows_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - imports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRowList'
+          description: ''
+  /api/v1/investigations/:
+    get:
+      operationId: investigations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - investigations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInvestigationList'
+          description: ''
+    post:
+      operationId: investigations_create
+      tags:
+      - investigations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvestigationCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InvestigationCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InvestigationCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/investigations/{id}/:
+    get:
+      operationId: investigations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 investigation run 的 UUID 字符串。
+        required: true
+      tags:
+      - investigations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investigation'
+          description: ''
+  /api/v1/investigations/{id}/cancel/:
+    post:
+      operationId: investigations_cancel_create
+      description: Stop a run at the next graph checkpoint; no budget is refunded.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 investigation run 的 UUID 字符串。
+        required: true
+      tags:
+      - investigations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investigation'
+          description: ''
+  /api/v1/investigations/{id}/resume/:
+    post:
+      operationId: investigations_resume_create
+      description: Create one resumable job while preserving steps and the original
+        budget.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 investigation run 的 UUID 字符串。
+        required: true
+      tags:
+      - investigations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investigation'
+          description: ''
+  /api/v1/jobs/:
+    get:
+      operationId: jobs_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - jobs
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedJobList'
+          description: ''
+  /api/v1/jobs/{id}/:
+    get:
+      operationId: jobs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 job 的 UUID 字符串。
+        required: true
+      tags:
+      - jobs
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/jobs/{id}/retry-refresh/:
+    post:
+      operationId: jobs_retry_refresh_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 job 的 UUID 字符串。
+        required: true
+      tags:
+      - jobs
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/jobs/probe/:
+    post:
+      operationId: jobs_probe_create
+      tags:
+      - jobs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/JobCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/JobCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/login/:
+    post:
+      operationId: login_create
+      tags:
+      - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResult'
+          description: ''
+  /api/v1/logout/:
+    post:
+      operationId: logout_create
+      tags:
+      - logout
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/notifications/:
+    get:
+      operationId: notifications_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - notifications
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNotificationList'
+          description: ''
+  /api/v1/notifications/{id}/:
+    get:
+      operationId: notifications_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 notification 的 UUID 字符串。
+        required: true
+      tags:
+      - notifications
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/v1/notifications/{id}/read/:
+    post:
+      operationId: notifications_read_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 notification 的 UUID 字符串。
+        required: true
+      tags:
+      - notifications
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/v1/observations/:
+    get:
+      operationId: observations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - observations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedObservationList'
+          description: ''
+  /api/v1/observations/{id}/:
+    get:
+      operationId: observations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 observation lead 的 UUID 字符串。
+        required: true
+      tags:
+      - observations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Observation'
+          description: ''
+  /api/v1/parent-snapshots/:
+    post:
+      operationId: parent_snapshots_create
+      tags:
+      - parent-snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParentCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ParentCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ParentCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/parent-snapshots/{id}/:
+    get:
+      operationId: parent_snapshots_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 parent snapshot 的 UUID 字符串。
+        required: true
+      tags:
+      - parent-snapshots
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParentSnapshot'
+          description: ''
+  /api/v1/products/:
+    get:
+      operationId: products_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - products
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProductList'
+          description: ''
+    post:
+      operationId: products_create
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProductCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProductCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/products/{id}/:
+    get:
+      operationId: products_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 product 的 UUID 字符串。
+        required: true
+      tags:
+      - products
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/products/{id}/mappings/:
+    post:
+      operationId: products_mappings_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 product 的 UUID 字符串。
+        required: true
+      tags:
+      - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MappingCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MappingCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MappingCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /api/v1/reports/:
+    get:
+      operationId: reports_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - reports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReportList'
+          description: ''
+  /api/v1/reports/{id}/:
+    get:
+      operationId: reports_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 standard report 的 UUID 字符串。
+        required: true
+      tags:
+      - reports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: ''
+  /api/v1/reports/{id}/export/:
+    get:
+      operationId: reports_export_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 standard report 的 UUID 字符串。
+        required: true
+      tags:
+      - reports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+            text/html:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/v1/rule-configurations/{shop_id}/:
+    get:
+      operationId: rule_configurations_retrieve
+      parameters:
+      - in: path
+        name: shop_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - rule-configurations
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: ''
+  /api/v1/rule-configurations/apply/:
+    post:
+      operationId: rule_configurations_apply_create
+      tags:
+      - rule-configurations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleApplyCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RuleApplyCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RuleApplyCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: ''
+  /api/v1/rule-configurations/preview/:
+    post:
+      operationId: rule_configurations_preview_create
+      tags:
+      - rule-configurations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RulePreviewCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RulePreviewCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RulePreviewCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleResult'
+          description: ''
+  /api/v1/scan-schedules/:
+    get:
+      operationId: scan_schedules_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - scan-schedules
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedScheduleList'
+          description: ''
+    post:
+      operationId: scan_schedules_create
+      tags:
+      - scan-schedules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScheduleCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ScheduleCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: ''
+  /api/v1/scan-schedules/{id}/:
+    get:
+      operationId: scan_schedules_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 daily scan schedule 的 UUID 字符串。
+        required: true
+      tags:
+      - scan-schedules
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: ''
+  /api/v1/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/semantic-runs/:
+    get:
+      operationId: semantic_runs_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - semantic-runs
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSemanticRunList'
+          description: ''
+    post:
+      operationId: semantic_runs_create
+      tags:
+      - semantic-runs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SemanticRunCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SemanticRunCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SemanticRunCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/semantic-runs/{id}/:
+    get:
+      operationId: semantic_runs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 semantic run 的 UUID 字符串。
+        required: true
+      tags:
+      - semantic-runs
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SemanticRun'
+          description: ''
+  /api/v1/session/:
+    get:
+      operationId: session_retrieve
+      tags:
+      - session
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+          description: ''
+  /api/v1/shops/:
+    get:
+      operationId: shops_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - shops
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedShopList'
+          description: ''
+  /api/v1/shops/{id}/:
+    get:
+      operationId: shops_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 shop 的 UUID 字符串。
+        required: true
+      tags:
+      - shops
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+          description: ''
+  /api/v1/shops/{id}/capabilities/:
+    get:
+      operationId: shops_capabilities_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 shop 的 UUID 字符串。
+        required: true
+      tags:
+      - shops
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capabilities'
+          description: ''
+  /api/v1/shops/{id}/members/:
+    get:
+      operationId: shops_members_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 shop 的 UUID 字符串。
+        required: true
+      tags:
+      - shops
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Members'
+          description: ''
+  /api/v1/snapshots/:
+    get:
+      operationId: snapshots_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - snapshots
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSnapshotList'
+          description: ''
+  /api/v1/snapshots/{id}/:
+    get:
+      operationId: snapshots_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 metric snapshot 的 UUID 字符串。
+        required: true
+      tags:
+      - snapshots
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+          description: ''
+  /api/v1/snapshots/recompute/:
+    post:
+      operationId: snapshots_recompute_create
+      tags:
+      - snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecomputeCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecomputeCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecomputeCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/snapshots/recompute-range/:
+    post:
+      operationId: snapshots_recompute_range_create
+      tags:
+      - snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecomputeRangeCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecomputeRangeCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecomputeRangeCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/snapshots/scan/:
+    post:
+      operationId: snapshots_scan_create
+      tags:
+      - snapshots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScanCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ScanCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
+  /api/v1/sources/:
+    get:
+      operationId: sources_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - sources
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSourceList'
+          description: ''
+    post:
+      operationId: sources_create
+      tags:
+      - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SourceCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SourceCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+          description: ''
+  /api/v1/sources/{id}/:
+    get:
+      operationId: sources_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 source 的 UUID 字符串。
+        required: true
+      tags:
+      - sources
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+          description: ''
+  /api/v1/sources/{id}/contracts/:
+    post:
+      operationId: sources_contracts_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 source 的 UUID 字符串。
+        required: true
+      tags:
+      - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContractCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContractCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+          description: ''
+  /api/v1/sources/{id}/objects/:
+    get:
+      operationId: sources_objects_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 source 的 UUID 字符串。
+        required: true
+      tags:
+      - sources
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceObjects'
+          description: ''
+  /api/v1/sources/{id}/upload/:
+    post:
+      operationId: sources_upload_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 source 的 UUID 字符串。
+        required: true
+      tags:
+      - sources
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch'
+          description: ''
+  /api/v1/sources/catalog/:
+    get:
+      operationId: sources_catalog_retrieve
+      tags:
+      - sources
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceCatalog'
+          description: ''
+  /api/v1/workspaces/:
+    get:
+      operationId: workspaces_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - workspaces
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkspaceList'
+          description: ''
+  /api/v1/workspaces/{id}/:
+    get:
+      operationId: workspaces_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+          description: ''
+  /api/v1/workspaces/{id}/grants/:
+    get:
+      operationId: workspaces_grants_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - workspaces
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGrantList'
+          description: ''
+  /api/v1/workspaces/{id}/member-role/:
+    post:
+      operationId: workspaces_member_role_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemberChangeCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MemberChangeCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MemberChangeCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceMember'
+          description: ''
+  /api/v1/workspaces/{id}/members/:
+    get:
+      operationId: workspaces_members_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: 分页结果集中的页码。
+        schema:
+          type: integer
+      tags:
+      - workspaces
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWorkspaceMemberList'
+          description: ''
+  /api/v1/workspaces/{id}/new-member/:
+    post:
+      operationId: workspaces_new_member_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMemberCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NewMemberCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NewMemberCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceMember'
+          description: ''
+  /api/v1/workspaces/{id}/new-shop/:
+    post:
+      operationId: workspaces_new_shop_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewShopCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NewShopCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NewShopCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+          description: ''
+  /api/v1/workspaces/{id}/reset-password/:
+    post:
+      operationId: workspaces_reset_password_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceMember'
+          description: ''
+  /api/v1/workspaces/{id}/revoke-sessions/:
+    post:
+      operationId: workspaces_revoke_sessions_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionRevokeCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SessionRevokeCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SessionRevokeCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceMember'
+          description: ''
+  /api/v1/workspaces/{id}/set-grant/:
+    post:
+      operationId: workspaces_set_grant_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 workspace 的 UUID 字符串。
+        required: true
+      tags:
+      - workspaces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GrantCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GrantCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grant'
+          description: ''
+components:
+  schemas:
+    ActionTask:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+        event:
+          type: string
+          format: uuid
+          nullable: true
+        source_report:
+          type: string
+          format: uuid
+          nullable: true
+        child_asin:
+          type: string
+          maxLength: 10
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        title:
+          type: string
+          maxLength: 240
+        status:
+          type: string
+          maxLength: 20
+        assigned_to:
+          type: integer
+          nullable: true
+        created_by:
+          type: integer
+          readOnly: true
+        due_at:
+          type: string
+          format: date-time
+          nullable: true
+        review_at:
+          type: string
+          format: date-time
+          nullable: true
+        review_status:
+          type: string
+          maxLength: 20
+        review_result:
+          type: string
+        review_comparison: {}
+        action_type:
+          type: string
+          maxLength: 40
+        question:
+          type: string
+        completion_criteria:
+          type: string
+        evidence_refs: {}
+        observed_metrics: {}
+        effective_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_formal:
+          type: boolean
+        version:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - created_at
+      - created_by
+      - id
+      - shop
+      - title
+      - version
+    ActionTaskCommandRequest:
+      type: object
+      properties:
+        action_type:
+          allOf:
+          - $ref: '#/components/schemas/ActionTypeEnum'
+          default: investigation
+        question:
+          type: string
+          maxLength: 3000
+        completion_criteria:
+          type: string
+          maxLength: 3000
+        evidence_refs:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 200
+        observed_metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedMetricsEnum'
+        is_formal:
+          type: boolean
+          default: false
+        source_report:
+          type: string
+          format: uuid
+          nullable: true
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        event:
+          type: string
+          format: uuid
+          nullable: true
+        title:
+          type: string
+          minLength: 1
+          maxLength: 240
+        assigned_to:
+          type: integer
+          nullable: true
+        due_at:
+          type: string
+          format: date-time
+          nullable: true
+        expected_version:
+          type: integer
+          minimum: 1
+      required:
+      - child_asin
+      - shop
+      - title
+    ActionTypeEnum:
+      enum:
+      - investigation
+      - listing
+      - quality
+      - support
+      - inventory
+      - other
+      type: string
+      description: |-
+        * `investigation` - investigation
+        * `listing` - listing
+        * `quality` - quality
+        * `support` - support
+        * `inventory` - inventory
+        * `other` - other
+    Audit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        actor_name:
+          type: string
+          readOnly: true
+        action:
+          type: string
+          readOnly: true
+        target_id:
+          type: string
+          readOnly: true
+        before:
+          readOnly: true
+        after:
+          readOnly: true
+        request_id:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - action
+      - actor_name
+      - after
+      - before
+      - created_at
+      - id
+      - request_id
+      - target_id
+    Batch:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        source_id:
+          type: string
+          format: uuid
+          readOnly: true
+        contract:
+          type: string
+          format: uuid
+          readOnly: true
+        filename:
+          type: string
+          readOnly: true
+        file_hash:
+          type: string
+          readOnly: true
+        coverage_start:
+          type: string
+          format: date
+          readOnly: true
+        coverage_end:
+          type: string
+          format: date
+          readOnly: true
+        generated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        declared_complete:
+          type: boolean
+          readOnly: true
+        declared_asins:
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        total_rows:
+          type: integer
+          readOnly: true
+        valid_rows:
+          type: integer
+          readOnly: true
+        error_rows:
+          type: integer
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+        published_revision:
+          type: integer
+          readOnly: true
+          nullable: true
+        published_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        coverage_status:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - contract
+      - coverage_end
+      - coverage_start
+      - coverage_status
+      - created_at
+      - declared_asins
+      - declared_complete
+      - error
+      - error_rows
+      - file_hash
+      - filename
+      - generated_at
+      - id
+      - published_at
+      - published_revision
+      - source_id
+      - status
+      - total_rows
+      - valid_rows
+    Capabilities:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            type: string
+      required:
+      - roles
+    ChangeProposal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          maxLength: 10
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        operation:
+          type: string
+          maxLength: 40
+        target: {}
+        before: {}
+        after: {}
+        evidence_refs: {}
+        status:
+          type: string
+          readOnly: true
+        requested_by:
+          type: integer
+          readOnly: true
+        reviewed_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        review_note:
+          type: string
+        version:
+          type: integer
+          readOnly: true
+        idempotency_key:
+          type: string
+          maxLength: 150
+        payload_hash:
+          type: string
+          maxLength: 64
+        approved_payload_hash:
+          type: string
+          maxLength: 64
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        execution_result: {}
+        executed_at:
+          type: string
+          format: date-time
+          nullable: true
+        execution_policy:
+          type: string
+          readOnly: true
+        manual_authorization:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - created_at
+      - execution_policy
+      - id
+      - idempotency_key
+      - manual_authorization
+      - operation
+      - requested_by
+      - reviewed_by
+      - shop
+      - status
+      - target
+      - version
+    ClosureReasonEnum:
+      enum:
+      - resolved
+      - false_positive
+      - known_change
+      - duplicate
+      type: string
+      description: |-
+        * `resolved` - resolved
+        * `false_positive` - false_positive
+        * `known_change` - known_change
+        * `duplicate` - duplicate
+    Contract:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+        grain:
+          type: string
+          readOnly: true
+        column_mapping:
+          readOnly: true
+        ignored_columns:
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        coverage_basis:
+          type: string
+          readOnly: true
+        return_event:
+          type: string
+          readOnly: true
+        empty_report_means_zero:
+          type: boolean
+          readOnly: true
+      required:
+      - approved_at
+      - column_mapping
+      - coverage_basis
+      - empty_report_means_zero
+      - grain
+      - id
+      - ignored_columns
+      - return_event
+      - version
+    ContractCommandRequest:
+      type: object
+      properties:
+        empty_report_means_zero:
+          type: boolean
+          default: false
+        grain:
+          $ref: '#/components/schemas/GrainEnum'
+        column_mapping:
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+            maxLength: 150
+        ignored_columns:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 150
+        expected_version:
+          type: integer
+          minimum: 1
+        coverage_basis:
+          allOf:
+          - $ref: '#/components/schemas/CoverageBasisEnum'
+          default: business_date
+        return_event:
+          allOf:
+          - $ref: '#/components/schemas/ReturnEventEnum'
+          default: received
+      required:
+      - column_mapping
+      - grain
+    CoverageBasisEnum:
+      enum:
+      - business_date
+      - shipped_date
+      type: string
+      description: |-
+        * `business_date` - business_date
+        * `shipped_date` - shipped_date
+    DecisionEnum:
+      enum:
+      - approve
+      - reject
+      type: string
+      description: |-
+        * `approve` - approve
+        * `reject` - reject
+    Directory:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          readOnly: true
+        pattern:
+          type: string
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+        auto_publish:
+          type: boolean
+          readOnly: true
+        scan_interval_seconds:
+          type: integer
+          readOnly: true
+        next_scan_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+      required:
+      - auto_publish
+      - enabled
+      - error
+      - next_scan_at
+      - pattern
+      - scan_interval_seconds
+    DraftRevisionCommandRequest:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        title:
+          type: string
+          minLength: 1
+          maxLength: 240
+        action_type:
+          $ref: '#/components/schemas/ActionTypeEnum'
+        question:
+          type: string
+          maxLength: 3000
+        completion_criteria:
+          type: string
+          maxLength: 3000
+        evidence_refs:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 200
+        observed_metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedMetricsEnum'
+      required:
+      - expected_version
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        family:
+          type: string
+          readOnly: true
+        group:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        group_title:
+          type: string
+          readOnly: true
+          default: ''
+        title:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        priority:
+          type: integer
+          readOnly: true
+        magnitude:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,14}(?:\.\d{0,6})?$
+          readOnly: true
+        impact:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,4})?$
+          readOnly: true
+          nullable: true
+        last_cutoff:
+          type: string
+          format: date
+          readOnly: true
+        last_seen:
+          type: string
+          format: date-time
+          readOnly: true
+        last_checked_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        owner:
+          type: integer
+          readOnly: true
+          nullable: true
+        closure_reason:
+          type: string
+          readOnly: true
+        closure_note:
+          type: string
+          readOnly: true
+        closure_evidence:
+          readOnly: true
+        duplicate_of:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        snoozed_until:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        snooze_reason:
+          type: string
+          readOnly: true
+        needs_data:
+          type: boolean
+          readOnly: true
+        consecutive_days:
+          type: integer
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - closure_evidence
+      - closure_note
+      - closure_reason
+      - consecutive_days
+      - created_at
+      - duplicate_of
+      - family
+      - group
+      - group_title
+      - id
+      - impact
+      - last_checked_at
+      - last_cutoff
+      - last_seen
+      - magnitude
+      - needs_data
+      - owner
+      - priority
+      - product
+      - shop
+      - snooze_reason
+      - snoozed_until
+      - status
+      - title
+      - version
+    EventCommandOperationEnum:
+      enum:
+      - claim
+      - observe
+      - close
+      - snooze
+      - unsnooze
+      type: string
+      description: |-
+        * `claim` - claim
+        * `observe` - observe
+        * `close` - close
+        * `snooze` - snooze
+        * `unsnooze` - unsnooze
+    EventCommandRequest:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        operation:
+          $ref: '#/components/schemas/EventCommandOperationEnum'
+        owner:
+          type: integer
+        action_task:
+          type: string
+          format: uuid
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        closure_reason:
+          $ref: '#/components/schemas/ClosureReasonEnum'
+        evidence_refs:
+          type: array
+          items:
+            type: string
+            format: uuid
+        duplicate_of:
+          type: string
+          format: uuid
+        risk_resolved:
+          type: boolean
+          default: false
+        snoozed_until:
+          type: string
+          format: date-time
+      required:
+      - expected_version
+      - operation
+      - reason
+    EventGroupOperationEnum:
+      enum:
+      - merge
+      - split
+      type: string
+      description: |-
+        * `merge` - merge
+        * `split` - split
+    Evidence:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        snapshot:
+          type: string
+          format: uuid
+          readOnly: true
+        metric:
+          type: string
+          readOnly: true
+        detail:
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - detail
+      - id
+      - metric
+      - snapshot
+    EvidenceSearchCommandKindEnum:
+      enum:
+      - reviews
+      - support
+      type: string
+      description: |-
+        * `reviews` - reviews
+        * `support` - support
+    EvidenceSearchCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        query:
+          type: string
+          minLength: 1
+          maxLength: 200
+        start:
+          type: string
+          format: date
+        end:
+          type: string
+          format: date
+        kind:
+          allOf:
+          - $ref: '#/components/schemas/EvidenceSearchCommandKindEnum'
+          default: reviews
+        limit:
+          type: integer
+          maximum: 50
+          minimum: 1
+          default: 10
+        language:
+          type: string
+          minLength: 1
+          maxLength: 20
+        topic:
+          type: string
+          minLength: 1
+          maxLength: 100
+        polarity:
+          $ref: '#/components/schemas/PolarityEnum'
+      required:
+      - child_asin
+      - end
+      - query
+      - shop
+      - start
+    EvidenceSearchResult:
+      type: object
+      properties:
+        retrieval_id:
+          type: string
+          format: uuid
+        retrieval_version:
+          type: string
+        alias_version:
+          type: string
+        index_version:
+          type: string
+        source_manifest:
+          type: object
+          additionalProperties: {}
+        scope:
+          type: object
+          additionalProperties: {}
+        query:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        limitations:
+          type: array
+          items:
+            type: string
+      required:
+      - alias_version
+      - index_version
+      - items
+      - limitations
+      - query
+      - retrieval_id
+      - retrieval_version
+      - scope
+      - source_manifest
+    ExecutionCommandRequest:
+      type: object
+      properties:
+        effective_at:
+          type: string
+          format: date-time
+        review_at:
+          type: string
+          format: date-time
+        observed_metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObservedMetricsEnum'
+        notes:
+          type: string
+          minLength: 1
+          maxLength: 5000
+        evidence_refs:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 200
+        expected_version:
+          type: integer
+          minimum: 1
+      required:
+      - expected_version
+      - notes
+    FulfillmentEnum:
+      enum:
+      - FBA
+      - FBM
+      type: string
+      description: |-
+        * `FBA` - FBA
+        * `FBM` - FBM
+    GrainEnum:
+      enum:
+      - asin_day
+      - product_day
+      - asin_record
+      - product_record
+      type: string
+      description: |-
+        * `asin_day` - asin_day
+        * `product_day` - product_day
+        * `asin_record` - asin_record
+        * `product_record` - product_record
+    Grant:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        roles:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        all_products:
+          type: boolean
+          readOnly: true
+        products:
+          type: array
+          items:
+            type: string
+            format: uuid
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+      required:
+      - all_products
+      - id
+      - products
+      - roles
+      - shop
+      - user
+      - username
+      - version
+    GrantCommandRequest:
+      type: object
+      properties:
+        user:
+          type: integer
+        shop:
+          type: string
+          format: uuid
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RolesEnum'
+        all_products:
+          type: boolean
+        products:
+          type: array
+          items:
+            type: string
+            format: uuid
+        expected_version:
+          type: integer
+          minimum: 0
+      required:
+      - all_products
+      - expected_version
+      - roles
+      - shop
+      - user
+    GroupCommandRequest:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/EventGroupOperationEnum'
+        events:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 1
+        title:
+          type: string
+          minLength: 1
+          maxLength: 240
+        reason:
+          type: string
+          minLength: 3
+          maxLength: 1000
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - events
+      - idempotency_key
+      - operation
+      - reason
+    GroupResult:
+      type: object
+      properties:
+        ownership:
+          type: object
+          additionalProperties: {}
+        group_id:
+          type: string
+          format: uuid
+          nullable: true
+        events:
+          type: object
+          additionalProperties:
+            type: integer
+        operation:
+          $ref: '#/components/schemas/EventGroupOperationEnum'
+      required:
+      - events
+      - group_id
+      - operation
+      - ownership
+    Health:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+      - status
+    Investigation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        requested_by:
+          type: integer
+          readOnly: true
+        query:
+          type: string
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        status:
+          type: string
+          readOnly: true
+        route:
+          type: string
+          readOnly: true
+        max_steps:
+          type: integer
+          readOnly: true
+        steps_used:
+          type: integer
+          readOnly: true
+        budget_units:
+          type: integer
+          readOnly: true
+        stop_reason:
+          type: string
+          readOnly: true
+        state:
+          readOnly: true
+        result:
+          readOnly: true
+        checkpoint_version:
+          type: integer
+          readOnly: true
+        input_versions:
+          readOnly: true
+        previous_run:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        read_only_refresh:
+          type: boolean
+          readOnly: true
+        refreshes:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvestigationStep'
+          readOnly: true
+      required:
+      - budget_units
+      - checkpoint_version
+      - child_asin
+      - created_at
+      - id
+      - input_versions
+      - max_steps
+      - previous_run
+      - product
+      - query
+      - read_only_refresh
+      - refreshes
+      - requested_by
+      - result
+      - route
+      - shop
+      - state
+      - status
+      - steps
+      - steps_used
+      - stop_reason
+    InvestigationCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        query:
+          type: string
+          minLength: 2
+          maxLength: 2000
+        child_asin:
+          oneOf:
+          - type: string
+            pattern: ^[A-Z0-9]{10}$
+          - type: string
+            maxLength: 0
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        max_steps:
+          type: integer
+          maximum: 12
+          minimum: 3
+          default: 6
+        allow_internal_task:
+          type: boolean
+          default: false
+          description: 明确允许调查图在有证据时创建一个未指派的内部核查草稿；不授权任何外部经营变更。
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - idempotency_key
+      - query
+      - shop
+    InvestigationStep:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        sequence:
+          type: integer
+          readOnly: true
+        node:
+          type: string
+          readOnly: true
+        tool_name:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        input:
+          readOnly: true
+        output:
+          readOnly: true
+        evidence_refs:
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - evidence_refs
+      - id
+      - input
+      - node
+      - output
+      - sequence
+      - status
+      - tool_name
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        kind:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        attempts:
+          type: integer
+          readOnly: true
+        result:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        finished_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+      required:
+      - attempts
+      - created_at
+      - error
+      - finished_at
+      - id
+      - kind
+      - result
+      - shop
+      - status
+    JobCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - idempotency_key
+      - shop
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - password
+      - username
+    LoginResult:
+      type: object
+      properties:
+        username:
+          type: string
+        csrf_token:
+          type: string
+      required:
+      - csrf_token
+      - username
+    ManualAuthorizationCommandRequest:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        note:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        handoff_ref:
+          type: string
+          minLength: 1
+          pattern: ^[A-Za-z0-9._-]{1,150}$
+      required:
+      - expected_version
+      - handoff_ref
+      - note
+    Mapping:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        parent_asin:
+          type: string
+          readOnly: true
+        owner:
+          type: integer
+          readOnly: true
+          nullable: true
+        owner_name:
+          type: string
+          readOnly: true
+          nullable: true
+        effective_from:
+          type: string
+          format: date
+          readOnly: true
+        effective_to:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        version:
+          type: integer
+          readOnly: true
+        reason:
+          type: string
+          readOnly: true
+      required:
+      - effective_from
+      - effective_to
+      - id
+      - name
+      - owner
+      - owner_name
+      - parent_asin
+      - reason
+      - version
+    MappingCommandRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        parent_asin:
+          oneOf:
+          - type: string
+            default: ''
+            pattern: ^[A-Z0-9]{10}$
+          - type: string
+            maxLength: 0
+        owner:
+          type: integer
+          nullable: true
+        effective_from:
+          type: string
+          format: date
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+        expected_version:
+          type: integer
+          minimum: 1
+      required:
+      - effective_from
+      - name
+      - reason
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+      required:
+      - id
+      - username
+    MemberChangeCommandRequest:
+      type: object
+      properties:
+        member:
+          type: string
+          format: uuid
+        expected_version:
+          type: integer
+          minimum: 1
+        is_admin:
+          type: boolean
+      required:
+      - expected_version
+      - is_admin
+      - member
+    Members:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+      required:
+      - items
+    NewMemberCommandRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+          pattern: ^[A-Za-z0-9_.-]{3,100}$
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+        is_admin:
+          type: boolean
+          default: false
+      required:
+      - password
+      - username
+    NewShopCommandRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        marketplace:
+          type: string
+          minLength: 1
+          maxLength: 20
+        timezone:
+          type: string
+          minLength: 1
+          maxLength: 64
+        currency:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z]{3}$
+      required:
+      - currency
+      - marketplace
+      - name
+      - timezone
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        event:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        task:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        event_title:
+          type: string
+          readOnly: true
+        kind:
+          type: string
+          readOnly: true
+        data_version:
+          type: string
+          readOnly: true
+        read_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - data_version
+      - event
+      - event_title
+      - id
+      - kind
+      - read_at
+      - task
+    Observation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        family:
+          type: string
+          readOnly: true
+        metric:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        detail:
+          readOnly: true
+        snapshot:
+          type: string
+          format: uuid
+          readOnly: true
+        last_seen:
+          type: string
+          format: date-time
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - created_at
+      - detail
+      - family
+      - id
+      - last_seen
+      - metric
+      - product
+      - shop
+      - snapshot
+      - status
+      - title
+    ObservedMetricsEnum:
+      enum:
+      - ordered_units
+      - sessions
+      - unit_session_percent
+      - refunds
+      - returns
+      type: string
+      description: |-
+        * `ordered_units` - ordered_units
+        * `sessions` - sessions
+        * `unit_session_percent` - unit_session_percent
+        * `refunds` - refunds
+        * `returns` - returns
+    PaginatedActionTaskList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionTask'
+    PaginatedAuditList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Audit'
+    PaginatedBatchList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Batch'
+    PaginatedChangeProposalList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChangeProposal'
+    PaginatedEventList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    PaginatedEvidenceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evidence'
+    PaginatedGrantList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grant'
+    PaginatedInvestigationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Investigation'
+    PaginatedJobList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+    PaginatedNotificationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    PaginatedObservationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Observation'
+    PaginatedProductList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    PaginatedReportList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+    PaginatedRowList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Row'
+    PaginatedScheduleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+    PaginatedSemanticRunList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SemanticRun'
+    PaginatedShopList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shop'
+    PaginatedSnapshotList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snapshot'
+    PaginatedSourceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    PaginatedWorkspaceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workspace'
+    PaginatedWorkspaceMemberList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceMember'
+    ParentCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        parent_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - idempotency_key
+      - parent_asin
+      - shop
+    ParentSnapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        parent_asin:
+          type: string
+          readOnly: true
+        fingerprint:
+          type: string
+          readOnly: true
+        rule_version:
+          type: string
+          readOnly: true
+        source_manifest:
+          readOnly: true
+        mapping_versions:
+          readOnly: true
+        payload:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        local_date:
+          type: string
+          format: date
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - fingerprint
+      - id
+      - local_date
+      - mapping_versions
+      - parent_asin
+      - payload
+      - rule_version
+      - shop
+      - source_manifest
+    PasswordResetCommandRequest:
+      type: object
+      properties:
+        member:
+          type: string
+          format: uuid
+        expected_version:
+          type: integer
+          minimum: 1
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 300
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - expected_version
+      - member
+      - password
+      - reason
+    PolarityEnum:
+      enum:
+      - positive
+      - negative
+      - neutral
+      - mixed
+      type: string
+      description: |-
+        * `positive` - positive
+        * `negative` - negative
+        * `neutral` - neutral
+        * `mixed` - mixed
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        seller_sku:
+          type: string
+          readOnly: true
+        fulfillment:
+          allOf:
+          - $ref: '#/components/schemas/FulfillmentEnum'
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+        mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mapping'
+          readOnly: true
+      required:
+      - child_asin
+      - fulfillment
+      - id
+      - mappings
+      - seller_sku
+      - shop
+      - version
+    ProductCommandRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        parent_asin:
+          oneOf:
+          - type: string
+            default: ''
+            pattern: ^[A-Z0-9]{10}$
+          - type: string
+            maxLength: 0
+        owner:
+          type: integer
+          nullable: true
+        effective_from:
+          type: string
+          format: date
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+        expected_version:
+          type: integer
+          minimum: 1
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        seller_sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+        fulfillment:
+          $ref: '#/components/schemas/FulfillmentEnum'
+      required:
+      - child_asin
+      - effective_from
+      - fulfillment
+      - name
+      - reason
+      - seller_sku
+      - shop
+    ProposalCommandOperationEnum:
+      enum:
+      - internal_followup
+      - listing_change
+      - price_change
+      - inventory_change
+      type: string
+      description: |-
+        * `internal_followup` - internal_followup
+        * `listing_change` - listing_change
+        * `price_change` - price_change
+        * `inventory_change` - inventory_change
+    ProposalCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        operation:
+          $ref: '#/components/schemas/ProposalCommandOperationEnum'
+        target: {}
+        before: {}
+        after: {}
+        evidence_refs:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 200
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - child_asin
+      - idempotency_key
+      - operation
+      - shop
+      - target
+    ProposalExecuteCommandRequest:
+      type: object
+      properties:
+        expected_version:
+          type: integer
+          minimum: 1
+        payload_hash:
+          type: string
+          minLength: 64
+          maxLength: 64
+      required:
+      - expected_version
+      - payload_hash
+    ProposalReviewCommandRequest:
+      type: object
+      properties:
+        decision:
+          $ref: '#/components/schemas/DecisionEnum'
+        note:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        expected_version:
+          type: integer
+          minimum: 1
+        payload_hash:
+          type: string
+          minLength: 1
+          maxLength: 64
+      required:
+      - decision
+      - expected_version
+      - note
+    ProviderEnum:
+      enum:
+      - deterministic
+      - deepseek
+      - lmstudio
+      - qwen
+      type: string
+      description: |-
+        * `deterministic` - deterministic
+        * `deepseek` - deepseek
+        * `lmstudio` - lmstudio
+        * `qwen` - qwen
+    PublishCommandRequest:
+      type: object
+      properties:
+        allow_partial:
+          type: boolean
+          default: false
+        confirm_contract:
+          type: boolean
+          default: false
+    RecomputeCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+        as_of:
+          type: string
+          format: date
+      required:
+      - as_of
+      - child_asin
+      - idempotency_key
+      - shop
+    RecomputeRangeCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+        from_date:
+          type: string
+          format: date
+        to_date:
+          type: string
+          format: date
+      required:
+      - child_asin
+      - from_date
+      - idempotency_key
+      - shop
+      - to_date
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        refreshes:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        metric_snapshot:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        semantic_run:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        report_version:
+          type: integer
+          readOnly: true
+          default: 1
+        previous_report:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        input_versions:
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        payload:
+          readOnly: true
+        publication_key:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - created_at
+      - id
+      - input_versions
+      - metric_snapshot
+      - payload
+      - previous_report
+      - product
+      - publication_key
+      - refreshes
+      - report_version
+      - semantic_run
+      - shop
+      - status
+    ReturnEventEnum:
+      enum:
+      - received
+      - requested
+      type: string
+      description: |-
+        * `received` - received
+        * `requested` - requested
+    ReviewCommandRequest:
+      type: object
+      properties:
+        review_at:
+          type: string
+          format: date-time
+          nullable: true
+        result:
+          type: string
+          maxLength: 5000
+        snapshot:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        expected_version:
+          type: integer
+          minimum: 1
+      required:
+      - expected_version
+      - status
+    RolesEnum:
+      enum:
+      - data_admin
+      - operator
+      - quality
+      - support
+      type: string
+      description: |-
+        * `data_admin` - data_admin
+        * `operator` - operator
+        * `quality` - quality
+        * `support` - support
+    Row:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        line:
+          type: integer
+          readOnly: true
+        raw:
+          readOnly: true
+        normalized:
+          readOnly: true
+        business_key:
+          type: string
+          readOnly: true
+        payload_hash:
+          type: string
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+      required:
+      - business_key
+      - error
+      - id
+      - line
+      - normalized
+      - payload_hash
+      - raw
+    RuleApplyCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        preview_token:
+          type: string
+          minLength: 1
+          maxLength: 30000
+        reason:
+          type: string
+          minLength: 3
+          maxLength: 500
+      required:
+      - preview_token
+      - reason
+      - shop
+    RulePreviewCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        expected_version:
+          type: integer
+          minimum: 0
+        values:
+          $ref: '#/components/schemas/RuleSettingsRequest'
+      required:
+      - child_asin
+      - expected_version
+      - shop
+      - values
+    RuleResult:
+      type: object
+      properties:
+        version:
+          type: integer
+        values:
+          $ref: '#/components/schemas/RuleSettings'
+        catalog:
+          type: object
+          additionalProperties: {}
+        preview_token:
+          type: string
+        before:
+          type: array
+          items: {}
+        after:
+          type: array
+          items: {}
+        scope_note:
+          type: string
+        history:
+          type: array
+          items: {}
+        job_id:
+          type: string
+          format: uuid
+        impact:
+          type: array
+          items: {}
+    RuleSettings:
+      type: object
+      properties:
+        sales_change_pct:
+          type: number
+          format: double
+          maximum: 1000
+          minimum: 1
+        sales_gap:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        sales_min_baseline:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        traffic_drop_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        traffic_min_baseline:
+          type: integer
+          maximum: 10000000
+          minimum: 1
+        conversion_min_sessions:
+          type: integer
+          maximum: 10000000
+          minimum: 1
+        conversion_drop_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        conversion_drop_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+        cohort_min_orders:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        cohort_min_affected:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        cohort_increase_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+        observation_days:
+          type: integer
+          maximum: 180
+          minimum: 1
+        occurrence_increase_pct:
+          type: number
+          format: double
+          maximum: 10000
+          minimum: 1
+        occurrence_gap:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        rating_drop:
+          type: number
+          format: double
+          maximum: 4
+          minimum: 0.1
+        rating_compare_days:
+          type: integer
+          maximum: 90
+          minimum: 1
+        buybox_below_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        buybox_drop_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+      required:
+      - buybox_below_pct
+      - buybox_drop_pp
+      - cohort_increase_pp
+      - cohort_min_affected
+      - cohort_min_orders
+      - conversion_drop_pct
+      - conversion_drop_pp
+      - conversion_min_sessions
+      - observation_days
+      - occurrence_gap
+      - occurrence_increase_pct
+      - rating_compare_days
+      - rating_drop
+      - sales_change_pct
+      - sales_gap
+      - sales_min_baseline
+      - traffic_drop_pct
+      - traffic_min_baseline
+    RuleSettingsRequest:
+      type: object
+      properties:
+        sales_change_pct:
+          type: number
+          format: double
+          maximum: 1000
+          minimum: 1
+        sales_gap:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        sales_min_baseline:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        traffic_drop_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        traffic_min_baseline:
+          type: integer
+          maximum: 10000000
+          minimum: 1
+        conversion_min_sessions:
+          type: integer
+          maximum: 10000000
+          minimum: 1
+        conversion_drop_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        conversion_drop_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+        cohort_min_orders:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        cohort_min_affected:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        cohort_increase_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+        observation_days:
+          type: integer
+          maximum: 180
+          minimum: 1
+        occurrence_increase_pct:
+          type: number
+          format: double
+          maximum: 10000
+          minimum: 1
+        occurrence_gap:
+          type: integer
+          maximum: 1000000
+          minimum: 1
+        rating_drop:
+          type: number
+          format: double
+          maximum: 4
+          minimum: 0.1
+        rating_compare_days:
+          type: integer
+          maximum: 90
+          minimum: 1
+        buybox_below_pct:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 1
+        buybox_drop_pp:
+          type: number
+          format: double
+          maximum: 100
+          minimum: 0.1
+      required:
+      - buybox_below_pct
+      - buybox_drop_pp
+      - cohort_increase_pp
+      - cohort_min_affected
+      - cohort_min_orders
+      - conversion_drop_pct
+      - conversion_drop_pp
+      - conversion_min_sessions
+      - observation_days
+      - occurrence_gap
+      - occurrence_increase_pct
+      - rating_compare_days
+      - rating_drop
+      - sales_change_pct
+      - sales_gap
+      - sales_min_baseline
+      - traffic_drop_pct
+      - traffic_min_baseline
+    ScanCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - child_asin
+      - idempotency_key
+      - shop
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        enabled:
+          type: boolean
+          readOnly: true
+        at:
+          type: string
+          format: time
+          readOnly: true
+        last_run_date:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        version:
+          type: integer
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+        timezone:
+          type: string
+          readOnly: true
+      required:
+      - at
+      - enabled
+      - error
+      - id
+      - last_run_date
+      - shop
+      - timezone
+      - version
+    ScheduleCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        at:
+          type: string
+          format: time
+        enabled:
+          type: boolean
+        expected_version:
+          type: integer
+          minimum: 0
+      required:
+      - at
+      - enabled
+      - expected_version
+      - shop
+    SemanticClaim:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        review:
+          type: string
+          format: uuid
+          readOnly: true
+        prediction_id:
+          type: string
+          readOnly: true
+        primary_topic:
+          type: string
+          readOnly: true
+        secondary_topic:
+          type: string
+          readOnly: true
+        polarity:
+          type: string
+          readOnly: true
+        evidence_span:
+          type: string
+          readOnly: true
+        prediction_status:
+          type: string
+          readOnly: true
+        quality_flags:
+          readOnly: true
+        provider:
+          type: string
+          readOnly: true
+        model_name:
+          type: string
+          readOnly: true
+        prompt_version:
+          type: string
+          readOnly: true
+        taxonomy_version:
+          type: string
+          readOnly: true
+      required:
+      - evidence_span
+      - id
+      - model_name
+      - polarity
+      - prediction_id
+      - prediction_status
+      - primary_topic
+      - prompt_version
+      - provider
+      - quality_flags
+      - review
+      - secondary_topic
+      - taxonomy_version
+    SemanticRun:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        status:
+          type: string
+          readOnly: true
+        provider:
+          type: string
+          readOnly: true
+        model_name:
+          type: string
+          readOnly: true
+        prompt_version:
+          type: string
+          readOnly: true
+        taxonomy_version:
+          type: string
+          readOnly: true
+        source_manifest:
+          readOnly: true
+        total_reviews:
+          type: integer
+          readOnly: true
+        accepted_claims:
+          type: integer
+          readOnly: true
+        rejected_claims:
+          type: integer
+          readOnly: true
+        error_count:
+          type: integer
+          readOnly: true
+        error:
+          type: string
+          readOnly: true
+        finished_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/SemanticClaim'
+          readOnly: true
+      required:
+      - accepted_claims
+      - child_asin
+      - claims
+      - created_at
+      - error
+      - error_count
+      - finished_at
+      - id
+      - model_name
+      - product
+      - prompt_version
+      - provider
+      - rejected_claims
+      - shop
+      - source_manifest
+      - status
+      - taxonomy_version
+      - total_reviews
+    SemanticRunCommandRequest:
+      type: object
+      properties:
+        shop:
+          type: string
+          format: uuid
+        child_asin:
+          type: string
+          minLength: 1
+          pattern: ^[A-Z0-9]{10}$
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        provider:
+          $ref: '#/components/schemas/ProviderEnum'
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - child_asin
+      - idempotency_key
+      - provider
+      - shop
+    Session:
+      type: object
+      properties:
+        authenticated:
+          type: boolean
+        username:
+          type: string
+          nullable: true
+        csrf_token:
+          type: string
+      required:
+      - authenticated
+      - csrf_token
+      - username
+    SessionRevokeCommandRequest:
+      type: object
+      properties:
+        member:
+          type: string
+          format: uuid
+        expected_version:
+          type: integer
+          minimum: 1
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 300
+      required:
+      - expected_version
+      - member
+      - reason
+    Shop:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        workspace:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        marketplace:
+          type: string
+          readOnly: true
+        timezone:
+          type: string
+          readOnly: true
+        currency:
+          type: string
+          readOnly: true
+        is_test:
+          type: boolean
+          readOnly: true
+      required:
+      - currency
+      - id
+      - is_test
+      - marketplace
+      - name
+      - timezone
+      - workspace
+    Snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        child_asin:
+          type: string
+          readOnly: true
+        product:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        fingerprint:
+          type: string
+          readOnly: true
+        rule_version:
+          type: string
+          readOnly: true
+        source_manifest:
+          readOnly: true
+        payload:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        local_date:
+          type: string
+          format: date
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - child_asin
+      - created_at
+      - fingerprint
+      - id
+      - local_date
+      - payload
+      - product
+      - rule_version
+      - shop
+      - source_manifest
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        shop:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        kind:
+          type: string
+          readOnly: true
+        is_primary:
+          type: boolean
+          readOnly: true
+          default: false
+        revision:
+          type: integer
+          readOnly: true
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+          readOnly: true
+        directory:
+          allOf:
+          - $ref: '#/components/schemas/Directory'
+          readOnly: true
+          nullable: true
+      required:
+      - contracts
+      - directory
+      - id
+      - is_primary
+      - kind
+      - name
+      - revision
+      - shop
+    SourceCatalog:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceKind'
+      required:
+      - items
+    SourceCommandKindEnum:
+      enum:
+      - sales_traffic
+      - orders
+      - refunds
+      - returns
+      - reviews
+      - support
+      - inventory
+      - ratings
+      - operations
+      type: string
+      description: |-
+        * `sales_traffic` - sales_traffic
+        * `orders` - orders
+        * `refunds` - refunds
+        * `returns` - returns
+        * `reviews` - reviews
+        * `support` - support
+        * `inventory` - inventory
+        * `ratings` - ratings
+        * `operations` - operations
+    SourceCommandRequest:
+      type: object
+      properties:
+        empty_report_means_zero:
+          type: boolean
+          default: false
+        grain:
+          $ref: '#/components/schemas/GrainEnum'
+        column_mapping:
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+            maxLength: 150
+        ignored_columns:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 150
+        expected_version:
+          type: integer
+          minimum: 1
+        coverage_basis:
+          allOf:
+          - $ref: '#/components/schemas/CoverageBasisEnum'
+          default: business_date
+        return_event:
+          allOf:
+          - $ref: '#/components/schemas/ReturnEventEnum'
+          default: received
+        shop:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+        kind:
+          $ref: '#/components/schemas/SourceCommandKindEnum'
+        is_primary:
+          type: boolean
+          default: false
+      required:
+      - column_mapping
+      - grain
+      - kind
+      - name
+      - shop
+    SourceField:
+      type: object
+      properties:
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          type: string
+        max_length:
+          type: integer
+          nullable: true
+      required:
+      - max_length
+      - name
+      - required
+      - type
+    SourceKind:
+      type: object
+      properties:
+        kind:
+          type: string
+        label:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceField'
+      required:
+      - fields
+      - kind
+      - label
+    SourceObjects:
+      type: object
+      properties:
+        child_asins:
+          type: array
+          items:
+            type: string
+      required:
+      - child_asins
+    StatusEnum:
+      enum:
+      - scheduled
+      - completed
+      - not_scheduled
+      type: string
+      description: |-
+        * `scheduled` - scheduled
+        * `completed` - completed
+        * `not_scheduled` - not_scheduled
+    UploadCommandRequest:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          writeOnly: true
+        coverage_start:
+          type: string
+          format: date
+        coverage_end:
+          type: string
+          format: date
+        generated_at:
+          type: string
+          format: date-time
+        declared_complete:
+          type: boolean
+          default: false
+        declared_asins:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            pattern: ^[A-Z0-9]{10}$
+          maxItems: 1000
+          minItems: 1
+      required:
+      - coverage_end
+      - coverage_start
+      - declared_asins
+      - file
+      - generated_at
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        is_test:
+          type: boolean
+          readOnly: true
+        timezone:
+          type: string
+          readOnly: true
+        is_admin:
+          type: boolean
+          readOnly: true
+      required:
+      - id
+      - is_admin
+      - is_test
+      - name
+      - timezone
+    WorkspaceMember:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+        is_admin:
+          type: boolean
+          readOnly: true
+        version:
+          type: integer
+          readOnly: true
+      required:
+      - id
+      - is_admin
+      - user
+      - username
+      - version
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

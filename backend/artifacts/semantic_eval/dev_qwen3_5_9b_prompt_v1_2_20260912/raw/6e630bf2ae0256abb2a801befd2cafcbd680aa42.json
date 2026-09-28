@@ -1,0 +1,50 @@
+{
+  "review_id": "6e630bf2ae0256abb2a801befd2cafcbd680aa42",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-v7s0abz3orjc69wso0fnt",
+  "raw_response": {
+    "id": "chatcmpl-v7s0abz3orjc69wso0fnt",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"case_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"It seems to charge through a case.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"accessory_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"It does not charge through a pop socket.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Good for the price.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"Charges a little slower than a normal charger.\"}]}"
+        }
+      }
+    ],
+    "created": 1789188676,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 163,
+      "prompt_tokens": 646,
+      "total_tokens": 809,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 162,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"case_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"It seems to charge through a case.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"accessory_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"It does not charge through a pop socket.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Good for the price.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"Charges a little slower than a normal charger.\"}]}"
+}

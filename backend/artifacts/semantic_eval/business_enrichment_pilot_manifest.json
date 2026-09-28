@@ -1,0 +1,12 @@
+{
+  "run_id": "business-pilot-stage6b-20260913",
+  "status": "deferred_external_model",
+  "pilot_type": "business_prediction_pilot",
+  "processed": 1553,
+  "accepted": null,
+  "rejected": 0,
+  "errors": 501,
+  "reason": "Yootech completed and AILKIN was checkpointed; WixGear returned ModelGatewayError and external-model work is deferred.",
+  "scope": {"target": 2000, "minimum": 1000, "maximum": 3000, "products": ["B07P9S6R9Y", "B0BYJ8ZVWH", "B01G0X56YU"]},
+  "golden_data_read": false
+}

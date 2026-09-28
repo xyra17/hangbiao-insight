@@ -1,0 +1,216 @@
+{
+  "review_id": "06626d0a59093ed58f52cf5a46675d04f679be8a",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "3f62df86-2c74-486f-bda5-9c66e0bf4cff",
+  "raw_response": {
+    "id": "3f62df86-2c74-486f-bda5-9c66e0bf4cff",
+    "created_at": 1789211569.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "01de597f-946c-4d8d-8c62-6aeb720d4115",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON. Extract claims. Source: \"Reasonable price and Works great!\" Rating 5 but don't infer. Claims: price/value positive evidence \"Reasonable price\" primary convenience_value secondary price_value polarity positive. \"Works great\" general performance positive primary function_performance secondary general_performance evidence \"Works great!\" Need exact continuous substring. Review has \"Reasonable price and Works great!\" So evidence spans exact. Two claims. Ensure valid taxonomy. Return {\"claims\":[...]}.\n\nNeed no markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "3f62df86-2c74-486f-bda5-9c66e0bf4cff-0",
+        "status": "completed"
+      },
+      {
+        "id": "3c1cf3f5-0200-4ea9-92f0-f3f2d96906e9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Reasonable price\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works great!\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211570.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1021,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 170,
+      "output_tokens_details": {
+        "reasoning_tokens": 105
+      },
+      "total_tokens": 1191
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Reasonable price\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works great!\"}]}"
+}

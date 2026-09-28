@@ -1,0 +1,50 @@
+{
+  "review_id": "1dd0bbb74b4bee1c0bb7b83cc3263927f1059cb2",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-cplwjha3wbqkn918r2ktcf",
+  "raw_response": {
+    "id": "chatcmpl-cplwjha3wbqkn918r2ktcf",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband’s phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Seems like the quality on the other two screens wasn’t the same as mine\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"After submitting successfully it says we’ll send you an email to verify, but I’ve received no emails\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"We normally use the military grade glass protectors & the one on my phone seems to have no issues whatsoever so far. Seems like the quality on the other two screens wasn’t the same as mine\"}]}"
+        }
+      }
+    ],
+    "created": 1789177305,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 372,
+      "prompt_tokens": 576,
+      "total_tokens": 948,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 371,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband’s phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Seems like the quality on the other two screens wasn’t the same as mine\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"After submitting successfully it says we’ll send you an email to verify, but I’ve received no emails\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"We normally use the military grade glass protectors & the one on my phone seems to have no issues whatsoever so far. Seems like the quality on the other two screens wasn’t the same as mine\"}]}"
+}

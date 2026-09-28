@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-4f44db946457d680",
+      "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "abnormal_noise",
+      "polarity": "negative",
+      "evidence_span": "popping noise",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-ezsecv1psvy5egc1wdk"
+    },
+    {
+      "prediction_id": "SP-8cb53173fec07d66",
+      "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "melting_fire",
+      "polarity": "negative",
+      "evidence_span": "smelled like burning plastic",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-ezsecv1psvy5egc1wdk"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

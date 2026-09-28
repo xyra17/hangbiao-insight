@@ -1,0 +1,216 @@
+{
+  "review_id": "76ee59242d03cb51f8147dae23ee828d0a6ad33b",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "8ae4eee2-0258-431e-b6fe-50584cb82366",
+  "raw_response": {
+    "id": "8ae4eee2-0258-431e-b6fe-50584cb82366",
+    "created_at": 1789210985.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "66811154-f824-4156-9450-7dc5206ac238",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. Need extract claims from review. Need determine taxonomy pair, polarity, evidence_span exact substring. Need careful. Source text: \"SO FAR SO GOOD\\nONLY THING ABOUT THIS IS I MADE SURE I ORDERED THE RIGHT SIZE FOR MY PHONE BUT I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\"\n\nProduct likely screen protector. Claims: size/fit: says ordered right size but thinks a little small, covers screen barely, corners exposed. This is compatibility_fit: size_fit negative? Evidence span: \"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\" exact continuous substring? Need exact from source. It includes \"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\" yes from source. Polarity negative. Primary compatibility_fit, secondary size_fit. Could also protection_effectiveness claim: if drop phone and hits corner it would crack and defeat purpose of screen protector. This is function_performance: protection_effectiveness negative. Evidence: \"SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\" exact. But this is tied to size exposing corners. It is a product claim about protection effectiveness. Should include? The instructions: extract semantic claims. A review may contain zero or multiple. For every claim choose exactly one valid pair independently. We can include both? Need not overextract? The evidence for protection_effectiveness negative. It is a supported product claim. The first size fit claim and second protection effectiveness. However second may be consequence of size, but different taxonomy. We should include both if independent? \"independently determine polarity\" not necessarily independent claim extraction. It says every claim. Could include size_fit and protection_effectiveness. But overlapping evidence? We can use separate exact substrings.\n\nAlso maybe \"SO FAR SO GOOD\" positive general? It is not product-specific? Title says so far so good. Could be general positive, but evidence is vague. Should we extract? It says if no supported product claim. \"SO FAR SO GOOD\" could be general_performance positive? But no specific. Taxonomy other_unknown insufficient_information? Probably not, because title. But product claim: general satisfaction. But likely not. We can ignore.\n\nNeed ensure JSON valid. Claims array. For size_fit: primary compatibility_fit secondary size_fit polarity negative evidence_span exact. Need include exact substring continuous. I can use \"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\". Check source: \"BUT I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT...\" In source: \"I MADE SURE I ORDERED THE RIGHT SIZE FOR MY PHONE BUT I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\" Actually source exact: \"BUT I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\" There is no punctuation? Let's inspect: \"ONLY THING ABOUT THIS IS I MADE SURE I ORDERED THE RIGHT SIZE FOR MY PHONE BUT I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\"\n\nSo exact substring \"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\" exists. Good.\n\nFor protection_effectiveness: \"SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\" exact exists. It says would crack (phone? screen?) and defeat purpose. Negative. Primary function_performance secondary protection_effectiveness.\n\nCould also size_fit positive? \"ORDERED THE RIGHT SIZE FOR MY PHONE\" indicates compatibility? But then \"a little small\" negative. Mixed? Evidence \"I MADE SURE I ORDERED THE RIGHT SIZE FOR MY PHONE BUT I THINK ITS A LITTLE SMALL\" polarity mixed? The claim about size fit is negative overall. We can use evidence \"I THINK ITS A LITTLE SMALL...\" negative. That's fine. Maybe claim primary compatibility_fit secondary size_fit. Another claim primary compatibility_fit secondary device_compatibility? \"for my phone\" not issue. The fit issue is size_fit.\n\nNeed output exactly schema, no markdown. Ensure no extra text. The final must be JSON. Use \"claims\": [...]\n\n\nLet's think if any safety_risk? \"drop phone and hits corner it would crack\" could be device_damage potential due to insufficient coverage? It's a risk of phone damage, but it's hypothetical. Primary safety_risk secondary device_damage? Hmm taxonomy safety_risk includes device_damage: product causing damage to device. Here screen protector's corners exposed; if dropped, phone screen could crack. This is about protection effectiveness rather than product causing damage. So function_performance protection_effectiveness better. Could also be compatibility_fit size_fit. Good.\n\nCould \"SO FAR SO GOOD\" positive general_performance? No.\n\nNeed maybe no \"other_unknown\". Good.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "8ae4eee2-0258-431e-b6fe-50584cb82366-0",
+        "status": "completed"
+      },
+      {
+        "id": "a410e7dc-0ef7-4a50-8178-97f56b646d1e",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210992.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1126,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1507,
+      "output_tokens_details": {
+        "reasoning_tokens": 1365
+      },
+      "total_tokens": 2633
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR\"}]}"
+}

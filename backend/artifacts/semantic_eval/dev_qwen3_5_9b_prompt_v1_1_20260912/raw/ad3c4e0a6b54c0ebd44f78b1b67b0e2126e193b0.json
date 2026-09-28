@@ -1,0 +1,50 @@
+{
+  "review_id": "ad3c4e0a6b54c0ebd44f78b1b67b0e2126e193b0",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-jtumkx96uimzox7wuk40i",
+  "raw_response": {
+    "id": "chatcmpl-jtumkx96uimzox7wuk40i",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"This little charger is perfect for my bedside.\"}]}"
+        }
+      }
+    ],
+    "created": 1789186672,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 44,
+      "prompt_tokens": 621,
+      "total_tokens": 665,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 43,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"This little charger is perfect for my bedside.\"}]}"
+}

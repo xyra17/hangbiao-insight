@@ -1,0 +1,335 @@
+{
+  "version": "taxonomy-v1.0",
+  "status": "frozen_for_annotation_v1",
+  "design": {
+    "annotation_unit": "topic_claim",
+    "multi_label": true,
+    "topic_has_fixed_polarity": false,
+    "polarity_is_semantic": true,
+    "rating_is_not_polarity": true,
+    "evidence_span_required": true,
+    "causal_inference_forbidden": true
+  },
+  "polarity": [
+    "positive",
+    "negative",
+    "neutral"
+  ],
+  "topics": {
+    "function_performance": {
+      "definition": "产品核心功能能否实现，以及实际性能表现是否符合预期。",
+      "subtopics": {
+        "charging_success": {
+          "definition": "设备是否能够成功开始或持续完成充电。",
+          "positive_examples": [
+            "charges my phone every time",
+            "works perfectly for charging"
+          ],
+          "negative_examples": [
+            "doesn't charge my phone",
+            "won't charge"
+          ]
+        },
+        "charging_speed": {
+          "definition": "充电速度快慢，以及是否符合用户对快充的预期。",
+          "positive_examples": [
+            "charges very fast",
+            "fast charging works great"
+          ],
+          "negative_examples": [
+            "charges extremely slow",
+            "not fast charging"
+          ]
+        },
+        "protection_effectiveness": {
+          "definition": "屏幕保护类产品是否真正起到防刮、防摔或保护屏幕作用。",
+          "positive_examples": [
+            "protected my screen when I dropped it"
+          ],
+          "negative_examples": [
+            "screen still cracked"
+          ]
+        },
+        "general_performance": {
+          "definition": "无法归入更具体子类的产品功能或性能表现。",
+          "positive_examples": [],
+          "negative_examples": []
+        }
+      }
+    },
+    "reliability_durability": {
+      "definition": "产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。",
+      "subtopics": {
+        "stopped_working": {
+          "definition": "产品曾经正常工作，随后完全停止工作。",
+          "positive_examples": [],
+          "negative_examples": [
+            "stopped working after two months",
+            "worked for a while then died"
+          ]
+        },
+        "intermittent_failure": {
+          "definition": "产品时好时坏、连接不稳定或偶发失效。",
+          "positive_examples": [],
+          "negative_examples": [
+            "works only sometimes",
+            "keeps disconnecting"
+          ]
+        },
+        "short_lifespan": {
+          "definition": "产品使用寿命明显短于用户预期。",
+          "positive_examples": [],
+          "negative_examples": [
+            "only lasted a few weeks"
+          ]
+        },
+        "cracking_breakage": {
+          "definition": "产品出现开裂、碎裂、断裂等物理损坏。",
+          "positive_examples": [],
+          "negative_examples": [
+            "cracked after a few days",
+            "broke very easily"
+          ]
+        },
+        "wear_damage": {
+          "definition": "产品出现磨损、脱落或其他耐用性下降。",
+          "positive_examples": [],
+          "negative_examples": []
+        }
+      }
+    },
+    "compatibility_fit": {
+      "definition": "产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。",
+      "subtopics": {
+        "device_compatibility": {
+          "definition": "产品是否兼容特定手机、平板、手表等设备型号。",
+          "positive_examples": [
+            "works with my iPhone"
+          ],
+          "negative_examples": [
+            "doesn't work with my phone"
+          ]
+        },
+        "case_compatibility": {
+          "definition": "产品在手机安装保护壳等配件后是否仍可正常使用。",
+          "positive_examples": [
+            "charges through my case"
+          ],
+          "negative_examples": [
+            "won't charge with the case on"
+          ]
+        },
+        "size_fit": {
+          "definition": "产品尺寸是否与目标设备或使用对象匹配。",
+          "positive_examples": [
+            "fits perfectly"
+          ],
+          "negative_examples": [
+            "too small",
+            "doesn't fit the screen"
+          ]
+        },
+        "port_fit": {
+          "definition": "线缆、插头或接口与设备端口之间是否适配。",
+          "positive_examples": [],
+          "negative_examples": [
+            "connector does not fit"
+          ]
+        },
+        "wall_socket_fit": {
+          "definition": "墙充插脚与墙壁插座之间是否牢固、松动或容易脱落。",
+          "positive_examples": [
+            "fits tightly in the outlet"
+          ],
+          "negative_examples": [
+            "falls out of the wall outlet",
+            "plug is too loose"
+          ]
+        }
+      }
+    },
+    "safety_risk": {
+      "definition": "使用产品过程中出现的温度、电气、物理伤害或其他安全风险。",
+      "subtopics": {
+        "overheating": {
+          "definition": "产品或设备出现明显异常发热。",
+          "positive_examples": [],
+          "negative_examples": [
+            "gets extremely hot",
+            "charger becomes very hot"
+          ]
+        },
+        "melting_fire": {
+          "definition": "产品出现融化、冒烟、烧焦或起火等严重安全问题。",
+          "positive_examples": [],
+          "negative_examples": [
+            "started melting",
+            "almost caught fire"
+          ]
+        },
+        "abnormal_noise": {
+          "definition": "产品出现异常电流声、滋滋声或其他不正常声音。",
+          "positive_examples": [],
+          "negative_examples": [
+            "makes a buzzing sound"
+          ]
+        },
+        "physical_injury_irritation": {
+          "definition": "产品导致扎手、割伤、皮肤刺激等身体不适或伤害风险。",
+          "positive_examples": [],
+          "negative_examples": [
+            "tiny glass pieces cut my finger"
+          ]
+        }
+      }
+    },
+    "usability_installation": {
+      "definition": "产品的安装、定位、操作以及状态反馈是否清晰和方便。",
+      "subtopics": {
+        "positioning_alignment": {
+          "definition": "产品使用过程中是否需要反复调整位置才能正常工作。",
+          "positive_examples": [
+            "easy to position"
+          ],
+          "negative_examples": [
+            "have to place the phone exactly right"
+          ]
+        },
+        "installation_difficulty": {
+          "definition": "产品安装过程是否困难、复杂或容易失败。",
+          "positive_examples": [
+            "very easy to install"
+          ],
+          "negative_examples": [
+            "difficult to install"
+          ]
+        },
+        "bubbles_adhesion": {
+          "definition": "贴膜等产品是否出现气泡、翘边、不粘等问题。",
+          "positive_examples": [
+            "no bubbles"
+          ],
+          "negative_examples": [
+            "bubbles everywhere",
+            "edges don't stick"
+          ]
+        },
+        "ease_of_use": {
+          "definition": "日常使用是否简单、方便。",
+          "positive_examples": [
+            "easy to use"
+          ],
+          "negative_examples": [
+            "annoying to use"
+          ]
+        },
+        "status_indicator_feedback": {
+          "definition": "LED、指示灯或其他状态反馈是否能够清晰告诉用户设备状态。",
+          "positive_examples": [
+            "indicator clearly shows it is charging"
+          ],
+          "negative_examples": [
+            "can't tell whether it is charging"
+          ]
+        },
+        "installation_accessories": {
+          "definition": "安装模板、清洁片、湿巾等安装附件是否完整和好用。",
+          "positive_examples": [
+            "installation kit made it easy"
+          ],
+          "negative_examples": [
+            "cleaning wipe was completely dry",
+            "installation guide was missing"
+          ]
+        }
+      }
+    },
+    "convenience_value": {
+      "definition": "产品带来的多设备能力、便携性、价格价值和便利体验。",
+      "subtopics": {
+        "dual_port_multi_device": {
+          "definition": "是否支持同时连接或服务多个设备。",
+          "positive_examples": [
+            "charges two devices at once"
+          ],
+          "negative_examples": [
+            "can't charge two devices together"
+          ]
+        },
+        "portability_size": {
+          "definition": "产品尺寸、重量和携带便利程度。",
+          "positive_examples": [
+            "small and easy to travel with"
+          ],
+          "negative_examples": [
+            "too bulky"
+          ]
+        },
+        "price_value": {
+          "definition": "用户认为产品价格与实际价值是否匹配。",
+          "positive_examples": [
+            "great value for the price"
+          ],
+          "negative_examples": [
+            "not worth the money"
+          ]
+        },
+        "general_convenience": {
+          "definition": "无法归入更具体子类的便利性体验。",
+          "positive_examples": [],
+          "negative_examples": []
+        }
+      }
+    },
+    "product_quality": {
+      "definition": "产品材料、制造做工、出厂状态以及附属物料的质量。",
+      "subtopics": {
+        "material_build_quality": {
+          "definition": "材质、做工、结构质量是否良好。",
+          "positive_examples": [
+            "feels well made"
+          ],
+          "negative_examples": [
+            "feels cheap",
+            "poor build quality"
+          ]
+        },
+        "defective_on_arrival": {
+          "definition": "产品第一次使用或刚到货时就存在功能性缺陷。",
+          "positive_examples": [],
+          "negative_examples": [
+            "didn't work out of the box"
+          ]
+        },
+        "accessory_condition": {
+          "definition": "附带配件、包装内物料或安装工具本身的质量状态。",
+          "positive_examples": [],
+          "negative_examples": [
+            "included wipe was dried out"
+          ]
+        }
+      }
+    },
+    "other_unknown": {
+      "definition": "评论信息不足或现有 Taxonomy 无法可靠覆盖。",
+      "subtopics": {
+        "insufficient_information": {
+          "definition": "评论只有笼统评价，没有足够语义判断具体 Topic。",
+          "positive_examples": [
+            "good",
+            "great"
+          ],
+          "negative_examples": [
+            "bad",
+            "terrible"
+          ]
+        },
+        "uncategorized": {
+          "definition": "评论表达了明确业务语义，但当前 Taxonomy 尚未覆盖。",
+          "positive_examples": [],
+          "negative_examples": []
+        }
+      }
+    }
+  }
+}

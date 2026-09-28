@@ -1,0 +1,50 @@
+{
+  "review_id": "1dd0bbb74b4bee1c0bb7b83cc3263927f1059cb2",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-lariikql03d2y4a55djd22",
+  "raw_response": {
+    "id": "chatcmpl-lariikql03d2y4a55djd22",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband's phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"negative\", \"evidence_span\": \"Seems like the quality on the other two screens wasn't the same as mine\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband's phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"We normally use the military grade glass protectors & the one on my phone seems to have no issues whatsoever so far\"}]}"
+        }
+      }
+    ],
+    "created": 1789186251,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 311,
+      "prompt_tokens": 731,
+      "total_tokens": 1042,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 310,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband's phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"negative\", \"evidence_span\": \"Seems like the quality on the other two screens wasn't the same as mine\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"both we attempted to install on my husband's phone did not have the same easy installation even though we followed the exact same process and directions\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"needs more items to assist in installation process\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"We normally use the military grade glass protectors & the one on my phone seems to have no issues whatsoever so far\"}]}"
+}

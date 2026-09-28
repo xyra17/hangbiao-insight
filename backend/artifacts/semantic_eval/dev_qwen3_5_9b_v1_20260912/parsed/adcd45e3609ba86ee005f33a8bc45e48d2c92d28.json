@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-3e96b2560ac98898",
+      "review_id": "adcd45e3609ba86ee005f33a8bc45e48d2c92d28",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "positive",
+      "evidence_span": "the light turns on when the connection is found.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-593i6gr4wce2rzejp1xlg7"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "155f7856db098a0574e3c54eaf1dea21ea01c741",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d105c7d8-42b2-46a7-8ffa-517c54e773f5",
+  "raw_response": {
+    "id": "d105c7d8-42b2-46a7-8ffa-517c54e773f5",
+    "created_at": 1789211732.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "3bd1deb8-acef-47b0-9487-8f79650080ca",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need adhere schema JSON. Source text: \"Quality\\nCracked within a week of having these on the phones.\" Product likely phone case? Need extract claims. Review title Quality, text Cracked within a week of having these on the phones. Claim: cracking_breakage under reliability_durability. Polarity negative. Evidence span exact continuous substring from SOURCE_TEXT. Could use \"Cracked within a week of having these on the phones.\" But source_text includes \"Quality\\nCracked...\" The exact substring can be \"Cracked within a week of having these on the phones.\" That's continuous. Primary reliability_durability, secondary cracking_breakage, polarity negative, evidence_span. Is there also short_lifespan? \"within a week\" indicates short lifespan maybe. But claim cracked within week of having these on phones. Primary reliability_durability secondary cracking_breakage. Could also short_lifespan? Need exactly one valid pair per claim. A review may contain multiple claims. But same evidence maybe cracking and short_lifespan? We should be cautious. The taxonomy has short_lifespan under reliability_durability. \"Cracked within a week\" supports both cracking_breakage and short_lifespan. But extract semantic claims: one claim? In prior tasks, choose most specific? The crack is event, within a week indicates short lifespan. Could include two claims if distinct? But evidence span exact for each. If we include short_lifespan evidence \"within a week of having these on the phones\" and cracking \"Cracked within a week...\" Both supported. But do we need avoid over-splitting? The instruction: \"A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair\". It doesn't forbid overlapping evidence. But likely one claim: cracking_breakage. The \"within a week\" reinforces. Since title \"Quality\" not product claim? No.\n\nNeed output JSON only. Ensure enum fields exactly. Evidence exact continuous substring from SOURCE_TEXT including newline? We can use \"Cracked within a week of having these on the phones.\" It appears exactly after newline. Yes.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d105c7d8-42b2-46a7-8ffa-517c54e773f5-0",
+        "status": "completed"
+      },
+      {
+        "id": "e7070248-9f5f-444e-a368-4f7d1c811826",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Cracked within a week of having these on the phones.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211735.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1028,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 516,
+      "output_tokens_details": {
+        "reasoning_tokens": 466
+      },
+      "total_tokens": 1544
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Cracked within a week of having these on the phones.\"}]}"
+}

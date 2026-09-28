@@ -1,0 +1,216 @@
+{
+  "review_id": "6610ada1af914daff0f3b5183febafceb50108b2",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "3d2d329a-3c26-4e4a-a826-3084decf6fef",
+  "raw_response": {
+    "id": "3d2d329a-3c26-4e4a-a826-3084decf6fef",
+    "created_at": 1789210905.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "b6228fe4-4807-4039-a0e0-11324294b389",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Review: \"Charging units\\nThey seem sort of loose when plugged in.\" Rating 3. Need semantic claims. Need exactly one valid primary/secondary pair. Polarity. Evidence exact substring.\n\nWe need infer product? Charging units, loose when plugged in. This likely about fit/connection? Taxonomy: compatibility_fit includes port_fit, wall_socket_fit, size_fit, etc. \"loose when plugged in\" could indicate port fit? Charging unit plugged in? Could be wall socket fit? \"Charging units\" maybe charging cables/adapters? \"They seem sort of loose when plugged in.\" Loose when plugged in suggests fit into port or socket. Primary compatibility_fit, secondary maybe port_fit or wall_socket_fit. Need choose. Product B0BYJ8ZVWH unknown. \"Charging units\" maybe phone charger? \"plugged in\" into wall socket? \"loose when plugged in\" could be wall_socket_fit (plug fits loosely in outlet) or port_fit (connector fits loosely in device port). Which is more likely? They say \"Charging units\" plural, \"when plugged in\" ambiguous. We must not invent. Evidence span exact. Claim: They seem sort of loose when plugged in. Polarity negative? Loose is negative for fit. Primary compatibility_fit, secondary size_fit? Hmm \"loose when plugged in\" is about fit. Options: port_fit, wall_socket_fit, size_fit, accessory_compatibility, device_compatibility. If charging unit plugged in, likely plug into socket? \"Charging units\" as charging blocks? Loose when plugged in = wall socket fit. But if charging cable into phone, port_fit. Product id B0BYJ8ZVWH maybe charging station? Let's not rely. The taxonomy pair must be valid: compatibility_fit / wall_socket_fit is valid. \"loose when plugged in\" maybe wall socket. Or compatibility_fit/port_fit. Need choose primary/secondary. We need output only JSON.\n\nAny other claims? No. Evidence span exact continuous substring from source_text. Could use \"They seem sort of loose when plugged in.\" Exact. Polarity negative. Primary compatibility_fit, secondary wall_socket_fit? Let's evaluate.\n\n\"Charging units\" (title) \"They seem sort of loose when plugged in.\" It implies the units themselves are loose when plugged in? If it's a charging unit, it plugs into wall socket. So wall_socket_fit. If it's connector, port_fit. \"Charging units\" likely the product is charging adapter? B0BYJ8ZVWH maybe Amazon product? Not known. Product review title \"Charging units\" and text \"They seem sort of loose when plugged in.\" The phrase \"plugged in\" for charger units into wall outlet -> wall_socket_fit. Yes.\n\nNeed final JSON. Ensure no extra fields. Schema: {\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"They seem sort of loose when plugged in.\"}]}\n\nCheck evidence_span exact substring: Source_text includes newline: \"Charging units\\nThey seem sort of loose when plugged in.\" The substring \"They seem sort of loose when plugged in.\" is exact continuous. Good. No period? It has period at end, yes. final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "3d2d329a-3c26-4e4a-a826-3084decf6fef-0",
+        "status": "completed"
+      },
+      {
+        "id": "c5592a73-bb2c-45ba-8b26-36b3f8ab6ad4",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"They seem sort of loose when plugged in.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210909.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1030,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 782,
+      "output_tokens_details": {
+        "reasoning_tokens": 738
+      },
+      "total_tokens": 1812
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"They seem sort of loose when plugged in.\"}]}"
+}

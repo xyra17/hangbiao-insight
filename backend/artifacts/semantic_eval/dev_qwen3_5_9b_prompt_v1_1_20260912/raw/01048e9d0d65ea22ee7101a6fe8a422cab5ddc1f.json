@@ -1,0 +1,50 @@
+{
+  "review_id": "01048e9d0d65ea22ee7101a6fe8a422cab5ddc1f",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-v4xqryoveoei8vtmljchf",
+  "raw_response": {
+    "id": "chatcmpl-v4xqryoveoei8vtmljchf",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Small size\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"dual_port_multi_device\", \"polarity\": \"positive\", \"evidence_span\": \"takes two cords\"}]}"
+        }
+      }
+    ],
+    "created": 1789185823,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 76,
+      "prompt_tokens": 604,
+      "total_tokens": 680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 75,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Small size\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"dual_port_multi_device\", \"polarity\": \"positive\", \"evidence_span\": \"takes two cords\"}]}"
+}

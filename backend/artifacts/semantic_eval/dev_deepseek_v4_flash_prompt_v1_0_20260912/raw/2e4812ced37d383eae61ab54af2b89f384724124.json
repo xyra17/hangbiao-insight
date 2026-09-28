@@ -1,0 +1,216 @@
+{
+  "review_id": "2e4812ced37d383eae61ab54af2b89f384724124",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "b3aaebe0-c9c2-44ca-a3ed-28ee1117b306",
+  "raw_response": {
+    "id": "b3aaebe0-c9c2-44ca-a3ed-28ee1117b306",
+    "created_at": 1789212132.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "4e815c24-9dff-49ed-a9d2-eb6a886190d0",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source: \"Quick charger\\nThis charger charges my phone very quickly even with a case on the phone\". Need claims. One claim likely charging_speed positive evidence \"charges my phone very quickly\". Also maybe case_compatibility? \"even with a case on the phone\" indicates works with case. Primary compatibility_fit, secondary case_compatibility, positive, evidence \"even with a case on the phone\". Need exact continuous substring. Title maybe not source? source_text includes title? SOURCE_TEXT provided includes \"Quick charger\\nThis charger...\" Evidence can include. Claim 1 charging speed: \"charges my phone very quickly\" exact substring. Claim 2 case compatibility: \"even with a case on the phone\" exact substring. Polarity positive. Need exactly valid pairs. primary function_performance secondary charging_speed. primary compatibility_fit secondary case_compatibility. Are both product claims? Yes. Maybe \"Quick charger\" also charging_speed positive? But duplicate. Evidence span should exact. Could include \"Quick charger\" as title? But source_text has title and body. The instruction says copy evidence_span exact continuous substring from SOURCE_TEXT. We can use body. Need no extra. Final JSON. Ensure schema no additional. claims array.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "b3aaebe0-c9c2-44ca-a3ed-28ee1117b306-0",
+        "status": "completed"
+      },
+      {
+        "id": "1e9b973d-7e9d-4e3a-bf3d-bb34fab410b2",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"charges my phone very quickly\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"even with a case on the phone\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212134.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1032,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 337,
+      "output_tokens_details": {
+        "reasoning_tokens": 263
+      },
+      "total_tokens": 1369
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"charges my phone very quickly\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"even with a case on the phone\"}]}"
+}

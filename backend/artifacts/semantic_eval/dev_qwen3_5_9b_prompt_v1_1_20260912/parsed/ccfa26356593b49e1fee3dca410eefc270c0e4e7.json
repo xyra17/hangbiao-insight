@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-bd84d4cc0195fd0d",
+      "review_id": "ccfa26356593b49e1fee3dca410eefc270c0e4e7",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "material_build_quality",
+      "polarity": "positive",
+      "evidence_span": "very sturdy",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-3hagneycpfqb0hbkitsm2o"
+    },
+    {
+      "prediction_id": "SP-e5184248bf3b9e5a",
+      "review_id": "ccfa26356593b49e1fee3dca410eefc270c0e4e7",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "accessory_condition",
+      "polarity": "positive",
+      "evidence_span": "wipes for the front of the phone. They work great.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-3hagneycpfqb0hbkitsm2o"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

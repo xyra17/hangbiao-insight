@@ -1,0 +1,216 @@
+{
+  "review_id": "cc19d787611351197c6e9d0a4fcc845e8e5d0e29",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "b0445e1c-0c90-4a5b-8ad4-ea19b626a1b3",
+  "raw_response": {
+    "id": "b0445e1c-0c90-4a5b-8ad4-ea19b626a1b3",
+    "created_at": 1789211385.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "891daf17-d134-4e74-8d9f-867fe8318cab",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need adhere schema. We need identify claims. Source text: \"Great product\\nWe replaced one that we bought that had a weak connection with this one. This one has a much stronger connection and has no problem connecting through the phone case.\"\n\nProduct likely phone case? B07P9S6R9Y unknown. Review: Great product. We replaced one that we bought that had a weak connection with this one. This one has a much stronger connection and has no problem connecting through the phone case. This relates compatibility_fit? \"stronger connection\" maybe charging? Weak connection? Could be magnetic car mount? Need infer product maybe phone case? The review talks connecting through phone case, weak connection stronger connection. If product is maybe magnetic mount? \"connecting through the phone case\" suggests compatibility_fit: case_compatibility. Claims:\n- \"Great product\" general positive? But no specific product claim? Could be product_quality general? Taxonomy doesn't have general product quality except material_build_quality, defective, accessory. \"Great product\" vague. Maybe other_unknown? insufficient_information? But claim? Usually can include general_performance? However \"Great product\" is overall sentiment, no specific semantic claim? We should avoid unsupported. But could be positive general performance? The instruction: Extract product-review semantic claims. A review may contain zero. For every claim choose taxonomy. Do not infer. If no supported product claim exists, empty. \"Great product\" is vague, could be general performance? But no specific product attribute. We might not include.\n\n- \"We replaced one that we bought that had a weak connection with this one.\" It refers previous product? It's comparison. Claim about current product? \"This one has a much stronger connection\" = positive connection strength. What taxonomy? If product is maybe charging cable? \"connection\" could be charging connection? If \"connecting through phone case\" likely magnetic charging cable? Weak connection vs stronger connection. Primary function_performance? secondary power_output? charging_success? Or compatibility_fit case_compatibility? Let's parse.\n\nThe product ID B07P9S6R9Y maybe Amazon. Could be \"Anker Powerline III Lightning Cable\"? But \"connecting through the phone case\" sounds magnetic USB cable? \"weak connection\" could mean magnetic connection. Product might be \"USB C magnetic adapter\"? \"phone case\" compatibility. Review says \"This one has a much stronger connection and has no problem connecting through the phone case.\" The \"connection\" through phone case likely charging cable connector fits through phone case? There is a case compatibility issue. \"no problem connecting through the phone case\" = case_compatibility positive. \"much stronger connection\" = maybe charging_success positive or power_output? If magnetic connection strength, could be function_performance/general_performance? Hmm.\n\nNeed output claims list. Need exact evidence_span continuous substring. We can include:\n1. primary compatibility_fit, secondary case_compatibility, polarity positive, evidence_span \"has no problem connecting through the phone case\" or \"no problem connecting through the phone case\". This is clear: compatibility with phone case positive.\n2. primary function_performance, secondary general_performance? \"much stronger connection\" maybe connection strength. But taxonomy has charging_success, charging_speed, power_output, protection_effectiveness, general_performance. \"connection\" is about charging? If product is charger? Could map to charging_success? \"stronger connection\" might mean charging connection is reliable. But \"connection\" not exactly charging. Could be general_performance. Evidence \"has a much stronger connection\". Polarity positive. But if we include both, overlap? \"This one has a much stronger connection and has no problem connecting through the phone case.\" We can extract one claim: compatibility_fit/case_compatibility positive for \"no problem connecting through the phone case\"; another for function_performance/general_performance positive for \"much stronger connection\". Is that supported? The weaker/stronger connection is product performance. Yes.\n\nCould also mention previous weak connection? \"We replaced one that we bought that had a weak connection with this one.\" This is about old product, not current? It describes old product had weak connection. Not a claim about this product? It compares. Maybe evidence for new product stronger. We can skip old.\n\n\"Great product\" maybe other_unknown/uncategorized positive? Usually not claim. But maybe \"Great product\" is a product claim of general quality positive. The taxonomy lacks general product quality. Could map product_quality/material_build_quality? No, not material. other_unknown/uncategorized? But \"uncategorized\" for claims not fitting taxonomy. However they want exactly one valid pair. But if no specific attribute, maybe other_unknown/insufficient_information? Actually \"Great product\" is not insufficient info? Hmm.\n\nGiven strict, likely include only specific claims. The title is \"Great product\" could be ignored.\n\nNeed ensure JSON with claims array. No extra.\n\nLet's decide final claims:\n- primary_topic: compatibility_fit, secondary_topic: case_compatibility, polarity: positive, evidence_span: \"has no problem connecting through the phone case\" (exact substring? Source: \"has no problem connecting through the phone case.\" includes \"has\". Yes continuous: from \"has no problem connecting through the phone case\" yes.)\n- primary_topic: function_performance, secondary_topic: general_performance, polarity: positive, evidence_span: \"This one has a much stronger connection\" (exact substring: source: \"This one has a much stronger connection and...\" Yes continuous. Or \"much stronger connection\". Could be positive. Is \"connection\" general performance? Maybe secondary \"charging_success\"? If product is charging cable, stronger connection means charging connection? But no mention charging. \"connecting through phone case\" could be phone grip? Hmm. General_performance is safer.\n\nBut maybe \"weak connection\" is previous product negative, not current. Since \"This one has a much stronger connection\" positive about current. Good.\n\nNeed maybe polarity mixed? No, positive.\n\nCould include \"We replaced one that we bought that had a weak connection with this one.\" This claim about previous product negative? But product review semantic claims about current product? Probably not.\n\nCould include \"Great product\" as product_quality/material_build_quality? no. Skip.\n\nNeed final exactly JSON schema.\n\nLet's ensure no markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "b0445e1c-0c90-4a5b-8ad4-ea19b626a1b3-0",
+        "status": "completed"
+      },
+      {
+        "id": "1df09223-45dc-4be0-862e-78fb6ea271b9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This one has a much stronger connection\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"has no problem connecting through the phone case\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211392.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1054,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1413,
+      "output_tokens_details": {
+        "reasoning_tokens": 1337
+      },
+      "total_tokens": 2467
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This one has a much stronger connection\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"has no problem connecting through the phone case\"}]}"
+}

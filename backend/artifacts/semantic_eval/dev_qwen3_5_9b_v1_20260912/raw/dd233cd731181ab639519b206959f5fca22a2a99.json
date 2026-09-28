@@ -1,0 +1,50 @@
+{
+  "review_id": "dd233cd731181ab639519b206959f5fca22a2a99",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-eotvyd6c8xr346mxsx6013",
+  "raw_response": {
+    "id": "chatcmpl-eotvyd6c8xr346mxsx6013",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"this has never ever worked for me\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"it charges too slowly to do anything\"}]}"
+        }
+      }
+    ],
+    "created": 1789177880,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 82,
+      "prompt_tokens": 485,
+      "total_tokens": 567,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 81,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"this has never ever worked for me\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"it charges too slowly to do anything\"}]}"
+}

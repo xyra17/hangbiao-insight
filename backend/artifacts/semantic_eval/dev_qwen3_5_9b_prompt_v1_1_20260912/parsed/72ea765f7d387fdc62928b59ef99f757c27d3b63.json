@@ -1,0 +1,49 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5e43750863221df8",
+      "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "Doesn't charge well.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-bfzyq1g83p5xszrmq4ifd9"
+    },
+    {
+      "prediction_id": "SP-65bb5d40aee2c831",
+      "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "negative",
+      "evidence_span": "my phone still had 6% by morning even though it was plugged in all night.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-bfzyq1g83p5xszrmq4ifd9"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

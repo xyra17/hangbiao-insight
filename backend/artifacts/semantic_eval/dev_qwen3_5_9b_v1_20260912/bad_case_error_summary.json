@@ -1,0 +1,1549 @@
+{
+  "source": {
+    "baseline_metrics": "artifacts/semantic_eval/dev_qwen3_5_9b_v1_20260912/dev_eval_metrics.json",
+    "bad_cases": "artifacts/semantic_eval/dev_qwen3_5_9b_v1_20260912/bad_cases.jsonl",
+    "parsed_dir": "artifacts/semantic_eval/dev_qwen3_5_9b_v1_20260912/parsed",
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "read_only": true
+  },
+  "baseline": {
+    "review_count": 216,
+    "golden_claim_count": 388,
+    "prediction_count": 254,
+    "bad_case_count": 178
+  },
+  "error_type_distribution": {
+    "extra_topic": {
+      "count": 64,
+      "ratio": 0.3595505617977528
+    },
+    "guard_failure": {
+      "count": 18,
+      "ratio": 0.10112359550561797
+    },
+    "missing_topic": {
+      "count": 171,
+      "ratio": 0.9606741573033708
+    },
+    "polarity_mismatch": {
+      "count": 87,
+      "ratio": 0.4887640449438202
+    }
+  },
+  "topic_missed": [
+    {
+      "golden_topic": "charging_success",
+      "count": 45,
+      "ratio": 0.1965065502183406
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "count": 23,
+      "ratio": 0.10043668122270742
+    },
+    {
+      "golden_topic": "price_value",
+      "count": 18,
+      "ratio": 0.07860262008733625
+    },
+    {
+      "golden_topic": "general_performance",
+      "count": 13,
+      "ratio": 0.056768558951965066
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "count": 12,
+      "ratio": 0.05240174672489083
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "count": 10,
+      "ratio": 0.043668122270742356
+    },
+    {
+      "golden_topic": "insufficient_information",
+      "count": 10,
+      "ratio": 0.043668122270742356
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "count": 10,
+      "ratio": 0.043668122270742356
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "count": 8,
+      "ratio": 0.034934497816593885
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "count": 7,
+      "ratio": 0.03056768558951965
+    },
+    {
+      "golden_topic": "size_fit",
+      "count": 7,
+      "ratio": 0.03056768558951965
+    },
+    {
+      "golden_topic": "general_convenience",
+      "count": 6,
+      "ratio": 0.026200873362445413
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "count": 5,
+      "ratio": 0.021834061135371178
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "count": 5,
+      "ratio": 0.021834061135371178
+    },
+    {
+      "golden_topic": "stopped_working",
+      "count": 5,
+      "ratio": 0.021834061135371178
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "charging_speed",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "portability_size",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "general_durability",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "device_compatibility",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "intermittent_failure",
+      "count": 4,
+      "ratio": 0.017467248908296942
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "count": 3,
+      "ratio": 0.013100436681222707
+    },
+    {
+      "golden_topic": "wall_socket_fit",
+      "count": 2,
+      "ratio": 0.008733624454148471
+    },
+    {
+      "golden_topic": "power_output",
+      "count": 2,
+      "ratio": 0.008733624454148471
+    },
+    {
+      "golden_topic": "accessory_compatibility",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    },
+    {
+      "golden_topic": "defective_on_arrival",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    },
+    {
+      "golden_topic": "device_damage",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    },
+    {
+      "golden_topic": "accessory_condition",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    },
+    {
+      "golden_topic": "melting_fire",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    },
+    {
+      "golden_topic": "uncategorized",
+      "count": 1,
+      "ratio": 0.004366812227074236
+    }
+  ],
+  "topic_extra": [
+    {
+      "predicted_topic": "general_performance",
+      "count": 19
+    },
+    {
+      "predicted_topic": "general_durability",
+      "count": 10
+    },
+    {
+      "predicted_topic": "stopped_working",
+      "count": 10
+    },
+    {
+      "predicted_topic": "defective_on_arrival",
+      "count": 8
+    },
+    {
+      "predicted_topic": "device_compatibility",
+      "count": 7
+    },
+    {
+      "predicted_topic": "charging_success",
+      "count": 5
+    },
+    {
+      "predicted_topic": "ease_of_use",
+      "count": 4
+    },
+    {
+      "predicted_topic": "intermittent_failure",
+      "count": 4
+    },
+    {
+      "predicted_topic": "material_build_quality",
+      "count": 4
+    },
+    {
+      "predicted_topic": "general_convenience",
+      "count": 4
+    },
+    {
+      "predicted_topic": "cracking_breakage",
+      "count": 3
+    },
+    {
+      "predicted_topic": "portability_size",
+      "count": 3
+    },
+    {
+      "predicted_topic": "price_value",
+      "count": 2
+    },
+    {
+      "predicted_topic": "dual_port_multi_device",
+      "count": 2
+    },
+    {
+      "predicted_topic": "installation_difficulty",
+      "count": 2
+    },
+    {
+      "predicted_topic": "positioning_alignment",
+      "count": 2
+    },
+    {
+      "predicted_topic": "bubbles_adhesion",
+      "count": 2
+    },
+    {
+      "predicted_topic": "overheating",
+      "count": 1
+    },
+    {
+      "predicted_topic": "power_output",
+      "count": 1
+    },
+    {
+      "predicted_topic": "charging_speed",
+      "count": 1
+    }
+  ],
+  "topic_confusion": [
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "stopped_working",
+      "count": 12
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "charging_speed",
+      "count": 10
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "cracking_breakage",
+      "count": 9
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "price_value",
+      "count": 7
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "stopped_working",
+      "count": 7
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "general_performance",
+      "count": 6
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "general_durability",
+      "count": 5
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "general_performance",
+      "count": 4
+    },
+    {
+      "golden_topic": "size_fit",
+      "predicted_topic": "device_compatibility",
+      "count": 4
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "charging_speed",
+      "count": 4
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "price_value",
+      "count": 4
+    },
+    {
+      "golden_topic": "stopped_working",
+      "predicted_topic": "short_lifespan",
+      "count": 4
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "general_convenience",
+      "count": 4
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "general_durability",
+      "count": 4
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "general_convenience",
+      "count": 4
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "general_performance",
+      "count": 4
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "general_performance",
+      "count": 4
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "positioning_alignment",
+      "count": 4
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "charging_speed",
+      "count": 3
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "ease_of_use",
+      "count": 3
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "general_performance",
+      "count": 3
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "cracking_breakage",
+      "count": 3
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "general_durability",
+      "count": 3
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "device_compatibility",
+      "count": 3
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "material_build_quality",
+      "count": 3
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "charging_success",
+      "count": 3
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "charging_speed",
+      "count": 3
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "stopped_working",
+      "count": 3
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "defective_on_arrival",
+      "count": 3
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "cracking_breakage",
+      "count": 3
+    },
+    {
+      "golden_topic": "intermittent_failure",
+      "predicted_topic": "general_performance",
+      "count": 3
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "installation_difficulty",
+      "count": 3
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "price_value",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "dual_port_multi_device",
+      "count": 2
+    },
+    {
+      "golden_topic": "size_fit",
+      "predicted_topic": "cracking_breakage",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "cracking_breakage",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "size_fit",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "general_durability",
+      "count": 2
+    },
+    {
+      "golden_topic": "stopped_working",
+      "predicted_topic": "overheating",
+      "count": 2
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "overheating",
+      "count": 2
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "price_value",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "device_compatibility",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "case_compatibility",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "device_compatibility",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "ease_of_use",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "material_build_quality",
+      "count": 2
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "melting_fire",
+      "count": 2
+    },
+    {
+      "golden_topic": "melting_fire",
+      "predicted_topic": "abnormal_noise",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "portability_size",
+      "count": 2
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "charging_speed",
+      "count": 2
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "intermittent_failure",
+      "count": 2
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "price_value",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "general_convenience",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "portability_size",
+      "count": 2
+    },
+    {
+      "golden_topic": "size_fit",
+      "predicted_topic": "defective_on_arrival",
+      "count": 2
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "cracking_breakage",
+      "count": 2
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "defective_on_arrival",
+      "count": 2
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "intermittent_failure",
+      "count": 2
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "installation_difficulty",
+      "count": 2
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "charging_success",
+      "count": 2
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "general_convenience",
+      "count": 2
+    },
+    {
+      "golden_topic": "power_output",
+      "predicted_topic": "charging_speed",
+      "count": 2
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "charging_success",
+      "count": 2
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "general_performance",
+      "count": 2
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "charging_speed",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "material_build_quality",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "positioning_alignment",
+      "count": 2
+    },
+    {
+      "golden_topic": "device_compatibility",
+      "predicted_topic": "charging_success",
+      "count": 2
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "stopped_working",
+      "count": 2
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "bubbles_adhesion",
+      "count": 2
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "protection_effectiveness",
+      "count": 2
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "installation_difficulty",
+      "count": 2
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "general_performance",
+      "count": 2
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "material_build_quality",
+      "count": 2
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "status_indicator_feedback",
+      "count": 2
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "general_performance",
+      "count": 2
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "charging_success",
+      "count": 2
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "cracking_breakage",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "dual_port_multi_device",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "size_fit",
+      "predicted_topic": "physical_injury_irritation",
+      "count": 1
+    },
+    {
+      "golden_topic": "physical_injury_irritation",
+      "predicted_topic": "cracking_breakage",
+      "count": 1
+    },
+    {
+      "golden_topic": "physical_injury_irritation",
+      "predicted_topic": "size_fit",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "physical_injury_irritation",
+      "count": 1
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "cracking_breakage",
+      "count": 1
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "overheating",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "accessory_compatibility",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "accessory_compatibility",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "accessory_compatibility",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "accessory_compatibility",
+      "predicted_topic": "case_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "case_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "stopped_working",
+      "predicted_topic": "abnormal_noise",
+      "count": 1
+    },
+    {
+      "golden_topic": "stopped_working",
+      "predicted_topic": "melting_fire",
+      "count": 1
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "abnormal_noise",
+      "count": 1
+    },
+    {
+      "golden_topic": "abnormal_noise",
+      "predicted_topic": "short_lifespan",
+      "count": 1
+    },
+    {
+      "golden_topic": "abnormal_noise",
+      "predicted_topic": "overheating",
+      "count": 1
+    },
+    {
+      "golden_topic": "abnormal_noise",
+      "predicted_topic": "melting_fire",
+      "count": 1
+    },
+    {
+      "golden_topic": "melting_fire",
+      "predicted_topic": "short_lifespan",
+      "count": 1
+    },
+    {
+      "golden_topic": "melting_fire",
+      "predicted_topic": "overheating",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "overheating",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "overheating",
+      "count": 1
+    },
+    {
+      "golden_topic": "overheating",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "dual_port_multi_device",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "electrical_fault",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "electrical_fault",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "electrical_fault",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "electrical_fault",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "wall_socket_fit",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "general_convenience",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "power_output",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "general_convenience",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "power_output",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "power_output",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "power_output",
+      "count": 1
+    },
+    {
+      "golden_topic": "size_fit",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "general_durability",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "general_durability",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "general_durability",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "general_durability",
+      "count": 1
+    },
+    {
+      "golden_topic": "defective_on_arrival",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_performance",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "general_convenience",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "general_convenience",
+      "count": 1
+    },
+    {
+      "golden_topic": "device_damage",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "device_compatibility",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "case_compatibility",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "case_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "stopped_working",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "intermittent_failure",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "defective_on_arrival",
+      "predicted_topic": "intermittent_failure",
+      "count": 1
+    },
+    {
+      "golden_topic": "dual_port_multi_device",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "abnormal_noise",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "wall_socket_fit",
+      "count": 1
+    },
+    {
+      "golden_topic": "wall_socket_fit",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "wall_socket_fit",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "wall_socket_fit",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "device_compatibility",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "material_build_quality",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "device_compatibility",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "power_output",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "dual_port_multi_device",
+      "count": 1
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "dual_port_multi_device",
+      "count": 1
+    },
+    {
+      "golden_topic": "price_value",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_difficulty",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "portability_size",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "predicted_topic": "general_durability",
+      "count": 1
+    },
+    {
+      "golden_topic": "bubbles_adhesion",
+      "predicted_topic": "cracking_breakage",
+      "count": 1
+    },
+    {
+      "golden_topic": "uncategorized",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "installation_difficulty",
+      "count": 1
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "device_compatibility",
+      "count": 1
+    },
+    {
+      "golden_topic": "protection_effectiveness",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "defective_on_arrival",
+      "predicted_topic": "cracking_breakage",
+      "count": 1
+    },
+    {
+      "golden_topic": "installation_accessories",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "cracking_breakage",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "short_lifespan",
+      "predicted_topic": "defective_on_arrival",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "stopped_working",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "status_indicator_feedback",
+      "count": 1
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "positioning_alignment",
+      "predicted_topic": "status_indicator_feedback",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_speed",
+      "predicted_topic": "status_indicator_feedback",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "status_indicator_feedback",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_durability",
+      "predicted_topic": "general_convenience",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "status_indicator_feedback",
+      "predicted_topic": "material_build_quality",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "general_performance",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "charging_success",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "positioning_alignment",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "charging_speed",
+      "count": 1
+    },
+    {
+      "golden_topic": "portability_size",
+      "predicted_topic": "ease_of_use",
+      "count": 1
+    },
+    {
+      "golden_topic": "general_convenience",
+      "predicted_topic": "short_lifespan",
+      "count": 1
+    },
+    {
+      "golden_topic": "ease_of_use",
+      "predicted_topic": "price_value",
+      "count": 1
+    },
+    {
+      "golden_topic": "charging_success",
+      "predicted_topic": "short_lifespan",
+      "count": 1
+    }
+  ],
+  "invalid_taxonomy": {
+    "invalid_parent_topic": {
+      "reliability_durability": 16,
+      "product_quality": 14,
+      "function_performance": 10,
+      "convenience_value": 8,
+      "usability_installation": 4,
+      "safety_risk": 1,
+      "compatibility_fit": 1
+    },
+    "invalid_secondary_topic": {
+      "general_performance": 19,
+      "general_durability": 10,
+      "stopped_working": 9,
+      "device_compatibility": 7,
+      "defective_on_arrival": 6,
+      "charging_success": 5,
+      "ease_of_use": 4,
+      "intermittent_failure": 4,
+      "material_build_quality": 4,
+      "general_convenience": 4,
+      "portability_size": 3,
+      "price_value": 2,
+      "dual_port_multi_device": 2,
+      "installation_difficulty": 2,
+      "positioning_alignment": 2,
+      "cracking_breakage": 1,
+      "overheating": 1,
+      "power_output": 1,
+      "charging_speed": 1
+    },
+    "parent_secondary_mismatch": [
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "general_performance",
+        "count": 15
+      },
+      {
+        "parent_topic": "reliability_durability",
+        "secondary_topic": "general_durability",
+        "count": 10
+      },
+      {
+        "parent_topic": "reliability_durability",
+        "secondary_topic": "stopped_working",
+        "count": 9
+      },
+      {
+        "parent_topic": "compatibility_fit",
+        "secondary_topic": "device_compatibility",
+        "count": 7
+      },
+      {
+        "parent_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "count": 6
+      },
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "charging_success",
+        "count": 5
+      },
+      {
+        "parent_topic": "product_quality",
+        "secondary_topic": "general_performance",
+        "count": 4
+      },
+      {
+        "parent_topic": "reliability_durability",
+        "secondary_topic": "intermittent_failure",
+        "count": 4
+      },
+      {
+        "parent_topic": "product_quality",
+        "secondary_topic": "material_build_quality",
+        "count": 4
+      },
+      {
+        "parent_topic": "convenience_value",
+        "secondary_topic": "general_convenience",
+        "count": 4
+      },
+      {
+        "parent_topic": "usability_installation",
+        "secondary_topic": "ease_of_use",
+        "count": 3
+      },
+      {
+        "parent_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "count": 3
+      },
+      {
+        "parent_topic": "convenience_value",
+        "secondary_topic": "portability_size",
+        "count": 3
+      },
+      {
+        "parent_topic": "convenience_value",
+        "secondary_topic": "price_value",
+        "count": 2
+      },
+      {
+        "parent_topic": "convenience_value",
+        "secondary_topic": "dual_port_multi_device",
+        "count": 2
+      },
+      {
+        "parent_topic": "usability_installation",
+        "secondary_topic": "installation_difficulty",
+        "count": 2
+      },
+      {
+        "parent_topic": "usability_installation",
+        "secondary_topic": "positioning_alignment",
+        "count": 2
+      },
+      {
+        "parent_topic": "reliability_durability",
+        "secondary_topic": "protection_effectiveness",
+        "count": 1
+      },
+      {
+        "parent_topic": "convenience_value",
+        "secondary_topic": "ease_of_use",
+        "count": 1
+      },
+      {
+        "parent_topic": "reliability_durability",
+        "secondary_topic": "cracking_breakage",
+        "count": 1
+      },
+      {
+        "parent_topic": "safety_risk",
+        "secondary_topic": "overheating",
+        "count": 1
+      },
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "dual_port_multi_device",
+        "count": 1
+      },
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "power_output",
+        "count": 1
+      },
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "charging_speed",
+        "count": 1
+      },
+      {
+        "parent_topic": "safety_risk",
+        "secondary_topic": "protection_effectiveness",
+        "count": 1
+      },
+      {
+        "parent_topic": "product_quality",
+        "secondary_topic": "protection_effectiveness",
+        "count": 1
+      },
+      {
+        "parent_topic": "function_performance",
+        "secondary_topic": "status_indicator_feedback",
+        "count": 1
+      }
+    ]
+  },
+  "evidence_errors": {
+    "topic_unsupported": 94,
+    "too_long": 25,
+    "not_continuous_substring": 11
+  },
+  "polarity_errors": {
+    "matched_topic_polarity_error_count": 11,
+    "unmatched_topic_polarity_undetermined_count": 229
+  },
+  "representative_count": 60
+}

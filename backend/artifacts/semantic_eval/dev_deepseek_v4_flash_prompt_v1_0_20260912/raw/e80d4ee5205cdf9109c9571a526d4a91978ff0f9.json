@@ -1,0 +1,216 @@
+{
+  "review_id": "e80d4ee5205cdf9109c9571a526d4a91978ff0f9",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "5640ad56-c6f6-4842-bf5b-f941099b4945",
+  "raw_response": {
+    "id": "5640ad56-c6f6-4842-bf5b-f941099b4945",
+    "created_at": 1789211176.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "6b71d6cc-b9b2-4b4d-b43e-12bdc1d1861a",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Review: \"Convenient and works good\\nI have been using this for 3 months and love it, it’s so easy and convenient to use.\" Product likely charger? Need claims. We need extract product-review semantic claims, zero/multiple. Taxonomy v1.1. We need exact evidence spans continuous substring. We can include claims with evidence from source_text. Need determine primary/secondary pair valid. Source_text exact includes title? \"Convenient and works good\\nI have been using this for 3 months and love it, it’s so easy and convenient to use.\" Claims: \"works good\" -> function_performance/general_performance positive. Evidence span \"works good\" exact substring. \"easy and convenient to use\" -> usability_installation/ease_of_use positive? Or convenience_value/general_convenience? \"Convenient\" maybe convenience_value/general_convenience positive. \"easy\" ease_of_use. Could split? Need claims independently. We can extract:\n1. function_performance general_performance positive evidence \"works good\"\n2. usability_installation ease_of_use positive evidence \"so easy and convenient to use\" Hmm \"easy and convenient\" includes convenience; ease_of_use is specifically easy to use. Primary usability_installation, secondary ease_of_use, evidence \"easy and convenient to use\"? The phrase includes convenient but claim about ease. That's okay exact span. Or evidence \"so easy and convenient to use\". Polarity positive. \n3. convenience_value general_convenience positive evidence \"Convenient and works good\"? No, \"convenient to use\". Could have separate convenience_value claim evidence \"convenient to use\" or \"Convenient\". But maybe overlapping with usability. Are they distinct? \"convenient\" and \"easy\" both indicate usability/convenience. Taxonomy allows general_convenience. The title \"Convenient and works good\". Could claim convenience_value/general_convenience positive evidence \"Convenient\". But \"Convenient\" in title is exact substring. The instruction says do not infer sentiment from star rating. We can include.\n\nNeed avoid duplicate? \"Convenient and works good\" title and \"convenient to use\" same. We can extract 2 claims maybe enough: function_performance/general_performance positive \"works good\"; usability_installation/ease_of_use positive \"easy and convenient to use\". But \"convenient\" is convenience not ease. If secondary ease_of_use, evidence \"easy\" maybe only. Then separate convenience_value/general_convenience positive \"convenient to use\". That seems robust.\n\nAlso \"I have been using this for 3 months and love it\" Could imply durability general? \"have been using this for 3 months\" no explicit durability issue, just usage duration; \"love it\" general satisfaction. Could be reliability_durability/general_durability positive? But no statement that durable, only used 3 months and loves. Could infer? Better not. Could be general_performance? \"love it\" not specific. We can ignore. Need \"If no supported product claim exists return empty\". Here supported claims.\n\nNeed exact evidence_span as exact continuous substring from SOURCE_TEXT. Source text includes newline. We can copy. Need JSON schema with claims array. No markdown. Ensure valid JSON.\n\nLet's decide claims:\n- primary_topic function_performance, secondary general_performance, polarity positive, evidence_span \"works good\"\n- primary_topic usability_installation, secondary ease_of_use, polarity positive, evidence_span \"easy and convenient to use\" But \"easy and convenient to use\" contains \"easy\" and \"convenient to use\"; ease_of_use. Is that valid? The secondary ease_of_use can map to easy to use. Evidence span includes convenient, but fine as exact substring. Maybe better \"so easy and convenient to use\" includes \"so\". \n- primary_topic convenience_value, secondary general_convenience, polarity positive, evidence_span \"Convenient\" or \"convenient to use\". If use \"convenient to use\" exact substring. But then overlap. Fine.\nPotential issue: \"easy and convenient to use\" is exact? In source: \"it’s so easy and convenient to use.\" Yes substring \"easy and convenient to use\" exact. Good.\n\nCould also extract \"love it\" as general_performance? No.\n\nNeed ensure each claim exactly one valid primary/secondary pair. Yes.\n\nFinal only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "5640ad56-c6f6-4842-bf5b-f941099b4945-0",
+        "status": "completed"
+      },
+      {
+        "id": "5386dcae-7cd6-45a0-aaa6-7d9897abece6",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"works good\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy and convenient to use\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"general_convenience\",\"polarity\":\"positive\",\"evidence_span\":\"convenient to use\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211182.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1052,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1057,
+      "output_tokens_details": {
+        "reasoning_tokens": 953
+      },
+      "total_tokens": 2109
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"works good\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy and convenient to use\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"general_convenience\",\"polarity\":\"positive\",\"evidence_span\":\"convenient to use\"}]}"
+}

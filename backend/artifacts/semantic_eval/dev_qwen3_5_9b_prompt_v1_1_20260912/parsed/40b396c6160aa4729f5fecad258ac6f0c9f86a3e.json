@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-92bf3a575a0ac9c7",
+      "review_id": "40b396c6160aa4729f5fecad258ac6f0c9f86a3e",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "negative",
+      "evidence_span": "charge surprising slow",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-cpq8hihqn7dw686f7f33f"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

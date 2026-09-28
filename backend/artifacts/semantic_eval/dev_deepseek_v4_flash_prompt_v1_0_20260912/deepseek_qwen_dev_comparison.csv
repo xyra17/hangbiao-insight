@@ -1,0 +1,16 @@
+﻿category,name,qwen3.5-9b / prompt-v1.0,qwen3.5-9b / prompt-v1.1,qwen3.5-9b / prompt-v1.2,deepseek-v4-flash / prompt-v1.0
+metric,primary_topic_macro_f1,0.569058485890169,0.600328732461688,0.388546161602681,0.7863277210663184
+metric,secondary_topic_micro_f1,0.5064102564102564,0.5322128851540616,0.3319838056680162,0.6970760233918128
+metric,topic_polarity_micro_f1,0.5,0.5242718446601942,0.3286573146292585,0.6782407407407407
+metric,matched_topic_polarity_accuracy,0.9873417721518988,0.9789473684210527,0.9878048780487805,0.9630872483221476
+metric,evidence_substring_validity,0.9566929133858267,0.9211956521739131,0.9444444444444444,1.0
+metric,invalid_taxonomy_rate,0.051181102362204724,0.04891304347826087,0.015873015873015872,0.0
+metric,unsupported_evidence_rate,0.04330708661417323,0.07880434782608696,0.05555555555555555,0.0
+error,missing_topic,171,151,194,80
+error,extra_topic,64,88,26,127
+error,polarity_mismatch,87,102,46,115
+error,guard_failure,18,32,6,0
+error,evidence_invalid_claims,11,29,7,0
+error,unsupported_evidence_claims,11,29,7,0
+error,matched_topic_polarity_incorrect_claims,2,4,1,11
+error,bad_case_reviews,178,178,197,145

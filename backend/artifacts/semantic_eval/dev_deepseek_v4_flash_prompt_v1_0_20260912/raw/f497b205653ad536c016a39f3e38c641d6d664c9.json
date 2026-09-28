@@ -1,0 +1,216 @@
+{
+  "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "72e6d585-153e-4eb5-9f6f-a1a13ac02a2d",
+  "raw_response": {
+    "id": "72e6d585-153e-4eb5-9f6f-a1a13ac02a2d",
+    "created_at": 1789211865.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "34615c84-8c3e-4139-941e-ef6c2bdc2c97",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Review title \"Not protective\" source_text. Need claims. We need identify semantic claims. Product is screen protector. Text: \"This screen protector didn’t do anything to protect my phone. I tossed my phone onto the couch, and huge cracks spread across the screen. I thought it was the screen protector that cracked, but it was my actual phone screen.\"\n\nWe need extract product-review semantic claims, zero/multiple. Each exactly valid primary/secondary pair, polarity, evidence_span exact substring. Do not infer from star. Need choose taxonomy. Claim about screen protector not protecting phone; likely function_performance/protection_effectiveness negative. Evidence span: \"This screen protector didn’t do anything to protect my phone.\" Or maybe \"Not protective\" title? SOURCE_TEXT includes title? They provide title and source_text. The source_text field is \"Not protective\\nThis screen protector didn’t...\"? Actually in JSON source_text has \"Not protective\\nThis screen protector...\" Wait source_text string includes \"Not protective\\nThis screen protector...\"? Given: \"source_text\": \"Not protective\\nThis screen protector didn’t do anything to protect my phone. I tossed my phone onto the couch, and huge cracks spread across the screen. I thought it was the screen protector that cracked, but it was my actual phone screen.\" The title is separate but source_text includes title? It begins \"Not protective\\n...\" Yes. Evidence span must be exact continuous substring from SOURCE_TEXT. Could use \"This screen protector didn’t do anything to protect my phone.\" It's exact.\n\nPotential second claim: phone screen cracked after tossing onto couch; device damage? The protector failed to protect, actual phone screen cracked. This could be protection_effectiveness negative. Maybe also device_damage? Under safety_risk: device_damage. But is the screen protector causing damage? It didn't protect; phone screen cracked due to drop. Claim \"huge cracks spread across the screen\" and \"it was my actual phone screen\" indicates the phone screen damaged. Does this relate to product? It failed protection, not caused damage. Safety_risk/device_damage maybe product damaged device? But screen protector didn't protect phone; not necessarily safety risk. Could be function_performance/protection_effectiveness negative. One claim enough. Need maybe include actual phone screen cracked as consequence evidence. But taxonomy \"function_performance\": protection_effectiveness. Claim: product did not protect phone. Evidence span could cover both: \"This screen protector didn’t do anything to protect my phone. I tossed my phone onto the couch, and huge cracks spread across the screen.\" This includes claim. Or just first sentence.\n\nCould there be claim about it being actual phone screen cracked not protector? That is evidence that protector didn't protect, same claim.\n\nNeed output JSON. Ensure no extra. Use exact curly apostrophe? The source text has \"didn’t\" with right single quote. Evidence span must exactly match. We can copy: \"This screen protector didn’t do anything to protect my phone.\" That's exact. Polarity negative.\n\nCheck if primary_topic function_performance secondary protection_effectiveness valid. Yes.\n\nMaybe also \"Not protective\" is exact substring from source_text (line start) but less sufficient. Better sentence.\n\nNeed no markdown. Final JSON with claims array.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "72e6d585-153e-4eb5-9f6f-a1a13ac02a2d-0",
+        "status": "completed"
+      },
+      {
+        "id": "081badb4-5f85-4e1a-862d-a9f0b413f6ab",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"This screen protector didn’t do anything to protect my phone.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211869.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1065,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 746,
+      "output_tokens_details": {
+        "reasoning_tokens": 700
+      },
+      "total_tokens": 1811
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"This screen protector didn’t do anything to protect my phone.\"}]}"
+}

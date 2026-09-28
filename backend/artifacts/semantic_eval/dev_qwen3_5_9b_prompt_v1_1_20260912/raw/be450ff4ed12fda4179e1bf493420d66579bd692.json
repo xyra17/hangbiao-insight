@@ -1,0 +1,50 @@
+{
+  "review_id": "be450ff4ed12fda4179e1bf493420d66579bd692",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-b5zbjq5ak1tga8ldb69mkj",
+  "raw_response": {
+    "id": "chatcmpl-b5zbjq5ak1tga8ldb69mkj",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"The block is not Fast Charging...got the matching cord also which I Love\"}]}"
+        }
+      }
+    ],
+    "created": 1789185382,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 50,
+      "prompt_tokens": 599,
+      "total_tokens": 649,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 49,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"The block is not Fast Charging...got the matching cord also which I Love\"}]}"
+}

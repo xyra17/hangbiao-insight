@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "embedding_provider": "LMStudioEmbeddingProvider",
+  "embedding_model": "text-embedding-qwen3-embedding-0.6b",
+  "embedding_version": "qwen3-embedding-0.6b-local-v1",
+  "vector_dimension": 1024,
+  "qdrant_url": "http://127.0.0.1:6333",
+  "collection": "product_review_embeddings_qwen3_v1",
+  "attempted": 300,
+  "upserted": 300,
+  "failed": 0,
+  "collection_count": 410,
+  "query_checks": [
+    {"filter": {"product_id": "B07P9S6R9Y"}, "returned": 5, "detail_success": 5, "query_latency_ms": 52.5},
+    {"filter": {"product_id": "B0BYJ8ZVWH"}, "returned": 5, "detail_success": 5, "query_latency_ms": 53.6},
+    {"filter": {"product_id": "B01G0X56YU"}, "returned": 5, "detail_success": 5, "query_latency_ms": 46.2}
+  ],
+  "upsert_latency_ms": 16797.8,
+  "degraded": false,
+  "sample": "100 reviews per product from three real business Review CSV files"
+}

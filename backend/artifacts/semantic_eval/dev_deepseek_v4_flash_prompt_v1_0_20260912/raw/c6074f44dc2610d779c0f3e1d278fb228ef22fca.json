@@ -1,0 +1,216 @@
+{
+  "review_id": "c6074f44dc2610d779c0f3e1d278fb228ef22fca",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "56418d5e-f0c1-457a-ac8f-f75ef5c39337",
+  "raw_response": {
+    "id": "56418d5e-f0c1-457a-ac8f-f75ef5c39337",
+    "created_at": 1789211755.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "e7b28752-ec54-4af2-a12e-7dfea35c24b2",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims from source_text. Review: \"Makes my phone look great\\nEasy to install and looks great\". Product perhaps phone case? Need extract product-review semantic claims. Taxonomy. We can include claims if supported. \"Easy to install\" -> usability_installation / installation_difficulty? Actually easy to install is positive ease? Taxonomy has installation_difficulty and ease_of_use. \"Easy to install\" maps installation_difficulty? The secondary \"installation_difficulty\" likely negative? But polarity positive for easy install? Could use usability_installation / ease_of_use positive. Evidence span exact \"Easy to install\". \"Makes my phone look great\" is aesthetic? Taxonomy doesn't have appearance. Could be other_unknown/uncategorized? But \"looks great\" likely product quality? material_build_quality? Hmm. Also \"looks great\" maybe not a product claim? It is appearance but taxonomy doesn't include aesthetics. Could use other_unknown/uncategorized positive? Need if no supported product claim? There is claim about ease of installation supported. For \"Makes my phone look great\" maybe product_quality? material_build_quality? But \"look great\" not material build quality explicitly. Maybe other_unknown uncategorized. But schema says if no supported product claim exists, empty list. We can include installation ease. Also \"looks great\" maybe general convenience? No. Need exactly one valid pair per claim. Let's consider all claims.\n\nSource text: \"Makes my phone look great\\nEasy to install and looks great\"\nClaims:\n1. Makes my phone look great -> appearance/aesthetic, not in taxonomy. other_unknown/uncategorized positive evidence_span \"Makes my phone look great\".\n2. Easy to install -> usability_installation / ease_of_use? Evidence \"Easy to install\". But ease_of_use secondary is under usability_installation. Yes. polarity positive.\n3. looks great -> maybe duplicates appearance. Could combine with first? A claim could be same? Need avoid duplicate? Evidence \"looks great\" appears second time? Actually source has \"looks great\" at end. Could be same appearance. Should we include one or two? The review contains \"Makes my phone look great\" and \"looks great\". They likely same semantic claim. Could extract only once with evidence \"Makes my phone look great\" or \"looks great\". But \"Easy to install and looks great\": \"looks great\" separate clause. Hmm.\n\nNeed output JSON with claims array. For claim 1 perhaps primary_topic \"other_unknown\", secondary \"uncategorized\", polarity positive, evidence_span \"Makes my phone look great\". Claim 2 \"usability_installation\", \"ease_of_use\", positive, \"Easy to install\". Claim 3? \"looks great\" maybe product_quality/material_build_quality? No. I can include claim 3 other_unknown/uncategorized positive evidence \"looks great\". But duplicate? It is exact substring. Maybe multiple claims allowed. But could be redundant. The instruction: A review may contain zero or multiple claims. For every claim choose exactly one valid taxonomy pair. Do not invent evidence or topics. If no supported product claim exists, return empty list. \"looks great\" is supported but uncategorized. We can include it. But \"Makes my phone look great\" and \"looks great\" semantically same. To avoid duplication maybe extract first \"Makes my phone look great\" as appearance claim. The second \"looks great\" is not separately necessary. But exact evidence for first includes look great. Then installation. That's fine.\n\nNeed ensure primary/secondary valid pair? Taxonomy: primary \"other_unknown\" secondary \"uncategorized\" is valid. \"usability_installation\" secondary \"ease_of_use\" valid. Polarity positive.\n\nBut wait primary_topic enum includes other_unknown. secondary_topic enum includes uncategorized. okay.\n\nPotential issue: \"Easy to install\" might be installation_difficulty under usability_installation. Actually \"installation_difficulty\" is in taxonomy, likely a topic about difficulty. But \"ease_of_use\" is broader. Which is more precise? \"Easy to install\" is specifically installation difficulty positive? The secondary label \"installation_difficulty\" means difficulty of installation. If review says easy to install, polarity positive? But primary/secondary pair maybe \"usability_installation\"/\"installation_difficulty\". However \"installation_difficulty\" sounds negative construct, but polarity positive if low difficulty. Many taxonomies use \"installation_difficulty\" with polarity positive for easy? Hmm. The instruction: independently determine polarity. So can use installation_difficulty positive. But \"ease_of_use\" also fits. Which is better? \"Easy to install\" directly refers to installation difficulty. I'd choose secondary \"installation_difficulty\" with positive. But \"ease_of_use\" is also valid. Need choose exactly one valid. Both valid? The secondary list includes both installation_difficulty and ease_of_use. \"Easy to install\" is installation_difficulty (low difficulty) or ease_of_use. More specific installation_difficulty. Let's evaluate: taxonomy usability_installation: positioning_alignment, installation_difficulty, bubbles_adhesion, ease_of_use, status_indicator_feedback, installation_accessories. \"Easy to install\" is a statement about installation difficulty. So primary usability_installation, secondary installation_difficulty, polarity positive. But some may argue installation_difficulty polarity negative if difficulty exists. Here no difficulty. I'll maybe use ease_of_use? The evidence \"Easy to install\" maps to \"installation_difficulty\" precisely. But label \"installation_difficulty\" might be interpreted as a problem topic, but polarity positive indicates easy. The schema permits polarity. I'd choose installation_difficulty.\n\nCould there be a claim \"Makes my phone look great\" under product_quality/material_build_quality? Product is likely phone case, appearance is product quality? The taxonomy product_quality includes material_build_quality, defective_on_arrival, accessory_condition. Not appearance. So other_unknown/uncategorized.\n\nMaybe \"Makes my phone look great\" also implies device compatibility? No, it's aesthetic. \"Easy to install and looks great\" maybe case installation. It looks great. Not in taxonomy.\n\nShould I include only claims with taxonomy support? \"Makes my phone look great\" no specific supported product claim? It is product appearance, but no taxonomy category. Could be \"other_unknown/uncategorized\". The schema allows uncategorized. The instruction: If no supported product claim exists, return empty list. But \"other_unknown/uncategorized\" exists for unsupported/uncategorized claims? It says \"other_unknown\": [\"insufficient_information\", \"uncategorized\"]. So yes, can extract uncategorized claims. But \"Do not invent topics.\" \"Makes my phone look great\" is a product claim about appearance; using uncategorized is fine? It is a claim but not in taxonomy. Hmm.\n\nIf we return only installation claim, maybe miss appearance. But appearance isn't in taxonomy. Could return empty for that. The review title is \"Makes my phone look great\" and body repeats. If we include other_unknown/uncategorized positive, it's not inventing. Could be accepted. But evaluation might expect no claim for appearance because no taxonomy. However the taxonomy has other_unknown/uncategorized specifically. The instruction: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair...\" That implies any claim can be mapped to other_unknown/uncategorized. So include.\n\nNeed exact evidence substring. \"Makes my phone look great\" includes newline? No, source_text has \"Makes my phone look great\\nEasy to install and looks great\". The substring \"Makes my phone look great\" is exact continuous before newline. \"Easy to install\" exact. Good.\n\nCould include third claim \"looks great\" from second clause. But if we already have \"Makes my phone look great\", second \"looks great\" is redundant. The instruction doesn't demand deduplication but \"every claim\" might include both? The phrase \"Makes my phone look great\" and \"looks great\" are two mentions of same claim. Better one claim. Evidence span can be \"Makes my phone look great\". Then installation. So two claims.\n\nNeed final JSON only. Ensure no markdown. Use exact schema. Claims array with objects. Polarity positive. Primary/secondary. Let's produce:\n\n{\"claims\":[{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Makes my phone look great\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to install\"}]}\n\nCheck if secondary \"installation_difficulty\" valid under usability_installation yes. Could use ease_of_use. Which is more likely? Let's think. \"Easy to install\" is literally ease of installation. Taxonomy has \"installation_difficulty\" and \"ease_of_use\". The \"installation_difficulty\" likely describes whether installation was difficult. \"ease_of_use\" likely general usability after installation. Since specific installation, use installation_difficulty. Polarity positive for no difficulty. Good.\n\nPotential issue: \"Makes my phone look great\" is not product claim? It is about phone appearance, caused by product. It's a product benefit. Could be other_unknown/uncategorized. Good.\n\nNeed no additional.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "56418d5e-f0c1-457a-ac8f-f75ef5c39337-0",
+        "status": "completed"
+      },
+      {
+        "id": "84019a97-a653-4b48-9022-6a18576fe838",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Makes my phone look great\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to install\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211765.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1034,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2104,
+      "output_tokens_details": {
+        "reasoning_tokens": 2034
+      },
+      "total_tokens": 3138
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Makes my phone look great\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to install\"}]}"
+}

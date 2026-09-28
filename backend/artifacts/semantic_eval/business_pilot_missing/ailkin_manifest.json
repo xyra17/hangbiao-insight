@@ -1,0 +1,10 @@
+{
+  "run_id": "business-pilot-ailkin-20260913",
+  "status": "completed",
+  "product_id": "B0BYJ8ZVWH",
+  "processed": 553,
+  "checkpoint": 553,
+  "error_count": "see errors.jsonl",
+  "golden_data_read": false,
+  "note": "Manifest reconstructed after worker interruption; checkpoint and claim JSONL were preserved."
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "8984a0f300aa248e0d8b916963c23eb47da7a7c9",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "8e232fe7-9224-4ce9-94ca-ec99ff9ae87d",
+  "raw_response": {
+    "id": "8e232fe7-9224-4ce9-94ca-ec99ff9ae87d",
+    "created_at": 1789210823.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "bc7eb4fa-6268-4162-abc0-7a395373d263",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source: \"Garbage\\nDon’t waste your money with something that will die in 2 weeks on a trip. Buy an Anker!\" Rating 1 but don't infer from rating.\n\nNeed identify product-review semantic claims. Claims possibly:\n- \"Don’t waste your money\" price_value? negative, evidence exact substring. primary convenience_value secondary price_value. This is a claim about value/money. Evidence \"Don’t waste your money\"\n- \"something that will die in 2 weeks\" reliability_durability short_lifespan? \"die in 2 weeks\" indicates short lifespan. Primary reliability_durability secondary short_lifespan, negative. Evidence \"will die in 2 weeks\" or \"something that will die in 2 weeks on a trip\". Need exact continuous substring. \n- \"Don’t waste your money with something that will die in 2 weeks on a trip.\" Could combine? We can extract separate. Also title \"Garbage\" maybe general performance? \"Garbage\" is vague, likely insufficient? But primary other_unknown uncategorized? Maybe not product claim? It is an evaluative assertion \"Garbage\" but no specific taxonomy? Could be general_performance negative? But instruction choose valid pair. \"Garbage\" could general_performance? Hmm. Need semantic claims. A review may contain zero or multiple claims. We should not overextract. The phrase \"Buy an Anker!\" is recommendation for other brand, not product claim? It implies negative comparison? Not supported product topic. Ignore.\n\n\"Don’t waste your money with something that will die in 2 weeks on a trip.\" Contains price_value and short_lifespan. Could extract two claims.\n\nNeed ensure evidence_span exact continuous substring from SOURCE_TEXT. Source text includes newline. For first: \"Don’t waste your money\" exact substring yes. For second: \"will die in 2 weeks\" exact substring yes. Could include \"die in 2 weeks\" yes. Need exact substring. Use \"will die in 2 weeks\" from \"something that will die in 2 weeks on a trip\". Polarity negative.\n\nCould \"Garbage\" be a claim? Title \"Garbage\". Source starts \"Garbage\". It is product quality? \"material_build_quality\"? Not necessarily. \"Garbage\" general negative product quality? Taxonomy product_quality has material_build_quality, defective_on_arrival, accessory_condition. Not fit. other_unknown uncategorized maybe. But do we extract? It is a semantic claim but vague uncategorized. The instruction: If no supported product claim exists empty. But there is supported claim. For \"Garbage\", it's an evaluation but no specific attribute. Could classify primary other_unknown secondary uncategorized negative. Is that allowed? Yes. But maybe too vague. Does it count as product claim? It is a claim that product is garbage. Taxonomy includes other_unknown/uncategorized. Should we include? Need decide.\n\nWe can include \"Garbage\" as other_unknown/uncategorized negative, evidence_span \"Garbage\". However, this might be considered not a product claim? It is an overall evaluation. They likely expect claims from meaningful aspects. In these extraction tasks, \"Garbage\" could be uncategorized. But including may be okay. Yet schema says \"Do not invent evidence or topics. If no supported product claim exists...\" \"Garbage\" is supported evidence, topic uncategorized. Maybe include.\n\nBut if we include \"Don’t waste your money\" and \"will die in 2 weeks\", that's enough. Title \"Garbage\" maybe same as general negative. Let's consider taxonomy: function_performance/general_performance might fit overall performance? \"Garbage\" could mean general performance negative. But no evidence of function. Better other_unknown uncategorized. Would this violate \"product claim\"? It's a product evaluation. I think include.\n\nCould there be a claim about \"on a trip\" implying portability? No, it will die on a trip = reliability short lifespan. Not portability.\n\nNeed output JSON object with claims array. Make sure no extra text. Use exact substring including apostrophe? Source text has \"Don’t\" curly apostrophe? It says \"Don’t waste your money\" with curly apostrophe? In JSON source_text: \"Don’t waste your money...\" That's U+2019 likely. Need copy exactly. We can write \"Don’t waste your money\" with curly apostrophe. Similarly \"Don’t\" in evidence. Ensure exact.\n\nFor \"will die in 2 weeks\" exact. \"Garbage\" exact.\n\nPolarity: price_value negative? \"Don't waste your money\" means bad value, negative. short_lifespan negative. uncategorized negative.\n\nPrimary/secondary pairs:\n- convenience_value / price_value\n- reliability_durability / short_lifespan\n- other_unknown / uncategorized\nMaybe also product_quality/defective_on_arrival? \"will die in 2 weeks\" could be defective? No, short lifespan.\n\nCheck if \"die in 2 weeks\" refers to product dying = stopped_working? It will die in 2 weeks = short lifespan, not stopped working yet. reliability_durability short_lifespan. Good.\n\n\"Don't waste your money with something that will die in 2 weeks on a trip.\" might be one claim combining price and durability, but taxonomy one pair only. We can split.\n\nCould \"Don’t waste your money\" be general_convenience? price_value specifically. Good.\n\nNeed maybe include \"Buy an Anker!\" as recommendation, not product claim. Ignore.\n\nReturn valid JSON no markdown. Ensure additionalProperties false, no extra fields.\n\nLet's formulate:\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"other_unknown\",\n      \"secondary_topic\": \"uncategorized\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Garbage\"\n    },\n    {\n      \"primary_topic\": \"convenience_value\",\n      \"secondary_topic\": \"price_value\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Don’t waste your money\"\n    },\n    {\n      \"primary_topic\": \"reliability_durability\",\n      \"secondary_topic\": \"short_lifespan\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"will die in 2 weeks\"\n    }\n  ]\n}\n\nCheck exact substring: Source text is \"Garbage\\nDon’t waste your money with something that will die in 2 weeks on a trip. Buy an Anker!\" The substring \"Don’t waste your money\" includes curly apostrophe. I need output same. In final, I can type \"Don’t\" with curly apostrophe. It may be fine. If not, could use \"Don’t waste your money\" as in source. The source has \"Don’t\" likely with U+2019. We'll use that.\n\nEvidence \"will die in 2 weeks\" exact continuous substring. Yes.\n\nNeed no extra explanation. Final JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "8e232fe7-9224-4ce9-94ca-ec99ff9ae87d-0",
+        "status": "completed"
+      },
+      {
+        "id": "f57665f7-4358-4212-9fa3-50052d531682",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"negative\",\"evidence_span\":\"Garbage\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"Don’t waste your money\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"will die in 2 weeks\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210830.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1043,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1606,
+      "output_tokens_details": {
+        "reasoning_tokens": 1501
+      },
+      "total_tokens": 2649
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"negative\",\"evidence_span\":\"Garbage\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"Don’t waste your money\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"will die in 2 weeks\"}]}"
+}

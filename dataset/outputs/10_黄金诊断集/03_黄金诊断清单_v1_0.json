@@ -1,0 +1,24 @@
+{
+  "dataset_name": "Golden Diagnosis Set",
+  "version": "golden-diagnosis-v1.0",
+  "status": "frozen",
+  "frozen_date": "2026-09-11",
+  "case_month_count": 7,
+  "logical_scenario_count": 6,
+  "business_source": "synthetic",
+  "review_source": "real_amazon_reviews",
+  "golden_review_version": "golden_review_labels-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "no_explanation_case": {
+    "case_id": "SYN-NOEXP-001__2019-06",
+    "product_id": "B0BYJ8ZVWH",
+    "month": "2019-06",
+    "semantic_audit": "09C Top3 semantic audit",
+    "audit_result": "SELECT"
+  },
+  "causality_policy": "Review evidence may support, contradict, or fail to explain a synthetic business anomaly. Correlation must not be described as causation.",
+  "files": {
+    "golden_cases": "01_黄金诊断案例_v1_0.csv",
+    "expectations": "02_黄金诊断预期_v1_0.csv"
+  }
+}

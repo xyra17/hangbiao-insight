@@ -1,0 +1,50 @@
+{
+  "review_id": "3e42cfcfd9bd7b8d722f94a1bafcad85e190ebf6",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-4tpw99ptp9odrchl9tci8a",
+  "raw_response": {
+    "id": "chatcmpl-4tpw99ptp9odrchl9tci8a",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"I am so pleased how this little guy charges with gusto, all while I continue to stream useless youtube videos!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"It charges fast, with the case on.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"I saw this charger and thought, for the price, I'll give it a try.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"neutral\", \"evidence_span\": \"I will be getting more of these little dynamos, as soon as a figure out how to cat-proof them.\"}]}"
+        }
+      }
+    ],
+    "created": 1789185631,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 199,
+      "prompt_tokens": 731,
+      "total_tokens": 930,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 198,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"I am so pleased how this little guy charges with gusto, all while I continue to stream useless youtube videos!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"It charges fast, with the case on.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"I saw this charger and thought, for the price, I'll give it a try.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"neutral\", \"evidence_span\": \"I will be getting more of these little dynamos, as soon as a figure out how to cat-proof them.\"}]}"
+}

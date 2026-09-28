@@ -1,0 +1,34 @@
+﻿primary_topic,primary_definition,secondary_topic,secondary_definition,positive_examples,negative_examples
+function_performance,产品核心功能能否实现，以及实际性能表现是否符合预期。,charging_success,设备是否能够成功开始或持续完成充电。,charges my phone every time | works perfectly for charging,doesn't charge my phone | won't charge
+function_performance,产品核心功能能否实现，以及实际性能表现是否符合预期。,charging_speed,充电速度快慢，以及是否符合用户对快充的预期。,charges very fast | fast charging works great,charges extremely slow | not fast charging
+function_performance,产品核心功能能否实现，以及实际性能表现是否符合预期。,protection_effectiveness,屏幕保护类产品是否真正起到防刮、防摔或保护屏幕作用。,protected my screen when I dropped it,screen still cracked
+function_performance,产品核心功能能否实现，以及实际性能表现是否符合预期。,general_performance,无法归入更具体子类的产品功能或性能表现。,,
+reliability_durability,产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。,stopped_working,产品曾经正常工作，随后完全停止工作。,,stopped working after two months | worked for a while then died
+reliability_durability,产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。,intermittent_failure,产品时好时坏、连接不稳定或偶发失效。,,works only sometimes | keeps disconnecting
+reliability_durability,产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。,short_lifespan,产品使用寿命明显短于用户预期。,,only lasted a few weeks
+reliability_durability,产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。,cracking_breakage,产品出现开裂、碎裂、断裂等物理损坏。,,cracked after a few days | broke very easily
+reliability_durability,产品是否稳定工作，以及经过一段时间后是否失效、损坏或寿命过短。,wear_damage,产品出现磨损、脱落或其他耐用性下降。,,
+compatibility_fit,产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。,device_compatibility,产品是否兼容特定手机、平板、手表等设备型号。,works with my iPhone,doesn't work with my phone
+compatibility_fit,产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。,case_compatibility,产品在手机安装保护壳等配件后是否仍可正常使用。,charges through my case,won't charge with the case on
+compatibility_fit,产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。,size_fit,产品尺寸是否与目标设备或使用对象匹配。,fits perfectly,too small | doesn't fit the screen
+compatibility_fit,产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。,port_fit,线缆、插头或接口与设备端口之间是否适配。,,connector does not fit
+compatibility_fit,产品与设备、保护壳、接口、墙插或尺寸之间是否匹配。,wall_socket_fit,墙充插脚与墙壁插座之间是否牢固、松动或容易脱落。,fits tightly in the outlet,falls out of the wall outlet | plug is too loose
+safety_risk,使用产品过程中出现的温度、电气、物理伤害或其他安全风险。,overheating,产品或设备出现明显异常发热。,,gets extremely hot | charger becomes very hot
+safety_risk,使用产品过程中出现的温度、电气、物理伤害或其他安全风险。,melting_fire,产品出现融化、冒烟、烧焦或起火等严重安全问题。,,started melting | almost caught fire
+safety_risk,使用产品过程中出现的温度、电气、物理伤害或其他安全风险。,abnormal_noise,产品出现异常电流声、滋滋声或其他不正常声音。,,makes a buzzing sound
+safety_risk,使用产品过程中出现的温度、电气、物理伤害或其他安全风险。,physical_injury_irritation,产品导致扎手、割伤、皮肤刺激等身体不适或伤害风险。,,tiny glass pieces cut my finger
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,positioning_alignment,产品使用过程中是否需要反复调整位置才能正常工作。,easy to position,have to place the phone exactly right
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,installation_difficulty,产品安装过程是否困难、复杂或容易失败。,very easy to install,difficult to install
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,bubbles_adhesion,贴膜等产品是否出现气泡、翘边、不粘等问题。,no bubbles,bubbles everywhere | edges don't stick
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,ease_of_use,日常使用是否简单、方便。,easy to use,annoying to use
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,status_indicator_feedback,LED、指示灯或其他状态反馈是否能够清晰告诉用户设备状态。,indicator clearly shows it is charging,can't tell whether it is charging
+usability_installation,产品的安装、定位、操作以及状态反馈是否清晰和方便。,installation_accessories,安装模板、清洁片、湿巾等安装附件是否完整和好用。,installation kit made it easy,cleaning wipe was completely dry | installation guide was missing
+convenience_value,产品带来的多设备能力、便携性、价格价值和便利体验。,dual_port_multi_device,是否支持同时连接或服务多个设备。,charges two devices at once,can't charge two devices together
+convenience_value,产品带来的多设备能力、便携性、价格价值和便利体验。,portability_size,产品尺寸、重量和携带便利程度。,small and easy to travel with,too bulky
+convenience_value,产品带来的多设备能力、便携性、价格价值和便利体验。,price_value,用户认为产品价格与实际价值是否匹配。,great value for the price,not worth the money
+convenience_value,产品带来的多设备能力、便携性、价格价值和便利体验。,general_convenience,无法归入更具体子类的便利性体验。,,
+product_quality,产品材料、制造做工、出厂状态以及附属物料的质量。,material_build_quality,材质、做工、结构质量是否良好。,feels well made,feels cheap | poor build quality
+product_quality,产品材料、制造做工、出厂状态以及附属物料的质量。,defective_on_arrival,产品第一次使用或刚到货时就存在功能性缺陷。,,didn't work out of the box
+product_quality,产品材料、制造做工、出厂状态以及附属物料的质量。,accessory_condition,附带配件、包装内物料或安装工具本身的质量状态。,,included wipe was dried out
+other_unknown,评论信息不足或现有 Taxonomy 无法可靠覆盖。,insufficient_information,评论只有笼统评价，没有足够语义判断具体 Topic。,good | great,bad | terrible
+other_unknown,评论信息不足或现有 Taxonomy 无法可靠覆盖。,uncategorized,评论表达了明确业务语义，但当前 Taxonomy 尚未覆盖。,,

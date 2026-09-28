@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>航标 Insight - AI Diagnostic Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#00f2fe',
+                        brand2: '#4facfe',
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '-apple-system', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'SFMono-Regular', 'monospace']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- ECharts & Lucide -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+        /* --- Color System & Cinematic Contrast Fixes --- */
+        :root {
+            --bg-body: #ffffff;
+            --bg-surface: rgba(255, 255, 255, 0.96);
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --border-strong: rgba(15, 23, 42, 0.15);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --mesh-1: rgba(0, 242, 254, 0.15);
+            --mesh-2: rgba(168, 85, 247, 0.1);
+        }
+
+        .dark {
+            --bg-body: #06090f;
+            --bg-surface: rgba(13, 17, 23, 0.75);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-strong: rgba(255, 255, 255, 0.12);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --mesh-1: rgba(0, 242, 254, 0.12);
+            --mesh-2: rgba(168, 85, 247, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Application shell: a distinct navigation plane anchors the workspace. */
+        #sidebar {
+            background: #eff6ff;
+            border-right: 1px solid #bfdbfe;
+            box-shadow: 10px 0 28px rgba(15, 23, 42, 0.06);
+        }
+
+        #sidebar,
+        #sidebar * {
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-subtle: rgba(15, 23, 42, 0.1);
+            --border-strong: rgba(15, 23, 42, 0.18);
+        }
+
+        #sidebar .brand-mark {
+            background: #ffffff;
+            border: 1px solid #dbeafe;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+        }
+
+        #sidebar .nav-active {
+            background: #ffffff;
+            color: #0f172a;
+            border-color: #bfdbfe;
+            box-shadow: 0 5px 14px rgba(37, 99, 235, 0.08);
+        }
+
+        #sidebar .nav-idle:hover {
+            background: #dbeafe;
+        }
+
+        #sidebar .nav-pending {
+            opacity: 1;
+            color: #64748b;
+        }
+
+        #sidebar .nav-pending span:last-child {
+            background: #dbeafe;
+            color: #475569;
+        }
+
+        main {
+            background: #f8fafc;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        #view-container {
+            flex: 0 0 auto !important;
+            overflow: visible !important;
+            min-height: calc(100vh - 88px);
+        }
+
+        .top-banner {
+            margin: 16px 24px 0;
+            min-height: 72px;
+            padding: 0 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+            border: 1px solid #dbeafe;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .top-banner::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: -17px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #bfdbfe, transparent);
+        }
+
+        .live-pill {
+            border: 1px solid #a5f3fc;
+            background: #ecfeff;
+            border-radius: 999px;
+            padding: 8px 12px;
+        }
+
+        .time-console {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+        }
+
+        .time-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 10px;
+            border-radius: 7px;
+            color: #0f766e;
+            background: #f0fdfa;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .range-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 260px;
+            padding: 8px 10px;
+            color: #334155;
+            border-radius: 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .range-trigger:hover,
+        .range-trigger[aria-expanded="true"] {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .range-popover {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            z-index: 60;
+            width: min(420px, calc(100vw - 48px));
+            padding: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+        }
+
+        .range-popover input {
+            width: 100%;
+            padding: 9px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            color: #0f172a;
+            background: #ffffff;
+            font-size: 12px;
+        }
+
+        .range-option {
+            padding: 7px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            color: #475569;
+            background: #ffffff;
+            font-size: 12px;
+        }
+
+        .range-option:hover,
+        .range-option.active {
+            border-color: #60a5fa;
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .history-action {
+            padding: 8px 11px;
+            border: 1px solid #94a3b8;
+            border-radius: 7px;
+            color: #334155;
+            background: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .history-action:hover {
+            border-color: #2563eb;
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .route-card {
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid #4facfe;
+            background: #ffffff;
+        }
+
+        .route-card[data-route="clarification"],
+        .route-card[data-route="unsupported"] { border-left-color: #94a3b8; }
+        .route-card[data-route="agent"] { border-left-color: #00f2fe; }
+
+        .kpi-panel {
+            position: relative;
+            border: 1px solid #dbeafe;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+        }
+
+        .dashboard-panel {
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+        }
+
+        .chart-panel {
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+            padding: 24px;
+        }
+
+        .alert-card {
+            border: 1px solid #fecaca;
+            border-left: 4px solid #b91c1c;
+            border-radius: 14px;
+            background: #fffafa;
+            box-shadow: 0 8px 22px rgba(127, 29, 29, 0.06);
+        }
+
+        .risk-value {
+            color: #b91c1c;
+            font-weight: 500;
+        }
+
+        .risk-badge {
+            color: #b91c1c;
+            background: #fff1f2;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-action {
+            color: #ffffff;
+            background: #7f1d1d;
+        }
+
+        .alert-action:hover { background: #991b1b; }
+
+        /* Dark theme keeps the same cyan/blue palette and swaps only surface values. */
+        .dark main { background: var(--bg-body); }
+        .dark #sidebar {
+            background: linear-gradient(165deg, rgba(79, 172, 254, 0.12), rgba(0, 242, 254, 0.08)), var(--bg-body);
+            box-shadow: 18px 0 45px rgba(0, 0, 0, 0.22);
+        }
+        .dark #sidebar,
+        .dark #sidebar * {
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-strong: rgba(255, 255, 255, 0.12);
+        }
+        .dark #sidebar .brand-mark,
+        .dark #sidebar .nav-active {
+            background: rgba(13, 17, 23, 0.88);
+            color: #f8fafc;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark #sidebar .nav-idle:hover { background: rgba(255, 255, 255, 0.06); }
+        .dark .top-banner {
+            background: linear-gradient(100deg, rgba(79, 172, 254, 0.12), rgba(0, 242, 254, 0.04) 58%, rgba(13, 17, 23, 0.96));
+        }
+        .dark .time-console,
+        .dark .route-card,
+        .dark .bg-white { background-color: #0d1117 !important; }
+        .dark .bg-blue-50,
+        .dark .bg-cyan-50 { background-color: rgba(79, 172, 254, 0.08) !important; }
+        .dark .kpi-panel,
+        .dark .dashboard-panel,
+        .dark .chart-panel { background: #0d1117; border-color: rgba(255, 255, 255, 0.12); }
+        .dark .alert-card { background: rgba(127, 29, 29, 0.16); border-color: rgba(248, 113, 113, 0.35); }
+        .dark .range-popover,
+        .dark .range-popover input,
+        .dark .range-option,
+        .dark .history-action { background: #0d1117; color: #cbd5e1; border-color: rgba(255,255,255,0.16); }
+        .dark .range-trigger:hover,
+        .dark .range-trigger[aria-expanded="true"] { background: rgba(255,255,255,0.06); color: #f8fafc; }
+
+        /* Ambient Aurora */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 10% 30%, var(--mesh-1), transparent 60%),
+                radial-gradient(circle at 90% 70%, var(--mesh-2), transparent 60%);
+            filter: blur(80px);
+            opacity: 0.9;
+        }
+
+        /* HUD Panels & Corner Accents */
+        .hud-panel {
+            position: relative;
+            background: linear-gradient(180deg, rgba(150, 150, 150, 0.03) 0%, transparent 100%);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .hud-panel::before,
+        .hud-panel::after,
+        .hud-corner-bl,
+        .hud-corner-br {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 1.5px solid var(--text-muted);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .hud-panel::before {
+            top: -1.5px;
+            left: -1.5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .hud-panel::after {
+            top: -1.5px;
+            right: -1.5px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .hud-corner-bl {
+            bottom: -1.5px;
+            left: -1.5px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .hud-corner-br {
+            bottom: -1.5px;
+            right: -1.5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .hud-panel:hover::before,
+        .hud-panel:hover::after,
+        .hud-panel:hover .hud-corner-bl,
+        .hud-panel:hover .hud-corner-br {
+            border-color: #00f2fe;
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Typography & Glow */
+        .text-glow {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 8px rgba(0, 242, 254, 0.4));
+        }
+
+        .data-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Custom Dropdown Styling */
+        .custom-dropdown-content {
+            background: var(--bg-surface);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .custom-dropdown-content.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown-item {
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.1) 0%, transparent 100%);
+            padding-left: 1.5rem !important;
+            color: var(--text-main);
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 242, 254, 0.05);
+            border-left: 2px solid #00f2fe;
+        }
+
+        /* Fluid Interactions */
+        .btn-fluid {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-fluid:active:not(:disabled) {
+            transform: scale(0.96);
+        }
+
+        .btn-fluid:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* Table Rows */
+        tr {
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.2s;
+        }
+
+        tr:hover {
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.04) 0%, transparent 100%);
+            padding-left: 4px;
+        }
+
+        th {
+            border-bottom: 1px solid var(--border-strong);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Terminal & Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-strong);
+            border-radius: 4px;
+        }
+
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+            display: inline-block;
+            width: 6px;
+            height: 14px;
+            background-color: var(--text-main);
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Drawer */
+        .drawer {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Image Hover for Products */
+        .product-img {
+            filter: none;
+            transition: all 0.4s ease;
+        }
+
+        .group:hover .product-img {
+            filter: grayscale(0%) opacity(1);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="text-sm md:text-base selection:bg-brand selection:text-black">
+
+    <div class="aurora-bg"></div>
+
+    <div class="flex h-screen overflow-hidden relative">
+        <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden drawer-overlay"
+            onclick="toggleSidebar()"></div>
+
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="bg-[var(--bg-surface)] backdrop-blur-2xl border-r border-[var(--border-subtle)] fixed inset-y-0 left-0 z-50 w-[260px] transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-400 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.05)]">
+            <div class="h-20 flex items-center px-6 shrink-0 relative">
+                <div
+                    class="absolute bottom-0 left-6 right-6 h-[1px] bg-gradient-to-r from-[var(--border-strong)] to-transparent">
+                </div>
+                <div
+                    class="brand-mark w-8 h-8 rounded flex items-center justify-center mr-3">
+                    <i data-lucide="compass" class="text-black w-5 h-5"></i>
+                </div>
+                <span
+                    class="text-base font-mono tracking-widest text-[var(--text-main)] font-semibold mt-0.5">INSIGHT</span>
+                <button class="md:hidden ml-auto text-[var(--text-muted)] hover:text-[var(--text-main)]"
+                    onclick="toggleSidebar()">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2 hide-scroll" id="nav-container">
+                <!-- Injected via JS -->
+            </nav>
+
+            <div class="p-5 shrink-0 relative border-t border-[var(--border-subtle)]">
+                <div
+                    class="flex items-center px-4 py-2.5 text-[var(--text-muted)] hover:text-[var(--text-main)] cursor-pointer transition-colors text-sm font-mono tracking-widest rounded hover:bg-black/5 dark:hover:bg-white/5 mb-3">
+                    <i data-lucide="settings" class="w-4 h-4 mr-3"></i> <span data-i18n="nav_settings">系统设置</span>
+                </div>
+                <div
+                    class="flex items-center px-4 py-3 rounded border border-[var(--border-subtle)] bg-[var(--bg-body)]">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center text-white text-xs font-mono shadow-inner">
+                        OP</div>
+                    <div class="ml-3 flex flex-col">
+                        <span class="text-sm font-medium text-[var(--text-main)] font-mono"
+                            data-i18n="user_role">运营总监</span>
+                        <span class="text-xs text-[var(--text-muted)] mt-0.5" data-i18n="user_tier">PRO 授权版</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
+            <!-- Top Bar -->
+            <header
+                class="top-banner flex items-center justify-between z-20 shrink-0 relative">
+                <div class="flex items-center">
+                    <button class="md:hidden mr-4 text-[var(--text-muted)] hover:text-[var(--text-main)]"
+                        onclick="toggleSidebar()">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                    <!-- Global Dynamic Page Title -->
+                    <div class="w-1 h-9 rounded-full bg-gradient-to-b from-brand2 to-brand mr-4"></div>
+                    <div>
+                    <div class="text-[10px] font-mono tracking-widest text-[var(--text-muted)] mb-1">INSIGHT / OPERATIONS</div>
+                    <h1 id="page-title" class="text-lg font-semibold tracking-wide text-[var(--text-main)]"
+                        data-i18n="nav_dashboard">经营总览</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="live-pill hidden sm:flex items-center">
+                        <div class="w-2 h-2 rounded-full bg-brand mr-2 animate-pulse shadow-[0_0_8px_#00f2fe]"></div>
+                        <span class="text-xs text-[var(--text-muted)] font-mono tracking-widest"
+                            data-i18n="sys_online">ENGINE: ONLINE</span>
+                    </div>
+                    <!-- Controls -->
+                    <div class="flex items-center gap-3 border-l border-slate-200 pl-6">
+                        <span class="hidden lg:inline text-[11px] font-medium text-slate-600">北京时间</span>
+                        <button onclick="toggleLang()"
+                            class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors btn-fluid font-mono text-xs tracking-widest px-3 py-1.5 rounded border border-[var(--border-subtle)] hover:border-brand/50">
+                            <span id="lang-text">EN</span>
+                        </button>
+                        <button onclick="toggleTheme()" aria-label="切换明暗主题" title="切换明暗主题"
+                            class="text-[var(--text-muted)] hover:text-brand transition-colors btn-fluid p-2 rounded-lg border border-[var(--border-subtle)]">
+                            <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Views Container -->
+            <div class="flex-1 overflow-y-auto scroll-smooth pb-12" id="view-container">
+
+                <!-- 1. DASHBOARD VIEW -->
+                <div id="view-dashboard" class="page-view space-y-8 pt-8 pb-10 px-6 lg:px-10 max-w-[1600px] mx-auto animate-fade-in-up">
+
+                    <div
+                        class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
+                        <!-- Custom Dropdown (Replaces native select) -->
+                        <div class="relative group" id="custom-select-container">
+                            <div class="flex items-center gap-2 cursor-pointer border-b border-dashed border-[var(--border-strong)] pb-1.5 hover:border-brand transition-colors"
+                                onclick="toggleDropdown(event)">
+                                <span class="text-xl font-medium text-[var(--text-main)]" id="selected-product-text"
+                                    data-i18n="opt_all">全部观测商品</span>
+                                <i data-lucide="chevron-down"
+                                    class="w-5 h-5 text-[var(--text-muted)] group-hover:text-brand transition-colors"></i>
+                            </div>
+                            <!-- Custom Dropdown Menu -->
+                            <div id="product-dropdown"
+                                class="custom-dropdown-content absolute top-full left-0 mt-3 w-[340px] rounded-lg z-50 p-2 flex flex-col gap-1">
+                                <div class="dropdown-item active px-4 py-3 rounded-md cursor-pointer flex items-center justify-between"
+                                    onclick="selectProduct('all', 'opt_all', event)">
+                                    <span class="font-medium text-sm text-[var(--text-main)]"
+                                        data-i18n="opt_all">全部观测商品</span>
+                                    <i data-lucide="check" class="w-4 h-4 text-brand"></i>
+                                </div>
+                                <div class="dropdown-item px-4 py-3 rounded-md cursor-pointer flex items-center justify-between text-[var(--text-muted)]"
+                                    onclick="selectProduct('p1', 'opt_p1', event)">
+                                    <span class="font-medium text-sm" data-i18n="opt_p1">无线降噪蓝牙耳机 Pro</span>
+                                    <i data-lucide="check" class="w-4 h-4 text-brand opacity-0"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="time-range-picker" class="relative flex items-center gap-3 w-full xl:w-auto">
+                            <button id="realtime-btn" onclick="setRealtime()" class="time-status btn-fluid" title="返回实时监测">
+                                <span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span>实时监测
+                            </button>
+                            <span class="hidden sm:inline text-xs text-slate-600">更新于 <b id="live-clock" class="font-mono text-slate-800">--:--:--</b></span>
+                            <div class="time-console flex-1 xl:flex-none">
+                                <button id="range-trigger" onclick="toggleRangePicker(event)" aria-expanded="false" class="range-trigger btn-fluid">
+                                    <i data-lucide="calendar-days" class="w-4 h-4 text-slate-500 shrink-0"></i>
+                                    <span id="time-range-label" class="truncate">最近 14 天</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 ml-auto shrink-0"></i>
+                                </button>
+                                <div id="range-popover" class="range-popover hidden">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div><h3 class="text-sm font-semibold text-slate-900">选择历史范围</h3><p class="text-xs text-slate-500 mt-1">精确到分钟，应用后刷新数据视图</p></div>
+                                        <button onclick="closeRangePicker()" class="p-1 text-slate-500 hover:text-slate-900" aria-label="关闭时间选择"><i data-lucide="x" class="w-4 h-4"></i></button>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-2 mb-4">
+                                        <button class="range-option" onclick="setRangePreset(1, event)">近 24 小时</button>
+                                        <button class="range-option" onclick="setRangePreset(7, event)">近 7 天</button>
+                                        <button class="range-option active" onclick="setRangePreset(14, event)">近 14 天</button>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <label class="text-xs font-medium text-slate-600">开始时间<input id="history-start" type="text" inputmode="numeric" placeholder="2026-09-17 00:00" aria-label="历史开始时间" class="mt-1.5"></label>
+                                        <label class="text-xs font-medium text-slate-600">结束时间<input id="history-end" type="text" inputmode="numeric" placeholder="2026-09-17 23:59" aria-label="历史结束时间" class="mt-1.5"></label>
+                                    </div>
+                                    <div class="flex justify-end gap-2 mt-5">
+                                        <button onclick="closeRangePicker()" class="px-3 py-2 text-xs text-slate-600 hover:text-slate-900">取消</button>
+                                        <button onclick="applyHistoryRange()" class="history-action">应用范围</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core KPIs -->
+                    <div class="kpi-panel px-6 lg:px-8 py-7">
+                        <div
+                            class="grid grid-cols-2 lg:grid-cols-4 gap-y-8 lg:gap-y-0 lg:divide-x divide-slate-200">
+                            <div
+                                class="flex flex-col lg:px-8 first:pl-0 last:pr-0">
+                                <span
+                                    class="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-2 font-mono flex items-center"
+                                    data-i18n="kpi_orders">订单总数</span>
+                                <div class="flex items-baseline gap-2"><span
+                                        class="text-4xl data-number text-[var(--text-main)] font-light">12,450</span><span
+                                        class="text-xs text-emerald-500 font-mono">+5.2%</span></div>
+                            </div>
+                            <div
+                                class="flex flex-col lg:px-8 first:pl-0 last:pr-0">
+                                <span
+                                    class="text-xs text-[#b91c1c] uppercase tracking-widest mb-2 font-mono flex items-center"
+                                    data-i18n="kpi_refunds">退款告警</span>
+                                <div class="flex items-baseline gap-2"><span
+                                        class="text-4xl data-number risk-value">8.4%</span><span
+                                        class="text-xs text-[#b91c1c] font-mono">+1.2%</span></div>
+                            </div>
+                            <div
+                                class="flex flex-col lg:px-8 first:pl-0 last:pr-0">
+                                <span
+                                    class="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-2 font-mono flex items-center"
+                                    data-i18n="kpi_rating">商品声誉</span>
+                                <div class="flex items-baseline gap-2"><span
+                                        class="text-4xl data-number text-[var(--text-main)] font-light">4.2</span><span
+                                        class="text-xs text-red-400 font-mono">-0.1</span></div>
+                            </div>
+                            <div
+                                class="flex flex-col lg:px-8 first:pl-0 last:pr-0">
+                                <span
+                                    class="text-xs text-[var(--text-muted)] uppercase tracking-widest mb-2 font-mono flex items-center"
+                                    data-i18n="kpi_reviews">语义样本</span>
+                                <div class="flex items-baseline gap-2"><span
+                                        class="text-4xl data-number text-[var(--text-main)] font-light">856</span><span
+                                        class="text-xs text-emerald-500 font-mono">+12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <div class="chart-panel lg:col-span-8 flex flex-col">
+                            <div
+                                class="flex justify-between items-center mb-5 border-b border-slate-200 pb-3">
+                                <h3 class="text-sm font-mono tracking-widest text-[var(--text-main)] uppercase"
+                                    data-i18n="chart_trend">订单与退款趋势投影</h3>
+                                <div
+                                    class="flex gap-6 text-xs font-mono text-[var(--text-muted)] uppercase tracking-widest">
+                                    <span class="flex items-center"><span
+                                            class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span><span
+                                            data-i18n="label_orders">订单</span></span>
+                                    <span class="flex items-center"><span
+                                            class="w-2 h-2 rounded-full bg-brand shadow-[0_0_8px_#00f2fe] mr-2"></span><span
+                                            data-i18n="label_refunds">退款率</span></span>
+                                </div>
+                            </div>
+                            <div id="chart-trend" class="w-full h-[320px]"></div>
+                        </div>
+
+                        <!-- AI Alert (Cinematic Panel) -->
+                        <div class="alert-card lg:col-span-4 flex flex-col justify-center p-8">
+                            <div>
+                                <div
+                                    class="risk-badge inline-flex items-center px-3 py-1.5 rounded text-xs tracking-widest font-mono mb-5">
+                                    <span data-i18n="status_critical">CRITICAL</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 leading-tight text-[var(--text-main)]"><span
+                                        data-i18n="alert_title1">退款率激增告警</span><br><span class="text-[#b91c1c]"
+                                        data-i18n="alert_title2">已突破安全阈值</span></h3>
+                                <p class="text-sm text-[var(--text-muted)] mb-8 leading-relaxed font-medium"
+                                    data-i18n="alert_desc">
+                                    目标商品近 14 天退款率飙升至 8.4%，同时伴随负面极性评论急剧增加。系统建议立即进行根因排查。
+                                </p>
+                                <button onclick="openInvestigation()"
+                                    class="alert-action w-full py-3 text-sm font-medium tracking-wide rounded-lg flex justify-center items-center gap-2 btn-fluid">
+                                    <span data-i18n="btn_start_engine">初始化诊断引擎</span> <i data-lucide="chevron-right"
+                                        class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Modules -->
+                    <div class="dashboard-panel px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-sm font-mono tracking-widest text-[var(--text-main)] uppercase mb-6 border-b border-[var(--border-strong)] pb-3"
+                                data-i18n="table_radar">异常实体雷达</h3>
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr>
+                                        <th class="pb-3 font-medium" data-i18n="th_target">目标实体</th>
+                                        <th class="pb-3 font-medium" data-i18n="th_variance">指标异动</th>
+                                        <th class="pb-3 font-medium" data-i18n="th_state">状态</th>
+                                        <th class="pb-3 font-medium text-right" data-i18n="th_action">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm" id="dashboard-anomaly-list">
+                                    <!-- Rendered via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-mono tracking-widest text-[var(--text-main)] uppercase mb-6 border-b border-[var(--border-strong)] pb-3"
+                                data-i18n="chart_sentiment">负面异常根因分布 (Top Drivers)</h3>
+                            <div id="chart-sentiment" class="w-full h-[260px]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. PRODUCTS VIEW (Rich List/Grid) -->
+                <div id="view-products"
+                    class="page-view hidden space-y-8 pt-8 px-6 lg:px-10 max-w-[1600px] mx-auto animate-fade-in-up">
+                    <div class="relative w-full sm:w-1/3 border-b border-[var(--border-strong)] pb-2 mb-8 group">
+                        <i data-lucide="search"
+                            class="absolute left-0 top-1.5 w-5 h-5 text-[var(--text-muted)] group-focus-within:text-brand transition-colors"></i>
+                        <input type="text" id="search-ph" placeholder="搜索 ASIN 或商品名称..."
+                            class="w-full bg-transparent pl-8 outline-none text-[var(--text-main)] text-base placeholder:text-[var(--text-muted)]">
+                    </div>
+
+                    <!-- Rich Product Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="product-grid">
+                        <!-- JS Rendered -->
+                    </div>
+                </div>
+
+                <!-- 3. ANOMALIES VIEW -->
+                <div id="view-anomalies"
+                    class="page-view hidden space-y-8 pt-8 px-6 lg:px-10 max-w-[1600px] mx-auto animate-fade-in-up">
+                    <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
+                        <section class="xl:col-span-4 rounded-2xl border border-[var(--border-strong)] bg-white p-6 shadow-[0_12px_36px_rgba(79,172,254,0.08)]">
+                            <div class="flex items-center justify-between mb-5">
+                                <div>
+                                    <div class="text-xs text-blue-600 font-mono mb-1">REQUEST ROUTER</div>
+                                    <h2 class="text-xl font-semibold">异常诊断请求</h2>
+                                </div>
+                                <span class="live-pill text-xs font-mono text-blue-600">已就绪</span>
+                            </div>
+                            <label class="block text-xs text-[var(--text-muted)] mb-2" for="diagnosis-request">输入商品、时间与要诊断的问题</label>
+                            <textarea id="diagnosis-request" rows="4" class="w-full resize-none rounded-xl border border-[var(--border-strong)] p-4 outline-none focus:border-brand2 bg-white text-sm leading-relaxed" placeholder="例如：为什么无线耳机 Pro 近 14 天退款率异常，评论能否解释？"></textarea>
+                            <button onclick="routeDiagnosis()" class="mt-4 w-full rounded-xl bg-gradient-to-r from-brand2 to-brand py-3 text-sm font-semibold text-slate-900 flex items-center justify-center gap-2 btn-fluid">
+                                <i data-lucide="git-branch" class="w-4 h-4"></i>判断路由并执行
+                            </button>
+                            <p id="route-result" class="mt-3 text-xs text-[var(--text-muted)] min-h-[18px]">请求将先经过信息完整性与数据可用性判断。</p>
+                        </section>
+
+                        <section class="xl:col-span-8 rounded-2xl border border-[var(--border-strong)] bg-white p-6">
+                            <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
+                                <div>
+                                    <div class="text-xs text-[var(--text-muted)] font-mono mb-1">ROUTING MAP</div>
+                                    <h2 class="text-xl font-semibold">五类执行结果</h2>
+                                </div>
+                                <span class="text-xs text-[var(--text-muted)]">前置短路 → 可执行层级</span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                                <div class="route-card rounded-xl p-4" data-route="clarification"><b class="block text-sm mb-2">Clarification</b><span class="text-xs text-[var(--text-muted)] leading-relaxed">缺少商品、月份等字段，不创建调查</span></div>
+                                <div class="route-card rounded-xl p-4" data-route="unsupported"><b class="block text-sm mb-2">Unsupported</b><span class="text-xs text-[var(--text-muted)] leading-relaxed">依赖未接入数据，返回不支持原因</span></div>
+                                <div class="route-card rounded-xl p-4"><b class="block text-sm mb-2">L0 Tool</b><span class="text-xs text-[var(--text-muted)] leading-relaxed">退款率、订单量等单指标同步查询</span></div>
+                                <div class="route-card rounded-xl p-4"><b class="block text-sm mb-2">L1 Workflow</b><span class="text-xs text-[var(--text-muted)] leading-relaxed">异常检测、趋势等固定步骤同步执行</span></div>
+                                <div class="route-card rounded-xl p-4" data-route="agent"><b class="block text-sm mb-2">L2 Agent</b><span class="text-xs text-[var(--text-muted)] leading-relaxed">原因与证据解释，创建 Investigation</span></div>
+                            </div>
+                        </section>
+                    </div>
+                    <div
+                        class="flex flex-col sm:flex-row gap-6 justify-between items-end pb-4 border-b border-[var(--border-strong)]">
+                        <div
+                            class="flex space-x-3 overflow-x-auto w-full sm:w-auto hide-scroll font-mono text-xs tracking-widest uppercase">
+                            <button
+                                class="px-5 py-2 border border-[var(--text-main)] bg-[var(--text-main)] text-[var(--bg-body)] rounded"
+                                data-i18n="filter_all">全部事件</button>
+                            <button
+                                class="px-5 py-2 border border-red-500/40 text-red-500 hover:bg-red-500/10 btn-fluid rounded font-medium"
+                                data-i18n="filter_high">高危异常</button>
+                            <button
+                                class="px-5 py-2 border border-yellow-500/40 text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 btn-fluid rounded font-medium"
+                                data-i18n="filter_med">中度预警</button>
+                        </div>
+                        <button onclick="simulateExport()"
+                            class="text-xs text-[var(--text-main)] flex items-center gap-2 btn-fluid font-mono tracking-widest border border-[var(--border-strong)] px-4 py-2.5 rounded hover:border-brand transition-colors">
+                            <i data-lucide="download" class="w-4 h-4"></i> <span data-i18n="btn_export">导出数据流</span>
+                        </button>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr>
+                                    <th class="p-4 font-medium" data-i18n="th_target">目标实体</th>
+                                    <th class="p-4 font-medium" data-i18n="th_summary">异常特征</th>
+                                    <th class="p-4 font-medium" data-i18n="th_time">捕获时间</th>
+                                    <th class="p-4 font-medium" data-i18n="th_severity">威胁等级</th>
+                                    <th class="p-4 font-medium" data-i18n="th_status">处理状态</th>
+                                    <th class="p-4 font-medium text-right" data-i18n="th_action">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="anomaly-table-body">
+                                <!-- JS Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <section id="investigation-workbench" class="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-white shadow-[0_16px_44px_rgba(79,172,254,0.09)]">
+                        <div class="p-6 bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-[var(--border-subtle)] flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand2 to-brand flex items-center justify-center"><i data-lucide="terminal" class="w-5 h-5 text-slate-900"></i></div>
+                                <div><div class="text-xs text-blue-600 font-mono mb-1">L2 / AGENT INVESTIGATION</div><h2 class="text-xl font-semibold">AI 诊断工作台·无线耳机 Pro</h2></div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button disabled class="px-4 py-2 rounded-lg border border-[var(--border-strong)] text-xs text-[var(--text-muted)]">external_planner <span class="ml-1">延期</span></button>
+                                <button class="px-4 py-2 rounded-lg bg-white border border-brand2 text-xs text-blue-600 font-medium">deterministic_local 运行中</button>
+                            </div>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                            <div class="lg:col-span-8">
+                                <h3 class="text-sm font-semibold mb-5">本地确定性链路</h3>
+                                <div class="flex flex-col md:flex-row md:items-center gap-3 text-xs">
+                                    <span class="px-3 py-2 rounded-lg bg-blue-50 text-blue-700">异常检测</span><i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-muted)] hidden md:block"></i>
+                                    <span class="px-3 py-2 rounded-lg bg-blue-50 text-blue-700">ReviewSignal</span><i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-muted)] hidden md:block"></i>
+                                    <span class="px-3 py-2 rounded-lg bg-blue-50 text-blue-700">Keyword Retrieval</span><i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-muted)] hidden md:block"></i>
+                                    <span class="px-3 py-2 rounded-lg bg-blue-50 text-blue-700">Review Detail</span><i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-muted)] hidden md:block"></i>
+                                    <span class="px-3 py-2 rounded-lg bg-cyan-50 text-cyan-700">Evidence Guard</span>
+                                </div>
+                                <div class="mt-6 p-5 rounded-xl border-l-4 border-brand bg-cyan-50/60">
+                                    <div class="text-xs text-[var(--text-muted)] mb-2">保守结论·证据完整度 87.4%</div>
+                                    <p class="text-sm leading-relaxed">评论中“右耳无法充电”的负面信号与退款率上升在时间上显著相关；尚缺 FBA 批次日志，因此不将“批次硬件缺陷”标记为已确证根因。</p>
+                                </div>
+                            </div>
+                            <aside class="lg:col-span-4 lg:border-l lg:border-[var(--border-subtle)] lg:pl-8">
+                                <h3 class="text-sm font-semibold mb-4">调查状态</h3>
+                                <div class="space-y-3 text-xs text-[var(--text-muted)]">
+                                    <div class="flex justify-between"><span>调查 ID</span><b class="font-mono text-[var(--text-main)]">INV-0916-024</b></div>
+                                    <div class="flex justify-between"><span>存储</span><b class="font-mono text-[var(--text-main)]">SQLite</b></div>
+                                    <div class="flex justify-between"><span>事件流</span><b class="font-mono text-emerald-600">SSE 已连接</b></div>
+                                    <div class="flex justify-between"><span>决策</span><b class="text-blue-600">保守结论</b></div>
+                                </div>
+                                <button onclick="startEmbeddedDiagnosis()" class="mt-6 w-full py-3 rounded-xl bg-slate-900 text-white text-sm font-medium">重新执行调查</button>
+                            </aside>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 4. AI DIAGNOSIS VIEW -->
+                <div id="view-ai"
+                    class="page-view hidden flex flex-col px-6 lg:px-10 pt-6 h-full min-h-[700px] max-w-[1600px] mx-auto animate-fade-in-up">
+                    <div
+                        class="flex flex-wrap gap-4 justify-between items-end pb-6 border-b border-[var(--border-strong)] shrink-0">
+                        <div>
+                            <div class="text-xs text-brand font-mono mb-2 tracking-widest" data-i18n="ai_active">诊断协议运行中
+                            </div>
+                            <h2 class="text-2xl flex items-center gap-3 text-[var(--text-main)]">
+                                <span class="font-mono text-[var(--text-muted)] text-xl">[TARGET]</span> <strong
+                                    class="font-semibold">ANC Earbuds Pro</strong>
+                            </h2>
+                        </div>
+                        <div class="flex gap-4 font-mono text-sm tracking-widest">
+                            <button id="btn-start-diag" onclick="startDiagnosis()"
+                                class="px-8 py-2.5 bg-[var(--text-main)] text-[var(--bg-body)] font-semibold rounded flex items-center gap-2 btn-fluid hover:bg-brand hover:text-black transition-colors">
+                                <span data-i18n="btn_init">启动诊断</span>
+                            </button>
+                            <button
+                                class="px-6 py-2.5 border border-[var(--border-strong)] text-[var(--text-muted)] rounded btn-fluid opacity-50 cursor-not-allowed">
+                                <span data-i18n="btn_ask">深度追问</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 h-full">
+                        <!-- Terminal -->
+                        <div class="lg:col-span-4 flex flex-col h-full overflow-y-auto hide-scroll pb-10">
+                            <h3
+                                class="text-xs text-[var(--text-main)] font-mono tracking-widest mb-8 uppercase flex items-center gap-2">
+                                <span class="w-2 h-2 bg-brand rounded-full shadow-[0_0_8px_#00f2fe]"></span> <span
+                                    data-i18n="ai_log">诊断执行日志</span>
+                            </h3>
+                            <div class="font-mono text-xs space-y-4 relative leading-relaxed" id="diag-timeline">
+                                <div class="text-[var(--text-muted)] opacity-60 pt-6">> AWAITING INSTRUCTION<span
+                                        class="cursor-blink"></span></div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas -->
+                        <div
+                            class="lg:col-span-8 flex flex-col relative border-t lg:border-t-0 lg:border-l border-[var(--border-strong)] pt-8 lg:pt-0 lg:pl-12 h-full pb-10">
+                            <div id="diag-center-empty"
+                                class="absolute inset-0 flex flex-col items-center justify-center text-center pl-12">
+                                <div
+                                    class="w-24 h-24 mb-6 opacity-20 flex items-center justify-center border-2 border-dashed rounded-full border-[var(--text-main)] animate-[spin_8s_linear_infinite]">
+                                    <i data-lucide="loader" class="w-10 h-10"></i>
+                                </div>
+                                <p class="text-sm font-mono text-[var(--text-muted)] tracking-widest"
+                                    data-i18n="ai_empty">等待指令序列下达<span class="cursor-blink"></span></p>
+                            </div>
+
+                            <div id="diag-center-result"
+                                class="hidden flex-1 flex flex-col h-full animate-fade-in-up font-mono overflow-y-auto hide-scroll">
+                                <div class="flex justify-between items-start mb-8">
+                                    <div>
+                                        <h3 class="text-3xl font-bold text-[var(--text-main)] mb-2 tracking-tight"
+                                            data-i18n="ai_result_title">已锚定异常根因</h3>
+                                        <p class="text-xs text-[var(--text-muted)] tracking-widest uppercase"><span
+                                                data-i18n="ai_conf">模型置信度:</span> <span
+                                                class="text-brand font-bold">87.4% (高置信)</span></p>
+                                    </div>
+                                    <i data-lucide="check-circle-2"
+                                        class="w-10 h-10 text-brand drop-shadow-[0_0_12px_#00f2fe]"></i>
+                                </div>
+
+                                <div
+                                    class="pl-5 border-l-2 border-brand text-sm text-[var(--text-muted)] mb-10 leading-loose">
+                                    <p class="mb-4 text-[var(--text-main)] font-sans font-medium text-base"><span
+                                            class="font-mono text-sm mr-2 text-brand" data-i18n="ai_p1">推演结论:</span>
+                                        <span data-i18n="ai_p2">退款激增的主要驱动力为批次级硬件瑕疵（电池缺陷）。</span>
+                                    </p>
+                                    <ul class="space-y-3 list-none font-sans text-sm">
+                                        <li><span class="text-brand font-mono mr-2">></span> <span
+                                                data-i18n="ai_p3">语义提取: 关于"充电/没电"的负面客诉向量环比暴涨 420%。</span></li>
+                                        <li><span class="text-brand font-mono mr-2">></span> <span
+                                                data-i18n="ai_p4">时序关联: 故障订单集中在 9月1日-9月5日 的发货波次。</span></li>
+                                    </ul>
+                                </div>
+
+                                <h4 class="text-xs uppercase tracking-widest text-[var(--text-main)] mb-4"
+                                    data-i18n="ai_ev">关键证据碎片</h4>
+                                <div class="space-y-4 pr-4">
+                                    <div
+                                        class="p-5 bg-[var(--bg-surface)] border border-[var(--border-strong)] text-sm text-[var(--text-main)] rounded relative overflow-hidden group">
+                                        <div
+                                            class="absolute left-0 top-0 bottom-0 w-1 bg-red-500 group-hover:shadow-[0_0_10px_#ef4444] transition-shadow">
+                                        </div>
+                                        <div class="text-xs text-[var(--text-muted)] mb-3 tracking-widest">FRAG_ID:
+                                            REV-0912-US</div>
+                                        <p class="font-sans leading-relaxed">"The sound quality is okay, but the right
+                                            earbud stopped charging completely after two days of use. Returning it
+                                            immediately."</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="mt-8 pt-5 border-t border-[var(--border-strong)] flex items-center justify-between text-xs">
+                                    <span
+                                        class="text-yellow-600 dark:text-yellow-500 flex items-center gap-2 font-medium"><i
+                                            data-lucide="alert-triangle" class="w-4 h-4"></i> <span
+                                            data-i18n="ai_warn1">关联数据缺失: FBA 物理批次日志</span></span>
+                                    <button
+                                        class="text-brand hover:text-brand2 transition-colors font-semibold tracking-widest"
+                                        data-i18n="ai_warn2">申请数据库授权 -></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. REVIEWS VIEW -->
+                <div id="view-reviews"
+                    class="page-view hidden space-y-8 pt-8 px-6 lg:px-10 max-w-[1600px] mx-auto animate-fade-in-up">
+                    <div class="rounded-2xl border border-[var(--border-strong)] bg-gradient-to-r from-blue-50 to-white p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <img id="semantic-product-image" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=160&q=80" alt="当前商品" class="w-14 h-14 rounded-xl object-cover">
+                            <div><div class="text-xs text-[var(--text-muted)] mb-1">当前语义对象</div><h2 id="semantic-product-name" class="font-semibold">无线降噪蓝牙耳机 Pro</h2><div id="semantic-product-asin" class="text-xs font-mono text-blue-600 mt-1">ASIN: B08F5G3XYZ</div></div>
+                        </div>
+                        <button onclick="navigateTo('products')" class="text-xs px-4 py-2 rounded-lg border border-brand2 text-blue-600 bg-white">更换商品</button>
+                    </div>
+                    <div
+                        class="flex flex-col sm:flex-row gap-6 justify-between items-end border-b border-[var(--border-strong)] pb-4">
+                        <div class="relative w-full sm:w-1/3 group">
+                            <i data-lucide="search"
+                                class="absolute left-0 top-1.5 w-5 h-5 text-[var(--text-muted)] group-focus-within:text-brand transition-colors"></i>
+                            <input type="text" id="review-search" placeholder="搜索 NLP 语义向量..."
+                                class="w-full bg-transparent pl-8 outline-none text-[var(--text-main)] text-sm font-mono placeholder:text-[var(--text-muted)] tracking-wide">
+                        </div>
+                        <div class="flex space-x-6 font-mono text-xs tracking-widest uppercase">
+                            <button class="text-brand pb-1 border-b border-brand font-medium" data-i18n="filter_all">ALL
+                                / 全部</button>
+                            <button class="text-[var(--text-muted)] hover:text-green-500 pb-1"
+                                data-i18n="filter_pos">POS / 正向</button>
+                            <button class="text-[var(--text-muted)] hover:text-red-500 pb-1" data-i18n="filter_neg">NEG
+                                / 负向</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                        <div class="lg:col-span-8 flex flex-col gap-5" id="review-list">
+                            <!-- JS Rendered -->
+                        </div>
+                        <div
+                            class="lg:col-span-4 border border-[var(--border-strong)] p-8 rounded bg-[var(--bg-surface)] h-fit font-mono">
+                            <h3 class="text-xs uppercase tracking-widest mb-6 text-[var(--text-main)] border-b border-[var(--border-strong)] pb-3"
+                                data-i18n="rev_stat">模型采样统计</h3>
+                            <div class="space-y-5 text-sm text-[var(--text-muted)]">
+                                <div class="flex justify-between items-center">
+                                    <span data-i18n="rev_m1">解析算法</span> <span
+                                        class="text-[var(--text-main)] border border-[var(--border-strong)] px-2 py-1 text-xs rounded bg-[var(--bg-body)]">Vector
+                                        Sim</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span data-i18n="rev_m2">采样数量</span> <span
+                                        class="text-[var(--text-main)] text-lg">231</span>
+                                </div>
+                                <div
+                                    class="flex justify-between items-center pt-4 border-t border-dashed border-[var(--border-strong)]">
+                                    <span data-i18n="rev_m4">证据链完整度</span> <span
+                                        class="text-emerald-500 flex items-center gap-2 font-medium"><span
+                                            class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]"></span>
+                                        100%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. DATASOURCE VIEW -->
+                <div id="view-datasource"
+                    class="page-view hidden space-y-10 pt-8 px-6 lg:px-10 max-w-5xl mx-auto font-mono animate-fade-in-up">
+                    <div
+                        class="p-4 border-l-2 border-brand bg-brand/5 text-xs text-[var(--text-muted)] tracking-wide flex items-center gap-3">
+                        <i data-lucide="info" class="w-5 h-5 text-brand"></i>
+                        <span data-i18n="ds_info">沙盒演示环境：当前界面仅模拟数据管道的注入交互，不会进行真实的物理文件解析。</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="border-2 border-dashed border-[var(--border-strong)] p-10 flex flex-col items-center justify-center hover:border-brand/60 hover:bg-brand/5 transition-all cursor-pointer rounded"
+                            onclick="simulateUpload()">
+                            <i data-lucide="upload-cloud" class="w-12 h-12 text-[var(--text-muted)] mb-5"></i>
+                            <h3 class="text-base text-[var(--text-main)] mb-2 tracking-widest font-medium"
+                                data-i18n="ds_up1">上传结构化文件</h3>
+                            <p class="text-xs text-[var(--text-muted)] opacity-70 tracking-widest">.CSV / .XLSX
+                                (退款单/售后单)</p>
+                        </div>
+                        <div
+                            class="border border-[var(--border-strong)] p-8 flex flex-col justify-center bg-[var(--bg-surface)] rounded">
+                            <h3 class="text-xs tracking-widest mb-6 text-[var(--text-main)]">> DIRECT DB LINK / 数据库直连
+                            </h3>
+                            <input type="text" value="jdbc:sqlite:/data/insight.db"
+                                class="w-full bg-transparent border-b border-[var(--border-strong)] py-2 text-sm outline-none text-[var(--text-muted)] mb-8 focus:border-brand transition-colors">
+                            <button onclick="simulateExport()"
+                                class="w-full bg-[var(--text-main)] text-[var(--bg-body)] py-3 text-sm hover:opacity-90 transition-opacity tracking-widest rounded font-semibold">
+                                <span data-i18n="ds_test">TEST HEARTBEAT / 测试心跳</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3
+                            class="text-xs tracking-widest mb-6 text-[var(--text-main)] border-b border-[var(--border-strong)] pb-3">
+                            > ACTIVE STREAMS / 活跃数据流</h3>
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-[var(--text-muted)]">
+                                <tr>
+                                    <th class="pb-3 border-none">数据域</th>
+                                    <th class="pb-3 border-none">管道类型</th>
+                                    <th class="pb-3 border-none">连接状态</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-[var(--text-main)]">
+                                <tr>
+                                    <td class="py-4 font-medium">Amazon 评价实时流</td>
+                                    <td class="py-4 text-[var(--text-muted)]">OAuth API</td>
+                                    <td class="py-4 text-emerald-500 flex items-center gap-2 font-medium"><span
+                                            class="w-2 h-2 bg-emerald-500 rounded-full"></span> 持续接入中</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 font-medium opacity-50">Seller Central 退款明细</td>
+                                    <td class="py-4 text-[var(--text-muted)] opacity-50">Local CSV</td>
+                                    <td
+                                        class="py-4 text-yellow-600 dark:text-yellow-500 flex items-center gap-2 opacity-60 font-medium">
+                                        <span class="w-2 h-2 bg-yellow-500 rounded-full"></span> <span
+                                            data-i18n="pending">等待注入</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- HUD Drawer -->
+    <div id="review-drawer"
+        class="drawer fixed top-0 right-0 h-full w-full sm:w-[500px] bg-[var(--bg-body)] z-50 flex flex-col border-l border-[var(--border-strong)] shadow-2xl">
+        <div class="flex justify-between items-center p-8 border-b border-[var(--border-strong)] shrink-0">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-[var(--text-main)] flex items-center"><span
+                    class="w-2 h-2 bg-brand rounded-full mr-3 shadow-[0_0_8px_#00f2fe]"></span> 节点详情 / Entity Detail
+            </h2>
+            <button onclick="closeDrawer()"
+                class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="p-8 overflow-y-auto flex-1 text-[var(--text-main)]" id="drawer-content">
+            <!-- Injected via JS -->
+        </div>
+    </div>
+    <div id="drawer-overlay" class="drawer-overlay fixed inset-0 bg-black/60 z-40" onclick="closeDrawer()"></div>
+
+    <!-- Toast -->
+    <div id="toast-container" class="fixed bottom-8 right-8 flex flex-col gap-3 z-50 pointer-events-none"></div>
+
+    <script>
+        // --- State & i18n ---
+        let currentLang = 'zh';
+        let currentTheme = 'light';
+        let currentPage = 'dashboard';
+        let chartTrend, chartSentiment;
+
+        const i18n = {
+            zh: {
+                nav_dashboard: "经营总览", nav_products: "商品资源库", nav_anomalies: "异常监控流",
+                nav_ai: "AI 诊断终端", nav_reviews: "语义洞察", nav_datasource: "数据总线", nav_ads: "广告链路分析",
+                nav_settings: "系统设置", user_role: "运营总监", user_tier: "PRO 授权版", pending: "待接入",
+                opt_all: "全局观测域", opt_p1: "无线降噪蓝牙耳机 Pro",
+                kpi_orders: "订单吞吐", kpi_refunds: "退款告警", kpi_rating: "商品声誉", kpi_reviews: "语义样本",
+                chart_trend: "订单与退款趋势投影", chart_sentiment: "负面异常根因分布 (Top Drivers)", table_radar: "异常实体雷达",
+                label_orders: "日均订单", label_refunds: "退款率",
+                status_critical: "极高风险",
+                alert_title1: "退款率激增告警", alert_title2: "已突破安全阈值", alert_desc: "目标商品近 14 天退款率飙升至 8.4%，同时伴随负面极性评论急剧增加。系统建议立即进行根因排查。",
+                btn_start_engine: "初始化诊断引擎", btn_export: "导出数据流", btn_init: "启动模型", btn_ask: "深度追问",
+                th_target: "目标实体", th_variance: "指标异动", th_summary: "异常特征", th_time: "捕获时间", th_status: "处理状态", th_severity: "威胁等级", th_state: "状态", th_action: "操作",
+                filter_all: "全部事件", filter_high: "高危异常", filter_med: "中度预警", filter_pos: "正向情绪", filter_neg: "负面客诉",
+                ai_active: "诊断协议运行中", ai_log: "终端执行日志", ai_empty: "等待指令序列下达", ai_result_title: "已锚定异常根因", ai_conf: "模型置信度:",
+                ai_p1: "推演结论:", ai_p2: "退款激增的主要驱动力为批次级硬件瑕疵（电池缺陷）。", ai_p3: "语义提取: 关于'充电/没电'的负面客诉向量环比暴涨 420%。", ai_p4: "时序关联: 故障订单集中在 9月1日-9月5日 的发货波次。",
+                ai_ev: "关键证据碎片", ai_warn1: "关联数据缺失: FBA 物理批次日志", ai_warn2: "申请数据库授权 ->",
+                rev_stat: "模型采样统计", rev_m1: "解析算法", rev_m2: "采样数量", rev_m4: "证据链完整度",
+                ds_info: "沙盒演示环境：当前界面仅模拟数据管道的注入交互，不会进行真实的物理文件解析。", ds_up1: "上传结构化文件", ds_test: "测试连接心跳",
+                toast_switch: "目标观测参数已重载", toast_export: "数据快照生成完毕", toast_upload: "模拟数据注入成功", ph_search: "检索 ASIN 或商品名称...", sys_online: "系统在线"
+            },
+            en: {
+                nav_dashboard: "Dashboard", nav_products: "Catalog", nav_anomalies: "Anomalies",
+                nav_ai: "AI Terminal", nav_reviews: "Semantics", nav_datasource: "Data Bus", nav_ads: "Ads Funnel",
+                nav_settings: "SYS_CONFIG", user_role: "Ops Director", user_tier: "PRO_EDITION", pending: "PENDING",
+                opt_all: "All Assortments", opt_p1: "ANC Earbuds Pro",
+                kpi_orders: "Order Stream", kpi_refunds: "Refund Alert", kpi_rating: "Reputation", kpi_reviews: "Sample Size",
+                chart_trend: "Trend Projection", chart_sentiment: "Top Negative Drivers", table_radar: "Radar",
+                label_orders: "Orders", label_refunds: "Refunds",
+                status_critical: "CRITICAL",
+                alert_title1: "ALERT: REFUND", alert_title2: "BREACHED THRESHOLD", alert_desc: "Target refund rate spiked in 14d, with negative polarity surge. Immediate root cause isolation required.",
+                btn_start_engine: "INIT ENGINE", btn_export: "DUMP_CSV", btn_init: "EXECUTE", btn_ask: "ITERATE",
+                th_target: "Entity", th_variance: "Delta", th_summary: "Signature", th_time: "Timestamp", th_status: "Status", th_severity: "Severity", th_state: "State", th_action: "EXEC",
+                filter_all: "ALL_EVENTS", filter_high: "SEV_1_HIGH", filter_med: "SEV_2_MED", filter_pos: "POS_VECTORS", filter_neg: "NEG_VECTORS",
+                ai_active: "PROTOCOL ACTIVE", ai_log: "Execution Stream", ai_empty: "AWAITING_SYNTHESIS", ai_result_title: "ROOT CAUSE ISOLATED", ai_conf: "Confidence:",
+                ai_p1: "Synthesis:", ai_p2: "Primary driver is a batch-specific hardware defect.", ai_p3: "Extraction: 'Charging' neg +420%.", ai_p4: "Correlation: Cluster at Sep 1-5.",
+                ai_ev: "Evidence Fragments", ai_warn1: "Missing: FBA Batch Logs", ai_warn2: "REQ_ACCESS ->",
+                rev_stat: "Retrieval Stats", rev_m1: "Algorithm", rev_m2: "Volume", rev_m4: "Integrity",
+                ds_info: "Sandbox Env: UI Simulates data ingest.", ds_up1: "UPLOAD_FILE", ds_test: "TEST_HEARTBEAT",
+                toast_switch: "Parameters reloaded", toast_export: "Snapshot dumped", toast_upload: "Stream injected", ph_search: "Search ASIN...", sys_online: "ENGINE: ONLINE"
+            }
+        };
+
+        const navItems = [
+            { id: 'dashboard', icon: 'grid', i18nKey: 'nav_dashboard' }, { id: 'products', icon: 'box', i18nKey: 'nav_products' },
+            { id: 'anomalies', icon: 'activity', i18nKey: 'nav_anomalies' },
+            { id: 'datasource', icon: 'database', i18nKey: 'nav_datasource' },
+            { id: 'ads', icon: 'layers', i18nKey: 'nav_ads', pending: true }
+        ];
+
+        const mockAnomalies = [
+            { target: "无线耳机 Pro", targetEn: "Earbuds Pro", diff: "+ 3.2%", diffEn: "+3.2%", sum: "退款率突破阈值", sumEn: "Refund Surge", time: "2 小时前", risk: 'high', status: '待处理' },
+            { target: "磁吸充电宝", targetEn: "PowerBank", diff: "+ 15单/日", diffEn: "+15/day", sum: "一星差评聚集", sumEn: "1-Star Cluster", time: "5 小时前", risk: 'medium', status: '已隔离' }
+        ];
+
+        // Rich Product Data
+        const mockProducts = [
+            { id: "P1", name: "无线降噪蓝牙耳机 Pro", nameEn: "ANC Earbuds Pro", asin: "B08F5G3XYZ", price: "$129.99", rating: 4.2, status: 'warn', img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=300&q=80", desc: "主打超长续航与主动降噪，北美区数码类目 Top 50.", descEn: "Flagship ANC earbuds with 40h battery life. NA Top 50." },
+            { id: "P2", name: "智能运动手表 S5", nameEn: "Smart Watch S5", asin: "B09J8H7ABC", price: "$199.00", rating: 4.8, status: 'good', img: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=300&q=80", desc: "50米防水，内置多种运动模式，心率监测.", descEn: "50m waterproof, multi-sport modes, HR tracking." },
+            { id: "P3", name: "人体工学办公椅", nameEn: "Ergo Office Chair", asin: "B07K6J5DEF", price: "$249.50", rating: 4.5, status: 'good', img: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=300&q=80", desc: "3D自适应腰托，透气网布，欧洲站热销款.", descEn: "3D lumbar support, breathable mesh, EU best seller." },
+            { id: "P4", name: "磁吸无线充电宝", nameEn: "Magnetic PowerBank", asin: "B0C1D2E3F4", price: "$39.99", rating: 3.8, status: 'warn', img: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=300&q=80", desc: "10000mAh大容量，支持Magsafe快充.", descEn: "10000mAh capacity, Magsafe compatible fast charging." }
+        ];
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            applyI18n(); renderNav(); renderDynamicLists(); lucide.createIcons();
+            setTimeout(initCharts, 100);
+            initRealtimeControls();
+            document.getElementById('range-popover').addEventListener('click', (e) => e.stopPropagation());
+
+            // Global Click for Dropdown
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('custom-select-container');
+                const dropdown = document.getElementById('product-dropdown');
+                if (container && !container.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+                const rangePicker = document.getElementById('time-range-picker');
+                if (rangePicker && !rangePicker.contains(e.target)) {
+                    closeRangePicker();
+                }
+            });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeDrawer(); document.getElementById('product-dropdown')?.classList.remove('open'); closeRangePicker(); } });
+            window.addEventListener('resize', () => { chartTrend?.resize(); chartSentiment?.resize(); });
+        });
+
+        // --- Custom Dropdown Logic ---
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('product-dropdown').classList.toggle('open');
+        }
+
+        function selectProduct(val, i18nKey, e) {
+            e.stopPropagation();
+            const textEl = document.getElementById('selected-product-text');
+            textEl.setAttribute('data-i18n', i18nKey);
+            textEl.innerText = i18n[currentLang][i18nKey];
+
+            document.querySelectorAll('.dropdown-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('i').classList.add('opacity-0');
+                el.querySelector('span').classList.replace('text-[var(--text-main)]', 'text-[var(--text-muted)]');
+            });
+            const clicked = e.currentTarget;
+            clicked.classList.add('active');
+            clicked.querySelector('i').classList.remove('opacity-0');
+            clicked.querySelector('span').classList.replace('text-[var(--text-muted)]', 'text-[var(--text-main)]');
+
+            document.getElementById('product-dropdown').classList.remove('open');
+            showToast(i18n[currentLang].toast_switch);
+        }
+
+        function formatLocalInput(date) {
+            const offset = date.getTimezoneOffset();
+            return new Date(date.getTime() - offset * 60000).toISOString().slice(0, 16).replace('T', ' ');
+        }
+
+        function initRealtimeControls() {
+            const now = new Date();
+            const start = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+            document.getElementById('history-start').value = formatLocalInput(start);
+            document.getElementById('history-end').value = formatLocalInput(now);
+            document.getElementById('time-range-label').textContent = '最近 14 天';
+            const tick = () => {
+                const clock = document.getElementById('live-clock');
+                if (clock) clock.textContent = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+            };
+            tick(); setInterval(tick, 1000);
+        }
+
+        function setRealtime() {
+            document.getElementById('history-end').value = formatLocalInput(new Date());
+            document.getElementById('time-range-label').textContent = '实时监测';
+            showToast('已切换至实时监测');
+            initCharts();
+        }
+
+        function toggleRangePicker(event) {
+            event?.stopPropagation();
+            const popover = document.getElementById('range-popover');
+            const trigger = document.getElementById('range-trigger');
+            const willOpen = popover.classList.contains('hidden');
+            popover.classList.toggle('hidden', !willOpen);
+            trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        }
+
+        function closeRangePicker() {
+            document.getElementById('range-popover').classList.add('hidden');
+            document.getElementById('range-trigger').setAttribute('aria-expanded', 'false');
+        }
+
+        function setRangePreset(days, event) {
+            event?.stopPropagation();
+            const now = new Date();
+            const start = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+            document.getElementById('history-start').value = formatLocalInput(start);
+            document.getElementById('history-end').value = formatLocalInput(now);
+            document.getElementById('time-range-label').textContent = `最近 ${days} 天`;
+            document.querySelectorAll('.range-option').forEach(btn => btn.classList.remove('active'));
+            event?.currentTarget?.classList.add('active');
+        }
+
+        function applyHistoryRange() {
+            const start = document.getElementById('history-start').value.trim().replace('T', ' ');
+            const end = document.getElementById('history-end').value.trim().replace('T', ' ');
+            const timePattern = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
+            if (!timePattern.test(start) || !timePattern.test(end) || start >= end) {
+                showToast('请设置有效的历史时间范围'); return;
+            }
+            const rangeLabel = `${start.slice(5, 16)} 至 ${end.slice(5, 16)}`;
+            document.getElementById('time-range-label').textContent = rangeLabel;
+            document.querySelectorAll('.range-option').forEach(btn => btn.classList.remove('active'));
+            closeRangePicker();
+            showToast(`已加载 ${start} 至 ${end}`);
+            initCharts();
+        }
+
+        function openProductSemantics(productId) {
+            const product = mockProducts.find(p => p.id === productId);
+            if (!product) return;
+            navigateTo('reviews');
+            document.getElementById('semantic-product-name').textContent = currentLang === 'zh' ? product.name : product.nameEn;
+            document.getElementById('semantic-product-asin').textContent = `ASIN: ${product.asin}`;
+            document.getElementById('semantic-product-image').src = product.img;
+            showToast(`已载入 ${product.asin} 的语义样本`);
+        }
+
+        function openInvestigation() {
+            navigateTo('anomalies');
+            setTimeout(() => document.getElementById('investigation-workbench')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+        }
+
+        function routeDiagnosis() {
+            const input = document.getElementById('diagnosis-request').value.trim();
+            const output = document.getElementById('route-result');
+            let route = 'L2 Agent';
+            let detail = '已创建 Investigation，将使用 SQLite、SSE 与多工具证据链。';
+            if (!input || !/\d|近|今|昨|周|月/.test(input) || !/[商品耳机手表椅充电宝]|ASIN/i.test(input)) {
+                route = 'Clarification'; detail = '缺少商品或时间范围，已返回待补充字段，未创建调查。';
+            } else if (/[广告库存流量促销]/.test(input)) {
+                route = 'Unsupported'; detail = '所需数据尚未接入，未创建调查。';
+            } else if (/[退款率订单量].*[多少查询]/.test(input)) {
+                route = 'L0 Tool'; detail = '已同步返回单指标查询结果。';
+            } else if (/[趋势检测]/.test(input) && !/[为什么原因解释]/.test(input)) {
+                route = 'L1 Workflow'; detail = '已启动固定步骤异常检测工作流。';
+            }
+            output.innerHTML = `<b class="text-blue-600">${route}</b> · ${detail}`;
+            if (route === 'L2 Agent') openInvestigation();
+        }
+
+        function startEmbeddedDiagnosis() {
+            showToast('deterministic_local 已重新执行');
+        }
+
+        // --- Core ---
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.getElementById('lang-text').innerText = currentLang === 'zh' ? 'EN' : '中';
+            applyI18n(); renderNav(); renderDynamicLists(); initCharts(); lucide.createIcons();
+            // Update Page Title again after translating dictionary
+            const activeNav = navItems.find(i => i.id === currentPage);
+            if (activeNav) document.getElementById('page-title').innerText = i18n[currentLang][activeNav.i18nKey];
+        }
+
+        function applyI18n() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n'); if (i18n[currentLang][key]) el.innerHTML = i18n[currentLang][key];
+            });
+            ['search-ph', 'review-search'].forEach(id => {
+                const el = document.getElementById(id); if (el) el.placeholder = i18n[currentLang].ph_search;
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement; html.classList.toggle('dark');
+            currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            document.getElementById('theme-icon').setAttribute('data-lucide', currentTheme === 'dark' ? 'sun' : 'moon');
+            lucide.createIcons(); initCharts();
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar'); const overlay = document.getElementById('mobile-sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            if (sidebar.classList.contains('-translate-x-full')) { overlay.classList.remove('open'); setTimeout(() => overlay.classList.add('hidden'), 300); }
+            else { overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.add('open'), 10); }
+        }
+
+        function navigateTo(pageId) {
+            if (pageId === 'ads') return;
+            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${pageId}`).classList.remove('hidden');
+            currentPage = pageId;
+
+            // Fix Global Header Title
+            const activeNav = navItems.find(i => i.id === pageId);
+            if (activeNav) {
+                const pt = document.getElementById('page-title');
+                pt.setAttribute('data-i18n', activeNav.i18nKey);
+                pt.innerText = i18n[currentLang][activeNav.i18nKey];
+            }
+
+            renderNav(); applyI18n();
+            if (pageId === 'dashboard') setTimeout(() => { chartTrend?.resize(); chartSentiment?.resize(); }, 50);
+            const overlay = document.getElementById('mobile-sidebar-overlay'); if (overlay.classList.contains('open')) toggleSidebar();
+        }
+
+        // --- Render ---
+        function renderNav() {
+            document.getElementById('nav-container').innerHTML = navItems.map(item => `
+                <div onclick="navigateTo('${item.id}')" 
+                     class="flex items-center px-4 py-3.5 transition-all group rounded-lg ${item.pending ? 'nav-pending cursor-not-allowed' : 'cursor-pointer'}
+                     ${currentPage === item.id ? 'nav-active font-semibold border shadow-sm' : 'nav-idle text-[var(--text-muted)] hover:text-[var(--text-main)]'}">
+                    <i data-lucide="${item.icon}" class="w-4 h-4 mr-4"></i>
+                    <span class="text-sm tracking-widest uppercase font-mono">${i18n[currentLang][item.i18nKey]}</span>
+                    ${item.pending ? `<span class="ml-auto text-[10px] font-mono tracking-widest px-2 py-0.5 rounded">${i18n[currentLang].pending}</span>` : ''}
+                </div>`).join('');
+        }
+
+        function renderDynamicLists() {
+            // Dashboard Table
+            const dashList = document.getElementById('dashboard-anomaly-list');
+            if (dashList) dashList.innerHTML = mockAnomalies.map(a => `
+                <tr class="cursor-pointer group" onclick="openInvestigation()">
+                    <td class="py-4 text-[var(--text-main)] font-medium">${currentLang === 'zh' ? a.target : a.targetEn}</td>
+                    <td class="py-4 font-mono text-xs ${a.risk === 'high' ? 'text-red-500' : 'text-yellow-600 dark:text-yellow-500'} tracking-widest">${currentLang === 'zh' ? a.diff : a.diffEn}</td>
+                    <td class="py-4"><div class="w-2.5 h-2.5 rounded-full ${a.risk === 'high' ? 'bg-red-500 shadow-[0_0_10px_#ef4444] animate-pulse' : 'bg-yellow-500'}"></div></td>
+                    <td class="py-4 text-right"><i data-lucide="arrow-right" class="w-5 h-5 inline-block text-[var(--text-muted)] group-hover:text-brand transition-colors"></i></td>
+                </tr>`).join('');
+
+            // Full Anomaly Table
+            const centerList = document.getElementById('anomaly-table-body');
+            if (centerList) centerList.innerHTML = mockAnomalies.map(a => `
+                <tr>
+                    <td class="p-5 font-medium text-[var(--text-main)] text-base">${currentLang === 'zh' ? a.target : a.targetEn}</td>
+                    <td class="p-5 text-sm text-[var(--text-muted)]">${currentLang === 'zh' ? a.sum : a.sumEn}</td>
+                    <td class="p-5 text-[var(--text-muted)] text-xs font-mono tracking-widest">${a.time}</td>
+                    <td class="p-5 font-mono text-xs font-medium tracking-widest ${a.risk === 'high' ? 'text-red-500' : 'text-yellow-600 dark:text-yellow-500'}">${a.risk.toUpperCase()}</td>
+                    <td class="p-5 text-[var(--text-muted)] text-xs uppercase tracking-widest">${a.status}</td>
+                    <td class="p-5 text-right"><button onclick="openInvestigation()" class="text-blue-600 text-xs font-semibold hover:text-brand2 transition-colors font-mono tracking-widest">诊断</button></td>
+                </tr>`).join('');
+
+            // Rich Product Grid (Refactored to Image + Info)
+            const prodGrid = document.getElementById('product-grid');
+            if (prodGrid) prodGrid.innerHTML = mockProducts.map(p => `
+                <div class="bg-white border border-[var(--border-strong)] rounded-xl overflow-hidden hover:border-brand/50 transition-colors group flex shadow-[0_10px_30px_rgba(79,172,254,0.06)]">
+                    <div class="w-32 h-auto shrink-0 relative overflow-hidden bg-white/5 border-r border-[var(--border-subtle)]">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover product-img absolute inset-0">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] text-[var(--text-muted)] font-mono tracking-widest bg-[var(--border-subtle)] px-2 py-0.5 rounded">ASIN: ${p.asin}</span>
+                                <span class="text-xs ${p.status === 'warn' ? 'text-red-500' : 'text-emerald-600'}">${p.status === 'warn' ? '需关注' : '稳定'}</span>
+                            </div>
+                            <h3 class="text-[var(--text-main)] font-semibold text-base mb-1 truncate" title="${currentLang === 'zh' ? p.name : p.nameEn}">${currentLang === 'zh' ? p.name : p.nameEn}</h3>
+                            <p class="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-4">${currentLang === 'zh' ? p.desc : p.descEn}</p>
+                        </div>
+                        <div class="border-t border-[var(--border-subtle)] pt-3">
+                            <div class="flex justify-between items-center mb-3"><span class="font-mono text-sm text-[var(--text-main)] font-medium">${p.price}</span><span class="flex items-center text-xs font-mono text-[var(--text-main)]"><i data-lucide="star" class="w-3 h-3 text-yellow-500 fill-current mr-1"></i>${p.rating}</span></div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="openProductSemantics('${p.id}')" class="px-3 py-2 rounded-lg bg-gradient-to-r from-brand2 to-brand text-slate-900 text-xs font-semibold">查看语义洞察</button>
+                                <a href="https://www.amazon.com/dp/${p.asin}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-lg border border-brand2 text-blue-600 text-xs font-medium flex items-center justify-center gap-1">商城详情 <i data-lucide="external-link" class="w-3 h-3"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`).join('');
+
+            // Review List
+            const revList = document.getElementById('review-list');
+            if (revList) revList.innerHTML = [1, 2, 3].map(i => `
+                <div class="border-l-4 border-${i === 1 ? 'red' : 'emerald'}-500 p-6 cursor-pointer bg-[var(--bg-surface)] hover:bg-black/5 dark:hover:bg-white/5 transition-all border-y border-r border-[var(--border-strong)] rounded-r-lg hover:-translate-y-1 shadow-sm" onclick="openReviewDrawer('${i}')">
+                    <div class="flex justify-between items-center mb-4 font-mono text-xs text-[var(--text-muted)] tracking-widest">
+                        <span class="font-medium">VECTOR_TAG: ${i === 1 ? 'NEG_FRAG' : 'POS_FRAG'}</span>
+                        <div class="flex text-yellow-500">${Array(5).fill(0).map((_, j) => `<i data-lucide="star" class="w-4 h-4 ${j < (6 - i) ? 'fill-current' : 'text-[var(--border-strong)]'}"></i>`).join('')}</div>
+                    </div>
+                    <p class="text-[15px] text-[var(--text-main)] leading-relaxed font-normal">"${currentLang === 'zh' ? (i === 1 ? '音质还可以，但是右耳用了两天就完全充不进电了，立刻退货。' : '降噪效果在这个价位出乎意料的好。') : (i === 1 ? 'Extracted semantic fragment showing hardware failure...' : 'User stated high satisfaction with noise cancellation.')}"</p>
+                </div>`).join('');
+        }
+
+        // --- Interaction ---
+        function showToast(msg) {
+            const c = document.getElementById('toast-container'); const t = document.createElement('div');
+            t.className = 'px-6 py-4 bg-[var(--text-main)] text-[var(--bg-body)] rounded-lg font-mono text-xs tracking-widest flex items-center transform translate-y-4 opacity-0 transition-all duration-300 shadow-2xl font-semibold border border-[var(--border-subtle)]';
+            t.innerHTML = `> ${msg}`; c.appendChild(t);
+            setTimeout(() => t.classList.remove('translate-y-4', 'opacity-0'), 10);
+            setTimeout(() => { t.classList.add('translate-y-4', 'opacity-0'); setTimeout(() => t.remove(), 400); }, 3000);
+        }
+        function simulateExport() { showToast(i18n[currentLang].toast_export); }
+        function simulateUpload() { showToast(i18n[currentLang].toast_upload); }
+
+        function openReviewDrawer(id) {
+            const d = document.getElementById('review-drawer'), o = document.getElementById('drawer-overlay'), c = document.getElementById('drawer-content');
+            c.innerHTML = `
+                <div class="mb-8"><div class="text-xs text-[var(--text-muted)] mb-3 font-mono tracking-widest">FRAG_ID: REV-${id}9X</div><h3 class="text-2xl font-semibold">${currentLang === 'zh' ? '语义碎片详情' : 'Semantic Deep Dive'}</h3></div>
+                <div class="p-6 bg-[var(--bg-surface)] text-[15px] leading-relaxed border border-[var(--border-strong)] font-normal rounded-lg text-[var(--text-main)] shadow-sm">
+                    "${currentLang === 'zh' ? '音质还可以，但是右耳用了两天就完全充不进电了，立刻退货。' : 'The sound quality is okay, but the right earbud stopped charging completely after two days of use. Returning it.'}"
+                </div>
+                <div class="mt-10 pt-6 border-t border-[var(--border-strong)] font-mono">
+                    <div class="text-xs text-[var(--text-muted)] mb-5 uppercase tracking-widest font-medium">${currentLang === 'zh' ? '提取特征向量' : 'Extracted Vectors'}</div>
+                    <span class="inline-block px-3 py-1.5 bg-red-500/10 text-red-500 border border-red-500/20 text-xs tracking-widest mr-3 rounded font-medium">BATTERY_FAULT</span>
+                    <span class="inline-block px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-strong)] text-[var(--text-main)] text-xs tracking-widest rounded font-medium">REFUND_INTENT</span>
+                </div>`;
+            o.classList.add('open'); d.classList.add('open');
+        }
+        function closeDrawer() { document.getElementById('review-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); }
+
+        function startDiagnosis() {
+            const btn = document.getElementById('btn-start-diag'), tl = document.getElementById('diag-timeline'), e = document.getElementById('diag-center-empty'), r = document.getElementById('diag-center-result');
+            btn.disabled = true; btn.innerHTML = `PROCESSING...`; e.style.display = 'flex'; r.classList.add('hidden'); r.style.display = 'none'; tl.innerHTML = '';
+            const steps = currentLang === 'zh' ? ["解析底层数据流...", "提取 NLP 语义向量...", "交叉比对时序特征...", "生成高置信度推演..."] : ["PARSING METRIC STREAM...", "EXTRACTING NLP VECTORS...", "CROSS-REFERENCING TIMELINES...", "SYNTHESIZING ROOT CAUSE..."];
+            let i = 0;
+            function runStep() {
+                if (i >= steps.length) { btn.disabled = false; btn.innerHTML = currentLang === 'zh' ? "重新执行" : "RE-RUN"; e.style.display = 'none'; r.style.display = 'flex'; r.classList.remove('hidden'); return; }
+                const n = document.createElement('div'); n.className = 'timeline-node timeline-active text-[var(--text-main)]';
+                n.innerHTML = `<div class="timeline-dot"></div><div class="mb-1 font-medium text-sm">> ${steps[i]}</div><div class="text-[10px] text-[var(--text-muted)] tracking-widest opacity-80 mt-1">${new Date().toISOString().split('T')[1].slice(0, -1)}</div>`;
+                tl.appendChild(n); if (i > 0) tl.children[i - 1].classList.remove('timeline-active');
+                i++; setTimeout(runStep, 800 + Math.random() * 500);
+            } runStep();
+        }
+
+        // --- ECharts (High Fidelity + Horizontal Bar update) ---
+        function initCharts() {
+            const isD = currentTheme === 'dark', tC = isD ? '#94a3b8' : '#475569', gC = isD ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)', bC = '#00f2fe';
+            const fontF = 'JetBrains Mono, monospace';
+
+            // Trend
+            const td = document.getElementById('chart-trend');
+            if (td) {
+                if (chartTrend) chartTrend.dispose(); chartTrend = echarts.init(td);
+                chartTrend.setOption({
+                    backgroundColor: 'transparent', tooltip: { trigger: 'axis', backgroundColor: isD ? 'rgba(13,17,23,0.95)' : 'rgba(255,255,255,0.95)', borderColor: isD ? '#1e293b' : '#cbd5e1', textStyle: { color: isD ? '#fff' : '#0f172a', fontFamily: fontF, fontSize: 13 }, padding: 12, borderRadius: 8 },
+                    grid: { top: 20, right: 0, bottom: 20, left: 10, containLabel: true },
+                    xAxis: { type: 'category', data: ['01', '02', '03', '04', '05', '06', '07', '08'], axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: tC, fontFamily: fontF, fontSize: 12, margin: 15 } },
+                    yAxis: [{ type: 'value', splitLine: { lineStyle: { color: gC, type: 'dashed' } }, axisLabel: { color: tC, fontFamily: fontF, fontSize: 12 } }, { type: 'value', splitLine: { show: false }, axisLabel: { show: false } }],
+                    series: [
+                        { name: currentLang === 'zh' ? '订单' : 'Orders', type: 'line', smooth: true, data: [120, 130, 100, 130, 150, 140, 160, 180], itemStyle: { color: 'rgba(59, 130, 246, 0.5)' }, areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(59,130,246,0.2)' }, { offset: 1, color: 'rgba(59,130,246,0)' }]) }, showSymbol: false },
+                        { name: currentLang === 'zh' ? '退款率' : 'Refund Rate', type: 'line', smooth: true, yAxisIndex: 1, data: [2, 2.3, 2.0, 2.5, 3.5, 5.0, 8.1, 8.4], itemStyle: { color: bC }, lineStyle: { width: 3, shadowColor: bC, shadowBlur: 10 }, areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(0,242,254,0.25)' }, { offset: 1, color: 'rgba(0,242,254,0)' }]) }, showSymbol: false }
+                    ]
+                });
+            }
+
+            // Horizontal Bar for Sentiment (More actionable for Operations)
+            const sd = document.getElementById('chart-sentiment');
+            if (sd) {
+                if (chartSentiment) chartSentiment.dispose(); chartSentiment = echarts.init(sd);
+                const categories = currentLang === 'zh' ? ['物流破损', '包装简陋', '右耳没电', '续航虚标'] : ['Logistics', 'Packaging', 'Dead Earbud', 'Battery Life'];
+                chartSentiment.setOption({
+                    backgroundColor: 'transparent',
+                    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: isD ? 'rgba(13,17,23,0.95)' : 'rgba(255,255,255,0.95)', borderColor: isD ? '#1e293b' : '#cbd5e1', textStyle: { color: isD ? '#fff' : '#0f172a', fontFamily: fontF, fontSize: 13 }, padding: 12, borderRadius: 8 },
+                    grid: { top: 10, right: 40, bottom: 10, left: 10, containLabel: true },
+                    xAxis: { type: 'value', show: false },
+                    yAxis: { type: 'category', data: categories.reverse(), axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: tC, fontFamily: fontF, fontSize: 12, margin: 15 } },
+                    series: [{
+                        type: 'bar',
+                        data: [45, 68, 120, 310].reverse(),
+                        itemStyle: { color: bC, borderRadius: [0, 4, 4, 0] },
+                        barWidth: 16,
+                        label: { show: true, position: 'right', color: tC, fontFamily: fontF, formatter: '+{c}' }
+                    }]
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

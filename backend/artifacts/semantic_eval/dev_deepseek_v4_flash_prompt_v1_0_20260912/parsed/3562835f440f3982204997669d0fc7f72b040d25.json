@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-c6aa43f4349797ae",
+      "review_id": "3562835f440f3982204997669d0fc7f72b040d25",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "complete adhesion difficult",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "9363cf5a-6c0e-47b5-beb0-746418553901"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-84b03141fee493f1",
+      "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Does exactly what I needed it to",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "787c06ca-f266-42f9-a05e-b2c831af3fa8"
+    },
+    {
+      "prediction_id": "SP-7c1a786330570392",
+      "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "dual_port_multi_device",
+      "polarity": "positive",
+      "evidence_span": "provide more than one usb port so I can charge my items",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "787c06ca-f266-42f9-a05e-b2c831af3fa8"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

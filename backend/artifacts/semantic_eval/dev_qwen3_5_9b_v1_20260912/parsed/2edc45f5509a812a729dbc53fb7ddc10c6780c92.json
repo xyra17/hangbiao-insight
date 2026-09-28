@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-ffc546a366c1d23f",
+      "review_id": "2edc45f5509a812a729dbc53fb7ddc10c6780c92",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "stopped_working",
+      "polarity": "negative",
+      "evidence_span": "Worked twice before breaking",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-88wyoslqcm97v9x9c8ni2c"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "40b396c6160aa4729f5fecad258ac6f0c9f86a3e",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "eedd8d32-e0a4-4157-a09b-e3e310168b6f",
+  "raw_response": {
+    "id": "eedd8d32-e0a4-4157-a09b-e3e310168b6f",
+    "created_at": 1789210912.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "07d04c57-e847-4fa7-be2e-a9b7c519ce1c",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source text. Review title \"They work but charge surprising slow\" and body. Product likely charger? Need claims. Need exactly one valid primary/secondary taxonomy pair, polarity. Evidence exact continuous substring from SOURCE_TEXT. Do not infer from star rating. Need maybe claims:\n\n1. They work but charge surprising slow. Claim charging_speed negative. primary function_performance secondary charging_speed. Evidence span exact \"charge surprising slow\" or \"They work but charge surprising slow\". Contains both positive work and negative slow, but claim about charging speed negative. But \"They work but charge surprising slow\" mixed? The claim for charging speed is negative. Could evidence \"charge surprising slow\". Need exact substring. Source includes title line. \"charge surprising slow\" is substring? In title: \"They work but charge surprising slow\". Yes.\n\n2. \"It works but I find myself looking at the charging status and being very surprised at how little progress is made overnight.\" This also charging speed negative? \"how little progress is made overnight\" = charging_speed negative. Evidence maybe exact. Could be same claim. \"It works\" function general positive? But \"It works\" perhaps general_performance positive. But review says they work. Is that a product claim? Could extract \"It works\" positive general_performance. However primary function_performance secondary general_performance. Evidence span \"It works\" exact. But maybe duplicated.\n\n3. \"what good is something you can’t count on to fully charge your things!\" reliability? charging_success? Negative. It charges slowly not fully. Could be charging_success negative? \"can’t count on to fully charge your things\" indicates charging_success negative. Primary function_performance secondary charging_success. Evidence exact \"can’t count on to fully charge your things\" (note apostrophe curly). Or \"fully charge your things\". Hmm.\n\nNeed determine claims semantic. The product is charger. Claims:\n- Charging speed slow: negative.\n- Charging success/reliability? not fully charge: negative. The phrase \"what good is something you can’t count on to fully charge your things!\" Could be general performance? It implies reliability. But taxonomy has charging_success under function_performance. \"fully charge\" = charging_success negative. The issue is slow progress overnight, can't fully charge. That's charging_speed and charging_success.\n\nMaybe only one claim? But instructions may contain multiple. Let's parse.\n\nSOURCETEXT:\n\"They work but charge surprising slow\nIt works but I find myself looking at the charging status and being very surprised at how little progress is made overnight. It’s bad enough that I will have to replace them eventually because what good is something you can’t count on to fully charge your things!\"\n\nClaims:\n1. \"They work\" positive general performance? Maybe no because then contrast. But \"They work but charge surprising slow\" primary: function_performance, secondary: general_performance? Polarity positive for \"They work\". Evidence \"They work\". But if extracting every claim, yes. However \"They work\" might be general_performance positive. The title has both work and charging slow. We can have claim positive general_performance and negative charging_speed.\n\n2. \"charge surprising slow\" negative charging_speed. Evidence exact \"charge surprising slow\".\n\n3. \"It works\" positive general_performance. Evidence exact \"It works\". Same as #1 but repeated.\n\n4. \"how little progress is made overnight\" negative charging_speed. Evidence exact. This is same claim as #2 maybe separate? Could include multiple evidence spans? Need each claim has one evidence. We can have two claims for charging speed with different evidence? Better avoid duplicates.\n\n5. \"I will have to replace them eventually\" negative reliability/durability? \"replace them eventually\" due charging issue. But no direct durability issue? It's consequence. Could be short_lifespan? Not exactly product lifespan. Could be reliability? The product must be replaced because can't count on fully charge. Hmm maybe not.\n\n6. \"can’t count on to fully charge your things\" negative charging_success or reliability? The phrase \"can't count on\" reliability. But specific to fully charge. Secondary charging_success.\n\nNeed produce valid JSON. We can include claims that are clearly supported. The ideal maybe:\n- primary: function_performance, secondary: charging_speed, polarity: negative, evidence_span: \"charge surprising slow\"\n- primary: function_performance, secondary: charging_success, polarity: negative, evidence_span: \"can’t count on to fully charge your things\"\n- primary: function_performance, secondary: general_performance, polarity: positive, evidence_span: \"They work\" maybe.\n\nBut \"They work\" is positive general_performance but contradictory? It says works but slow. Could be valid. However \"They work\" is generic. We can include. \"It works\" also.\n\nNeed maybe no \"general_performance\" if \"They work\" is trivial? The instruction: extract product-review semantic claims. \"They work but charge surprising slow\" implies working is a claim about general performance. Could include.\n\nBut maybe output too many. We need strictly adhere schema. Ensure evidence_span exact continuous substring from SOURCE_TEXT. Source text includes newlines. If evidence span contains newline? We can avoid. \"They work\" exact. \"charge surprising slow\" exact. \"It works\" exact. \"how little progress is made overnight\" exact. \"can’t count on to fully charge your things\" exact? Let's verify text: \"because what good is something you can’t count on to fully charge your things!\" It contains \"can’t count on to fully charge your things\" yes with curly apostrophe. Need ensure apostrophe char in source: \"can’t\" uses U+2019. We can copy from source? In prompt: \"can’t\". Yes curly? It appears as ’ in \"can’t\". We'll use same.\n\nCould there be polarity mixed for title \"They work but charge surprising slow\"? If claim is entire sentence, mixed. But the claim about charging speed is negative. If primary general performance? \"They work but...\" mixed maybe. But we can split.\n\nNeed taxonomy pair exactly one primary/secondary. For general performance positive: primary function_performance, secondary general_performance. For charging speed negative: function_performance/charging_speed. For charging success negative: function_performance/charging_success. No other.\n\nMaybe \"I will have to replace them eventually\" indicates short_lifespan? But not lifespan, due poor charging. Could be reliability_durability / general_durability negative? But \"replace eventually\" because unable to rely. Could be reliability? Hmm. The taxonomy reliability_durability includes general_durability, short_lifespan. \"will have to replace them eventually\" suggests product lifespan ended early? But they are not broken, just insufficient charging. \"replace them\" refers chargers? Actually product maybe wireless charger? They will replace because can't count on fully charge. It isn't durability. Better not.\n\nMaybe \"It’s bad enough that I will have to replace them eventually\" negative general_convenience? No.\n\nNeed final JSON only. We can choose 3 claims. Need maybe not include \"It works\" duplicate. Let's decide.\n\nReview title: \"They work but charge surprising slow\" includes two claims: works positive general performance; charging slow negative. Body: \"It works but...\" repeats works. \"looking at charging status ... little progress overnight\" is same charging slow; evidence can be \"how little progress is made overnight\" negative charging_speed. \"can’t count on to fully charge your things\" is charging success negative. This is distinct. So 4 claims? \n1 general performance positive \"They work\"\n2 charging_speed negative \"charge surprising slow\"\n3 charging_speed negative \"how little progress is made overnight\" (maybe duplicate)\n4 charging_success negative \"can’t count on to fully charge your things\"\n\nPossible duplicate charging_speed. We can merge by choosing evidence span that includes both? \"charge surprising slow\\nIt works but I find myself looking at the charging status and being very surprised at how little progress is made overnight.\" That is exact continuous substring? It includes newline. Could be evidence_span exact. But schema expects string, can contain newline. We can do one claim charging_speed negative with evidence \"charge surprising slow\" only. That covers. Then charging_success negative.\n\nAlso general performance positive \"They work\" maybe. But \"It works\" duplicate. We can include one \"They work\" from title.\n\nNeed if no product claim? There are claims.\n\nLet's ensure no unsupported inference. \"They work\" positive. That is explicit. \"charge surprising slow\" negative. \"can’t count on to fully charge your things\" negative charging success. Good.\n\nCould polarity for \"They work but charge surprising slow\" be mixed? If evidence span entire title, primary maybe function_performance secondary general_performance? But we split. For \"They work\" positive.\n\nWhat about \"It works\" maybe another positive general performance. But duplicate. The title and body both. We can omit duplicates. The final can contain 3 claims.\n\nNeed output JSON with claims array. No markdown. Use exact keys.\n\nLet's craft:\n{\"claims\":[\n{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They work\"},\n{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"charge surprising slow\"},\n{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"can’t count on to fully charge your things\"}\n]}\n\nCheck evidence \"can’t count on to fully charge your things\" exact? Source: \"because what good is something you can’t count on to fully charge your things!\" The substring starts after \"can’t\". Yes exactly \"can’t count on to fully charge your things\". It omits \"something you\". It is continuous. Good.\n\nCould include \"how little progress is made overnight\" as separate. But maybe redundant. If not include, is okay? Extract product-review semantic claims. The charging_speed issue is captured. \"charge surprising slow\" enough. The body elaborates. Fine.\n\nPotential issue: \"They work\" is generic positive but in context \"work\" may mean they charge? It is general performance. Good.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "eedd8d32-e0a4-4157-a09b-e3e310168b6f-0",
+        "status": "completed"
+      },
+      {
+        "id": "405e1fd3-1a82-4b91-bafd-607ccc00e0a2",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They work\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"charge surprising slow\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"can’t count on to fully charge your things\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210923.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1081,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2318,
+      "output_tokens_details": {
+        "reasoning_tokens": 2216
+      },
+      "total_tokens": 3399
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They work\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"charge surprising slow\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"can’t count on to fully charge your things\"}]}"
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "dd233cd731181ab639519b206959f5fca22a2a99",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "28fa3fbb-bbff-474a-8ff2-9343be86db1a",
+  "raw_response": {
+    "id": "28fa3fbb-bbff-474a-8ff2-9343be86db1a",
+    "created_at": 1789211903.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "325e0820-2821-4ab6-8449-c78831552314",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. We need parse review. Product unknown likely charging pad? Source: \"Never Worked I got this a few months ago so unfortunately I can't return it, but this has never ever worked for me. My mom got one as well and while it tells her that her phone is charging, it charges too slowly to do anything. Disappointing!\" Need extract product-review semantic claims. Zero/multiple. Choose valid primary/secondary pair. Polarity. evidence_span exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating.\n\nNeed determine claims. There are claims:\n1. \"this has never ever worked for me\" => product didn't work. primary reliability_durability, secondary stopped_working? Or general_performance? Since never worked, stopped_working maybe implies worked then stopped? It never worked. Could be defective_on_arrival? It was received maybe few months ago and never ever worked. Product_quality defective_on_arrival? Hmm taxonomy: reliability_durability includes stopped_working, intermittent_failure, general_durability. \"Never worked\" could be stopped_working? But \"never ever worked\" means function failure from start, maybe defective_on_arrival under product_quality. Need choose best. Since \"Never Worked\" and \"this has never ever worked for me\" could be product_quality defective_on_arrival if DOA. But \"got this a few months ago\" not immediate. However never worked suggests defective. Primary reliability_durability? Let's examine.\n\n2. \"while it tells her that her phone is charging, it charges too slowly to do anything\" => charging speed negative, primary function_performance secondary charging_speed. Evidence exact: \"it charges too slowly to do anything\" or including \"while it tells her that her phone is charging, it charges too slowly to do anything\". Also status indicator feedback? \"it tells her that her phone is charging\" could be status_indicator_feedback maybe positive/neutral? It tells phone charging, but charges slowly. The phrase indicates status indicator? Not necessarily product status indicator, phone shows charging. Claim about charging_speed negative. Could include status? Need not overextract.\n\n3. \"I can't return it\" maybe not product claim, return policy. No.\n\n4. \"Disappointing!\" sentiment no product claim? Could be general? No.\n\nNeed output claims list. Need exactly one valid pair per claim. Let's craft.\n\nClaim 1: evidence \"this has never ever worked for me\" primary reliability_durability, secondary stopped_working? The taxonomy pair: stopped_working maybe under reliability_durability. Polarity negative. Is \"never worked\" a case of stopped_working? It never started, but secondary stopped_working closest. Alternatively defective_on_arrival primary product_quality secondary defective_on_arrival. Since \"got this a few months ago\" and \"never ever worked\" could be defective on arrival. But \"Never Worked\" title. Product-quality defective_on_arrival is likely. Need decide based on valid primary/secondary. The taxonomy is hierarchical: product_quality -> defective_on_arrival. Evidence: \"this has never ever worked for me\" indicates it was defective. But reliability_durability -> stopped_working maybe \"stopped working\" suggests after use. \"Never worked\" isn't \"stopped_working\" exactly. However primary taxonomy \"reliability_durability\" probably intended for functionality over time: \"never ever worked\". But product_quality defective_on_arrival may be better for DOA. Review says got a few months ago so can't return, but never ever worked. It's not clear immediate. I'd choose reliability_durability / stopped_working? Wait stopped_working in taxonomy is about reliability. If it never worked, that's \"stopped_working\"? The product doesn't function. The label \"stopped_working\" may include \"doesn't work\". Let's see.\n\nClaim 2: \"it charges too slowly to do anything\" clearly function_performance/charging_speed negative. Evidence exact.\n\nPotential claim 3: \"it tells her that her phone is charging\" maybe status_indicator_feedback? This is positive/neutral? It tells her phone is charging, but then charge too slowly. It could be status indicator feedback? Primary usability_installation secondary status_indicator_feedback. Polarity positive? Actually \"tells her that her phone is charging\" means indicator says charging. But if it's not actually charging effectively, could be misleading; but no explicit negative. Could be neutral. Should we extract? The instruction: product-review semantic claims. A review may contain zero/multiple claims. \"it tells her that her phone is charging\" is a product behavior, but topic? If charging status correctly shows charging (maybe positive) but not necessarily claim about product? Could be status indicator feedback. But then \"charges too slowly\" is separate. However if we extract, evidence exact \"it tells her that her phone is charging\". Polarity neutral or positive? It tells her phone charging -> seems positive functionality of indicator. But \"while\" contrasts with slow charge. Could be neutral: indicator works but charging slow. Maybe not necessary; only explicit product claims about performance. We can include if valid. But risk overextraction. The main two claims enough. The reviewer says \"My mom got one as well and while it tells her that her phone is charging, it charges too slowly to do anything.\" That could be one claim about charging speed, with status feedback context. The status feedback itself not necessarily claimed as issue.\n\nNeed exact continuous substring. Evidence span must be exact substring. For claim 1, evidence_span: \"this has never ever worked for me\" occurs exactly? Source: \"but this has never ever worked for me.\" Yes substring \"this has never ever worked for me\". Good.\n\nFor claim 2, evidence_span: \"it charges too slowly to do anything\" occurs. Or \"it charges too slowly to do anything.\" Exact. Use without period? \"it charges too slowly to do anything\" is continuous substring. Good.\n\nNeed consider \"Never Worked\" in title. Source_text starts \"Never Worked\\nI got this...\" evidence_span could be \"Never Worked\" too. But there is duplicate claim? We can use title evidence or body. The title \"Never Worked\" supports stopped_working. Could include one claim with evidence \"Never Worked\" and another with body? But same claim, avoid duplicate. Use body.\n\nPotential \"I can't return it\" not product claim. \"Disappointing\" no.\n\nNeed output JSON only. Ensure schema: {\"claims\":[{...}]}. Primary/secondary enums exactly. Polarity negative.\n\nNeed maybe include claim for \"it tells her that her phone is charging\" as status indicator? Let's evaluate taxonomy: usability_installation: status_indicator_feedback. The review says \"it tells her that her phone is charging\" - this is the indicator/feedback from phone? The product likely wireless charger, it tells her phone is charging? Could be the charger has an indicator? \"it tells her that her phone is charging\" might refer to phone display, not product. Not a claim about product's status indicator? It could mean product makes phone show charging. If so primary usability_installation secondary status_indicator_feedback, polarity positive? But then \"but charges too slowly\" negative. However \"while it tells her that her phone is charging\" is not necessarily positive; it's just a state. If extracted, evidence exact \"it tells her that her phone is charging\". Polarity positive? It says phone is charging, which is good? But because too slow, the net claim is negative speed. I'd avoid to be safe.\n\nPotential \"My mom got one as well\" no.\n\nPotential claim about inability to return is not product claim. No.\n\nNeed consider \"charging_success\" maybe \"this has never ever worked for me\" if product is charger and didn't charge? But not explicit charging? The product B07P9S6R9Y perhaps wireless charger. Title \"Never Worked\". \"this has never ever worked\" can be general function. Primary function_performance secondary general_performance? Or charging_success? Hmm taxonomy: function_performance includes charging_success, charging_speed, power_output, protection_effectiveness, general_performance. If it's a charger, \"never worked\" = charging_success negative. But \"never ever worked\" could mean device doesn't function. Since second sentence says her mom's tells phone charging but slow, likely product is charger. The first claim \"this has never ever worked for me\" could be charging_success negative. Which is more accurate than reliability_durability? Let's think.\n\nThe taxonomy has function_performance/charging_success for charger functionality. \"Never worked\" = doesn't charge? But not explicitly says charging. However context \"phone is charging\" suggests it's a charger. The title \"Never Worked\" and product B07... likely wireless charger. The review: \"I got this a few months ago... can't return it, but this has never ever worked for me.\" That directly says product doesn't work. Could be function_performance/charging_success? If product is charger, \"never worked\" likely means did not charge. But the review also mentions mom's unit \"it tells her that her phone is charging, it charges too slowly.\" So \"this has never ever worked\" could mean no charging at all. So primary function_performance secondary charging_success negative may be better. But then \"charges too slowly\" is charging_speed. What about reliability? \"Never worked\" not reliability over time? It's function performance. Taxonomy pair: function_performance/charging_success. Evidence \"this has never ever worked for me\" doesn't mention charging, but context product is charger. Do we infer? Maybe classification based on review. If no explicit charging? The title \"Never Worked\" is general. Could be general_performance. Hmm.\n\nLet's inspect source: product id B07P9S6R9Y. Could be \"Anker Wireless Charger\"? Title \"Never Worked\". Review: \"My mom got one as well and while it tells her that her phone is charging, it charges too slowly to do anything.\" It's a wireless charger. So first claim likely charging failure. Function_performance/charging_success negative. But evidence \"this has never ever worked for me\" not explicit charge. Could still be product didn't work generally. The taxonomy allows general_performance. Which is better? \"never worked\" = general performance failure. But if product is charger, charging_success is more specific. The instruction: do not invent topics. If evidence doesn't specify charging, \"general_performance\" might be safer. Yet title \"Never Worked\" no charging. The second claim mentions charging. The first could be general_performance negative. But taxonomy primary function_performance secondary general_performance. Or reliability_durability/stopped_working? \n\nNeed decide. The review begins \"Never Worked\" then \"this has never ever worked for me.\" That's a clear product claim: product does not function. This falls under function_performance/general_performance maybe. \"stopped_working\" implies it worked at some point. \"defective_on_arrival\" implies initial defect. \"general_performance\" is broad. Primary function_performance. Secondary general_performance. Polarity negative. Evidence \"this has never ever worked for me\". That seems valid and avoids over-specific charging. But \"Never Worked\" title could be evidence. Then second claim charging_speed. Which is better? Let's examine taxonomy: reliability_durability has stopped_working. Function_performance has general_performance. If product never worked, it's a function failure, not durability. \"Stopped working\" would be if it worked before. So I lean function_performance / general_performance for first. But is \"general_performance\" valid secondary under function_performance? Yes.\n\nAlternatively, because review says \"while it tells her that her phone is charging, it charges too slowly to do anything\" the mom's charger has charging_success? Actually it does charge but too slowly. That's charging_speed. Good.\n\nThe first claim \"never ever worked\" means no charging success? Could be charging_success. Hmm.\n\nLet's parse exact: \"Never Worked\\nI got this a few months ago so unfortunately I can't return it, but this has never ever worked for me. My mom got one as well and while it tells her that her phone is charging, it charges too slowly to do anything. Disappointing!\"\n\nThe reviewer's own unit \"never ever worked\" (no charging?). Mom's unit \"tells her phone is charging, charges slowly\" (charging_success positive? but speed negative). The first claim could be charging_success negative if product is charger. But evidence doesn't mention charging specifically. However \"Never Worked\" is title. The review context is charger. The instruction says don't invent topics. We can infer from \"phone is charging\" later that product is charger? It might be a wireless charger. But topic charging_success is about whether charging succeeds. \"Never ever worked\" could mean charging never worked. If we use evidence \"this has never ever worked for me\", the claim is general; secondary charging_success might be inferred. To avoid inventing, use general_performance.\n\nNeed maybe include \"it tells her that her phone is charging\" as charging_success positive? Actually \"it tells her that her phone is charging\" could be evidence that charging_success positive? But then \"charges too slowly\" indicates charging occurs but speed negative. The phrase \"it tells her that her phone is charging\" is not necessarily product claim about success; it says phone indicates charging. Could be status indicator. I'd not extract.\n\nNeed final JSON. Ensure no markdown. Use exact schema. Claims maybe two:\n\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"general_performance\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"this has never ever worked for me\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"charging_speed\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"it charges too slowly to do anything\"\n    }\n  ]\n}\n\nCheck if \"general_performance\" is valid enum? Yes under function_performance. Polarity negative.\n\nShould first be reliability_durability/stopped_working? Let's maybe consider if \"Never Worked\" is a product quality claim? Product never worked = defective_on_arrival? But got a few months ago. The title \"Never Worked\" might indicate it never worked from start, i.e., defective on arrival. Product_quality defective_on_arrival. However \"never worked\" could be reliability. The taxonomy primary product_quality secondary defective_on_arrival is for product arriving defective. The review: \"I got this a few months ago ... this has never ever worked for me.\" That's exactly DOA? It never worked. But they didn't say it was dead on arrival; they used it for months? Actually \"never ever worked\" means from beginning. It could be defective_on_arrival. Which is more appropriate? If choosing defective_on_arrival, primary product_quality. Evidence \"this has never ever worked for me\". That might be more semantically precise than general_performance. But taxonomy product_quality defective_on_arrival is about defective on arrival. The review says got a few months ago, can't return, but never ever worked. It implies it was defective from arrival. Hmm.\n\nThe instruction: extract product-review semantic claims. The claim is \"this has never ever worked for me\" => product never functioned. The most direct topic is function_performance/general_performance or reliability_durability/stopped_working. Defective_on_arrival is product quality, but requires arrival. Since it never worked, it could be defective on arrival. Which pair is valid? Multiple could be valid? But \"exactly one valid primary/secondary taxonomy pair\" per claim. We need best.\n\nLet's examine taxonomy structure. Primary topics: function_performance includes general_performance. reliability_durability includes stopped_working. product_quality includes defective_on_arrival. For \"never worked\", general_performance seems broad. If a product doesn't work, that's function performance. Defective_on_arrival is more about condition out of box. Since not explicit arrived broken, but \"never ever worked\" is close. Yet the phrase \"I got this a few months ago so unfortunately I can't return it\" suggests they tried for months? Actually \"never ever worked\" means it never worked, but they didn't return in time. Could be DOA but no immediate return. I'd not use defective_on_arrival unless explicit \"arrived broken\" or \"didn't work out of the box\". Use general_performance.\n\nPotential issue: \"Never Worked\" title is a separate claim? We can't duplicate. Use body.\n\nNeed final only JSON. Ensure valid JSON. No trailing commas. Let's produce.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "28fa3fbb-bbff-474a-8ff2-9343be86db1a-0",
+        "status": "completed"
+      },
+      {
+        "id": "adb87542-79e4-4d54-8558-c2ca606af9a7",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"this has never ever worked for me\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"it charges too slowly to do anything\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211920.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1071,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 3676,
+      "output_tokens_details": {
+        "reasoning_tokens": 3602
+      },
+      "total_tokens": 4747
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"this has never ever worked for me\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"it charges too slowly to do anything\"}]}"
+}

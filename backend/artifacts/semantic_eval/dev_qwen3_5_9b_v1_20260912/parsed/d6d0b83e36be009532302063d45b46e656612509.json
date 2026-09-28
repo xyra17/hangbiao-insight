@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-0c14084fd8fe6cd0",
+      "review_id": "d6d0b83e36be009532302063d45b46e656612509",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "positioning_alignment",
+      "polarity": "negative",
+      "evidence_span": "Hard to place properly",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-kzmkrmgrcll74qx6dbpo9"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

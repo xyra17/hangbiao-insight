@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-2311aa818aceb8e2",
+      "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "positioning_alignment",
+      "polarity": "negative",
+      "evidence_span": "the exact area to put the phone to start the charge is small. Need to put it in the exact spot or it won't charge.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-j9q5o2gfgfk5rxtzthe4f3"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

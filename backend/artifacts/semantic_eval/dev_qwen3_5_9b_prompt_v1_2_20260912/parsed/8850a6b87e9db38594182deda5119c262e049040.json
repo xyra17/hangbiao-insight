@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-24e7ebca3f50835b",
+      "review_id": "8850a6b87e9db38594182deda5119c262e049040",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "Uno de los tres protectores venía quebrado",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-24ne8k39ixyhoax532eup9"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f83ea1a6917d88b8",
+      "review_id": "43eedc7f0477a8f8a95bb7f52702ededc3882514",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "wear_damage",
+      "polarity": "negative",
+      "evidence_span": "he tears them up",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "a206dee7-b34f-43ed-aa2e-87ab8f4db25d"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

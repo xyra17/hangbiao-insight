@@ -1,0 +1,50 @@
+{
+  "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-j9q5o2gfgfk5rxtzthe4f3",
+  "raw_response": {
+    "id": "chatcmpl-j9q5o2gfgfk5rxtzthe4f3",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"the exact area to put the phone to start the charge is small. Need to put it in the exact spot or it won't charge.\"}]}"
+        }
+      }
+    ],
+    "created": 1789190037,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 66,
+      "prompt_tokens": 701,
+      "total_tokens": 767,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 65,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"the exact area to put the phone to start the charge is small. Need to put it in the exact spot or it won't charge.\"}]}"
+}

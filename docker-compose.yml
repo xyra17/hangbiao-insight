@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    ports: ["8200:8200"]
+    environment:
+      EXECUTION_MODE: deterministic_local
+      INVESTIGATION_DB_PATH: /app/backend/artifacts/investigations.sqlite3
+    volumes:
+      - ./backend/artifacts:/app/backend/artifacts
+      - ./dataset:/app/dataset:ro
+  web:
+    build: ./frontend
+    depends_on: [api]
+    ports: ["5173:80"]

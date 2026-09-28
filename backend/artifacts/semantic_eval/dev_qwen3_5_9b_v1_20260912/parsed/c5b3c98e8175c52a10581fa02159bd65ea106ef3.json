@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-df2007ce8aeb8f63",
+      "review_id": "c5b3c98e8175c52a10581fa02159bd65ea106ef3",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "case_compatibility",
+      "polarity": "positive",
+      "evidence_span": "ONLY one that I can get to work through my iPhone case",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-5dakpudmavggm044a1lxy5"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-39ae5d3e90b699c0",
+      "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "negative",
+      "evidence_span": "This screen protector didn’t do anything to protect my phone.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "72e6d585-153e-4eb5-9f6f-a1a13ac02a2d"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

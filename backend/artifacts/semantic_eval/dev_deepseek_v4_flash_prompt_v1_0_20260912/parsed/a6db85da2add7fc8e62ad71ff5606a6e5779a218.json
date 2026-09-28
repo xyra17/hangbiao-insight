@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-ebb3b4fcfe05c24d",
+      "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "cracking_breakage",
+      "polarity": "negative",
+      "evidence_span": "It cracked right away.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "38df3784-fba4-40ef-832d-35884bd2cc99"
+    },
+    {
+      "prediction_id": "SP-2471146043ca9b85",
+      "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "material_build_quality",
+      "polarity": "negative",
+      "evidence_span": "Poor quality.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "38df3784-fba4-40ef-832d-35884bd2cc99"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

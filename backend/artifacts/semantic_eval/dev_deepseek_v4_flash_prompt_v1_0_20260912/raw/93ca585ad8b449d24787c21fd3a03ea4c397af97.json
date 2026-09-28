@@ -1,0 +1,216 @@
+{
+  "review_id": "93ca585ad8b449d24787c21fd3a03ea4c397af97",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "b179909d-1da9-4470-b6f8-7dad90bbd736",
+  "raw_response": {
+    "id": "b179909d-1da9-4470-b6f8-7dad90bbd736",
+    "created_at": 1789211168.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "9f616b6f-a393-469c-8ed3-9743c29bf811",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. Need extract claims. Source text: \"Did not work\\nOrdered 3 chargers. 1 didn't work and was returned, other 2 seem to charge okay for at least the past 2 weeks.\"\n\nNeed product-review semantic claims. We need choose claims. Review has multiple claims? Let's parse.\n\nText: Title \"Did not work\" likely claim about one charger? Full source includes title? source_text: \"Did not work\\nOrdered 3 chargers. 1 didn't work and was returned, other 2 seem to charge okay for at least the past 2 weeks.\"\n\nClaims:\n1. One charger didn't work (defective/stopped working) negative. Primary reliability_durability, secondary stopped_working? Or product_quality defective_on_arrival? It says 1 didn't work and was returned. Since product is charger, didn't work = stopped_working or defective_on_arrival. \"Ordered 3 chargers. 1 didn't work\" likely defective on arrival? But no explicit arrival, just didn't work. Reliability/durability stopped_working. Could be function_performance general_performance? Taxonomy: reliability_durability includes stopped_working. Use primary reliability_durability secondary stopped_working. Evidence span exact: \"1 didn't work\" or \"1 didn't work and was returned\". Need continuous substring. The title \"Did not work\" also exact substring from source? Source_text begins \"Did not work\\n...\" yes. But it duplicates? We should not duplicate same claim maybe one claim for non-working. Could include title evidence \"Did not work\" and body \"1 didn't work and was returned\" same claim. Better one evidence span perhaps \"1 didn't work and was returned\" exact substring. That captures nonworking + returned. Polarity negative.\n\n2. Other 2 seem to charge okay for at least past 2 weeks. Positive about charging success/function_performance. Primary function_performance, secondary charging_success. Polarity positive. Evidence span exact: \"other 2 seem to charge okay for at least the past 2 weeks.\" Note lowercase other? Source: \"other 2 seem to charge okay for at least the past 2 weeks.\" exact continuous substring after comma. Evidence span can be that. Polarity positive. Secondary charging_success.\n\nNeed consider \"Ordered 3 chargers\" maybe not claim. No.\n\nNeed maybe \"didn't work\" could be primary product_quality defective_on_arrival? The returned indicates defect. But taxonomy says reliability_durability stopped_working. \"Did not work\" is function performance? Hmm. Let's examine instructions: choose exactly one valid primary/secondary pair. Each claim independently. We can output two claims.\n\nNeed ensure no star rating inference. Good.\n\nPotential issue: Title \"Did not work\" alone could be exact span, but if evidence span is \"1 didn't work and was returned\" it's exact. Does it include apostrophe? Source: \"1 didn't work and was returned, other...\" Yes exact.\n\nNeed decide if polarity for nonworking maybe negative. Yes.\n\nNow output schema:\n{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"1 didn't work and was returned\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"other 2 seem to charge okay for at least the past 2 weeks.\"}]}\n\nNeed check evidence span exact continuous substring. Source has \"other 2\" lowercase after comma and space. The substring includes period at end? Source ends \"weeks.\" yes. Good.\n\nCould the first claim evidence span \"1 didn't work and was returned\" but source \"1 didn't work and was returned,\" includes comma. If we omit comma, it's still continuous substring? \"1 didn't work and was returned\" yes no comma after returned? Actually source segment: \"1 didn't work and was returned, other\" The substring \"1 didn't work and was returned\" exactly exists (without comma). Yes.\n\nCould there be a claim about returned? no.\n\nNeed output only JSON. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "b179909d-1da9-4470-b6f8-7dad90bbd736-0",
+        "status": "completed"
+      },
+      {
+        "id": "be25404d-7282-4190-86fc-c50a1970c598",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"1 didn't work and was returned\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"other 2 seem to charge okay for at least the past 2 weeks.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211173.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1052,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 968,
+      "output_tokens_details": {
+        "reasoning_tokens": 882
+      },
+      "total_tokens": 2020
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"1 didn't work and was returned\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"other 2 seem to charge okay for at least the past 2 weeks.\"}]}"
+}

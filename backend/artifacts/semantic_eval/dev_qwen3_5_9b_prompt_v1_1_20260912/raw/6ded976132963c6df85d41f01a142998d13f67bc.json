@@ -1,0 +1,50 @@
+{
+  "review_id": "6ded976132963c6df85d41f01a142998d13f67bc",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-jyt6bca5wyrnye8xuavbd8",
+  "raw_response": {
+    "id": "chatcmpl-jyt6bca5wyrnye8xuavbd8",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"This thing just blinked and never charged the phone or the battery case.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"This thing just blinked and never charged the phone or the battery case.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"nothing worked\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"nothing worked\"}]}"
+        }
+      }
+    ],
+    "created": 1789186522,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 163,
+      "prompt_tokens": 683,
+      "total_tokens": 846,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 162,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"This thing just blinked and never charged the phone or the battery case.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"This thing just blinked and never charged the phone or the battery case.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"nothing worked\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"nothing worked\"}]}"
+}

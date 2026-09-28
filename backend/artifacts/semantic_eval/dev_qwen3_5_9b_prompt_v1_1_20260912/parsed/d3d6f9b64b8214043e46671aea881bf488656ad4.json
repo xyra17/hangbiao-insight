@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f5f80e225cd6415d",
+      "review_id": "d3d6f9b64b8214043e46671aea881bf488656ad4",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "dual_port_multi_device",
+      "polarity": "positive",
+      "evidence_span": "dual slot usb for charging 2 things at once",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-ipilcvdo8jdqzdllgyp9en"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

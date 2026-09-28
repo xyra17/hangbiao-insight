@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7ee635092ce9f860",
+      "review_id": "3562835f440f3982204997669d0fc7f72b040d25",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "negative",
+      "evidence_span": "Difficult to get complete adhesion g",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-004elc3bc141wa6xkzhhtjtd"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

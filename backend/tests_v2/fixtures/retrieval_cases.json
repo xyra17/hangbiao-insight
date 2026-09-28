@@ -1,0 +1,117 @@
+{
+  "version": "synthetic-retrieval-regression-v1",
+  "scope": "Synthetic mechanism regression only; not independent business acceptance",
+  "documents": [
+    {
+      "id": "CN-1",
+      "text": "这个充电器使用时严重发烫，已经停止使用。",
+      "language": "zh"
+    },
+    {
+      "id": "EN-1",
+      "text": "The charger is overheating during use."
+    },
+    {
+      "id": "CN-2",
+      "text": "充电速度非常慢，等了一晚上。",
+      "language": "zh"
+    },
+    {
+      "id": "EN-2",
+      "text": "It charges slowly and takes all night."
+    },
+    {
+      "id": "CN-3",
+      "text": "手机保护壳太厚，无线充电无法正常启动。",
+      "language": "zh"
+    },
+    {
+      "id": "EN-3",
+      "text": "It stopped working after two days."
+    },
+    {
+      "id": "CN-4",
+      "text": "包装完好，物流很快。",
+      "language": "zh"
+    },
+    {
+      "id": "EN-4",
+      "text": "The photos match the product."
+    },
+    {
+      "id": "EN-5",
+      "text": "Works as described. Nice color."
+    },
+    {
+      "id": "EN-6",
+      "text": "The cable is too short."
+    },
+    {
+      "id": "CN-5",
+      "text": "电源线太短，放不到桌面上。",
+      "language": "zh"
+    },
+    {
+      "id": "EN-7",
+      "text": "Delivery arrived on Tuesday."
+    },
+    {
+      "id": "EN-8",
+      "text": "The box was damaged."
+    },
+    {
+      "id": "EN-9",
+      "text": "I like the small size."
+    },
+    {
+      "id": "EN-10",
+      "text": "The blue version looks good."
+    }
+  ],
+  "queries": [
+    {
+      "query": "过热",
+      "relevant": [
+        "CN-1",
+        "EN-1"
+      ]
+    },
+    {
+      "query": "charges slowly",
+      "relevant": [
+        "EN-2"
+      ]
+    },
+    {
+      "query": "充电速度",
+      "relevant": [
+        "CN-2"
+      ]
+    },
+    {
+      "query": "保护壳",
+      "relevant": [
+        "CN-3"
+      ]
+    },
+    {
+      "query": "stopped working",
+      "relevant": [
+        "EN-3"
+      ]
+    },
+    {
+      "query": "photos",
+      "relevant": [
+        "EN-4"
+      ]
+    },
+    {
+      "query": "hot",
+      "relevant": [
+        "CN-1",
+        "EN-1"
+      ]
+    }
+  ]
+}

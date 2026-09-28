@@ -1,0 +1,71 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-4eddfbfbbf7b9c24",
+      "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "I am not able to use this for my iPhone 11 because it's a few millimeters too long.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h1xifxs15uedm8keizi96"
+    },
+    {
+      "prediction_id": "SP-b0808fbb2e1cd0cc",
+      "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "size_fit",
+      "polarity": "negative",
+      "evidence_span": "It's a little too big!!",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h1xifxs15uedm8keizi96"
+    },
+    {
+      "prediction_id": "SP-f476c326e6cbd8bb",
+      "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "size_fit",
+      "polarity": "negative",
+      "evidence_span": "It hangs long the top and bottom slightly.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h1xifxs15uedm8keizi96"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 2
+}

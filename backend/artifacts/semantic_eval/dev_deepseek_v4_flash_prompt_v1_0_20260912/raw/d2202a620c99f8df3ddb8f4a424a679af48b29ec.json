@@ -1,0 +1,216 @@
+{
+  "review_id": "d2202a620c99f8df3ddb8f4a424a679af48b29ec",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "523b1921-0755-4436-ae45-ffa9656ba0ce",
+  "raw_response": {
+    "id": "523b1921-0755-4436-ae45-ffa9656ba0ce",
+    "created_at": 1789211650.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "1adfcebc-2848-45fc-978f-71e73b81fff7",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need follow schema. Need identify product-review semantic claims. Review about outlet? Product likely charger? \"They come right out of the outlet\" maybe plug doesn't stay in wall socket. Need taxonomy. Primary compatibility_fit? secondary wall_socket_fit. Claim: \"They come right out of the outlet\" and \"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\" Negative. Evidence span exact continuous substring. Also \"When they actually stay put they charge fine\" function_performance charging_success positive? But conditional? It says when they actually stay put they charge fine, negative overall? Could extract charging success positive maybe? But review polarity? We need claims. \"not worth it\" convenience_value price_value negative. \"not worth buying these\" price_value negative maybe general value. \"just go try a different brand\" general? Could be not product claim? We need decide.\n\nNeed exact evidence substrings from source_text. Source: \"They come right out of the outlet\\nIf there is absolutely ANY kind of pull on these, they come right out of the outlet! Not happy and not worth it. When they actually stay put they charge fine, but again, not worth buying these. Do yourself a favor and just go try a different brand instead\"\n\nNeed output JSON only. Claims may multiple. Valid pairs. Let's map:\n\n1. \"They come right out of the outlet\" – compatibility_fit / wall_socket_fit negative. Evidence exact \"They come right out of the outlet\" or full \"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\" This describes plug fit in outlet. Primary compatibility_fit, secondary wall_socket_fit. Polarity negative. Evidence: \"They come right out of the outlet\" maybe first line. But there's newline. Exact substring yes. Could use \"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\" includes punctuation. Stronger.\n\n2. \"Not happy and not worth it.\" This could be convenience_value / price_value negative? \"not worth it\" value. Evidence exact \"Not happy and not worth it.\" But \"not happy\" is sentiment not product claim. \"not worth it\" price_value. Primary convenience_value secondary price_value negative. Evidence \"not worth it\" or \"Not happy and not worth it.\" Use \"not worth it\" exact. Does that count? Yes product value. But maybe \"not worth it\" could be general_convenience? price_value. \n\n3. \"When they actually stay put they charge fine\" – function_performance charging_success positive. Evidence exact. But conditional \"when they actually stay put\" maybe positive claim charging works if geometry. Polarity positive? But review says not worth. The claim itself \"they charge fine\" positive. Could include entire \"When they actually stay put they charge fine\" as evidence. polarity positive. Is this a product claim? Yes charging success. But if devices? It's charger? \"charge fine\" likely. Primary function_performance secondary charging_success positive.\n\n4. \"not worth buying these\" – convenience_value price_value negative. Evidence exact \"not worth buying these\" or \"but again, not worth buying these.\" Could duplicate with not worth it. Maybe only one price_value. If multiple claims can multiple. Need maybe avoid duplicate? It says zero or multiple. We can include one price value claim with evidence \"not worth it\" or \"not worth buying these\". Maybe include both? Hmm.\n\n5. \"just go try a different brand instead\" – no product claim? It's recommendation. Could be other_unknown? Probably not.\n\nNeed ensure polarity. For \"They come right out of outlet\" negative. For \"charge fine\" positive. For \"not worth it\" negative. That's 3 claims. Does \"They come right out of outlet\" maybe reliability_durability/intermittent_failure? No, wall_socket_fit. It falls out, not secure. Compatibility fit.\n\nPotential issue: product may be \"outlet extender\"? \"They come right out of the outlet\" could refer to plugs? But item is charger? wall_socket_fit. Good.\n\nNeed exact evidence_span. Allowed exact continuous substring. For first, evidence maybe \"They come right out of the outlet\" appears twice? First line and later. If use \"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\" exact. It includes \"they come right out...\" lower-case. That's fine. However the claim is \"They come right out of the outlet\" with uppercase. Need substring. I can use exact \"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\" It's continuous in source. That is evidence. Good.\n\nSecond \"When they actually stay put they charge fine\" exact. Source: \"When they actually stay put they charge fine, but again...\" Yes.\n\nThird \"not worth it\" appears in \"Not happy and not worth it.\" Exact substring \"not worth it\" within. That is continuous. Evidence span can be short. Polarity negative. But is \"not worth it\" product claim? It is value. Good.\n\nMaybe also \"not worth buying these\" as separate price_value. But likely redundant. Could include if multiple value claims. Maybe one claim \"not worth it\" and one \"not worth buying these\". But schema allows multiple; however over-extraction? The instruction says a review may contain zero or multiple claims. Should extract semantic claims. \"not worth it\" and \"not worth buying these\" same semantic value, maybe one claim. Use one. Evidence span can include both? \"not worth it. When they actually stay put they charge fine, but again, not worth buying these.\" That includes other claim. Better separate? No need.\n\nNeed final JSON with claims array exactly. Ensure no extra text. Must conform. Let's craft:\n\n{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"When they actually stay put they charge fine\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"not worth it\"}]}\n\nCheck if evidence for \"not worth it\" exact substring in source: Source has \"Not happy and not worth it.\" lower-case \"not worth it\" yes after and. Good.\n\nPotential issue: Did we omit \"not worth buying these\"? Maybe include as another price_value? If we include, two price_value claims. Could be considered multiple claims. But same topic; maybe okay. However evidence \"not worth buying these\" exact. But if we include both, might be over-extraction? The review repeats value. I'd keep only one. Desired? Hmm.\n\nMaybe \"They come right out of the outlet\" claim polarity negative and \"If there is absolutely ANY kind of pull on these...\" same. One claim. Good.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "523b1921-0755-4436-ae45-ffa9656ba0ce-0",
+        "status": "completed"
+      },
+      {
+        "id": "954202b1-967d-45e5-912f-ac2405b79838",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"When they actually stay put they charge fine\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"not worth it\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211658.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1085,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1633,
+      "output_tokens_details": {
+        "reasoning_tokens": 1514
+      },
+      "total_tokens": 2718
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"If there is absolutely ANY kind of pull on these, they come right out of the outlet!\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"When they actually stay put they charge fine\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"not worth it\"}]}"
+}

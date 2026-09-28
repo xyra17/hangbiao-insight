@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-81039eaf5a936191",
+      "review_id": "9315a9d5abb2bece260180d03d5445250bf04310",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "negative",
+      "evidence_span": "Slow charge",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "045042e3-5dc2-425a-9f53-c5a477b20e02"
+    },
+    {
+      "prediction_id": "SP-d5b7dd30ff302587",
+      "review_id": "9315a9d5abb2bece260180d03d5445250bf04310",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "price_value",
+      "polarity": "negative",
+      "evidence_span": "Waste of money",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "045042e3-5dc2-425a-9f53-c5a477b20e02"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

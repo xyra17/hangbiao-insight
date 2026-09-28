@@ -1,0 +1,216 @@
+{
+  "review_id": "f0b33589facd4ab8ba24c1bc44acdf937e795991",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "54267c11-2710-4ef6-bea1-b16767d9a0db",
+  "raw_response": {
+    "id": "54267c11-2710-4ef6-bea1-b16767d9a0db",
+    "created_at": 1789212118.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "98623c05-c439-4945-a0d8-67d8866893dc",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON schema. Need extract claims. Review source: \"Stopped working\\nI bought this charger on March 26. It worked fine at first. Now. No longer charging and no green ring. Too late to return.\"\n\nNeed identify product-review semantic claims. Product charger likely. Claims:\n- \"It worked fine at first\" positive general performance? But then stopped working. Could be reliability_durability stopped_working negative evidence \"Stopped working\" or \"No longer charging\". \n- \"No longer charging\" function_performance charging_success negative? Also reliability stopped_working negative. Need choose exactly one valid primary/secondary pair per claim. Multiple claims possible.\n- \"no green ring\" status_indicator_feedback? usability_installation status_indicator_feedback negative. \"and no green ring\" exact continuous substring from source. \n- \"Too late to return\" maybe convenience_value price_value? Actually return window? Not product claim? It's about return policy, not product. Could be other? Probably not product intrinsic. But maybe not a product claim. We should not infer. \n- \"bought this charger on March 26\" no claim.\n- \"It worked fine at first\" general_performance positive? But might contrast. Evidence exact \"It worked fine at first\". This is about function_performance general_performance positive. Is it a claim? Yes.\n- \"Now. No longer charging\" Could combine? Evidence exact \"No longer charging\" but source has \"Now. No longer charging\" with period. \"No longer charging\" is exact substring. Claim: function_performance charging_success negative. Also could reliability_durability stopped_working negative for \"Stopped working\" title? Title may be part source_text? source_text includes \"Stopped working\" at beginning. Evidence \"Stopped working\". That is reliability_durability stopped_working negative. Should we include title? The source_text includes title. Yes. But duplicate with no longer charging. Could extract both? A review may contain multiple claims. \"Stopped working\" and \"No longer charging\" both similar. We can include both? Need avoid over-extract? Let's parse.\n\nThe title \"Stopped working\" is a product claim: reliability_durability stopped_working negative. Evidence span from SOURCE_TEXT exact \"Stopped working\". \nThen \"It worked fine at first\" positive general_performance. \n\"Now. No longer charging\" negative charging_success function_performance. \n\"no green ring\" status_indicator_feedback negative perhaps usability_installation. \n\"Too late to return\" not product claim? Maybe convenience_value general_convenience? It references return policy, not product. Omit.\n\nNeed ensure primary/secondary taxonomy pair valid. For reliability_durability stopped_working valid. For function_performance charging_success valid. For usability_installation status_indicator_feedback valid. For function_performance general_performance? secondary general_performance valid. Polarity positive.\n\nPotential issue overlapping evidence spans and claims. \"No longer charging and no green ring\" could be one span? But different topics. We can have separate exact substrings. \"no green ring\" exact substring. \"No longer charging\" exact substring. \"Stopped working\" exact. \"It worked fine at first\" exact.\n\nShould \"It worked fine at first\" positive claim about general performance but overall negative. Polarity positive? The statement itself positive. Yes.\n\nCould \"No longer charging\" be reliability_durability stopped_working rather than charging_success. Both valid. We need choose one. For \"No longer charging\", charging_success is more direct: function_performance charging_success negative. For \"Stopped working\", reliability_durability stopped_working negative. \nCould \"no green ring\" be status_indicator_feedback negative. yes.\n\nAre there any safety issues? no.\n\nNeed output JSON with claims array.\n\nEnsure exact substring: source_text = \"Stopped working\\nI bought this charger on March 26. It worked fine at first. Now. No longer charging and no green ring. Too late to return.\"\nEvidence \"Stopped working\" exact includes no newline? The source starts \"Stopped working\\nI...\" yes \"Stopped working\" exact.\n\"It worked fine at first.\" Source has period. If copy evidence_span exact continuous substring. Could include period? \"It worked fine at first\" without period is substring. Fine. \n\"No longer charging\" exact substring. \n\"no green ring\" exact substring. \nMaybe \"Too late to return\" exact substring; primary other_unknown? Hmm taxonomy has other_unknown insufficient_information. But \"Too late to return\" is about return policy, not product. Not a product claim. Omit.\n\nNeed maybe include \"and no green ring\" if status indicator? Evidence \"no green ring\" okay.\n\nNow final only JSON. Ensure no markdown. Valid JSON.\n\nNeed quote fields. \nClaims:\n1 primary reliability_durability secondary stopped_working polarity negative evidence_span \"Stopped working\"\n2 primary function_performance secondary general_performance polarity positive evidence_span \"It worked fine at first\"\n3 primary function_performance secondary charging_success polarity negative evidence_span \"No longer charging\"\n4 primary usability_installation secondary status_indicator_feedback polarity negative evidence_span \"no green ring\"\n\nCheck whether \"general_performance\" in function_performance; yes valid. \nCould \"It worked fine at first\" maybe reliability_durability general_durability positive. But general_performance seems okay. It describes charging worked. The product is charger. It worked fine at first. That's general performance. \nPotential issue conflicting with later stopped. Polarity positive for that claim. Good.\n\nShould we include \"Stopped working\" and \"No longer charging\" duplicate? It's okay multiple claims. But maybe one claim for stopped working/reliability, one for no charging/function performance, one status indicator, one positive initial. Good.\n\nNeed final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "54267c11-2710-4ef6-bea1-b16767d9a0db-0",
+        "status": "completed"
+      },
+      {
+        "id": "1de38d94-aa23-425d-bb37-15a816d3a326",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Stopped working\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It worked fine at first\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"No longer charging\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"negative\",\"evidence_span\":\"no green ring\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212125.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1052,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1388,
+      "output_tokens_details": {
+        "reasoning_tokens": 1252
+      },
+      "total_tokens": 2440
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Stopped working\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It worked fine at first\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"No longer charging\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"negative\",\"evidence_span\":\"no green ring\"}]}"
+}

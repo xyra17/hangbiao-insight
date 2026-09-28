@@ -1,0 +1,14 @@
+﻿product_name,review_priority,review_count
+AILKIN_USB_Wall_Charger,P0-A_conflict,3
+AILKIN_USB_Wall_Charger,P0-C_multi_candidate,7
+AILKIN_USB_Wall_Charger,P0-D_no_candidate,59
+AILKIN_USB_Wall_Charger,P1_single_candidate,41
+Ailun_Screen_Protector,P0-A_conflict,1
+Ailun_Screen_Protector,P0-B_category_mismatch,6
+Ailun_Screen_Protector,P0-C_multi_candidate,11
+Ailun_Screen_Protector,P0-D_no_candidate,48
+Ailun_Screen_Protector,P1_single_candidate,44
+Yootech_Wireless_Charger,P0-A_conflict,5
+Yootech_Wireless_Charger,P0-C_multi_candidate,19
+Yootech_Wireless_Charger,P0-D_no_candidate,64
+Yootech_Wireless_Charger,P1_single_candidate,52

@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5937f61f8785411a",
+      "review_id": "1c8eeda74c44d7194794915cdf3a0563b71de4f0",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "general_durability",
+      "polarity": "positive",
+      "evidence_span": "it lasted a long time throughout me dropping my phone a lot and took the damage well",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-jx0uq1h5sv38ni7vy5g2d"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

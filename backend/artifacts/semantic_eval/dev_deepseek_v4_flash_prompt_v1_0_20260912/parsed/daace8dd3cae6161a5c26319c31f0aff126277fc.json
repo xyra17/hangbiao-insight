@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-2baee9822a50f5d8",
+      "review_id": "daace8dd3cae6161a5c26319c31f0aff126277fc",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "Did not charge my iPhone 8 very well at all",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "e800ce9e-f3e2-4f76-a89c-8f0631d17b9d"
+    },
+    {
+      "prediction_id": "SP-55cc29fea24398e0",
+      "review_id": "daace8dd3cae6161a5c26319c31f0aff126277fc",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "maybe I just got a malfunctioning unit",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "e800ce9e-f3e2-4f76-a89c-8f0631d17b9d"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

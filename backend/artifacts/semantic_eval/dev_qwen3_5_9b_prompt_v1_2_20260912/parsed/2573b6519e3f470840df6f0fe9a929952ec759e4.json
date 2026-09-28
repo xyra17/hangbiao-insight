@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-bed2021f87c5ca90",
+      "review_id": "2573b6519e3f470840df6f0fe9a929952ec759e4",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "Too small for IPhone 11",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-1lhk6mp7blojddlj6ichsi5"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

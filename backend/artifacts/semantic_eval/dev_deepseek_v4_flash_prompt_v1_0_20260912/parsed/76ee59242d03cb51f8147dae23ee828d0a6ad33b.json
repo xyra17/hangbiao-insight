@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-20bfc64b1f7593ff",
+      "review_id": "76ee59242d03cb51f8147dae23ee828d0a6ad33b",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "size_fit",
+      "polarity": "negative",
+      "evidence_span": "I THINK ITS A LITTLE SMALL I COVERS THE SCREEN JUST BARELY BUT ON THE 4 CORNERS THE SCREEN OR GLASS IS EXPOSED",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "8ae4eee2-0258-431e-b6fe-50584cb82366"
+    },
+    {
+      "prediction_id": "SP-9acee03d5ff26a96",
+      "review_id": "76ee59242d03cb51f8147dae23ee828d0a6ad33b",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "negative",
+      "evidence_span": "SO IF I DROP MY PHONE AND IT HITS 1 OF THE CORNERS IT WOULD CRACK AND WOULD DEFEAT THE PERPOSE OF HAVING A SCREEN PROTECTOR",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "8ae4eee2-0258-431e-b6fe-50584cb82366"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

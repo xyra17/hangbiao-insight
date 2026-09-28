@@ -1,0 +1,216 @@
+{
+  "review_id": "93b23914becd9989c78bf7f18c6d3bd4c1ae7c95",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "b764a4dd-b7d7-4807-8010-884f23c55665",
+  "raw_response": {
+    "id": "b764a4dd-b7d7-4807-8010-884f23c55665",
+    "created_at": 1789211869.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "00824ec7-5b72-4d90-9a7f-2e5edcf90886",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims. Source text: \"Too small\\nThe one for iPhone XR is like .5 cm too small each way.\" Review title Too small. Product likely phone case? Product id B07H2V5YLH maybe iPhone XR case? Claim about size. Taxonomy compatibility_fit: size_fit. Polarity negative. Evidence span exact continuous substring. Could use \"Too small\" or \"The one for iPhone XR is like .5 cm too small each way.\" Need exact substring from SOURCE_TEXT. SOURCE_TEXT contains newline after Too small. Evidence span must be exact continuous substring. If include newline? Better use \"Too small\" as evidence? It supports size. But maybe \"The one for iPhone XR is like .5 cm too small each way.\" Exact continuous substring no newline. That's good. Primary compatibility_fit, secondary size_fit, polarity negative, evidence_span \"The one for iPhone XR is like .5 cm too small each way.\" Or \"Too small\". Need exact. Maybe one claim. If title \"Too small\" also evidence. But one claim. Ensure JSON only.\n\nNeed consider if \"Too small\" size_fit. Yes.\n\nReturn {\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"The one for iPhone XR is like .5 cm too small each way.\"}]}",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "b764a4dd-b7d7-4807-8010-884f23c55665-0",
+        "status": "completed"
+      },
+      {
+        "id": "a7bd1a62-98f3-4d4d-b29d-17712efc95d7",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"The one for iPhone XR is like .5 cm too small each way.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211871.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1036,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 354,
+      "output_tokens_details": {
+        "reasoning_tokens": 305
+      },
+      "total_tokens": 1390
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"The one for iPhone XR is like .5 cm too small each way.\"}]}"
+}

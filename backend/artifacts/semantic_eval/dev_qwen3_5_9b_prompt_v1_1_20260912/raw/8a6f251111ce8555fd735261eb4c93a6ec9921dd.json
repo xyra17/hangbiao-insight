@@ -1,0 +1,50 @@
+{
+  "review_id": "8a6f251111ce8555fd735261eb4c93a6ec9921dd",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-lht9m0uiabqmuqxi57kmqg",
+  "raw_response": {
+    "id": "chatcmpl-lht9m0uiabqmuqxi57kmqg",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"All have worked flawlessly and I love when the phones actually starts charging moments before it makes contact with the pad.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"Fast charging\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"great quality wireless charger\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"positive\", \"evidence_span\": \"the halo-light reassures proper contact was made and then the charging chime sounds from your device.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"I will purchase more later in the year as Christmas gifts for everyone with an iPhone or Android device will love this charger.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"durable\"}]}"
+        }
+      }
+    ],
+    "created": 1789187360,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 268,
+      "prompt_tokens": 746,
+      "total_tokens": 1014,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 267,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"All have worked flawlessly and I love when the phones actually starts charging moments before it makes contact with the pad.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"Fast charging\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"great quality wireless charger\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"positive\", \"evidence_span\": \"the halo-light reassures proper contact was made and then the charging chime sounds from your device.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"I will purchase more later in the year as Christmas gifts for everyone with an iPhone or Android device will love this charger.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"durable\"}]}"
+}

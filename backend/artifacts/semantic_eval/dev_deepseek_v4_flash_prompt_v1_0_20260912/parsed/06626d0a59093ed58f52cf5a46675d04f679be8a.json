@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f82269ce30ccb143",
+      "review_id": "06626d0a59093ed58f52cf5a46675d04f679be8a",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "price_value",
+      "polarity": "positive",
+      "evidence_span": "Reasonable price",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "3f62df86-2c74-486f-bda5-9c66e0bf4cff"
+    },
+    {
+      "prediction_id": "SP-ea83c80a1d7436fb",
+      "review_id": "06626d0a59093ed58f52cf5a46675d04f679be8a",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Works great!",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "3f62df86-2c74-486f-bda5-9c66e0bf4cff"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

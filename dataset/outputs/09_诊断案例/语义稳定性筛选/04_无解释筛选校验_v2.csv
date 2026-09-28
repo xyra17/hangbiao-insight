@@ -1,0 +1,5 @@
+﻿check_name,expected,actual,passed
+candidate_count_ge_3,3,124,True
+top3_count,3,3,True
+audit_total_count,120,120,True
+rejected_2019_12_excluded,0,0,True

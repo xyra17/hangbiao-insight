@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-b7a9c9de48c05bca",
+      "review_id": "7e9df35e980af059bd7bf60448ad4683070cb7f5",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "abnormal_noise",
+      "polarity": "negative",
+      "evidence_span": "it make a hissing sound",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-1yklf8nb8vo0s2rcoh6anmd"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

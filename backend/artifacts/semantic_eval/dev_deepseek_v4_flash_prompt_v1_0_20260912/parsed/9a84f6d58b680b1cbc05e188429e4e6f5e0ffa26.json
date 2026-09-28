@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-0e35f310b88c62b8",
+      "review_id": "9a84f6d58b680b1cbc05e188429e4e6f5e0ffa26",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "Does not work with iPhone 13 Pro",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "c004ac0f-e316-43ea-90dd-300739277dd9"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

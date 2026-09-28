@@ -1,0 +1,99 @@
+{
+  "comparison": {
+    "v1_0_dir": "artifacts/semantic_eval/dev_qwen3_5_9b_v1_20260912",
+    "v1_1_dir": "artifacts/semantic_eval/dev_qwen3_5_9b_prompt_v1_1_20260912",
+    "same_split": true,
+    "same_schema_and_taxonomy": true
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "v1_0": 0.569058485890169,
+      "v1_1": 0.600328732461688,
+      "delta": 0.031270246571519,
+      "improved": true,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    },
+    "secondary_topic_micro_f1": {
+      "v1_0": 0.5064102564102564,
+      "v1_1": 0.5322128851540616,
+      "delta": 0.025802628743805234,
+      "improved": true,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    },
+    "topic_polarity_micro_f1": {
+      "v1_0": 0.5,
+      "v1_1": 0.5242718446601942,
+      "delta": 0.024271844660194164,
+      "improved": true,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    },
+    "matched_topic_polarity_accuracy": {
+      "v1_0": 0.9873417721518988,
+      "v1_1": 0.9789473684210527,
+      "delta": -0.0083944037308461,
+      "improved": false,
+      "v1_0_passed": true,
+      "v1_1_passed": true
+    },
+    "evidence_substring_validity": {
+      "v1_0": 0.9566929133858267,
+      "v1_1": 0.9211956521739131,
+      "delta": -0.035497261211913655,
+      "improved": false,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    },
+    "invalid_taxonomy_rate": {
+      "v1_0": 0.051181102362204724,
+      "v1_1": 0.04891304347826087,
+      "delta": -0.002268058883943852,
+      "improved": true,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    },
+    "unsupported_evidence_rate": {
+      "v1_0": 0.04330708661417323,
+      "v1_1": 0.07880434782608696,
+      "delta": 0.03549726121191373,
+      "improved": false,
+      "v1_0_passed": false,
+      "v1_1_passed": false
+    }
+  },
+  "errors": {
+    "missing_topic": {
+      "v1_0": 171,
+      "v1_1": 151,
+      "delta": -20
+    },
+    "extra_topic": {
+      "v1_0": 64,
+      "v1_1": 88,
+      "delta": 24
+    },
+    "polarity_mismatch": {
+      "v1_0": 87,
+      "v1_1": 102,
+      "delta": 15
+    },
+    "guard_failure": {
+      "v1_0": 18,
+      "v1_1": 32,
+      "delta": 14
+    },
+    "bad_case_count": {
+      "v1_0": 178,
+      "v1_1": 178,
+      "delta": 0
+    }
+  },
+  "status_counts": {
+    "regressed": 14,
+    "fixed": 14,
+    "unchanged": 164
+  },
+  "representative_count": 60
+}

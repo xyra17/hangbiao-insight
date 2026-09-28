@@ -1,0 +1,20 @@
+{
+  "release": "stage6b-local-release-rc1",
+  "execution_mode": "deterministic_local",
+  "external_model_called": false,
+  "checks": {
+    "backend_tests": {"passed": 98},
+    "python_compileall": "passed",
+    "frontend_production_build": "passed",
+    "preflight": "ready",
+    "sqlite_backup_restore": "passed",
+    "docker_image_build": "passed",
+    "container_health": "passed",
+    "container_frontend_http": "passed",
+    "investigation_http_e2e": "passed",
+    "follow_up_parent_context": "passed"
+  },
+  "retrieval_policy": {"default": "keyword", "char_bigram": "experimental", "qdrant": "experimental"},
+  "deferred": ["deepseek_enrichment", "deepseek_planner_e2e", "semantic_release", "multi_agent", "graphrag", "dify"],
+  "notes": ["No mock, Golden, or stale recovery result was used as a release pass.", "Business enrichment remains deferred because the external model gateway is unavailable."]
+}

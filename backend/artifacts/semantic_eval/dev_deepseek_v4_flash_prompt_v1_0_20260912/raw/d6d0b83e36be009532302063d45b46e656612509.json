@@ -1,0 +1,216 @@
+{
+  "review_id": "d6d0b83e36be009532302063d45b46e656612509",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "e1182ffb-b422-43eb-b215-ef4c484a9795",
+  "raw_response": {
+    "id": "e1182ffb-b422-43eb-b215-ef4c484a9795",
+    "created_at": 1789212002.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "b33a91a8-a256-45cf-b61a-9c0020212490",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review: title \"Hard to place properly\". source_text: \"Hard to place properly\\nMy wife finds if difficult to get her phone placed properly on the single coil and sometimes she fussed with it for a while. Works well when it's connected though\" rating 3.\n\nNeed identify product-review semantic claims. Taxonomy. Claims may zero multiple. Exactly one valid primary/secondary pair. Determine polarity independent star. evidence_span exact continuous substring from SOURCE_TEXT.\n\nWe need parse.\n\nText: \"Hard to place properly\\nMy wife finds if difficult to get her phone placed properly on the single coil and sometimes she fussed with it for a while. Works well when it's connected though\"\n\nLikely claims:\n1. Difficulty placing phone properly on single coil -> usability_installation / positioning_alignment, negative. Evidence span maybe \"Hard to place properly\" or \"difficult to get her phone placed properly on the single coil\". Exact substring: \"Hard to place properly\" yes title included in source_text? source_text starts \"Hard to place properly\\n...\" So exact. But title could be separate? source_text includes title? Yes source_text includes \"Hard to place properly\\nMy wife...\" So evidence_span can be \"Hard to place properly\". But claim details: positioning alignment. Also \"difficult to get her phone placed properly on the single coil\" exact. It includes \"if difficult\" typo? source has \"finds if difficult\" maybe \"if\" typo. Evidence substring: \"difficult to get her phone placed properly on the single coil\" exact within source. This supports positioning_alignment negative.\n\n2. Works well when connected -> function_performance / charging_success? Positive. Evidence \"Works well when it's connected though\" This indicates charging success when connected. Primary function_performance secondary charging_success positive. Or general_performance positive. Since \"works well when it's connected\" likely charging success. But if wireless charger, connected? yes.\n\nPotential claim about \"sometimes she fussed with it for a while\" same as positioning. Could combine. Maybe one claim only? Need multiple claims independent. \"Hard to place properly\" and \"difficult... placed properly...\" are same claim. We can extract one claim for positioning difficulty negative. And one for works well when connected positive.\n\nNeed ensure no unsupported. \"single coil\" may indicate device? Not compatibility. \"fussed with it for a while\" repeated.\n\nCould there be claim \"single coil\" compatibility? no.\n\nNeed answer JSON schema: {\"claims\":[...]}.\n\nNeed exact evidence_span. For first maybe \"difficult to get her phone placed properly on the single coil\" is exact? Let's check source_text: \"My wife finds if difficult to get her phone placed properly on the single coil and sometimes she fussed with it for a while.\" There is \"finds if difficult\" (typo \"if\" not \"it\"). The substring \"difficult to get her phone placed properly on the single coil\" indeed appears after \"finds if \". Yes exact.\n\nPolarity negative.\n\nSecond evidence: \"Works well when it's connected though\" exact. Polarity positive. primary function_performance secondary charging_success.\n\nNeed maybe first evidence \"Hard to place properly\" exact but says title. It is continuous at start. We can use \"difficult to get her phone placed properly on the single coil\". That's good and includes context.\n\nAny claim about \"sometimes she fussed with it for a while\" could be usability installation / positioning_alignment negative as same. Could mention \"fussed with it for a while\" maybe general convenience? But same placement issue. Better not duplicate. However review may contain zero or multiple. We can have two claims: one negative positioning, one positive charging success. Good.\n\nNeed adhere to JSON only.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "e1182ffb-b422-43eb-b215-ef4c484a9795-0",
+        "status": "completed"
+      },
+      {
+        "id": "4e7fee3c-de28-42b9-8d38-800fc22ce06d",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"difficult to get her phone placed properly on the single coil\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"Works well when it's connected though\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212006.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1055,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 873,
+      "output_tokens_details": {
+        "reasoning_tokens": 792
+      },
+      "total_tokens": 1928
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"difficult to get her phone placed properly on the single coil\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"Works well when it's connected though\"}]}"
+}

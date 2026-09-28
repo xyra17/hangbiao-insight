@@ -1,0 +1,50 @@
+{
+  "review_id": "73a8276800380c5d6e47792ff10af585f77e42e3",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-z9krvc7m7fi0kqmnqev6zxk",
+  "raw_response": {
+    "id": "chatcmpl-z9krvc7m7fi0kqmnqev6zxk",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"It began by charging well. But after a while it would start to flash when I placed my phone on it and not charge.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"No matter what I did, remove and replace phone, shift and turn phone, unplug and replug the charger, it would not start charging my phone.\"}]}"
+        }
+      }
+    ],
+    "created": 1789186637,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 127,
+      "prompt_tokens": 653,
+      "total_tokens": 780,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 126,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"It began by charging well. But after a while it would start to flash when I placed my phone on it and not charge.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"No matter what I did, remove and replace phone, shift and turn phone, unplug and replug the charger, it would not start charging my phone.\"}]}"
+}

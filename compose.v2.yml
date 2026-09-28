@@ -1,0 +1,81 @@
+name: insight-v2
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${PGDATABASE:-insight}
+      POSTGRES_USER: ${PGUSER:-insight}
+      POSTGRES_PASSWORD: ${INSIGHT_DB_PASSWORD:?set INSIGHT_DB_PASSWORD}
+    volumes: ["pgdata:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:-insight} -d ${PGDATABASE:-insight}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:7.4
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction", "--requirepass", "${INSIGHT_REDIS_PASSWORD:?set INSIGHT_REDIS_PASSWORD}"]
+    volumes: ["redisdata:/data"]
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.v2
+    restart: unless-stopped
+    env_file: .env.local
+    environment:
+      PYTHONPATH: /app/backend
+      DJANGO_SETTINGS_MODULE: config.settings
+      LOGIN_TRUSTED_PROXY_COUNT: "1"
+      PGHOST: postgres
+      PGPORT: "5432"
+      CELERY_BROKER_URL: redis://:${INSIGHT_REDIS_PASSWORD}@redis:6379/0
+      INSIGHT_STORAGE_ROOT: /data/storage
+    command: ["/bin/sh", "-c", "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2 --timeout 120"]
+    volumes: ["appdata:/data"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_started}
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.v2
+    restart: unless-stopped
+    env_file: .env.local
+    environment:
+      PYTHONPATH: /app/backend
+      DJANGO_SETTINGS_MODULE: config.settings
+      PGHOST: postgres
+      PGPORT: "5432"
+      CELERY_BROKER_URL: redis://:${INSIGHT_REDIS_PASSWORD}@redis:6379/0
+      INSIGHT_STORAGE_ROOT: /data/storage
+    command: ["/app/backend/.venv/bin/celery", "-A", "config", "worker", "--loglevel=INFO", "--concurrency=2"]
+    volumes: ["appdata:/data"]
+    depends_on: [api]
+  beat:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.v2
+    restart: unless-stopped
+    env_file: .env.local
+    environment:
+      PYTHONPATH: /app/backend
+      DJANGO_SETTINGS_MODULE: config.settings
+      PGHOST: postgres
+      PGPORT: "5432"
+      CELERY_BROKER_URL: redis://:${INSIGHT_REDIS_PASSWORD}@redis:6379/0
+    command: ["/app/backend/.venv/bin/celery", "-A", "config", "beat", "--loglevel=INFO", "--schedule=/data/celerybeat-schedule"]
+    volumes: ["appdata:/data"]
+    depends_on: [api]
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.v2
+    restart: unless-stopped
+    ports: ["127.0.0.1:8080:80"]
+    depends_on: [api]
+volumes:
+  pgdata:
+  redisdata:
+  appdata:

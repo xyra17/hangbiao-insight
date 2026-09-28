@@ -1,0 +1,216 @@
+{
+  "review_id": "5b48a2757ddb597497427018890dff48c4873d5c",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "1f33e75e-7192-447a-b8d1-eabbec665bec",
+  "raw_response": {
+    "id": "1f33e75e-7192-447a-b8d1-eabbec665bec",
+    "created_at": 1789211803.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "9259d906-fc28-449b-ac2c-5dc3d9fb953d",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only final JSON. Need extract claims. Let's parse review.\n\nSource: \"Broke & started peeling off within first 6 months of use!\\nI have used another brand of glass protectors on all my cell phones in the past but bought this one because it was cheaper. You do get what you pay for! This protector cracked in 3 places within 6 months AND it has started peeling up on the edges! I NEVER had those problems with the other brand I used!\"\n\nNeed claims product-review semantic claims. Taxonomy. Product likely screen protector glass. Claims:\n1 cracked in 3 places within 6 months -> reliability_durability / cracking_breakage, negative. evidence exact: \"This protector cracked in 3 places within 6 months\" maybe continuous.\n2 started peeling up on edges -> usability_installation? bubbles_adhesion? Or reliability_durability wear_damage? Peeling off likely bubbles_adhesion? Taxonomy usability_installation includes bubbles_adhesion. But peeling edges could be adhesion issue. Also title \"started peeling off within first 6 months of use\" evidence. Primary usability_installation, secondary bubbles_adhesion, negative. Or reliability_durability / wear_damage. Need decide. Since \"peeling up on the edges\" is adhesion. Use usability_installation/bubbles_adhesion? It says bubbles_adhesion, perhaps includes adhesion issues. Negative.\n3 cheaper / you get what you pay for -> price_value? It implies lower price but poor value. \"bought this one because it was cheaper. You do get what you pay for!\" Could be convenience_value / price_value negative? It says cheaper, but \"you get what you pay for\" negative value. Evidence span exact maybe \"bought this one because it was cheaper. You do get what you pay for!\" This is a claim about price/value. Polarity negative. Primary convenience_value secondary price_value.\n4 Broke within first 6 months? Title says Broke & started peeling... Source text starts \"Broke & started peeling off within first 6 months of use!\" This is same as? It mentions Broke general. Could be reliability_durability / stopped_working? or cracking_breakage? \"Broke\" but then cracked. We can include one for \"Broke...\"? Maybe claim: reliability_durability / cracking_breakage negative evidence \"Broke & started peeling off within first 6 months of use!\" But that contains peeling too. Or \"Broke\" ambiguous. Need avoid duplicate? The title is part source_text. We can extract claims from entire source_text. It starts with \"Broke & started peeling off within first 6 months of use!\" That includes break and peeling. But later details. Maybe claim for breaking: reliability_durability/cracking_breakage negative evidence \"Broke & started peeling off within first 6 months of use!\" But evidence span must be continuous. \"Broke\" alone exact? Could be \"Broke\" but too short? minLength 1. But \"Broke & started peeling...\" includes both break and peeling.\nExtract \"This protector cracked in 3 places within 6 months\" definitely cracking_breakage.\nExtract \"started peeling up on the edges\" maybe wear_damage or bubbles_adhesion.\nAlso \"I NEVER had those problems with the other brand I used!\" This is comparative brand reliability? Probably not product claim? It refers to previous brand no problems, not this product. Could indicate negative comparison? But no taxonomy for brand comparison. Maybe not claim.\n\nNeed exactly one valid primary/secondary pair. For each claim independently polarity.\n\nNeed output JSON only. Need decide whether include price claim. It says bought because cheaper. \"You do get what you pay for!\" This is a value judgment. Primary convenience_value, secondary price_value, negative. Evidence exact continuous substring from source_text. We can use \"bought this one because it was cheaper. You do get what you pay for!\" It's continuous. Yes.\n\nNeed careful exact substring. Source text has newline. We can choose substring from text. Need exact. Could include \"This protector cracked in 3 places within 6 months\" yes substring exists.\n\"it has started peeling up on the edges\" source says \"AND it has started peeling up on the edges!\" We can use \"it has started peeling up on the edges\" exact continuous. Polarity negative. Primary usability_installation? secondary bubbles_adhesion. Is \"peeling up on edges\" adhesion issue, not bubbles. It could be \"wear_damage\". Which is more appropriate? The taxonomy includes bubbles_adhesion under usability_installation, likely for screen protector installation issues like bubbles and adhesion. Peeling edges is adhesion problem. So secondary bubbles_adhesion. Or reliability_durability/wear_damage? \"started peeling off within first 6 months\" is durability? It started peeling after use. Hmm.\n\nLet's infer intended. Product is screen protector. Claims likely:\n- cracked in 3 places within 6 months -> reliability_durability/cracking_breakage negative.\n- started peeling up on edges -> usability_installation/bubbles_adhesion negative.\n- cheaper, you get what you pay for -> convenience_value/price_value negative.\n- Broke within first 6 months -> reliability_durability/stopped_working? But \"Broke\" not necessarily stopped working? For screen protector, broke = cracked. We can avoid separate because cracked covers.\nTitle first phrase \"Broke & started peeling off within first 6 months of use!\" Could have two claims? But already covered by later specific.\nMaybe \"Broke\" claim with evidence \"Broke\" primary reliability_durability secondary cracking_breakage negative. But duplicate with cracked. Could include both? Review may contain multiple claims. The schema doesn't prohibit duplicate same topic. But we should avoid over-extraction. The first sentence says Broke & started peeling off within first 6 months. Later elaborates. Could extract one comprehensive claim? For \"Broke\" and \"peeling off\" combined cannot have one secondary. So either separate or skip first as summary. Usually extract all distinct semantic claims. The later \"cracked in 3 places within 6 months\" is specific break claim. \"peeling up edges\" specific peeling claim. So skip first summary to avoid duplicate.\n\nNeed consider \"within first 6 months\" also lifespan? The claim cracked within 6 months indicates short lifespan? But taxonomy reliability_durability has short_lifespan. However cracking_breakage more specific. We choose cracking_breakage. Polarity negative.\n\nPotential price claim: \"You do get what you pay for!\" Could be negative value. Evidence span should maybe include \"bought this one because it was cheaper. You do get what you pay for!\" exact. It includes newline? no. It is in source: \"I have used another brand... but bought this one because it was cheaper. You do get what you pay for!\" So continuous substring \"bought this one because it was cheaper. You do get what you pay for!\" yes.\nPrimary convenience_value secondary price_value negative. Could polarity be negative? It says cheaper but result bad, get what pay for implies low quality due to low price. Negative.\n\nNeed maybe claim about material build quality? \"glass protectors\" no.\n\nLet's ensure JSON schema: {\"claims\":[...]} exactly. No extra.\n\nNeed evidence_span exact continuous substring. We must copy exactly. For cracked: source: \"This protector cracked in 3 places within 6 months AND it has started peeling up on the edges!\" The substring \"This protector cracked in 3 places within 6 months\" does not include AND. Exact? Source has \"This protector cracked in 3 places within 6 months AND it has...\" Yes substring before AND. Good.\nFor peeling: \"it has started peeling up on the edges\" exists? Source: \"AND it has started peeling up on the edges!\" Yes substring. Lowercase it. Good.\nFor price: \"bought this one because it was cheaper. You do get what you pay for!\" Source: \"bought this one because it was cheaper. You do get what you pay for!\" yes.\n\nNeed maybe include \"Broke & started peeling off within first 6 months of use!\" as claim? It is exact. But if include, what secondary? Could be reliability_durability/cracking_breakage negative for broke. Evidence span just \"Broke\" or \"Broke & started peeling off...\" But if evidence includes peeling, topic mismatch. Could use \"Broke & started peeling off within first 6 months of use!\" primary reliability_durability secondary cracking_breakage mixed? Because includes break negative and peeling negative. But primary one. However over-extract. I think skip.\n\nNeed decide on peeling topic. Let's revisit taxonomy: usability_installation: [\"positioning_alignment\", \"installation_difficulty\", \"bubbles_adhesion\", \"ease_of_use\", \"status_indicator_feedback\", \"installation_accessories\"]. \"peeling up on edges\" is adhesion issue. Yes.\n\nCould also be reliability_durability/wear_damage. But \"peeling off\" is more adhesion. The title says \"Broke & started peeling off within first 6 months of use!\" This is durability. But specific \"peeling up on the edges\" due to adhesion. Which is expected? For screen protectors, peeling edges often attributed to adhesion failure. I'll choose usability_installation/bubbles_adhesion.\n\nNeed polarity for \"cracked in 3 places\" negative. Peeling negative. Price negative.\n\nNeed ensure no star rating inference; we didn't.\n\nFinal JSON with claims array three objects. Need exactly fields. Use double quotes. No markdown.\n\nLet's produce.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "1f33e75e-7192-447a-b8d1-eabbec665bec-0",
+        "status": "completed"
+      },
+      {
+        "id": "1e3b3da1-e2a9-41aa-8710-85149780bd93",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"This protector cracked in 3 places within 6 months\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"it has started peeling up on the edges\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"bought this one because it was cheaper. You do get what you pay for!\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211813.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1107,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2164,
+      "output_tokens_details": {
+        "reasoning_tokens": 2034
+      },
+      "total_tokens": 3271
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"This protector cracked in 3 places within 6 months\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"it has started peeling up on the edges\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"bought this one because it was cheaper. You do get what you pay for!\"}]}"
+}

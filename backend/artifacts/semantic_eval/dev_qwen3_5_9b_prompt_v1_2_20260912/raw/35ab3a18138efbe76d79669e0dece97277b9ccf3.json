@@ -1,0 +1,50 @@
+{
+  "review_id": "35ab3a18138efbe76d79669e0dece97277b9ccf3",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-veu2o9eb7vr2sspmvj9td",
+  "raw_response": {
+    "id": "chatcmpl-veu2o9eb7vr2sspmvj9td",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"it still wirelessly charge with Yootech!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"it seemed to charge quickly\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"My case will work on this Yootech charger\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"it is extremely nitpicky about finding the \\\"spot\\\" to charge which took several attempts and required patience\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"positive\", \"evidence_span\": \"I have a magnetic phone holder in my car so I glued the magnet at bottom and it does not disrupt charging at all\"}]}"
+        }
+      }
+    ],
+    "created": 1789189476,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 231,
+      "prompt_tokens": 816,
+      "total_tokens": 1047,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 230,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"it still wirelessly charge with Yootech!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"it seemed to charge quickly\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"My case will work on this Yootech charger\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"it is extremely nitpicky about finding the \\\"spot\\\" to charge which took several attempts and required patience\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"positive\", \"evidence_span\": \"I have a magnetic phone holder in my car so I glued the magnet at bottom and it does not disrupt charging at all\"}]}"
+}

@@ -1,0 +1,443 @@
+{"timestamp": "2026-09-12T04:48:09.427921+00:00", "event_type": "run_started", "review_id": null, "split": "dev", "review_count": 216, "actual_provider_config": {"provider": "lmstudio", "model": "stage55a-qwen3.5-9b", "api_name": "chat_completions_compatible", "reasoning_effort": "low", "structured_output": "json_schema", "strict": true, "prompt_version": "semantic-prompt-v1.2", "taxonomy_version": "taxonomy-v1.1", "max_attempts": 2, "timeout_seconds": 180.0, "base_url": "http://127.0.0.1:1234/v1"}, "production_provider_config": {"provider": "openai", "model": "gpt-5.6-sol", "api_name": "responses", "reasoning_effort": "low", "structured_output": "json_schema", "strict": true, "prompt_version": "semantic-prompt-v1.0", "taxonomy_version": "taxonomy-v1.1", "max_attempts": 3, "timeout_seconds": 120.0, "base_url": null}}
+{"timestamp": "2026-09-12T04:48:09.429168+00:00", "event_type": "review_started", "review_id": "eaa6931009f426797ea88bab22c0745a8b7283f4", "index": 1, "total": 216}
+{"timestamp": "2026-09-12T04:48:19.596671+00:00", "event_type": "review_completed", "review_id": "eaa6931009f426797ea88bab22c0745a8b7283f4", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:19.597984+00:00", "event_type": "review_started", "review_id": "5e101450e5c3205e7d21a7e327e4a1f3fee72850", "index": 2, "total": 216}
+{"timestamp": "2026-09-12T04:48:26.089742+00:00", "event_type": "review_completed", "review_id": "5e101450e5c3205e7d21a7e327e4a1f3fee72850", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:26.091762+00:00", "event_type": "review_started", "review_id": "be450ff4ed12fda4179e1bf493420d66579bd692", "index": 3, "total": 216}
+{"timestamp": "2026-09-12T04:48:32.609975+00:00", "event_type": "review_completed", "review_id": "be450ff4ed12fda4179e1bf493420d66579bd692", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:32.611651+00:00", "event_type": "review_started", "review_id": "66609f9475a527c3ce1c97cadf30d4fa2d125c6b", "index": 4, "total": 216}
+{"timestamp": "2026-09-12T04:48:39.825147+00:00", "event_type": "review_completed", "review_id": "66609f9475a527c3ce1c97cadf30d4fa2d125c6b", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:39.826428+00:00", "event_type": "review_started", "review_id": "df857089fd2cc6f84e45c116e50d645786af9a1d", "index": 5, "total": 216}
+{"timestamp": "2026-09-12T04:48:46.668357+00:00", "event_type": "review_completed", "review_id": "df857089fd2cc6f84e45c116e50d645786af9a1d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:46.669901+00:00", "event_type": "review_started", "review_id": "d7310f61d6b28acdd1ee57a37c32a8250f10a9a5", "index": 6, "total": 216}
+{"timestamp": "2026-09-12T04:48:53.523741+00:00", "event_type": "review_completed", "review_id": "d7310f61d6b28acdd1ee57a37c32a8250f10a9a5", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:48:53.525515+00:00", "event_type": "review_started", "review_id": "0e14ebb00a5cff1c77f7f4bfcd9a55baf3364778", "index": 7, "total": 216}
+{"timestamp": "2026-09-12T04:49:00.032024+00:00", "event_type": "review_completed", "review_id": "0e14ebb00a5cff1c77f7f4bfcd9a55baf3364778", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:00.032647+00:00", "event_type": "review_started", "review_id": "777bff30bad0db0cb90c66228602bdcff6633113", "index": 8, "total": 216}
+{"timestamp": "2026-09-12T04:49:06.514651+00:00", "event_type": "review_completed", "review_id": "777bff30bad0db0cb90c66228602bdcff6633113", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:06.515752+00:00", "event_type": "review_started", "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d", "index": 9, "total": 216}
+{"timestamp": "2026-09-12T04:49:13.019573+00:00", "event_type": "review_completed", "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:13.020794+00:00", "event_type": "review_started", "review_id": "3ce698e4defa882899602421165ce82981f3aa93", "index": 10, "total": 216}
+{"timestamp": "2026-09-12T04:49:22.230876+00:00", "event_type": "review_completed", "review_id": "3ce698e4defa882899602421165ce82981f3aa93", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:22.232578+00:00", "event_type": "review_started", "review_id": "4a230a2fa759dfa12ec713a86750577928e7db0d", "index": 11, "total": 216}
+{"timestamp": "2026-09-12T04:49:31.610463+00:00", "event_type": "review_completed", "review_id": "4a230a2fa759dfa12ec713a86750577928e7db0d", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:31.612190+00:00", "event_type": "review_started", "review_id": "34c2871251ec686ca4af9212293f1c190622b514", "index": 12, "total": 216}
+{"timestamp": "2026-09-12T04:49:38.109312+00:00", "event_type": "review_completed", "review_id": "34c2871251ec686ca4af9212293f1c190622b514", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:38.110691+00:00", "event_type": "review_started", "review_id": "d3d6f9b64b8214043e46671aea881bf488656ad4", "index": 13, "total": 216}
+{"timestamp": "2026-09-12T04:49:47.288058+00:00", "event_type": "review_completed", "review_id": "d3d6f9b64b8214043e46671aea881bf488656ad4", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:47.290326+00:00", "event_type": "review_started", "review_id": "0f7ef9475f539bc489897d9404719f93cc4f860e", "index": 14, "total": 216}
+{"timestamp": "2026-09-12T04:49:57.303954+00:00", "event_type": "review_completed", "review_id": "0f7ef9475f539bc489897d9404719f93cc4f860e", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:49:57.304444+00:00", "event_type": "review_started", "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015", "index": 15, "total": 216}
+{"timestamp": "2026-09-12T04:50:28.390385+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015", "prediction_id": "SP-cbd50d46b40a8127", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T04:50:28.390673+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015", "prediction_id": "SP-5ae432a5b3c7a9be", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T04:50:28.390798+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015", "prediction_id": "SP-46e2fbea10439528", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T04:50:28.390905+00:00", "event_type": "review_completed", "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015", "accepted": 3, "review_required": 0, "rejected": 3}
+{"timestamp": "2026-09-12T04:50:28.392240+00:00", "event_type": "review_started", "review_id": "58edc214302f3ba337ec37731a0a061329e7605d", "index": 16, "total": 216}
+{"timestamp": "2026-09-12T04:50:36.953775+00:00", "event_type": "review_completed", "review_id": "58edc214302f3ba337ec37731a0a061329e7605d", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:50:36.954864+00:00", "event_type": "review_started", "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218", "index": 17, "total": 216}
+{"timestamp": "2026-09-12T04:50:46.195057+00:00", "event_type": "review_completed", "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:50:46.196353+00:00", "event_type": "review_started", "review_id": "72ddaaf138564953d79efc5e72f65c49cfccfaaf", "index": 18, "total": 216}
+{"timestamp": "2026-09-12T04:50:55.404518+00:00", "event_type": "review_completed", "review_id": "72ddaaf138564953d79efc5e72f65c49cfccfaaf", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:50:55.406073+00:00", "event_type": "review_started", "review_id": "e8390f4fe30522ec20cee0e6d00da54f61773bcd", "index": 19, "total": 216}
+{"timestamp": "2026-09-12T04:51:04.718697+00:00", "event_type": "review_completed", "review_id": "e8390f4fe30522ec20cee0e6d00da54f61773bcd", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:04.719779+00:00", "event_type": "review_started", "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34", "index": 20, "total": 216}
+{"timestamp": "2026-09-12T04:51:16.335488+00:00", "event_type": "review_completed", "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34", "accepted": 2, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:16.336879+00:00", "event_type": "review_started", "review_id": "6e630bf2ae0256abb2a801befd2cafcbd680aa42", "index": 21, "total": 216}
+{"timestamp": "2026-09-12T04:51:33.198981+00:00", "event_type": "review_completed", "review_id": "6e630bf2ae0256abb2a801befd2cafcbd680aa42", "accepted": 4, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:33.200474+00:00", "event_type": "review_started", "review_id": "05fd1ff0bbb480011a11a37a9da9aa5390e1576e", "index": 22, "total": 216}
+{"timestamp": "2026-09-12T04:51:39.699784+00:00", "event_type": "review_completed", "review_id": "05fd1ff0bbb480011a11a37a9da9aa5390e1576e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:39.701475+00:00", "event_type": "review_started", "review_id": "9315a9d5abb2bece260180d03d5445250bf04310", "index": 23, "total": 216}
+{"timestamp": "2026-09-12T04:51:46.192786+00:00", "event_type": "review_completed", "review_id": "9315a9d5abb2bece260180d03d5445250bf04310", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:46.193881+00:00", "event_type": "review_started", "review_id": "d6b4a9093921c70626e93b5c3249e0123a50469f", "index": 24, "total": 216}
+{"timestamp": "2026-09-12T04:51:52.689365+00:00", "event_type": "review_completed", "review_id": "d6b4a9093921c70626e93b5c3249e0123a50469f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:51:52.690745+00:00", "event_type": "review_started", "review_id": "3e42cfcfd9bd7b8d722f94a1bafcad85e190ebf6", "index": 25, "total": 216}
+{"timestamp": "2026-09-12T04:52:02.740346+00:00", "event_type": "review_completed", "review_id": "3e42cfcfd9bd7b8d722f94a1bafcad85e190ebf6", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:02.741679+00:00", "event_type": "review_started", "review_id": "99a6c49bb68883248e68ebb53b6b053177eada76", "index": 26, "total": 216}
+{"timestamp": "2026-09-12T04:52:13.789153+00:00", "event_type": "review_completed", "review_id": "99a6c49bb68883248e68ebb53b6b053177eada76", "accepted": 2, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:13.792290+00:00", "event_type": "review_started", "review_id": "24dae0c0a49a215defee61bbee9f318269bfa251", "index": 27, "total": 216}
+{"timestamp": "2026-09-12T04:52:22.765306+00:00", "event_type": "review_completed", "review_id": "24dae0c0a49a215defee61bbee9f318269bfa251", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:22.766425+00:00", "event_type": "review_started", "review_id": "6bc641cdbd5442a5efed7aecd0246553d49e19d1", "index": 28, "total": 216}
+{"timestamp": "2026-09-12T04:52:29.262551+00:00", "event_type": "review_completed", "review_id": "6bc641cdbd5442a5efed7aecd0246553d49e19d1", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:29.263888+00:00", "event_type": "review_started", "review_id": "fc1a2fe06544de6e27ad7f71b017a47cfc7b93ec", "index": 29, "total": 216}
+{"timestamp": "2026-09-12T04:52:37.896936+00:00", "event_type": "review_completed", "review_id": "fc1a2fe06544de6e27ad7f71b017a47cfc7b93ec", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:37.898003+00:00", "event_type": "review_started", "review_id": "4153090f727ea3fd98e58769408e168a81929d6a", "index": 30, "total": 216}
+{"timestamp": "2026-09-12T04:52:58.447863+00:00", "event_type": "review_completed", "review_id": "4153090f727ea3fd98e58769408e168a81929d6a", "accepted": 5, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:52:58.449483+00:00", "event_type": "review_started", "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872", "index": 31, "total": 216}
+{"timestamp": "2026-09-12T04:53:09.419420+00:00", "event_type": "review_completed", "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872", "accepted": 2, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:09.420731+00:00", "event_type": "review_started", "review_id": "8eafc8ad868a7b7fe41c14155b0fa79d27b6e8d3", "index": 32, "total": 216}
+{"timestamp": "2026-09-12T04:53:15.954648+00:00", "event_type": "review_completed", "review_id": "8eafc8ad868a7b7fe41c14155b0fa79d27b6e8d3", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:15.956914+00:00", "event_type": "review_started", "review_id": "3a604bb0e3fddbbf84c714490ab9eaaf98b62496", "index": 33, "total": 216}
+{"timestamp": "2026-09-12T04:53:26.350543+00:00", "event_type": "review_completed", "review_id": "3a604bb0e3fddbbf84c714490ab9eaaf98b62496", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:26.351904+00:00", "event_type": "review_started", "review_id": "7e9df35e980af059bd7bf60448ad4683070cb7f5", "index": 34, "total": 216}
+{"timestamp": "2026-09-12T04:53:36.036784+00:00", "event_type": "review_completed", "review_id": "7e9df35e980af059bd7bf60448ad4683070cb7f5", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:36.038240+00:00", "event_type": "review_started", "review_id": "ac9ccf7baee6fbf9859cc2f4286782843d2c7e8e", "index": 35, "total": 216}
+{"timestamp": "2026-09-12T04:53:43.779245+00:00", "event_type": "review_completed", "review_id": "ac9ccf7baee6fbf9859cc2f4286782843d2c7e8e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:43.780658+00:00", "event_type": "review_started", "review_id": "75206c0c083b93a1f365673de970e60b87677276", "index": 36, "total": 216}
+{"timestamp": "2026-09-12T04:53:50.958951+00:00", "event_type": "review_completed", "review_id": "75206c0c083b93a1f365673de970e60b87677276", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:53:50.960247+00:00", "event_type": "review_started", "review_id": "2f226af24d9f7535cff0ba56ae40db740fde93d5", "index": 37, "total": 216}
+{"timestamp": "2026-09-12T04:54:01.894067+00:00", "event_type": "review_completed", "review_id": "2f226af24d9f7535cff0ba56ae40db740fde93d5", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:54:01.896264+00:00", "event_type": "review_started", "review_id": "0132917797a72770f3738d704055e55b6e77fd21", "index": 38, "total": 216}
+{"timestamp": "2026-09-12T04:54:14.443409+00:00", "event_type": "review_completed", "review_id": "0132917797a72770f3738d704055e55b6e77fd21", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:54:14.458241+00:00", "event_type": "review_started", "review_id": "f3a77ed85eda0fc142f29315f7de03db98b21c46", "index": 39, "total": 216}
+{"timestamp": "2026-09-12T04:54:26.606846+00:00", "event_type": "review_completed", "review_id": "f3a77ed85eda0fc142f29315f7de03db98b21c46", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:54:26.609202+00:00", "event_type": "review_started", "review_id": "3f618837e0fbd622b853c6e4b558367302a00a47", "index": 40, "total": 216}
+{"timestamp": "2026-09-12T04:54:37.549160+00:00", "event_type": "review_completed", "review_id": "3f618837e0fbd622b853c6e4b558367302a00a47", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:54:37.550477+00:00", "event_type": "review_started", "review_id": "ec1a444d91a2622ea536d7d2bdef5bf0cff68b90", "index": 41, "total": 216}
+{"timestamp": "2026-09-12T04:54:51.245358+00:00", "event_type": "review_completed", "review_id": "ec1a444d91a2622ea536d7d2bdef5bf0cff68b90", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:54:51.246520+00:00", "event_type": "review_started", "review_id": "93962cf3339e99078fa34842e7e90518b3591da2", "index": 42, "total": 216}
+{"timestamp": "2026-09-12T04:55:03.063828+00:00", "event_type": "review_completed", "review_id": "93962cf3339e99078fa34842e7e90518b3591da2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:03.067241+00:00", "event_type": "review_started", "review_id": "dc955b45b27e1ba939ac60f3bfe245880fcb3f28", "index": 43, "total": 216}
+{"timestamp": "2026-09-12T04:55:12.936275+00:00", "event_type": "review_completed", "review_id": "dc955b45b27e1ba939ac60f3bfe245880fcb3f28", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:12.937758+00:00", "event_type": "review_started", "review_id": "01048e9d0d65ea22ee7101a6fe8a422cab5ddc1f", "index": 44, "total": 216}
+{"timestamp": "2026-09-12T04:55:21.872050+00:00", "event_type": "review_completed", "review_id": "01048e9d0d65ea22ee7101a6fe8a422cab5ddc1f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:21.873694+00:00", "event_type": "review_started", "review_id": "3fbd725d920a2f818bd4b7bbb2e643789686fb4b", "index": 45, "total": 216}
+{"timestamp": "2026-09-12T04:55:32.989704+00:00", "event_type": "review_completed", "review_id": "3fbd725d920a2f818bd4b7bbb2e643789686fb4b", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:32.991076+00:00", "event_type": "review_started", "review_id": "8984a0f300aa248e0d8b916963c23eb47da7a7c9", "index": 46, "total": 216}
+{"timestamp": "2026-09-12T04:55:40.527393+00:00", "event_type": "review_completed", "review_id": "8984a0f300aa248e0d8b916963c23eb47da7a7c9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:40.528702+00:00", "event_type": "review_started", "review_id": "4a32bbb7e05bf2364623979f2e885810124739e7", "index": 47, "total": 216}
+{"timestamp": "2026-09-12T04:55:47.403647+00:00", "event_type": "review_completed", "review_id": "4a32bbb7e05bf2364623979f2e885810124739e7", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:47.404983+00:00", "event_type": "review_started", "review_id": "97b2231ff5be6238f725f1f954fea29ea2032972", "index": 48, "total": 216}
+{"timestamp": "2026-09-12T04:55:54.214233+00:00", "event_type": "review_completed", "review_id": "97b2231ff5be6238f725f1f954fea29ea2032972", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:55:54.215792+00:00", "event_type": "review_started", "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6", "index": 49, "total": 216}
+{"timestamp": "2026-09-12T04:56:10.465784+00:00", "event_type": "review_completed", "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:10.467732+00:00", "event_type": "review_started", "review_id": "2d468bd487220baa6df8a17ecc24d8f2326a1375", "index": 50, "total": 216}
+{"timestamp": "2026-09-12T04:56:20.307506+00:00", "event_type": "review_completed", "review_id": "2d468bd487220baa6df8a17ecc24d8f2326a1375", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:20.308934+00:00", "event_type": "review_started", "review_id": "f28c69874579f37fe0088bb33835a94213653cdb", "index": 51, "total": 216}
+{"timestamp": "2026-09-12T04:56:27.146314+00:00", "event_type": "review_completed", "review_id": "f28c69874579f37fe0088bb33835a94213653cdb", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:27.147579+00:00", "event_type": "review_started", "review_id": "0b8042f308df4906faa175cc0d0c9b870f2ce9d9", "index": 52, "total": 216}
+{"timestamp": "2026-09-12T04:56:33.611745+00:00", "event_type": "review_completed", "review_id": "0b8042f308df4906faa175cc0d0c9b870f2ce9d9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:33.614457+00:00", "event_type": "review_started", "review_id": "43eedc7f0477a8f8a95bb7f52702ededc3882514", "index": 53, "total": 216}
+{"timestamp": "2026-09-12T04:56:40.093972+00:00", "event_type": "review_completed", "review_id": "43eedc7f0477a8f8a95bb7f52702ededc3882514", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:40.095286+00:00", "event_type": "review_started", "review_id": "bfae10c94685d4d519dd1a8156f1474c5d58ef14", "index": 54, "total": 216}
+{"timestamp": "2026-09-12T04:56:46.576399+00:00", "event_type": "review_completed", "review_id": "bfae10c94685d4d519dd1a8156f1474c5d58ef14", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:46.577541+00:00", "event_type": "review_started", "review_id": "2a24d88384c7d0ff70ed3069074096281b4b1bd9", "index": 55, "total": 216}
+{"timestamp": "2026-09-12T04:56:53.759731+00:00", "event_type": "review_completed", "review_id": "2a24d88384c7d0ff70ed3069074096281b4b1bd9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:56:53.761368+00:00", "event_type": "review_started", "review_id": "14a9438aafecf0c4e8bb921376d824d26bd83a6b", "index": 56, "total": 216}
+{"timestamp": "2026-09-12T04:57:00.278948+00:00", "event_type": "review_completed", "review_id": "14a9438aafecf0c4e8bb921376d824d26bd83a6b", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:00.280414+00:00", "event_type": "review_started", "review_id": "4ad343d395858c04e076dfdd5c155d0e545d4fe5", "index": 57, "total": 216}
+{"timestamp": "2026-09-12T04:57:06.756131+00:00", "event_type": "review_completed", "review_id": "4ad343d395858c04e076dfdd5c155d0e545d4fe5", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:06.757822+00:00", "event_type": "review_started", "review_id": "6610ada1af914daff0f3b5183febafceb50108b2", "index": 58, "total": 216}
+{"timestamp": "2026-09-12T04:57:13.236223+00:00", "event_type": "review_completed", "review_id": "6610ada1af914daff0f3b5183febafceb50108b2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:13.238074+00:00", "event_type": "review_started", "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8", "index": 59, "total": 216}
+{"timestamp": "2026-09-12T04:57:19.758411+00:00", "event_type": "review_completed", "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:19.759500+00:00", "event_type": "review_started", "review_id": "40b396c6160aa4729f5fecad258ac6f0c9f86a3e", "index": 60, "total": 216}
+{"timestamp": "2026-09-12T04:57:28.588896+00:00", "event_type": "review_completed", "review_id": "40b396c6160aa4729f5fecad258ac6f0c9f86a3e", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:28.590649+00:00", "event_type": "review_started", "review_id": "cdb6a3134606332ebd06968bbc4e8e33a0e69631", "index": 61, "total": 216}
+{"timestamp": "2026-09-12T04:57:37.416574+00:00", "event_type": "review_completed", "review_id": "cdb6a3134606332ebd06968bbc4e8e33a0e69631", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:37.418256+00:00", "event_type": "review_started", "review_id": "154d61275b10c550f0cab3d68be144183c227283", "index": 62, "total": 216}
+{"timestamp": "2026-09-12T04:57:43.936328+00:00", "event_type": "review_completed", "review_id": "154d61275b10c550f0cab3d68be144183c227283", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:43.937429+00:00", "event_type": "review_started", "review_id": "c9d04765bcb498d20a9fe71e80144de83ef2023f", "index": 63, "total": 216}
+{"timestamp": "2026-09-12T04:57:50.414556+00:00", "event_type": "review_completed", "review_id": "c9d04765bcb498d20a9fe71e80144de83ef2023f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:50.416208+00:00", "event_type": "review_started", "review_id": "58510434983807ff6fa76502768864ccf3ccb301", "index": 64, "total": 216}
+{"timestamp": "2026-09-12T04:57:56.913912+00:00", "event_type": "review_completed", "review_id": "58510434983807ff6fa76502768864ccf3ccb301", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:57:56.915319+00:00", "event_type": "review_started", "review_id": "0840c321bab59e98a52c37c2f30c8f8d0976ee37", "index": 65, "total": 216}
+{"timestamp": "2026-09-12T04:58:03.416913+00:00", "event_type": "review_completed", "review_id": "0840c321bab59e98a52c37c2f30c8f8d0976ee37", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:03.418272+00:00", "event_type": "review_started", "review_id": "3c48427c614401bf42ad43d4d65efd60e4b3679d", "index": 66, "total": 216}
+{"timestamp": "2026-09-12T04:58:09.766491+00:00", "event_type": "review_completed", "review_id": "3c48427c614401bf42ad43d4d65efd60e4b3679d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:09.767780+00:00", "event_type": "review_started", "review_id": "9a84f6d58b680b1cbc05e188429e4e6f5e0ffa26", "index": 67, "total": 216}
+{"timestamp": "2026-09-12T04:58:16.213665+00:00", "event_type": "review_completed", "review_id": "9a84f6d58b680b1cbc05e188429e4e6f5e0ffa26", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:16.215191+00:00", "event_type": "review_started", "review_id": "6b4ca875091be12f3abfb0558adb67c4d5040809", "index": 68, "total": 216}
+{"timestamp": "2026-09-12T04:58:22.704575+00:00", "event_type": "review_completed", "review_id": "6b4ca875091be12f3abfb0558adb67c4d5040809", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:22.706047+00:00", "event_type": "review_started", "review_id": "702617600a9e17b157fc8cfc9505ecac43827aca", "index": 69, "total": 216}
+{"timestamp": "2026-09-12T04:58:28.867509+00:00", "event_type": "review_completed", "review_id": "702617600a9e17b157fc8cfc9505ecac43827aca", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:28.869274+00:00", "event_type": "review_started", "review_id": "76ee59242d03cb51f8147dae23ee828d0a6ad33b", "index": 70, "total": 216}
+{"timestamp": "2026-09-12T04:58:39.818929+00:00", "event_type": "review_completed", "review_id": "76ee59242d03cb51f8147dae23ee828d0a6ad33b", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:39.820363+00:00", "event_type": "review_started", "review_id": "6f585a53836cd03b3040107c729c76f3ee86d087", "index": 71, "total": 216}
+{"timestamp": "2026-09-12T04:58:46.100690+00:00", "event_type": "review_completed", "review_id": "6f585a53836cd03b3040107c729c76f3ee86d087", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:58:46.101946+00:00", "event_type": "review_started", "review_id": "85dca0815ad7c38a7f8161a8d6c9c19f7ac5ddda", "index": 72, "total": 216}
+{"timestamp": "2026-09-12T04:59:01.558957+00:00", "event_type": "review_completed", "review_id": "85dca0815ad7c38a7f8161a8d6c9c19f7ac5ddda", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:01.560535+00:00", "event_type": "review_started", "review_id": "9bceaaee2f74d521b539aa6c2f24457fb93ee781", "index": 73, "total": 216}
+{"timestamp": "2026-09-12T04:59:07.670369+00:00", "event_type": "review_completed", "review_id": "9bceaaee2f74d521b539aa6c2f24457fb93ee781", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:07.671623+00:00", "event_type": "review_started", "review_id": "04b150ee582a97083a322a4149ae66c681b8ba9f", "index": 74, "total": 216}
+{"timestamp": "2026-09-12T04:59:21.138371+00:00", "event_type": "review_completed", "review_id": "04b150ee582a97083a322a4149ae66c681b8ba9f", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:21.139991+00:00", "event_type": "review_started", "review_id": "98d6039deb0b1ec84b5797703a3243f043d04ada", "index": 75, "total": 216}
+{"timestamp": "2026-09-12T04:59:30.046106+00:00", "event_type": "review_completed", "review_id": "98d6039deb0b1ec84b5797703a3243f043d04ada", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:30.047460+00:00", "event_type": "review_started", "review_id": "ccfa26356593b49e1fee3dca410eefc270c0e4e7", "index": 76, "total": 216}
+{"timestamp": "2026-09-12T04:59:36.160150+00:00", "event_type": "review_completed", "review_id": "ccfa26356593b49e1fee3dca410eefc270c0e4e7", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:36.161850+00:00", "event_type": "review_started", "review_id": "1fd50f3e570fab92a6f306e3e6b3b9219b0a1bdc", "index": 77, "total": 216}
+{"timestamp": "2026-09-12T04:59:42.268438+00:00", "event_type": "review_completed", "review_id": "1fd50f3e570fab92a6f306e3e6b3b9219b0a1bdc", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:42.269969+00:00", "event_type": "review_started", "review_id": "293253165f983eb3382c4b7b2d05ad826edbbf1c", "index": 78, "total": 216}
+{"timestamp": "2026-09-12T04:59:48.388402+00:00", "event_type": "review_completed", "review_id": "293253165f983eb3382c4b7b2d05ad826edbbf1c", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:48.389747+00:00", "event_type": "review_started", "review_id": "d260f4ef28bf7445978541dff9f7986624f75439", "index": 79, "total": 216}
+{"timestamp": "2026-09-12T04:59:54.504652+00:00", "event_type": "review_completed", "review_id": "d260f4ef28bf7445978541dff9f7986624f75439", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T04:59:54.506004+00:00", "event_type": "review_started", "review_id": "2869b508706bc6a0433fe9849fc96109f687dac2", "index": 80, "total": 216}
+{"timestamp": "2026-09-12T05:00:00.635931+00:00", "event_type": "review_completed", "review_id": "2869b508706bc6a0433fe9849fc96109f687dac2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:00.637195+00:00", "event_type": "review_started", "review_id": "b4260a629e7abbdbb3754988441e82a66091b07f", "index": 81, "total": 216}
+{"timestamp": "2026-09-12T05:00:06.760658+00:00", "event_type": "review_completed", "review_id": "b4260a629e7abbdbb3754988441e82a66091b07f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:06.763314+00:00", "event_type": "review_started", "review_id": "f9b10c45d524579eafcfb93737796b1b9d186045", "index": 82, "total": 216}
+{"timestamp": "2026-09-12T05:00:13.311125+00:00", "event_type": "review_completed", "review_id": "f9b10c45d524579eafcfb93737796b1b9d186045", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:13.312471+00:00", "event_type": "review_started", "review_id": "a7e677e969c4ceaf7fd6a32366865a941ddd6e2e", "index": 83, "total": 216}
+{"timestamp": "2026-09-12T05:00:19.450325+00:00", "event_type": "review_completed", "review_id": "a7e677e969c4ceaf7fd6a32366865a941ddd6e2e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:19.451846+00:00", "event_type": "review_started", "review_id": "5a940c18a1d8d96b6a75c319bf31bc7b55fb781f", "index": 84, "total": 216}
+{"timestamp": "2026-09-12T05:00:25.602651+00:00", "event_type": "review_completed", "review_id": "5a940c18a1d8d96b6a75c319bf31bc7b55fb781f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:25.603871+00:00", "event_type": "review_started", "review_id": "3562835f440f3982204997669d0fc7f72b040d25", "index": 85, "total": 216}
+{"timestamp": "2026-09-12T05:00:31.725936+00:00", "event_type": "review_completed", "review_id": "3562835f440f3982204997669d0fc7f72b040d25", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:31.727605+00:00", "event_type": "review_started", "review_id": "400932bb943e0aa5b68b9a6fb497c91ae2bc15ee", "index": 86, "total": 216}
+{"timestamp": "2026-09-12T05:00:37.917426+00:00", "event_type": "review_completed", "review_id": "400932bb943e0aa5b68b9a6fb497c91ae2bc15ee", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:37.920706+00:00", "event_type": "review_started", "review_id": "3e8ed3c20a26bba89d01e0c8d3debb34b392ac0d", "index": 87, "total": 216}
+{"timestamp": "2026-09-12T05:00:44.095541+00:00", "event_type": "review_completed", "review_id": "3e8ed3c20a26bba89d01e0c8d3debb34b392ac0d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:44.097088+00:00", "event_type": "review_started", "review_id": "74733ba62a8883ad126d5fa44283e60e6f673979", "index": 88, "total": 216}
+{"timestamp": "2026-09-12T05:00:50.221733+00:00", "event_type": "review_completed", "review_id": "74733ba62a8883ad126d5fa44283e60e6f673979", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:50.223507+00:00", "event_type": "review_started", "review_id": "8850a6b87e9db38594182deda5119c262e049040", "index": 89, "total": 216}
+{"timestamp": "2026-09-12T05:00:58.723670+00:00", "event_type": "review_completed", "review_id": "8850a6b87e9db38594182deda5119c262e049040", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:00:58.725608+00:00", "event_type": "review_started", "review_id": "1dd0bbb74b4bee1c0bb7b83cc3263927f1059cb2", "index": 90, "total": 216}
+{"timestamp": "2026-09-12T05:01:06.247806+00:00", "event_type": "review_completed", "review_id": "1dd0bbb74b4bee1c0bb7b83cc3263927f1059cb2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:06.249312+00:00", "event_type": "review_started", "review_id": "098c05f4cde79cd4b1a83868e1a08a362f0322f5", "index": 91, "total": 216}
+{"timestamp": "2026-09-12T05:01:12.387930+00:00", "event_type": "review_completed", "review_id": "098c05f4cde79cd4b1a83868e1a08a362f0322f5", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:12.389194+00:00", "event_type": "review_started", "review_id": "1c8eeda74c44d7194794915cdf3a0563b71de4f0", "index": 92, "total": 216}
+{"timestamp": "2026-09-12T05:01:21.894252+00:00", "event_type": "review_completed", "review_id": "1c8eeda74c44d7194794915cdf3a0563b71de4f0", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:21.896617+00:00", "event_type": "review_started", "review_id": "2a24f05e3bb44271551c5202e8e9ab6923afdad2", "index": 93, "total": 216}
+{"timestamp": "2026-09-12T05:01:28.010331+00:00", "event_type": "review_completed", "review_id": "2a24f05e3bb44271551c5202e8e9ab6923afdad2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:28.012396+00:00", "event_type": "review_started", "review_id": "ecbce53a8974ccab2831c2afc2804e2a19561ed0", "index": 94, "total": 216}
+{"timestamp": "2026-09-12T05:01:34.107429+00:00", "event_type": "review_completed", "review_id": "ecbce53a8974ccab2831c2afc2804e2a19561ed0", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:34.108915+00:00", "event_type": "review_started", "review_id": "4a702b13b23a1ddb760ce29c6acd98d1d20d8134", "index": 95, "total": 216}
+{"timestamp": "2026-09-12T05:01:40.246119+00:00", "event_type": "review_completed", "review_id": "4a702b13b23a1ddb760ce29c6acd98d1d20d8134", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:40.247437+00:00", "event_type": "review_started", "review_id": "93ca585ad8b449d24787c21fd3a03ea4c397af97", "index": 96, "total": 216}
+{"timestamp": "2026-09-12T05:01:46.761189+00:00", "event_type": "review_completed", "review_id": "93ca585ad8b449d24787c21fd3a03ea4c397af97", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:46.762578+00:00", "event_type": "review_started", "review_id": "f968f22ca16e5edfb128e9ae8091ea7c7dab95f7", "index": 97, "total": 216}
+{"timestamp": "2026-09-12T05:01:52.867687+00:00", "event_type": "review_completed", "review_id": "f968f22ca16e5edfb128e9ae8091ea7c7dab95f7", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:52.869477+00:00", "event_type": "review_started", "review_id": "e80d4ee5205cdf9109c9571a526d4a91978ff0f9", "index": 98, "total": 216}
+{"timestamp": "2026-09-12T05:01:59.329194+00:00", "event_type": "review_completed", "review_id": "e80d4ee5205cdf9109c9571a526d4a91978ff0f9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:01:59.330340+00:00", "event_type": "review_started", "review_id": "ff3ed157aa27a8fec1d685ecb38bf3ae7782b0fd", "index": 99, "total": 216}
+{"timestamp": "2026-09-12T05:02:14.736648+00:00", "event_type": "review_completed", "review_id": "ff3ed157aa27a8fec1d685ecb38bf3ae7782b0fd", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:14.738064+00:00", "event_type": "review_started", "review_id": "b7ce1bfc98273ef8dc0bba71d21cf217d7a4ede3", "index": 100, "total": 216}
+{"timestamp": "2026-09-12T05:02:21.210795+00:00", "event_type": "review_completed", "review_id": "b7ce1bfc98273ef8dc0bba71d21cf217d7a4ede3", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:21.212087+00:00", "event_type": "review_started", "review_id": "c9196b640b8e2cef897fd0f12aa27870f722bb93", "index": 101, "total": 216}
+{"timestamp": "2026-09-12T05:02:27.683165+00:00", "event_type": "review_completed", "review_id": "c9196b640b8e2cef897fd0f12aa27870f722bb93", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:27.684864+00:00", "event_type": "review_started", "review_id": "a4348f22cb3df7f25be36ae2103243b87e49d313", "index": 102, "total": 216}
+{"timestamp": "2026-09-12T05:02:33.791584+00:00", "event_type": "review_completed", "review_id": "a4348f22cb3df7f25be36ae2103243b87e49d313", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:33.794021+00:00", "event_type": "review_started", "review_id": "1ea2312e49423e22b0713ef85754020207e6055c", "index": 103, "total": 216}
+{"timestamp": "2026-09-12T05:02:40.263080+00:00", "event_type": "review_completed", "review_id": "1ea2312e49423e22b0713ef85754020207e6055c", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:40.264517+00:00", "event_type": "review_started", "review_id": "6621fac6d92c6058d64426437e7d3e9a7dd20da1", "index": 104, "total": 216}
+{"timestamp": "2026-09-12T05:02:46.412235+00:00", "event_type": "review_completed", "review_id": "6621fac6d92c6058d64426437e7d3e9a7dd20da1", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:46.413522+00:00", "event_type": "review_started", "review_id": "d30f2160d1f50d1ced3f42c45d617e14424387ca", "index": 105, "total": 216}
+{"timestamp": "2026-09-12T05:02:52.554076+00:00", "event_type": "review_completed", "review_id": "d30f2160d1f50d1ced3f42c45d617e14424387ca", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:52.555584+00:00", "event_type": "review_started", "review_id": "936a1f60df4b32cb016ef341507e5c630d76cd79", "index": 106, "total": 216}
+{"timestamp": "2026-09-12T05:02:58.671444+00:00", "event_type": "review_completed", "review_id": "936a1f60df4b32cb016ef341507e5c630d76cd79", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:02:58.672860+00:00", "event_type": "review_started", "review_id": "f5502c18f4c9774bdeb2f63131e2f097a351e376", "index": 107, "total": 216}
+{"timestamp": "2026-09-12T05:03:04.799193+00:00", "event_type": "review_completed", "review_id": "f5502c18f4c9774bdeb2f63131e2f097a351e376", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:04.800546+00:00", "event_type": "review_started", "review_id": "543970462d2041f15a987a9936f620118b58fea9", "index": 108, "total": 216}
+{"timestamp": "2026-09-12T05:03:10.969548+00:00", "event_type": "review_completed", "review_id": "543970462d2041f15a987a9936f620118b58fea9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:10.971093+00:00", "event_type": "review_started", "review_id": "daace8dd3cae6161a5c26319c31f0aff126277fc", "index": 109, "total": 216}
+{"timestamp": "2026-09-12T05:03:19.893125+00:00", "event_type": "review_completed", "review_id": "daace8dd3cae6161a5c26319c31f0aff126277fc", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:19.895650+00:00", "event_type": "review_started", "review_id": "bff94018fc7a47a40f783befe9e8eb523c164e7e", "index": 110, "total": 216}
+{"timestamp": "2026-09-12T05:03:26.056963+00:00", "event_type": "review_completed", "review_id": "bff94018fc7a47a40f783befe9e8eb523c164e7e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:26.059243+00:00", "event_type": "review_started", "review_id": "10a733c35b9b2c17ccf2fd736c97bbc68d4e4ea8", "index": 111, "total": 216}
+{"timestamp": "2026-09-12T05:03:34.355927+00:00", "event_type": "review_completed", "review_id": "10a733c35b9b2c17ccf2fd736c97bbc68d4e4ea8", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:34.357171+00:00", "event_type": "review_started", "review_id": "c5b3c98e8175c52a10581fa02159bd65ea106ef3", "index": 112, "total": 216}
+{"timestamp": "2026-09-12T05:03:40.807575+00:00", "event_type": "review_completed", "review_id": "c5b3c98e8175c52a10581fa02159bd65ea106ef3", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:40.809036+00:00", "event_type": "review_started", "review_id": "05a414122cb18331f08343f4f02c8e54dea0ed48", "index": 113, "total": 216}
+{"timestamp": "2026-09-12T05:03:47.265044+00:00", "event_type": "review_completed", "review_id": "05a414122cb18331f08343f4f02c8e54dea0ed48", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:47.267619+00:00", "event_type": "review_started", "review_id": "2edc45f5509a812a729dbc53fb7ddc10c6780c92", "index": 114, "total": 216}
+{"timestamp": "2026-09-12T05:03:53.376900+00:00", "event_type": "review_completed", "review_id": "2edc45f5509a812a729dbc53fb7ddc10c6780c92", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:53.378259+00:00", "event_type": "review_started", "review_id": "dbd814d7c2d1a5631498ca4459a95e46ab8f98da", "index": 115, "total": 216}
+{"timestamp": "2026-09-12T05:03:59.478569+00:00", "event_type": "review_completed", "review_id": "dbd814d7c2d1a5631498ca4459a95e46ab8f98da", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:03:59.479719+00:00", "event_type": "review_started", "review_id": "97418a13e9626e633a8182dd6657b9e2818d169d", "index": 116, "total": 216}
+{"timestamp": "2026-09-12T05:04:07.912934+00:00", "event_type": "review_completed", "review_id": "97418a13e9626e633a8182dd6657b9e2818d169d", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:07.914356+00:00", "event_type": "review_started", "review_id": "adcd45e3609ba86ee005f33a8bc45e48d2c92d28", "index": 117, "total": 216}
+{"timestamp": "2026-09-12T05:04:14.729800+00:00", "event_type": "review_completed", "review_id": "adcd45e3609ba86ee005f33a8bc45e48d2c92d28", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:14.731185+00:00", "event_type": "review_started", "review_id": "6ded976132963c6df85d41f01a142998d13f67bc", "index": 118, "total": 216}
+{"timestamp": "2026-09-12T05:04:21.891949+00:00", "event_type": "review_completed", "review_id": "6ded976132963c6df85d41f01a142998d13f67bc", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:21.893578+00:00", "event_type": "review_started", "review_id": "db54e97b24e49984b115b348d7d379de34364db2", "index": 119, "total": 216}
+{"timestamp": "2026-09-12T05:04:30.657978+00:00", "event_type": "review_completed", "review_id": "db54e97b24e49984b115b348d7d379de34364db2", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:30.659346+00:00", "event_type": "review_started", "review_id": "3fefdee945924529e5c5eb9ab9403d10038e68b4", "index": 120, "total": 216}
+{"timestamp": "2026-09-12T05:04:36.785954+00:00", "event_type": "review_completed", "review_id": "3fefdee945924529e5c5eb9ab9403d10038e68b4", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:36.787416+00:00", "event_type": "review_started", "review_id": "35ab3a18138efbe76d79669e0dece97277b9ccf3", "index": 121, "total": 216}
+{"timestamp": "2026-09-12T05:04:57.713203+00:00", "event_type": "review_completed", "review_id": "35ab3a18138efbe76d79669e0dece97277b9ccf3", "accepted": 5, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:04:57.714941+00:00", "event_type": "review_started", "review_id": "d9e45e76544b61d4d50206d23217963f545fed6c", "index": 122, "total": 216}
+{"timestamp": "2026-09-12T05:05:03.925806+00:00", "event_type": "review_completed", "review_id": "d9e45e76544b61d4d50206d23217963f545fed6c", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:03.927242+00:00", "event_type": "review_started", "review_id": "cc19d787611351197c6e9d0a4fcc845e8e5d0e29", "index": 123, "total": 216}
+{"timestamp": "2026-09-12T05:05:10.365398+00:00", "event_type": "review_completed", "review_id": "cc19d787611351197c6e9d0a4fcc845e8e5d0e29", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:10.367079+00:00", "event_type": "review_started", "review_id": "5accfb22e230772be7796f0d3829922ac59aad57", "index": 124, "total": 216}
+{"timestamp": "2026-09-12T05:05:18.906605+00:00", "event_type": "review_completed", "review_id": "5accfb22e230772be7796f0d3829922ac59aad57", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:18.909405+00:00", "event_type": "review_started", "review_id": "3cfffb5e9c66847da4663620b66f6c68fd342e04", "index": 125, "total": 216}
+{"timestamp": "2026-09-12T05:05:25.030849+00:00", "event_type": "review_completed", "review_id": "3cfffb5e9c66847da4663620b66f6c68fd342e04", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:25.032352+00:00", "event_type": "review_started", "review_id": "a8a42b06a0fe016ec406b4a4b61ac6d6637e21ca", "index": 126, "total": 216}
+{"timestamp": "2026-09-12T05:05:31.163111+00:00", "event_type": "review_completed", "review_id": "a8a42b06a0fe016ec406b4a4b61ac6d6637e21ca", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:31.164444+00:00", "event_type": "review_started", "review_id": "1bdfc1241cb18ec4a5f2e7621ad50af185771049", "index": 127, "total": 216}
+{"timestamp": "2026-09-12T05:05:37.273222+00:00", "event_type": "review_completed", "review_id": "1bdfc1241cb18ec4a5f2e7621ad50af185771049", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:37.274509+00:00", "event_type": "review_started", "review_id": "91494a1312d24b201ef57ee260b6d998e8d22ae5", "index": 128, "total": 216}
+{"timestamp": "2026-09-12T05:05:43.422100+00:00", "event_type": "review_completed", "review_id": "91494a1312d24b201ef57ee260b6d998e8d22ae5", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:43.423794+00:00", "event_type": "review_started", "review_id": "3d81342ea2b5f8ce6ab97d10ffba8de35b714f86", "index": 129, "total": 216}
+{"timestamp": "2026-09-12T05:05:49.632957+00:00", "event_type": "review_completed", "review_id": "3d81342ea2b5f8ce6ab97d10ffba8de35b714f86", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:49.634534+00:00", "event_type": "review_started", "review_id": "73a8276800380c5d6e47792ff10af585f77e42e3", "index": 130, "total": 216}
+{"timestamp": "2026-09-12T05:05:58.683363+00:00", "event_type": "review_completed", "review_id": "73a8276800380c5d6e47792ff10af585f77e42e3", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:05:58.684758+00:00", "event_type": "review_started", "review_id": "eb6dd64cab21a29c547beec8e2363b26b022b5a4", "index": 131, "total": 216}
+{"timestamp": "2026-09-12T05:06:05.504734+00:00", "event_type": "review_completed", "review_id": "eb6dd64cab21a29c547beec8e2363b26b022b5a4", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:05.506119+00:00", "event_type": "review_started", "review_id": "ad3c4e0a6b54c0ebd44f78b1b67b0e2126e193b0", "index": 132, "total": 216}
+{"timestamp": "2026-09-12T05:06:11.951889+00:00", "event_type": "review_completed", "review_id": "ad3c4e0a6b54c0ebd44f78b1b67b0e2126e193b0", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:11.953195+00:00", "event_type": "review_started", "review_id": "06e8c6ab39889ee49ef0d2d3d90dce89bcf93d9a", "index": 133, "total": 216}
+{"timestamp": "2026-09-12T05:06:18.400460+00:00", "event_type": "review_completed", "review_id": "06e8c6ab39889ee49ef0d2d3d90dce89bcf93d9a", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:18.401775+00:00", "event_type": "review_started", "review_id": "12510bfe4e724d81b3563e9755872f8270ac5905", "index": 134, "total": 216}
+{"timestamp": "2026-09-12T05:06:26.383199+00:00", "event_type": "review_completed", "review_id": "12510bfe4e724d81b3563e9755872f8270ac5905", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:26.384906+00:00", "event_type": "review_started", "review_id": "72249bb18291a3980aff528529b45d1946f02c62", "index": 135, "total": 216}
+{"timestamp": "2026-09-12T05:06:32.902895+00:00", "event_type": "review_completed", "review_id": "72249bb18291a3980aff528529b45d1946f02c62", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:32.905272+00:00", "event_type": "review_started", "review_id": "5d5fbe53b1de343477f972c460e323ac09c59e5d", "index": 136, "total": 216}
+{"timestamp": "2026-09-12T05:06:39.067744+00:00", "event_type": "review_completed", "review_id": "5d5fbe53b1de343477f972c460e323ac09c59e5d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:39.068971+00:00", "event_type": "review_started", "review_id": "06a4416b5186c46657d47eaa9281b9f43dc4037b", "index": 137, "total": 216}
+{"timestamp": "2026-09-12T05:06:45.537467+00:00", "event_type": "review_completed", "review_id": "06a4416b5186c46657d47eaa9281b9f43dc4037b", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:45.538556+00:00", "event_type": "review_started", "review_id": "e3c0929db07862d5f8d165dbdf651408b199ef2a", "index": 138, "total": 216}
+{"timestamp": "2026-09-12T05:06:51.680939+00:00", "event_type": "review_completed", "review_id": "e3c0929db07862d5f8d165dbdf651408b199ef2a", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:51.683043+00:00", "event_type": "review_started", "review_id": "3d30fc410d5759e682735be9089abafc671bcf2d", "index": 139, "total": 216}
+{"timestamp": "2026-09-12T05:06:57.769876+00:00", "event_type": "review_completed", "review_id": "3d30fc410d5759e682735be9089abafc671bcf2d", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:06:57.770952+00:00", "event_type": "review_started", "review_id": "4e6d8624be2e268737a362ec72ed74055d24b50c", "index": 140, "total": 216}
+{"timestamp": "2026-09-12T05:07:03.948914+00:00", "event_type": "review_completed", "review_id": "4e6d8624be2e268737a362ec72ed74055d24b50c", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:03.950246+00:00", "event_type": "review_started", "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c", "index": 141, "total": 216}
+{"timestamp": "2026-09-12T05:07:10.425765+00:00", "event_type": "review_completed", "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:10.427077+00:00", "event_type": "review_started", "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6", "index": 142, "total": 216}
+{"timestamp": "2026-09-12T05:07:23.926132+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6", "prediction_id": "SP-5ad5e568ce6bb72f", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T05:07:23.926436+00:00", "event_type": "review_completed", "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6", "accepted": 2, "review_required": 0, "rejected": 1}
+{"timestamp": "2026-09-12T05:07:23.927666+00:00", "event_type": "review_started", "review_id": "f7501055e28938ca5129ba93117f376ca5cf64c1", "index": 143, "total": 216}
+{"timestamp": "2026-09-12T05:07:30.040400+00:00", "event_type": "review_completed", "review_id": "f7501055e28938ca5129ba93117f376ca5cf64c1", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:30.041885+00:00", "event_type": "review_started", "review_id": "06626d0a59093ed58f52cf5a46675d04f679be8a", "index": 144, "total": 216}
+{"timestamp": "2026-09-12T05:07:36.143377+00:00", "event_type": "review_completed", "review_id": "06626d0a59093ed58f52cf5a46675d04f679be8a", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:36.144798+00:00", "event_type": "review_started", "review_id": "9b10481adce4385dfed6dfa51810c5f1413f443e", "index": 145, "total": 216}
+{"timestamp": "2026-09-12T05:07:45.239940+00:00", "event_type": "review_completed", "review_id": "9b10481adce4385dfed6dfa51810c5f1413f443e", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:45.241284+00:00", "event_type": "review_started", "review_id": "8f5eb66a7009a53f9605d85f9d72580f5bd6da2f", "index": 146, "total": 216}
+{"timestamp": "2026-09-12T05:07:54.040674+00:00", "event_type": "review_completed", "review_id": "8f5eb66a7009a53f9605d85f9d72580f5bd6da2f", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:07:54.043062+00:00", "event_type": "review_started", "review_id": "8c5941028a4dcedeaf20a130d2c8dca44554c329", "index": 147, "total": 216}
+{"timestamp": "2026-09-12T05:08:00.150615+00:00", "event_type": "review_completed", "review_id": "8c5941028a4dcedeaf20a130d2c8dca44554c329", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:00.152395+00:00", "event_type": "review_started", "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62", "index": 148, "total": 216}
+{"timestamp": "2026-09-12T05:08:10.336083+00:00", "event_type": "review_completed", "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62", "accepted": 2, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:10.337383+00:00", "event_type": "review_started", "review_id": "e9a471deeb1d246d609e81824e3eb176ba9ac75f", "index": 149, "total": 216}
+{"timestamp": "2026-09-12T05:08:18.735962+00:00", "event_type": "review_completed", "review_id": "e9a471deeb1d246d609e81824e3eb176ba9ac75f", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:18.737492+00:00", "event_type": "review_started", "review_id": "0f4c9b656e77a84f7e63b9fa09989bf5af573b29", "index": 150, "total": 216}
+{"timestamp": "2026-09-12T05:08:25.189490+00:00", "event_type": "review_completed", "review_id": "0f4c9b656e77a84f7e63b9fa09989bf5af573b29", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:25.190776+00:00", "event_type": "review_started", "review_id": "ecc695a920c240ed03d33abfd0ec748a4becd811", "index": 151, "total": 216}
+{"timestamp": "2026-09-12T05:08:33.324398+00:00", "event_type": "review_completed", "review_id": "ecc695a920c240ed03d33abfd0ec748a4becd811", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:33.325591+00:00", "event_type": "review_started", "review_id": "fc1e597a25e579dfa72c34183f277965002c1752", "index": 152, "total": 216}
+{"timestamp": "2026-09-12T05:08:39.426170+00:00", "event_type": "review_completed", "review_id": "fc1e597a25e579dfa72c34183f277965002c1752", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:39.427878+00:00", "event_type": "review_started", "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63", "index": 153, "total": 216}
+{"timestamp": "2026-09-12T05:08:45.879252+00:00", "event_type": "review_completed", "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:45.880629+00:00", "event_type": "review_started", "review_id": "d600ef9569c08b60d9eb8b83bbef53d04d6e1b42", "index": 154, "total": 216}
+{"timestamp": "2026-09-12T05:08:52.337795+00:00", "event_type": "review_completed", "review_id": "d600ef9569c08b60d9eb8b83bbef53d04d6e1b42", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:08:52.338865+00:00", "event_type": "review_started", "review_id": "cf6a90fc5da3ea1546951e898de8580a448c9e1c", "index": 155, "total": 216}
+{"timestamp": "2026-09-12T05:09:01.594130+00:00", "event_type": "review_completed", "review_id": "cf6a90fc5da3ea1546951e898de8580a448c9e1c", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:01.595562+00:00", "event_type": "review_started", "review_id": "bba31d61e4b33d7f52551501aa841c26e32ebd35", "index": 156, "total": 216}
+{"timestamp": "2026-09-12T05:09:11.008668+00:00", "event_type": "review_completed", "review_id": "bba31d61e4b33d7f52551501aa841c26e32ebd35", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:11.010404+00:00", "event_type": "review_started", "review_id": "d2202a620c99f8df3ddb8f4a424a679af48b29ec", "index": 157, "total": 216}
+{"timestamp": "2026-09-12T05:09:17.802266+00:00", "event_type": "review_completed", "review_id": "d2202a620c99f8df3ddb8f4a424a679af48b29ec", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:17.804780+00:00", "event_type": "review_started", "review_id": "caf20012fd26673aee7407d61d94786bcb3fb125", "index": 158, "total": 216}
+{"timestamp": "2026-09-12T05:09:24.265894+00:00", "event_type": "review_completed", "review_id": "caf20012fd26673aee7407d61d94786bcb3fb125", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:24.267494+00:00", "event_type": "review_started", "review_id": "7508f5e9dc9961a6aafb890938767abee9d3fbac", "index": 159, "total": 216}
+{"timestamp": "2026-09-12T05:09:30.386750+00:00", "event_type": "review_completed", "review_id": "7508f5e9dc9961a6aafb890938767abee9d3fbac", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:30.388086+00:00", "event_type": "review_started", "review_id": "59beadb79f3c64c29cc160a5ed14e8cd3b3ef3f0", "index": 160, "total": 216}
+{"timestamp": "2026-09-12T05:09:36.508613+00:00", "event_type": "review_completed", "review_id": "59beadb79f3c64c29cc160a5ed14e8cd3b3ef3f0", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:36.510246+00:00", "event_type": "review_started", "review_id": "37bf0c8b9a38d054c13f0f6553eab4d934620cbd", "index": 161, "total": 216}
+{"timestamp": "2026-09-12T05:09:45.115030+00:00", "event_type": "review_completed", "review_id": "37bf0c8b9a38d054c13f0f6553eab4d934620cbd", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:45.116191+00:00", "event_type": "review_started", "review_id": "f7b3c0b4a3853bbb3a7e846c44a8fad7dfbc7fe0", "index": 162, "total": 216}
+{"timestamp": "2026-09-12T05:09:53.782422+00:00", "event_type": "review_completed", "review_id": "f7b3c0b4a3853bbb3a7e846c44a8fad7dfbc7fe0", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:53.783948+00:00", "event_type": "review_started", "review_id": "38bd8ea30a21f677facd06564100d76efe215773", "index": 163, "total": 216}
+{"timestamp": "2026-09-12T05:09:59.872104+00:00", "event_type": "review_completed", "review_id": "38bd8ea30a21f677facd06564100d76efe215773", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:09:59.873473+00:00", "event_type": "review_started", "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63", "index": 164, "total": 216}
+{"timestamp": "2026-09-12T05:10:09.693714+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63", "prediction_id": "SP-4eddfbfbbf7b9c24", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T05:10:09.693863+00:00", "event_type": "review_completed", "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63", "accepted": 0, "review_required": 0, "rejected": 1}
+{"timestamp": "2026-09-12T05:10:09.695323+00:00", "event_type": "review_started", "review_id": "d89b3f77d75e619d6875a0241f61aa8299f14b7e", "index": 165, "total": 216}
+{"timestamp": "2026-09-12T05:10:17.876966+00:00", "event_type": "review_completed", "review_id": "d89b3f77d75e619d6875a0241f61aa8299f14b7e", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:10:17.878478+00:00", "event_type": "review_started", "review_id": "9041b5e62c1e0cc5630f2134c4e5bea6050460f0", "index": 166, "total": 216}
+{"timestamp": "2026-09-12T05:10:26.297424+00:00", "event_type": "review_completed", "review_id": "9041b5e62c1e0cc5630f2134c4e5bea6050460f0", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:10:26.298823+00:00", "event_type": "review_started", "review_id": "155f7856db098a0574e3c54eaf1dea21ea01c741", "index": 167, "total": 216}
+{"timestamp": "2026-09-12T05:10:34.812142+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "155f7856db098a0574e3c54eaf1dea21ea01c741", "prediction_id": "SP-fb14075046c1fc55", "status": "rejected", "quality_flags": ["invalid_topic"]}
+{"timestamp": "2026-09-12T05:10:34.812922+00:00", "event_type": "review_completed", "review_id": "155f7856db098a0574e3c54eaf1dea21ea01c741", "accepted": 0, "review_required": 0, "rejected": 1}
+{"timestamp": "2026-09-12T05:10:34.814283+00:00", "event_type": "review_started", "review_id": "35cc1ee8ccb945a460a3ccc171b50833408d032e", "index": 168, "total": 216}
+{"timestamp": "2026-09-12T05:10:40.918926+00:00", "event_type": "review_completed", "review_id": "35cc1ee8ccb945a460a3ccc171b50833408d032e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:10:40.921278+00:00", "event_type": "review_started", "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9", "index": 169, "total": 216}
+{"timestamp": "2026-09-12T05:11:04.860942+00:00", "event_type": "review_completed", "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9", "accepted": 4, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:04.862891+00:00", "event_type": "review_started", "review_id": "c6074f44dc2610d779c0f3e1d278fb228ef22fca", "index": 170, "total": 216}
+{"timestamp": "2026-09-12T05:11:10.966218+00:00", "event_type": "review_completed", "review_id": "c6074f44dc2610d779c0f3e1d278fb228ef22fca", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:10.968209+00:00", "event_type": "review_started", "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e", "index": 171, "total": 216}
+{"timestamp": "2026-09-12T05:11:17.079646+00:00", "event_type": "review_completed", "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:17.080982+00:00", "event_type": "review_started", "review_id": "51a6c493ef13749a374c96daa784fef6fc594079", "index": 172, "total": 216}
+{"timestamp": "2026-09-12T05:11:23.183236+00:00", "event_type": "review_completed", "review_id": "51a6c493ef13749a374c96daa784fef6fc594079", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:23.184568+00:00", "event_type": "review_started", "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744", "index": 173, "total": 216}
+{"timestamp": "2026-09-12T05:11:29.300697+00:00", "event_type": "review_completed", "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:29.301999+00:00", "event_type": "review_started", "review_id": "4a0e7942b7bc9430e4291db463e85855041f9074", "index": 174, "total": 216}
+{"timestamp": "2026-09-12T05:11:37.713055+00:00", "event_type": "review_completed", "review_id": "4a0e7942b7bc9430e4291db463e85855041f9074", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:37.714432+00:00", "event_type": "review_started", "review_id": "93d177f0e8b42dd94071abf0e0abcfd467f2ad0b", "index": 175, "total": 216}
+{"timestamp": "2026-09-12T05:11:44.835714+00:00", "event_type": "review_completed", "review_id": "93d177f0e8b42dd94071abf0e0abcfd467f2ad0b", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:44.836919+00:00", "event_type": "review_started", "review_id": "5b48a2757ddb597497427018890dff48c4873d5c", "index": 176, "total": 216}
+{"timestamp": "2026-09-12T05:11:59.302638+00:00", "event_type": "review_completed", "review_id": "5b48a2757ddb597497427018890dff48c4873d5c", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:11:59.304165+00:00", "event_type": "review_started", "review_id": "5e0738d020ecc7353c914013429cf30b1f62e673", "index": 177, "total": 216}
+{"timestamp": "2026-09-12T05:12:07.814770+00:00", "event_type": "review_completed", "review_id": "5e0738d020ecc7353c914013429cf30b1f62e673", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:12:07.815825+00:00", "event_type": "review_started", "review_id": "eb7fa7ee4d68ce54a8c65ac806541e7de206ef4b", "index": 178, "total": 216}
+{"timestamp": "2026-09-12T05:12:13.936290+00:00", "event_type": "review_completed", "review_id": "eb7fa7ee4d68ce54a8c65ac806541e7de206ef4b", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:12:13.937998+00:00", "event_type": "review_started", "review_id": "ee23bbc909708e163ab29057c72f303ca56717bb", "index": 179, "total": 216}
+{"timestamp": "2026-09-12T05:12:23.221909+00:00", "event_type": "review_completed", "review_id": "ee23bbc909708e163ab29057c72f303ca56717bb", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:12:23.224174+00:00", "event_type": "review_started", "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36", "index": 180, "total": 216}
+{"timestamp": "2026-09-12T05:12:40.392563+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36", "prediction_id": "SP-ab22fabb7fbe0f51", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T05:12:40.392920+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36", "prediction_id": "SP-a50aa184103f409b", "status": "rejected", "quality_flags": ["invalid_topic"]}
+{"timestamp": "2026-09-12T05:12:40.393082+00:00", "event_type": "review_completed", "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36", "accepted": 3, "review_required": 0, "rejected": 2}
+{"timestamp": "2026-09-12T05:12:40.394353+00:00", "event_type": "review_started", "review_id": "2573b6519e3f470840df6f0fe9a929952ec759e4", "index": 181, "total": 216}
+{"timestamp": "2026-09-12T05:12:48.710617+00:00", "event_type": "review_completed", "review_id": "2573b6519e3f470840df6f0fe9a929952ec759e4", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:12:48.712237+00:00", "event_type": "review_started", "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9", "index": 182, "total": 216}
+{"timestamp": "2026-09-12T05:12:55.168002+00:00", "event_type": "review_completed", "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:12:55.169206+00:00", "event_type": "review_started", "review_id": "93b23914becd9989c78bf7f18c6d3bd4c1ae7c95", "index": 183, "total": 216}
+{"timestamp": "2026-09-12T05:13:03.094789+00:00", "event_type": "review_completed", "review_id": "93b23914becd9989c78bf7f18c6d3bd4c1ae7c95", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:03.096352+00:00", "event_type": "review_started", "review_id": "84a1bdca63ba9b6808188d44aeacac2ac47e99eb", "index": 184, "total": 216}
+{"timestamp": "2026-09-12T05:13:16.961225+00:00", "event_type": "review_completed", "review_id": "84a1bdca63ba9b6808188d44aeacac2ac47e99eb", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:16.962573+00:00", "event_type": "review_started", "review_id": "0bc292b1df7b2ca1d7c52d8a3556e407f688a050", "index": 185, "total": 216}
+{"timestamp": "2026-09-12T05:13:25.625787+00:00", "event_type": "review_completed", "review_id": "0bc292b1df7b2ca1d7c52d8a3556e407f688a050", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:25.627305+00:00", "event_type": "review_started", "review_id": "166245d07fb371e9791babcce04c7fdfdecb9f3b", "index": 186, "total": 216}
+{"timestamp": "2026-09-12T05:13:34.330226+00:00", "event_type": "review_completed", "review_id": "166245d07fb371e9791babcce04c7fdfdecb9f3b", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:34.331923+00:00", "event_type": "review_started", "review_id": "2f8ca2f59256f66ea189a0bd7faf77a01308fbd8", "index": 187, "total": 216}
+{"timestamp": "2026-09-12T05:13:40.445080+00:00", "event_type": "review_completed", "review_id": "2f8ca2f59256f66ea189a0bd7faf77a01308fbd8", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:40.446112+00:00", "event_type": "review_started", "review_id": "dd233cd731181ab639519b206959f5fca22a2a99", "index": 188, "total": 216}
+{"timestamp": "2026-09-12T05:13:49.115814+00:00", "event_type": "review_completed", "review_id": "dd233cd731181ab639519b206959f5fca22a2a99", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:49.117223+00:00", "event_type": "review_started", "review_id": "e164559515767f5209f182f3cadc351084c69524", "index": 189, "total": 216}
+{"timestamp": "2026-09-12T05:13:57.507932+00:00", "event_type": "review_completed", "review_id": "e164559515767f5209f182f3cadc351084c69524", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:13:57.509264+00:00", "event_type": "review_started", "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec", "index": 190, "total": 216}
+{"timestamp": "2026-09-12T05:14:08.128705+00:00", "event_type": "evidence_or_taxonomy_guard_failure", "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec", "prediction_id": "SP-2311aa818aceb8e2", "status": "rejected", "quality_flags": ["evidence_not_found"]}
+{"timestamp": "2026-09-12T05:14:08.128853+00:00", "event_type": "review_completed", "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec", "accepted": 0, "review_required": 0, "rejected": 1}
+{"timestamp": "2026-09-12T05:14:08.130656+00:00", "event_type": "review_started", "review_id": "8a6f251111ce8555fd735261eb4c93a6ec9921dd", "index": 191, "total": 216}
+{"timestamp": "2026-09-12T05:14:27.167461+00:00", "event_type": "review_completed", "review_id": "8a6f251111ce8555fd735261eb4c93a6ec9921dd", "accepted": 4, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:14:27.168722+00:00", "event_type": "review_started", "review_id": "b5471ff34821689fc1b874a8c769d05fe91fdc02", "index": 192, "total": 216}
+{"timestamp": "2026-09-12T05:14:33.966396+00:00", "event_type": "review_completed", "review_id": "b5471ff34821689fc1b874a8c769d05fe91fdc02", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:14:33.967538+00:00", "event_type": "review_started", "review_id": "1157640007f1df2118fa4c0460bdbd9e7b260228", "index": 193, "total": 216}
+{"timestamp": "2026-09-12T05:14:40.079379+00:00", "event_type": "review_completed", "review_id": "1157640007f1df2118fa4c0460bdbd9e7b260228", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:14:40.080698+00:00", "event_type": "review_started", "review_id": "d6d0b83e36be009532302063d45b46e656612509", "index": 194, "total": 216}
+{"timestamp": "2026-09-12T05:14:48.583731+00:00", "event_type": "review_completed", "review_id": "d6d0b83e36be009532302063d45b46e656612509", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:14:48.584729+00:00", "event_type": "review_started", "review_id": "be8609a9e8e36a38d4fd27d15dc600728a54ba79", "index": 195, "total": 216}
+{"timestamp": "2026-09-12T05:14:54.687244+00:00", "event_type": "review_completed", "review_id": "be8609a9e8e36a38d4fd27d15dc600728a54ba79", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:14:54.688304+00:00", "event_type": "review_started", "review_id": "2137cc88721a431325c03202b6e10b1cf04fa6ef", "index": 196, "total": 216}
+{"timestamp": "2026-09-12T05:15:00.802958+00:00", "event_type": "review_completed", "review_id": "2137cc88721a431325c03202b6e10b1cf04fa6ef", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:00.804072+00:00", "event_type": "review_started", "review_id": "6b9c8bf086ef6cc75ba779f59362cd17dea744b2", "index": 197, "total": 216}
+{"timestamp": "2026-09-12T05:15:06.922911+00:00", "event_type": "review_completed", "review_id": "6b9c8bf086ef6cc75ba779f59362cd17dea744b2", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:06.924416+00:00", "event_type": "review_started", "review_id": "e52ee50fb3f2d3607dae5cde28ec4e3bf02506ae", "index": 198, "total": 216}
+{"timestamp": "2026-09-12T05:15:13.031241+00:00", "event_type": "review_completed", "review_id": "e52ee50fb3f2d3607dae5cde28ec4e3bf02506ae", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:13.032274+00:00", "event_type": "review_started", "review_id": "4aa1340bc5d2c642fd9a9457f01eecac3855b1eb", "index": 199, "total": 216}
+{"timestamp": "2026-09-12T05:15:19.142966+00:00", "event_type": "review_completed", "review_id": "4aa1340bc5d2c642fd9a9457f01eecac3855b1eb", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:19.144319+00:00", "event_type": "review_started", "review_id": "47e5cc2e454d8cd2fe361decde88b97ea8defb49", "index": 200, "total": 216}
+{"timestamp": "2026-09-12T05:15:27.410528+00:00", "event_type": "review_completed", "review_id": "47e5cc2e454d8cd2fe361decde88b97ea8defb49", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:27.411900+00:00", "event_type": "review_started", "review_id": "bb77b5a63f1d92bc4c074388f617c2743541a596", "index": 201, "total": 216}
+{"timestamp": "2026-09-12T05:15:33.521244+00:00", "event_type": "review_completed", "review_id": "bb77b5a63f1d92bc4c074388f617c2743541a596", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:33.523669+00:00", "event_type": "review_started", "review_id": "9b83c6d992c9473d567592b68ab0c629c0f2f9c5", "index": 202, "total": 216}
+{"timestamp": "2026-09-12T05:15:41.958312+00:00", "event_type": "review_completed", "review_id": "9b83c6d992c9473d567592b68ab0c629c0f2f9c5", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:41.959953+00:00", "event_type": "review_started", "review_id": "ca5e8e1a80e5f8f9f280d3fa0f0e63ba46a5f7d4", "index": 203, "total": 216}
+{"timestamp": "2026-09-12T05:15:49.938342+00:00", "event_type": "review_completed", "review_id": "ca5e8e1a80e5f8f9f280d3fa0f0e63ba46a5f7d4", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:49.939722+00:00", "event_type": "review_started", "review_id": "0fdf6bdb7646541cb227549f6d62b58ef0d8f0ba", "index": 204, "total": 216}
+{"timestamp": "2026-09-12T05:15:59.116005+00:00", "event_type": "review_completed", "review_id": "0fdf6bdb7646541cb227549f6d62b58ef0d8f0ba", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:15:59.117080+00:00", "event_type": "review_started", "review_id": "53281141f6ceeefcb2b957455f7b697eee45d7d2", "index": 205, "total": 216}
+{"timestamp": "2026-09-12T05:16:07.452875+00:00", "event_type": "review_completed", "review_id": "53281141f6ceeefcb2b957455f7b697eee45d7d2", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:07.454164+00:00", "event_type": "review_started", "review_id": "1177b99813e7cfef446344be172765fe1a13b658", "index": 206, "total": 216}
+{"timestamp": "2026-09-12T05:16:21.324782+00:00", "event_type": "review_completed", "review_id": "1177b99813e7cfef446344be172765fe1a13b658", "accepted": 3, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:21.326511+00:00", "event_type": "review_started", "review_id": "702589e68b274d78b0d73913f75ff4af0f3eb38f", "index": 207, "total": 216}
+{"timestamp": "2026-09-12T05:16:27.430348+00:00", "event_type": "review_completed", "review_id": "702589e68b274d78b0d73913f75ff4af0f3eb38f", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:27.431770+00:00", "event_type": "review_started", "review_id": "f0b33589facd4ab8ba24c1bc44acdf937e795991", "index": 208, "total": 216}
+{"timestamp": "2026-09-12T05:16:35.805306+00:00", "event_type": "review_completed", "review_id": "f0b33589facd4ab8ba24c1bc44acdf937e795991", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:35.806678+00:00", "event_type": "review_started", "review_id": "cf0457b1019b112ca297cd6c34e5734815d59480", "index": 209, "total": 216}
+{"timestamp": "2026-09-12T05:16:42.250365+00:00", "event_type": "review_completed", "review_id": "cf0457b1019b112ca297cd6c34e5734815d59480", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:42.251810+00:00", "event_type": "review_started", "review_id": "30bb07d1e1745af542004964e1d606648b638654", "index": 210, "total": 216}
+{"timestamp": "2026-09-12T05:16:50.637363+00:00", "event_type": "review_completed", "review_id": "30bb07d1e1745af542004964e1d606648b638654", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:50.638675+00:00", "event_type": "review_started", "review_id": "2e4812ced37d383eae61ab54af2b89f384724124", "index": 211, "total": 216}
+{"timestamp": "2026-09-12T05:16:56.749242+00:00", "event_type": "review_completed", "review_id": "2e4812ced37d383eae61ab54af2b89f384724124", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:16:56.750434+00:00", "event_type": "review_started", "review_id": "20f7742ba01435ee32b1a89c6dd081b369ebb268", "index": 212, "total": 216}
+{"timestamp": "2026-09-12T05:17:03.201106+00:00", "event_type": "review_completed", "review_id": "20f7742ba01435ee32b1a89c6dd081b369ebb268", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:17:03.203618+00:00", "event_type": "review_started", "review_id": "605ed35d8155071c066294af80c9d5c7d72d817e", "index": 213, "total": 216}
+{"timestamp": "2026-09-12T05:17:09.320803+00:00", "event_type": "review_completed", "review_id": "605ed35d8155071c066294af80c9d5c7d72d817e", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:17:09.322114+00:00", "event_type": "review_started", "review_id": "3122d8e0813ce9c315f743037ce4f56a26638d3d", "index": 214, "total": 216}
+{"timestamp": "2026-09-12T05:17:18.495064+00:00", "event_type": "review_completed", "review_id": "3122d8e0813ce9c315f743037ce4f56a26638d3d", "accepted": 1, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:17:18.496488+00:00", "event_type": "review_started", "review_id": "6faa0cb9c410c15f41204f22a398935c149945a8", "index": 215, "total": 216}
+{"timestamp": "2026-09-12T05:17:24.590104+00:00", "event_type": "review_completed", "review_id": "6faa0cb9c410c15f41204f22a398935c149945a8", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:17:24.591592+00:00", "event_type": "review_started", "review_id": "d45c74c4c2d0852bea419c952ea426391cc06f34", "index": 216, "total": 216}
+{"timestamp": "2026-09-12T05:17:30.684081+00:00", "event_type": "review_completed", "review_id": "d45c74c4c2d0852bea419c952ea426391cc06f34", "accepted": 0, "review_required": 0, "rejected": 0}
+{"timestamp": "2026-09-12T05:17:30.757947+00:00", "event_type": "run_completed", "review_id": null, "prediction_count": 126, "processing_error_review_count": 0, "bad_case_count": 197}

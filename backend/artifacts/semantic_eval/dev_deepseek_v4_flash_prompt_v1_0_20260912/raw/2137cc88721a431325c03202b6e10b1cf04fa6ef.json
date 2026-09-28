@@ -1,0 +1,216 @@
+{
+  "review_id": "2137cc88721a431325c03202b6e10b1cf04fa6ef",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "e2a6038c-ac36-408b-8664-6d38f2d32197",
+  "raw_response": {
+    "id": "e2a6038c-ac36-408b-8664-6d38f2d32197",
+    "created_at": 1789212011.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "53052508-c315-4484-a9a7-225bb439a1d5",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source text: \"Works well\\nIt works perfectly.\" Rating 5 but don't infer sentiment from star. Claims: general performance positive? Evidence spans exact continuous substring. \"Works well\" and \"It works perfectly.\" Could be function_performance/general_performance positive. Need zero or multiple. Both similar maybe one or two claims. We need choose taxonomy pair. For each claim exactly one valid primary/secondary. Evidence span exact. Since review says works well, works perfectly. That's general performance positive. Could extract two claims? \"Works well\" and \"It works perfectly.\" Both same topic. But likely one claim sufficient? Instructions: every claim. If multiple statements same claim? Could treat as one claim evidence span maybe \"Works well\\nIt works perfectly.\" Exact continuous substring includes newline. But then evidence span exact continuous substring from source. It is continuous. Primary function_performance secondary general_performance polarity positive. Is there any other? No.\n\nNeed decide output. Could include one claim with evidence_span \"Works well\\nIt works perfectly.\" or two claims. The phrase \"Works well\" and \"It works perfectly\" are two claims. But they are redundant. Taxonomy claim extraction: each claim? Hmm.\n\nNeed adhere schema. I'll output one claim maybe evidence span \"Works well\\nIt works perfectly.\" But \"Works well\" alone is exact. \"It works perfectly.\" exact. If output one claim, evidence_span can include both. Does \"Works well\\nIt works perfectly.\" continuous? Yes source_text has \"Works well\\nIt works perfectly.\" The entire text. That supports general performance positive. But claims field items: one claim.\n\nCould include two claims: \n1 function_performance/general_performance positive evidence \"Works well\"\n2 function_performance/general_performance positive evidence \"It works perfectly.\"\nWould that be acceptable? It might be over-extraction? A review may contain multiple claims. These are separate sentences. However they express same semantic claim. The task likely expects all product-review semantic claims, so both are claims. But if duplicated, maybe one enough. \"Works well\" is general performance; \"It works perfectly\" same. I'd lean one combined claim because no need duplicate. But the instruction: \"A review may contain zero or multiple claims.\" Not \"unique claims\". The semantic claim is the product works well. Both spans support same claim. We can choose strongest exact substring maybe entire. There is no star inference. Polarity positive.\n\nNeed output JSON only. Ensure no extra. Use exact schema. We'll return {\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works well\\nIt works perfectly.\"}]} Wait JSON newline escaped as \\n. The source_text contains newline. evidence_span exact continuous substring. In JSON string, \\n represents newline. The actual substring includes newline. That is okay.\n\nBut maybe evidence_span cannot be empty. Good.\n\nNeed final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "e2a6038c-ac36-408b-8664-6d38f2d32197-0",
+        "status": "completed"
+      },
+      {
+        "id": "83b604d3-6c58-4a3d-9670-f6c7a3bd0b49",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works well\\nIt works perfectly.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212014.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1022,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 667,
+      "output_tokens_details": {
+        "reasoning_tokens": 628
+      },
+      "total_tokens": 1689
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works well\\nIt works perfectly.\"}]}"
+}

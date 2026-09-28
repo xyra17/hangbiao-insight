@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-1f4feb6f7bf03c68",
+      "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "material_build_quality",
+      "polarity": "positive",
+      "evidence_span": "Great quality",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-o1q6v0mobywa6kmbensie"
+    },
+    {
+      "prediction_id": "SP-9df2cc1943d03cb0",
+      "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "price_value",
+      "polarity": "positive",
+      "evidence_span": "great price",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-o1q6v0mobywa6kmbensie"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

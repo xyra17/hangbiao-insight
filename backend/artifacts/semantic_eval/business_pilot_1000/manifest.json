@@ -1,0 +1,18 @@
+{
+  "run_id": "business-pilot-20260913",
+  "input_hash": "3b5e2ae64c8fced9386c83e1f0e8eb7420d6b99d6813a81383287d758e296752",
+  "sample_rule": {
+    "products": [
+      "B01N5IB20Q",
+      "B07P9S6R9Y",
+      "B0BYJ8ZVWH"
+    ],
+    "limit": 1000,
+    "min_per_product": 1
+  },
+  "processed": 1000,
+  "record_count": 1000,
+  "error_count": 1,
+  "elapsed_seconds": 9591.443,
+  "status": "completed"
+}

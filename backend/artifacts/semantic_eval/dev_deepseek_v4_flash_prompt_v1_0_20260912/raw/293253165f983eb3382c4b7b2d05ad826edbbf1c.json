@@ -1,0 +1,216 @@
+{
+  "review_id": "293253165f983eb3382c4b7b2d05ad826edbbf1c",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "8c5ef799-a1e5-42b5-bb29-c1de87d18228",
+  "raw_response": {
+    "id": "8c5ef799-a1e5-42b5-bb29-c1de87d18228",
+    "created_at": 1789211064.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "0cdf41fc-587c-47fe-840d-01491e7e97fe",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. We need parse source_text: \"Lasts through my 2 year old grandson dropping my phone. Great price and easy to apply.\"\n\nProduct likely phone screen protector? Product B07H2V5YLH maybe. Claims: \"Lasts through my 2 year old grandson dropping my phone.\" This indicates durability/protection? Taxonomy primary reliability_durability secondary general_durability maybe positive. Or function_performance protection_effectiveness? It says lasts through dropping phone. Could be protection_effectiveness? The product maybe tempered glass. \"Lasts through...\" implies durable/protective. We need choose exactly one valid pair. Let's examine taxonomy. function_performance has protection_effectiveness, general_performance. reliability_durability has general_durability, stopped_working etc. \"Lasts through\" suggests durability. But \"dropping my phone\" could be protection_effectiveness (protects phone from drops). However \"Lasts\" indicates the product itself lasts. We can extract primary reliability_durability secondary general_durability polarity positive evidence \"Lasts through my 2 year old grandson dropping my phone.\" Maybe also \"Great price\" => convenience_value price_value positive evidence \"Great price\". \"easy to apply\" => usability_installation ease_of_use positive evidence \"easy to apply\". Need evidence_span exact continuous substring from SOURCE_TEXT. For \"great price and easy to apply\" if separate spans, \"Great price\" exact and \"easy to apply\" exact. Need no overlap? Multiple claims okay.\n\nNeed ensure \"Great price\" at beginning sentence after period: \"Great price and easy to apply.\" Exact substring \"Great price\" yes. \"easy to apply\" yes. For first claim, evidence_span \"Lasts through my 2 year old grandson dropping my phone.\" exact includes period. Polarity positive. Primary reliability_durability secondary general_durability or maybe protection_effectiveness? Let's think. \"Lasts through my 2 year old grandson dropping my phone\" The claim is about durability? \"Lasts through\" = it doesn't break when phone dropped? If product is screen protector, it protects. The phrase \"Lasts through\" more directly durability. Taxonomy primary reliability_durability secondary general_durability. Positive.\n\nCould also \"Great price\" primary convenience_value secondary price_value positive. \"easy to apply\" primary usability_installation secondary ease_of_use positive.\n\nNeed return JSON only. Ensure schema. Empty? no, claims.\n\nCheck if star rating not infer. We don't need mention rating. Need exact continuous substring. Source text has \"Great price\" capital G. \"easy to apply\" lower e. Good.\n\nPotential issue: \"Lasts through my 2 year old grandson dropping my phone.\" evidence contains possessive \"my\". Exact substring yes.\n\nNeed final JSON. Ensure no extra.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "8c5ef799-a1e5-42b5-bb29-c1de87d18228-0",
+        "status": "completed"
+      },
+      {
+        "id": "78cd79d3-44ca-45ad-9115-191cee7db4ef",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"Lasts through my 2 year old grandson dropping my phone.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great price\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy to apply\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211067.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1035,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 706,
+      "output_tokens_details": {
+        "reasoning_tokens": 595
+      },
+      "total_tokens": 1741
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"Lasts through my 2 year old grandson dropping my phone.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great price\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy to apply\"}]}"
+}

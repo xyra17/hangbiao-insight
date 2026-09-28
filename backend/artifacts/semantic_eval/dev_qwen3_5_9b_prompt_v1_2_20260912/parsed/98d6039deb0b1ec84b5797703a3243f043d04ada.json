@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-04c4255299f0f1bc",
+      "review_id": "98d6039deb0b1ec84b5797703a3243f043d04ada",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "material_build_quality",
+      "polarity": "negative",
+      "evidence_span": "No protegen el teléfono por lo frágiles que son.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-2u4cdmwyliu53z3aoyp57a"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

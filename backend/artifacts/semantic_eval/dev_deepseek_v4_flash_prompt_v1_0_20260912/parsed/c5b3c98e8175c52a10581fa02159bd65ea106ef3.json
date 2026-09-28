@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-0df425b5cff58c7b",
+      "review_id": "c5b3c98e8175c52a10581fa02159bd65ea106ef3",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "price_value",
+      "polarity": "positive",
+      "evidence_span": "Well worth the money.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "fd202f23-dabe-4350-a8cd-3b86de46e7f1"
+    },
+    {
+      "prediction_id": "SP-ceb079b5763121b4",
+      "review_id": "c5b3c98e8175c52a10581fa02159bd65ea106ef3",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "case_compatibility",
+      "polarity": "positive",
+      "evidence_span": "this is the ONLY one that I can get to work through my iPhone case",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "fd202f23-dabe-4350-a8cd-3b86de46e7f1"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

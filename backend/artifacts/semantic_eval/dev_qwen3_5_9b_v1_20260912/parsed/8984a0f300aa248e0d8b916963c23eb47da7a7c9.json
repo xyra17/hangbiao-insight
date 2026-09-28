@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-3f77167ab198878c",
+      "review_id": "8984a0f300aa248e0d8b916963c23eb47da7a7c9",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "short_lifespan",
+      "polarity": "negative",
+      "evidence_span": "die in 2 weeks",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-knup7khfrhl19zqsmtbq"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,50 @@
+{
+  "review_id": "0f7ef9475f539bc489897d9404719f93cc4f860e",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-ubpabynuucmiwh3449ffs",
+  "raw_response": {
+    "id": "chatcmpl-ubpabynuucmiwh3449ffs",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"physical_injury_irritation\", \"polarity\": \"negative\", \"evidence_span\": \"This made my fingertips peel!\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"after my last one cracked\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"The size is off\"}]}"
+        }
+      }
+    ],
+    "created": 1789176891,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 122,
+      "prompt_tokens": 541,
+      "total_tokens": 663,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 121,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"physical_injury_irritation\", \"polarity\": \"negative\", \"evidence_span\": \"This made my fingertips peel!\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"after my last one cracked\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"The size is off\"}]}"
+}

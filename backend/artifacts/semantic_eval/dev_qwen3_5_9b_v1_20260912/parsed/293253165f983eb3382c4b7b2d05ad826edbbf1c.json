@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-c55612a80e570910",
+      "review_id": "293253165f983eb3382c4b7b2d05ad826edbbf1c",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "general_durability",
+      "polarity": "positive",
+      "evidence_span": "Lasts through my 2 year old grandson dropping my phone.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-8ypdsd3fsdttgjd2uygik"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

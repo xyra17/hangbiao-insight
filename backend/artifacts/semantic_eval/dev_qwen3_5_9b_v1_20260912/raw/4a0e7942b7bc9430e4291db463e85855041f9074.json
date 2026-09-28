@@ -1,0 +1,50 @@
+{
+  "review_id": "4a0e7942b7bc9430e4291db463e85855041f9074",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-xvqas4j7o3auaqh0t6nfse",
+  "raw_response": {
+    "id": "chatcmpl-xvqas4j7o3auaqh0t6nfse",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"Too Big For Iphone X\"}]}"
+        }
+      }
+    ],
+    "created": 1789177777,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 41,
+      "prompt_tokens": 476,
+      "total_tokens": 517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 40,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"Too Big For Iphone X\"}]}"
+}

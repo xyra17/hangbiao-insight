@@ -1,0 +1,216 @@
+{
+  "review_id": "97418a13e9626e633a8182dd6657b9e2818d169d",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "c9acee8d-196a-41f2-b591-71f3d6bb5d39",
+  "raw_response": {
+    "id": "c9acee8d-196a-41f2-b591-71f3d6bb5d39",
+    "created_at": 1789211309.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "7bd676f0-3cdd-48cf-9d89-72e624dc4bf1",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract product-review semantic claims. Need follow schema. Review source_text: \"CHARGES SLOW\\nI don't know how sturdy this charger is but it feels flimsy. The cords don't bend very well (for travel). This charger charges slow as heck — even my phone literally displayed a notification that the charging source was too low!\"\n\nWe need extract claims. Need taxonomy primary/secondary pair. Zero or multiple. Polarity independent of star rating.\n\nLet's parse.\n\nClaims:\n1. \"I don't know how sturdy this charger is but it feels flimsy.\" This is about material_build_quality? Primary product_quality, secondary material_build_quality. Polarity negative? \"feels flimsy\" negative. Evidence span exact substring. Could include \"it feels flimsy.\" maybe exact continuous substring. Need copy evidence_span as exact continuous substring from SOURCE_TEXT. We can choose \"it feels flimsy\" or \"feels flimsy\". It is exact. Ensure no quotes? Evidence exact.\n\n2. \"The cords don't bend very well (for travel).\" This about cords? Could be product_quality material_build_quality? Or usability? Cords don't bend well for travel. It's physical quality/flexibility. Could be material_build_quality negative. Primary product_quality secondary material_build_quality. Or convenience_value portability_size? Hmm \"cords don't bend very well (for travel)\" relates to portability/travel? But taxonomy: convenience_value -> portability_size. But \"don't bend\" is flexibility, build quality. It could be material_build_quality. Need choose exactly one valid pair. The product is charger? Cords. \"cords don't bend very well (for travel)\" is about build/material. I think product_quality/material_build_quality, negative.\n\n3. \"This charger charges slow as heck — even my phone literally displayed a notification that the charging source was too low!\" This is charging_speed negative. Primary function_performance, secondary charging_speed. Polarity negative. Evidence span could be \"This charger charges slow as heck\" or entire sentence. Should include maybe \"charges slow as heck\". Since exact substring. \"This charger charges slow as heck\" is exact. Also \"charging source was too low\" indicates power output? But claim about slow charging. Could be primary function_performance secondary charging_speed negative.\n\nNeed consider title \"CHARGES SLOW\" appears in source_text? source_text begins \"CHARGES SLOW\\n...\" So title is part source_text. Could use \"CHARGES SLOW\" as evidence. But the sentence later more specific. We can include one claim for charging speed. Evidence span could be \"CHARGES SLOW\" exact. But better full: \"This charger charges slow as heck\". Need exact substring yes.\n\nPotential claim about \"phone literally displayed a notification that the charging source was too low\" maybe power_output? But that's same charging speed issue. Could be function_performance/power_output negative? The notification \"charging source was too low\" could indicate insufficient power output. That's distinct? The product charges slow. We can decide if multiple claims: \"charges slow as heck\" -> charging_speed negative. \"charging source was too low\" -> power_output negative? It might be evidence of low power output. However taxonomy: power_output for charger. Could extract as one claim maybe primary function_performance secondary power_output negative with evidence \"charging source was too low\". But the review says phone displayed notification that charging source was too low, which is a symptom of low power output. This could be a separate claim. But \"charges slow\" already covers charging_speed. Do we need both? The prompt says a review may contain zero or multiple claims. We need extract claims. Could include both if supported. But over-extraction risk. Let's examine.\n\n\"CHARGES SLOW\" title and later \"This charger charges slow as heck\" clearly charging_speed negative. \"even my phone literally displayed a notification that the charging source was too low!\" Could be evidence of power_output negative. The charger's power output is too low. Primary function_performance, secondary power_output. Polarity negative. Evidence span: \"charging source was too low\" exact substring? The source text: \"the charging source was too low!\" includes \"charging source was too low\" yes exact. But this phrase is about the source, i.e., charger. It is a product claim. Could include.\n\nBut if claim already \"charges slow as heck\", the notification adds support, not necessarily separate. Semantic claims maybe each aspect. I can produce 4 claims: flimsy build; cords don't bend; slow charging; low charging source/power output. Need ensure no duplicates. The taxonomy allows multiple.\n\nNeed decide polarity for \"I don't know how sturdy this charger is but it feels flimsy\" — mixed? It says don't know how sturdy but feels flimsy. The product claim: feels flimsy, negative. The \"I don't know\" is uncertainty, but then \"feels flimsy\" negative. Polarity negative. Evidence span could be \"it feels flimsy\" or whole \"I don't know how sturdy this charger is but it feels flimsy.\" If whole, polarity mixed? But claim polarity negative. Better use \"it feels flimsy\" to avoid uncertainty. Exact substring: source has \"but it feels flimsy.\" So \"it feels flimsy\" exact.\n\n\"The cords don't bend very well (for travel).\" Could be negative material_build_quality. Evidence span \"The cords don't bend very well\" exact. Could also be convenience_value portability_size? It says for travel, but the issue is cords don't bend. Primary product_quality, secondary material_build_quality negative. Maybe \"cords don't bend very well\" is about wear_damage? No. material build quality.\n\nCharging slow: evidence \"This charger charges slow as heck\" exact. primary function_performance secondary charging_speed negative.\n\nPower output: \"charging source was too low\" exact. primary function_performance secondary power_output negative. But is \"charging source\" the charger? It might be the source. The user says phone displayed notification charging source too low, meaning the charger output too low. Yes.\n\nCould there be claim about \"charger is flimsy\" primary product_quality material_build_quality negative. \"cords don't bend very well\" perhaps product_quality material_build_quality negative too. Both could be same secondary. Is that okay? Multiple claims same taxonomy? Yes.\n\nNeed output JSON with claims array. Must adhere schema no extra. Ensure enum valid. primary_topic etc. evidence_span minLength 1.\n\nNeed check exact substring preservation. Let's copy exact source_text:\n\n\"CHARGES SLOW\\nI don't know how sturdy this charger is but it feels flimsy. The cords don't bend very well (for travel). This charger charges slow as heck — even my phone literally displayed a notification that the charging source was too low!\"\n\nNote dash is em dash \"—\". Evidence spans:\n- \"it feels flimsy\" appears exactly? Source: \"is but it feels flimsy.\" yes substring \"it feels flimsy\".\n- \"The cords don't bend very well\" appears exactly: \"The cords don't bend very well (for travel).\" yes.\n- \"This charger charges slow as heck\" appears exactly. Source: \"This charger charges slow as heck — even...\" yes.\n- \"charging source was too low\" appears exactly? Source: \"the charging source was too low!\" yes substring \"charging source was too low\" without \"the\". yes.\n\nPotential issue \"charges slow as heck\" title \"CHARGES SLOW\" perhaps evidence span could be title. But I use later.\n\nNeed consider if \"cords don't bend very well\" is a claim about the charger? The product likely wall charger with cords? The product ID B07P9S6R9Y maybe charger? The text says charger and cords. It's product claim.\n\nShould we include polarity neutral for \"I don't know how sturdy this charger is\"? No, because evidence_span should match claim. If claim is \"feels flimsy\", negative.\n\nCould \"don't bend very well\" negative. Yes.\n\nCould \"charging source too low\" be not product claim? It's a notification from phone, but the charger's source. It's product functionality. Negative.\n\nNeed ensure no inference from star rating. We didn't.\n\nNow final JSON. Must not include markdown. The schema says additionalProperties false, properties claims. We can output exactly.\n\nLet's craft JSON:\n\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"product_quality\",\n      \"secondary_topic\": \"material_build_quality\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"it feels flimsy\"\n    },\n    {\n      \"primary_topic\": \"product_quality\",\n      \"secondary_topic\": \"material_build_quality\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"The cords don't bend very well\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"charging_speed\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"This charger charges slow as heck\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"power_output\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"charging source was too low\"\n    }\n  ]\n}\n\nCheck if \"The cords don't bend very well\" exact continuous substring. Yes. But note apostrophe in don't is straight? Source has \"don't\" straight. Yes.\n\nPotential alternative: The second claim might be convenience_value portability_size because \"(for travel)\" but I classify material_build_quality. Is that valid? The issue \"cords don't bend very well\" is material flexibility, not size. Fine.\n\nCould there be \"general_performance\" for charger flimsy? No.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "c9acee8d-196a-41f2-b591-71f3d6bb5d39-0",
+        "status": "completed"
+      },
+      {
+        "id": "5ed79e4b-2a67-460d-ac52-e2994aa859f6",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"it feels flimsy\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"The cords don't bend very well\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"This charger charges slow as heck\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"power_output\",\"polarity\":\"negative\",\"evidence_span\":\"charging source was too low\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211318.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1074,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2287,
+      "output_tokens_details": {
+        "reasoning_tokens": 2147
+      },
+      "total_tokens": 3361
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"it feels flimsy\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"The cords don't bend very well\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"This charger charges slow as heck\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"power_output\",\"polarity\":\"negative\",\"evidence_span\":\"charging source was too low\"}]}"
+}

@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-445fc2e352d79c77",
+      "review_id": "b4260a629e7abbdbb3754988441e82a66091b07f",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "Start peeling too quick",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "a3333455-aea7-4962-a2a3-67c126d7f92a"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

@@ -1,0 +1,11 @@
+{
+  "taxonomy_version": "taxonomy-v1.0",
+  "review_set_version": "annotation-review-v1.0",
+  "label_schema_version": "annotation-label-long-v1.0",
+  "review_count": 360,
+  "label_slots_per_review": 4,
+  "total_label_slots": 1440,
+  "multi_label": true,
+  "rating_is_polarity": false,
+  "evidence_span_required": true
+}

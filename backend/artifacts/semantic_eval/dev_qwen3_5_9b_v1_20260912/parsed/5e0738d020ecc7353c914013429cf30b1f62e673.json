@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-569d339729d81d10",
+      "review_id": "5e0738d020ecc7353c914013429cf30b1f62e673",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "cracking_breakage",
+      "polarity": "negative",
+      "evidence_span": "Cracks easily",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-2ocyv53xhl8tkyueftxum"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

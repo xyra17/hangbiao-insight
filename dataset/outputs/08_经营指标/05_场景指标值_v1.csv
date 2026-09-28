@@ -1,0 +1,8 @@
+﻿product_id,product_name,month,order_count,refund_count,refund_rate,source,version,scenario_id,scenario_type,expected_review_relation,is_injected
+B07H2V5YLH,Ailun_Screen_Protector,2022-11-01,5353,177,0.0330655707080142,synthetic,business-metric-v1.0,SYN-POSREC-002,positive_recovery,supporting_evidence,True
+B07H2V5YLH,Ailun_Screen_Protector,2022-12-01,6252,216,0.0345489443378119,synthetic,business-metric-v1.0,SYN-POSREC-002,positive_recovery,supporting_evidence,True
+B07P9S6R9Y,Yootech_Wireless_Charger,2020-06-01,4800,354,0.07375,synthetic,business-metric-v1.0,SYN-EXPLAIN-001,explainable_negative,supporting_evidence,True
+B07P9S6R9Y,Yootech_Wireless_Charger,2022-02-01,8634,744,0.08617095205003475,synthetic,business-metric-v1.0,SYN-MIXED-001,mixed_conflict,partial_support,True
+B0BYJ8ZVWH,AILKIN_USB_Wall_Charger,2019-06-01,2119,95,0.04483246814535158,synthetic,business-metric-v1.0,SYN-NOEXP-001,no_review_explanation,no_explanation,True
+B0BYJ8ZVWH,AILKIN_USB_Wall_Charger,2022-07-01,4324,106,0.024514338575393153,synthetic,business-metric-v1.0,SYN-POSREC-001,positive_recovery,supporting_evidence,True
+B0BYJ8ZVWH,AILKIN_USB_Wall_Charger,2022-08-01,2540,136,0.05354330708661417,synthetic,business-metric-v1.0,SYN-REVERSAL-001,negative_reversal,supporting_evidence,True

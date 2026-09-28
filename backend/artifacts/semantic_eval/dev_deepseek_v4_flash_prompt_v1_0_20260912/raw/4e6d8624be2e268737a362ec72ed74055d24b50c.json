@@ -1,0 +1,216 @@
+{
+  "review_id": "4e6d8624be2e268737a362ec72ed74055d24b50c",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "5574fc9a-7f2c-464b-aca1-63655f98e8fb",
+  "raw_response": {
+    "id": "5574fc9a-7f2c-464b-aca1-63655f98e8fb",
+    "created_at": 1789211531.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "daa5d7e9-bbe6-4533-a6c7-e62d2962f893",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract product-review semantic claims. Need adhere schema. Need determine claims. Source text: \"Doesn't work with Samsung S7\\nReturned,  would not charge my phone.\" Rating 1 but don't infer sentiment from star rating. Need claims zero/multiple. We need choose taxonomy pair. The review says doesn't work with Samsung S7, returned, would not charge my phone. Product likely charger? Need extract claims. Claim 1: compatibility with Samsung S7: primary compatibility_fit, secondary device_compatibility, polarity negative, evidence_span exact continuous substring. Could be \"Doesn't work with Samsung S7\" exact. Claim 2: would not charge my phone: primary function_performance, secondary charging_success, polarity negative, evidence_span \"would not charge my phone.\" Note exact substring continuous. Should we include \"Returned,\"? Probably not a claim or convenience? Returned is action, no product claim. Could include charging failure. Also device compatibility maybe \"Doesn't work with Samsung S7\" can be general performance? But taxonomy compatibility_fit/device_compatibility appropriate. \"would not charge my phone\" primary function_performance/charging_success. Ensure evidence_span exact substring from source_text, including case and punctuation. For first: source_text has \"Doesn't work with Samsung S7\\nReturned,  would not charge my phone.\" The substring \"Doesn't work with Samsung S7\" is continuous. Polarity negative. For second: \"would not charge my phone.\" includes period at end. Source has \"would not charge my phone.\" yes. Could evidence_span include \"Returned,  would not charge my phone.\"? No, claim is charging. Use \"would not charge my phone.\" The schema only claims list. Need valid JSON. No markdown? final only.\n\nNeed consider if first \"Doesn't work with Samsung S7\" could be compatibility_fit/device_compatibility or function_performance/general_performance? It states doesn't work with device, likely compatibility. Good.\n\nSecond: \"would not charge my phone\" is charging_success, function_performance. Negative. Could be same as first? Both supported. The review has multiple claims? Yes.\n\nPotential issue: \"Doesn't work with Samsung S7\" may also imply charging_success but explicit compatibility. We separate.\n\nNeed ensure no star inference. Polarity negative from text. Good.\n\nNeed output JSON exactly.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "5574fc9a-7f2c-464b-aca1-63655f98e8fb-0",
+        "status": "completed"
+      },
+      {
+        "id": "80302e8b-6ca4-42e0-abb7-9770aec330ba",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn't work with Samsung S7\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"would not charge my phone.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211534.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1039,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 583,
+      "output_tokens_details": {
+        "reasoning_tokens": 509
+      },
+      "total_tokens": 1622
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn't work with Samsung S7\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"would not charge my phone.\"}]}"
+}

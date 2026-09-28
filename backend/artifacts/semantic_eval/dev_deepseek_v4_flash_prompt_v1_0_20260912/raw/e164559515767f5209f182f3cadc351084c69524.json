@@ -1,0 +1,216 @@
+{
+  "review_id": "e164559515767f5209f182f3cadc351084c69524",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d0091aae-351b-414e-a8db-6cd63b8173fb",
+  "raw_response": {
+    "id": "d0091aae-351b-414e-a8db-6cd63b8173fb",
+    "created_at": 1789211920.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "e95dae42-70b8-4854-95ce-2ffe057a8d9f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source text: \"Anh, ok.\\nIt very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Rating 3, don't infer sentiment.\n\nWe need identify product-review semantic claims. Claims may be:\n1. \"It very slow to charge\" -> function_performance / charging_speed, polarity negative. Evidence exact substring: \"It very slow to charge\" (note grammar, source has \"It very slow to charge\"). Should we include \"It very slow to charge\" exact.\n2. \"it doesn't stop charging when the battery is at 100%\" -> This could be function_performance? charging_success? Or safety_risk? It doesn't stop charging at 100% is charging behavior, overcharging concern. Taxonomy: function_performance includes charging_success, charging_speed, power_output, protection_effectiveness, general_performance. Safety_risk includes overheating, melting_fire, electrical_fault, device_damage, abnormal_noise, physical_injury_irritation. \"doesn't stop charging when battery at 100%\" could be charging_success? It charges but not stopping. Maybe function_performance / charging_success negative? Or safety_risk / electrical_fault? Hmm. The claim is that charger continues charging after battery full. This may relate to charging_success? \"charging_success\" means whether charging works. Not exactly. Protection_effectiveness? Overcharge protection not effective. But taxonomy has protection_effectiveness under function_performance. Continuing to charge when full could be protection_effectiveness negative. However \"charging_success\" is more general. Need choose valid pair. Primary function_performance, secondary charging_success? It doesn't stop charging when battery at 100% -> charging process not correct. Could be \"charging_success\" negative? Hmm.\n\nLet's parse: \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Actually \"which is why I bought it\" likely refers to stop charging? Wait grammar: \"it doesn't stop charging when battery is 100%, which is why I bought it.\" Could mean he bought it for that feature? But contradictory: maybe bought it because it stops charging? The text says \"doesn't stop charging ... which is why I bought it\" ambiguous. But we don't infer. Claim: doesn't stop charging at 100%. Polarity negative? If product should stop charging, not stopping is negative. But phrase \"which is why I bought it\" maybe positive? Hmm don't infer sentiment from rating. The statement itself: \"doesn't stop charging when battery at 100%\" is likely a complaint. Polarity negative? But if they bought because of it? Actually \"which is why I bought it\" likely refers to slow charge? No, \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Could mean \"it doesn't stop charging at 100%, which is why I bought it\" as desired feature? That would be positive/neutral. But typical product review: \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Maybe they bought it because it doesn't stop charging? Unclear. We need determine polarity independently from star. The claim \"doesn't stop charging when battery is at 100%\" is a statement of behavior; if it's a feature it wanted, maybe positive. But without context, is it negative? Let's examine: \"which is why I bought it\" usually explains reason for purchase. So if it doesn't stop charging at 100%, and that's why I bought it, that's positive (they wanted overcharge? weird). But \"doesn't stop charging\" usually bad. Could be \"which is why I bought it\" refers to \"slow to charge\"? No, singular \"which\" could refer to whole clause? \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Hmm maybe they bought it because it doesn't stop charging? Actually maybe they mean it stops charging when battery at 100%? But text says doesn't stop. Could be a typo. We should not invent. For polarity, if the review states \"doesn't stop charging\" as a reason for buying, maybe positive? But the wording \"doesn't stop charging\" itself is negative if unwanted. However \"which is why I bought it\" indicates desired. What is \"it\"? The entire previous clause? \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Could mean \"it doesn't stop charging when battery is at 100%, which is why I bought it\" = they wanted a charger that doesn't stop charging? Unlikely. Could be they bought it because it is slow to charge? Also unlikely. The sentence is awkward.\n\nMaybe there is only one claim: slow to charge. The second clause maybe not a product claim? It is a product behavior. We can include it with polarity negative? Need decide.\n\nAlso \"Anh, ok.\" maybe title? Not product claim.\n\nNeed exact evidence substring. Claim 1 evidence: \"It very slow to charge\" (exact includes capital I). Claim 2 evidence: \"it doesn't stop charging when the battery is at 100%\" exact substring. We can include.\n\nTaxonomy for second: primary function_performance, secondary charging_success? Or protection_effectiveness? Let's think: \"doesn't stop charging when battery at 100%\" relates to charging control/protection. Function_performance / protection_effectiveness: protection_effectiveness likely refers to protection against overcharge, overcurrent, etc. The charger failing to stop at 100% is overcharge protection failure. That seems appropriate. But is \"protection_effectiveness\" about protecting device? Yes. Alternatively safety_risk / overheating? Not stated. No safety issue explicitly. So function_performance / protection_effectiveness negative.\n\nBut if they wanted it not to stop charging, polarity positive/mixed. Hmm. Let's see review title: \"Anh, ok.\" rating 3. Could be \"Anh, ok.\" means \"Ah, ok.\"? The review: \"Anh, ok. It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Maybe they are saying \"It doesn't stop charging when battery at 100%, which is why I bought it\" i.e., they wanted that. But then \"very slow to charge\" negative. The second could be positive? But \"doesn't stop charging\" is generally bad, but \"which is why I bought it\" makes it positive. The instruction: Do not infer sentiment from star rating. We can infer from wording. The wording \"which is why I bought it\" indicates positive motivation. So polarity for second could be positive. But is it a product claim? Yes, it claims feature. But if it's positive, that's odd. Let's consider if \"which is why I bought it\" refers to \"it doesn't stop charging when battery is at 100%\" -> reason for purchase. So polarity positive. But the phrase \"doesn't stop charging\" itself is negative; the reason clause flips. The claim is \"it doesn't stop charging when battery at 100%, which is why I bought it.\" The entire evidence span includes positive context. So polarity positive? Hmm.\n\nHowever, the task: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair, independently determine polarity, and copy evidence_span as an exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence or topics.\" So we need polarity based on claim. For \"It very slow to charge\" negative. For \"it doesn't stop charging when the battery is at 100%, which is why I bought it\" — if the claim is \"doesn't stop charging at 100%\" as a feature, and they bought it for that, polarity positive? But the claim itself \"doesn't stop charging\" is a negative behavior if we ignore the reason. The reason is part of evidence. We could include entire clause. The polarity could be mixed? Because \"doesn't stop charging\" negative but \"which is why I bought it\" positive. But claim is one behavior with mixed sentiment? The instruction has mixed polarity. Could use mixed for second? Hmm.\n\nLet's read exact: \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" The \"which is why I bought it\" likely refers to \"it doesn't stop charging when battery at 100%\". So they are saying the charger does not stop charging at 100%, and that's why they bought it. Why would someone want that? Maybe they want to use device while charging? Or maybe they mean \"it doesn't stop charging when battery is at 100%, which is why I bought it [to avoid?]\" No. It's ambiguous. Maybe they are non-native and meant \"it stops charging when battery at 100%, which is why I bought it\" but wrote doesn't. We cannot correct. The polarity of the claim \"it doesn't stop charging when battery at 100%\" is negative if we consider typical expectation. But the explicit reason indicates positive. However, \"which is why I bought it\" might refer to the slow charging? No, \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" The \"which\" could refer to the entire preceding compound: \"It very slow to charge and it doesn't stop charging...\" That doesn't make sense: \"slow to charge and doesn't stop charging, which is why I bought it\" -> they bought it because it is slow and overcharges? Unlikely. So \"which\" refers to the nearest antecedent: \"it doesn't stop charging when battery at 100%\". So they bought it because it doesn't stop charging. So positive. But then why rating 3? Not infer.\n\nCould there be a claim about \"slow to charge\" and \"doesn't stop charging\" as two separate. For second, polarity positive? But if we mark positive, is that supported? The evidence span should include \"it doesn't stop charging when the battery is at 100%, which is why I bought it\" to capture positive. But the claim itself is a behavior. The taxonomy: function_performance / charging_success? Or protection_effectiveness? If positive, it's a feature: doesn't stop charging. But what taxonomy? Maybe function_performance / charging_success positive? The charger successfully continues charging? Hmm. Or convenience_value / general_convenience? Not really.\n\nAlternatively, maybe we should not extract second as separate claim because it's not a clear product claim? But it is a product behavior. The task says extract semantic claims. We can include.\n\nLet's consider if \"which is why I bought it\" means they bought the product because of the slow charging? No, maybe they mean \"it doesn't stop charging when battery is at 100%, which is why I bought it\" as a desired feature: they wanted a charger that doesn't stop charging? That is odd but possible. If so, polarity positive. But the phrase \"doesn't stop charging\" is typically negative. The instruction \"Do not infer sentiment from star rating\" doesn't say don't infer from typical expectations. We should judge polarity from the text. The text explicitly says \"which is why I bought it\" = positive reason. So I lean positive for second. But then what about \"It very slow to charge\" negative. The overall rating 3. That seems plausible: they like that it doesn't stop charging? Hmm.\n\nLet's think of product B07P9S6R9Y maybe a charger? \"Anh, ok.\" The review: \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Maybe they bought a charger that doesn't stop charging at 100% to keep device topped up? Some people want that? Possibly for a battery maintainer? But it says \"which is why I bought it\" so yes positive.\n\nBut if the charger doesn't stop charging at 100%, it could damage battery. That's safety risk. But the reviewer wanted it. Polarity positive? The claim is the product does this. The polarity of the claim is positive if the reviewer views it positively. So positive.\n\nHowever, the taxonomy for \"doesn't stop charging when battery at 100%\" as a positive feature: Could be function_performance / charging_success? \"Charging success\" maybe it successfully charges continuously. Or \"protection_effectiveness\" negative? If positive, protection_effectiveness positive? That's weird: not stopping is not protection. Maybe \"charging_success\" is neutral/positive: it charges. But the specific behavior is not stopping. There's no specific secondary for \"charging_stop\" or \"overcharge_protection\". The closest might be \"protection_effectiveness\" (protection against overcharge). If they wanted it not to stop, then protection_effectiveness negative? Actually if it doesn't stop, protection is ineffective, but they like it. The polarity of the claim about protection effectiveness would be negative? But reviewer sentiment positive. The polarity field likely reflects reviewer's sentiment toward the aspect, not objective. If they like that it doesn't stop, then protection_effectiveness is positive? That's confusing.\n\nMaybe better: The claim \"it doesn't stop charging when battery at 100%\" is a fact. The reviewer's sentiment is positive because they bought it for that. But the taxonomy pair should describe the aspect. Which aspect? It's about charging behavior. \"charging_success\" is about whether charging works. Does it work? Yes, it charges and doesn't stop. But \"doesn't stop\" is a specific behavior. Could be \"general_performance\" maybe. Hmm.\n\nLet's search memory: taxonomy-v1.1 has function_performance: charging_success, charging_speed, power_output, protection_effectiveness, general_performance. \"Protection_effectiveness\" likely covers overcharge protection, overcurrent, etc. So \"doesn't stop charging when battery at 100%\" is protection_effectiveness (negative if bad). If positive, it's positive protection? But not stopping is not protection. If reviewer wanted it, then they don't view it as protection. Maybe it's \"charging_success\" because it successfully charges even at 100%? Not sure.\n\nMaybe we can avoid second claim by treating it as part of first? No, separate aspect.\n\nLet's consider the possibility that \"which is why I bought it\" refers to \"it doesn't stop charging when battery at 100%\" as a negative? Wait, \"which is why I bought it\" could mean \"I bought it [to solve the problem that it doesn't stop charging when battery at 100%]\"? No, \"which is why I bought it\" means the preceding clause is the reason for purchase. So positive.\n\nBut maybe the review is sarcastic? No.\n\nLet's look at title: \"Anh, ok.\" maybe \"Ah, ok.\" Not helpful.\n\nThe instruction: \"If no supported product claim exists, return an empty list.\" We have at least slow charging.\n\nLet's decide final output. I think include two claims:\n1. primary function_performance, secondary charging_speed, polarity negative, evidence_span \"It very slow to charge\"\n2. primary function_performance, secondary charging_success? or protection_effectiveness? polarity positive? evidence_span \"it doesn't stop charging when the battery is at 100%, which is why I bought it\"\n\nBut if polarity positive, what secondary? Maybe \"charging_success\" positive because it charges and doesn't stop? Actually \"charging_success\" is about whether charging succeeds. The claim is that it doesn't stop charging at 100%, which is a charging behavior. It might be considered \"charging_success\" (it continues charging). But \"success\" usually means it charges the device. Not stopping at 100% is not success? It is successful charging. Hmm.\n\nAlternatively, secondary \"protection_effectiveness\" with polarity negative? Because objectively, not stopping at 100% is a failure of protection. But the reviewer says that's why they bought it, so they view it as positive. If we set polarity negative, we'd be inferring negative from typical expectations, contradicting explicit positive reason. The task says determine polarity from review. So positive.\n\nBut if polarity positive, \"protection_effectiveness\" positive is contradictory: protection is effective? Actually if it doesn't stop, protection is not effective. So cannot use protection_effectiveness positive. Maybe use \"charging_success\" positive: it successfully keeps charging. That might be okay.\n\nLet's see if there's a secondary \"general_performance\" that can be positive. But charging_success is more specific.\n\nWhat about \"convenience_value\" / \"general_convenience\" positive? Not really.\n\nMaybe the second claim is not a product claim because it's ambiguous? But it is. We can include with primary function_performance, secondary charging_success, polarity positive. Evidence span exact.\n\nWait, the phrase \"which is why I bought it\" might refer to the entire product? \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Could be they bought it because it doesn't stop charging at 100%? Yes. So positive.\n\nBut if we mark positive, is that consistent with \"doesn't stop charging\"? The claim is \"it doesn't stop charging when battery at 100%\". The polarity of that claim as expressed by reviewer is positive. The evidence span should include the positive reason to justify polarity. So evidence_span: \"it doesn't stop charging when the battery is at 100%, which is why I bought it\". That includes the comma and reason. Exact substring? Source: \"it doesn't stop charging when the battery is at 100%, which is why I bought it.\" Yes.\n\nBut wait, the source text has newline after \"Anh, ok.\" and then \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" So exact substring \"it doesn't stop charging when the battery is at 100%, which is why I bought it\" is continuous. Yes.\n\nFor first claim, evidence \"It very slow to charge\" exact. Good.\n\nNow, could \"It very slow to charge\" be primary function_performance secondary charging_speed negative. Yes.\n\nNow, if I include second as positive, what secondary? Let's re-evaluate taxonomy. The claim is about charging behavior: it doesn't stop charging at 100%. That is about charging success? \"charging_success\" might mean whether it successfully charges. It does charge. But the specific \"doesn't stop\" is not about success. \"protection_effectiveness\" is about protecting battery from overcharge. Not stopping means protection ineffective. If reviewer likes it, then they don't consider it a protection issue. So maybe it's not protection_effectiveness. Could be \"general_performance\" because it's a general charging behavior. But \"charging_success\" is more specific. I'll use function_performance / charging_success, polarity positive. But is that valid? The taxonomy pair must be exactly one valid primary/secondary. Any secondary under primary is valid. So yes.\n\nAlternatively, could be \"safety_risk / overheating\" but no.\n\nLet's consider if the second claim should be negative because \"doesn't stop charging\" is a negative product behavior, and \"which is why I bought it\" might be a mistake or sarcasm? The instruction says do not infer sentiment from star rating. We shouldn't correct. I think explicit \"which is why I bought it\" is strong positive. So positive.\n\nBut wait, the review title \"Anh, ok.\" maybe \"Ah, ok.\" Could be \"Anh, ok.\" Not relevant.\n\nLet's produce JSON with two claims. Ensure no extra text. Use exact schema. The evidence_span for second should be exact continuous substring. Start with lowercase \"it\" because after \"and \". So \"it doesn't stop charging when the battery is at 100%, which is why I bought it\". Yes.\n\nLet's check exact source: \"Anh, ok.\\nIt very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\"\nSo \"It very slow to charge\" is exact. \"it doesn't stop charging when the battery is at 100%, which is why I bought it\" is exact. Good.\n\nNow final JSON:\n{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"It very slow to charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"it doesn't stop charging when the battery is at 100%, which is why I bought it\"}]}\n\nBut let's double-check polarity for second. If we choose \"charging_success\" positive, does the evidence support positive? The phrase \"which is why I bought it\" supports positive. But \"doesn't stop charging\" might be neutral? The reviewer bought it for that, so positive. Yes.\n\nHowever, could the second claim be considered \"function_performance / protection_effectiveness\" with polarity negative? Let's think: If a charger doesn't stop charging at 100%, that is a failure of protection_effectiveness. The reviewer says \"which is why I bought it\" — that's weird. Maybe they meant \"which is why I bought it\" as in \"I bought it because it doesn't stop charging when battery at 100%\"? That would mean they wanted a charger that doesn't stop charging. So they view it as a feature. If we label protection_effectiveness, it would be negative objectively, but positive from reviewer? Polarity should reflect reviewer sentiment. So if we label protection_effectiveness, polarity would be positive? That's contradictory: protection effectiveness positive means it protects well, but it doesn't stop charging, so protection is not effective. So not protection_effectiveness. Charging_success positive: it successfully charges. That's okay.\n\nMaybe use \"general_performance\" positive? But charging_success is more specific. I'll stick with charging_success.\n\nAlternatively, if the second claim is negative, then secondary could be protection_effectiveness negative. Which is more likely expected by evaluation? Let's think of typical annotation. The sentence: \"It very slow to charge and it doesn't stop charging when the battery is at 100%, which is why I bought it.\" A human annotator might extract two claims: slow charging (negative), doesn't stop charging (negative? or positive?). The phrase \"which is why I bought it\" could be interpreted as \"I bought it because it doesn't stop charging at 100%\"—so positive. But typical product review: if it doesn't stop charging at 100%, that's a defect. The \"which is why I bought it\" might be a non-native speaker error; they might mean \"which is why I bought it\" as in \"that's the reason I bought it [to avoid this issue?]\" No, that doesn't fit. Could be they bought it because it doesn't stop charging? Some devices like battery chargers for cars might be supposed to not stop? Unclear. The instruction says do not infer sentiment from star rating. It doesn't say ignore explicit positive phrases. So positive.\n\nBut if the evaluation expects negative, we might be wrong. Let's consider the possibility that \"which is why I bought it\" refers to \"It very slow to charge and it doesn't stop charging...\" as a whole? That would mean they bought it because it is slow and doesn't stop charging, which is absurd. So the only sensible reading is that they bought it because it doesn't stop charging at 100%. So positive.\n\nBut wait, maybe \"which is why I bought it\" means \"I bought it because it doesn't stop charging when battery at 100%\"? That is a feature they wanted. So positive.\n\nThus final.\n\nLet's ensure no additional properties. The JSON schema has \"$defs\" etc. We just need output object with \"claims\". Good.\n\nLet's produce final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d0091aae-351b-414e-a8db-6cd63b8173fb-0",
+        "status": "completed"
+      },
+      {
+        "id": "ebfe29f7-f9b0-49e9-bc8e-dbff5dd1ecc9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"It very slow to charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"it doesn't stop charging when the battery is at 100%, which is why I bought it\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211945.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1046,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 5301,
+      "output_tokens_details": {
+        "reasoning_tokens": 5217
+      },
+      "total_tokens": 6347
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"It very slow to charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"it doesn't stop charging when the battery is at 100%, which is why I bought it\"}]}"
+}

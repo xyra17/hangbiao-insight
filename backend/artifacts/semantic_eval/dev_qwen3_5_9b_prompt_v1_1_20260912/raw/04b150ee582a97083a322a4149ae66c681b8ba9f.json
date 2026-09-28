@@ -1,0 +1,50 @@
+{
+  "review_id": "04b150ee582a97083a322a4149ae66c681b8ba9f",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-fcrqof2q5b81tlj2yc81bn",
+  "raw_response": {
+    "id": "chatcmpl-fcrqof2q5b81tlj2yc81bn",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"break very very very easy\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"negative\", \"evidence_span\": \"I had to change it so quickly\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"This is really bad\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"it is easy to put it on\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"the screen of my phone is perfect thanks to this\"}]}"
+        }
+      }
+    ],
+    "created": 1789186117,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 205,
+      "prompt_tokens": 646,
+      "total_tokens": 851,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 204,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"break very very very easy\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"negative\", \"evidence_span\": \"I had to change it so quickly\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"This is really bad\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"it is easy to put it on\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"the screen of my phone is perfect thanks to this\"}]}"
+}

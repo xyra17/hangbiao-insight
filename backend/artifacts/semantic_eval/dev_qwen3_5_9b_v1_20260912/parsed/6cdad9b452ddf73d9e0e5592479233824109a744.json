@@ -1,0 +1,69 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-002f20be749b2418",
+      "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "positive",
+      "evidence_span": "Super easy to install.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-tse6hck6qjglw5z65y41"
+    },
+    {
+      "prediction_id": "SP-ed50a60a30829f6e",
+      "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "positive",
+      "evidence_span": "It does perfectly protect the screen.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-tse6hck6qjglw5z65y41"
+    },
+    {
+      "prediction_id": "SP-6fcf3813b8048a2e",
+      "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "dual_port_multi_device",
+      "polarity": "positive",
+      "evidence_span": "Love the fact that it comes in a pack of three.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-tse6hck6qjglw5z65y41"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

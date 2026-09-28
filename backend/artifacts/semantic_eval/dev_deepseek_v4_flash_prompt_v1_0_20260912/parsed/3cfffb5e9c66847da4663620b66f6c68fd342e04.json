@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-b848f8151d036c55",
+      "review_id": "3cfffb5e9c66847da4663620b66f6c68fd342e04",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "intermittent_failure",
+      "polarity": "negative",
+      "evidence_span": "It rarely works.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "f82ed8e4-cf99-4fde-afd2-c02ea6502840"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

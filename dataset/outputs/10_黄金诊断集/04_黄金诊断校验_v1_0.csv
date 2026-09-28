@@ -1,0 +1,8 @@
+﻿check_name,expected,actual,passed
+golden_case_count,7,7,True
+unique_case_id,7,7,True
+all_case_frozen,7,7,True
+noexp_case_matches_09c,SYN-NOEXP-001__2019-06,SYN-NOEXP-001__2019-06,True
+business_source_synthetic,0,0,True
+causal_claim_disabled,0,0,True
+expectation_complete,7,7,True

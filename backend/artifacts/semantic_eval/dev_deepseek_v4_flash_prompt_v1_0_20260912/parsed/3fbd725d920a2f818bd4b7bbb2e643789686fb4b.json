@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-6cfdc581b228b141",
+      "review_id": "3fbd725d920a2f818bd4b7bbb2e643789686fb4b",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "Neither of the two plugins I purchased will charge anything.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "90f17a66-44ba-43fd-9aa4-bf70af6cede5"
+    },
+    {
+      "prediction_id": "SP-b6ede25346bcc135",
+      "review_id": "3fbd725d920a2f818bd4b7bbb2e643789686fb4b",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "Entirely defective.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "90f17a66-44ba-43fd-9aa4-bf70af6cede5"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

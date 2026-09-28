@@ -1,0 +1,216 @@
+{
+  "review_id": "d3d6f9b64b8214043e46671aea881bf488656ad4",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "ac865843-6237-4df6-9d6c-b2d13314efbc",
+  "raw_response": {
+    "id": "ac865843-6237-4df6-9d6c-b2d13314efbc",
+    "created_at": 1789210552.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "cccd0e3f-63b6-4dcb-aeea-944926ca856d",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer structured extraction only. Need parse source_text: \"It great\\nIt works great and has a dual slot usb for charging 2 things at once. Great value\"\n\nNeed extract product-review semantic claims. Each claim exactly one valid primary/secondary taxonomy pair, polarity, evidence_span exact continuous substring. No infer from star. We can have multiple claims.\n\nWe need decide claims:\n- \"It works great\" general performance positive? primary function_performance secondary general_performance evidence \"It works great\" or \"works great\". polarity positive.\n- \"has a dual slot usb for charging 2 things at once\" convenience_value dual_port_multi_device positive? Evidence exact: \"has a dual slot usb for charging 2 things at once\" or \"dual slot usb for charging 2 things at once\". Claim about dual port multi device. positive.\n- \"Great value\" convenience_value price_value positive evidence \"Great value\".\n\nPotential \"It great\" maybe general performance positive? But \"It great\" ungrammatical, likely title repeated. Could be overall product quality? But if title and source_text includes \"It great\", maybe claim? It is vague. We can include? Need if supported product claim. \"It great\" maybe general performance positive? Evidence \"It great\". But \"It works great\" already covers. We should avoid duplicate? Could include \"It great\" as general_performance positive? But not necessary. The instruction: a review may contain zero or multiple claims. Extract all supported product claims. \"It great\" is a product claim? It's a fragment saying it's great, likely overall. But taxonomy other_unknown insufficient? Hmm.\n\nNeed exact evidence span. We should include claims where clear. \"It works great\" function_performance/general_performance positive. \"has a dual slot usb for charging 2 things at once\" convenience_value/dual_port_multi_device positive. \"Great value\" convenience_value/price_value positive.\n\nNeed decide primary/secondary valid pair. For dual_port_multi_device under convenience_value. For price_value under convenience_value. General_performance under function_performance.\n\nPolarity for dual slot: positive because statement feature, likely positive. The phrase \"dual slot usb for charging 2 things at once\" is positive/neutral? It's a feature, in context \"works great and has...\" and \"Great value\"; likely positive. In taxonomy, polarity can be positive. For feature existence maybe neutral? But review sentiment positive: \"great value\", overall. The claim \"has a dual slot usb for charging 2 things at once\" itself is positive? It could be neutral feature. But in review, positive. We can set positive.\n\nNeed ensure evidence_span exact continuous substring from SOURCE_TEXT. For first, \"It works great\" is exact? SOURCE_TEXT: \"It great\\nIt works great and has a dual slot usb for charging 2 things at once. Great value\" There is newline after It great. \"It works great\" yes substring. For dual, \"has a dual slot usb for charging 2 things at once\" exact substring? Let's verify: \"It works great and has a dual slot usb for charging 2 things at once.\" Yes substring starts at \"has\". Contains \"a dual slot usb...\" Yes exact. But note \"usb\" lowercase. Fine. For value: \"Great value\" exact at end? Yes.\n\nCould include \"It great\" as general_performance? Hmm. If include, evidence_span \"It great\" exact. But \"It great\" is likely title. It is a very vague overall positive. Taxonomy maybe other_unknown/uncategorized? But if no specific product claim, maybe not. \"It great\" isn't a product claim? It is overall impression. The taxonomy has general_performance. But \"works great\" already covers performance. Duplicative. We can omit.\n\nNeed output JSON only. Ensure schema exactly {\"claims\":[...]}.\n\nLet's produce.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "ac865843-6237-4df6-9d6c-b2d13314efbc-0",
+        "status": "completed"
+      },
+      {
+        "id": "8acd52da-1d98-42aa-b5cf-8e584f06cdaf",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It works great\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"has a dual slot usb for charging 2 things at once\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great value\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210556.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1037,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 938,
+      "output_tokens_details": {
+        "reasoning_tokens": 830
+      },
+      "total_tokens": 1975
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It works great\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"has a dual slot usb for charging 2 things at once\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great value\"}]}"
+}

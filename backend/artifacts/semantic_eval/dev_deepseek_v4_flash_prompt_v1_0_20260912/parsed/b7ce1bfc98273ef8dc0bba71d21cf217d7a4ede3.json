@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7909f3d3ed9497e9",
+      "review_id": "b7ce1bfc98273ef8dc0bba71d21cf217d7a4ede3",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "ease_of_use",
+      "polarity": "positive",
+      "evidence_span": "They are so easy and convenient to use.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "39717223-7bcd-4c5d-b5aa-92cca14597ee"
+    },
+    {
+      "prediction_id": "SP-4303ae7c1401d178",
+      "review_id": "b7ce1bfc98273ef8dc0bba71d21cf217d7a4ede3",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "general_convenience",
+      "polarity": "positive",
+      "evidence_span": "So easy and convenient",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "39717223-7bcd-4c5d-b5aa-92cca14597ee"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

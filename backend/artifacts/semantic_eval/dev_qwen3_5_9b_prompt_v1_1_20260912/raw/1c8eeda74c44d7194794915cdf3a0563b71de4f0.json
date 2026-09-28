@@ -1,0 +1,50 @@
+{
+  "review_id": "1c8eeda74c44d7194794915cdf3a0563b71de4f0",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-7z05nfaihnvtidcp0s8go",
+  "raw_response": {
+    "id": "chatcmpl-7z05nfaihnvtidcp0s8go",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"lasted a long time throughout me dropping my phone a lot and took the damage well\"}]}"
+        }
+      }
+    ],
+    "created": 1789186282,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 56,
+      "prompt_tokens": 623,
+      "total_tokens": 679,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 55,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"positive\", \"evidence_span\": \"lasted a long time throughout me dropping my phone a lot and took the damage well\"}]}"
+}

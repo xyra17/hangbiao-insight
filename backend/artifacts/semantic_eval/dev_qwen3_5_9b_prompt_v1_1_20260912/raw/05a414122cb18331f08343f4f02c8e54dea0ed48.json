@@ -1,0 +1,50 @@
+{
+  "review_id": "05a414122cb18331f08343f4f02c8e54dea0ed48",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-xujm74gg5u7csohhs0kzv",
+  "raw_response": {
+    "id": "chatcmpl-xujm74gg5u7csohhs0kzv",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Excellent price\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"needs a continuous charging light\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"the no light feature is a liability\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"find that my phone wasn't charging\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"It needs a continuous charging/ charged light\"}]}"
+        }
+      }
+    ],
+    "created": 1789186463,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 199,
+      "prompt_tokens": 644,
+      "total_tokens": 843,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 198,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Excellent price\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"needs a continuous charging light\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"the no light feature is a liability\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"find that my phone wasn't charging\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"status_indicator_feedback\", \"polarity\": \"negative\", \"evidence_span\": \"It needs a continuous charging/ charged light\"}]}"
+}

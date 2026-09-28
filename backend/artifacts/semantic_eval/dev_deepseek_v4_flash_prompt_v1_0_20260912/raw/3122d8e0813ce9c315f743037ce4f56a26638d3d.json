@@ -1,0 +1,216 @@
+{
+  "review_id": "3122d8e0813ce9c315f743037ce4f56a26638d3d",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "45c6b9f4-188a-4681-a264-18258fb4cdd8",
+  "raw_response": {
+    "id": "45c6b9f4-188a-4681-a264-18258fb4cdd8",
+    "created_at": 1789212144.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "8f28c284-8e30-4c1b-b016-ad776110a68b",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer structured extraction. Need parse review. Need identify claims. Source: \"Dies quickly\\nWe bought three of these. Right from the beginning they worked great...no complaints...however, all three of them died within a few months. They just completely stopped working. We had to throw them all away.\"\n\nProduct likely some item? B07P9S6R9Y maybe charger? We don't know. But review semantic claims. Need extract product-review claims. Valid taxonomy pairs. Need exact evidence substring.\n\nClaims:\n- \"Right from the beginning they worked great...no complaints\" positive general performance? primary function_performance secondary general_performance polarity positive evidence_span \"worked great\" or \"Right from the beginning they worked great\". But if product claim? likely performance initially positive. We can include? It says no complaints. However main negative: died quickly, stopped working, short lifespan. Need claims:\n1. \"all three of them died within a few months\" -> reliability_durability / short_lifespan? Or stopped_working? \"died\" implies stopped working after few months. short_lifespan. Polarity negative. evidence_span exact continuous \"all three of them died within a few months\" or \"died within a few months\". \n2. \"They just completely stopped working\" -> reliability_durability / stopped_working negative.\n3. \"Dies quickly\" title? Is title part of source_text? source_text starts with \"Dies quickly\" yes. That itself is claim reliability_durability short_lifespan? Evidence \"Dies quickly\" negative.\nBut duplicate? We need maybe extract all distinct claims. Could include initial positive general performance. But the review says \"Right from the beginning they worked great...no complaints...however...\" That is a claim of function performance positive. Should we include? The instruction: A review may contain zero or multiple claims. Extract product-review semantic claims. Do not infer sentiment from star rating. If no supported product claim exists. So yes, \"worked great\" is product performance claim.\n\nNeed exactly one valid primary/secondary pair. Let's map:\n- \"worked great\" -> function_performance / general_performance positive.\n- \"Dies quickly\" -> reliability_durability / short_lifespan negative. But if title \"Dies quickly\" may be summary of short lifespan.\n- \"all three of them died within a few months\" -> reliability_durability / short_lifespan negative. Similar duplicate. Could count as one? But evidence spans different. We can include both? Need avoid over? The review has multiple assertions. It might be okay.\n- \"They just completely stopped working\" -> reliability_durability / stopped_working negative.\n- \"We had to throw them all away\" is consequence, not product claim? Could be general? No.\n\nNeed careful: \"all three of them died within a few months\" could be short_lifespan (died after months) not stopped_working. \"stopped working\" is separate. Good.\n\nNeed output JSON only. Ensure evidence_span exact continuous substring from SOURCE_TEXT. For title \"Dies quickly\" source text includes newline after? \"Dies quickly\\nWe bought...\" substring \"Dies quickly\" exact. Good. \"Right from the beginning they worked great\" exact. \"all three of them died within a few months\" exact? Source: \"however, all three of them died within a few months.\" So exact substring \"all three of them died within a few months\" yes. \"They just completely stopped working\" exact.\n\nPotential issue: \"Dies quickly\" is same as short_lifespan. If include both, okay. Could there be \"we bought three of these\" no claim. \"Right from the beginning they worked great...no complaints\" positive general performance. \"however\" contrast.\n\nNeed polarity: For \"worked great\" positive. For short lifespan negative, stopped working negative.\n\nNeed output schema: {\"claims\":[...]}. No extra.\n\nNeed maybe no \"mixed\"? Could initial positive and later negative might overall mixed but claims independent. Each claim polarity independent. Good.\n\nNeed include no unsupported claims. Maybe \"We had to throw them all away\" implies defective/disposable, but no taxonomy. Skip.\n\nLet's craft final JSON. Ensure fields. Use primary/secondary exactly. For \"Dies quickly\" primary reliability_durability secondary short_lifespan. Evidence \"Dies quickly\". For initial: primary function_performance secondary general_performance polarity positive evidence \"Right from the beginning they worked great\" maybe includes no complaints? The claim is worked great. \nFor died: primary reliability_durability secondary short_lifespan negative evidence \"all three of them died within a few months\". \nFor stopped working: primary reliability_durability secondary stopped_working negative evidence \"They just completely stopped working\".\n\nPotential duplicate \"Dies quickly\" and \"died within few months\": Both short_lifespan. Accept? The task says every claim. Title is part of source_text, likely a claim. We can include. If evaluator expects maybe three claims? Hard. We'll include four. But maybe title \"Dies quickly\" is not separate from \"died within a few months\", but title is a summary claim. It's okay.\n\nNeed exact continuous substring \"Right from the beginning they worked great\" is exact? source_text: \"Right from the beginning they worked great...no complaints...however...\" Yes substring includes capitalization and no ellipsis? The text has \"great...no\" with three periods. \"Right from the beginning they worked great\" is continuous before ellipsis. Yes.\n\nOutput JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "45c6b9f4-188a-4681-a264-18258fb4cdd8-0",
+        "status": "completed"
+      },
+      {
+        "id": "b2d5b7ae-e3c9-45e4-a232-ef45cc3003b4",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Right from the beginning they worked great\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"Dies quickly\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"all three of them died within a few months\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"They just completely stopped working\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212151.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1063,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1310,
+      "output_tokens_details": {
+        "reasoning_tokens": 1159
+      },
+      "total_tokens": 2373
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Right from the beginning they worked great\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"Dies quickly\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"all three of them died within a few months\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"They just completely stopped working\"}]}"
+}

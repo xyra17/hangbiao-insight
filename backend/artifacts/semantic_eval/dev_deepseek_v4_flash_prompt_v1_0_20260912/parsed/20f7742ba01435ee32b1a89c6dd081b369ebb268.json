@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-12291eb4184e5e18",
+      "review_id": "20f7742ba01435ee32b1a89c6dd081b369ebb268",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "general_performance",
+      "polarity": "negative",
+      "evidence_span": "Doesn't work",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "9497dfeb-17a3-4386-84bb-c2680418908c"
+    },
+    {
+      "prediction_id": "SP-a4640a0a102819fe",
+      "review_id": "20f7742ba01435ee32b1a89c6dd081b369ebb268",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "positioning_alignment",
+      "polarity": "negative",
+      "evidence_span": "Takes too much time to angle the phone right.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "9497dfeb-17a3-4386-84bb-c2680418908c"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

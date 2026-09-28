@@ -1,0 +1,216 @@
+{
+  "review_id": "4a230a2fa759dfa12ec713a86750577928e7db0d",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "e1dcb67c-0f13-479b-9831-962131fa5f72",
+  "raw_response": {
+    "id": "e1dcb67c-0f13-479b-9831-962131fa5f72",
+    "created_at": 1789210540.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "5d35042c-4f6e-46eb-aea7-0df0367b89ea",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. Need extract claims. Review: title \"They were good while they lasted\"; source: \"They were good while they lasted\\nI bought these in July. 5 months later they both stopped working all together. This sucks because I really had night hope for these. Good concept but they don’t last.\"\n\nNeed product-review semantic claims. We need identify claims, taxonomy pair. Product B0BYJ8ZVWH unknown maybe charger? \"both stopped working\" likely reliability_durability / stopped_working. Also short lifespan? 5 months later stopped working. \"don't last\" could short_lifespan. \"Good concept\" maybe general performance? Need exactly one primary/secondary pair per claim. Could include \"stopped working all together\" as reliability_durability/stopped_working negative. \"5 months later\" maybe short_lifespan negative. \"They don't last\" short_lifespan negative. But avoid duplicate? We can have multiple claims. Evidence span exact continuous substring. Need no infer star. \"They were good while they lasted\" positive? It implies good function while lasted, maybe general_performance positive. But phrase is title included in source_text? source_text includes title first line. Could claim function_performance/general_performance positive with evidence \"They were good while they lasted\". However \"while they lasted\" negative lifespan. Hmm semantic claims: Good concept but they don’t last. \"Good concept\" not product performance? Maybe product_quality? concept vague maybe other_unknown/uncategorized? Probably not supported product claim? Could ignore.\n\nNeed decide claims. The review has explicit:\n- \"both stopped working all together\" => reliability_durability/stopped_working negative.\n- \"they don’t last\" => reliability_durability/short_lifespan negative.\n- \"5 months later\" as timeframe evidence for short lifespan? Could claim short_lifespan negative evidence \"5 months later they both stopped working all together\" but that overlaps stopped_working. Could be combined short_lifespan? But taxonomy has stopped_working and short_lifespan. We can extract both separately? A review may contain multiple claims. For \"5 months later they both stopped working all together\" primary reliability, secondary stopped_working. \"they don’t last\" short_lifespan. \"They were good while they lasted\" could positive general_performance? But \"while they lasted\" implies short lifespan, perhaps not separate positive claim? It says good while they lasted = positive function performance, negative durability. If extract, evidence exact substring \"They were good while they lasted\" from title. Polarity mixed? Actually claim about performance positive? \"They were good while they lasted\" = good performance but temporary. The phrase itself is mixed? The primary topic function_performance, secondary general_performance, polarity positive? But \"while they lasted\" negative durability not general performance. Could be mixed if overall. But likely want only clear product claims. Also \"Good concept\" maybe positive other? Concept not in taxonomy. No.\n\nNeed output JSON with claims. Ensure evidence_span is exact continuous substring from SOURCE_TEXT. Source_text includes title as first line. Evidence \"They were good while they lasted\" is exact. But if primary function_performance/general_performance positive. Hmm.\n\nLet's examine instruction: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair, independently determine polarity, and copy evidence_span as an exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence or topics. If no supported product claim exists, return an empty list.\"\n\nNeed probably not over-extract. Claim from \"they both stopped working all together\" definitely. Claim from \"they don’t last\" definitely short_lifespan. Claim \"Good concept\" maybe unsupported taxonomy? It is product concept, not listed. Could map product_quality/material? No. Ignore.\n\nClaim \"They were good while they lasted\" is about function, but \"while lasted\" perhaps general durability. Could be mixed: function_performance/general_performance positive? But if we already extract stopped working and short lifespan, this phrase adds positive performance. Should we include? It says \"Good concept but they don’t last\", concept. \"They were good while they lasted\" maybe positive general performance. Evidence span exact. Polarity positive? It says good. But \"while they lasted\" is qualifier. I think can include as positive general_performance because explicit \"good\". However \"while they lasted\" is about duration. Could be mixed. The claim is about performance being good. But maybe \"while they lasted\" makes overall mixed. Yet polarity should be per claim; the claim \"good while lasted\" includes both positive performance and negative duration, but primary topic function_performance/general_performance; polarity mixed? Hmm.\n\nLet's think likely expected by annotators. They might want:\n1. reliability_durability / stopped_working / negative / \"they both stopped working all together\"\n2. reliability_durability / short_lifespan / negative / \"they don’t last\" or \"5 months later they both stopped working all together\"\n\nCould also:\n3. function_performance / general_performance / positive / \"They were good while they lasted\"\n\nBut the title is in source_text and evidence. \"They were good while they lasted\" is a claim. It is not star rating. It's product semantic. Include? The instruction says a review may contain zero or multiple claims. I'll include maybe to be comprehensive. But \"while they lasted\" pushes maybe mixed. However primary function_performance/general_performance describes performance. The claim: \"They were good\" positive. Evidence includes \"while they lasted\" but the sentiment toward performance is positive. We can label positive. Hmm.\n\nCould \"I really had night hope\" (probably high hope? typo) not product claim. No.\n\nCould \"Good concept\" map to other_unknown/uncategorized positive? No because taxonomy other_unknown secondary insufficient_information/uncategorized. \"Good concept\" is not a supported product claim? It's vague product concept. Could be \"general_performance\"? No. Better ignore.\n\nNeed final JSON only. Let's structure.\n\nClaims:\n[\n {\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They were good while they lasted\"},\n {\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"5 months later they both stopped working all together\"},\n {\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"they don’t last\"}\n]\n\nCheck evidence exact: \"5 months later they both stopped working all together.\" There is period. Source: \"5 months later they both stopped working all together.\" Our evidence without period still continuous substring? \"5 months later they both stopped working all together\" yes before period. Fine. \"they don’t last\" exact includes curly apostrophe. Source: \"they don’t last.\" yes. \"They were good while they lasted\" exact first line. Good.\n\nPotential issue: \"They were good while they lasted\" is title and source_text includes it? Yes source_text: \"They were good while they lasted\\nI bought...\" So exact.\n\nShould \"stopped_working\" evidence be \"they both stopped working all together\" not include 5 months? The claim of stopped working is \"they both stopped working all together\"; 5 months later is time. Use exact \"they both stopped working all together\". For short_lifespan, evidence \"5 months later they both stopped working all together\" maybe better. But \"they don't last\" also. Need avoid duplicate same span? okay. I can use stopped_working evidence \"they both stopped working all together\" and short_lifespan evidence \"5 months later they both stopped working all together\" or \"they don’t last\". But if short_lifespan evidence \"they don’t last\" explicit. Good.\n\nCould \"5 months later they both stopped working all together\" also support short_lifespan, but two claims from same sentence maybe duplicate. We already have stopped_working, short_lifespan from \"don't last\". Fine.\n\nNeed ensure primary/secondary valid pair? function_performance/general_performance valid. reliability_durability/stopped_working valid. reliability_durability/short_lifespan valid. Good.\n\nFinal JSON only.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "e1dcb67c-0f13-479b-9831-962131fa5f72-0",
+        "status": "completed"
+      },
+      {
+        "id": "0ff3c57f-3613-4203-bf44-f5263e836e6d",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They were good while they lasted\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"they both stopped working all together\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"they don’t last\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210548.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1061,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1926,
+      "output_tokens_details": {
+        "reasoning_tokens": 1813
+      },
+      "total_tokens": 2987
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"They were good while they lasted\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"they both stopped working all together\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"they don’t last\"}]}"
+}

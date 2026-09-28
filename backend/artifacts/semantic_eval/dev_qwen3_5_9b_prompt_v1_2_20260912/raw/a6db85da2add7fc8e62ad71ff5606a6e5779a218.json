@@ -1,0 +1,50 @@
+{
+  "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-nya3p60wanfo11jrvyurcb",
+  "raw_response": {
+    "id": "chatcmpl-nya3p60wanfo11jrvyurcb",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"It cracked right away.\"}]}"
+        }
+      }
+    ],
+    "created": 1789188636,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 45,
+      "prompt_tokens": 610,
+      "total_tokens": 655,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 44,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"It cracked right away.\"}]}"
+}

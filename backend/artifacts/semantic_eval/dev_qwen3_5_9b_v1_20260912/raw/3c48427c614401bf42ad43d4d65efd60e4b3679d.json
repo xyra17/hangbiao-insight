@@ -1,0 +1,50 @@
+{
+  "review_id": "3c48427c614401bf42ad43d4d65efd60e4b3679d",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-a2e45spb127am9w29zfug",
+  "raw_response": {
+    "id": "chatcmpl-a2e45spb127am9w29zfug",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Perfect size and fits in your pocket to go anywhere you need it\"}]}"
+        }
+      }
+    ],
+    "created": 1789177197,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 50,
+      "prompt_tokens": 449,
+      "total_tokens": 499,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 49,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Perfect size and fits in your pocket to go anywhere you need it\"}]}"
+}

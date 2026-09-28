@@ -1,0 +1,50 @@
+{
+  "review_id": "1177b99813e7cfef446344be172765fe1a13b658",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-jguuqa3ubvps8z6tqtmn",
+  "raw_response": {
+    "id": "chatcmpl-jguuqa3ubvps8z6tqtmn",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"This device works very well, charges my phone with no problems, exactly as described.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"The price was right (much less than an Apple repair)\"}]}"
+        }
+      }
+    ],
+    "created": 1789177990,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 95,
+      "prompt_tokens": 555,
+      "total_tokens": 650,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 94,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"This device works very well, charges my phone with no problems, exactly as described.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"The price was right (much less than an Apple repair)\"}]}"
+}

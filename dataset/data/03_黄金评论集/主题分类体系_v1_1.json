@@ -1,0 +1,116 @@
+{
+  "version": "taxonomy-v1.1",
+  "status": "frozen",
+  "based_on": "taxonomy-v1.0",
+  "adopted_changes": [
+    {
+      "path": "function_performance / power_output",
+      "type": "add_subtopic",
+      "reason": "Repeated reviews explicitly discuss insufficient/sufficient power, current, or amperage."
+    },
+    {
+      "path": "reliability_durability / general_durability",
+      "type": "add_subtopic",
+      "reason": "Repeated reviews explicitly praise durability, long life, or long-term stable use."
+    },
+    {
+      "path": "compatibility_fit / accessory_compatibility",
+      "type": "add_subtopic",
+      "reason": "Non-case accessories such as Pop Socket can affect wireless charging compatibility."
+    },
+    {
+      "path": "safety_risk / electrical_fault",
+      "type": "add_subtopic",
+      "reason": "Short circuit and partial home power outage are distinct electrical safety signals."
+    },
+    {
+      "path": "safety_risk / device_damage",
+      "type": "add_subtopic",
+      "reason": "One review explicitly alleges battery/device damage caused by the charger."
+    },
+    {
+      "path": "product_quality / accessory_condition",
+      "type": "extend_definition",
+      "reason": "Includes missing expected accessories such as a wall plug/power adapter."
+    }
+  ],
+  "deferred_gaps": [
+    {
+      "candidate": "function_performance / charge_control",
+      "decision": "defer",
+      "reason": "Only one explicit auto-stop/100% charging-control example; keep general_performance for now."
+    },
+    {
+      "candidate": "product_quality / packaging_usability",
+      "decision": "defer",
+      "reason": "Low frequency and lower relevance to P0 operating diagnosis."
+    },
+    {
+      "candidate": "appearance_aesthetics",
+      "decision": "defer",
+      "reason": "Sparse and outside current P0 diagnostic scope."
+    },
+    {
+      "candidate": "shipping_delivery",
+      "decision": "defer",
+      "reason": "Fulfillment-side signal rather than product/use experience."
+    }
+  ],
+  "topic_structure": {
+    "function_performance": [
+      "charging_success",
+      "charging_speed",
+      "power_output",
+      "protection_effectiveness",
+      "general_performance"
+    ],
+    "reliability_durability": [
+      "general_durability",
+      "stopped_working",
+      "intermittent_failure",
+      "short_lifespan",
+      "cracking_breakage",
+      "wear_damage"
+    ],
+    "compatibility_fit": [
+      "device_compatibility",
+      "case_compatibility",
+      "accessory_compatibility",
+      "size_fit",
+      "port_fit",
+      "wall_socket_fit"
+    ],
+    "safety_risk": [
+      "overheating",
+      "melting_fire",
+      "electrical_fault",
+      "device_damage",
+      "abnormal_noise",
+      "physical_injury_irritation"
+    ],
+    "usability_installation": [
+      "positioning_alignment",
+      "installation_difficulty",
+      "bubbles_adhesion",
+      "ease_of_use",
+      "status_indicator_feedback",
+      "installation_accessories"
+    ],
+    "convenience_value": [
+      "dual_port_multi_device",
+      "portability_size",
+      "price_value",
+      "general_convenience"
+    ],
+    "product_quality": [
+      "material_build_quality",
+      "defective_on_arrival",
+      "accessory_condition"
+    ],
+    "other_unknown": [
+      "insufficient_information",
+      "uncategorized"
+    ]
+  },
+  "frozen_date": "2026-09-11"
+}

@@ -1,0 +1,50 @@
+{
+  "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-l9mx62lwhgbejmj5fz9sxm",
+  "raw_response": {
+    "id": "chatcmpl-l9mx62lwhgbejmj5fz9sxm",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"negative\", \"evidence_span\": \"cracks easy\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"installation wasn't the easiest\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"neutral\", \"evidence_span\": \"Looked great once it was one\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"Protects your screen well\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"your main screen will stay protected\"}]}"
+        }
+      }
+    ],
+    "created": 1789187221,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 192,
+      "prompt_tokens": 654,
+      "total_tokens": 846,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 191,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"negative\", \"evidence_span\": \"cracks easy\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"negative\", \"evidence_span\": \"installation wasn't the easiest\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"neutral\", \"evidence_span\": \"Looked great once it was one\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"Protects your screen well\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"your main screen will stay protected\"}]}"
+}

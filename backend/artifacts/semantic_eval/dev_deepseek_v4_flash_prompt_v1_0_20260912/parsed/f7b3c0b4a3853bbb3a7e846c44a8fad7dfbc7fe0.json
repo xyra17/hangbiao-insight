@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-24e1a9c25f7c1b3d",
+      "review_id": "f7b3c0b4a3853bbb3a7e846c44a8fad7dfbc7fe0",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_success",
+      "polarity": "negative",
+      "evidence_span": "Would not charge my Galaxy Watch 4 with the stock cable charger with a magnet pad.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "a8f64a18-c210-466b-97f5-b095ca438ca2"
+    },
+    {
+      "prediction_id": "SP-63f5f4c5f55c2f81",
+      "review_id": "f7b3c0b4a3853bbb3a7e846c44a8fad7dfbc7fe0",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "power_output",
+      "polarity": "negative",
+      "evidence_span": "this does not appear to provide enough power to charge the watch",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "a8f64a18-c210-466b-97f5-b095ca438ca2"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

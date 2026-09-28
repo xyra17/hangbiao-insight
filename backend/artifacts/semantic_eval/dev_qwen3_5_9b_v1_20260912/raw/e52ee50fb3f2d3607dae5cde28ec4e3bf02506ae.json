@@ -1,0 +1,50 @@
+{
+  "review_id": "e52ee50fb3f2d3607dae5cde28ec4e3bf02506ae",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-mhrfoxcr11pe7758e6r1ip",
+  "raw_response": {
+    "id": "chatcmpl-mhrfoxcr11pe7758e6r1ip",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"Hardly works\\nThis only works like 20% of the time.. when it decides to work it's great but not worth it.\"}]}"
+        }
+      }
+    ],
+    "created": 1789177951,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 64,
+      "prompt_tokens": 453,
+      "total_tokens": 517,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 63,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"Hardly works\\nThis only works like 20% of the time.. when it decides to work it's great but not worth it.\"}]}"
+}

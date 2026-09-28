@@ -1,0 +1,216 @@
+{
+  "review_id": "d6b4a9093921c70626e93b5c3249e0123a50469f",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "3e3cc919-2047-46c9-aff2-aa90762409dc",
+  "raw_response": {
+    "id": "3e3cc919-2047-46c9-aff2-aa90762409dc",
+    "created_at": 1789210629.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "a5c6c5d0-b465-4df8-a46c-60a5f7b45e51",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need adhere schema. We need parse review. Source_text: \"Works well\\nHaven’t used for travel yet but easy to use for charging at home.\" Rating 5 but don't infer sentiment from star. Need claims. Product likely charger? Need identify claims: \"Works well\" general performance positive? But sources exact substring. \"Works well\" is exact. It claims function_performance/general_performance polarity positive. \"easy to use for charging at home\" usability_installation/ease_of_use positive? Also charging at home maybe function_performance/charging_success? Let's think. Review: Works well. Haven’t used for travel yet but easy to use for charging at home. Claim 1: Works well -> general_performance positive. Claim 2: easy to use for charging at home -> ease_of_use positive. Maybe \"charging at home\" indicates charging_success positive? But phrase \"easy to use for charging at home\" is about ease of use. Could include function_performance/charging_success? The claim is it charges at home, but evidence \"easy to use for charging at home\" maybe no explicit success, but implies charging at home. However \"easy to use\" primary usability ease_of_use. Could also mention haven't used for travel yet: That is about portability/travel? It says haven't used for travel yet, no claim, it's lack of experience, maybe insufficient information? But \"Haven’t used for travel yet\" is not a product claim; maybe no sentiment. We should avoid. \"but easy to use for charging at home.\" There is one claim. \"Works well\" general performance. Need output JSON with claims array. Must use exact continuous substring. Include no extra. Let's craft.\n\nPotential issue primary/secondary taxonomy pair must exactly valid. general_performance is function_performance. ease_of_use usability_installation.\n\nPolarity: positive.\n\nShould evidence_span include newline? \"Works well\" exact. \"easy to use for charging at home\" exact. If include \"but easy to use...\"? The claim evidence could be \"easy to use for charging at home\". That is continuous substring. Good.\n\nNeed maybe claim for \"Haven’t used for travel yet\" maybe other_unknown/insufficient_information neutral? But instruction \"If no supported product claim exists, return empty list.\" A statement of not used for travel yet is not a product claim; so ignore. Star rating not infer.\n\nReturn JSON. Ensure \"claims\": [...]. No markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "3e3cc919-2047-46c9-aff2-aa90762409dc-0",
+        "status": "completed"
+      },
+      {
+        "id": "bbd5c79a-ba87-43d4-a211-00e8dd7f4ae5",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works well\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy to use for charging at home\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210632.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1038,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 604,
+      "output_tokens_details": {
+        "reasoning_tokens": 532
+      },
+      "total_tokens": 1642
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Works well\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"easy to use for charging at home\"}]}"
+}

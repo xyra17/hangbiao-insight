@@ -1,0 +1,216 @@
+{
+  "review_id": "2edc45f5509a812a729dbc53fb7ddc10c6780c92",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "1581260f-9c57-473a-9428-6a021b1587a6",
+  "raw_response": {
+    "id": "1581260f-9c57-473a-9428-6a021b1587a6",
+    "created_at": 1789211300.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "117a3e74-4d38-4e4c-b170-c612b0407448",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extraction. Need parse review. Source text: \"Worked twice before breaking\\nWorked twice and never again. Was a gift from my brother purchased through Amazon.\" Rating 1 but don't infer sentiment from star. Need claims. Product likely charger? Need extract semantic claims. Claim: \"Worked twice and never again\" indicates stopped working after two uses, reliability durability stopped_working. Evidence span exact continuous substring. \"Worked twice and never again.\" or \"Worked twice before breaking\" maybe same claim? Need pick exact evidence. We can include maybe two claims? One for stopped_working: evidence \"Worked twice and never again.\" Another for breaking? \"Worked twice before breaking\" could be cracking_breakage? But \"breaking\" likely stopped working, not physical break? Need be careful. Title part is also source_text? It includes title line? source_text includes title repeated at beginning. Yes source_text: \"Worked twice before breaking\\nWorked twice and never again. Was a gift...\" We can use evidence exact substring. Claim primary reliability_durability secondary stopped_working polarity negative. Evidence \"Worked twice and never again.\" That suffices. Maybe also \"before breaking\" is cracking_breakage? But \"breaking\" could mean broke/stopped working. The phrase \"before breaking\" is ambiguous. Taxonomy has cracking_breakage under reliability_durability. If \"breaking\" means product physically broke, could be cracking_breakage. But evidence \"Worked twice before breaking\" exact substring. However same underlying? We can include one claim for stopped_working with evidence \"Worked twice and never again.\" Another for cracking_breakage? \"Worked twice before breaking\" suggests breakage. But \"before breaking\" maybe product quality? Need not over-extract. The review: \"Worked twice before breaking\" and \"Worked twice and never again.\" They are duplicate. I'd return one claim: stopped_working. Maybe include \"Was a gift...\" no product claim. No other.\n\nNeed ensure schema exactly. Return JSON with claims array. Polarity negative. Evidence span exact continuous substring. Use \"Worked twice and never again.\" It's in source. Primary reliability_durability. Secondary stopped_working. Good.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "1581260f-9c57-473a-9428-6a021b1587a6-0",
+        "status": "completed"
+      },
+      {
+        "id": "e4e3bd29-d407-4cb1-9629-1b1f7246def2",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Worked twice and never again.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211303.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1042,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 516,
+      "output_tokens_details": {
+        "reasoning_tokens": 473
+      },
+      "total_tokens": 1558
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Worked twice and never again.\"}]}"
+}

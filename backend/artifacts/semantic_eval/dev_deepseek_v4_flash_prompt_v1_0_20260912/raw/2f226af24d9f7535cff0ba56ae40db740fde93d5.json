@@ -1,0 +1,216 @@
+{
+  "review_id": "2f226af24d9f7535cff0ba56ae40db740fde93d5",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "e5c2e787-5150-49fc-ba37-75592252d677",
+  "raw_response": {
+    "id": "e5c2e787-5150-49fc-ba37-75592252d677",
+    "created_at": 1789210739.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "9c6f5c6f-6f69-4dc8-9c59-53d1c9e8c5a3",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Review: \"Ehhhh\\nBought this but will not work when both ports are being used. Once I unplug on cord then it will but defeats the purpose of why I bought it.\" Product likely charger? Need identify semantic claims. We need primary/secondary taxonomy. Claim: \"will not work when both ports are being used\" -> function_performance / charging_success? Or convenience_value dual_port_multi_device? It says both ports used doesn't work. Could be dual port multi device issue but primary maybe function_performance charging_success? Let's parse. The product likely dual port charger. \"Bought this but will not work when both ports are being used. Once I unplug on cord then it will but defeats the purpose of why I bought it.\" This is a claim about malfunction when both ports used. Taxonomy: function_performance: charging_success, charging_speed, power_output, protection_effectiveness, general_performance. convenience_value: dual_port_multi_device, portability_size, price_value, general_convenience. \"both ports are being used\" directly dual_port_multi_device? But the issue is it doesn't work when both ports used, so primary could be function_performance / charging_success? Or convenience_value / dual_port_multi_device. We need exactly one valid primary/secondary pair. Since \"both ports\" feature, maybe convenience_value/dual_port_multi_device. But \"will not work\" suggests function performance. The taxonomy pair can be primary function_performance secondary charging_success, evidence span \"will not work when both ports are being used\". Also \"Once I unplug on cord then it will but defeats the purpose\" supports dual port multi device negative. Could extract two claims? Review may contain multiple claims. Need maybe one claim for not working when both ports used (function_performance/charging_success negative) and one for defeats purpose of dual port (convenience_value/dual_port_multi_device negative). But overlapping same evidence? Need exact continuous substring. Need not duplicate? Let's consider.\n\nReview text:\n\"Ehhhh\nBought this but will not work when both ports are being used. Once I unplug on cord then it will but defeats the purpose of why I bought it.\"\n\nClaim 1: When both ports used, product does not work. primary_topic: function_performance, secondary_topic: charging_success? It is about charging success? Maybe \"will not work\" not necessarily charging, but product function. \"both ports\" indicates multi-device. If using both ports, it won't charge/work. The taxonomy function_performance includes general_performance. Could use general_performance for \"will not work\". But specific charging? We don't know if it charges. Product is likely USB charger. The phrase \"both ports\" and \"unplug cord\" implies charging. So charging_success fits. Polarity negative. Evidence: \"will not work when both ports are being used\" exact substring. Check source: \"Bought this but will not work when both ports are being used.\" The substring \"will not work when both ports are being used\" is exact continuous. Good.\n\nClaim 2: \"Once I unplug on cord then it will but defeats the purpose of why I bought it.\" This indicates it works with one cord but not with two, defeating purpose. Could be convenience_value/dual_port_multi_device negative. Evidence: \"defeats the purpose of why I bought it\" exact. But is that a product claim? It references dual port purpose? Maybe yes, the purpose was to use both ports. Primary convenience_value secondary dual_port_multi_device. Polarity negative. But might be redundant. The instruction says zero or multiple claims. We can include both if supported. But be careful: \"Once I unplug on cord then it will\" typo \"on cord\" likely \"one cord\". This is evidence that it works with one cord, but not both. The claim \"defeats the purpose of why I bought it\" is about dual_port_multi_device? It implies purpose of buying was multi-device. Could be general_convenience? The taxonomy convenience_value has dual_port_multi_device. If product has two ports and purpose is both ports, yes dual_port_multi_device. Negative polarity.\n\nCould also primary function_performance/secondary charging_success for entire issue. If we include both, are we double-counting? Might be okay. Need choose exact valid pair. We might only need one claim. Let's examine typical extraction tasks: Extract product-review semantic claims. For every claim choose exactly one valid primary/secondary taxonomy pair. A claim is a statement about product. \"will not work when both ports are being used\" is a claim about charging_success/dual port. \"defeats purpose\" is more subjective but about convenience. It might be considered another claim about dual port multi device. But if we make two claims, both negative.\n\nNeed ensure polarity: negative. Star rating not used.\n\nPotential issue: \"will not work when both ports are being used\" could be primary_topic: convenience_value, secondary: dual_port_multi_device because it's about both ports. But \"will not work\" is function performance. The primary/secondary taxonomy pair must be one from taxonomy. The pair can be primary function_performance, secondary charging_success. That is valid. If we want dual_port, primary convenience_value, secondary dual_port_multi_device. Which one is more apt? Let's reason: The product fails to work when both ports used. The core function is charging. The dual-port feature is convenience. The claim \"will not work when both ports are being used\" directly says dual port usage causes malfunction. That is a functional performance issue (charging_success) under the condition of dual port. The secondary could be charging_success; the dual port aspect is in evidence but not taxonomy secondary. Alternatively, primary convenience_value/dual_port_multi_device captures the multi-device limitation. But \"will not work\" is stronger than convenience. In taxonomy, convenience_value includes dual_port_multi_device, which likely intended for claims about ability to charge multiple devices simultaneously. So a negative claim \"will not work when both ports are being used\" is exactly a dual_port_multi_device problem. However, it's also charging_success. The instruction says choose exactly one valid primary/secondary taxonomy pair. We need infer best. Could use convenience_value/dual_port_multi_device because it explicitly mentions both ports. But the product not working is function. Hmm.\n\nThe taxonomy has \"function_performance\": [\"charging_success\", ...] and \"convenience_value\": [\"dual_port_multi_device\", ...]. If a review says \"both ports don't work simultaneously\", it's about dual port multi-device functionality. I'd lean convenience_value/dual_port_multi_device because the issue is using both ports at once. But \"will not work\" could be general. If we map to function_performance/charging_success, the evidence \"both ports\" is incidental. The claim is that it doesn't work when both ports used. That's about charging success. Which primary is more appropriate? The primary topic should be broad category: function_performance because it's about product not working. Secondary: charging_success because it's about charging. That seems valid. The dual port aspect is a condition. The convenience_value/dual_port_multi_device would be about ability to use multiple devices, which is also a function. Hmm.\n\nMaybe we can include both claims to cover: one for function_performance/charging_success negative and one for convenience_value/dual_port_multi_device negative. But they are same underlying issue and evidence spans could be different. Claim 1 evidence \"will not work when both ports are being used\"; Claim 2 evidence \"defeats the purpose of why I bought it\". That might be acceptable. But if we include both, we risk over-extraction. The instruction says \"A review may contain zero or multiple claims.\" We should extract distinct claims. Is \"defeats the purpose\" a separate claim? It's sentiment/interpretation, not a product attribute. It refers to the previous claim. It may not be an independent product claim. So maybe only one claim is better.\n\nLet's check if there's any other claim: \"Bought this but will not work when both ports are being used.\" That's the main. \"Once I unplug on cord then it will\" implies it works when one cord, but not a claim? It's describing behavior. Could be intermittent? No. \"defeats the purpose of why I bought it\" is not a product claim, just user dissatisfaction. So one claim.\n\nSo final: {\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"will not work when both ports are being used\"}]}\n\nNeed ensure exact substring: yes from source: \"Bought this but will not work when both ports are being used.\" The substring \"will not work when both ports are being used\" is exact. No period. Good.\n\nBut what about primary_topic \"convenience_value\", secondary \"dual_port_multi_device\"? Let's decide. The instruction: \"Extract product-review semantic claims.\" It may expect taxonomy pair that best matches. The claim \"will not work when both ports are being used\" is a functional failure. The dual_port_multi_device is a convenience feature. If the product doesn't work when both ports used, it's a function_performance issue. I'll go with function_performance/charging_success negative. Could also mention dual port in secondary? Not possible, secondary must be one of list. So charging_success is closest. If we wanted dual port, primary convenience_value. But then \"will not work\" is not captured. I'd stick with function_performance.\n\nLet's ensure JSON schema: top-level claims array. No extra. Use double quotes. Final answer only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "e5c2e787-5150-49fc-ba37-75592252d677-0",
+        "status": "completed"
+      },
+      {
+        "id": "2874f41a-1947-4f79-b9f4-da0c5e26ab93",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"will not work when both ports are being used\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210749.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1051,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2130,
+      "output_tokens_details": {
+        "reasoning_tokens": 2088
+      },
+      "total_tokens": 3181
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"will not work when both ports are being used\"}]}"
+}

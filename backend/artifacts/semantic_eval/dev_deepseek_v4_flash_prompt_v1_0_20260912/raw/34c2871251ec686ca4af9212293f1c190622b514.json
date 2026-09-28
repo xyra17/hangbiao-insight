@@ -1,0 +1,216 @@
+{
+  "review_id": "34c2871251ec686ca4af9212293f1c190622b514",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "81a2eb2b-d327-4e31-a439-7eacef37ce9b",
+  "raw_response": {
+    "id": "81a2eb2b-d327-4e31-a439-7eacef37ce9b",
+    "created_at": 1789210549.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "20e7e8b0-4824-427c-ae81-176b1a41327e",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer in JSON schema. Need extract product-review semantic claims. Review: title \"Doesn’t work at all\" source_text \"Doesn’t work at all\\nNot worth you money look somewhere else!\" rating 1. Need claims. We need exactly taxonomy pairs. Claim: \"Doesn’t work at all\" indicates stopped_working? primary reliability_durability secondary stopped_working? Or function_performance general_performance? The taxonomy has reliability_durability stopped_working. \"Doesn't work at all\" means product doesn't function, likely stopped_working? But if new maybe defective_on_arrival? Product quality defective_on_arrival? Need infer. Source text includes \"Doesn’t work at all\" and \"Not worth you money look somewhere else!\" Second claim: price_value negative convenience_value. Evidence span exact continuous substring. Need not infer from rating. First: primary reliability_durability, secondary stopped_working, polarity negative, evidence_span \"Doesn’t work at all\" exact from source. Note curly apostrophe? Source: \"Doesn’t work at all\\nNot worth you money look somewhere else!\" It has curly apostrophe in Doesn’t. Copy exact. \"Not worth you money look somewhere else!\" Could be price_value negative? \"Not worth you money\" indicates poor value. primary convenience_value secondary price_value polarity negative evidence span \"Not worth you money look somewhere else!\" exact. Is that product claim? yes value. Could also general_convenience? price_value best. Need ensure secondary topics valid in taxonomy. Yes.\n\nNeed output only JSON. Empty if none. Two claims. Polarity negative for both. Ensure valid JSON, no markdown. Need exact substring from SOURCE_TEXT. \"Doesn’t work at all\" appears title and source_text. Source_text begins \"Doesn’t work at all\\nNot worth...\" So exact substring includes curly apostrophe. We can output. The second evidence_span could be \"Not worth you money look somewhere else!\" exact continuous substring. Good.\n\nNeed maybe \"Doesn’t work at all\" could be function_performance general_performance rather than stopped_working. The valid primary/secondary pair: reliability_durability -> stopped_working. Does \"doesn't work at all\" mean stopped working; if it never worked, maybe defective_on_arrival under product_quality. But product review likely about power adapter? Product B0BYJ8ZVWH unknown. \"Doesn't work at all\" implies stopped_working. There is no \"not working\" under function_performance except general_performance. But reliability_durability has stopped_working. Use that.\n\nNeed final exactly JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "81a2eb2b-d327-4e31-a439-7eacef37ce9b-0",
+        "status": "completed"
+      },
+      {
+        "id": "3c8bdeb8-a38d-4dea-8e33-7bf13a1268d7",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn’t work at all\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"Not worth you money look somewhere else!\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210552.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1032,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 638,
+      "output_tokens_details": {
+        "reasoning_tokens": 560
+      },
+      "total_tokens": 1670
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn’t work at all\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"Not worth you money look somewhere else!\"}]}"
+}

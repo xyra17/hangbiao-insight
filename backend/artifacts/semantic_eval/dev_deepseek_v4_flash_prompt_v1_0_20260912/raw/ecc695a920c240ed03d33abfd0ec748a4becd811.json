@@ -1,0 +1,216 @@
+{
+  "review_id": "ecc695a920c240ed03d33abfd0ec748a4becd811",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "742fbd02-1af5-48c4-bbaf-8e0be3a7481a",
+  "raw_response": {
+    "id": "742fbd02-1af5-48c4-bbaf-8e0be3a7481a",
+    "created_at": 1789211609.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "477295c7-5998-45b8-90e6-0dc29228c49f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims from review. Need analyze. Review title: \"Works only in tight sockets\". Source text: \"Works only in tight sockets\\nIt’ll fall outta older outlets. Tried to pinch prongs together lightly and it just cracked. Charges decent so far though\"\n\nWe need claims with taxonomy primary/secondary, polarity, evidence_span exact continuous substring from SOURCE_TEXT. Zero or multiple. Do not infer from star rating. Need exact evidence substring.\n\nLet's parse. Product likely charger? It mentions sockets/outlets, prongs cracked, charges decent.\n\nPotential claims:\n1. \"Works only in tight sockets\" -> compatibility_fit/wall_socket_fit? It only works in tight sockets; falls out older outlets. Primary compatibility_fit secondary wall_socket_fit. Polarity negative? It indicates poor fit in loose outlets. Evidence span: \"Works only in tight sockets\" or \"It’ll fall outta older outlets.\" Can choose exact continuous substring. The title is in source_text: \"Works only in tight sockets\" yes exact. But maybe claim about outlet fit. Negative.\n\n2. \"It’ll fall outta older outlets.\" -> compatibility_fit/wall_socket_fit negative. Could be same claim as above; but can extract multiple? Need avoid duplicate? We can include one claim with evidence_span maybe title and body? Exact continuous substring cannot include newline? It can include \"Works only in tight sockets\\nIt’ll fall outta older outlets.\" That's continuous including newline. But one claim maybe wall_socket_fit negative. However title and sentence same issue. Could extract one claim with evidence span \"It’ll fall outta older outlets.\" That covers. But review also title. The instruction says every claim. We can include both? likely not duplicate. But title and body are both claims? It's same. Better one claim for wall_socket_fit negative using evidence \"It’ll fall outta older outlets.\" Or title. Need maybe include \"Works only in tight sockets\" as separate? Hmm.\n\n3. \"Tried to pinch prongs together lightly and it just cracked.\" -> reliability_durability/cracking_breakage negative. Evidence span exact: \"Tried to pinch prongs together lightly and it just cracked.\" Primary reliability_durability secondary cracking_breakage. Polarity negative.\n\n4. \"Charges decent so far though\" -> function_performance/charging_success? Or general_performance? The phrase charges decent so far indicates charging works decent. Primary function_performance, secondary charging_success or general_performance? \"Charges\" = charging_success. Polarity positive? \"decent so far though\" positive maybe. But \"so far\" maybe neutral? Sentiment positive. We can classify positive. Evidence span \"Charges decent so far though\".\n\nCould there be safety risk due cracked prongs? It says prongs cracked, not device damage? That's durability cracking_breakage. No safety.\n\nCompatibility fit wall_socket_fit. Also maybe \"Works only in tight sockets\" = wall_socket_fit negative. \"It’ll fall outta older outlets\" same. Could one claim evidence span \"Works only in tight sockets\" and another \"It’ll fall outta older outlets.\" But that's redundant. The schema doesn't forbid duplicates, but semantic claims should maybe one per topic. We can include one claim with span \"Works only in tight sockets\\nIt’ll fall outta older outlets.\" But exact continuous substring includes newline. Yes source text includes newline. But evidence span should maybe exact continuous. It is continuous from title through newline to sentence. That includes both. Polarity negative. Is that acceptable? It is exact substring. That might be best.\n\nBut note title is \"Works only in tight sockets\" and body begins \"It’ll fall outta older outlets.\" They are contiguous with newline. We can include entire as one evidence. Primary compatibility_fit, secondary wall_socket_fit, negative.\n\nHowever the review title itself might be considered separate from source_text? source_text includes title? The given source_text starts with title line then body. Yes.\n\nThen cracked claim. Charges decent.\n\nNeed ensure JSON only. No markdown. Need maybe no extra text.\n\nLet's consider if \"pinch prongs together lightly and it just cracked\" indicates material_build_quality? Taxonomy product_quality material_build_quality. But also reliability_durability cracking_breakage. Which is more appropriate? The prongs cracked when pinched lightly. Cracking/breakage under normal? It's a durability/breakage issue. primary reliability_durability secondary cracking_breakage. Good.\n\n\"Charges decent so far though\" is function_performance/charging_success positive. Could also general_performance. Since charging success? It charges. Evidence \"Charges decent so far though\". Positive perhaps. \"decent\" maybe moderate positive. We can set positive.\n\nPotential issue \"It’ll fall outta older outlets.\" This could be compatibility_fit/wall_socket_fit. Polarity negative. Yes.\n\nNeed maybe include \"Works only in tight sockets\" as compatibility_fit/wall_socket_fit negative. It only works in tight sockets = limitation. If we use evidence span \"Works only in tight sockets\" plus separate \"It’ll fall outta older outlets.\" Both same claim. To avoid duplicate, use one evidence span with both? But if we include both separate, output has two claims for wall_socket_fit. Is that okay? The instruction: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair...\" They didn't say deduplicate. But semantic claims: \"Works only in tight sockets\" and \"It'll fall outta older outlets\" are two claims? They are two statements expressing same issue. Usually extract one per claim. To be safe, one claim for wall_socket_fit negative with evidence \"Works only in tight sockets\" or \"It’ll fall outta older outlets.\" Which is stronger? \"It’ll fall outta older outlets\" specifically issue. But title \"Works only in tight sockets\" also. Could evidence span include both? \"Works only in tight sockets\\nIt’ll fall outta older outlets.\" That's exact continuous substring. It covers both. This is okay though evidence span can contain two sentences. It might be considered one claim. Let's do that.\n\nNeed check exact substring: source_text: \"Works only in tight sockets\\nIt’ll fall outta older outlets. Tried to pinch prongs together lightly and it just cracked. Charges decent so far though\"\n\nThe substring with newline: \"Works only in tight sockets\\nIt’ll fall outta older outlets.\" Yes. Need JSON escape newline as \\n. The schema evidence_span string minLength. Good.\n\nSecond claim evidence \"Tried to pinch prongs together lightly and it just cracked.\" exact. Third \"Charges decent so far though\" exact no period? Source: \"Charges decent so far though\" no final period. Yes.\n\nPolarity: for cracked negative. For charging positive? \"decent\" positive. Some might consider neutral? \"charges decent so far though\" implies okay. Positive. The word \"though\" contrasts with negative but claim itself positive. Polarity positive.\n\nNeed output JSON. Ensure no extra. The final answer should be just JSON.\n\nLet's craft:\n\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"compatibility_fit\",\n      \"secondary_topic\": \"wall_socket_fit\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Works only in tight sockets\\nIt’ll fall outta older outlets.\"\n    },\n    {\n      \"primary_topic\": \"reliability_durability\",\n      \"secondary_topic\": \"cracking_breakage\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Tried to pinch prongs together lightly and it just cracked.\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"charging_success\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Charges decent so far though\"\n    }\n  ]\n}\n\nCheck if \"Works only in tight sockets\\nIt’ll fall outta older outlets.\" includes newline, in JSON we use \\n. Good.\n\nNeed maybe \"It’ll\" with curly apostrophe exact. Source has \"It’ll\" curly. We'll copy. \"fall outta\" not \"out of\". Good.\n\nPotential issue: Evidence span from title plus body includes newline; it's exact continuous substring. Yes.\n\nWould \"Works only in tight sockets\" be positive? No negative limitation. Good.\n\nCould the cracked prong be product_quality/material_build_quality? The taxonomy allows reliability_durability/cracking_breakage; but \"prongs cracked\" is physical breakage. Good.\n\nShould we include \"prongs together lightly\" maybe \"pinch prongs together lightly\" indicates installation? No.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "742fbd02-1af5-48c4-bbaf-8e0be3a7481a-0",
+        "status": "completed"
+      },
+      {
+        "id": "5d833511-aab7-4da1-9453-deddb904d8eb",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"Works only in tight sockets\\nIt’ll fall outta older outlets.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Tried to pinch prongs together lightly and it just cracked.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"Charges decent so far though\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211618.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1049,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2051,
+      "output_tokens_details": {
+        "reasoning_tokens": 1923
+      },
+      "total_tokens": 3100
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"wall_socket_fit\",\"polarity\":\"negative\",\"evidence_span\":\"Works only in tight sockets\\nIt’ll fall outta older outlets.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Tried to pinch prongs together lightly and it just cracked.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"Charges decent so far though\"}]}"
+}

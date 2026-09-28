@@ -1,0 +1,207 @@
+{
+  "split_version": "golden-semantic-split-v1.0",
+  "seed": 20260912,
+  "unit": "review_id",
+  "ratios": {
+    "dev": 0.6,
+    "validation": 0.2,
+    "frozen_test": 0.2
+  },
+  "counts": {
+    "dev": 216,
+    "validation": 72,
+    "frozen_test": 72
+  },
+  "secondary_topic_support": {
+    "abnormal_noise": {
+      "dev": 4,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "accessory_compatibility": {
+      "dev": 1,
+      "validation": 0,
+      "frozen_test": 0
+    },
+    "accessory_condition": {
+      "dev": 1,
+      "validation": 0,
+      "frozen_test": 0
+    },
+    "bubbles_adhesion": {
+      "dev": 7,
+      "validation": 3,
+      "frozen_test": 3
+    },
+    "case_compatibility": {
+      "dev": 7,
+      "validation": 3,
+      "frozen_test": 3
+    },
+    "charging_speed": {
+      "dev": 34,
+      "validation": 11,
+      "frozen_test": 12
+    },
+    "charging_success": {
+      "dev": 59,
+      "validation": 17,
+      "frozen_test": 16
+    },
+    "cracking_breakage": {
+      "dev": 18,
+      "validation": 6,
+      "frozen_test": 6
+    },
+    "defective_on_arrival": {
+      "dev": 4,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "device_compatibility": {
+      "dev": 9,
+      "validation": 3,
+      "frozen_test": 5
+    },
+    "device_damage": {
+      "dev": 1,
+      "validation": 0,
+      "frozen_test": 0
+    },
+    "dual_port_multi_device": {
+      "dev": 10,
+      "validation": 4,
+      "frozen_test": 4
+    },
+    "ease_of_use": {
+      "dev": 14,
+      "validation": 5,
+      "frozen_test": 5
+    },
+    "electrical_fault": {
+      "dev": 1,
+      "validation": 1,
+      "frozen_test": 0
+    },
+    "general_convenience": {
+      "dev": 10,
+      "validation": 4,
+      "frozen_test": 3
+    },
+    "general_durability": {
+      "dev": 6,
+      "validation": 2,
+      "frozen_test": 3
+    },
+    "general_performance": {
+      "dev": 13,
+      "validation": 5,
+      "frozen_test": 4
+    },
+    "installation_accessories": {
+      "dev": 7,
+      "validation": 2,
+      "frozen_test": 2
+    },
+    "installation_difficulty": {
+      "dev": 19,
+      "validation": 6,
+      "frozen_test": 6
+    },
+    "insufficient_information": {
+      "dev": 10,
+      "validation": 4,
+      "frozen_test": 3
+    },
+    "intermittent_failure": {
+      "dev": 6,
+      "validation": 2,
+      "frozen_test": 2
+    },
+    "material_build_quality": {
+      "dev": 12,
+      "validation": 4,
+      "frozen_test": 4
+    },
+    "melting_fire": {
+      "dev": 3,
+      "validation": 1,
+      "frozen_test": 2
+    },
+    "overheating": {
+      "dev": 3,
+      "validation": 2,
+      "frozen_test": 1
+    },
+    "physical_injury_irritation": {
+      "dev": 1,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "port_fit": {
+      "dev": 1,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "portability_size": {
+      "dev": 7,
+      "validation": 3,
+      "frozen_test": 3
+    },
+    "positioning_alignment": {
+      "dev": 9,
+      "validation": 3,
+      "frozen_test": 3
+    },
+    "power_output": {
+      "dev": 3,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "price_value": {
+      "dev": 29,
+      "validation": 10,
+      "frozen_test": 11
+    },
+    "protection_effectiveness": {
+      "dev": 11,
+      "validation": 4,
+      "frozen_test": 4
+    },
+    "short_lifespan": {
+      "dev": 27,
+      "validation": 10,
+      "frozen_test": 9
+    },
+    "size_fit": {
+      "dev": 13,
+      "validation": 5,
+      "frozen_test": 4
+    },
+    "status_indicator_feedback": {
+      "dev": 5,
+      "validation": 2,
+      "frozen_test": 2
+    },
+    "stopped_working": {
+      "dev": 18,
+      "validation": 6,
+      "frozen_test": 7
+    },
+    "uncategorized": {
+      "dev": 1,
+      "validation": 1,
+      "frozen_test": 1
+    },
+    "wall_socket_fit": {
+      "dev": 4,
+      "validation": 1,
+      "frozen_test": 1
+    }
+  },
+  "frozen_test_policy": "Never expose frozen_test labels to prompts or prompt tuning.",
+  "review_source": "黄金评论主表_v1_0.csv",
+  "claim_source": "黄金评论标签表_v1_0.csv",
+  "review_source_sha256": "ec47356ca0986496d779828ea1faa7c97ce8003c0fe140e297f92c18e6680caf",
+  "claim_source_sha256": "9a6be3c90f7f65841ba7b6af82d8a6e65cf35c71c6080cc8eb7fe89c1b3536cf"
+}

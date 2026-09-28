@@ -1,0 +1,242 @@
+商品经营异常智能诊断 Agent
+Review Topic Annotation Guideline V1.0
+
+一、标注目标
+
+本任务不是判断一条评论整体是好评还是差评。
+
+真正的标注单位是：
+
+Topic Claim = Topic + Polarity + Evidence Span
+
+一条 Review 可以拥有多个 Topic Claim。
+
+
+二、Rating 不等于 Polarity
+
+Amazon 星级只提供上下文，不直接作为 Polarity。
+
+例如：
+
+4 星：
+"Works well but charging is very slow."
+
+应该标：
+
+function_performance
+charging_success
+positive
+"Works well"
+
+以及：
+
+function_performance
+charging_speed
+negative
+"charging is very slow"
+
+
+三、Multi-label
+
+例如：
+
+"Charges fast but gets extremely hot."
+
+需要两个标签：
+
+1.
+function_performance
+charging_speed
+positive
+"Charges fast"
+
+2.
+safety_risk
+overheating
+negative
+"gets extremely hot"
+
+
+四、Evidence Span
+
+Evidence Span 必须来自评论原文。
+
+要求：
+
+1. 尽量短。
+2. 必须能够独立支持当前标签。
+3. 不得改写。
+4. 不得加入评论中没有表达的原因。
+
+
+五、Polarity
+
+positive：
+明确认可、成功、改善、满意、方便。
+
+negative：
+失效、风险、不满、不符合预期、明显缺陷。
+
+neutral：
+客观描述事实，没有明显价值判断。
+
+
+六、Topic 与 Polarity 分离
+
+charging_speed 不是负面 Topic。
+
+例如：
+
+"charges very quickly"
+→ charging_speed / positive
+
+"charges very slowly"
+→ charging_speed / negative
+
+
+七、Topic 优先级
+
+优先使用最具体的二级 Topic。
+
+例如：
+
+"Stopped working after 3 weeks."
+
+优先：
+
+reliability_durability / stopped_working
+
+不要只标：
+
+function_performance / general_performance
+
+
+八、可靠性与功能的区别
+
+"Doesn't charge at all from the first use."
+
+更适合：
+
+function_performance / charging_success / negative
+
+如果明确表示：
+
+"Worked for two months and then stopped."
+
+更适合：
+
+reliability_durability / stopped_working / negative
+
+
+九、安全风险独立标注
+
+如果评论同时包含：
+
+"charges well but gets hot"
+
+必须同时保留：
+
+charging_success / positive
+
+overheating / negative
+
+
+十、Return / Refund 不作为核心 Topic
+
+例如：
+
+"It stopped working so I returned it."
+
+核心标签是：
+
+reliability_durability / stopped_working
+
+return 本身只是用户后续行为，不建立独立 Topic。
+
+
+十一、信息不足
+
+例如：
+
+"Good."
+"Bad."
+"Great product."
+
+没有具体业务语义时使用：
+
+other_unknown / insufficient_information
+
+
+十二、未覆盖的新主题
+
+评论有明确语义，但 V1.0 没有合适标签时：
+
+other_unknown / uncategorized
+
+同时：
+
+needs_review = true
+
+并在 notes 中写清楚新问题。
+
+
+十三、annotation_confidence
+
+high：
+标签边界明确，Evidence 直接支持。
+
+medium：
+基本能够判断，但存在相邻 Topic 边界。
+
+low：
+语义含糊、信息不足或 Taxonomy 可能需要调整。
+
+
+十四、needs_review
+
+true：
+需要后续仲裁。
+
+false：
+当前标注者认为标签明确。
+
+
+十五、Long Format 使用规则
+
+每条 Review 已预留 4 个 Label Slot。
+
+label_index = 1：
+默认 annotation_status = pending。
+
+label_index = 2～4：
+默认 annotation_status = unused。
+
+如果评论包含第二个 Topic：
+
+把 label_index=2 改为 completed，并填写标签。
+
+没有使用的 Slot 保持 unused。
+
+完成的标签：
+
+annotation_status = completed。
+
+
+十六、因果红线
+
+人工评论标签只表达：
+
+“评论里说了什么”。
+
+禁止标注：
+
+“这个问题导致退款率上涨”
+“这个问题导致销量下降”
+
+经营指标和评论之间的关系属于后续 Diagnosis Case，
+不属于 Review Topic 标签。
+
+
+当前冻结版本：
+
+taxonomy-v1.0

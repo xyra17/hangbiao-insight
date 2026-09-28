@@ -1,0 +1,50 @@
+{
+  "review_id": "3ce698e4defa882899602421165ce82981f3aa93",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-ijw7dhcfjug53bfbtcnqc5",
+  "raw_response": {
+    "id": "chatcmpl-ijw7dhcfjug53bfbtcnqc5",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Breaks too easily\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"My wife has gone through all 3 of the screens in the pack in less than a month\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"This screen protector does not come with a template to aid installation\"}]}"
+        }
+      }
+    ],
+    "created": 1789185445,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 141,
+      "prompt_tokens": 638,
+      "total_tokens": 779,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 140,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Breaks too easily\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"My wife has gone through all 3 of the screens in the pack in less than a month\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_accessories\", \"polarity\": \"negative\", \"evidence_span\": \"This screen protector does not come with a template to aid installation\"}]}"
+}

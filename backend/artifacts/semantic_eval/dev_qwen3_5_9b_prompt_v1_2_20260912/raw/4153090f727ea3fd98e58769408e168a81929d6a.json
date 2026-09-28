@@ -1,0 +1,50 @@
+{
+  "review_id": "4153090f727ea3fd98e58769408e168a81929d6a",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-gya8ki8dccqwrh703wq5ae",
+  "raw_response": {
+    "id": "chatcmpl-gya8ki8dccqwrh703wq5ae",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"It burned out on me while out of state, leaving me with no wireless charger.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"It only lasted a month.\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"It burned out on me while out of state, leaving me with no wireless charger.\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"abnormal_noise\", \"polarity\": \"negative\", \"evidence_span\": \"Makes a weird and faint noise\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"melting_fire\", \"polarity\": \"negative\", \"evidence_span\": \"emits a burning scent.\"}]}"
+        }
+      }
+    ],
+    "created": 1789188757,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 224,
+      "prompt_tokens": 626,
+      "total_tokens": 850,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 223,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"It burned out on me while out of state, leaving me with no wireless charger.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"It only lasted a month.\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"It burned out on me while out of state, leaving me with no wireless charger.\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"abnormal_noise\", \"polarity\": \"negative\", \"evidence_span\": \"Makes a weird and faint noise\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"melting_fire\", \"polarity\": \"negative\", \"evidence_span\": \"emits a burning scent.\"}]}"
+}

@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-30dfe997ba2881ae",
+      "review_id": "2573b6519e3f470840df6f0fe9a929952ec759e4",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "size_fit",
+      "polarity": "negative",
+      "evidence_span": "Too small for IPhone 11",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "09104a1a-dae2-4098-a484-0e9820c7e779"
+    },
+    {
+      "prediction_id": "SP-7efb105d4e2e4972",
+      "review_id": "2573b6519e3f470840df6f0fe9a929952ec759e4",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "negative",
+      "evidence_span": "Glass does not adequately fit or protect the phone.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "09104a1a-dae2-4098-a484-0e9820c7e779"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

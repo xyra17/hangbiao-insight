@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5b8639acc0ea08eb",
+      "review_id": "bff94018fc7a47a40f783befe9e8eb523c164e7e",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "general_convenience",
+      "polarity": "positive",
+      "evidence_span": "Convenient to use",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "c3814ccf-cb7b-4565-a150-9ee6b6a233e8"
+    },
+    {
+      "prediction_id": "SP-a93909968cb56a85",
+      "review_id": "bff94018fc7a47a40f783befe9e8eb523c164e7e",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "ease_of_use",
+      "polarity": "positive",
+      "evidence_span": "Just place phone on disk with no cords to connect.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "c3814ccf-cb7b-4565-a150-9ee6b6a233e8"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

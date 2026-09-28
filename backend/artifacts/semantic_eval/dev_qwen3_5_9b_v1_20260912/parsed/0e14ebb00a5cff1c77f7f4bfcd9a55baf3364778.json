@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-e5836cd16df201cc",
+      "review_id": "0e14ebb00a5cff1c77f7f4bfcd9a55baf3364778",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "protection_effectiveness",
+      "polarity": "positive",
+      "evidence_span": "these screens really protect my phone",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-qzqpt116bcr8m1p1jxj0e"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

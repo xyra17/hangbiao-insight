@@ -1,0 +1,23 @@
+name: insight-v2-dev
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: insight
+      POSTGRES_USER: insight
+      POSTGRES_PASSWORD: ${INSIGHT_DB_PASSWORD:?Use .env.local}
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U insight -d insight"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7.4
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction", "--requirepass", "${INSIGHT_REDIS_PASSWORD:?Use .env.local}"]
+    ports: ["127.0.0.1:56379:6379"]
+    volumes: ["redis_data:/data"]
+volumes:
+  postgres_data:
+  redis_data:

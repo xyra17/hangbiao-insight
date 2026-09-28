@@ -1,0 +1,216 @@
+{
+  "review_id": "1c8eeda74c44d7194794915cdf3a0563b71de4f0",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "939e76dc-236c-4196-813e-58bf5815f836",
+  "raw_response": {
+    "id": "939e76dc-236c-4196-813e-58bf5815f836",
+    "created_at": 1789211135.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "f7d4c277-0ca6-4851-b9bf-f27e875b7c65",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review: \"Buy it!!!\\nI loved this screen protector, it lasted a long time throughout me dropping my phone a lot and took the damage well. I ended up getting some for my boyfriend and mom as well\"\n\nWe need identify product-review semantic claims. One or multiple. Taxonomy. Product screen protector. Claims:\n- lasted a long time throughout dropping phone a lot and took damage well. This is reliability_durability / general_durability? Or protection_effectiveness? It says lasted long and took damage well. Screen protector protected from drops? \"took the damage well\" indicates protection effectiveness maybe function_performance/protection_effectiveness. Also durability: lasted a long time. Could have two claims? Need exact evidence spans continuous. Let's parse.\n\n\"it lasted a long time\" -> reliability_durability / general_durability positive.\n\"throughout me dropping my phone a lot and took the damage well\" -> function_performance / protection_effectiveness positive? It took damage well (the protector absorbed). Could be durability/wear_damage? \"took the damage well\" likely protection_effectiveness. Need independent. Could extract one claim for durability and one for protection. But \"lasted a long time throughout me dropping my phone a lot and took the damage well\" continuous includes both. If two claims, evidence spans may overlap? Probably okay exact substring. But need avoid duplicating? We can extract:\n1. primary reliability_durability, secondary general_durability, polarity positive, evidence_span \"it lasted a long time\"\n2. primary function_performance, secondary protection_effectiveness, polarity positive, evidence_span \"took the damage well\"\nMaybe also \"I loved this screen protector\" general? That's sentiment no specific product claim? Could be other_unknown? No, not a claim. \"I ended up getting some for my boyfriend and mom as well\" indicates general convenience? Repurchase/gifting? Price value? No.\n\nNeed exactly one valid taxonomy pair per claim. Evidence exact substring. Ensure substring exact from SOURCE_TEXT. SOURCE_TEXT includes \"I loved this screen protector, it lasted a long time throughout me dropping my phone a lot and took the damage well. I ended up getting some for my boyfriend and mom as well\"\n\n\"it lasted a long time\" exact substring yes.\n\"took the damage well\" exact substring yes.\n\nCould \"lasted a long time throughout me dropping my phone a lot\" be general_durability positive. \"and took the damage well\" likely protection_effectiveness. We can include two claims. Is there a claim about compatibility? No. Price? no. \"Buy it\" no.\n\nNeed output JSON with claims array.\n\nCheck schema: {\"claims\":[...]} additionalProperties false. Each claim fields. Polarity enum. primary_topic enum, secondary_topic enum.\n\nNeed decide if \"screen protector lasted long...\" Could primary reliability_durability secondary short_lifespan? positive? No, general_durability exists. Use general_durability. The text \"lasted a long time\" implies lifespan long positive, but taxonomy has short_lifespan only negative? General_durability is fine.\n\nCould \"took the damage well\" be general_performance? But protection_effectiveness is more specific under function_performance. It's about protecting phone? Yes screen protector took the damage (from drops), so protection_effectiveness positive.\n\nPotential issue: \"throughout me dropping my phone a lot\" evidence for protection? It includes drop events; \"took damage well\" maybe the protector itself took damage well. Could be reliability_durability / wear_damage? \"wear_damage\" is about product wear/damage. But \"took the damage well\" positive? It didn't break? Hmm.\n\nMaybe only one claim: \"it lasted a long time throughout me dropping my phone a lot and took the damage well\" as reliability_durability general_durability positive. But also protection_effectiveness. The instruction: extract claims. Could be two aspects. The review says screen protector lasted long and took damage well. That's durability. It doesn't explicitly say phone screen not damaged. It says screen protector took damage. So protection effectiveness maybe inferred. But if protector took damage, it protected? Hmm.\n\n\"took the damage well\" could mean the screen protector took the damage (instead of phone). That is protection effectiveness. I think two claims okay.\n\nNeed ensure no invalid evidence. \"it lasted a long time\" exact. \"took the damage well\" exact.\n\nFinal JSON only.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "939e76dc-236c-4196-813e-58bf5815f836-0",
+        "status": "completed"
+      },
+      {
+        "id": "eb79908b-9fb3-4898-84e0-e979ec9b2fb6",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"it lasted a long time\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"took the damage well\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211140.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1060,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1037,
+      "output_tokens_details": {
+        "reasoning_tokens": 962
+      },
+      "total_tokens": 2097
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"it lasted a long time\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"took the damage well\"}]}"
+}

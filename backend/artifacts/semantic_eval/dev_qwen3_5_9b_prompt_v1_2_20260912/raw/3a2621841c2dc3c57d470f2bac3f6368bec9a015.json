@@ -1,0 +1,50 @@
+{
+  "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-g3mc2icl9m9hb48l5vnina",
+  "raw_response": {
+    "id": "chatcmpl-g3mc2icl9m9hb48l5vnina",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"One of them lasted a good month. One lasted a couple of weeks.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"I picked it up a FEW MINUTES later and there was a crack through the darn thing.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"After going through this three-pack in 2-3 months (I don't enjoy looking at my screen through cracks so I change it when that happens), I will go to an actual store and purchase a good, quality screen protector.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I put the third one on today and, I kid you not, my phone just sat next to me on my bed. I picked it up a FEW MINUTES later and there was a crack through the darn thing.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I think it must have knocked against my book light. ??? That is ABSURD.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Mind you, my phone's screen is fine, but how protective can this really be if it cracks while sitting on a bed?!\"}]}"
+        }
+      }
+    ],
+    "created": 1789188597,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 377,
+      "prompt_tokens": 767,
+      "total_tokens": 1144,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 376,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"One of them lasted a good month. One lasted a couple of weeks.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"I picked it up a FEW MINUTES later and there was a crack through the darn thing.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"After going through this three-pack in 2-3 months (I don't enjoy looking at my screen through cracks so I change it when that happens), I will go to an actual store and purchase a good, quality screen protector.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I put the third one on today and, I kid you not, my phone just sat next to me on my bed. I picked it up a FEW MINUTES later and there was a crack through the darn thing.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I think it must have knocked against my book light. ??? That is ABSURD.\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"Mind you, my phone's screen is fine, but how protective can this really be if it cracks while sitting on a bed?!\"}]}"
+}

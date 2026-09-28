@@ -1,0 +1,216 @@
+{
+  "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "85154729-8376-4264-a3ff-55bc032ac68e",
+  "raw_response": {
+    "id": "85154729-8376-4264-a3ff-55bc032ac68e",
+    "created_at": 1789211534.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "293cf886-604a-4e98-883d-fc39739f492f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need adhere schema. We need identify product-review semantic claims. Source text: \"Great quality/ Great Service\\nVery good quality, work well and a great price. The vendor had them to me before the promised time. Like that, recommend to all to use them. You will not be disappointed\"\n\nWe need extract claims, each with primary/secondary taxonomy, polarity, evidence_span exact substring. No sentiment from star rating. If no supported product claim empty.\n\nWe need parse. Claims:\n- \"Very good quality\" product_quality / material_build_quality? Maybe general quality? Taxonomy product_quality has material_build_quality, defective_on_arrival, accessory_condition. \"Very good quality\" likely product_quality / material_build_quality positive. Evidence \"Very good quality\"\n- \"work well\" function_performance / general_performance positive. Evidence \"work well\" (exact substring from source_text). Source: \"work well\" yes.\n- \"a great price\" convenience_value / price_value positive. Evidence \"a great price\"\n- \"The vendor had them to me before the promised time.\" This is service/shipping, not product? Taxonomy doesn't include shipping/service except maybe general_convenience? Not product claim. Could be other_unknown? But instructions product-review semantic claims. If no supported product claim? This is vendor service, not product. Should we include? Probably not product claim. Could be convenience_value/general_convenience? \"had them to me before promised time\" relates delivery speed, not taxonomy. Since no product claim, skip.\n- \"Like that, recommend to all to use them.\" Could be general positive recommendation, no specific attribute. Maybe other_unknown/uncategorized? But \"recommend\" implies overall product satisfaction? Might not be specific claim. Usually we extract claims with attributes. Could be general_performance? No evidence \"work well\" already. \"Like that\" maybe general convenience? Not clear. We might skip.\n- \"You will not be disappointed\" general positive, no attribute. Skip or other_unknown/uncategorized? But no specific claim. Probably skip.\n\nNeed exactly one valid primary/secondary pair. For \"Very good quality\" primary product_quality secondary material_build_quality? \"quality\" could be material_build_quality. Polarity positive. Evidence exact \"Very good quality\". But note title also has \"Great quality/ Great Service\". Source_text includes title? It says source_text includes \"Great quality/ Great Service\\nVery good quality...\" So evidence span could be from source_text. There is \"Great quality/ Great Service\" at start. Maybe claim \"Great quality\" product_quality/material_build_quality positive. But duplicate with \"Very good quality\"? We can include both? The review may contain multiple claims. Could include \"Great quality\" from title and \"Very good quality\" from body. But maybe same claim repeated. We should avoid duplicates? We can include one evidence span. The instructions: each claim exactly one pair. A review may contain zero or multiple claims. We can extract claims. It doesn't prohibit duplicate topics. But likely we should extract distinct claims. \"Great quality\" and \"Very good quality\" both same product quality. We can choose one maybe body. But evidence_span could be \"Very good quality\". \n\n\"work well\" function_performance/general_performance positive.\n\"great price\" convenience_value/price_value positive.\n\"vendor had them to me before the promised time\" is service, not product. Maybe convenience_value/general_convenience? Delivery speed? But taxonomy convenience_value includes general_convenience; could be shipping/delivery convenience? But primary convenience_value secondary general_convenience. However \"vendor\" service. The product review semantic claims? It might be about vendor service, not product. The taxonomy doesn't have shipping. Could categorize as other_unknown/uncategorized? But we should not invent. Hmm.\n\n\"Great Service\" in title: not product claim. \"vendor had them to me before promised time\" service. \"Like that, recommend to all to use them. You will not be disappointed\" overall recommendation. Could be other_unknown/uncategorized positive? But \"uncategorized\" maybe for supported product claim not fitting taxonomy. \"recommend\" is overall, no specific topic. Maybe we can include as other_unknown/uncategorized? But the instruction: \"Extract product-review semantic claims.\" A claim could be overall product satisfaction. Taxonomy has general_performance under function_performance, general_durability, general_convenience. \"recommend to all to use them\" indicates general satisfaction but no attribute. Could use function_performance/general_performance? But \"work well\" already. \"You will not be disappointed\" general. Could use other_unknown/uncategorized. But is that supported? Maybe not.\n\nWe need decide final. The expected output likely includes:\n- product_quality/material_build_quality positive \"Very good quality\"\n- function_performance/general_performance positive \"work well\"\n- convenience_value/price_value positive \"a great price\"\n\nMaybe include \"Great quality\" as product_quality/material_build_quality positive? But that would duplicate. The title is part of source_text. Could extract \"Great quality\" too? But then same topic. The schema doesn't forbid duplicates. But typical tasks want claims from all text. However \"Great quality/ Great Service\" is a title. It contains \"Great quality\" and \"Great Service\". \"Great quality\" is a product claim. \"Great Service\" is service claim not product. We could extract \"Great quality\" as product_quality/material_build_quality positive. But then \"Very good quality\" is also same. Maybe we can include both? But that might be redundant. The instruction: \"A review may contain zero or multiple claims.\" It doesn't say deduplicate. But to be safe, extract distinct claims. If we include both, evidence spans \"Great quality\" and \"Very good quality\" both valid. But then the output has two claims for same attribute. Could be considered over-extraction? Hmm.\n\nMaybe we can combine? No, evidence_span exact continuous substring. Cannot combine non-contiguous. Could use \"Great quality/ Great Service\\nVery good quality\" but that includes service and newline, not one claim. So separate.\n\nLet's consider possible expected from annotation: They might want all product-related claims. Title \"Great quality/ Great Service\" – \"Great quality\" product_quality, \"Great Service\" not product. Body \"Very good quality\" product_quality, \"work well\" function_performance, \"a great price\" convenience_value. \"The vendor had them to me before the promised time.\" Service/shipping. \"Like that, recommend to all to use them. You will not be disappointed\" overall positive recommendation, maybe other_unknown/uncategorized. But \"recommend\" is not a product attribute. However it's a claim about the product being recommendable? Could be general_performance? But no specific.\n\nThe taxonomy includes \"other_unknown\": [\"insufficient_information\", \"uncategorized\"]. Could use other_unknown/uncategorized for general recommendation? But \"uncategorized\" is for claims that don't fit. \"Like that, recommend to all to use them\" is a claim of recommendation, no attribute. Might be considered \"general_performance\"? Actually function_performance/general_performance is for general performance claims like \"works well\". \"recommend\" is overall satisfaction, could be general_performance? Not exactly. But maybe acceptable.\n\nWe need produce JSON only. Let's decide minimal but comprehensive. I think include three clear product claims:\n1. product_quality/material_build_quality positive \"Very good quality\"\n2. function_performance/general_performance positive \"work well\"\n3. convenience_value/price_value positive \"a great price\"\n\nShould we include \"Great quality\" from title? The source_text includes it. The title is \"Great quality/ Great Service\". If we include it, we have four claims. But \"Great quality\" is same as \"Very good quality\". The review may contain multiple claims; duplicate attribute claims could be separate. But typically extraction tasks want each mention? The instruction: \"For every claim choose exactly one valid primary/secondary taxonomy pair\" implies each claim occurrence. So if there are two quality mentions, they are two claims. But are they distinct claims? They both assert quality. Could be considered one claim repeated. However evidence_span must be exact substring, so we could pick the first mention \"Great quality\" and not the second. But the second is more explicit \"Very good quality\". Which one to choose? If we only pick one, we can pick \"Very good quality\" because it's in body. But then we ignore title \"Great quality\". The title is part of source_text. Is title considered part of review? Yes. So there is a claim \"Great quality\". I'd include both? Let's think about annotation guidelines: Usually they want all product claims. If a review says \"Great quality\" in title and \"Very good quality\" in body, they might annotate both as same topic, but maybe they would deduplicate? The prompt doesn't mention deduplication. It says \"A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair...\" So each claim is a semantic assertion. \"Great quality\" and \"Very good quality\" are two separate assertions (though same meaning). So include both? But then the output has two claims with same topic and evidence. That's acceptable.\n\nWhat about \"Great Service\" – service, not product. Taxonomy doesn't include service. Could be other_unknown/uncategorized? But it's not product claim. \"The vendor had them to me before the promised time\" is service. \"Great Service\" is service. Should we include as other_unknown/uncategorized? The prompt says product-review semantic claims. Service claims are not product claims. So skip.\n\n\"Like that, recommend to all to use them. You will not be disappointed\" – overall recommendation. Could be other_unknown/uncategorized? It's a product claim? It's a recommendation to use them. It implies general satisfaction. Could be general_performance? But no specific. I'd skip to avoid over-extraction.\n\nThus claims: maybe three or four. Let's check exact evidence_span. Source_text: \"Great quality/ Great Service\\nVery good quality, work well and a great price. The vendor had them to me before the promised time. Like that, recommend to all to use them. You will not be disappointed\"\n\nSubstrings:\n- \"Great quality\" appears at start.\n- \"Very good quality\" appears after newline.\n- \"work well\" appears in \"work well and\"\n- \"a great price\" appears in \"and a great price\"\nPolarity: all positive.\n\nPrimary/secondary:\n- \"Great quality\" -> product_quality / material_build_quality. Is \"quality\" material build quality? Could be general product quality. Taxonomy product_quality only has material_build_quality, defective_on_arrival, accessory_condition. So material_build_quality is closest.\n- \"Very good quality\" -> same.\n- \"work well\" -> function_performance / general_performance.\n- \"a great price\" -> convenience_value / price_value.\n\nShould we include \"Great Service\" as other_unknown/uncategorized? If we include, primary other_unknown, secondary uncategorized, polarity positive, evidence_span \"Great Service\". But is it a product claim? No. The instructions: \"Extract product-review semantic claims.\" Service claim is not product. So skip.\n\nWhat about \"recommend to all to use them\" – could be other_unknown/uncategorized positive. But it's not a specific product attribute. It's a recommendation. Might be considered a claim. But I think skip.\n\nWe need output JSON with claims array. Should we include both quality mentions? If we include both, we have four claims. Let's decide. The prompt says \"A review may contain zero or multiple claims.\" It doesn't say deduplicate. But if we include both, it might be seen as redundant. In many extraction tasks, they want all mentions. However, the title is often a summary of body. The body has \"Very good quality\", title has \"Great quality\". They are separate spans. I'll include both to be thorough? But maybe over-extraction penalty. The desired output likely expects exactly the claims in the review. Let's think of a human annotator: They read review. They see title \"Great quality/ Great Service\". They might annotate \"Great quality\" as product_quality. Then body \"Very good quality\" as product_quality. They might consider them two claims. But often they would combine? The schema requires evidence_span exact substring, so they can't combine non-contiguous. So they might pick one. Which one? The body has more complete sentence. The title is also part of source_text. I'd lean to include only \"Very good quality\" because it's in the body and more specific? But \"Great quality\" is also a claim. Hmm.\n\nMaybe we can avoid duplicate by choosing the first mention \"Great quality\" and not the second? But then we miss \"Very good quality\". The body has \"Very good quality\" which is more explicit. If we only pick one, which is better? The instruction says \"For every claim choose exactly one valid...\" So if there are two claims, we should include both. I'll include both.\n\nWait, the review title is \"Great quality/ Great Service\". The source_text includes that. The body \"Very good quality, work well and a great price.\" So there are two quality claims. I'll include both.\n\nBut also \"work well\" and \"a great price\" are in same sentence. That's fine.\n\nLet's construct JSON:\n\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"product_quality\",\n      \"secondary_topic\": \"material_build_quality\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Great quality\"\n    },\n    {\n      \"primary_topic\": \"product_quality\",\n      \"secondary_topic\": \"material_build_quality\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Very good quality\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"general_performance\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"work well\"\n    },\n    {\n      \"primary_topic\": \"convenience_value\",\n      \"secondary_topic\": \"price_value\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"a great price\"\n    }\n  ]\n}\n\nCheck if \"Great quality\" is exact substring: source_text starts \"Great quality/ Great Service\\n...\" Yes. \"Very good quality\" exact. \"work well\" exact. \"a great price\" exact.\n\nShould we include \"Great Service\"? No.\n\nWhat about \"The vendor had them to me before the promised time\" – could be convenience_value/general_convenience? It's about delivery speed. But not product. Skip.\n\nWhat about \"Like that, recommend to all to use them. You will not be disappointed\" – overall positive. Could be other_unknown/uncategorized. But skip.\n\nNow, is \"material_build_quality\" correct for \"quality\"? It might be \"general_performance\" if they mean overall quality? But product_quality is the primary for quality. The secondary material_build_quality is the only general quality in product_quality. So yes.\n\nCould \"work well\" be function_performance/general_performance? Yes.\n\nCould \"a great price\" be convenience_value/price_value? Yes.\n\nPolarity all positive.\n\nReturn only JSON. Use exact schema. No markdown. Ensure valid JSON. Use double quotes. Done.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "85154729-8376-4264-a3ff-55bc032ac68e-0",
+        "status": "completed"
+      },
+      {
+        "id": "01a086bb-797a-42e4-a944-f1c621e6e81f",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Great quality\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Very good quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"work well\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"a great price\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211549.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1063,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 3464,
+      "output_tokens_details": {
+        "reasoning_tokens": 3336
+      },
+      "total_tokens": 4527
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Great quality\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Very good quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"work well\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"a great price\"}]}"
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "6b9c8bf086ef6cc75ba779f59362cd17dea744b2",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "281ad596-3491-451c-bfe6-4f988b6ae763",
+  "raw_response": {
+    "id": "281ad596-3491-451c-bfe6-4f988b6ae763",
+    "created_at": 1789212015.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "36f20645-69cd-4201-87c4-49efd7163e03",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims. Source text: \"Poor quality\\nSo far not that good\" Title maybe included? SOURCE_TEXT given: \"Poor quality\\nSo far not that good\". Need claims. Review has maybe product quality? \"Poor quality\" implies material_build_quality? Primary product_quality, secondary material_build_quality? Polarity negative. Evidence span exact substring \"Poor quality\" from source. Also \"So far not that good\" general vague? Could be general_performance negative? \"not that good\" could indicate general performance? Need decide supported product claim. It says Poor quality. That's product quality. \"So far not that good\" maybe insufficient information? But \"not that good\" is a claim about product overall? Could map other_unknown/uncategorized? But primary maybe other_unknown secondary insufficient_information? However \"not that good\" vague no specific product attribute. If no supported product claim exists? But poor quality is supported. Should we extract one claim only? The second sentence \"So far not that good\" may be same sentiment, general. Could be function_performance/general_performance negative. But \"not that good\" is general evaluation, not specific function. Taxonomy has general_performance under function_performance. It says so far not that good: general performance negative. But evidence span exact \"So far not that good\". Is that a claim? Could be. However \"Poor quality\" already negative product_quality. The review may contain multiple claims. Need independent. We can include both? Need avoid over-extraction. \"So far not that good\" could be general_performance. But is it product claim? It refers to product? Context title \"Poor quality\", so yes. But \"not that good\" ambiguous. Might be insufficient_information? The instruction says if no supported product claim exists, empty. Here \"Poor quality\" is supported. The second likely also supported as general performance? Let's assess.\n\nSchema: primary_topic/secondary. For \"Poor quality\": product_quality/material_build_quality negative. Evidence \"Poor quality\". For \"So far not that good\": function_performance/general_performance negative? Evidence exact. Could also be product_quality? \"not that good\" general quality? But product_quality secondary has material_build_quality, defective_on_arrival, accessory_condition. Not general quality. So general_performance is better.\n\nCould combine entire text \"Poor quality\\nSo far not that good\" as one claim? But evidence span must exact continuous substring. It can contain newline. But primary? Product quality? The second vague. Better separate.\n\nNeed output JSON only. Ensure no markdown. Claims list with two objects. Polarity negative. Evidence span exact substring from source. For first, \"Poor quality\" appears. For second, \"So far not that good\" appears exactly. Note source has newline between. Yes.\n\nNeed verify primary/secondary valid. product_quality/material_build_quality valid. function_performance/general_performance valid. Good.\n\nPotential issue: \"So far not that good\" could be other_unknown/insufficient_information? But polarity negative? insufficient info not necessarily. The phrase is evaluative. I'll include as general_performance. But if evaluator expects only one? Hmm.\n\nLet's think of product review semantic claims. \"Poor quality\" definitely product_quality. \"So far not that good\" is vague overall evaluation. They might consider it general_performance. Since review title \"Poor quality\" and body \"So far not that good\" could be same claim. The system says may contain zero or multiple claims. For every claim. Multiple claims allowed. Do we risk duplicating? They are separate spans but similar. Could be redundant. But semantic claim: overall not good. I'd include because it's a distinct product claim. But maybe \"So far not that good\" is insufficient information, no specific product attribute. In taxonomy, other_unknown includes insufficient_information/uncategorized. Polarity? If insufficient info, neutral? But \"not that good\" has negative sentiment. However primary other_unknown? Could be \"uncategorized\" with negative? Hmm.\n\nGuideline: If no supported product claim exists, empty. \"So far not that good\" is vague but still a product evaluation, not necessarily attribute. General performance is appropriate. I'll include both.\n\nNeed final JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "281ad596-3491-451c-bfe6-4f988b6ae763-0",
+        "status": "completed"
+      },
+      {
+        "id": "a07630c6-b65d-44e1-932b-1ef24d70d9ad",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"Poor quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"So far not that good\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212019.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1024,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 984,
+      "output_tokens_details": {
+        "reasoning_tokens": 915
+      },
+      "total_tokens": 2008
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"Poor quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"So far not that good\"}]}"
+}

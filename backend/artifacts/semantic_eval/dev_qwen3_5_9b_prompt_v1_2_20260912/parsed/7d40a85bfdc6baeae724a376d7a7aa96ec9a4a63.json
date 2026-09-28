@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-4eddfbfbbf7b9c24",
+      "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "I am not able to use this for my iPhone 11 because it's a few millimeters too long.",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x4wd9075l88tfm6gy53rkr"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

@@ -1,0 +1,343 @@
+{
+  "run_status": "completed",
+  "split": "dev",
+  "review_count": 216,
+  "golden_claim_count": 388,
+  "prediction_count": 254,
+  "processing_error_review_count": 0,
+  "bad_case_count": 178,
+  "actual_provider_config": {
+    "provider": "lmstudio",
+    "model": "stage55a-qwen3.5-9b",
+    "api_name": "chat_completions_compatible",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 2,
+    "timeout_seconds": 180.0,
+    "base_url": "http://127.0.0.1:1234/v1"
+  },
+  "production_provider_config": {
+    "provider": "openai",
+    "model": "gpt-5.6-sol",
+    "api_name": "responses",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 3,
+    "timeout_seconds": 120.0,
+    "base_url": null
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "value": 0.569058485890169,
+      "numerator": 4.552467887121352,
+      "denominator": 8,
+      "target": 0.85,
+      "passed": false
+    },
+    "secondary_topic_micro_f1": {
+      "value": 0.5064102564102564,
+      "numerator": 316,
+      "denominator": 624,
+      "target": 0.75,
+      "passed": false
+    },
+    "topic_polarity_micro_f1": {
+      "value": 0.5,
+      "numerator": 314,
+      "denominator": 628,
+      "target": 0.7,
+      "passed": false
+    },
+    "matched_topic_polarity_accuracy": {
+      "value": 0.9873417721518988,
+      "numerator": 156,
+      "denominator": 158,
+      "target": 0.85,
+      "passed": true
+    },
+    "evidence_substring_validity": {
+      "value": 0.9566929133858267,
+      "numerator": 243,
+      "denominator": 254,
+      "target": 1.0,
+      "passed": false
+    },
+    "invalid_taxonomy_rate": {
+      "value": 0.051181102362204724,
+      "numerator": 13,
+      "denominator": 254,
+      "target": 0.0,
+      "passed": false
+    },
+    "unsupported_evidence_rate": {
+      "value": 0.04330708661417323,
+      "numerator": 11,
+      "denominator": 254,
+      "target": 0.0,
+      "passed": false
+    },
+    "per_topic_support": {
+      "abnormal_noise": 4,
+      "accessory_compatibility": 1,
+      "accessory_condition": 1,
+      "bubbles_adhesion": 7,
+      "case_compatibility": 7,
+      "charging_speed": 34,
+      "charging_success": 59,
+      "cracking_breakage": 18,
+      "defective_on_arrival": 4,
+      "device_compatibility": 9,
+      "device_damage": 1,
+      "dual_port_multi_device": 10,
+      "ease_of_use": 14,
+      "electrical_fault": 1,
+      "general_convenience": 10,
+      "general_durability": 6,
+      "general_performance": 13,
+      "installation_accessories": 7,
+      "installation_difficulty": 19,
+      "insufficient_information": 10,
+      "intermittent_failure": 6,
+      "material_build_quality": 12,
+      "melting_fire": 3,
+      "overheating": 3,
+      "physical_injury_irritation": 1,
+      "port_fit": 1,
+      "portability_size": 7,
+      "positioning_alignment": 9,
+      "power_output": 3,
+      "price_value": 29,
+      "protection_effectiveness": 11,
+      "short_lifespan": 27,
+      "size_fit": 13,
+      "status_indicator_feedback": 5,
+      "stopped_working": 18,
+      "uncategorized": 1,
+      "wall_socket_fit": 4
+    },
+    "bad_cases": [
+      {
+        "review_id": "58edc214302f3ba337ec37731a0a061329e7605d",
+        "primary_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "evidence_span": "the screen protector cracked",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "f9b10c45d524579eafcfb93737796b1b9d186045",
+        "primary_topic": "usability_installation",
+        "secondary_topic": "installation_difficulty",
+        "evidence_span": "fairly easy to put on but there were something on the actual sticky part that I couldn't get off so I had to throw one away",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "intermittent_failure",
+        "evidence_span": "One of them lasted a good month. One lasted a couple of weeks.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "evidence_span": "cracks easy",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "usability_installation",
+        "secondary_topic": "installation_difficulty",
+        "evidence_span": "installation wasn't the easiest",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "product_quality",
+        "secondary_topic": "general_performance",
+        "evidence_span": "Protects your screen well",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "evidence_span": "prone to cracking if your clumsy like me",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "product_quality",
+        "secondary_topic": "general_performance",
+        "evidence_span": "your main screen will stay protected",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+        "primary_topic": "convenience_value",
+        "secondary_topic": "ease_of_use",
+        "evidence_span": "easy to install",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+        "primary_topic": "product_quality",
+        "secondary_topic": "general_performance",
+        "evidence_span": "Works great",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+        "primary_topic": "product_quality",
+        "secondary_topic": "general_performance",
+        "evidence_span": "Great price and fingerprint reader",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "e52ee50fb3f2d3607dae5cde28ec4e3bf02506ae",
+        "primary_topic": "function_performance",
+        "secondary_topic": "general_performance",
+        "evidence_span": "Hardly works\nThis only works like 20% of the time.. when it decides to work it's great but not worth it.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "93962cf3339e99078fa34842e7e90518b3591da2",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "stopped_working",
+        "evidence_span": "One didn't work",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6",
+        "primary_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "evidence_span": "one didn't even work right out of the box",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "2a24d88384c7d0ff70ed3069074096281b4b1bd9",
+        "primary_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "evidence_span": "one wasn't wrap in the plastic and it had a small scratch on it",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "general_durability",
+        "evidence_span": "This screen protector didn't do anything to protect my phone.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "stopped_working",
+        "evidence_span": "Only 1 port worked at a time",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+        "primary_topic": "safety_risk",
+        "secondary_topic": "protection_effectiveness",
+        "evidence_span": "good protection",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "8a6f251111ce8555fd735261eb4c93a6ec9921dd",
+        "primary_topic": "function_performance",
+        "secondary_topic": "status_indicator_feedback",
+        "evidence_span": "halo-light reassures proper contact was made and then the charging chime sounds from your device",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "0e14ebb00a5cff1c77f7f4bfcd9a55baf3364778",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "protection_effectiveness",
+        "evidence_span": "these screens really protect my phone",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "72ea765f7d387fdc62928b59ef99f757c27d3b63",
+        "primary_topic": "function_performance",
+        "secondary_topic": "charging_success",
+        "evidence_span": "Doesn't charge well.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "e9a471deeb1d246d609e81824e3eb176ba9ac75f",
+        "primary_topic": "compatibility_fit",
+        "secondary_topic": "wall_socket_fit",
+        "evidence_span": "didn't even stick in the wall",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8",
+        "primary_topic": "function_performance",
+        "secondary_topic": "dual_port_multi_device",
+        "evidence_span": "provide more than one usb port so I can charge my items",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "6cdad9b452ddf73d9e0e5592479233824109a744",
+        "primary_topic": "product_quality",
+        "secondary_topic": "protection_effectiveness",
+        "evidence_span": "It does perfectly protect the screen.",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      }
+    ]
+  }
+}

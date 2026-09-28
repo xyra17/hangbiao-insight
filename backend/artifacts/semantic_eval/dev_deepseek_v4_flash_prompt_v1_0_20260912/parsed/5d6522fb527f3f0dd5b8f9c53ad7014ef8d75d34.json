@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-0fbce4a879055b3f",
+      "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "stopped_working",
+      "polarity": "negative",
+      "evidence_span": "Stopped working after just 3 months.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "43e6cb5b-f4b7-4517-8ffd-4ca1d4725d05"
+    },
+    {
+      "prediction_id": "SP-67edcb18cd8f062e",
+      "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "overheating",
+      "polarity": "negative",
+      "evidence_span": "It was overheating very bad",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "43e6cb5b-f4b7-4517-8ffd-4ca1d4725d05"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

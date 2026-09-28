@@ -1,0 +1,216 @@
+{
+  "review_id": "04b150ee582a97083a322a4149ae66c681b8ba9f",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "365dcec2-6f9a-40da-a5a4-234653843aa6",
+  "raw_response": {
+    "id": "365dcec2-6f9a-40da-a5a4-234653843aa6",
+    "created_at": 1789211016.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "5e22acba-0937-4a08-8929-297cc4a332cd",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need follow schema. Need parse source_text. Need identify claims with taxonomy pair. Review: \"Super bad\\nThis is really bad  I had to change it so quickly because it break very very very easy, so That is the reason I think this is not good but the screen of my phone is perfect thanks to this, I think so, but it brake with everything , it is easy to put it on\"\n\nWe need extract product-review semantic claims. Product likely screen protector? B07H2V5YLH maybe? Evidence exact continuous substring. Need claims: break easy -> reliability_durability/cracking_breakage? \"it break very very very easy\" and \"it brake with everything\" = breakage. Polarity negative. Evidence span exact maybe \"it break very very very easy\" or \"it brake with everything\". Also \"screen of my phone is perfect thanks to this\" = protection_effectiveness positive? primary function_performance secondary protection_effectiveness. Evidence \"the screen of my phone is perfect thanks to this\". Also \"it is easy to put it on\" = usability_installation/ease_of_use positive. Evidence \"it is easy to put it on\". Also \"had to change it so quickly\" maybe short_lifespan? It is because break easy. Could be reliability_durability/short_lifespan? But primary claim is break. \"I had to change it so quickly because it break\" could indicate short lifespan. But we shouldn't duplicate? Need maybe claims: \n1 negative reliability_durability/cracking_breakage evidence \"it break very very very easy\" or \"it brake with everything\". \n2 positive function_performance/protection_effectiveness evidence \"the screen of my phone is perfect thanks to this\"\n3 positive usability_installation/ease_of_use evidence \"it is easy to put it on\"\nPotential \"not good\" general? \"This is really bad\" maybe other_unknown? No specific product claim? It is overall sentiment; could be general_performance negative? But evidence \"This is really bad\" maybe function_performance/general_performance? Hmm taxonomy general_performance under function_performance. But \"This is really bad\" no specific product attribute. We might include? The instructions: If no supported product claim exists empty. \"This is really bad\" is overall opinion but not specific. Could be primary other_unknown/secondary uncategorized? But if no supported product claim? We can include general performance? Need avoid infer. Let's inspect.\n\nReview title \"Super bad\". Source text begins \"Super bad\\nThis is really bad  I had to change it so quickly because it break very very very easy, so That is the reason I think this is not good but the screen of my phone is perfect thanks to this, I think so, but it brake with everything , it is easy to put it on\"\n\nProduct probably screen protector. Claims:\n- It breaks very easily. That's durability/cracking_breakage negative.\n- The screen of my phone is perfect thanks to this. That's protection_effectiveness positive.\n- It breaks with everything. Again cracking_breakage negative? Could be same? \"brake with everything\" means breaks on every impact? It could be separate claim? We can include one with evidence \"it brake with everything\" if exact substring. But maybe duplicate same secondary. The schema allows multiple claims. We can include both? They are similar. The instruction \"A review may contain zero or multiple claims.\" We can extract multiple distinct mentions. But maybe better to include both because different evidence. However duplicate claim might be redundant. Need decide.\n\nAlso \"it is easy to put it on\" = ease of use positive. Yes.\n\"had to change it so quickly\" = short_lifespan? It says had to change it so quickly because it break easy. That implies short lifespan due to breakage. Could be reliability_durability/short_lifespan negative evidence \"I had to change it so quickly\". But this is derived from breakage. We could include separate claim: \"I had to change it so quickly\" = short_lifespan? But \"change it\" maybe replacing protector. Evidence exact. Polarity negative. But maybe this is same issue; but taxonomy has short_lifespan. Should we include? It might be supported: Had to change quickly. Could be due to break. But explicit \"I had to change it so quickly\" is a claim of short lifespan. I'd include maybe.\n\n\"this is not good\" general negative? Could map function_performance/general_performance? But general overall? Maybe \"this is not good\" is overall evaluation, not specific. Could be other_unknown/uncategorized? Taxonomy has general_performance. In product reviews, general performance for overall performance. But evidence \"this is not good\" and reason break. Could be redundant. We can skip to avoid unsupported. But maybe model should extract all product claims, including general performance? Hmm.\n\nNeed exact evidence_span continuous substring from SOURCE_TEXT. Ensure no newline? Can include \"Super bad\" maybe not claim. For evidence spans, exact text. We can choose substrings.\n\nNeed valid primary/secondary taxonomy pair. Must ensure secondary belongs to primary. Let's map:\n- reliability_durability: cracking_breakage, short_lifespan, general_durability etc.\n- function_performance: protection_effectiveness.\n- usability_installation: ease_of_use.\n\nPolarity:\n- breaks easily negative.\n- screen perfect positive.\n- easy to put on positive.\n- had to change quickly negative (short lifespan). But if due to breaking, negative.\nCould also \"break with everything\" negative.\n\nPotential issue: \"but it brake with everything\" misspelled brake. Evidence span exact \"it brake with everything\" from source. Claim negative reliability_durability/cracking_breakage.\n\nCould \"it break very very very easy\" and \"it brake with everything\" both cracking_breakage. Are these separate claims? Could extract both. But maybe one claim with evidence \"it break very very very easy\" and another \"it brake with everything\". That's okay.\n\nNeed maybe not infer sentiment from star rating. We use text.\n\nNeed final JSON only.\n\nLet's construct:\n{\n \"claims\": [\n  {\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it break very very very easy\"},\n  {\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I had to change it so quickly\"},\n  {\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"the screen of my phone is perfect thanks to this\"},\n  {\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it brake with everything\"},\n  {\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"it is easy to put it on\"}\n ]\n}\n\nCheck exact substring: Source has \"because it break very very very easy\" yes. \"I had to change it so quickly\" exact. \"the screen of my phone is perfect thanks to this\" exact. \"it brake with everything\" exact. \"it is easy to put it on\" exact.\n\nShould we include \"This is really bad\" as general_performance? Hmm maybe no. But perhaps they expect at least one. We have many.\n\nCould \"it break very very very easy\" be short_lifespan? Actually cracking_breakage is product cracking/breaking. Good.\n\"it brake with everything\" same.\n\nCould \"I had to change it so quickly\" be short_lifespan. Yes.\n\nPotential issue: \"the screen of my phone is perfect thanks to this\" primary function_performance secondary protection_effectiveness. Good.\n\n\"it is easy to put it on\" ease_of_use. Good.\n\nNow final. Ensure JSON valid. No markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "365dcec2-6f9a-40da-a5a4-234653843aa6-0",
+        "status": "completed"
+      },
+      {
+        "id": "9fd176fe-84da-4cef-b1c0-e732921118fa",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it break very very very easy\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I had to change it so quickly\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"the screen of my phone is perfect thanks to this\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it brake with everything\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"it is easy to put it on\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211024.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1078,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1903,
+      "output_tokens_details": {
+        "reasoning_tokens": 1709
+      },
+      "total_tokens": 2981
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it break very very very easy\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I had to change it so quickly\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"the screen of my phone is perfect thanks to this\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"it brake with everything\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"it is easy to put it on\"}]}"
+}

@@ -1,0 +1,208 @@
+{
+  "run_status": "completed",
+  "split": "dev",
+  "review_count": 216,
+  "golden_claim_count": 388,
+  "prediction_count": 126,
+  "processing_error_review_count": 0,
+  "bad_case_count": 197,
+  "actual_provider_config": {
+    "provider": "lmstudio",
+    "model": "stage55a-qwen3.5-9b",
+    "api_name": "chat_completions_compatible",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.2",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 2,
+    "timeout_seconds": 180.0,
+    "base_url": "http://127.0.0.1:1234/v1"
+  },
+  "production_provider_config": {
+    "provider": "openai",
+    "model": "gpt-5.6-sol",
+    "api_name": "responses",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 3,
+    "timeout_seconds": 120.0,
+    "base_url": null
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "value": 0.388546161602681,
+      "numerator": 3.108369292821448,
+      "denominator": 8,
+      "target": 0.85,
+      "passed": false
+    },
+    "secondary_topic_micro_f1": {
+      "value": 0.3319838056680162,
+      "numerator": 164,
+      "denominator": 494,
+      "target": 0.75,
+      "passed": false
+    },
+    "topic_polarity_micro_f1": {
+      "value": 0.3286573146292585,
+      "numerator": 164,
+      "denominator": 499,
+      "target": 0.7,
+      "passed": false
+    },
+    "matched_topic_polarity_accuracy": {
+      "value": 0.9878048780487805,
+      "numerator": 81,
+      "denominator": 82,
+      "target": 0.85,
+      "passed": true
+    },
+    "evidence_substring_validity": {
+      "value": 0.9444444444444444,
+      "numerator": 119,
+      "denominator": 126,
+      "target": 1.0,
+      "passed": false
+    },
+    "invalid_taxonomy_rate": {
+      "value": 0.015873015873015872,
+      "numerator": 2,
+      "denominator": 126,
+      "target": 0.0,
+      "passed": false
+    },
+    "unsupported_evidence_rate": {
+      "value": 0.05555555555555555,
+      "numerator": 7,
+      "denominator": 126,
+      "target": 0.0,
+      "passed": false
+    },
+    "per_topic_support": {
+      "abnormal_noise": 4,
+      "accessory_compatibility": 1,
+      "accessory_condition": 1,
+      "bubbles_adhesion": 7,
+      "case_compatibility": 7,
+      "charging_speed": 34,
+      "charging_success": 59,
+      "cracking_breakage": 18,
+      "defective_on_arrival": 4,
+      "device_compatibility": 9,
+      "device_damage": 1,
+      "dual_port_multi_device": 10,
+      "ease_of_use": 14,
+      "electrical_fault": 1,
+      "general_convenience": 10,
+      "general_durability": 6,
+      "general_performance": 13,
+      "installation_accessories": 7,
+      "installation_difficulty": 19,
+      "insufficient_information": 10,
+      "intermittent_failure": 6,
+      "material_build_quality": 12,
+      "melting_fire": 3,
+      "overheating": 3,
+      "physical_injury_irritation": 1,
+      "port_fit": 1,
+      "portability_size": 7,
+      "positioning_alignment": 9,
+      "power_output": 3,
+      "price_value": 29,
+      "protection_effectiveness": 11,
+      "short_lifespan": 27,
+      "size_fit": 13,
+      "status_indicator_feedback": 5,
+      "stopped_working": 18,
+      "uncategorized": 1,
+      "wall_socket_fit": 4
+    },
+    "bad_cases": [
+      {
+        "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+        "primary_topic": "reliability_durability",
+        "secondary_topic": "stopped_working",
+        "evidence_span": "One of them lasted a good month. One lasted a couple of weeks.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+        "primary_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "evidence_span": "I put the third one on today and, I kid you not, my phone just sat next to me on my bed. I picked it up a FEW MINUTES later and there was a crack through the darn thing.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+        "primary_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "evidence_span": "I think it must have knocked against my book light. ??? That is ABSURD.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6",
+        "primary_topic": "product_quality",
+        "secondary_topic": "defective_on_arrival",
+        "evidence_span": "one didn't even work right out of the box",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "7d40a85bfdc6baeae724a376d7a7aa96ec9a4a63",
+        "primary_topic": "compatibility_fit",
+        "secondary_topic": "device_compatibility",
+        "evidence_span": "I am not able to use this for my iPhone 11 because it's a few millimeters too long.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "155f7856db098a0574e3c54eaf1dea21ea01c741",
+        "primary_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "evidence_span": "Cracked within a week of having these on the phones.",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "usability_installation",
+        "secondary_topic": "installation_difficulty",
+        "evidence_span": "installation wasn't the easiest",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      },
+      {
+        "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+        "primary_topic": "product_quality",
+        "secondary_topic": "cracking_breakage",
+        "evidence_span": "prone to cracking",
+        "reasons": [
+          "invalid_taxonomy"
+        ]
+      },
+      {
+        "review_id": "934d5fa6f56364d7203830a22ae2444416d531ec",
+        "primary_topic": "usability_installation",
+        "secondary_topic": "positioning_alignment",
+        "evidence_span": "the exact area to put the phone to start the charge is small. Need to put it in the exact spot or it won't charge.",
+        "reasons": [
+          "unsupported_evidence"
+        ]
+      }
+    ]
+  }
+}

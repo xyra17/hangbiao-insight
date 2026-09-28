@@ -1,0 +1,50 @@
+{
+  "review_id": "3fefdee945924529e5c5eb9ab9403d10038e68b4",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-4rg77qx4bl6zr05ry4fly",
+  "raw_response": {
+    "id": "chatcmpl-4rg77qx4bl6zr05ry4fly",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"did not work with my phone\"}]}"
+        }
+      }
+    ],
+    "created": 1789186546,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 43,
+      "prompt_tokens": 597,
+      "total_tokens": 640,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 42,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"did not work with my phone\"}]}"
+}

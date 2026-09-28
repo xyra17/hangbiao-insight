@@ -1,0 +1,50 @@
+{
+  "review_id": "6bc641cdbd5442a5efed7aecd0246553d49e19d1",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-491gqn0be5sg5s06akyqxq",
+  "raw_response": {
+    "id": "chatcmpl-491gqn0be5sg5s06akyqxq",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"Easy to use\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"charges very quickly\"}]}"
+        }
+      }
+    ],
+    "created": 1789177001,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 74,
+      "prompt_tokens": 436,
+      "total_tokens": 510,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 73,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"Easy to use\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"charges very quickly\"}]}"
+}

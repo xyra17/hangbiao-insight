@@ -1,0 +1,50 @@
+{
+  "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-mnrrekgi6tgvtv8fnh4e3i",
+  "raw_response": {
+    "id": "chatcmpl-mnrrekgi6tgvtv8fnh4e3i",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"caused power outages\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"Only 1 port worked at a time\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"I gave 1 star for quick shipping and 1 port worked fine until the charger was unplugged, then plugged back in\"}]}"
+        }
+      }
+    ],
+    "created": 1789185871,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 146,
+      "prompt_tokens": 743,
+      "total_tokens": 889,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 145,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"caused power outages\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"Only 1 port worked at a time\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"intermittent_failure\", \"polarity\": \"negative\", \"evidence_span\": \"I gave 1 star for quick shipping and 1 port worked fine until the charger was unplugged, then plugged back in\"}]}"
+}

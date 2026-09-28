@@ -1,0 +1,69 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5ad5e568ce6bb72f",
+      "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "one didn't even work right out of the box",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-hf06y5ljd071xhrnpvwgu8"
+    },
+    {
+      "prediction_id": "SP-60d6e2f44dc2e24f",
+      "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "only had one USB port working after a short while",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-hf06y5ljd071xhrnpvwgu8"
+    },
+    {
+      "prediction_id": "SP-55710e565bd9253f",
+      "review_id": "d1f071c4f4062b563655258f58375a26a19f0ed6",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "stopped_working",
+      "polarity": "negative",
+      "evidence_span": "They are both in the garbage already",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-hf06y5ljd071xhrnpvwgu8"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

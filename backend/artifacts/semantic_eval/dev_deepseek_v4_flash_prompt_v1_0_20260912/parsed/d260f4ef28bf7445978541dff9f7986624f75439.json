@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-5940b81fe4ba43ff",
+      "review_id": "d260f4ef28bf7445978541dff9f7986624f75439",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "general_convenience",
+      "polarity": "positive",
+      "evidence_span": "muy practicos",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "8bbc05ac-17c9-4b9a-a650-d7b58cc858ec"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

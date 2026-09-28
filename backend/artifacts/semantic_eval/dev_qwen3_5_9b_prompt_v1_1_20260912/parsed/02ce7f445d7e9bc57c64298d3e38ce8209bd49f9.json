@@ -1,0 +1,181 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f556ccd8cb180e41",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "positioning_alignment",
+      "polarity": "negative",
+      "evidence_span": "the screen protector did not go on as flawless as the first time",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-920dbe2544bb8c17",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "I was left with a large air bubble on the top of the air protector",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-81a740d1a0a2a949",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "it did not work",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-d3993a5926fccde8",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "A credit card also did not work to remove the air bubble",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-b4de7018d932200d",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "It was just moving the bubble to the surrounding areas",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-e4bec365c975d79e",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "the same problem occurred",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-6ce0c719d6ba5701",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "bubbles_adhesion",
+      "polarity": "negative",
+      "evidence_span": "only 1/3 screen protectors were successful",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    },
+    {
+      "prediction_id": "SP-7a9f281f1fbb088f",
+      "review_id": "02ce7f445d7e9bc57c64298d3e38ce8209bd49f9",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "device_compatibility",
+      "polarity": "negative",
+      "evidence_span": "none of which were for the iPhone 11",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-x66k9i4lz9oca9soxww10k"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 7
+}

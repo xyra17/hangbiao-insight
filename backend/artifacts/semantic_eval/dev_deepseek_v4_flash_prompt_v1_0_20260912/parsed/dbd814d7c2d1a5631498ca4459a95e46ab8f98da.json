@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-c3216e3c68054836",
+      "review_id": "dbd814d7c2d1a5631498ca4459a95e46ab8f98da",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "other_unknown",
+      "secondary_topic": "uncategorized",
+      "polarity": "negative",
+      "evidence_span": "This is not a good product.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "80b8fd51-5e11-4aa3-b484-076ab2a0a0c5"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

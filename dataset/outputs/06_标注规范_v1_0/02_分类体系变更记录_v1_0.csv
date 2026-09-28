@@ -1,0 +1,8 @@
+﻿change_type,old,new,reason
+rename,safety_thermal,safety_risk,真实评论除过热外，还出现玻璃碎片、身体刺激等物理安全风险。
+add_subtopic,,compatibility_fit / wall_socket_fit,墙充存在插头在墙壁插座中过松、易脱落等独立问题。
+add_subtopic,,safety_risk / physical_injury_irritation,钢化膜评论出现碎玻璃扎手等身体伤害风险。
+add_subtopic,,usability_installation / status_indicator_feedback,无线充评论中存在 LED / 充电状态提示是否清晰的问题。
+add_subtopic,,usability_installation / installation_accessories,钢化膜评论出现安装模板、清洁片、湿巾等附件问题。
+rule,rating ≈ polarity,rating only for sampling; semantic span determines polarity,真实样本中存在高星负向问题和低星局部正向反馈。
+rule,single label row,long-format multi-label,同一评论可同时包含多个 Topic 和不同 Polarity。

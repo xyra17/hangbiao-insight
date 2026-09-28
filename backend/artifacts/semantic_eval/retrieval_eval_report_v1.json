@@ -1,0 +1,22 @@
+{
+  "keyword": {
+    "query_count": 90,
+    "recall_at_10": 0.6666666666666666,
+    "mrr": 0.6666666666666666,
+    "ndcg_at_10": 0.6666666666666666,
+    "evidence_precision": 0.2,
+    "no_result_rate": 0.3333333333333333,
+    "p50_latency_ms": 15.385,
+    "p95_latency_ms": 45.69
+  },
+  "hybrid": {
+    "query_count": 90,
+    "recall_at_10": 0.6666666666666666,
+    "mrr": 0.65,
+    "ndcg_at_10": 0.5859942959604789,
+    "evidence_precision": 0.2,
+    "no_result_rate": 0.3333333333333333,
+    "p50_latency_ms": 33.39,
+    "p95_latency_ms": 94.94
+  }
+}

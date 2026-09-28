@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-9c63311a837fe9fb",
+      "review_id": "f28c69874579f37fe0088bb33835a94213653cdb",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "melting_fire",
+      "polarity": "negative",
+      "evidence_span": "will burn up within a day",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "003300db-f6ec-450e-88f6-c8d072a20866"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

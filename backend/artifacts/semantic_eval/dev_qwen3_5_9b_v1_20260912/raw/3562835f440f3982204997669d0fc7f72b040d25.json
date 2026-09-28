@@ -1,0 +1,50 @@
+{
+  "review_id": "3562835f440f3982204997669d0fc7f72b040d25",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-l5c9nic7oyq5z76w9fwy",
+  "raw_response": {
+    "id": "chatcmpl-l5c9nic7oyq5z76w9fwy",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"bubbles_adhesion\", \"polarity\": \"negative\", \"evidence_span\": \"Difficult to get complete adhesion g\"}]}"
+        }
+      }
+    ],
+    "created": 1789177285,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 47,
+      "prompt_tokens": 456,
+      "total_tokens": 503,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 46,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"bubbles_adhesion\", \"polarity\": \"negative\", \"evidence_span\": \"Difficult to get complete adhesion g\"}]}"
+}

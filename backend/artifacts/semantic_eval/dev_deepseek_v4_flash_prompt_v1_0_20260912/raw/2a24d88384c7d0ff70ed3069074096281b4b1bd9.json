@@ -1,0 +1,216 @@
+{
+  "review_id": "2a24d88384c7d0ff70ed3069074096281b4b1bd9",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "9aaa24fe-0883-4edb-8741-eca128a28997",
+  "raw_response": {
+    "id": "9aaa24fe-0883-4edb-8741-eca128a28997",
+    "created_at": 1789210893.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "b3ecfb5b-a57d-4732-82ad-d0efd8657700",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Review text: \"I just received them in the mail today. I immediately unwrapped them and I couldn’t help but noticed that one wasn’t wrap in the plastic and it had a small scratch on it. So far it works fine though but I shouldn’t have received one with damage on it.\"\n\nWe need identify product-review semantic claims. Need exactly one valid primary/secondary taxonomy pair per claim, polarity independently. Evidence exact continuous substring from SOURCE_TEXT. Need no infer from star. Product maybe charger? B0BYJ8ZVWH unknown. Claims:\n1) One wasn't wrapped in plastic and had small scratch on it. This is product_quality / accessory_condition? Defective on arrival? Scratch damage upon receipt, unwrapped. It arrived with damage. Primary product_quality, secondary defective_on_arrival maybe. Evidence: \"one wasn’t wrap in the plastic and it had a small scratch on it\" exact substring? Source has \"one wasn’t wrap in the plastic and it had a small scratch on it.\" yes continuous. Polarity negative. Could also accessory_condition if packaging missing? But \"small scratch\" is product condition. defective_on_arrival seems appropriate. \n2) \"So far it works fine though\" function_performance / general_performance positive. Evidence exact: \"So far it works fine though\" but source has \"So far it works fine though but...\" exact continuous. Polarity positive. \n3) \"but I shouldn’t have received one with damage on it.\" same as defect/arrival negative. Could be separate claim? It's restating negative damage. Might be same claim. We can include one? The instruction: zero or multiple claims. We can include claims. Should avoid duplicate? Need claims semantic. The first covers unwrapped and scratch, negative. The last is complaint about receiving damaged item, likely same. Maybe duplicate if include both? They ask extract claims; each claim maybe separate if evidence spans distinct. We can include two negative? Better not duplicate same semantic. But maybe last \"shouldn't have received one with damage\" is claim about product_quality defective_on_arrival, same as first. Could include only one negative claim and one positive. But maybe \"one wasn’t wrap in plastic\" could be accessory_condition/packaging? Taxonomy has accessory_condition under product_quality. It's about accessory packaging? Hmm \"one wasn’t wrap in the plastic\" means item not wrapped in plastic; maybe defective_on_arrival or accessory_condition? \"accessory_condition\" likely condition of included accessories. Not packaging. Damage scratch = defective_on_arrival or wear_damage? Since received, defective_on_arrival. \nPotential claim: \"it works fine\" positive general performance.\nPotential negative: \"small scratch\" product_quality / defective_on_arrival negative.\nPotential negative: \"wasn't wrap in the plastic\" product_quality / defective_on_arrival or other? Actually not wrapped could be packaging issue not product quality? Taxonomy no packaging. Could be \"accessory_condition\" if plastic wrap? No, plastic wrap packaging. Could be uncategorized? But combined with scratch. Use same evidence span includes both. \nNeed final JSON only.\n\nCheck exact substring: source_text: \"🤨🤔\\nI just received them in the mail today. I immediately unwrapped them and I couldn’t help but noticed that one wasn’t wrap in the plastic and it had a small scratch on it. So far it works fine though but I shouldn’t have received one with damage on it.\"\n\nEvidence span exact continuous substring. We can use \"one wasn’t wrap in the plastic and it had a small scratch on it\" without period? It appears exact substring. Yes. Use apostrophe curly? Source \"wasn’t\" with right single quote. Need exact. We'll copy.\n\nPositive evidence \"So far it works fine though\" exact. \nNegative second maybe \"I shouldn’t have received one with damage on it\" exact. If include, primary product_quality secondary defective_on_arrival negative. But duplicate with first. Could include? The first is specific scratch and unwrapped; second general damage on arrival. Both negative product_quality/defective_on_arrival. Might be acceptable but over-extraction? We should include separate claims if distinct evidence. The last adds \"damage\" but same. The schema doesn't penalize duplicate? Better minimize redundancy. Maybe include only the comprehensive negative evidence that includes damage: \"one wasn’t wrap in the plastic and it had a small scratch on it\" and positive. The last sentence \"but I shouldn’t have received one with damage on it\" is sentiment/expectation, same claim. Not separate product semantic claim? It is a claim about receiving damaged item. Could include but duplicate. I'll include two claims. Need ensure valid secondary for primary. defective_on_arrival valid under product_quality. general_performance valid under function_performance. Polarity negative, positive. \nCould the positive \"works fine\" be mixed because though? \"So far it works fine though but...\" The clause itself positive. Polarity positive. \nMaybe \"I just received them in mail today\" no claim. \nFinal: {\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"one wasn’t wrap in the plastic and it had a small scratch on it\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"So far it works fine though\"}]}\nCheck evidence spans exact continuous substring. First begins lower \"one\" from \"that one...\" yes \"one wasn’t wrap...\" continuous. Does source have \"wasn’t wrap\" not \"wrapped\"? yes \"wasn’t wrap in the plastic\". Good. Second exact \"So far it works fine though\". Good. \nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "9aaa24fe-0883-4edb-8741-eca128a28997-0",
+        "status": "completed"
+      },
+      {
+        "id": "aa5e897c-3e4c-4293-9700-de189786c043",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"one wasn’t wrap in the plastic and it had a small scratch on it\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"So far it works fine though\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210900.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1082,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1334,
+      "output_tokens_details": {
+        "reasoning_tokens": 1250
+      },
+      "total_tokens": 2416
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"one wasn’t wrap in the plastic and it had a small scratch on it\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"So far it works fine though\"}]}"
+}

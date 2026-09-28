@@ -1,0 +1,50 @@
+{
+  "review_id": "7e9df35e980af059bd7bf60448ad4683070cb7f5",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-1yklf8nb8vo0s2rcoh6anmd",
+  "raw_response": {
+    "id": "chatcmpl-1yklf8nb8vo0s2rcoh6anmd",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"abnormal_noise\", \"polarity\": \"negative\", \"evidence_span\": \"it make a hissing sound\"}]}"
+        }
+      }
+    ],
+    "created": 1789177042,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 44,
+      "prompt_tokens": 483,
+      "total_tokens": 527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 43,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"abnormal_noise\", \"polarity\": \"negative\", \"evidence_span\": \"it make a hissing sound\"}]}"
+}

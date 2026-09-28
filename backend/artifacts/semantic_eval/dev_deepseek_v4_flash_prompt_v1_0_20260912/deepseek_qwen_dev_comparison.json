@@ -1,0 +1,185 @@
+{
+  "scope": {
+    "split": "dev",
+    "review_count": 216,
+    "prompt_for_provider_comparison": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "validation_or_test_executed": false,
+    "business_reviews_executed": false
+  },
+  "versions": {
+    "qwen3.5-9b / prompt-v1.0": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    },
+    "qwen3.5-9b / prompt-v1.1": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    },
+    "qwen3.5-9b / prompt-v1.2": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    },
+    "deepseek-v4-flash / prompt-v1.0": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "api_name": "responses",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 3,
+      "timeout_seconds": 180.0,
+      "base_url": "https://api.deepseek.com"
+    }
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "qwen3.5-9b / prompt-v1.0": 0.569058485890169,
+      "qwen3.5-9b / prompt-v1.1": 0.600328732461688,
+      "qwen3.5-9b / prompt-v1.2": 0.388546161602681,
+      "deepseek-v4-flash / prompt-v1.0": 0.7863277210663184
+    },
+    "secondary_topic_micro_f1": {
+      "qwen3.5-9b / prompt-v1.0": 0.5064102564102564,
+      "qwen3.5-9b / prompt-v1.1": 0.5322128851540616,
+      "qwen3.5-9b / prompt-v1.2": 0.3319838056680162,
+      "deepseek-v4-flash / prompt-v1.0": 0.6970760233918128
+    },
+    "topic_polarity_micro_f1": {
+      "qwen3.5-9b / prompt-v1.0": 0.5,
+      "qwen3.5-9b / prompt-v1.1": 0.5242718446601942,
+      "qwen3.5-9b / prompt-v1.2": 0.3286573146292585,
+      "deepseek-v4-flash / prompt-v1.0": 0.6782407407407407
+    },
+    "matched_topic_polarity_accuracy": {
+      "qwen3.5-9b / prompt-v1.0": 0.9873417721518988,
+      "qwen3.5-9b / prompt-v1.1": 0.9789473684210527,
+      "qwen3.5-9b / prompt-v1.2": 0.9878048780487805,
+      "deepseek-v4-flash / prompt-v1.0": 0.9630872483221476
+    },
+    "evidence_substring_validity": {
+      "qwen3.5-9b / prompt-v1.0": 0.9566929133858267,
+      "qwen3.5-9b / prompt-v1.1": 0.9211956521739131,
+      "qwen3.5-9b / prompt-v1.2": 0.9444444444444444,
+      "deepseek-v4-flash / prompt-v1.0": 1.0
+    },
+    "invalid_taxonomy_rate": {
+      "qwen3.5-9b / prompt-v1.0": 0.051181102362204724,
+      "qwen3.5-9b / prompt-v1.1": 0.04891304347826087,
+      "qwen3.5-9b / prompt-v1.2": 0.015873015873015872,
+      "deepseek-v4-flash / prompt-v1.0": 0.0
+    },
+    "unsupported_evidence_rate": {
+      "qwen3.5-9b / prompt-v1.0": 0.04330708661417323,
+      "qwen3.5-9b / prompt-v1.1": 0.07880434782608696,
+      "qwen3.5-9b / prompt-v1.2": 0.05555555555555555,
+      "deepseek-v4-flash / prompt-v1.0": 0.0
+    }
+  },
+  "errors": {
+    "missing_topic": {
+      "qwen3.5-9b / prompt-v1.0": 171,
+      "qwen3.5-9b / prompt-v1.1": 151,
+      "qwen3.5-9b / prompt-v1.2": 194,
+      "deepseek-v4-flash / prompt-v1.0": 80
+    },
+    "extra_topic": {
+      "qwen3.5-9b / prompt-v1.0": 64,
+      "qwen3.5-9b / prompt-v1.1": 88,
+      "qwen3.5-9b / prompt-v1.2": 26,
+      "deepseek-v4-flash / prompt-v1.0": 127
+    },
+    "polarity_mismatch": {
+      "qwen3.5-9b / prompt-v1.0": 87,
+      "qwen3.5-9b / prompt-v1.1": 102,
+      "qwen3.5-9b / prompt-v1.2": 46,
+      "deepseek-v4-flash / prompt-v1.0": 115
+    },
+    "guard_failure": {
+      "qwen3.5-9b / prompt-v1.0": 18,
+      "qwen3.5-9b / prompt-v1.1": 32,
+      "qwen3.5-9b / prompt-v1.2": 6,
+      "deepseek-v4-flash / prompt-v1.0": 0
+    },
+    "evidence_invalid_claims": {
+      "qwen3.5-9b / prompt-v1.0": 11,
+      "qwen3.5-9b / prompt-v1.1": 29,
+      "qwen3.5-9b / prompt-v1.2": 7,
+      "deepseek-v4-flash / prompt-v1.0": 0
+    },
+    "unsupported_evidence_claims": {
+      "qwen3.5-9b / prompt-v1.0": 11,
+      "qwen3.5-9b / prompt-v1.1": 29,
+      "qwen3.5-9b / prompt-v1.2": 7,
+      "deepseek-v4-flash / prompt-v1.0": 0
+    },
+    "matched_topic_polarity_incorrect_claims": {
+      "qwen3.5-9b / prompt-v1.0": 2,
+      "qwen3.5-9b / prompt-v1.1": 4,
+      "qwen3.5-9b / prompt-v1.2": 1,
+      "deepseek-v4-flash / prompt-v1.0": 11
+    },
+    "bad_case_reviews": {
+      "qwen3.5-9b / prompt-v1.0": 178,
+      "qwen3.5-9b / prompt-v1.1": 178,
+      "qwen3.5-9b / prompt-v1.2": 197,
+      "deepseek-v4-flash / prompt-v1.0": 145
+    }
+  },
+  "error_units": {
+    "missing_topic": "reviews",
+    "extra_topic": "reviews",
+    "polarity_mismatch": "reviews",
+    "guard_failure": "reviews",
+    "evidence_invalid_claims": "claims",
+    "unsupported_evidence_claims": "claims",
+    "matched_topic_polarity_incorrect_claims": "matched topics",
+    "bad_case_reviews": "reviews"
+  },
+  "deepseek_delta_vs_qwen_prompt_v1_0": {
+    "primary_topic_macro_f1": 0.21726923517614938,
+    "secondary_topic_micro_f1": 0.19066576698155646,
+    "topic_polarity_micro_f1": 0.1782407407407407,
+    "matched_topic_polarity_accuracy": -0.02425452382975113,
+    "evidence_substring_validity": 0.04330708661417326,
+    "invalid_taxonomy_rate": -0.051181102362204724,
+    "unsupported_evidence_rate": -0.04330708661417323
+  },
+  "deepseek_token_usage": {
+    "input_tokens": 228129,
+    "output_tokens": 357460,
+    "total_tokens": 585589,
+    "reasoning_tokens": 338292,
+    "cached_tokens": 187392,
+    "response_count_with_raw_file": 216
+  }
+}

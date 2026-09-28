@@ -1,0 +1,216 @@
+{
+  "review_id": "4153090f727ea3fd98e58769408e168a81929d6a",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d9509ec6-3c24-4962-9dbb-b21f88c2329b",
+  "raw_response": {
+    "id": "d9509ec6-3c24-4962-9dbb-b21f88c2329b",
+    "created_at": 1789210680.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "be1da5c1-f1c6-4db2-b6ab-6a287397544f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. We have source_text. Need taxonomy pairs. Review: title \"Bruned Out\" maybe typo burned out. Text: \"Avoid this brand and product. It burned out on me while out of state, leaving me with no wireless charger. It only lasted a month. Makes a weird and faint noise and emits a burning scent.\"\n\nNeed claims. Identify semantic claims:\n- \"It burned out on me\" -> reliability_durability stopped_working? burned out = stopped working. Polarity negative. Evidence exact substring: \"It burned out on me\" or \"burned out on me\" continuous. Primary reliability_durability, secondary stopped_working.\n- \"It only lasted a month.\" -> short_lifespan under reliability_durability. negative. Evidence \"It only lasted a month.\"\n- \"Makes a weird and faint noise\" -> safety_risk abnormal_noise likely. negative. Evidence \"Makes a weird and faint noise\" or \"Makes a weird and faint noise and emits a burning scent.\" We can separate.\n- \"emits a burning scent.\" -> safety_risk melting_fire? burning scent could be overheating? Taxonomy safety_risk: overheating, melting_fire, electrical_fault, device_damage, abnormal_noise, physical_injury_irritation. Burning scent is sign of overheating/melting? Need choose. \"emits a burning scent\" likely overheating? Could be melting_fire? If burning scent indicates burning/melting. Primary safety_risk secondary melting_fire? But no actual fire. \"burned out\" could electrical_fault? Hmm.\n\nNeed ensure exact continuous substring for evidence_span. Could use \"emits a burning scent.\" exact with period. Polarity negative.\n\n- \"leaving me with no wireless charger\" maybe general performance? It stopped working while out of state leaving no charger. That is consequence of burned out. Could include as separate? \"leaving me with no wireless charger\" indicates device_compatibility? no. Function_performance charging_success? It's wireless charger, no wireless charger means couldn't charge. Actually product is wireless charger. \"leaving me with no wireless charger\" not exactly claim about function? It burned out leaving no charger. Could be reliability stopped_working consequence. Not separate.\n\n- \"Avoid this brand and product.\" general negative recommendation, no specific taxonomy? Could be other_unknown uncategorized? It's a review claim? \"Avoid this brand and product\" is general negative about brand/product. But taxonomy product claim? Could be general_performance? Avoid brand and product overall. We might omit because no specific attribute. But instructions: extract product-review semantic claims. \"Avoid this brand and product\" is opinion/recommendation, not product attribute. Could be other_unknown/uncategorized? But maybe no. We can include? Need exactly one valid taxonomy pair. If no supported product claim exists, empty. But there are supported claims. For \"Avoid this brand and product\", primary other_unknown secondary uncategorized negative? But this is not a product claim; it's a recommendation. Better not include.\n\nNeed decide if \"burned out\" primary reliability_durability secondary stopped_working vs safety_risk melting_fire/electrical_fault? Since \"It burned out on me\" could mean electrical burnout. \"burned out\" = stopped working. Product is wireless charger. The later \"emits burning scent\" safety. Could include both \"It burned out on me\" as stopped_working. Good.\n\nMaybe \"burned out\" and \"only lasted a month\" both reliability_durability? But they are separate claims: stopped_working and short_lifespan. Could combine? Review may contain multiple claims. We can include both.\n\nPotential claim: \"Makes a weird and faint noise\" primary safety_risk secondary abnormal_noise negative. Evidence exact substring \"Makes a weird and faint noise\". Note grammar: \"Makes\" capital.\nPotential claim: \"emits a burning scent.\" primary safety_risk secondary overheating? or melting_fire? Let's reason taxonomy:\n- overheating: device gets too hot.\n- melting_fire: melted, fire.\n- electrical_fault: electrical issues.\n- device_damage: damage to connected device.\n- abnormal_noise: weird noise.\n- physical_injury_irritation: injuries.\n\"emits a burning scent\" likely indicates overheating/melting. Which secondary? Burning scent is not exactly melting_fire, but could be sign. \"melting_fire\" covers burning? It says melting_fire. A burning scent could be from melting. We can select melting_fire. But \"burned out\" also could be electrical_fault. Hmm.\n\nCould use \"emits a burning scent\" as safety_risk/overheating because burning smell often overheated. But melting_fire more severe. The phrase \"burning scent\" strongly associated with burning, fire. Taxonomy \"melting_fire\". I think choose melting_fire. However overheat can emit burning scent. Which is primary? The text doesn't explicitly say overheating, but burning scent implies something burning. Since \"burned out\" earlier. Could be electrical_fault? \"burned out\" = electrical component failure. \"emits burning scent\" = maybe melting_fire. Let's include one for burning scent. Polarity negative.\n\nMaybe claim \"It only lasted a month.\" primary reliability_durability secondary short_lifespan negative.\n\nMaybe \"leaving me with no wireless charger\" primary convenience_value general_convenience? No, it's consequence and negative. But could be \"leaving me with no wireless charger\" = general_convenience negative? Hmm not a product feature but user impact. Probably not.\n\nNeed output JSON schema. Ensure claims list. Need exact evidence_span continuous substrings from SOURCE_TEXT. Check source text exact:\n\"Bruned Out\\nAvoid this brand and product. It burned out on me while out of state, leaving me with no wireless charger. It only lasted a month. Makes a weird and faint noise and emits a burning scent.\"\n\nEvidence:\n\"It burned out on me\" - continuous, yes.\n\"It only lasted a month.\" - includes period, yes.\n\"Makes a weird and faint noise\" - continuous, yes.\n\"emits a burning scent.\" - continuous, yes. Note preceding \"and \" but substring can start at emits. Yes.\nCould maybe include \"Makes a weird and faint noise and emits a burning scent.\" as one claim? But we split noise and burning scent; both safety_risk. That's okay.\n\nNeed ensure field names primary_topic, secondary_topic, polarity, evidence_span.\n\nPotential issue: \"It burned out on me\" maybe primary reliability_durability, secondary stopped_working. \"burned out\" is stopped_working. Good.\n\nPotential issue: \"It only lasted a month.\" reliability_durability short_lifespan. Good.\nPotential issue: \"Makes a weird and faint noise\" safety_risk abnormal_noise. Good.\nPotential issue: \"emits a burning scent.\" safety_risk melting_fire. Evidence exact. Polarity negative.\n\nNeed decide if include \"Avoid this brand and product.\" as other_unknown uncategorized negative. The schema says if no supported product claim exists return empty. But here there are claims. \"Avoid this brand and product\" is broad negative. Could be product_quality general? No secondary? Maybe general_performance? Hmm. It says avoid brand and product, not specific. If included, primary other_unknown secondary uncategorized, evidence \"Avoid this brand and product.\" negative. But is that a product-review semantic claim? It is a recommendation, yes but not attribute. In taxonomy, other_unknown/uncategorized might capture general sentiment? The instructions: \"Extract product-review semantic claims.\" A claim could be an evaluative statement about product. \"Avoid this brand and product\" is evaluative, no attribute. But \"uncategorized\" seems for unsupported. But if no supported product claim exists, empty. However supported claims exist. We can include broad overall? But they said do not infer sentiment from star rating, don't invent. The text explicitly says avoid. But primary taxonomy? \"other_unknown\" seems for unknown. Yet it's an overall negative recommendation. Could map to \"general_performance\" under function_performance? \"Avoid this brand and product\" not performance. \"general_convenience\"? No. I lean omit to avoid unsupported taxonomy. The claims with specific issues are enough.\n\nNeed final only JSON. Ensure no markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d9509ec6-3c24-4962-9dbb-b21f88c2329b-0",
+        "status": "completed"
+      },
+      {
+        "id": "4295c05b-63cb-43c9-8556-fb429392c753",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"It burned out on me\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"It only lasted a month.\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"abnormal_noise\",\"polarity\":\"negative\",\"evidence_span\":\"Makes a weird and faint noise\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"melting_fire\",\"polarity\":\"negative\",\"evidence_span\":\"emits a burning scent.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210689.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1060,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1936,
+      "output_tokens_details": {
+        "reasoning_tokens": 1787
+      },
+      "total_tokens": 2996
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"It burned out on me\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"It only lasted a month.\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"abnormal_noise\",\"polarity\":\"negative\",\"evidence_span\":\"Makes a weird and faint noise\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"melting_fire\",\"polarity\":\"negative\",\"evidence_span\":\"emits a burning scent.\"}]}"
+}

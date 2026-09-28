@@ -1,0 +1,50 @@
+{
+  "review_id": "9b10481adce4385dfed6dfa51810c5f1413f443e",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-ausdus072kwj3xd0nk3at",
+  "raw_response": {
+    "id": "chatcmpl-ausdus072kwj3xd0nk3at",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"One of my boxes just stopped working :(\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"after only having it for almost 4 months!\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"One of my boxes just stopped working :(\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"positive\", \"evidence_span\": \"glad the package came with 2!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Otherwise it's a great concept for a usb charger.\"}]}"
+        }
+      }
+    ],
+    "created": 1789186790,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 215,
+      "prompt_tokens": 668,
+      "total_tokens": 883,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 214,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"One of my boxes just stopped working :(\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"after only having it for almost 4 months!\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"One of my boxes just stopped working :(\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"accessory_condition\", \"polarity\": \"positive\", \"evidence_span\": \"glad the package came with 2!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Otherwise it's a great concept for a usb charger.\"}]}"
+}

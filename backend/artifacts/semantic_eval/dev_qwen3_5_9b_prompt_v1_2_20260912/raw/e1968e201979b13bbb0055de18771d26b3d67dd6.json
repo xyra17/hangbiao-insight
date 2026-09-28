@@ -1,0 +1,50 @@
+{
+  "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-tjjoxqv85zii4hqn6v8k",
+  "raw_response": {
+    "id": "chatcmpl-tjjoxqv85zii4hqn6v8k",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"caused power outages\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Only 1 port worked\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"the power has gone out for the section of the home this was linked to\"}]}"
+        }
+      }
+    ],
+    "created": 1789188954,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 129,
+      "prompt_tokens": 739,
+      "total_tokens": 868,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 128,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"caused power outages\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Only 1 port worked\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"electrical_fault\", \"polarity\": \"negative\", \"evidence_span\": \"the power has gone out for the section of the home this was linked to\"}]}"
+}

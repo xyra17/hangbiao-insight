@@ -1,0 +1,216 @@
+{
+  "review_id": "d600ef9569c08b60d9eb8b83bbef53d04d6e1b42",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "83cbb737-d990-4f6c-ad11-f24f31b8b50b",
+  "raw_response": {
+    "id": "83cbb737-d990-4f6c-ad11-f24f31b8b50b",
+    "created_at": 1789211631.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "5658cef3-77cd-48f4-9e3e-8960d7dc34da",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. Need parse review. Product likely charger. Source text: \"Good replacement for OEM charger.\\nSimplifies charging 2 items at once  (eliminates need for separate charging block for each device).<br />Charges Kindle and phone at same time.  A great value.\"\n\nNeed extract product-review semantic claims. Multiple. Need exactly one valid primary/secondary taxonomy pair, independently polarity, evidence_span exact continuous substring. No infer sentiment from star rating. Need if no supported product claim empty. Here claims:\n- \"Good replacement for OEM charger.\" This is general performance? Primary function_performance, secondary general_performance? Polarity positive. Evidence exact \"Good replacement for OEM charger.\" Could also compatibility? replacement OEM maybe device compatibility? But general performance? It says good replacement for OEM charger, likely function_performance / general_performance positive.\n- \"Simplifies charging 2 items at once\" -> convenience_value / dual_port_multi_device? Multi-device charging. Polarity positive. Evidence: \"Simplifies charging 2 items at once\" or including? Exact continuous substring. It mentions eliminates need separate charging block for each device. Could be dual_port_multi_device positive. Evidence span could be \"Simplifies charging 2 items at once\" or full sentence. Need exact.\n- \"eliminates need for separate charging block for each device\" also dual_port_multi_device / convenience. Could combine with previous? Each claim distinct? The same topic, maybe one claim. But they want every claim. We can include one for dual port multi device evidence full phrase? Maybe two separate? Better not duplicate. Use evidence span covering entire parenthetical? \"eliminates need for separate charging block for each device\" as convenience_value dual_port_multi_device positive. But if also \"Simplifies charging 2 items at once\" same claim maybe combine? Evidence span must exact continuous substring; can be \"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device)\"? Contains newline? Actually source has two spaces then (eliminates...). It is continuous substring? Yes from source: \"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device).\" It includes two spaces? Need exact. We can copy.\n- \"Charges Kindle and phone at same time.\" -> compatibility? device_compatibility positive? Or dual_port_multi_device? It charges two devices at same time, already dual. Could be compatibility_fit / device_compatibility because specific devices Kindle and phone compatible. But \"Charges Kindle and phone at same time\" indicates device compatibility positive. It also multi-device. Need one pair. Primary compatibility_fit, secondary device_compatibility, positive. Evidence exact.\n- \"A great value.\" -> convenience_value / price_value positive. Evidence \"A great value.\"\n\nPotential issue \"Good replacement for OEM charger.\" maybe compatibility? Actually replacement for OEM charger: compatibility_fit / device_compatibility? It is charger replacement, maybe function? \"Good replacement\" general performance. We can choose function_performance/general_performance positive. \"OEM charger\" refers compatibility? A replacement for OEM charger likely compatibility with device? Hmm taxonomy: compatibility_fit includes device_compatibility, case, accessory, size, port, wall_socket. A charger being replacement for OEM charger may imply compatibility with devices? But not explicit. Better function_performance/general_performance.\n\nNeed output JSON only with claims array. Need ensure primary_topic and secondary_topic enum valid. Polarity allowed positive etc. Evidence span exact continuous substring from SOURCE_TEXT. Need include zero? no.\n\nLet's craft claims:\n1. primary_topic: function_performance, secondary_topic: general_performance, polarity: positive, evidence_span: \"Good replacement for OEM charger.\"\n2. primary_topic: convenience_value, secondary_topic: dual_port_multi_device, polarity: positive, evidence_span: \"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device).\" Wait exact substring includes \"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device).\" Source has two spaces before \"(eliminates\"? It has \"at once  (eliminates\" yes two spaces. And period after parenthesis. Good. But evidence span includes period; okay. This claim covers multi device and eliminates separate blocks. It is continuous substring in source. \n3. primary_topic: compatibility_fit, secondary_topic: device_compatibility, polarity: positive, evidence_span: \"Charges Kindle and phone at same time.\"\n4. primary_topic: convenience_value, secondary_topic: price_value, polarity: positive, evidence_span: \"A great value.\"\n\nIs claim 2 and 3 overlapping? Both multi-device? Claim 3 device compatibility: specific devices. Good.\n\nBut maybe review title \"Good replacement for OEM charger.\" is also product quality? Could be material build quality? No.\n\nNeed maybe \"Charges Kindle and phone at same time\" is function_performance/charging_success and compatibility? It says charges at same time, successful charging? Primary function_performance secondary charging_success positive? But specific devices compatibility. Which is more supported? The taxonomy has dual_port_multi_device under convenience_value. \"Charges Kindle and phone at same time\" demonstrates dual port multi device and device compatibility. Need exactly one. Since previous already dual_port, maybe this is compatibility_fit/device_compatibility. Is \"Kindle and phone\" device compatibility yes. It charges them, so compatibility_fit/device_compatibility. \nAlternatively \"Charges Kindle and phone at same time\" could be function_performance/charging_success (charges) and positive. But device compatibility more specific to devices. Hm.\n\nNeed consider \"Good replacement for OEM charger.\" Could be compatibility_fit/accessory_compatibility? OEM charger is accessory? Actually replacement for OEM charger means it works as replacement. Could be function_performance/general_performance. Good.\n\n\"Simplifies charging 2 items at once (eliminates need for separate charging block for each device).\" Primary convenience_value, secondary dual_port_multi_device. Positive. Good.\n\n\"A great value.\" price_value. Positive.\n\nNo negative.\n\nNeed final exactly JSON. Ensure no markdown. \nNeed possible schema says additionalProperties false at top, claims items. We include claims. Good.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "83cbb737-d990-4f6c-ad11-f24f31b8b50b-0",
+        "status": "completed"
+      },
+      {
+        "id": "9086e27e-7bd5-4744-a6d5-9cd2d3b141fa",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Good replacement for OEM charger.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device).\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"Charges Kindle and phone at same time.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"A great value.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211637.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1066,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1502,
+      "output_tokens_details": {
+        "reasoning_tokens": 1346
+      },
+      "total_tokens": 2568
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Good replacement for OEM charger.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"Simplifies charging 2 items at once  (eliminates need for separate charging block for each device).\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"Charges Kindle and phone at same time.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"A great value.\"}]}"
+}

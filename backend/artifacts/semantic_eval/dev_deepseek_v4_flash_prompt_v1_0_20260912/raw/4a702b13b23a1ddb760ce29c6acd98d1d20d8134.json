@@ -1,0 +1,216 @@
+{
+  "review_id": "4a702b13b23a1ddb760ce29c6acd98d1d20d8134",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "3578c49d-5964-42a4-b2c7-12d66817366a",
+  "raw_response": {
+    "id": "3578c49d-5964-42a4-b2c7-12d66817366a",
+    "created_at": 1789211163.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "6df02e12-bdd6-4783-a13c-3cc5c5932455",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. We need extract claims from review. Review: \"Great\\nThis is a good screen protector my son dropped his phone and it did not break surprise\" rating 5. Need claims with taxonomy. We must not infer sentiment from rating. We need identify product claims. Product screen protector. Claims: \"This is a good screen protector\" general quality? Could be product_quality/material_build_quality? Or function_performance/protection_effectiveness? The phrase \"my son dropped his phone and it did not break surprise\" is protection effectiveness: phone did not break after drop. That is function_performance/protection_effectiveness positive. Also \"This is a good screen protector\" maybe general performance? It's vague. Could be product_quality? We need exactly one valid primary/secondary pair per claim. For \"good screen protector\" maybe product_quality/material_build_quality? But no specific material. \"good\" is general. Taxonomy has function_performance/general_performance or product_quality/material_build_quality. Which is best? A screen protector being \"good\" is general performance? Could be other_unknown/uncategorized? But likely general_performance. However \"my son dropped his phone and it did not break\" is protection_effectiveness, clearly function_performance. Evidence span exact continuous substring. Need copy evidence. Could include \"This is a good screen protector\" as evidence for general performance? But sentiment positive. The second claim evidence: \"my son dropped his phone and it did not break\" exact. Polarity positive (phone didn't break, protective). Could be one claim. Do we need include first? The review has \"Great\" title but source_text includes Great. \"Great\" is not a product claim? Maybe positive general sentiment, no specific. We should avoid. \"This is a good screen protector\" is a product claim. Primary function_performance? secondary general_performance? Or product_quality? Let's examine taxonomy: product_quality includes material_build_quality, defective_on_arrival, accessory_condition. \"good screen protector\" not material build quality. function_performance includes protection_effectiveness and general_performance. Since screen protector's function is protection. \"good screen protector\" could be general_performance positive. But second claim is more specific. If we include both, first is redundant but distinct? A review may contain multiple claims. We need extract semantic claims. \"This is a good screen protector\" = general assessment of product's performance/quality. Could be function_performance/general_performance positive. Evidence span exact: \"This is a good screen protector\" (source has \"This is a good screen protector my son...\" yes exact substring). Second: \"my son dropped his phone and it did not break\" exact substring. Polarity positive. Primary function_performance secondary protection_effectiveness. That seems good.\n\nNeed ensure no hallucination. Also \"Great\" could be other? We'll ignore as not product claim? But title \"Great\" is in source text. Could be general positive sentiment, no specific claim. If no supported product claim? There are supported claims. We return JSON.\n\nNeed decide if \"This is a good screen protector\" is claim. It is. Secondary general_performance. Polarity positive. Evidence exact continuous substring from SOURCE_TEXT. Source text: \"Great\\nThis is a good screen protector my son dropped his phone and it did not break surprise\". Evidence for first can be \"This is a good screen protector\". For second \"my son dropped his phone and it did not break\". Both exact.\n\nPotential issue: \"surprise\" at end. The second evidence could include \"my son dropped his phone and it did not break surprise\"? But \"surprise\" separate maybe not part. Evidence span must exact continuous substring. We can choose \"my son dropped his phone and it did not break\" (without surprise). That's continuous. Good.\n\nNeed output schema. Ensure keys claims. No markdown. JSON.\n\nLet's craft:\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"general_performance\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"This is a good screen protector\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"protection_effectiveness\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"my son dropped his phone and it did not break\"\n    }\n  ]\n}\n\nCheck secondary enum includes general_performance yes. protection_effectiveness yes. Primary function_performance yes. No extra fields. Good.\n\nBut perhaps \"This is a good screen protector\" could be product_quality/material_build_quality? Let's consider. The taxonomy product_quality/material_build_quality likely evaluates build quality, materials. \"good screen protector\" isn't explicitly material/build. General performance more apt. If annotation expects one claim? Could combine? But instruction says may contain multiple claims. We can include both. Risk of over-extracting. \"This is a good screen protector\" is a general evaluative claim. It's supported. Good.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "3578c49d-5964-42a4-b2c7-12d66817366a-0",
+        "status": "completed"
+      },
+      {
+        "id": "da1bb48b-9b72-4dac-ab60-b33cdb83bb15",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This is a good screen protector\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"my son dropped his phone and it did not break\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211168.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1037,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1156,
+      "output_tokens_details": {
+        "reasoning_tokens": 1079
+      },
+      "total_tokens": 2193
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This is a good screen protector\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"my son dropped his phone and it did not break\"}]}"
+}

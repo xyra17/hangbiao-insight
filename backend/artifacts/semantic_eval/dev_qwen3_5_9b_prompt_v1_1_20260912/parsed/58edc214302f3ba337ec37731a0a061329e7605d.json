@@ -1,0 +1,71 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7e2bccedb495b2a7",
+      "review_id": "58edc214302f3ba337ec37731a0a061329e7605d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "cracked",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-k3efzmaq77cynkjsawbstf"
+    },
+    {
+      "prediction_id": "SP-fc2d4805188ed8bc",
+      "review_id": "58edc214302f3ba337ec37731a0a061329e7605d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "cracked",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "duplicate_claim"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-k3efzmaq77cynkjsawbstf"
+    },
+    {
+      "prediction_id": "SP-db4aa79817484931",
+      "review_id": "58edc214302f3ba337ec37731a0a061329e7605d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "defective_on_arrival",
+      "polarity": "negative",
+      "evidence_span": "cracked",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "duplicate_claim"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-k3efzmaq77cynkjsawbstf"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 2
+}

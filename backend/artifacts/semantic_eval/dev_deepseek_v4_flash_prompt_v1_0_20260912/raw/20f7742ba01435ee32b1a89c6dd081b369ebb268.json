@@ -1,0 +1,216 @@
+{
+  "review_id": "20f7742ba01435ee32b1a89c6dd081b369ebb268",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "9497dfeb-17a3-4386-84bb-c2680418908c",
+  "raw_response": {
+    "id": "9497dfeb-17a3-4386-84bb-c2680418908c",
+    "created_at": 1789212134.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "99224069-8273-4bdb-bba6-98ce41ff973a",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. Need extract claims from review. Need follow taxonomy. Source text: \"Doesn't work\\nTakes too much time to angle the phone right. No one has time for that. Unfortunately I already threw out the box but I would really like a refund because it doesn't work. Requesting a refund.\"\n\nWe need identify product-review semantic claims. Product likely wireless charger? B07P9S6R9Y maybe charger. Claims: \"Doesn't work\" -> function_performance? primary function_performance secondary general_performance? or stopped_working? Since \"doesn't work\" can be reliability_durability stopped_working? Need decide. It says doesn't work, maybe product doesn't function. Taxonomy function_performance includes general_performance; reliability_durability includes stopped_working. \"Doesn't work\" likely function_performance/general_performance? But \"stopped_working\" implies previously worked then stopped. Here \"doesn't work\" could be defective on arrival maybe product_quality defective_on_arrival? However review title \"Doesn't work\" and later \"because it doesn't work\". Need one claim maybe function_performance general_performance negative. Another claim: \"Takes too much time to angle the phone right.\" That's usability_installation/positioning_alignment negative. \"No one has time for that.\" same evidence maybe positioning_alignment negative. \"Unfortunately I already threw out the box but I would really like a refund because it doesn't work. Requesting a refund.\" refund not product claim? Could be insufficient? No claim maybe not.\n\nNeed exactly primary/secondary pair valid. For \"Takes too much time to angle the phone right.\" primary usability_installation, secondary positioning_alignment, polarity negative, evidence exact continuous substring. Could include \"Takes too much time to angle the phone right.\" The newline? source_text has \\n. Evidence span can be exact continuous substring. So \"Takes too much time to angle the phone right.\" exact.\n\nFor \"Doesn't work\" at title: evidence_span \"Doesn't work\" (without newline) from title/source. It appears also in source_text line 1 and later. That's exact continuous substring. primary function_performance secondary general_performance? Or reliability_durability stopped_working? Let's inspect taxonomy: function_performance: charging_success, charging_speed, power_output, protection_effectiveness, general_performance. Product seems probably phone holder? \"angle the phone right\" maybe car phone mount? Doesn't work could be general_performance. If it's phone mount, function_performance general_performance. \"Doesn't work\" negative. Another claim \"doesn't work\" later same. Duplicate? We can include only one? Review may contain multiple claims, but same semantic claim repeated. Should we include each occurrence? Probably one claim per unique claim. The evidence span can be first \"Doesn't work\". If include duplicate, maybe not needed.\n\nPotential \"because it doesn't work\" same claim. Don't duplicate.\n\nWhat about \"Requesting a refund\" not product claim? No.\n\nNeed produce JSON with claims array. Ensure no additional properties. Need primary/secondary exactly from enum. Polarity. Evidence exact substring.\n\nLet's think if \"Takes too much time to angle the phone right\" is usability_installation positioning_alignment. Yes.\n\nCould there be \"No one has time for that\" as general_convenience? It's subjective complaint about usability, same. We can either include evidence \"Takes too much time to angle the phone right. No one has time for that.\" as one claim? But evidence span must exact continuous substring. That sentence pair includes space after period? Source: \"Takes too much time to angle the phone right. No one has time for that.\" Yes exact. But claim about positioning alignment plus inconvenience. Taxonomy one pair. Better separate maybe \"Takes too much time to angle the phone right.\" is positioning_alignment. \"No one has time for that.\" is general_convenience? It's not a concrete product attribute? Could be usability/ease_of_use? But secondary valid. However \"No one has time for that\" refers to angling phone. Could be convenience_value/general_convenience negative. But maybe too vague. We can include? Review semantic claim: time-consuming positioning. Primary usability_installation secondary positioning_alignment negative. That's enough. The \"No one has time\" reinforces but not separate claim.\n\nWhat about \"I already threw out the box\" not product claim. \"would really like a refund because it doesn't work\" same work claim.\n\nNeed decide \"Doesn't work\" primary: function_performance/secondary general_performance, polarity negative. Alternatively reliability_durability/stopped_working? \"Doesn't work\" not stopped working. Also product quality defective_on_arrival? \"doesn't work\" immediately implies defective, but primary function_performance general_performance seems more direct. They mention \"it doesn't work\" as function. Use that.\n\nCould be compatibility_fit? \"angle the phone right\" maybe phone positioning in charger? Hmm product B07P9S6R9Y? Let's infer maybe \"WiFi Smart Plug\"? No \"angle the phone right\" suggests phone stand/mount? Could be car phone mount? \"Takes too much time to angle the phone right\" -> product positioning alignment. There is taxonomy usability_installation positioning_alignment. Good.\n\nNeed output JSON. No markdown. Ensure valid JSON. Final only.\n\nPotential issue schema: $defs included? Response format says must adhere to schema; likely only {\"claims\":[...]} enough. We can include no $defs? The schema has $defs but output doesn't need. We can just produce claims. Ensure exactly required fields. For each claim: primary_topic, secondary_topic, polarity, evidence_span. Good.\n\nLet's craft:\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"general_performance\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Doesn't work\"\n    },\n    {\n      \"primary_topic\": \"usability_installation\",\n      \"secondary_topic\": \"positioning_alignment\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Takes too much time to angle the phone right.\"\n    }\n  ]\n}\n\nWill \"Doesn't work\" in source_text appears as first line. exact substring includes apostrophe. Yes.\n\nNeed maybe evidence_span for later \"it doesn't work\" if title maybe source_text includes title? source_text starts \"Doesn't work\\n...\" Yes.\n\nCould include \"it doesn't work\" as same? Not necessary.\n\nCheck if \"No one has time for that.\" as convenience_value/general_convenience? Should we include? The claim \"Takes too much time...\" is already usability. The phrase \"No one has time for that\" could be general_convenience negative. But maybe overextraction. They ask extract product-review semantic claims. A review may contain zero/multiple. We can include if distinct. But \"No one has time for that\" is not a specific product claim? It's sentiment about time-consuming setup. Could be general_convenience. But exact evidence \"No one has time for that.\" Primary convenience_value secondary general_convenience polarity negative. Is that a product claim? It references usability. Could be included. But if we include two overlapping claims maybe okay. However likely expected claims are \"doesn't work\" and \"takes too much time to angle phone right\". Keep minimal.\n\nNeed no extra text. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "9497dfeb-17a3-4386-84bb-c2680418908c-0",
+        "status": "completed"
+      },
+      {
+        "id": "a53c836c-513e-4e1f-8b17-c2a8ea4c4875",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn't work\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"Takes too much time to angle the phone right.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212142.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1064,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1686,
+      "output_tokens_details": {
+        "reasoning_tokens": 1610
+      },
+      "total_tokens": 2750
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"Doesn't work\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"Takes too much time to angle the phone right.\"}]}"
+}

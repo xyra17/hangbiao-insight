@@ -1,0 +1,216 @@
+{
+  "review_id": "05a414122cb18331f08343f4f02c8e54dea0ed48",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "1901b798-5fb1-4f60-bcef-eb8e10731503",
+  "raw_response": {
+    "id": "1901b798-5fb1-4f60-bcef-eb8e10731503",
+    "created_at": 1789211292.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "5e88a6d7-d2c1-41b1-9e92-ffb6d397732e",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer JSON only. Need extract claims. We have source_text. Need identify semantic claims. Review: \"Excellent price, but needs a continuous charging light.\\nUpdate:  I like the charger, but the no light feature is a liability. I have gotten up in the morning several times to find that my phone wasn't charging. It needs a continuous charging/ charged light.\"\n\nTaxonomy. Claims:\n- Excellent price -> convenience_value / price_value positive. Evidence \"Excellent price\"\n- needs a continuous charging light -> usability_installation / status_indicator_feedback negative? It's a need lacking. Also \"no light feature is a liability\" -> status_indicator_feedback negative. Evidence exact substring. \"no light feature is a liability\" maybe includes no light feature. Polarity negative. Primary usability_installation secondary status_indicator_feedback.\n- \"I have gotten up in the morning several times to find that my phone wasn't charging.\" This indicates charging_success? Function_performance/charging_success negative. It wasn't charging, despite charger? Could be due to no light? But claim is phone wasn't charging. Need extract? It is supported. Evidence exact: \"my phone wasn't charging\" or full sentence. Primary function_performance, secondary charging_success, negative. But careful \"wasn't charging\" could be device not charging due to charger issue. Yes.\n- \"It needs a continuous charging/ charged light.\" Same as status indicator feedback negative? Could duplicate. We can include maybe one for needs continuous light and one for no light feature liability. Need avoid over-inventing topics. The instructions: every claim exactly one valid pair. A review may contain zero/multiple. We can extract distinct claims. We must copy evidence_span exact continuous substring. We can use same evidence? Probably okay. Need decide claims count.\n\nCould include:\n1. price_value positive: \"Excellent price\"\n2. status_indicator_feedback negative: \"needs a continuous charging light\"\n3. status_indicator_feedback negative: \"no light feature is a liability\" maybe duplicate same issue. Could combine with first? It says needs continuous light. The update elaborates. We can choose evidence \"the no light feature is a liability\" for same claim. But maybe only one claim about missing light. Need not duplicate same semantic claim. However evidence from update gives stronger. There are two mentions. We can create one status_indicator_feedback claim with evidence \"needs a continuous charging light\" or \"no light feature is a liability\". Maybe choose \"the no light feature is a liability\" because it's a complete negative claim. But initial title also. I'd include one status indicator claim, perhaps evidence from update or first. Since source has both. The prompt wants claims, no need all mentions. Could extract separate? I think one claim enough.\n4. charging_success negative: \"my phone wasn't charging\" or \"I have gotten up in the morning several times to find that my phone wasn't charging.\" Evidence exact: \"my phone wasn't charging\" is continuous substring. Polarity negative. Primary function_performance / charging_success.\nMaybe \"I like the charger\" positive general? This is general sentiment but no specific product attribute? It may be \"general_performance\" positive? \"I like the charger\" is overall liking, perhaps product_quality? But taxonomy doesn't include overall satisfaction. Could be other_unknown uncategorized? But if no supported product claim? \"I like the charger\" is a claim about product general? It is not specific. Could ignore. But \"I like the charger, but...\" maybe positive general performance? The taxonomy has general_performance under function_performance. Is \"I like the charger\" a function performance claim? Maybe not. Avoid. \"Excellent price\" definitely.\n\nPotential claim: \"the no light feature is a liability\" status indicator feedback negative.\nPotential claim: \"It needs a continuous charging/ charged light\" status indicator feedback negative. Duplicate. I'd choose one maybe \"no light feature is a liability\" as evidence. But title included in source_text? Yes title and update all part of source. Evidence can be exact substring \"needs a continuous charging light\" from title. Since that claim is direct request. But \"no light feature is a liability\" also. Maybe include one claim with evidence \"needs a continuous charging light\" and another \"the no light feature is a liability\"? They are same product aspect. The prompt doesn't explicitly forbid duplicates; but better not duplicate. However \"needs a continuous charging light\" is positive? It indicates desired feature; polarity negative (lack). \"no light feature is a liability\" negative. We can choose one evidence span that best supports: \"no light feature is a liability\". But if only one, title's initial claim omitted. Fine.\n\nCheck \"I have gotten up in the morning several times to find that my phone wasn't charging.\" This is evidence of charging_success negative. Does it imply no light caused? yes, but claim itself is phone wasn't charging. It may be same underlying issue as status indicator? It says because no light, didn't know not charging. But \"phone wasn't charging\" is separate function performance claim. Include.\n\nCould there be \"charging/charged light\" status_indicator_feedback. Good.\n\nNeed output schema exactly: {\"claims\":[...]}.\nNeed ensure fields only. No extra.\n\nLet's craft:\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"convenience_value\",\n      \"secondary_topic\": \"price_value\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Excellent price\"\n    },\n    {\n      \"primary_topic\": \"usability_installation\",\n      \"secondary_topic\": \"status_indicator_feedback\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"needs a continuous charging light\"\n    },\n    {\n      \"primary_topic\": \"function_performance\",\n      \"secondary_topic\": \"charging_success\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"my phone wasn't charging\"\n    }\n  ]\n}\nIs evidence_span exact continuous substring? \"my phone wasn't charging\" appears: \"to find that my phone wasn't charging.\" Yes exact substring. \"needs a continuous charging light\" appears: \"but needs a continuous charging light.\" Yes exact. \"Excellent price\" appears at start. Good.\n\nShould we include \"no light feature is a liability\" instead? Maybe the \"needs...\" is from title, yes. Polarity negative? The phrase \"needs\" is neutral? It implies missing feature; in product review context negative. Good.\n\nMaybe include another status_indicator_feedback claim with evidence \"no light feature is a liability\" because it's explicit negative. But duplicate. Could maybe use that as evidence for same claim, but the evidence_span could be either. The first title says needs continuous light. The update says no light feature liability. If I include only one, okay. But maybe the model expects multiple claims from each sentence? The instructions: \"A review may contain zero or multiple claims.\" We can extract all distinct. Are \"needs continuous light\" and \"no light feature is liability\" distinct claims? They are same aspect. One says need; one says liability. Could be considered same claim. We can combine? No, evidence span must be exact continuous. We cannot combine. We choose one. Which is better? \"no light feature is a liability\" more explicit negative. But title's \"needs...\" is also claim. If we include one, maybe okay.\n\nMaybe include a mixed? No.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "1901b798-5fb1-4f60-bcef-eb8e10731503-0",
+        "status": "completed"
+      },
+      {
+        "id": "49674509-c08d-4faf-bdb2-eb09d109d0a9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Excellent price\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"negative\",\"evidence_span\":\"needs a continuous charging light\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"my phone wasn't charging\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211300.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1077,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1688,
+      "output_tokens_details": {
+        "reasoning_tokens": 1585
+      },
+      "total_tokens": 2765
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Excellent price\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"negative\",\"evidence_span\":\"needs a continuous charging light\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"my phone wasn't charging\"}]}"
+}

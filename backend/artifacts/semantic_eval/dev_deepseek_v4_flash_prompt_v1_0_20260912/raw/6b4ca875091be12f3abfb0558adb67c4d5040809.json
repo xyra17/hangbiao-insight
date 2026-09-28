@@ -1,0 +1,216 @@
+{
+  "review_id": "6b4ca875091be12f3abfb0558adb67c4d5040809",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "a18c75a6-df80-4b27-95c4-dc52f41cc640",
+  "raw_response": {
+    "id": "a18c75a6-df80-4b27-95c4-dc52f41cc640",
+    "created_at": 1789210976.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "f5aa450e-ce24-4a3d-8f64-69a5786207c8",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source text: title repeated \"Went through the whole pack in a week\" then \"These are not very resistant to dropping your phone.<br />I went through the whole package in one week.<br />Not very resilient.\"\n\nProduct? likely screen protector? B07H2V5YLH maybe tempered glass? Claims: not resistant to dropping phone -> protection_effectiveness negative? Primary function_performance, secondary protection_effectiveness. Evidence exact substring: \"These are not very resistant to dropping your phone.\" Or \"not very resistant to dropping your phone\". Need exact continuous substring from SOURCE_TEXT. Source has \"These are not very resistant to dropping your phone.<br />\" Include maybe no <br>. Evidence span exact continuous. Could use \"These are not very resistant to dropping your phone.\" That's continuous? source_text: \"These are not very resistant to dropping your phone.<br />I went...\" The substring excluding <br /> is \"These are not very resistant to dropping your phone.\" yes before <. Good.\n\nWent through whole package in one week / Not very resilient. This indicates short lifespan/durability? Primary reliability_durability, secondary short_lifespan? Evidence: \"I went through the whole package in one week.\" or \"Went through the whole pack in a week\" in title. Claim: whole package used in one week = short lifespan? Could be product consumed? If phone screen protectors, went through whole pack in week due to breakage. \"Not very resilient\" = general_durability negative or wear_damage? Since resistant to dropping = protection_effectiveness. \"Not very resilient\" maybe general_durability. Need decide.\n\nReview contains zero/multiple claims. Could include:\n1. function_performance/protection_effectiveness negative: \"These are not very resistant to dropping your phone.\"\n2. reliability_durability/short_lifespan negative: \"I went through the whole package in one week.\" Or \"Went through the whole pack in a week\" evidence.\n\n\"Not very resilient.\" could be reliability_durability/general_durability negative evidence \"Not very resilient.\" But maybe duplicate. We can include as general_durability. Need avoid over-extract? It's a supported product claim. Evidence exact. Polarity negative.\n\nPotential issue taxonomy pair: primary reliability_durability and secondary short_lifespan for going through pack in one week. \"Not very resilient\" = general_durability. Maybe combine? The schema wants one secondary per claim. We can have two claims. \"Went through whole pack in a week\" indicates short lifespan. \"Not very resilient\" indicates general durability.\n\nNeed ensure evidence_span exact continuous substring. Source_text includes title? They provide title and source_text. source_text starts \"Went through the whole pack in a week\\nThese...\" So title also included in source_text. Could use \"Went through the whole pack in a week\" exact. But then duplicate with \"I went through the whole package in one week.\" Which is better evidence. Use \"I went through the whole package in one week.\" Exact. For \"Not very resilient.\" exact.\n\nQuestion: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair, independently determine polarity, and copy evidence_span as an exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence or topics. If no supported product claim exists, return an empty list.\"\n\nNeed output JSON with claims list. Use required schema.\n\nNeed decide if \"These are not very resistant to dropping your phone\" maps to protection_effectiveness (function_performance). Polarity negative.\n\n\"I went through whole package in one week\" maps to short_lifespan? Primary reliability_durability secondary short_lifespan, negative. \"Not very resilient\" maps to general_durability, negative. But is \"Not very resilient\" sufficient product claim? Yes about durability. Maybe evidence \"Not very resilient.\" Could be general_durability. But if we include both short_lifespan and general_durability, maybe overlapping? Maybe one claim for durability: evidence \"I went through the whole package in one week.<br />Not very resilient.\" But evidence must continuous exact, cannot include <br />? Actually source has \"<br />\" so could include entire \"I went through the whole package in one week.<br />Not very resilient.\" That's continuous. But one claim with secondary? short_lifespan? The span includes both. But we prefer separate.\n\nCheck exact source:\n\"Went through the whole pack in a week\\nThese are not very resistant to dropping your phone.<br />I went through the whole package in one week.<br />Not very resilient.\"\n\nThe evidence \"I went through the whole package in one week.\" exact. \"Not very resilient.\" exact. \"These are not very resistant to dropping your phone.\" exact.\n\nCould \"Went through the whole pack in a week\" is title, same as source_text first line. Could use as evidence for short_lifespan. But \"I went through...\" also.\n\nNeed output polished. No extra text.\n\nLet's craft:\n{\"claims\":[\n{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"These are not very resistant to dropping your phone.\"},\n{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I went through the whole package in one week.\"},\n{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"negative\",\"evidence_span\":\"Not very resilient.\"}\n]}\n\nNeed check if \"general_durability\" valid secondary under reliability_durability yes. Is \"Not very resilient\" about general_durability. Fine.\n\nPotential issue \"protection_effectiveness\" might be under function_performance. Yes.\n\nNeed ensure no markdown. final JSON only.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "a18c75a6-df80-4b27-95c4-dc52f41cc640-0",
+        "status": "completed"
+      },
+      {
+        "id": "1ca4063e-adea-475a-a8a8-33b319b6e4c9",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"These are not very resistant to dropping your phone.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I went through the whole package in one week.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"negative\",\"evidence_span\":\"Not very resilient.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210982.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1059,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1393,
+      "output_tokens_details": {
+        "reasoning_tokens": 1275
+      },
+      "total_tokens": 2452
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"These are not very resistant to dropping your phone.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"I went through the whole package in one week.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"negative\",\"evidence_span\":\"Not very resilient.\"}]}"
+}

@@ -1,0 +1,23 @@
+{
+  "dataset_name": "Golden Review Labels",
+  "version": "golden_review_labels-v1.0",
+  "status": "frozen",
+  "frozen_date": "2026-09-11",
+  "taxonomy_version": "taxonomy-v1.1",
+  "review_count": 360,
+  "topic_claim_count": 657,
+  "high_confidence_review_count": 313,
+  "medium_confidence_review_count": 47,
+  "remaining_adjudication_count": 0,
+  "evidence_validation_errors": 0,
+  "core_products": [
+    "AILKIN_USB_Wall_Charger",
+    "Ailun_Screen_Protector",
+    "Yootech_Wireless_Charger"
+  ],
+  "files": {
+    "review_master": "黄金评论主表_v1_0.csv",
+    "golden_labels": "黄金评论标签表_v1_0.csv",
+    "taxonomy": "主题分类体系_v1_1.json"
+  }
+}

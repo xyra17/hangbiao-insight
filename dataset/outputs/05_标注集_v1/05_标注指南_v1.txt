@@ -1,0 +1,56 @@
+商品经营异常智能诊断 Agent
+Review Topic Annotation Guideline V1 Draft
+
+1. 标注对象
+每条评论可以有 0～N 个 Topic。
+一个 Topic 对应评论中的一个明确事实、体验或判断。
+
+2. Rating 不是 Polarity
+1 星评论中也可能包含正向内容。
+5 星评论中也可能包含负向问题。
+正式 Polarity 必须根据 Evidence Span 的语义判断。
+
+3. Multi-label
+例如：
+"Charges fast but gets extremely hot."
+
+应该拆成：
+function_performance / charging_speed / positive / "Charges fast"
+safety_thermal / overheating / negative / "gets extremely hot"
+
+4. Evidence Span
+每一个 Topic 标签必须复制一段能够直接支持该标签的原始评论文字。
+禁止使用模型推理出来但原文没有表达的信息。
+
+5. Polarity
+positive：明确认可、改善、成功、好用。
+negative：明确抱怨、失效、风险、不符合预期。
+neutral：客观描述，没有明显正负态度。
+
+6. other_unknown
+如果评论只有：
+"Good."
+"Bad."
+"Works."
+等缺乏具体业务语义的信息，可以标：
+other_unknown / insufficient_information
+
+7. 不要强行分类
+Taxonomy 没有覆盖的新业务语义，应优先标：
+other_unknown / uncategorized
+并写入 notes。
+后续统一评估是否需要增加新 Topic。
+
+8. 同一评论允许多个标签
+不要因为评论总体评分是五星，就忽略其中明确出现的负向问题。
+
+9. 不做因果推断
+评论中出现“发热”和经营指标异常同时发生，
+只能说明存在评论侧信号，
+不能在人工标签阶段标成“导致退款率上升”。
+
+10. 当前版本
+taxonomy-v1-draft
+
+完成一轮人工检查后再升级并冻结为：
+taxonomy-v1.0

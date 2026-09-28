@@ -1,0 +1,6 @@
+﻿check_name,expected,actual,passed
+daily_product_count,3,3,True
+negative_order_count,0,0,True
+refund_count_gt_order_count,0,0,True
+refund_rate_out_of_range,0,0,True
+scenario_month_count,7,7,True

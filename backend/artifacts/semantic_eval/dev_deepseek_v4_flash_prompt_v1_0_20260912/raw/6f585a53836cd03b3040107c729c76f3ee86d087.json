@@ -1,0 +1,216 @@
+{
+  "review_id": "6f585a53836cd03b3040107c729c76f3ee86d087",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "fdeabf71-2a28-4175-805b-8af6286007aa",
+  "raw_response": {
+    "id": "fdeabf71-2a28-4175-805b-8af6286007aa",
+    "created_at": 1789210992.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "572c28c3-d469-419b-9962-94eb3d99ca49",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need adhere schema. Source text: \"Easy to apply\\nExactly as expected\". Review title \"Easy to apply\". Need extract product-review semantic claims. Claims? \"Easy to apply\" relates usability_installation, ease_of_use likely positive. \"Exactly as expected\" vague maybe product_quality? Could be compatibility? It's general satisfaction? Need only supported product claim. Taxonomy. \"Easy to apply\" likely usability_installation/ease_of_use positive evidence span exact continuous substring from SOURCE_TEXT. Source_text includes \"Easy to apply\\nExactly as expected\". Evidence span can be \"Easy to apply\" exact substring. Claim primary usability_installation, secondary ease_of_use, positive. \"Exactly as expected\" maybe other_unknown/uncategorized? Or general_performance? It indicates product met expectations, but no specific product attribute. Could be product_quality? However instruction if no supported product claim exists? This is product claim? \"Exactly as expected\" is vague, no specific topic. Could classify other_unknown/uncategorized neutral? But \"exactly as expected\" positive sentiment. Yet no taxonomy. Maybe not include because unsupported? But review has title and text. We need every claim? Could include as other_unknown/uncategorized? The taxonomy includes other_unknown: insufficient_information, uncategorized. But \"Exactly as expected\" is a general positive claim. Which secondary? uncategorized maybe. Polarity positive. Evidence span \"Exactly as expected\". Would that be acceptable? Need decide. Since \"Easy to apply\" definitely ease of use. \"Exactly as expected\" could be product quality? Hmm.\n\nMaybe product is some item? Product ID B07H2V5YLH. Unknown. \"Easy to apply\" likely screen protector? Easy to apply = usability_installation/ease_of_use. \"Exactly as expected\" = product_quality? It doesn't mention material, defective, accessory. Could be general_performance? \"Exactly as expected\" means function performance general? It could be general_performance positive. But \"function_performance/general_performance\" describes overall performance. \"Exactly as expected\" is overall expectation, maybe general_performance. But no specific. If include, primary function_performance, secondary general_performance, positive, evidence_span \"Exactly as expected\". Is that too inferential? It says do not infer sentiment from star; but text explicitly positive \"exactly as expected\". It's a product claim? It could be. But maybe to avoid overclaim, only one claim.\n\nNeed output JSON exactly. The schema expects {\"claims\":[...]}. We can include 2 claims. Need ensure evidence_span exact continuous substring. \"Easy to apply\" is substring. \"Exactly as expected\" also substring after newline. Both exact. Polarity positive. For \"Exactly as expected\", polarity positive? It indicates met expectations, positive. Taxonomy: other_unknown/uncategorized? Hmm. The instruction: for every claim choose exactly one valid primary/secondary taxonomy pair. If no supported product claim exists, empty list. \"Exactly as expected\" is not a product attribute? It is vague but a claim of meeting expectations. Could be general satisfaction. But taxonomy lacks general satisfaction except general_performance or general_convenience. \"general_performance\" under function_performance maybe product works as expected. That seems plausible: primary function_performance, secondary general_performance, positive, evidence_span \"Exactly as expected\". However \"Exactly as expected\" not necessarily function performance; could be appearance, etc. But unknown product. Since no context, maybe other_unknown/uncategorized is safer for vague. But taxonomy has \"insufficient_information\" for other_unknown; \"Exactly as expected\" is not insufficient? It is generic. \"uncategorized\" maybe.\n\nMaybe \"Easy to apply\" could be usability_installation/ease_of_use. \"Exactly as expected\" could be product_quality/material_build_quality? No, not enough.\n\nNeed final only JSON. Let's craft with two claims. But we need consider if \"Easy to apply\" exact evidence_span includes title? SOURCE_TEXT is \"Easy to apply\\nExactly as expected\". Yes.\n\nPolarity: \"Easy to apply\" positive. \"Exactly as expected\" positive. If neutral? \"Exactly as expected\" often positive (satisfied). It says don't infer from star, but phrase itself positive. Yes.\n\nPotential issue: The title \"Easy to apply\" and source_text line duplicate? Source_text includes it. It's exact.\n\nWill final.\n\nBut maybe \"Exactly as expected\" could be \"general_performance\" positive. Primary function_performance. Yet \"easy to apply\" is usability_installation. Which one is more primary? Let's output:\n{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to apply\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Exactly as expected\"}]}\n\nIs \"uncategorized\" allowed in other_unknown? yes. But maybe \"insufficient_information\"? \"Exactly as expected\" provides info but no topic. uncategorized better.\n\nNeed ensure no extra text. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "fdeabf71-2a28-4175-805b-8af6286007aa-0",
+        "status": "completed"
+      },
+      {
+        "id": "52bebca7-f7bc-4eba-b82c-90e62623f811",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to apply\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Exactly as expected\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210997.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1023,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 1162,
+      "output_tokens_details": {
+        "reasoning_tokens": 1094
+      },
+      "total_tokens": 2185
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to apply\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Exactly as expected\"}]}"
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "e8390f4fe30522ec20cee0e6d00da54f61773bcd",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "544043c4-58c0-4f10-b8f7-cb9fc19ed4bf",
+  "raw_response": {
+    "id": "544043c4-58c0-4f10-b8f7-cb9fc19ed4bf",
+    "created_at": 1789210596.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "b8d03a53-5578-45fb-93c4-28e8ef2428ea",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review: \"Didn't fit iPhone 11 Pro. The glass covers were too large to fit properly over the phone screen and didn't adhere to the screen, especially when I placed my otter box on the phone.\"\n\nNeed claims with taxonomy pairs. Product likely screen protector? B07H2V5YLH. Claims:\n- Didn't fit iPhone 11 Pro: compatibility_fit / device_compatibility negative. Evidence span exact continuous substring. Could be \"Didn't fit iPhone 11 Pro.\" includes period? Source text starts. We can use \"Didn't fit iPhone 11 Pro.\" exact.\n- glass covers too large to fit properly over phone screen: compatibility_fit / size_fit negative. Evidence \"The glass covers were too large to fit properly  over the phone screen\" exact including double space? Source has \"properly  over\" two spaces. Need copy exact. Could use shorter \"too large to fit properly\" but exact substring continuous. \"too large to fit properly\" appears. But if span includes? yes. Primary compatibility_fit secondary size_fit.\n- didn't adhere to screen: usability_installation / bubbles_adhesion? secondary bubbles_adhesion. Polarity negative. Evidence \"didn't adhere to the screen\" exact. Maybe also case compatibility? \"especially when I placed my otter box on the phone.\" Could imply case compatibility? The screen protector didn't adhere especially with OtterBox case. Claim about case compatibility? \"when I placed my otter box on the phone\" perhaps glass didn't adhere when case on. This is compatibility_fit/case_compatibility negative? But evidence maybe \"especially when I placed my otter box on the phone.\" It suggests case caused lifting? Need not over extract? The review says didn't adhere to screen, especially when placed otter box. The primary claim adhesion issue. Also case compatibility maybe: screen protector doesn't work with OtterBox case. Could extract compatibility_fit/case_compatibility negative evidence \"especially when I placed my otter box on the phone.\" Is that a product claim? yes compatibility with case. But is it necessarily \"case compatibility\"? It says especially when I placed my otter box on the phone, glass didn't adhere. That indicates case compatibility issue. Need exactly valid pair. Let's decide claims. They asked zero/multiple and independent. We should extract supported product-review semantic claims. We can include 4:\n1 device compatibility: Didn't fit iPhone 11 Pro. negative\n2 size fit: The glass covers were too large to fit properly over the phone screen. But exact span: \"The glass covers were too large to fit properly  over the phone screen\" (source has two spaces between properly and over? Let's check source: \"The glass covers were too large to fit properly  over the phone screen and didn't adhere to the screen, especially when I placed my otter box on the phone.\" Yes two spaces after properly due copied. Need exact continuous substring. Use \"The glass covers were too large to fit properly  over the phone screen\" with double space. If uncertain, use \"too large to fit properly\" single space? In source there is \"properly  over\" double. \"too large to fit properly\" is substring with single space between too and large etc. Does \"too large to fit properly\" appear? Source: \"were too large to fit properly  over\" => substring \"too large to fit properly\" yes ends before double space. That can be evidence for size. Good avoid double.\n3 bubbles_adhesion: \"didn't adhere to the screen\" exact.\n4 case_compatibility: \"especially when I placed my otter box on the phone.\" exact? Need capitalization: source has \"especially when I placed my otter box on the phone.\" Lowercase. Use exact substring. Polarity negative? The adhesion issue especially with case. But case_compatibility claim: the product is not compatible with OtterBox? The sentence doesn't explicitly say case didn't fit, but implies screen protector didn't adhere with case. We can label negative. Is this too inferential? Maybe okay. However if we include, evidence span exact \"especially when I placed my otter box on the phone.\" That covers case. Could be compatibility_fit/case_compatibility.\n\nNeed final JSON only, adhering schema. Ensure enum values. Polarity negative for all. Evidence spans exact continuous substrings from SOURCE_TEXT. Need include claims array. Let's produce. \nCheck schema: top-level {\"claims\":[...]} Each claim primary_topic etc. No additional properties? ExtractedClaim additionalProperties false. Good.\n\nNeed no markdown. \nPotential issue \"Didn't fit iPhone 11 Pro.\" includes period. Source first line exactly \"Didn't fit iPhone 11 Pro.\\nThe...\" yes substring with period. It includes newline? We can use without newline. It's exact continuous substring \"Didn't fit iPhone 11 Pro.\" yes.\n\nFor size: \"too large to fit properly\" exact? Source: \"The glass covers were too large to fit properly  over\" yes. Use that. Polarity negative.\n\nFor adhesion: \"didn't adhere to the screen\" exact. Source: \"screen and didn't adhere to the screen, especially...\" yes. Use \"didn't adhere to the screen\" exact.\n\nFor case: \"especially when I placed my otter box on the phone.\" exact includes period. Yes.\n\nCould there be claim about \"glass covers\" product_quality material? no. \n\nNeed decide if two similar compatibility claims duplicative? Device compatibility vs size fit different. Case compatibility separate. Good.\n\nFinal.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "544043c4-58c0-4f10-b8f7-cb9fc19ed4bf-0",
+        "status": "completed"
+      },
+      {
+        "id": "77049701-5529-4217-bd0a-f8a07874f919",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"Didn't fit iPhone 11 Pro.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"too large to fit properly\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"didn't adhere to the screen\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"especially when I placed my otter box on the phone.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210603.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1066,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1329,
+      "output_tokens_details": {
+        "reasoning_tokens": 1178
+      },
+      "total_tokens": 2395
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"Didn't fit iPhone 11 Pro.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"too large to fit properly\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"didn't adhere to the screen\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"especially when I placed my otter box on the phone.\"}]}"
+}

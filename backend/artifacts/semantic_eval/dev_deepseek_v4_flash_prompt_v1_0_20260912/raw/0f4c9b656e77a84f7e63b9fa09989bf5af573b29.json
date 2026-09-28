@@ -1,0 +1,216 @@
+{
+  "review_id": "0f4c9b656e77a84f7e63b9fa09989bf5af573b29",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "7ead6175-16ad-472f-af7c-4b80feaa5c0a",
+  "raw_response": {
+    "id": "7ead6175-16ad-472f-af7c-4b80feaa5c0a",
+    "created_at": 1789211597.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "ab6de216-1fee-4563-abbd-63e029acfc8f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract product-review semantic claims. Need output JSON schema. Need parse source_text. Review title \"Fast charge\". Source text: \"Fast charge\\nProduct delivered quickly.  Can't quite comment on value, as durability would play a part in that and it's to soon to say. However, function-wise, these are so much better than most OEM charging blocks. Would recommend.\"\n\nNeed extract claims. Must exactly one valid primary/secondary taxonomy pair. Polarity independent of star. Evidence_span exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star. Do not invent evidence/topics. If no supported product claim empty.\n\nWe need identify claims. Product: likely charging block? B0BYJ8ZVWH maybe charger? Title Fast charge. Text mentions function-wise better than most OEM charging blocks. \"Fast charge\" title maybe claim about charging speed? But evidence_span should be from SOURCE_TEXT. SOURCE_TEXT includes \"Fast charge\\nProduct delivered quickly...\" So \"Fast charge\" is substring. It's a claim? Title included? Source_text includes title line. We can use evidence_span \"Fast charge\". Primary function_performance, secondary charging_speed? Polarity positive? \"Fast charge\" positive. But is it a product claim? Yes indicates fast charging. Could be claim.\n\n\"Product delivered quickly.\" This is shipping/delivery speed, not in taxonomy? convenience? Maybe general_convenience? But taxonomy for product claims. Delivery speed not product attribute? Could be convenience_value/general_convenience? Hmm \"delivered quickly\" relates shipping, not product? Taxonomy has no shipping. It's not product feature. Might be other_unknown/uncategorized? But likely should not extract? The instruction product-review semantic claims. Delivery is service, not product. Could ignore.\n\n\"Can't quite comment on value, as durability would play a part in that and it's to soon to say.\" This mentions value and durability. But \"Can't comment on value\" no polarity? It implies inability to assess price_value due to durability unknown. Could extract reliability_durability/general_durability? But it's not claiming durability positive/negative, just unknown. Polarity neutral? Evidence \"Can't quite comment on value, as durability would play a part in that and it's to soon to say.\" It contains \"value\" and \"durability\". But is it a claim? It is a statement about value/durability uncertainty. Could be other_unknown/insufficient_information? But primary topic other_unknown secondary insufficient_information. However taxonomy pair must be valid. It says a review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair. Do not invent. If no supported product claim exists, empty. The sentence \"Can't quite comment on value, as durability would play a part...\" is a claim about lack of info? Maybe yes: no comment on value because durability unknown. But \"durability\" is mentioned as future factor. Could be reliability_durability/general_durability with neutral? Or convenience_value/price_value neutral? Hmm.\n\n\"However, function-wise, these are so much better than most OEM charging blocks.\" This is a clear claim: function_performance/general_performance positive. Evidence exact \"these are so much better than most OEM charging blocks\" or \"function-wise, these are so much better than most OEM charging blocks\". Primary function_performance, secondary general_performance, polarity positive.\n\n\"Would recommend.\" This is recommendation, not product attribute? Could be other_unknown/uncategorized? Maybe general positive but not claim. Usually recommendation not taxonomy. Could ignore? But may be considered general performance? Hmm.\n\nNeed decide claims. Likely extract:\n1. \"Fast charge\" -> function_performance/charging_speed positive.\n2. \"these are so much better than most OEM charging blocks\" -> function_performance/general_performance positive.\nMaybe \"Can't quite comment on value...\" -> convenience_value/price_value neutral? But if no value opinion? It says can't comment, so not a claim? The schema says extract product-review semantic claims. A claim may be statement about uncertainty? It is about price_value and durability. But \"can't comment\" is not a positive/negative claim. However polarity neutral possible. But evidence span must be exact. Are we to include neutral claims? Yes polarity neutral allowed. But is it a \"semantic claim\"? It is a claim of insufficiency. Could map to other_unknown/insufficient_information? But primary other_unknown secondary insufficient_information. Evidence \"Can't quite comment on value, as durability would play a part in that and it's to soon to say.\" It explicitly mentions value and durability. But is that a product claim? It says cannot comment on value because durability would play part and too soon. This is meta. Might be considered insufficient_information. But if we include, it might be over-extraction. The instruction \"A review may contain zero or multiple claims.\" \"If no supported product claim exists...\" It's about product claims. The sentence about value/durability is not claiming product attribute, just uncertainty. Probably not extract. \"Would recommend\" is overall sentiment, not product claim.\n\nNeed ensure no inferred sentiment from star. We can include \"Fast charge\" from title? Source_text starts with \"Fast charge\\n\". The title is part of source_text? Yes source_text includes title line. Evidence span can include title. Is \"Fast charge\" a claim? It's likely title generated by reviewer. Yes.\n\nCould there be claim about charging blocks compatibility? \"better than most OEM charging blocks\" no compatibility.\n\nNeed output JSON only. Need adhere strict schema. Claims array. For each claim fields: primary_topic, secondary_topic, polarity, evidence_span. No extra.\n\nLet's ensure taxonomy pair validity: function_performance has charging_speed, general_performance. For \"Fast charge\", secondary charging_speed. Polarity positive. Evidence \"Fast charge\". For \"these are so much better than most OEM charging blocks\" primary function_performance, secondary general_performance, polarity positive. Evidence exact substring? Source: \"However, function-wise, these are so much better than most OEM charging blocks.\" The substring \"these are so much better than most OEM charging blocks\" is exact continuous. Could include \"function-wise, these are so much better...\" but primary already function_performance. Evidence span exact continuous substring. \"these are so much better than most OEM charging blocks\" is exact. Good.\n\nWhat about \"Product delivered quickly.\" Could be convenience_value/general_convenience? But delivery speed is not product convenience. Could be other_unknown/uncategorized? But not product claim. ignore.\n\nWhat about \"Would recommend.\" Could be other_unknown/uncategorized positive? But not product attribute. ignore.\n\nPotential issue: \"Fast charge\" in title might be considered claim but evidence substring includes newline? We can just use \"Fast charge\". Exact substring.\n\nNeed maybe include claim about value: \"Can't quite comment on value, as durability would play a part in that and it's to soon to say.\" Primary convenience_value, secondary price_value, polarity neutral? Evidence exact. But does it have polarity? Neutral. But is it a claim? It says can't comment on value. It's a claim about value not assessable. If we include, it might be considered a semantic claim. But then secondary price_value? The topic is value, so price_value. Polarity neutral. But instruction \"Do not infer sentiment from star rating. Do not invent evidence or topics.\" The text mentions value. It is a product claim? It says can't comment yet. Hmm.\n\nLet's examine typical extraction tasks: They want extract product-review semantic claims. For each claim choose taxonomy pair, polarity, evidence. If a sentence says \"Can't comment on value yet due to durability unknown\", is that a claim? It is not a claim about product's value but about reviewer's inability. Could be \"insufficient_information\" under other_unknown. But then secondary insufficient_information. However that taxonomy pair is for when no supported product claim? The instructions: \"If no supported product claim exists, return an empty list.\" So \"insufficient_information\" may be used when a claim is too vague. But here there is enough? Hmm.\n\nAlso \"durability would play a part in that and it's too soon to say\" indicates durability not yet assessed. That could be reliability_durability/general_durability neutral? But not a claim of durability. It is a statement that durability unknown. Could be insufficient_information. But if we extract, we'd have multiple claims. The review's main product claim is performance. Value/durability are mentioned as unassessable. I'd lean not to extract them as claims because no actual evaluation. The instruction: \"Extract product-review semantic claims.\" Claims are assertions about product attributes. \"Can't comment\" is not an assertion about attribute, it's an absence. So ignore.\n\nBut the title \"Fast charge\" is an assertion. The sentence \"function-wise, these are so much better...\" is an assertion. Good.\n\nNeed maybe primary topic for \"Fast charge\" could be function_performance/charging_speed. Polarity positive. Evidence \"Fast charge\". It's the title and first line. However \"Fast charge\" might be a category/label, not necessarily claim? But title is part of review, likely claim. Usually titles can be claims. Include.\n\nCould the phrase \"these are so much better than most OEM charging blocks\" be about general performance, not charging speed? It says function-wise, better than OEM charging blocks. That's general performance. Could also be charging_speed? It doesn't specify speed. So general_performance.\n\nNeed output JSON with claims array. Ensure no markdown. Let's craft final.\n\nFinal: {\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"Fast charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"these are so much better than most OEM charging blocks\"}]}\n\nCheck evidence_span exact continuous substring: Source has \"However, function-wise, these are so much better than most OEM charging blocks.\" The substring \"these are so much better than most OEM charging blocks\" matches exactly, no period. Good. \"Fast charge\" matches first line. Good.\n\nCould there be a claim about \"Product delivered quickly.\" If we don't include, okay. If they expected convenience_value/general_convenience, maybe? But delivery is not product claim. The taxonomy doesn't have shipping. So no.\n\nPotential issue: \"Would recommend\" might be overall positive, but not a product claim. ignore.\n\nNeed ensure valid JSON. Use double quotes. Done.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "7ead6175-16ad-472f-af7c-4b80feaa5c0a-0",
+        "status": "completed"
+      },
+      {
+        "id": "fa56b88e-93f4-412d-8594-d77458cd3274",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"Fast charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"these are so much better than most OEM charging blocks\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211608.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1067,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2331,
+      "output_tokens_details": {
+        "reasoning_tokens": 2259
+      },
+      "total_tokens": 3398
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"Fast charge\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"these are so much better than most OEM charging blocks\"}]}"
+}

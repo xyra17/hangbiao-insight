@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-a80b7c4057b1fec5",
+      "review_id": "2e4812ced37d383eae61ab54af2b89f384724124",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "function_performance",
+      "secondary_topic": "charging_speed",
+      "polarity": "positive",
+      "evidence_span": "charges my phone very quickly",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "b3aaebe0-c9c2-44ca-a3ed-28ee1117b306"
+    },
+    {
+      "prediction_id": "SP-d5c00da27f055aab",
+      "review_id": "2e4812ced37d383eae61ab54af2b89f384724124",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "compatibility_fit",
+      "secondary_topic": "case_compatibility",
+      "polarity": "positive",
+      "evidence_span": "even with a case on the phone",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "b3aaebe0-c9c2-44ca-a3ed-28ee1117b306"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

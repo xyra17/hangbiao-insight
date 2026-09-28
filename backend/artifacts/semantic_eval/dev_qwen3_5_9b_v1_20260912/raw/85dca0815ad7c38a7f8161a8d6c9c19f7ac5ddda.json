@@ -1,0 +1,50 @@
+{
+  "review_id": "85dca0815ad7c38a7f8161a8d6c9c19f7ac5ddda",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-69g4c8b389uqc7otg36l4r",
+  "raw_response": {
+    "id": "chatcmpl-69g4c8b389uqc7otg36l4r",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"Wouldnt line up straight (yes, I followed included instructions)\"}]}"
+        }
+      }
+    ],
+    "created": 1789177229,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 51,
+      "prompt_tokens": 497,
+      "total_tokens": 548,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 50,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"Wouldnt line up straight (yes, I followed included instructions)\"}]}"
+}

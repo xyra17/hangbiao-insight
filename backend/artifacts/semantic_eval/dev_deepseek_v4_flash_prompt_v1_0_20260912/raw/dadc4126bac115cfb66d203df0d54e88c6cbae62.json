@@ -1,0 +1,216 @@
+{
+  "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "9ce63dac-67a1-484e-a358-f73947bb8ee1",
+  "raw_response": {
+    "id": "9ce63dac-67a1-484e-a358-f73947bb8ee1",
+    "created_at": 1789211588.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "3b2259af-2ca4-4a60-83b3-9fb569af2c57",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need adhere schema JSON only. Need analyze review. Source: \"Not safe!\\nDo not buy! Charger made a popping noise and smelled like burning plastic!\" Rating 1 but ignore. Claims: likely safety_risk, abnormal_noise? \"made a popping noise\" could abnormal_noise. \"smelled like burning plastic\" could melting_fire? Safety risk. Primary safety_risk secondary abnormal_noise for popping noise. Another claim safety_risk secondary melting_fire for smelled burning plastic. Could combine? Need exact evidence spans continuous substrings. Review has \"Charger made a popping noise\" and \"smelled like burning plastic\". Also \"Not safe!\" maybe general safety? But taxonomy safety_risk only specific. Need zero/multiple. We can output claims. Ensure exact substring. Evidence_span can be \"Charger made a popping noise\" from source. \"smelled like burning plastic\" exact substring? Source has \"and smelled like burning plastic!\" so substring \"smelled like burning plastic\" yes continuous. For popping noise: \"Charger made a popping noise\" yes. Polarity negative.\n\nBut taxonomy secondary: \"abnormal_noise\" for popping noise. \"melting_fire\" for burning plastic smell? It's not necessarily melting/fire but smell burning plastic indicates overheating/melting. Could be overheating? Taxonomy safety_risk: overheating, melting_fire, electrical_fault, device_damage, abnormal_noise, physical_injury_irritation. \"smelled like burning plastic\" best melting_fire or overheating. Maybe melting_fire. Could also be electrical_fault? Popping noise + burning smell indicates electrical fault. But exact claim: popping noise => abnormal_noise. Burning plastic smell => melting_fire. Also \"Not safe!\" maybe safety_risk with secondary? \"uncategorized\" maybe? But don't invent. Could claim \"Not safe!\" as safety_risk/uncategorized? But taxonomy valid secondary under other_unknown? No, safety_risk primary enums listed. Could use secondary \"melting_fire\"? Evidence \"Not safe!\" not specific. Better skip.\n\nNeed only JSON. Ensure schema. final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "9ce63dac-67a1-484e-a358-f73947bb8ee1-0",
+        "status": "completed"
+      },
+      {
+        "id": "26c7c60c-2e2e-4797-ad1c-fb03bda38a1d",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"abnormal_noise\",\"polarity\":\"negative\",\"evidence_span\":\"Charger made a popping noise\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"melting_fire\",\"polarity\":\"negative\",\"evidence_span\":\"smelled like burning plastic\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211591.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1033,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 525,
+      "output_tokens_details": {
+        "reasoning_tokens": 450
+      },
+      "total_tokens": 1558
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"abnormal_noise\",\"polarity\":\"negative\",\"evidence_span\":\"Charger made a popping noise\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"melting_fire\",\"polarity\":\"negative\",\"evidence_span\":\"smelled like burning plastic\"}]}"
+}

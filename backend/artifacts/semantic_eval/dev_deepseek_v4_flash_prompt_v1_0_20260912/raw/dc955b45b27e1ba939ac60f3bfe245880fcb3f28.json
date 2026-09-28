@@ -1,0 +1,216 @@
+{
+  "review_id": "dc955b45b27e1ba939ac60f3bfe245880fcb3f28",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "cc5e6724-cea2-40d7-adf3-bced54a63177",
+  "raw_response": {
+    "id": "cc5e6724-cea2-40d7-adf3-bced54a63177",
+    "created_at": 1789210801.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "e2d6abf5-3d3b-4244-8f74-b1041928256f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need adhere schema. Let's parse source_text: \"It works\\nNot as fast in charging as Id like. Takes sometime, but it does work\". Need claims zero or multiple. We need identify semantic product claims. Primary/secondary taxonomy. Polarity. Evidence exact substring continuous.\n\nReview title \"It works\" and body. Product likely charger? It works. Claim about charging speed? \"Not as fast in charging as Id like.\" Negative? It says not as fast as I'd like, charging speed negative. Another \"Takes sometime, but it does work\" maybe charging_success positive? Or general performance? It works suggests function performance general positive. \"Takes sometime\" might charging_speed negative same. Need decide multiple claims? We can extract:\n1 primary function_performance secondary charging_speed polarity negative evidence \"Not as fast in charging as Id like.\" Or \"Not as fast in charging as Id like. Takes sometime\" maybe continuous? Exact substring. \n2 primary function_performance secondary charging_success polarity positive evidence \"it does work\" or \"It works\" from title? Source_text includes \"It works\\nNot...\" Yes source_text includes title? It says source_text: \"It works\\nNot...\" So evidence could be \"It works\". This indicates charging/function success positive. But is it a product claim? It works. We can extract primary function_performance secondary general_performance or charging_success? Product charger? \"It works\" general performance positive. But if specifically charging? There's charging context. Could be \"it does work\" positive charging_success. Need valid secondary. \"It works\" maybe general_performance. \"it does work\" also positive. If we extract both \"It works\" and \"it does work\", duplicate? Maybe one claim positive function success. And one negative speed. Need cautious. The instruction: a review may contain zero or multiple claims. For every claim choose exactly one valid pair. \"Do not infer sentiment from star rating.\" We can infer from text. We need not overproduce. Let's formulate JSON.\n\nPotential claims:\n- primary_topic: function_performance, secondary_topic: charging_speed, polarity: negative, evidence_span: \"Not as fast in charging as Id like.\" This is a clear claim. The exact substring includes \"Id\" no apostrophe. Good.\n- primary_topic: function_performance, secondary_topic: charging_success, polarity: positive, evidence_span: \"it does work\" or \"It works\". \"it does work\" indicates works, success. \"It works\" from title also. Which one better? \"it does work\" within body. It might be \"charging_success\" because context charging. But it's a general performance? Since \"Takes sometime, but it does work\" - it does work = charging success. Primary function_performance, secondary charging_success. Evidence \"it does work\". Positive. Could also include \"Takes sometime\" as negative speed? The speed claim already includes \"Not as fast... Takes sometime\" maybe evidence \"Not as fast in charging as Id like. Takes sometime\" continuous? The instruction evidence_span exact continuous substring. We can include \"Not as fast in charging as Id like. Takes sometime\" but includes sentence. Better just phrase.\n\nCould there be claim \"Takes sometime\" negative charging_speed. Same as not fast. Maybe one claim with evidence \"Not as fast in charging as Id like. Takes sometime\" continuous yes. But polarity negative. Fine.\n\nNeed output schema {\"claims\":[...]}. Ensure no additional properties. Use exact enum strings.\n\nNeed decide if only one claim? The review says It works, Not as fast, Takes sometime, but it does work. There are two semantic claims: works positive, speed negative. The \"It works\" and \"it does work\" are same claim, duplicate. We should maybe include one positive and one negative. Positive evidence could be \"It works\" or \"it does work\". Use \"it does work\" to avoid title? Both in source. Since \"It works\" title is part of source_text. But if claim is positive, evidence \"it does work\" is exact from body. Good.\n\nNegative evidence: \"Not as fast in charging as Id like.\" Exact. Polarity negative. \nPositive evidence: \"it does work\" exact. Polarity positive. \nWould \"Takes sometime\" also negative charging_speed? Could add separate? But likely same speed issue. Avoid duplicate. Could evidence \"Takes sometime\" negative charging_speed. But we already have negative. Maybe include both speed negative? The review has two phrases about speed. But claims independent? \"Not as fast\" and \"Takes sometime\" both negative charging speed. Could extract one claim with evidence spanning both: \"Not as fast in charging as Id like. Takes sometime\" continuous. That covers both. Polarity negative. Then positive \"it does work\". That seems good. Evidence exact continuous substring: source_text has newline after It works. \"Not as fast in charging as Id like. Takes sometime\" yes exactly? Let's check: \"Not as fast in charging as Id like. Takes sometime, but it does work\". Yes substring \"Not as fast in charging as Id like. Takes sometime\" continuous. Good. But is \"Takes sometime\" exact capitalization? yes.\n\nPositive \"it does work\" exact substring. Good.\n\nCould positive be \"It works\" and \"it does work\" both? We should avoid duplicate. One positive claim for charging success/general performance.\n\nNow choose secondary for positive: charging_success or general_performance? The product likely charger, and text \"it does work\" in context charging. Primary function_performance; secondary charging_success. That is valid. But \"It works\" could be general performance. If we choose charging_success, evidence \"it does work\" supports. Good.\n\nPotential issue: The negative evidence \"Not as fast in charging as Id like. Takes sometime\" is one claim; but \"Takes sometime\" may indicate charging_speed. Fine.\n\nNeed output only JSON. Ensure property names correct.\n\nLet's produce with two claims. \nClaim1: primary function_performance, secondary charging_speed, polarity negative, evidence_span \"Not as fast in charging as Id like. Takes sometime\"\nClaim2: primary function_performance, secondary charging_success, polarity positive, evidence_span \"it does work\"\n\nNeed ensure evidence_span minLength. Yes.\n\nShould we include \"It works\" as positive instead? Maybe if positive claim is \"It works\", secondary general_performance. But context charging? The title says It works. It is general. But if we already have it does work positive charging_success, okay.\n\nCould there be a claim about \"Not as fast in charging\" is negative but \"it does work\" positive. Polarity for whole review? Not needed.\n\nLet's final JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "cc5e6724-cea2-40d7-adf3-bced54a63177-0",
+        "status": "completed"
+      },
+      {
+        "id": "4a5d6bae-2fac-4e87-aa81-9c728e18d660",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Not as fast in charging as Id like. Takes sometime\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"it does work\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210808.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1034,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1508,
+      "output_tokens_details": {
+        "reasoning_tokens": 1434
+      },
+      "total_tokens": 2542
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Not as fast in charging as Id like. Takes sometime\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"it does work\"}]}"
+}

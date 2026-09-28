@@ -1,0 +1,50 @@
+{
+  "review_id": "d3d6f9b64b8214043e46671aea881bf488656ad4",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-q80ps6fbaagmpgoy11stg",
+  "raw_response": {
+    "id": "chatcmpl-q80ps6fbaagmpgoy11stg",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"dual_port_multi_device\", \"polarity\": \"positive\", \"evidence_span\": \"has a dual slot usb for charging 2 things at once\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Great value\"}]}"
+        }
+      }
+    ],
+    "created": 1789176884,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 84,
+      "prompt_tokens": 448,
+      "total_tokens": 532,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 83,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"dual_port_multi_device\", \"polarity\": \"positive\", \"evidence_span\": \"has a dual slot usb for charging 2 things at once\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Great value\"}]}"
+}

@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-45ec62099c611d4e",
+      "review_id": "9041b5e62c1e0cc5630f2134c4e5bea6050460f0",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "short_lifespan",
+      "polarity": "negative",
+      "evidence_span": "All three have broken within 2 weeks.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "90d6ef78-1987-4aa3-a0e1-f763ec522a51"
+    },
+    {
+      "prediction_id": "SP-23b399eeee001861",
+      "review_id": "9041b5e62c1e0cc5630f2134c4e5bea6050460f0",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "reliability_durability",
+      "secondary_topic": "cracking_breakage",
+      "polarity": "negative",
+      "evidence_span": "the shields breaking with normal use.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "90d6ef78-1987-4aa3-a0e1-f763ec522a51"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

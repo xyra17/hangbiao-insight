@@ -1,0 +1,216 @@
+{
+  "review_id": "7508f5e9dc9961a6aafb890938767abee9d3fbac",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "a1adac3d-6e7f-480b-91f9-e5b109d90e2f",
+  "raw_response": {
+    "id": "a1adac3d-6e7f-480b-91f9-e5b109d90e2f",
+    "created_at": 1789211666.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "ea96808e-ec90-41f1-b8b7-30d36e5686cc",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Source: \"This does what you are expecting.\\nThis works well for charging my phone and iPad. Just what I wanted.\" Rating 5 but don't infer sentiment from star. Need claims supported. Product likely charger. Claim: works well for charging phone and iPad. That is function_performance / charging_success? It says charging my phone and iPad. Polarity positive (\"works well\"). Evidence exact continuous substring: \"This works well for charging my phone and iPad.\" Also maybe dual_port_multi_device? It charges phone and iPad, maybe multi-device? But not explicitly dual port, just works for both. Could be compatibility device? The taxonomy has convenience_value dual_port_multi_device. \"charging my phone and iPad\" implies multiple devices? But primary is function_performance charging_success. \"Just what I wanted\" general sentiment not product claim? maybe no. \"This does what you are expecting\" general performance? Could be function_performance/general_performance positive? Evidence \"This does what you are expecting.\" That's a product claim about doing expected function. But maybe vague. We can include. Need exact continuous substring. \"This does what you are expecting.\" positive? expectation met. Primary function_performance secondary general_performance? Or charging_success? It says does what expecting, broad. Then \"This works well for charging my phone and iPad.\" function_performance charging_success positive. Maybe \"Just what I wanted\" convenience_value general_convenience positive? But not product-specific? It's just satisfaction. Could include convenience? Hmm.\n\nNeed be careful: review may contain zero multiple. We can extract two claims. Claim 1: \"This does what you are expecting.\" Primary function_performance, secondary general_performance, polarity positive. Claim 2: \"This works well for charging my phone and iPad.\" Primary function_performance, secondary charging_success, polarity positive. Is \"for charging my phone and iPad\" also compatibility? No.\n\nNeed output JSON only. Ensure no markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "a1adac3d-6e7f-480b-91f9-e5b109d90e2f-0",
+        "status": "completed"
+      },
+      {
+        "id": "f03a36ac-3d81-4b6e-9c17-4b43338eba68",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This does what you are expecting.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"This works well for charging my phone and iPad.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211668.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1042,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 497,
+      "output_tokens_details": {
+        "reasoning_tokens": 422
+      },
+      "total_tokens": 1539
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This does what you are expecting.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"This works well for charging my phone and iPad.\"}]}"
+}

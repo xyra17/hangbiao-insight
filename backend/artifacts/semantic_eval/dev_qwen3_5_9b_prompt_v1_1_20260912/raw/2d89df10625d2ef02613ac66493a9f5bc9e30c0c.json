@@ -1,0 +1,50 @@
+{
+  "review_id": "2d89df10625d2ef02613ac66493a9f5bc9e30c0c",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-drfv4zcq8fkv6pre1em61s",
+  "raw_response": {
+    "id": "chatcmpl-drfv4zcq8fkv6pre1em61s",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"Great quality\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"great price\"}]}"
+        }
+      }
+    ],
+    "created": 1789186754,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 71,
+      "prompt_tokens": 627,
+      "total_tokens": 698,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 70,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"Great quality\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"great price\"}]}"
+}

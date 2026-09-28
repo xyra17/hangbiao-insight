@@ -1,0 +1,216 @@
+{
+  "review_id": "3f618837e0fbd622b853c6e4b558367302a00a47",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "ba0894f4-ad96-48f8-bb55-5d956c7aa850",
+  "raw_response": {
+    "id": "ba0894f4-ad96-48f8-bb55-5d956c7aa850",
+    "created_at": 1789210776.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "e1530c5f-b29b-48f3-8ca2-dcd01cefc14a",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review: \"Price and quality\\nSecond time I’ve ordered.  Best I’ve found\" rating 5. Need semantic claims. Topic taxonomy. Claims maybe price_value positive? \"Price and quality\" maybe title includes price and quality, but source_text includes. \"Second time I’ve ordered. Best I’ve found\" implies general satisfaction/quality? We need exact evidence span continuous substring. Need decide claims. There may be zero/multiple. \"Price and quality\" is not a claim? It mentions price and quality but no explicit polarity except title maybe ambiguous. \"Best I’ve found\" general positive product quality maybe product_quality? Could extract price_value positive from \"Price and quality\"? But \"Price and quality\" alone not sentiment. \"Second time I’ve ordered. Best I’ve found\" positive repurchase, best found. This could be convenience_value/price_value? Hmm \"Best I’ve found\" general positive? Could be other_unknown / uncategorized? But we shouldn't invent. Product review semantic claims: product-level assertions. \"Second time I’ve ordered\" implies previous positive experience? Not a product attribute. \"Best I’ve found\" general performance/quality? Maybe product_quality: material_build_quality? No, \"best\" overall quality not specific. Taxonomy has general_performance under function_performance, general_durability, general_convenience. \"Best I’ve found\" could be function_performance/general_performance positive. But primary function_performance secondary general_performance? It asserts best found, general performance. Evidence \"Best I’ve found\" exact. Also \"Price and quality\" maybe price_value? But no polarity phrase. If claim: primary convenience_value secondary price_value polarity neutral? Evidence \"Price and quality\". But is that a claim? It is heading. Could be product quality and price? Hmm.\n\nNeed comply: \"If no supported product claim exists, return empty list.\" Here there is supported product claim with \"Best I’ve found\" positive general performance. Maybe also \"Second time I’ve ordered\" indicates repurchase/reliability? Not directly. Could classify as general_convenience? No.\n\nNeed output schema. Need claims array. Could include one or two. Let's inspect likely expected. Reviews often contain product-review claims. \"Price and quality\" title could be claim? It doesn't state whether good or bad. The title is likely just topics. Star rating not to infer. Therefore not a claim. \"Second time I’ve ordered.\" indicates repeat purchase, maybe general positive? But not product attribute. \"Best I’ve found\" is evaluative overall. Could be \"general_performance\" positive. However \"Best I've found\" lacking what product is. But product review context: charger? product maybe charger. It says best I've found. That's supported general performance? It could mean best price/quality. But not specific. Maybe use other_unknown/uncategorized? Primary other_unknown, secondary uncategorized, polarity positive, evidence \"Best I’ve found\". But taxonomy provides general_performance. Which is better? The claim \"Best I’ve found\" = general product performance/quality. Product_quality category: material_build_quality/defective_on_arrival/accessory_condition. Not overall quality. Function_performance general_performance likely includes general performance. But \"Best\" overall quality could be general_performance. I'd choose function_performance/general_performance positive.\n\nCould there be claim \"Second time I’ve ordered\" -> convenience_value/general_convenience positive? It indicates repeat purchase; not product attribute. Avoid.\n\nNeed exact continuous substring from SOURCE_TEXT. \"Best I’ve found\" includes curly apostrophe? Source: \"Best I’ve found\" yes. We can copy exactly. However source_text has newline and two spaces after period: \"Second time I’ve ordered.  Best I’ve found\". Evidence \"Best I’ve found\" exact. If include \"Second time I’ve ordered.  Best I’ve found\" no. Need one span. If only one claim, output.\n\nPotential issue: \"Price and quality\" itself may be evidence for price_value claim? The title says \"Price and quality\" maybe user mentions both price and quality, not a sentiment. Since no sentiment, could be neutral if treated as topics, but \"product-review semantic claims\" require a claim. A claim could be about price and quality, but no assertion. No.\n\nLet's final JSON with claims one. Ensure valid JSON, no markdown. \nNeed enum values exact: primary_topic \"function_performance\", secondary_topic \"general_performance\", polarity \"positive\", evidence_span \"Best I’ve found\". \nLet's output.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "ba0894f4-ad96-48f8-bb55-5d956c7aa850-0",
+        "status": "completed"
+      },
+      {
+        "id": "9b01edcb-26d1-420e-a0a2-3fbea20a4935",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Best I’ve found\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210781.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1033,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1042,
+      "output_tokens_details": {
+        "reasoning_tokens": 1004
+      },
+      "total_tokens": 2075
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Best I’ve found\"}]}"
+}

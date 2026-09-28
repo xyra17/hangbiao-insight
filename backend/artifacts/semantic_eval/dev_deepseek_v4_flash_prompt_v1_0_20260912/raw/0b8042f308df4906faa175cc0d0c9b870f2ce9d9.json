@@ -1,0 +1,216 @@
+{
+  "review_id": "0b8042f308df4906faa175cc0d0c9b870f2ce9d9",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "6bac3077-4857-44d7-b7ff-10cab3043bd6",
+  "raw_response": {
+    "id": "6bac3077-4857-44d7-b7ff-10cab3043bd6",
+    "created_at": 1789210874.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "682393d0-066d-4778-994f-cc6e3afcf2d9",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims from source_text. Source: \"Sturdy\\nGreat product\". Need review semantic claims. Product unknown likely charger? Taxonomy. Claims? \"Sturdy\" implies material build quality positive. \"Great product\" general? Could be general_performance? But \"great product\" is overall product quality maybe uncategorized? Need choose exactly one valid primary/secondary pair. We need decide if supported product claim exists. There is claim: sturdy -> product_quality/material_build_quality positive evidence \"Sturdy\". Great product maybe general positive but vague. Is that a product claim? It may be overall satisfaction, could be product_quality? Taxonomy has product_quality material_build_quality, defective_on_arrival, accessory_condition. \"Great product\" not specific. Could be other_unknown/uncategorized? But instruction: If no supported product claim exists return empty. \"Sturdy\" clearly supported physical quality. \"Great product\" is vague but maybe general praise not a semantic claim? They say do not infer topics. Could classify as product_quality/material_build_quality? No, great product is general. Maybe function_performance/general_performance? It's overall product performance? But \"great product\" not enough? Maybe claim should be product_quality? Hmm.\n\nNeed output claims array. Review title \"Sturdy\" and source_text includes \"Sturdy\\nGreat product\". Evidence span exact continuous substring from SOURCE_TEXT. Can include \"Sturdy\" and \"Great product\". Since newline included. If we use \"Sturdy\" exact. If use \"Great product\" exact.\n\nNeed maybe one claim for Sturdy, one for Great product. \"Sturdy\" = product_quality/material_build_quality positive. \"Great product\" could be other_unknown/uncategorized? But \"uncategorized\" for unknown? If it's a product claim? It is general positive but no specific topic. The taxonomy allows other_unknown/uncategorized. Evidence exact \"Great product\". Polarity positive. But maybe \"Great product\" is just overall positive, can map to product_quality? Hmm primary product_quality secondary? There isn't general_quality. \"material_build_quality\" not necessarily. \"general_performance\" under function_performance could capture general performance. But \"great product\" doesn't say performance. \"general_convenience\" under convenience_value? no. \"uncategorized\" seems appropriate.\n\nNeed consider if multiple claims from one review? Yes. Should we include both? They are claims? \"Sturdy\" and \"Great product\". The title and source text. Source_text contains title? It says source_text: \"Sturdy\\nGreat product\" includes title duplicated. So yes.\n\nPotential issue: Evidence span must be exact continuous substring. For \"Sturdy\" in source_text, yes. For \"Great product\", yes.\n\nNeed final JSON only. Ensure schema exact. {\"claims\":[...]}.\n\nNeed no markdown. \nPolarity: positive for both.\n\nLet's craft:\n{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Sturdy\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Great product\"}]}\n\nIs \"Great product\" claim valid? It may be overall sentiment not product claim? But could be supported product claim. The instruction: \"Extract product-review semantic claims.\" It is a product claim of general satisfaction but no specific topic. other_unknown/uncategorized exists. So okay.\n\nNeed maybe if no supported product claim? But \"Sturdy\" supported. So not empty. Good.\n\nLet's final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "6bac3077-4857-44d7-b7ff-10cab3043bd6-0",
+        "status": "completed"
+      },
+      {
+        "id": "8d6252d8-b703-49e7-8347-bba0276bc706",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Sturdy\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Great product\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210879.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1025,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 853,
+      "output_tokens_details": {
+        "reasoning_tokens": 787
+      },
+      "total_tokens": 1878
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Sturdy\"},{\"primary_topic\":\"other_unknown\",\"secondary_topic\":\"uncategorized\",\"polarity\":\"positive\",\"evidence_span\":\"Great product\"}]}"
+}

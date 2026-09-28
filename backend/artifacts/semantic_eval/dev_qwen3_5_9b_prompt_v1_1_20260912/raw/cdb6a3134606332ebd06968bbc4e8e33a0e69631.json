@@ -1,0 +1,50 @@
+{
+  "review_id": "cdb6a3134606332ebd06968bbc4e8e33a0e69631",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-2ohko908qeqsy991kia10b",
+  "raw_response": {
+    "id": "chatcmpl-2ohko908qeqsy991kia10b",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"reasonable price\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"I liked the package of 2 chargers\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"The design is simple, attractive\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"power_output\", \"polarity\": \"positive\", \"evidence_span\": \"2.1 Amp output\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"charged my phone easily in good time\"}]}"
+        }
+      }
+    ],
+    "created": 1789185985,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 188,
+      "prompt_tokens": 630,
+      "total_tokens": 818,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 187,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"reasonable price\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"I liked the package of 2 chargers\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"The design is simple, attractive\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"power_output\", \"polarity\": \"positive\", \"evidence_span\": \"2.1 Amp output\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"charged my phone easily in good time\"}]}"
+}

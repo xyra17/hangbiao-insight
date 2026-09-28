@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-087bf1507e31ede2",
+      "review_id": "c9196b640b8e2cef897fd0f12aa27870f722bb93",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "device_damage",
+      "polarity": "negative",
+      "evidence_span": "iPhone working wrong because of this",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "fd3a5b1f-eb6f-4630-87e2-2374d91684cb"
+    },
+    {
+      "prediction_id": "SP-db1a9da86bfe8859",
+      "review_id": "c9196b640b8e2cef897fd0f12aa27870f722bb93",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "device_damage",
+      "polarity": "negative",
+      "evidence_span": "The battery of my iPhone does not work because of this",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "fd3a5b1f-eb6f-4630-87e2-2374d91684cb"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

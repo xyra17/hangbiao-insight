@@ -1,0 +1,11 @@
+﻿check_name,expected,actual,passed
+case_month_count,7,7,True
+unique_case_id,7,7,True
+business_source_is_synthetic,0,0,True
+causal_claim_disabled,0,0,True
+golden_review_created_at_missing,0,0,True
+golden_claim_month_missing,0,0,True
+noexp_current_audit_count,40,40,True
+noexp_baseline_audit_count,60,60,True
+noexp_total_audit_count,100,100,True
+noexp_duplicate_review_id,0,0,True

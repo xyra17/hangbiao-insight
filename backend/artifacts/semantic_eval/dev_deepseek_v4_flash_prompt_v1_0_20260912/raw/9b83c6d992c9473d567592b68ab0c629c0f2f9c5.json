@@ -1,0 +1,216 @@
+{
+  "review_id": "9b83c6d992c9473d567592b68ab0c629c0f2f9c5",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "26912442-b7b0-40ec-bfcf-838a240f79f0",
+  "raw_response": {
+    "id": "26912442-b7b0-40ec-bfcf-838a240f79f0",
+    "created_at": 1789212048.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "c0d68418-e58c-4839-b9f1-d49d0fd6e375",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review: \"Easy to use\\nSuper easy to set up took me 2 seconds to set up. It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\" Product maybe charger? Need claims. We need semantic claims, zero/multiple. Valid taxonomy pairs. Evidence exact continuous substring. Polarity independently.\n\nWe parse:\n- \"Easy to use\" title maybe source_text includes \"Easy to use\". Claim usability_installation/ease_of_use positive. Evidence span \"Easy to use\" or \"Super easy to set up took me 2 seconds to set up.\" It's about ease of use/setup. Could be ease_of_use.\n- \"Super easy to set up took me 2 seconds to set up.\" Usability_installation/installation_difficulty? Actually installation_difficulty is secondary? \"easy to set up\" = ease_of_use maybe also installation_difficulty negative? Taxonomy has installation_difficulty for difficulty, but positive ease? Could map usability_installation/ease_of_use. Evidence \"Super easy to set up took me 2 seconds to set up\". Polarity positive.\n- \"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\" Convenience_value/portability_size positive. Evidence exact \"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\" Note curly apostrophe in It’s. Must copy exact. Source has \"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\". Could claim portability_size positive.\n\nNeed decide whether \"Easy to use\" and \"Super easy to set up...\" are separate or overlapping. They are separate sentences? Source: \"Easy to use\\nSuper easy to set up took me 2 seconds to set up. It’s small enough...\" The newline maybe title and body. We can include two claims: ease_of_use and installation? But taxonomy secondary has \"installation_difficulty\" not \"ease_of_installation\". For \"easy to set up\", secondary \"ease_of_use\" fits. Could include one claim for ease_of_use evidence entire \"Easy to use\\nSuper easy to set up took me 2 seconds to set up.\" But evidence span can include newline? It says exact continuous substring. Could include \"\\n\" maybe yes. But easier separate.\n\nNeed ensure primary/secondary valid: usability_installation/ease_of_use. convenience_value/portability_size.\n\nMaybe \"small enough to travel with doesn’t take a lot of room\" is portability_size. Polarity positive.\n\nNo other claims.\n\nNeed final JSON with claims array. Ensure schema exact: {\"claims\":[...]}.\n\nLet's craft:\n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"usability_installation\",\n      \"secondary_topic\": \"ease_of_use\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Easy to use\"\n    },\n    {\n      \"primary_topic\": \"usability_installation\",\n      \"secondary_topic\": \"ease_of_use\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"Super easy to set up took me 2 seconds to set up.\"\n    },\n    {\n      \"primary_topic\": \"convenience_value\",\n      \"secondary_topic\": \"portability_size\",\n      \"polarity\": \"positive\",\n      \"evidence_span\": \"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\"\n    }\n  ]\n}\n\nCheck exact substring: Source text: \"Easy to use\\nSuper easy to set up took me 2 seconds to set up. It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\". The second evidence includes period after set up. Yes source has \"set up. It’s\". We exclude period maybe? We included period. Exact substring \"Super easy to set up took me 2 seconds to set up.\" yes continuous with period. Third evidence no period at end? Source ends with bag, no period? Actually source_text: \"... in a suitcase or a bag\" no final period. Yes. Good.\n\nPotential issue duplicate ease_of_use claims? Could be considered multiple claims. \"Easy to use\" and \"Super easy to set up...\" are similar but different evidence. Could be one claim with evidence \"Easy to use\\nSuper easy...\"? The review has title and first sentence. But as extraction, multiple claims allowed. Is \"Easy to use\" alone a claim? It is product usability. Yes.\n\nNeed no additional text.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "26912442-b7b0-40ec-bfcf-838a240f79f0-0",
+        "status": "completed"
+      },
+      {
+        "id": "797784f6-746b-470c-9577-6ddd787a7b90",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to use\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Super easy to set up took me 2 seconds to set up.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"portability_size\",\"polarity\":\"positive\",\"evidence_span\":\"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789212053.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1062,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1128,
+      "output_tokens_details": {
+        "reasoning_tokens": 996
+      },
+      "total_tokens": 2190
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy to use\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Super easy to set up took me 2 seconds to set up.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"portability_size\",\"polarity\":\"positive\",\"evidence_span\":\"It’s small enough to travel with doesn’t take a lot of room in a suitcase or a bag\"}]}"
+}

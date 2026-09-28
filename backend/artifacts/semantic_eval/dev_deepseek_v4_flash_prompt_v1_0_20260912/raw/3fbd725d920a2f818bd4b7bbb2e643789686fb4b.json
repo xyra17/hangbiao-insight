@@ -1,0 +1,216 @@
+{
+  "review_id": "3fbd725d920a2f818bd4b7bbb2e643789686fb4b",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "90f17a66-44ba-43fd-9aa4-bf70af6cede5",
+  "raw_response": {
+    "id": "90f17a66-44ba-43fd-9aa4-bf70af6cede5",
+    "created_at": 1789210815.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "eb777a3d-1e78-4461-ba5c-a909965d2edd",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims from review. Need follow schema. Review text: \"Do Not Buy\\nNeither of the two plugins I purchased will charge anything.  Entirely defective.  Have tried with countless devices and in multiple plugins.  Recommend looking elsewhere if they’re okay with sending completely defective ones.\"\n\nNeed extract product-review semantic claims. A review may contain zero/multiple. For every claim choose exactly one valid primary/secondary taxonomy pair, independently polarity, evidence_span exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence/topics. If no supported product claim exists return empty list.\n\nWe need identify claims. Product is charger/plugins? \"two plugins I purchased will charge anything.\" likely charging plugs? They won't charge anything. Claim: function_performance / charging_success negative. Evidence span exact: \"Neither of the two plugins I purchased will charge anything.\" Maybe also \"Entirely defective.\" claim product_quality / defective_on_arrival? Hmm \"Entirely defective\" could be defective_on_arrival? It says completely defective, maybe general quality? Taxonomy product_quality includes defective_on_arrival, material_build_quality, accessory_condition. \"Entirely defective\" likely product_quality defective_on_arrival? But not necessarily on arrival? It says sending completely defective ones. Could be product_quality / defective_on_arrival negative. Evidence exact \"Entirely defective.\" This is a claim. Also \"Have tried with countless devices and in multiple plugins.\" This supports charging failure, maybe same claim? Could be compatibility? It says tried with countless devices and multiple plugins, but primary is charging_success already. Maybe multiple claims? Let's parse.\n\n\"Do Not Buy\" not a product claim? Recommendation, overall negative, no specific topic maybe other_unknown uncategorized? But likely not semantic product claim? Could be general. But instructions: If no supported product claim exists empty. We need extract product claims. \"Neither of the two plugins I purchased will charge anything.\" This is charging success negative. \"Entirely defective.\" Product quality defective_on_arrival? Maybe \"defective_on_arrival\" if newly purchased and defective. \"Have tried with countless devices and in multiple plugins.\" Could be compatibility_fit/device_compatibility? Actually they tried with countless devices, meaning the plug doesn't charge devices. But claim is same charging failure. It could support function_performance/charging_success rather than compatibility. \"Recommend looking elsewhere if they’re okay with sending completely defective ones.\" This is about defective items, maybe product_quality/defective_on_arrival negative. Evidence span: \"sending completely defective ones\" is exact substring? In source: \"if they’re okay with sending completely defective ones.\" The continuous substring \"sending completely defective ones\" exists. But includes apostrophe? We can use \"completely defective ones\" exact. But claim of defective product. Should we include? It could duplicate. Need not over-extract. We can include 2 claims: charging_success negative evidence \"Neither of the two plugins I purchased will charge anything.\" and defective_on_arrival negative evidence \"Entirely defective.\" Or \"completely defective ones\". That seems reasonable.\n\nNeed ensure primary/secondary valid. For \"Entirely defective.\" primary product_quality, secondary defective_on_arrival. Is it \"defective_on_arrival\"? The product is defective, but not explicit on arrival. Taxonomy only defective_on_arrival in product_quality. Could use general? No general quality in product_quality except material_build_quality, defective_on_arrival, accessory_condition. \"Entirely defective\" likely defective_on_arrival. Alternatively other_unknown/uncategorized? But better product_quality/defective_on_arrival. Does \"defective_on_arrival\" require DOA; \"Entirely defective\" fits.\n\nAlso \"Neither of the two plugins I purchased will charge anything.\" primary function_performance, secondary charging_success negative. Good.\n\n\"Have tried with countless devices and in multiple plugins.\" This could be compatibility_fit/device_compatibility? But \"countless devices\" means device compatibility? It says tried with countless devices and multiple plugins, but did not charge. That indicates not compatible with devices? Hmm but it's about charging fail. Could be evidence for charging_success. We can include as another claim? The same issue. But if separate, primary compatibility_fit/device_compatibility negative? But it doesn't explicitly say incompatible, only tried with countless devices. The product doesn't charge anything with devices. Could be compatibility claim. However \"multiple plugins\" maybe multiple units of the product? It says \"in multiple plugins\" likely outlets? Wait \"plugins\" might mean wall plugs? They purchased two plugins (chargers). \"Have tried with countless devices and in multiple plugins.\" They tried with devices and in multiple outlets? If \"plugins\" means power adapters? Confusing. It might refer to wall outlets? Actually \"plugins\" probably charging blocks. \"multiple plugins\" could mean multiple outlets? It says two plugins I purchased. Hmm. \"tried with countless devices and in multiple plugins\" maybe \"multiple plugs\" [outlets]. Could be port_fit/wall_socket_fit? But evidence does not indicate fit. Better not.\n\nNeed maybe include only 2 claims. But \"Recommend looking elsewhere if they’re okay with sending completely defective ones.\" Could be same defective claim. It could be evidence for product_quality/defective_on_arrival. But \"Entirely defective.\" is already exact. We can choose one evidence for defective. Should we use \"Entirely defective.\" or \"completely defective ones\"? Both exact. I'd use \"Entirely defective.\" shortest.\n\nNeed output JSON only, no markdown. Ensure schema exactly: {\"claims\":[...]}.\n\nCheck if evidence_span must be exact continuous substring from SOURCE_TEXT. Our spans: \"Neither of the two plugins I purchased will charge anything.\" Does source include newline after title, then exactly that sentence. Yes. It has two spaces after period? Source: \"Neither of the two plugins I purchased will charge anything.  Entirely defective.\" We only need substring, so fine. \"Entirely defective.\" exact. Polarity negative.\n\nCould there be \"Do Not Buy\" claim? It's overall recommendation, but no product topic. Could be other_unknown/uncategorized? But \"Do not buy\" isn't semantic product claim? It is a sentiment/recommendation. The instruction says extract product-review semantic claims. \"Do Not Buy\" may be overall opinion. Could include other_unknown/uncategorized negative evidence \"Do Not Buy\". But taxonomy has other_unknown/uncategorized. Should we include? It says primary/secondary valid. \"Do Not Buy\" is a recommendation, not a product attribute. Likely not a product claim. Also \"Recommend looking elsewhere...\" similar. I'd omit.\n\nNeed maybe include \"Entirely defective.\" primary product_quality secondary defective_on_arrival. If \"defective_on_arrival\" is specifically on arrival, but \"sending completely defective ones\" suggests it arrived defective. Fine.\n\nPotential issue: \"Neither of the two plugins I purchased will charge anything.\" The primary function_performance secondary charging_success. It also implies \"stopped_working\"? No, they never worked? \"will charge anything\" means no charging. \"Entirely defective\" maybe could be reliability_durability/stopped_working? But product_quality/defective_on_arrival is better. \"function_performance/charging_success\" for charging.\n\nNeed final JSON. Ensure no extra text.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "90f17a66-44ba-43fd-9aa4-bf70af6cede5-0",
+        "status": "completed"
+      },
+      {
+        "id": "54b690aa-db62-436d-81b8-d3964f7dc99b",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"Neither of the two plugins I purchased will charge anything.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"Entirely defective.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210823.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1061,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1668,
+      "output_tokens_details": {
+        "reasoning_tokens": 1592
+      },
+      "total_tokens": 2729
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"Neither of the two plugins I purchased will charge anything.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"Entirely defective.\"}]}"
+}

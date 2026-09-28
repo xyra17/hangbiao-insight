@@ -1,0 +1,216 @@
+{
+  "review_id": "e1968e201979b13bbb0055de18771d26b3d67dd6",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "c040bc17-d443-45c6-b633-acf64bc18adf",
+  "raw_response": {
+    "id": "c040bc17-d443-45c6-b633-acf64bc18adf",
+    "created_at": 1789210837.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "ab38ddc0-17bc-45df-b09b-6579c2be0adc",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims. Need be careful. Review text: \"Only 1 port worked, caused power outages.\\nI bought this in May its now July so I've had them for a few months. We kept having problems with partial home power outages that were not fixed by trying to flip the fuses, about the 3rd time a maintenence person suggested it was this charger, which I doubted as both were being used. The first one causing issues was removed. Yesterday I  unplugged and then replugged the second one, and the power has gone out for the section of the home this was linked to.<br />Only one of the ports would work at a time<br />I gave 1 star for quick shipping and 1 port worked fine until the charger was unplugged, then plugged back in\"\n\nNeed extract semantic claims. Product likely charger? B0BYJ8ZVWH maybe USB charger/power adapter? Claims:\n- Only 1 port worked: primary function_performance? secondary charging_success? Or convenience_value dual_port_multi_device? \"Only 1 port worked\" indicates port functionality / charging success. There is taxonomy dual_port_multi_device under convenience_value. \"Only one of the ports would work at a time\" relates dual_port_multi_device? But port worked at a time maybe charging_success/function_performance. Need choose exactly one valid primary/secondary pair. Since \"port\" could be USB ports. \"Only 1 port worked\" = charging_success? It says port worked, not charging success exactly. \"Only one of the ports would work at a time\" = dual_port_multi_device negative? primary convenience_value secondary dual_port_multi_device. But dual port functionality is convenience. However taxonomy has function_performance charging_success, power_output. Also compatibility port_fit? no. I'd lean function_performance/charging_success for \"Only 1 port worked\" and \"Only one of the ports would work at a time\". Need maybe one claim or multiple? They are repeated. Could extract one for only one port worked and one for caused power outages? Caused power outages = safety_risk/electrical_fault? Yes power outages caused by charger = electrical_fault, negative. Evidence \"caused power outages.\" or \"the power has gone out for the section of the home this was linked to.\" Also first one causing issues and removed. Could extract safety_risk electrical_fault negative evidence \"caused power outages.\" Maybe also \"We kept having problems with partial home power outages...\" but caused by charger? maintenance suggested. Evidence exact continuous substring. Need copy exact. \n- \"The first one causing issues was removed.\" maybe reliability_durability intermittent_failure? \"causing issues\" vague. \n- \"1 port worked fine until the charger was unplugged, then plugged back in\" indicates reliability? intermittent after replug? Could be function_performance/charging_success mixed? It says 1 port worked fine until unplugged/replugged, then only one? Hmm.\n\nNeed likely claims:\n1. Primary function_performance, secondary charging_success, polarity negative, evidence \"Only 1 port worked\" (exact substring from source). Note title has \"Only 1 port worked, caused power outages.\" So exact substring \"Only 1 port worked\" exists.\n2. Primary safety_risk, secondary electrical_fault, polarity negative, evidence \"caused power outages\" (from title) or \"the power has gone out for the section of the home this was linked to\". The cause \"caused power outages\" clear.\n3. Primary convenience_value, secondary dual_port_multi_device, polarity negative, evidence \"Only one of the ports would work at a time\" maybe exact substring. But if we already claim only 1 port worked, this is same. Could include as separate? A review may contain multiple claims. But repeated same claim maybe one claim enough. We don't want duplicates? It says may contain zero or multiple. Independently. Could include both if different phrasing. But taxonomy: \"dual_port_multi_device\" specifically about ability to use multiple devices simultaneously. \"Only one of the ports would work at a time\" exactly matches dual port multi-device negative. \"Only 1 port worked\" also could be dual_port_multi_device. Which pair to choose? The headline \"Only 1 port worked, caused power outages.\" Maybe first claim should be convenience_value/dual_port_multi_device not function_performance/charging_success. But \"port worked\" = charging_success? Let's parse.\n\nThe product perhaps a \"Tessan\" outlet extender? The phrase \"Only one of the ports would work at a time\" suggests multi-port charger. The taxonomy includes dual_port_multi_device under convenience_value. That seems apt for \"Only one of the ports would work at a time\" (negative). \"Only 1 port worked\" also. However there is \"charging_success\" under function_performance, could apply if port charging. But no explicit \"charging\" word. \"port worked\" = likely function. But dual_port_multi_device is more specific to multi-port functionality. Need choose valid. \nCould also extract \"1 port worked fine until the charger was unplugged, then plugged back in\" as reliability_durability/intermittent_failure? It suggests after unplug/replug, maybe issue. But not explicit failure. \"1 port worked fine until...\" Positive until condition? Polarity mixed? Not clear. Better avoid.\n\nNeed ensure no unsupported. \"Only 1 port worked\" supported. \"caused power outages\" supported. \"Only one of the ports would work at a time\" supported.\n\nShould we include claim for \"I gave 1 star for quick shipping\" not product claim? shipping not taxonomy; no.\n\nPotential claim: \"We kept having problems with partial home power outages\" safety_risk/electrical_fault negative? Evidence exact substring: \"We kept having problems with partial home power outages\". But cause maybe charger later. Could include as electrical_fault. However source_text says \"We kept having problems with partial home power outages that were not fixed by trying to flip the fuses, about the 3rd time a maintenence person suggested it was this charger, which I doubted as both were being used.\" The claim could be \"suggested it was this charger\" causing outages. The title \"caused power outages\" is exact in title but title is not in source_text? Wait source_text includes \"Only 1 port worked, caused power outages.\\nI bought...\" Yes title is part of source_text? Actually source_text begins with same as title. So exact substring \"caused power outages\" exists. Use that.\n\nNeed output JSON with claims array. Need no extra text.\n\nLet's decide exact claims:\n1. primary_topic: function_performance, secondary_topic: charging_success, polarity: negative, evidence_span: \"Only 1 port worked\" (or \"Only 1 port worked, caused power outages.\" includes safety? better only phrase). Is \"Only 1 port worked\" negative? yes.\n2. primary_topic: safety_risk, secondary_topic: electrical_fault, polarity: negative, evidence_span: \"caused power outages\" (exact substring). \n3. primary_topic: convenience_value, secondary_topic: dual_port_multi_device, polarity: negative, evidence_span: \"Only one of the ports would work at a time\" maybe exact. This duplicates #1 but specifically multi-port. Could include. \nMaybe also reliability_durability/stopped_working? \"Only 1 port worked\" could be stopped working for other ports? But no explicit stopped. \n\"the power has gone out for the section of the home this was linked to\" safety electrical_fault. Could include another safety claim but same. We can include only one electrical fault.\nCould there be claim about \"The first one causing issues was removed\" = reliability_durability/intermittent_failure? It says \"causing issues\", vague. Not enough. \n\"1 port worked fine until the charger was unplugged, then plugged back in\" = function_performance/charging_success mixed? It states one port worked fine until unplugged, then plugged back in, implies after replug maybe not. But not explicit; maybe same as only one port. Avoid.\n\"quick shipping\" no taxonomy.\n\nNeed ensure polarity definitions: positive/neutral/negative/mixed. For only one port worked at a time = negative. electrical fault = negative.\n\nPotential issue: primary/secondary taxonomy pair: \"dual_port_multi_device\" is secondary under convenience_value. Yes.\n\nMaybe \"Only 1 port worked\" could be convenience_value/dual_port_multi_device. But I can have both function_performance/charging_success and convenience_value/dual_port_multi_device? The instruction \"For every claim choose exactly one valid primary/secondary taxonomy pair\" and \"independently determine polarity.\" A review may contain multiple claims. If same aspect, duplicate? Might be considered redundant but not explicitly prohibited. We can consolidate. Could make one claim for port issue with primary convenience_value secondary dual_port_multi_device? But then no function_performance claim. Which is more valid? The phrase \"Only 1 port worked\" = a port failed to function (charging_success). \"Only one of the ports would work at a time\" = dual port multi device. They are different evidence spans but same underlying. \nMaybe output two claims:\n- function_performance/charging_success negative evidence \"Only 1 port worked\"\n- safety_risk/electrical_fault negative evidence \"caused power outages\"\n- convenience_value/dual_port_multi_device negative evidence \"Only one of the ports would work at a time\"\nThis is reasonable.\n\nNeed exact continuous substring. Check source_text: \"Only 1 port worked, caused power outages.\\nI bought...\" So \"Only 1 port worked\" exact. \"caused power outages\" exact (without period maybe okay continuous substring). \"Only one of the ports would work at a time\" exact from line: \"<br />Only one of the ports would work at a time<br />\" Yes exact.\n\nNeed JSON only. Ensure no markdown. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "c040bc17-d443-45c6-b633-acf64bc18adf-0",
+        "status": "completed"
+      },
+      {
+        "id": "4d809001-847f-4861-b264-fbf9b011fe3d",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"Only 1 port worked\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"electrical_fault\",\"polarity\":\"negative\",\"evidence_span\":\"caused power outages\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"negative\",\"evidence_span\":\"Only one of the ports would work at a time\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210847.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1177,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2253,
+      "output_tokens_details": {
+        "reasoning_tokens": 2142
+      },
+      "total_tokens": 3430
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"Only 1 port worked\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"electrical_fault\",\"polarity\":\"negative\",\"evidence_span\":\"caused power outages\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"negative\",\"evidence_span\":\"Only one of the ports would work at a time\"}]}"
+}

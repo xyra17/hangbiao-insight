@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-e6f00a5f9a112c15",
+      "review_id": "7e9df35e980af059bd7bf60448ad4683070cb7f5",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "abnormal_noise",
+      "polarity": "negative",
+      "evidence_span": "it make a hissing sound wheb both ports are used",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "8c73d788-6880-4694-ae40-2527d933a422"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

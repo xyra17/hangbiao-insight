@@ -1,0 +1,50 @@
+{
+  "review_id": "0f7ef9475f539bc489897d9404719f93cc4f860e",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-25nhjr652wn8vbbv3877f8",
+  "raw_response": {
+    "id": "chatcmpl-25nhjr652wn8vbbv3877f8",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"physical_injury_irritation\", \"polarity\": \"negative\", \"evidence_span\": \"This made my fingertips peel!\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I bought this protector after my last one cracked.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"my last one cracked\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"The size is off\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"negative\", \"evidence_span\": \"total waste of money\"}]}"
+        }
+      }
+    ],
+    "created": 1789185485,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 199,
+      "prompt_tokens": 696,
+      "total_tokens": 895,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 198,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"physical_injury_irritation\", \"polarity\": \"negative\", \"evidence_span\": \"This made my fingertips peel!\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"defective_on_arrival\", \"polarity\": \"negative\", \"evidence_span\": \"I bought this protector after my last one cracked.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"my last one cracked\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"size_fit\", \"polarity\": \"negative\", \"evidence_span\": \"The size is off\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"negative\", \"evidence_span\": \"total waste of money\"}]}"
+}

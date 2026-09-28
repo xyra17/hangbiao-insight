@@ -1,0 +1,216 @@
+{
+  "review_id": "a6db85da2add7fc8e62ad71ff5606a6e5779a218",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "38df3784-fba4-40ef-832d-35884bd2cc99",
+  "raw_response": {
+    "id": "38df3784-fba4-40ef-832d-35884bd2cc99",
+    "created_at": 1789210588.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "bff1c8d6-6770-4e2a-a2c6-dad83e6a518f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need adhere schema JSON. We have source_text: \"It cracked right away. Two days after I placed the glass protector on.\\nPoor quality. Cracked right away.\" Rating 1 but don't infer. Need claims. Review about glass protector cracked right away, poor quality. Taxonomy: product_quality material_build_quality or reliability_durability cracking_breakage? \"cracked right away\" after placing. It's a glass protector. Claim: cracked right away, two days after placed. Primary probably reliability_durability secondary cracking_breakage. Also \"Poor quality\" product_quality material_build_quality? Need exact evidence span continuous substring. Could extract one claim for cracked: evidence_span \"It cracked right away.\" primary reliability_durability, secondary cracking_breakage, polarity negative. Another claim \"Poor quality.\" primary product_quality, secondary material_build_quality? polarity negative. Could also \"Cracked right away.\" duplicate? Need maybe one or multiple. We can include two claims. Evidence exact continuous substring from SOURCE_TEXT. \"It cracked right away.\" exists. \"Poor quality.\" exists. Need maybe \"Two days after I placed the glass protector on.\" supports time short lifespan? But cracked is reliability durability. Could combine evidence? The schema asks evidence_span exact continuous substring. For cracked claim, maybe use \"It cracked right away. Two days after I placed the glass protector on.\" continuous including newline? Yes exact substring includes period and space? Source: \"It cracked right away. Two days after I placed the glass protector on.\\nPoor quality. Cracked right away.\" So \"It cracked right away. Two days after I placed the glass protector on.\" is exact continuous substring. It includes time. For poor quality, \"Poor quality.\" Then perhaps \"Cracked right away.\" duplicate. Should we include duplicate? No.\n\nNeed determine primary/secondary pairs valid. \"cracking_breakage\" under reliability_durability. \"material_build_quality\" under product_quality. Polarity negative. Good.\n\nNeed output JSON only. Ensure no additionalProperties. {\"claims\":[...]}. Use exact evidence. For first, evidence_span can be \"It cracked right away. Two days after I placed the glass protector on.\" That has newline? Actually source_text has period then newline? \"It cracked right away. Two days after I placed the glass protector on.\\nPoor quality. Cracked right away.\" There is no newline between first and second sentence; it's \"It cracked right away. Two days after...\" then newline. So exact substring yes. Could include first part only \"It cracked right away.\" simpler. That supports cracking. But \"Two days after...\" indicates time. We can just use \"It cracked right away.\" If only that, okay. The second \"Cracked right away.\" duplicate. Use first.\n\nQuestion: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair, independently determine polarity, and copy evidence_span as an exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence or topics. If no supported product claim exists, return an empty list.\"\n\nSo for \"Poor quality\" it is a product claim? Yes quality. primary product_quality secondary material_build_quality. Evidence \"Poor quality.\" Polarity negative. For cracked, \"It cracked right away.\" Could primary reliability_durability secondary cracking_breakage. Polarity negative. \"Two days after I placed\" maybe short_lifespan? Could be reliability_durability short_lifespan? But cracking is explicit. If we include short lifespan, evidence \"Two days after I placed the glass protector on.\" But that sentence alone says time after placing, not lifespan? \"cracked right away. Two days after...\" It indicates short lifespan before crack. But taxonomy has short_lifespan. Could be secondary short_lifespan with primary reliability_durability. But \"cracked right away\" already cracking_breakage. Maybe one claim can have secondary cracking_breakage; no need. The phrase \"Poor quality\" maps to material_build_quality. Good.\n\nNeed ensure JSON valid. Final only.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "38df3784-fba4-40ef-832d-35884bd2cc99-0",
+        "status": "completed"
+      },
+      {
+        "id": "0cd703a8-ec42-4ec9-9b35-a17b5a08c907",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"It cracked right away.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"Poor quality.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210592.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1052,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 969,
+      "output_tokens_details": {
+        "reasoning_tokens": 896
+      },
+      "total_tokens": 2021
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"It cracked right away.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"negative\",\"evidence_span\":\"Poor quality.\"}]}"
+}

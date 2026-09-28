@@ -1,0 +1,50 @@
+{
+  "review_id": "ec1a444d91a2622ea536d7d2bdef5bf0cff68b90",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-1bfpylestt3dnh2jg048kk",
+  "raw_response": {
+    "id": "chatcmpl-1bfpylestt3dnh2jg048kk",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"worked great\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Nice little cubes\"}]}"
+        }
+      }
+    ],
+    "created": 1789177070,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 72,
+      "prompt_tokens": 455,
+      "total_tokens": 527,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 71,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"worked great\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Nice little cubes\"}]}"
+}

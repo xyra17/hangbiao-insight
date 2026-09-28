@@ -1,0 +1,93 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-3544d841cc3879ea",
+      "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "ease_of_use",
+      "polarity": "positive",
+      "evidence_span": "easy to install",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-uwjccemaf4m4w8kidcfb9d"
+    },
+    {
+      "prediction_id": "SP-935bf53847161434",
+      "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "convenience_value",
+      "secondary_topic": "price_value",
+      "polarity": "positive",
+      "evidence_span": "great price",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-uwjccemaf4m4w8kidcfb9d"
+    },
+    {
+      "prediction_id": "SP-50ac4879beef9cad",
+      "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Works great",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-uwjccemaf4m4w8kidcfb9d"
+    },
+    {
+      "prediction_id": "SP-29d69f59ea3da8e2",
+      "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Great price and fingerprint reader",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-uwjccemaf4m4w8kidcfb9d"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 3
+}

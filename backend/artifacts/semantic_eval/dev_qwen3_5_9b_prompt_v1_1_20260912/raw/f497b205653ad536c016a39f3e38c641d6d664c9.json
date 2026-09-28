@@ -1,0 +1,50 @@
+{
+  "review_id": "f497b205653ad536c016a39f3e38c641d6d664c9",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-ft9iaf3h1tc3b95jiojrtw",
+  "raw_response": {
+    "id": "chatcmpl-ft9iaf3h1tc3b95jiojrtw",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"negative\", \"evidence_span\": \"This screen protector didn't do anything to protect my phone.\"}]}"
+        }
+      }
+    ],
+    "created": 1789187248,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 50,
+      "prompt_tokens": 633,
+      "total_tokens": 683,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 49,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"product_quality\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"negative\", \"evidence_span\": \"This screen protector didn't do anything to protect my phone.\"}]}"
+}

@@ -1,0 +1,216 @@
+{
+  "review_id": "4a0e7942b7bc9430e4291db463e85855041f9074",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "0156a606-c6c6-4439-b389-a91c69a0a2b7",
+  "raw_response": {
+    "id": "0156a606-c6c6-4439-b389-a91c69a0a2b7",
+    "created_at": 1789211775.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "9b9bada2-6c3b-4afc-a3d6-813817e4ce71",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need adhere schema. We need parse source text. Product likely screen protector. Claims: \"Too Big For Iphone X\" title maybe source includes title? source_text includes title line. Review: \"Too Big For Iphone X\\nThese are too big for the Iphone X! They extend a tad bit beyond the screen. Can’t cut them cuz they crack. Water all the screen protectors trying to get them to fit\"\n\nNeed extract claims with taxonomy pairs. Need exact continuous substring from SOURCE_TEXT. Need zero/multiple. Claims:\n- too big for iPhone X => compatibility_fit / size_fit? Negative. Evidence \"These are too big for the Iphone X!\" or \"too big for the Iphone X\". \n- extend beyond screen => compatibility_fit / size_fit? positioning_alignment? It's physical fit/size. Could be size_fit negative. Evidence \"They extend a tad bit beyond the screen.\"\n- Can’t cut them cuz they crack => product_quality? cracking_breakage? Or usability? They crack when cut. Primary reliability_durability secondary cracking_breakage negative. Evidence \"Can’t cut them cuz they crack.\" Hmm \"can't cut them because they crack\" indicates material cracks. That's cracking_breakage. \n- \"Water all the screen protectors trying to get them to fit\" Typo? \"Water all\"? Maybe \"Wasted all the screen protectors trying to get them to fit\" likely source says Water? It says \"Water all the screen protectors trying to get them to fit\" exact. This is usability_installation / installation_difficulty? Negative due difficulty fitting. Evidence \"Water all the screen protectors trying to get them to fit\" maybe \"trying to get them to fit\" installation difficulty. The phrase \"Water all\" maybe typo \"Wasted\". Could claim installation_difficulty. Need not infer. Evidence exact substring. \nPotential issue: multiple claims might overlap. Need choose primary/secondary valid. For \"These are too big for the Iphone X! They extend a tad bit beyond the screen.\" Could combine as one claim? It says claims may multiple; every claim one taxonomy pair. We can extract separate? It is same issue size fit. Maybe one claim with evidence span \"These are too big for the Iphone X! They extend a tad bit beyond the screen.\" That's continuous. But \"They extend...\" follows after ! space. That's exact substring. Could include both. But evidence_span should exact continuous substring. Yes.\n\nNeed decide polarity. Negative.\n\nClaim 2: \"Can’t cut them cuz they crack.\" Primary reliability_durability, secondary cracking_breakage, negative. Evidence exact with apostrophe? Source: \"Can’t cut them cuz they crack.\" Contains curly apostrophe? The source_text: \"Can’t cut them cuz they crack.\" Use exact. In JSON can include curly. Need ensure exact. It appears \"Can’t\" with curly apostrophe. We can copy.\n\nClaim 3: \"Water all the screen protectors trying to get them to fit\" Maybe \"Water\" maybe \"Wasted\"? It exactly \"Water all the screen protectors trying to get them to fit\" no punctuation. This is installation difficulty or size fit? The attempt to fit due size issue. Could be usability_installation/installation_difficulty negative. Evidence span exact substring. We can include \"trying to get them to fit\" maybe continuous substring from source. But the full phrase includes typo. The claim: \"Water all the screen protectors trying to get them to fit\" indicates wasted all trying to fit. Primary usability_installation, secondary installation_difficulty, negative. Is \"Water\" a verb? Hmm not a product claim? It is about installation difficulty. Evidence could be \"trying to get them to fit\" which is exact continuous. That's sufficient. But \"Water all the screen protectors...\" exact. Use full phrase? Need avoid weird. The evidence span should support claim. \"trying to get them to fit\" supports installation difficulty. But perhaps doesn't mention screen protectors. Maybe full \"Water all the screen protectors trying to get them to fit\" supports. Use full exact.\n\nCould there be claim about general performance? No.\n\nNeed final JSON only. Ensure no additional text. Schema:\n{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"These are too big for the Iphone X! They extend a tad bit beyond the screen.\"}, ...]}\nCheck evidence exact: Source: \"Too Big For Iphone X\\nThese are too big for the Iphone X! They extend a tad bit beyond the screen. Can’t cut them cuz they crack. Water all the screen protectors trying to get them to fit\"\nYes substring.\n\nBut \"These are too big for the Iphone X! They extend a tad bit beyond the screen.\" includes period. Exact. It starts after newline. Good.\n\nSecond evidence \"Can’t cut them cuz they crack.\" includes period. Exact. The source has \"Can’t cut them cuz they crack. Water...\" yes.\n\nThird evidence \"Water all the screen protectors trying to get them to fit\" no period at end? Source ends with \"fit\" no period. Yes.\n\nPotential conflict: primary_product maybe product_quality for cracking? Taxonomy says reliability_durability/cracking_breakage. Good.\n\nNeed decide if \"Can’t cut them cuz they crack\" is negative polarity. Yes.\n\nCould classify \"too big\" as compatibility_fit/size_fit. Good.\n\nMaybe \"extend a tad bit beyond screen\" could be compatibility_fit/size_fit too; same claim. If extracting separate claim, evidence \"They extend a tad bit beyond the screen.\" But duplicate. I think one claim with both.\n\nQuestion says extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair. We can output three claims. Are there any unsupported? The first plus extension is one size fit. The second is cracking breakage. The third installation difficulty. Good.\n\nNeed ensure no \"other_unknown\". Good.\n\nFinal only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "0156a606-c6c6-4439-b389-a91c69a0a2b7-0",
+        "status": "completed"
+      },
+      {
+        "id": "cb3086b2-84af-4936-9086-2527426a43d5",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"These are too big for the Iphone X! They extend a tad bit beyond the screen.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Can’t cut them cuz they crack.\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"negative\",\"evidence_span\":\"Water all the screen protectors trying to get them to fit\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211782.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1068,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1454,
+      "output_tokens_details": {
+        "reasoning_tokens": 1320
+      },
+      "total_tokens": 2522
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"These are too big for the Iphone X! They extend a tad bit beyond the screen.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Can’t cut them cuz they crack.\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"negative\",\"evidence_span\":\"Water all the screen protectors trying to get them to fit\"}]}"
+}

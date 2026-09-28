@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f8cc4bc0f743a8d0",
+      "review_id": "c6074f44dc2610d779c0f3e1d278fb228ef22fca",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "other_unknown",
+      "secondary_topic": "uncategorized",
+      "polarity": "positive",
+      "evidence_span": "Makes my phone look great",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "56418d5e-f0c1-457a-ac8f-f75ef5c39337"
+    },
+    {
+      "prediction_id": "SP-a41c636dbc9f4e1d",
+      "review_id": "c6074f44dc2610d779c0f3e1d278fb228ef22fca",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "positive",
+      "evidence_span": "Easy to install",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "56418d5e-f0c1-457a-ac8f-f75ef5c39337"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

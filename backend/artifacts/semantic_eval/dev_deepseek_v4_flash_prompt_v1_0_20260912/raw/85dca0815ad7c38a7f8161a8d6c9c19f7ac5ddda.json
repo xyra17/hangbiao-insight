@@ -1,0 +1,216 @@
+{
+  "review_id": "85dca0815ad7c38a7f8161a8d6c9c19f7ac5ddda",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d87a70b6-401c-4452-be05-193e3977973e",
+  "raw_response": {
+    "id": "d87a70b6-401c-4452-be05-193e3977973e",
+    "created_at": 1789210997.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "bb29a40f-27ae-4224-a1f0-fc1dbe03b4ea",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Need follow schema. We have source_text. Need identify product-review semantic claims. Product appears maybe iPhone? We need extract claims: zero or multiple. Taxonomy. Need exact evidence span continuous substring from SOURCE_TEXT. Do not infer from star rating. Need choose primary/secondary pair.\n\nReview: \"1 Out of 3 Aint Bad\\nWhat else can I say.  Only needed 2 but only got one to work right.  Wouldnt line up straight (yes, I followed included instructions) and by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\"\n\nWe need claims. Let's analyze.\n\nProduct likely screen protector? B07H2V5YLH? Text: \"1 Out of 3 Aint Bad\", \"Only needed 2 but only got one to work right. Wouldnt line up straight ... included instructions ... peel off and try a couple times, corner is pried up and wont stay flat.\" These are about screen protector installation, alignment, adhesion/bubbles? Could be glass screen protector.\n\nClaims:\n1. Only needed 2 but only got one to work right. Could be defective_on_arrival? Or function/performance? It implies two out of three didn't work right. Could be reliability/durability? \"only got one to work right\" maybe product_quality defective_on_arrival? Since new product, multiple defective. But \"work right\" ambiguous. Could be general_performance negative? But need valid primary second. Evidence span exact: \"Only needed 2 but only got one to work right.\" Could classify product_quality/defective_on_arrival? Maybe if only one functional? But \"work right\" pertains installation issue? Hmm.\n\n2. \"Wouldnt line up straight (yes, I followed included instructions)\" – usability_installation/positioning_alignment negative. Evidence span exact: \"Wouldnt line up straight (yes, I followed included instructions)\" or \"Wouldnt line up straight\". Includes typo. Primary usability_installation, secondary positioning_alignment, polarity negative.\n\n3. \"by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\" – usability_installation/bubbles_adhesion? corner pried up and won't stay flat = adhesion issue. Secondary bubbles_adhesion likely. Polarity negative. Evidence span exact: \"the corner is pried up and wont stay flat\" maybe continuous. Or entire clause. Should include exact substring. It is about adhesion. primary usability_installation, secondary bubbles_adhesion, negative.\n\n4. \"included instructions\" maybe installation_accessories? But it's in context compliance, not a claim about instructions? It says followed included instructions, no specific sentiment about instructions. Not claim.\n\n5. \"Only needed 2 but only got one to work right.\" Could be product_quality/defective_on_arrival? Let's think. Review has 3 pack? 1 out of 3 aint bad. \"Only needed 2 but only got one to work right.\" This indicates two units defective/not working. Could classify reliability_durability/defective? Actually taxonomy has product_quality defective_on_arrival, reliability_durability general_durability/stopped_working. If package includes 3 screen protectors, only one usable, likely defective_on_arrival? It could be installation failure not product defect. But they state \"only got one to work right\" due to not lining up and adhesion? First sentence maybe overall defect rate. Could be product_quality/defective_on_arrival negative. Evidence: \"Only needed 2 but only got one to work right.\" However if \"work right\" includes alignment issue, maybe not separate? We can include as claim about product quality? We need avoid duplicative? It says independently determine. Could be primary product_quality secondary defective_on_arrival. But does \"work right\" mean function? Could be general_performance negative. But \"Only needed 2 but only got one to work right\" likely about defective units. Taxonomy product_quality/defective_on_arrival fits \"defective on arrival\" maybe when received. Polarity negative. Evidence exact \"Only needed 2 but only got one to work right.\" Need exact substring includes two spaces? source: \"What else can I say.  Only needed 2 but only got one to work right.  Wouldnt...\" There are two spaces after period. Exact continuous substring can include one space? Need exact. We can copy \"Only needed 2 but only got one to work right.\" That is continuous and exact (starting after two spaces? If we omit leading spaces, substring is exact within source). Yes.\n\nPotential claim \"1 Out of 3 Aint Bad\" title? Is title part source_text? source_text includes title first line. Could claim? Title itself is semantic: 1 out of 3 aint bad? It says only one of three good. But evidence from title? It is in SOURCE_TEXT. Could extract as defective_on_arrival? But \"1 Out of 3 Aint Bad\" conveys quality issue. But perhaps \"1 out of 3\" is a claim about defect rate. It may duplicate. We can include? It says every claim. If title included, yes maybe claim. But maybe we should not extract title as claim if ambiguous? \"1 Out of 3 Aint Bad\" means among 3, one works? Actually \"1 Out of 3 Aint Bad\" idiom? It's title. It is about products: 1 out of 3 is not bad? Wait quote \"1 Out of 3 Aint Bad\" from Meat Loaf: \"Two out of three ain't bad\" means 2/3 good enough. Here \"1 Out of 3 Aint Bad\" likely sarcastic, one out of three works. Could be product quality. But evidence exact. Maybe not separate from \"Only needed 2 but only got one to work right.\" Could include if valid. But review may contain zero/multiple. We can include title as claim? It references 1 out of 3 working. Primary product_quality defective_on_arrival? Polarity negative. Evidence span \"1 Out of 3 Aint Bad\". But we need avoid overextraction? The instruction: Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim... So title can contain claim if product relevant. It is. But maybe \"1 Out of 3 Aint Bad\" is less explicit; the body clarifies. Might be duplicate. Usually extraction tasks do not duplicate same underlying claim across title and body? Could include both? Hmm.\n\nNeed decide final. Desired maybe JSON with claims array. Need ensure all evidence_span exact continuous substring from SOURCE_TEXT. We can include exact substrings:\n\n- \"Only needed 2 but only got one to work right.\" (product_quality/defective_on_arrival, negative)\n- \"Wouldnt line up straight\" (usability_installation/positioning_alignment, negative)\n- \"the corner is pried up and wont stay flat\" (usability_installation/bubbles_adhesion, negative)\n\nMaybe also \"1 Out of 3 Aint Bad\" as product_quality/defective_on_arrival negative? But if include, duplicate. I'd probably skip title as it's idiomatic and not a clear product claim without body. However it is in source_text and rating 1.0. But instruction no infer from star. The title says \"1 Out of 3 Aint Bad\" could be claim that only 1 of 3 works. But body says only one to work right. We can include body only.\n\nWhat about \"Only needed 2 but only got one to work right\" - is that \"function_performance/general_performance\" or \"product_quality/defective_on_arrival\"? Let's map. \"Only got one to work right\" means units failed. \"defective_on_arrival\" is product_quality. If they tried to install and failed due alignment/adhesion, might not be defective. But \"Only needed 2 but only got one to work right\" likely because two couldn't line up? Hmm. Actually body says \"Wouldnt line up straight ... and by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\" So maybe only one out of three could be successfully installed due to alignment/adhesion. That is usability/installation, not product defect. \"Only got one to work right\" could mean installation success. If so primary usability_installation, secondary? positioning_alignment? Or bubbles_adhesion? \"work right\" vague. Could be general performance? But \"work right\" for screen protector = install correctly/stay flat. It might be part of same claim as alignment/adhesion. Could we label \"Only needed 2 but only got one to work right\" as usability_installation/positioning_alignment? Hmm.\n\nLet's parse product type. B07H2V5YLH maybe \"amFilm Screen Protector for iPhone 7\"? Actually B07H2V5YLH maybe \"[3-Pack] Screen Protector for iPhone 8 / 7, amFilm\". The text \"Wouldn't line up straight ... peel off ... corner is pried up and won't stay flat\" exactly screen protector installation. So \"only got one to work right\" refers to screen protectors not working due install defects. The causes: wouldn't line up straight; corner pried up and won't stay flat. So first claim may be general usability installation? But taxonomy has usability_installation/positioning_alignment, bubbles_adhesion. \"Only needed 2 but only got one to work right\" is outcome, could be \"general_performance\" under function_performance? For screen protector, \"work right\" maybe function? Not charging etc. The taxonomy function_performance has general_performance maybe generic product function. But product is screen protector, function is protection/adhesion. However primary function_performance/general_performance could fit \"only got one to work right.\" But then specific issues cover. Hmm.\n\nMaybe better to extract two claims: alignment and adhesion. The first sentence is summary/outcome not a separate claim? It is a claim: only 1 of 2 needed worked. But could be product_quality/defective_on_arrival. Need choose.\n\nLet's check taxonomy pair validity: primary product_quality, secondary defective_on_arrival. That seems apt for \"Only needed 2 but only got one to work right\" because product arrived defective? But if due install, maybe not. Another option primary reliability_durability secondary general_durability? No, not durability. Function_performance/general_performance? \"work right\" general. But \"only got one to work right\" is about multiple units not functioning. Could be product_quality/defective_on_arrival. I lean that.\n\nCould there be claim \"Wouldnt line up straight\" primary usability_installation secondary positioning_alignment. Yes.\n\nCould \"the corner is pried up and wont stay flat\" primary usability_installation secondary bubbles_adhesion. Yes.\n\nCould \"peel off and try a couple times\" be about installation_difficulty? It describes having to peel off and retry. But not necessarily claim. Maybe installation difficulty? \"by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\" That is adhesion. It also implies installation difficulty due retries. But we can capture as bubbles_adhesion. Maybe also \"installation_difficulty\" if \"try a couple times\" indicates difficult. But primary usability_installation secondary installation_difficulty? Hmm. The claim is the corner pried up and won't stay flat—adhesion. The repeated attempts are context. We can use exact span \"the corner is pried up and wont stay flat\".\n\nNeed exact substring: source_text: \"What else can I say.  Only needed 2 but only got one to work right.  Wouldnt line up straight (yes, I followed included instructions) and by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\"\n\nNote \"Wouldnt\" no apostrophe. \"wont\" no apostrophe. Need exact.\n\nEvidence span for positioning: \"Wouldnt line up straight\" or \"Wouldnt line up straight (yes, I followed included instructions)\" The latter includes parentheses. If use \"Wouldnt line up straight\" it is exact continuous substring. Good. But polarity negative.\n\nEvidence span for adhesion: \"the corner is pried up and wont stay flat\" exact continuous substring. Yes.\n\nEvidence span for defective: \"Only needed 2 but only got one to work right.\" exact. Good.\n\nPotential issue: \"Only needed 2\" maybe not \"defective on arrival\"; could be \"general_performance\" negative. Let's decide. If I classify product_quality/defective_on_arrival, maybe reviewer didn't say arrived defective, just installation failure. The phrase \"only got one to work right\" is general. But product_quality defective_on_arrival is specifically defective on arrival. This may not be supported; no evidence they arrived defective. It could be due installation. So maybe should use primary usability_installation? But \"work right\" not specific. Could be secondary general_performance? Primary function_performance, secondary general_performance: \"only got one to work right\" = general performance. But for screen protector, \"function\" is protection; not working may mean doesn't install/stay. Hmm.\n\nAlternative: Do not extract first sentence as claim because it's a summary/outcome and the specific claims are alignment and adhesion. The instruction says a review may contain zero or multiple claims. Is \"Only needed 2 but only got one to work right\" a semantic claim? Yes, it states only one of two worked. But perhaps it's a general statement without enough specificity? We can use other_unknown/uncategorized? That seems less useful. But should extract if supported. However if it's ambiguous, maybe skip? The prompt says do not invent topics; if no supported product claim exists, empty. But there is supported.\n\nCould include as reliability_durability/general_durability? \"only got one to work right\" = reliability? But no.\n\nLet's examine product category: screen protector. Taxonomy: usability_installation includes positioning_alignment, installation_difficulty, bubbles_adhesion, ease_of_use, status_indicator_feedback, installation_accessories. The whole review is about installation. The first sentence \"Only needed 2 but only got one to work right\" could be about installation success. The taxonomy doesn't have \"installation_success\" except ease_of_use? Actually \"work right\" after installation. Could be \"ease_of_use\" negative? But specific issues. Hmm.\n\nMaybe we should extract three claims:\n1. primary usability_installation, secondary positioning_alignment, negative, evidence \"Wouldnt line up straight\"\n2. primary usability_installation, secondary bubbles_adhesion, negative, evidence \"the corner is pried up and wont stay flat\"\n3. primary product_quality, secondary defective_on_arrival, negative, evidence \"Only needed 2 but only got one to work right.\"\n\nThis seems acceptable.\n\nNeed ensure JSON only. No markdown. Use schema. Claims array.\n\nPotential edge: secondary_topic must be one of enum but can be from any primary? It says choose exactly one valid primary/secondary taxonomy pair. So secondary must belong to primary? The taxonomy maps primary to list. We must pair correctly: product_quality: defective_on_arrival. usability_installation: positioning_alignment, bubbles_adhesion. Yes.\n\nNeed maybe include \"1 Out of 3 Aint Bad\" as product_quality/defective_on_arrival? If include, then duplicate same primary secondary with evidence title. I think skip. But maybe \"1 Out of 3 Aint Bad\" is a claim about defective rate. Hmm. The body \"Only needed 2 but only got one to work right\" duplicates. If include both, might be over-extraction. I'll skip title.\n\nCould there be claim \"yes, I followed included instructions\" about instructions? It's not sentiment about instructions; it's defensive. No.\n\nCould \"What else can I say.\" no.\n\nNeed final exactly JSON. Let's format.\n\nNeed ensure evidence spans exact continuous substring. Let's verify source_text has two spaces after periods. Our evidence \"Only needed 2 but only got one to work right.\" Is exact substring? The source: \"What else can I say.  Only needed 2 but only got one to work right.  Wouldnt...\" Our substring starts at \"Only\" and includes period. Yes, exact. It doesn't include leading two spaces. That's okay. Continuous substring. For positioning: source \"Wouldnt line up straight (yes...\" Our substring \"Wouldnt line up straight\" exact. For adhesion: source \"...a couple times, the corner is pried up and wont stay flat.\" Our \"the corner is pried up and wont stay flat\" exact. Good.\n\nPolarity: negative for all. Maybe first could be mixed? \"Only needed 2 but only got one to work right\" negative. Yes.\n\nNeed final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d87a70b6-401c-4452-be05-193e3977973e-0",
+        "status": "completed"
+      },
+      {
+        "id": "f3547a7e-21fb-40da-9069-1ab0a38c5aa3",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"Only needed 2 but only got one to work right.\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"Wouldnt line up straight\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"the corner is pried up and wont stay flat\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211015.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1092,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 3733,
+      "output_tokens_details": {
+        "reasoning_tokens": 3613
+      },
+      "total_tokens": 4825
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"defective_on_arrival\",\"polarity\":\"negative\",\"evidence_span\":\"Only needed 2 but only got one to work right.\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"positioning_alignment\",\"polarity\":\"negative\",\"evidence_span\":\"Wouldnt line up straight\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"bubbles_adhesion\",\"polarity\":\"negative\",\"evidence_span\":\"the corner is pried up and wont stay flat\"}]}"
+}

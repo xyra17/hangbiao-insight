@@ -1,0 +1,13 @@
+name: local-core-mvp
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: cd backend && uv sync --dev && uv run pytest
+      - run: cd backend && uv run python -m compileall app
+      - run: cd frontend && corepack enable && pnpm install --frozen-lockfile && pnpm build

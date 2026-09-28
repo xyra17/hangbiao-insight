@@ -1,0 +1,50 @@
+{
+  "review_id": "e9a471deeb1d246d609e81824e3eb176ba9ac75f",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-n6bgizuz7xn1mlh23xvrk",
+  "raw_response": {
+    "id": "chatcmpl-n6bgizuz7xn1mlh23xvrk",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Never worked.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"Never fully charged.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"wall_socket_fit\", \"polarity\": \"negative\", \"evidence_span\": \"didn't even stick in the wall\"}]}"
+        }
+      }
+    ],
+    "created": 1789177613,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 114,
+      "prompt_tokens": 469,
+      "total_tokens": 583,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 113,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Never worked.\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"negative\", \"evidence_span\": \"Never fully charged.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"wall_socket_fit\", \"polarity\": \"negative\", \"evidence_span\": \"didn't even stick in the wall\"}]}"
+}

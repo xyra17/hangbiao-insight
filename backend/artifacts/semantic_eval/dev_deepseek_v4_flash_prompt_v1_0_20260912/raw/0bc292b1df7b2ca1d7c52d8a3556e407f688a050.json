@@ -1,0 +1,216 @@
+{
+  "review_id": "0bc292b1df7b2ca1d7c52d8a3556e407f688a050",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "52070c85-d837-4866-a9cb-f0f5bdc4b817",
+  "raw_response": {
+    "id": "52070c85-d837-4866-a9cb-f0f5bdc4b817",
+    "created_at": 1789211882.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "a6dd261e-c636-405b-b997-0fbb987bdf3f",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON extraction. Need parse review. Product likely screen protector? Title \"DOES NOT FIT IPHONE XR!\" source: \"DOES NOT FIT IPHONE XR!\\nThis is too small for the iPhone XR I have big gaps along the edges of the screen. It’s fits iPhone 12 better, very disappointed\" rating 1. Need extract product-review semantic claims. Claim taxonomy. Need exactly one valid primary/secondary pair. Polarity independently. evidence exact substring.\n\nWe need identify claims. There may be compatibility_fit device_compatibility negative: too small for iPhone XR, big gaps along edges. Also maybe size_fit? Need primary compatibility_fit secondary device_compatibility or size_fit? Let's inspect taxonomy. compatibility_fit includes device_compatibility, case_compatibility, accessory_compatibility, size_fit, port_fit, wall_socket_fit. Claim \"DOES NOT FIT IPHONE XR\" -> device_compatibility negative. \"too small for the iPhone XR I have big gaps along the edges of the screen\" -> size_fit? It's about fit/size for device. Could be size_fit negative. \"It’s fits iPhone 12 better\" -> device_compatibility? Says fits iPhone 12 better, maybe positive/mixed for iPhone 12 compatibility? But relative. Could extract as device_compatibility? Need claim? It indicates compatibility with iPhone 12 better, maybe positive? But overall product not fit XR. We need not overextract? Let's see.\n\nA review may contain zero/multiple claims. For every claim choose pair. We can include:\n1. \"DOES NOT FIT IPHONE XR!\" primary compatibility_fit, secondary device_compatibility, polarity negative, evidence exact.\n2. \"This is too small for the iPhone XR I have big gaps along the edges of the screen.\" primary compatibility_fit? secondary size_fit? negative. Evidence maybe \"too small for the iPhone XR I have big gaps along the edges of the screen\" exact. This overlaps but size/fit.\n3. \"It’s fits iPhone 12 better\" primary compatibility_fit, secondary device_compatibility, polarity positive? It fits iPhone 12 better. However \"better\" relative; could be positive for iPhone 12 compatibility. But is it product claim? yes compatibility. Evidence exact \"It’s fits iPhone 12 better\" (contains typo). Polarity positive? Maybe mixed? Since overall disappointed but for iPhone 12 better. independent. We can mark positive for that claim? But \"better\" could imply okay. But not necessary? Need maybe include.\n\nCould there be \"very disappointed\" is sentiment not claim? Typically no product claim? Could be other_unknown? No.\n\nNeed output schema with claims array. Ensure evidence_span exact continuous substring from source_text. Note source_text has newline. Exact strings. For first evidence \"DOES NOT FIT IPHONE XR!\" includes exclamation. Fine. For second \"This is too small for the iPhone XR I have big gaps along the edges of the screen.\" exact includes period. For third \"It’s fits iPhone 12 better\" exact includes curly apostrophe? Source: \"It’s fits iPhone 12 better, very disappointed\". Yes \"It’s\" with curly. Evidence could be \"It’s fits iPhone 12 better\" exact. But grammar. Polarity? Let's think.\n\nShould we include duplicate claims? They may want each semantic claim. \"DOES NOT FIT IPHONE XR!\" and \"too small for iPhone XR big gaps\" both device compatibility/size. Could be multiple. Primary/secondary pairs valid. Need exactly one valid primary/secondary. \"device_compatibility\" is under compatibility_fit. \"size_fit\" under compatibility_fit. So okay.\n\nPotential issue if primary compatibility_fit secondary size_fit for \"too small... big gaps along edges\" maybe size_fit. Good.\nThe \"It’s fits iPhone 12 better\" maybe secondary device_compatibility. Polarity positive? It says fits better, so positive for 12. But \"better\" not absolute. Could be mixed? I lean positive.\n\nCould \"very disappointed\" be a claim about general convenience? No, sentiment only. Not product claim.\n\nNeed final only JSON no markdown. Ensure valid JSON with curly apostrophe in string okay. Use double quotes. The schema has $defs etc but response just claims. We can produce {\"claims\":[...]}.\n\nLet's formulate:\n{\n \"claims\": [\n  {\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"DOES NOT FIT IPHONE XR!\"},\n  {\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"This is too small for the iPhone XR I have big gaps along the edges of the screen.\"},\n  {\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"It’s fits iPhone 12 better\"}\n ]\n}\nNeed consider second: \"too small for iPhone XR\" could be device_compatibility, not size_fit? size_fit is appropriate. But \"big gaps along edges\" indicates size_fit. Good.\n\nPotential issue exact substring for second includes newline? It begins after newline \"This...\" yes exact. No leading newline? Source_text: \"DOES NOT FIT IPHONE XR!\\nThis is too small...\" The substring \"This is too small...\" is exact continuous substring (starting after \\n) yes.\n\nThird exact substring \"It’s fits iPhone 12 better\" starts after period+space? Source: \"...screen. It’s fits...\" yes exact.\n\nShould polarity for third be positive or neutral? \"fits iPhone 12 better\" is comparative, positive relative to XR? It could be considered positive compatibility with iPhone 12. Polarity positive. If they expect \"mixed\"? The review as a whole negative, but claim independent. It fits 12 better, positive. Fine.\n\nCould include \"very disappointed\" as no.\n\nNeed ensure no additional text. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "52070c85-d837-4866-a9cb-f0f5bdc4b817-0",
+        "status": "completed"
+      },
+      {
+        "id": "dd6d8b19-796f-4a7f-bffd-9d9fffb2eeeb",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"DOES NOT FIT IPHONE XR!\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"This is too small for the iPhone XR I have big gaps along the edges of the screen.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"It’s fits iPhone 12 better\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211888.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1068,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1429,
+      "output_tokens_details": {
+        "reasoning_tokens": 1303
+      },
+      "total_tokens": 2497
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"DOES NOT FIT IPHONE XR!\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"This is too small for the iPhone XR I have big gaps along the edges of the screen.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"It’s fits iPhone 12 better\"}]}"
+}

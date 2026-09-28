@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-b85b690d10826ea9",
+      "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "abnormal_noise",
+      "polarity": "negative",
+      "evidence_span": "Charger made a popping noise",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "9ce63dac-67a1-484e-a358-f73947bb8ee1"
+    },
+    {
+      "prediction_id": "SP-8cb53173fec07d66",
+      "review_id": "dadc4126bac115cfb66d203df0d54e88c6cbae62",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "safety_risk",
+      "secondary_topic": "melting_fire",
+      "polarity": "negative",
+      "evidence_span": "smelled like burning plastic",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "9ce63dac-67a1-484e-a358-f73947bb8ee1"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

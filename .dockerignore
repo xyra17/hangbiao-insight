@@ -1,0 +1,16 @@
+**/.git
+**/.venv
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/.local
+**/.env*
+**/storage
+**/artifacts
+**/test-results
+**/dist
+dataset
+!dataset/data
+!dataset/data/03_黄金评论集
+!dataset/data/03_黄金评论集/主题分类体系_v1_1.json

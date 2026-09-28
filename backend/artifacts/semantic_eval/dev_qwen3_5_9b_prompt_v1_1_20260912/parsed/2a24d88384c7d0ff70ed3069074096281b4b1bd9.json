@@ -1,0 +1,29 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-82484c518b08621b",
+      "review_id": "2a24d88384c7d0ff70ed3069074096281b4b1bd9",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "accessory_condition",
+      "polarity": "negative",
+      "evidence_span": "one wasn't wrap in the plastic and it had a small scratch on it",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-44sxsk8mvonj7rctzxxtyl"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 1
+}

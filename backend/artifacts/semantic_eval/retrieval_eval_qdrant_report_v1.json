@@ -1,0 +1,60 @@
+{
+  "version": "qdrant-eval-v1",
+  "collection": "product_review_embeddings_qwen3_eval_v1",
+  "corpus_attempted": 300,
+  "collection_count": 300,
+  "query_set": "retrieval_query_set_v1.jsonl",
+  "query_count": 90,
+  "metrics": [
+    {
+      "backend": "keyword",
+      "queries": 90,
+      "recall_at_10": 0.6666666666666666,
+      "mrr": 0.6666666666666666,
+      "ndcg_at_10": 0.6666666666666666,
+      "evidence_precision": 0.2,
+      "no_result_rate": 0.3333333333333333,
+      "p50_latency_ms": 15.370000000000001,
+      "p95_latency_ms": 47.38
+    },
+    {
+      "backend": "char_bigram_hybrid",
+      "queries": 90,
+      "recall_at_10": 0.6666666666666666,
+      "mrr": 0.65,
+      "ndcg_at_10": 0.5859942959604789,
+      "evidence_precision": 0.2,
+      "no_result_rate": 0.3333333333333333,
+      "p50_latency_ms": 34.165,
+      "p95_latency_ms": 139.04
+    },
+    {
+      "backend": "qdrant_vector",
+      "queries": 90,
+      "recall_at_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_at_10": 0.0,
+      "evidence_precision": 0.0,
+      "no_result_rate": 0.3333333333333333,
+      "p50_latency_ms": 39.935,
+      "p95_latency_ms": 51.18
+    },
+    {
+      "backend": "qdrant_rrf",
+      "queries": 90,
+      "recall_at_10": 0.6666666666666666,
+      "mrr": 0.6666666666666666,
+      "ndcg_at_10": 0.590306587714325,
+      "evidence_precision": 0.2,
+      "no_result_rate": 0.3333333333333333,
+      "p50_latency_ms": 60.325,
+      "p95_latency_ms": 93.01
+    }
+  ],
+  "go_no_go": {
+    "qdrant_exceeds_keyword": false,
+    "default_backend": "keyword",
+    "decision": "keyword remains default; qdrant experimental pending larger corpus validation"
+  },
+  "upsert_latency_ms": 17125.4
+}

@@ -1,0 +1,50 @@
+{
+  "review_id": "93d177f0e8b42dd94071abf0e0abcfd467f2ad0b",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-y50qgl4bwqccch7bpb5tt",
+  "raw_response": {
+    "id": "chatcmpl-y50qgl4bwqccch7bpb5tt",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"positive\", \"evidence_span\": \"Easy to install\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Wonderful performance\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"very affordable\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"seem to be pretty sturdy\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"3 come in the pack\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"Ordered these for my new IPhone 13\"}]}"
+        }
+      }
+    ],
+    "created": 1789177782,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 223,
+      "prompt_tokens": 524,
+      "total_tokens": 747,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 222,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"installation_difficulty\", \"polarity\": \"positive\", \"evidence_span\": \"Easy to install\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Wonderful performance\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"very affordable\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"material_build_quality\", \"polarity\": \"positive\", \"evidence_span\": \"seem to be pretty sturdy\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"3 come in the pack\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"Ordered these for my new IPhone 13\"}]}"
+}

@@ -1,0 +1,50 @@
+{
+  "review_id": "4a702b13b23a1ddb760ce29c6acd98d1d20d8134",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-00scylswq47jhuarhyw9moh",
+  "raw_response": {
+    "id": "chatcmpl-00scylswq47jhuarhyw9moh",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"did not break\"}]}"
+        }
+      }
+    ],
+    "created": 1789186304,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 40,
+      "prompt_tokens": 599,
+      "total_tokens": 639,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 39,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"protection_effectiveness\", \"polarity\": \"positive\", \"evidence_span\": \"did not break\"}]}"
+}

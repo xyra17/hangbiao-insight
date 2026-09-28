@@ -1,0 +1,216 @@
+{
+  "review_id": "6ded976132963c6df85d41f01a142998d13f67bc",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "376f89d7-8ec1-495b-8c45-1ecbc2ddb89e",
+  "raw_response": {
+    "id": "376f89d7-8ec1-495b-8c45-1ecbc2ddb89e",
+    "created_at": 1789211328.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "bb1b8647-6f2a-4f11-b6cc-60c79c0eba26",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Review text. Need identify product-review semantic claims, taxonomy pairs. Product likely charger? \"This thing just blinked and never charged the phone or the battery case. Tried it plugged into USB port, plugged directly into my Mac, plugged with my Mac power cord, with charging phone case and without, and nothing worked.\" Claims: charging_success negative under function_performance. Maybe compatibility? device_compatibility? It didn't charge phone or battery case; tried various ways. But primary charging success. Also \"never charged the phone or the battery case\" could be charging_success. \"nothing worked\" general performance? But same evidence maybe. Need multiple claims if independent. \"Now it's past the return window and the thing is worthless\" maybe reliability? defective? But no supported product claim? It's worthless after failure. Could claim short_lifespan? It failed immediately. But main is charging_success negative. Also maybe device_compatibility? It says with charging phone case and without, plugged USB, Mac, Mac power cord, nothing worked. Could be compatibility_fit: device_compatibility negative? \"Tried it plugged into USB port, plugged directly into my Mac, plugged with my Mac power cord, with charging phone case and without, and nothing worked.\" That indicates compatibility with devices/ports? But if it never charged phone, it's charging failure. Taxonomy requires exactly one valid primary/secondary pair. We should not over-extract. The review has clear claim: product never charged phone/battery case. Evidence exact substring: \"never charged the phone or the battery case\" or \"This thing just blinked and never charged the phone or the battery case.\" Need evidence exact continuous substring. Use exact substring from source. \"never charged the phone or the battery case\" appears? Source: \"This thing just blinked and never charged the phone or the battery case.\" Yes exact substring. primary function_performance secondary charging_success polarity negative. Could include \"nothing worked\" as general_performance negative? Evidence \"nothing worked\". Is that a product claim? It says tried various connections and nothing worked. That is general performance negative. But maybe duplicate of charging failure. Need decide. A review may contain zero or multiple claims. \"This thing just blinked and never charged the phone or the battery case.\" one. \"Tried it plugged into USB port, plugged directly into my Mac, plugged with my Mac power cord, with charging phone case and without, and nothing worked.\" This includes compatibility maybe: tried with phone case and without, multiple power sources, nothing worked. Could be device_compatibility or port_fit. But primary is charging_success. \"nothing worked\" is general performance. However taxonomy: general_performance under function_performance. Evidence exact substring \"nothing worked\" has polarity negative. Could be separate claim: general_performance negative. But is it independent? It refers to tried multiple methods and nothing worked. I think valid. But if we include both, we risk redundancy. Many extraction tasks expect each claim as distinct aspect. Here \"never charged\" is specific charging success; \"nothing worked\" general performance. We can include both. Also \"Now it's past the return window and the thing is worthless\" could be price_value? Not really. \"worthless\" is general? Not a product claim within taxonomy? Could be reliability durability stopped_working? It stopped working? \"never charged\" is stopped working? But taxonomy has stopped_working under reliability_durability. Could use that instead of charging_success? Which is more precise? \"never charged the phone\" is charging_success. \"This thing just blinked and never charged\" also could be stopped_working? But stopped_working means product ceased functioning. It never worked, defective on arrival? Could be defective_on_arrival under product_quality. Bought before Christmas, traveling January, tried, never charged. It arrived defective? \"never charged\" suggests defective on arrival. But primary? The taxonomy includes defective_on_arrival under product_quality. However primary function_performance charging_success is direct. Should we include defective_on_arrival? Evidence \"never charged\" maybe. But \"defective on arrival\" requires arrived broken; not explicit? It never worked from start. Could be. But likely intended: function_performance/charging_success negative.\n\nNeed exact evidence_span as exact continuous substring. For second claim \"nothing worked\" exact substring. Polarity negative. Primary function_performance secondary general_performance? The secondary enum includes general_performance. Yes.\n\nCould include \"Tried it plugged into USB port, plugged directly into my Mac, plugged with my Mac power cord, with charging phone case and without\" as compatibility_fit/device_compatibility? It says tried various connections, with case and without. It didn't work. But this is more evidence of charging failure, not compatibility issue. If claim is compatibility, polarity negative. But \"with charging phone case and without\" maybe case_compatibility? Not exactly. \"plugged into USB port\" wall_socket_fit? USB port fit? Not relevant. I'd not overdo.\n\nNeed output JSON with claims list. No extra. Ensure schema. Use double quotes.\n\nLet's craft:\n{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"This thing just blinked and never charged the phone or the battery case.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"nothing worked\"}]}\n\nCheck evidence exact: Source has \"nothing worked.\" With period. \"nothing worked\" is substring. Good. First has period? Source: \"This thing just blinked and never charged the phone or the battery case.\" Yes. Good. Is \"general_performance\" for \"nothing worked\" valid? It might be too broad but okay. If they expect no duplicate? Hmm.\n\nQuestion: \"Extract product-review semantic claims. A review may contain zero or multiple claims. For every claim choose exactly one valid primary/secondary taxonomy pair...\" If no supported. We have at least one. Additional \"nothing worked\" maybe supported. Could include \"Now it's past the return window and the thing is worthless.\" Could claim convenience_value price_value? \"worthless\" denotes no value. But price_value? It's about return window and worthless, not price. Could be other_unknown/uncategorized? But better not.\n\nMaybe \"Garbage\" title is overall negative but not claim. Do not infer from star rating.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "376f89d7-8ec1-495b-8c45-1ecbc2ddb89e-0",
+        "status": "completed"
+      },
+      {
+        "id": "c4f735e2-9c91-46e1-866c-932090916796",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"This thing just blinked and never charged the phone or the battery case.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"nothing worked\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211335.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1116,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1433,
+      "output_tokens_details": {
+        "reasoning_tokens": 1358
+      },
+      "total_tokens": 2549
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"negative\",\"evidence_span\":\"This thing just blinked and never charged the phone or the battery case.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"negative\",\"evidence_span\":\"nothing worked\"}]}"
+}

@@ -1,0 +1,50 @@
+{
+  "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-tw9td0fhimkdzrur76jxde",
+  "raw_response": {
+    "id": "chatcmpl-tw9td0fhimkdzrur76jxde",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Stopped working after a couple months\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"It was overheating very bad\"}]}"
+        }
+      }
+    ],
+    "created": 1789185572,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 83,
+      "prompt_tokens": 628,
+      "total_tokens": 711,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 82,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Stopped working after a couple months\"}, {\"primary_topic\": \"safety_risk\", \"secondary_topic\": \"overheating\", \"polarity\": \"negative\", \"evidence_span\": \"It was overheating very bad\"}]}"
+}

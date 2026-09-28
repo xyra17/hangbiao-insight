@@ -1,0 +1,50 @@
+{
+  "review_id": "98d6039deb0b1ec84b5797703a3243f043d04ada",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-vcs9xdk8vurah1hunhjz8n",
+  "raw_response": {
+    "id": "chatcmpl-vcs9xdk8vurah1hunhjz8n",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"Tan sólo con 3 días de haberlo puesto se quebró el temper.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"negative\", \"evidence_span\": \"Realmente son bastante frágiles y no protegen mucho de las caídas normales.\"}]}"
+        }
+      }
+    ],
+    "created": 1789186135,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 108,
+      "prompt_tokens": 638,
+      "total_tokens": 746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 107,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"cracking_breakage\", \"polarity\": \"negative\", \"evidence_span\": \"Tan sólo con 3 días de haberlo puesto se quebró el temper.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"general_durability\", \"polarity\": \"negative\", \"evidence_span\": \"Realmente son bastante frágiles y no protegen mucho de las caídas normales.\"}]}"
+}

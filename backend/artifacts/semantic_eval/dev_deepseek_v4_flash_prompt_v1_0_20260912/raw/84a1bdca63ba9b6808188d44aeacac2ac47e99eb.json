@@ -1,0 +1,216 @@
+{
+  "review_id": "84a1bdca63ba9b6808188d44aeacac2ac47e99eb",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "facc4d05-0d7d-49bc-bd92-bfb494ed6632",
+  "raw_response": {
+    "id": "facc4d05-0d7d-49bc-bd92-bfb494ed6632",
+    "created_at": 1789211871.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "7e86d9ed-0edc-4458-a484-3fbc6012eac2",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims from review. Need be careful. Review text: \"Not the greatest\\nI have installed many covers before, but these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.<br />Also all the wet wipes were dry as a bone.<br />Screen cracked after a day.\"\n\nNeed extract product-review semantic claims. Product likely screen protector? B07H2V5YLH. Claims:\n- attract dust to sticky side as peel cover off, wasted first, second same. This relates usability_installation / bubbles_adhesion? Or installation_difficulty? \"attract dust to sticky side\" during installation, wasted. Could be bubbles_adhesion maybe dust under protector? primary usability_installation secondary bubbles_adhesion? Or installation_difficulty? The taxonomy has bubbles_adhesion, positioning_alignment, installation_difficulty, ease_of_use, status_indicator_feedback, installation_accessories. Dust attraction causing wasted cover maybe installation_difficulty? Bubbles_adhesion is about bubbles/adhesion. Dust on sticky side affects adhesion. Hmm evidence exact: \"these attract dust to the sticky side as you peel the cover off.\" polarity negative. Primary usability_installation, secondary bubbles_adhesion? Need choose exactly valid pair. Could be product_quality / defective_on_arrival? No.\n- wet wipes were dry as a bone. Accessory condition. Wet wipes included as installation accessories? Primary usability_installation / installation_accessories? Or product_quality/accessory_condition? \"accessory_condition\" under product_quality. The wet wipes are accessories included, dry. That seems product_quality / accessory_condition, negative. Could also installation_accessories (usability_installation) if installation accessories issue. Need taxonomy valid one. \"wet wipes\" are installation accessories, dry = accessory condition. Which primary? product_quality has accessory_condition. Since included accessory quality. I'd choose product_quality / accessory_condition. Evidence: \"all the wet wipes were dry as a bone.\" polarity negative.\n- Screen cracked after a day. This could reliability_durability / cracking_breakage? Or product_quality? \"Screen cracked\" maybe device screen? Wait product is screen protector? It says covers? \"Screen cracked after a day\" could refer to the phone screen cracked after using protector? Hmm product? B07H2V5YLH maybe screen protector? If it's a screen protector cover, \"Screen cracked after a day\" means the screen protector cracked? \"Screen\" could be protector? It says installed covers, screen cracked after a day. Likely screen protector cracked. Claim: reliability_durability / cracking_breakage, negative. Evidence exact \"Screen cracked after a day.\" But if screen = device screen damaged due to product? safety_risk/device_damage? Hmm \"Screen cracked after a day\" in context of screen protector? Product maybe \"iPad screen protector\"? They installed covers, screen cracked after a day. Could mean phone screen cracked while protector on, not necessarily product failure. But likely product itself cracked? \"Screen cracked\" could be screen protector. The product title \"Not the greatest\"; review about screen protector. It may be a tempered glass screen protector. \"Screen cracked after a day\" = the screen protector cracked. Primary reliability_durability, secondary cracking_breakage. Negative. Need exact evidence span, could include \"Screen cracked after a day.\" with period. Source has \"<br />Screen cracked after a day.\" So evidence can be \"Screen cracked after a day.\" continuous substring yes, excluding HTML. It's exact substring? In source_text, after <br />, \"Screen cracked after a day.\" yes continuous. Good.\n- \"Wasted the first one, tried the second one and it did the same.\" This could be same installation issue / defective? Wasted due to dust attraction. Could extract claim? It supports repeated issue. But semantic claim same as first? We can include maybe separate? It says wasted first, second same. Evidence \"Wasted the first one, tried the second one and it did the same.\" Topic reliability_durability / intermittent_failure? Or defective_on_arrival? It did same = dust attraction; probably duplicate of first claim. Need zero or multiple claims. We should avoid duplicating same claim? Can extract claims per semantic claim. The dust claim evidence could include only first sentence; the waste same is same issue. We might not need separate. But perhaps \"Wasted the first one...\" indicates defective_on_arrival? Hmm first one wasted due to dust, second same. Could be product_quality/defective_on_arrival? But root cause dust attraction during install. I'd include first claim with evidence \"these attract dust to the sticky side as you peel the cover off.\" Maybe also include \"Wasted the first one, tried the second one and it did the same.\" as same claim? But evidence_span must be one continuous substring, cannot include both separated? Actually source_text: \"I have installed many covers before, but these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\" Could evidence span include full? It's continuous if from \"these attract...\" through \"did the same.\" It would include. But claim maybe installation difficulty / bubbles_adhesion. The evidence span could be \"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\" That's continuous substring? Source: \"but these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.<br />\" Yes continuous. It includes two sentences. Good. One claim.\n\nNeed decide primary/secondary. Let's parse taxonomy:\nfunction_performance: charging_success, charging_speed, power_output, protection_effectiveness, general_performance\nreliability_durability: general_durability, stopped_working, intermittent_failure, short_lifespan, cracking_breakage, wear_damage\ncompatibility_fit: device_compatibility, case_compatibility, accessory_compatibility, size_fit, port_fit, wall_socket_fit\nsafety_risk: overheating, melting_fire, electrical_fault, device_damage, abnormal_noise, physical_injury_irritation\nusability_installation: positioning_alignment, installation_difficulty, bubbles_adhesion, ease_of_use, status_indicator_feedback, installation_accessories\nconvenience_value: dual_port_multi_device, portability_size, price_value, general_convenience\nproduct_quality: material_build_quality, defective_on_arrival, accessory_condition\nother_unknown: insufficient_information, uncategorized\n\nClaim 1: dust attraction. It's installation issue. Could be \"installation_difficulty\" more direct: attract dust as peel cover off makes installation difficult. Bubbles_adhesion? Dust under screen protector can cause bubbles/adhesion. But the text doesn't mention bubbles/adhesion. It mentions sticky side attracts dust, causing waste. That's installation difficulty. Primary usability_installation, secondary installation_difficulty. Polarity negative. Evidence span: \"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\" This is exact continuous substring. Good.\n\nClaim 2: wet wipes dry. Primary product_quality? secondary accessory_condition. Or usability_installation/installation_accessories. Which is more valid? The wet wipes are installation accessories. \"all the wet wipes were dry as a bone\" = condition of accessory. The taxonomy under product_quality has accessory_condition. Under usability_installation has installation_accessories. Both could be valid. Need exactly one valid primary/secondary. I think product_quality/accessory_condition is precise: accessory condition. But if we classify as installation_accessories, primary usability_installation. Which one expected? The instruction says choose exactly one valid primary/secondary taxonomy pair. Both might be valid? Need not be unique. But we should pick best. Product_quality/accessory_condition for dry wipes. Negative.\n\nClaim 3: screen cracked after a day. Primary reliability_durability, secondary cracking_breakage. Negative. Evidence \"Screen cracked after a day.\" But if \"screen\" means device screen, then safety_risk/device_damage? Let's assess product. B07H2V5YLH? I can maybe infer from ASIN? B07H2V5YLH might be \"AmazonBasics Tempered Glass Screen Protector\"? Actually not sure. B07H2V5YLH maybe \"Mr Shield For iPad\"? Review: \"I have installed many covers before\" covers = screen protectors. \"Screen cracked after a day.\" If it's a screen protector, they might say \"screen\" as protector. \"Screen cracked\" in review of screen protector likely means screen protector cracked. So reliability_durability/cracking_breakage. If it meant device screen, it's safety_risk/device_damage. But \"cracked after a day\" with screen protector product likely product cracked. Good.\n\nNeed produce JSON with claims array. No extra text.\n\nCheck evidence spans exact continuous substrings from source_text. Need copy exactly. Source text:\n\"Not the greatest\\nI have installed many covers before, but these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.<br />Also all the wet wipes were dry as a bone.<br />Screen cracked after a day.\"\n\nEvidence 1: \"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\" Check starts at \"these\" lower case after \"but \". Yes. Includes period after same. No <br />. Good.\nEvidence 2: \"all the wet wipes were dry as a bone.\" Start after \"Also \" lower case. Exact continuous substring: \"all the wet wipes were dry as a bone.\" Yes.\nEvidence 3: \"Screen cracked after a day.\" Yes.\n\nNeed ensure JSON schema additionalProperties false at root and claims. So output:\n{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"negative\",\"evidence_span\":\"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"accessory_condition\",\"polarity\":\"negative\",\"evidence_span\":\"all the wet wipes were dry as a bone.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Screen cracked after a day.\"}]}\n\nNeed consider if \"Not the greatest\" claim? It's title, not specific product claim? We can ignore as sentiment summary no topic. It says no supported product claim? There is.\n\nPotential issue: \"these attract dust to sticky side\" could be product_quality/material_build_quality? Sticky side attracts dust = material build quality? But usability_installation/installation_difficulty better.\n\nCould also include \"Wasted the first one, tried second same\" as reliability_durability/intermittent_failure? It indicates both protectors had same issue. But claim is same installation difficulty. We include in evidence.\n\nCheck if \"wet wipes dry\" could be \"product_quality/defective_on_arrival\" because accessory dry on arrival? The secondary accessory_condition specifically. Good.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "facc4d05-0d7d-49bc-bd92-bfb494ed6632-0",
+        "status": "completed"
+      },
+      {
+        "id": "f8c6404b-dc35-4efe-bdd3-a9fee4f55732",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"negative\",\"evidence_span\":\"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"accessory_condition\",\"polarity\":\"negative\",\"evidence_span\":\"all the wet wipes were dry as a bone.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Screen cracked after a day.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211882.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1080,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 2628,
+      "output_tokens_details": {
+        "reasoning_tokens": 2489
+      },
+      "total_tokens": 3708
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"negative\",\"evidence_span\":\"these attract dust to the sticky side as you peel the cover off. Wasted the first one, tried the second one and it did the same.\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"accessory_condition\",\"polarity\":\"negative\",\"evidence_span\":\"all the wet wipes were dry as a bone.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"Screen cracked after a day.\"}]}"
+}

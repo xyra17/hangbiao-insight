@@ -1,0 +1,117 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-f7d601dd128e880a",
+      "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "cracking_breakage",
+      "polarity": "negative",
+      "evidence_span": "cracks easy",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h9w4lwkiznczhrcpmx9fuq"
+    },
+    {
+      "prediction_id": "SP-ab22fabb7fbe0f51",
+      "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "usability_installation",
+      "secondary_topic": "installation_difficulty",
+      "polarity": "negative",
+      "evidence_span": "installation wasn't the easiest",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "evidence_not_found"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h9w4lwkiznczhrcpmx9fuq"
+    },
+    {
+      "prediction_id": "SP-97acf194ae4c4df9",
+      "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "Protects your screen well",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h9w4lwkiznczhrcpmx9fuq"
+    },
+    {
+      "prediction_id": "SP-1173a00701e7c97a",
+      "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "cracking_breakage",
+      "polarity": "negative",
+      "evidence_span": "prone to cracking if your clumsy like me",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h9w4lwkiznczhrcpmx9fuq"
+    },
+    {
+      "prediction_id": "SP-933b7f68e1464461",
+      "review_id": "6f2a9278c7e8a5c6f4eed008f43ef4d0b93d7f36",
+      "product_id": "B07H2V5YLH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "general_performance",
+      "polarity": "positive",
+      "evidence_span": "your main screen will stay protected",
+      "prediction_status": "rejected",
+      "quality_flags": [
+        "invalid_topic"
+      ],
+      "provider": "lmstudio",
+      "api_name": "chat_completions_compatible",
+      "model_name": "stage55a-qwen3.5-9b",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "chatcmpl-h9w4lwkiznczhrcpmx9fuq"
+    }
+  ],
+  "accepted_count": 0,
+  "review_required_count": 0,
+  "rejected_count": 5
+}

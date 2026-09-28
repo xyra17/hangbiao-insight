@@ -1,0 +1,13 @@
+﻿category,metric_or_error,v1_0,v1_1,delta,improved
+metric,primary_topic_macro_f1,0.569058485890169,0.600328732461688,0.031270246571519,True
+metric,secondary_topic_micro_f1,0.5064102564102564,0.5322128851540616,0.025802628743805234,True
+metric,topic_polarity_micro_f1,0.5,0.5242718446601942,0.024271844660194164,True
+metric,matched_topic_polarity_accuracy,0.9873417721518988,0.9789473684210527,-0.0083944037308461,False
+metric,evidence_substring_validity,0.9566929133858267,0.9211956521739131,-0.035497261211913655,False
+metric,invalid_taxonomy_rate,0.051181102362204724,0.04891304347826087,-0.002268058883943852,True
+metric,unsupported_evidence_rate,0.04330708661417323,0.07880434782608696,0.03549726121191373,False
+error,missing_topic,171,151,-20,
+error,extra_topic,64,88,24,
+error,polarity_mismatch,87,102,15,
+error,guard_failure,18,32,14,
+error,bad_case_count,178,178,0,

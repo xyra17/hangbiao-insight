@@ -1,0 +1,216 @@
+{
+  "review_id": "d0f4a3eb6dd82f97ddbc3cc17fd88f7b3a266a7e",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "0641e2cf-6a18-4191-ba39-393ce37b2e6c",
+  "raw_response": {
+    "id": "0641e2cf-6a18-4191-ba39-393ce37b2e6c",
+    "created_at": 1789211765.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "6d1cf8c1-d029-478a-b3ce-ec6d00212d94",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need follow schema. Source text: \"Very easy to install, good protection.easy\\nVery easy to install, good protection.\" Rating 5 but ignore star. Need extract product-review semantic claims. Zero or multiple. Need exactly one valid primary/secondary pair. Copy evidence_span exact continuous substring from SOURCE_TEXT. Don't infer sentiment from star.\n\nReview title and source same. Claims likely:\n- easy to install -> usability_installation / installation_difficulty? Actually \"Very easy to install\" indicates ease of installation. Taxonomy usability_installation includes installation_difficulty, ease_of_use, etc. \"easy to install\" corresponds installation_difficulty? Polarity positive? Primary usability_installation, secondary installation_difficulty? The secondary is \"installation_difficulty\" (difficulty, but polarity positive means low difficulty). Or \"ease_of_use\"? \"install\" specific. Taxonomy has installation_difficulty under usability_installation, and ease_of_use. \"Very easy to install\" likely installation_difficulty positive. Evidence span: \"Very easy to install\" exact. Also \"good protection\" -> function_performance / protection_effectiveness positive. Evidence span: \"good protection\". Maybe first occurrence \"good protection.easy\" contains \"good protection\" substring. Need exact continuous substring from SOURCE_TEXT. \"good protection\" is continuous. There are two occurrences. Can use \"good protection\" or \"good protection.easy\"? For claim evidence span should not include extra. Use \"good protection\". Could duplicate same claim from repeated text? Probably one claim per semantic. Multiple claims: easy install and good protection. Need decide if \"easy\" at end after period is separate? \"protection.easy\" maybe typo; but \"easy\" alone repeated? The source_text: \"Very easy to install, good protection.easy\\nVery easy to install, good protection.\" There is \"easy\" after protection. Could be \"easy\" claim? It's not clear. It might be an accidental trailing \"easy\" but evidence \"easy\" could indicate ease? But insufficient context? We already have easy to install. \"easy\" alone maybe general ease? We can ignore? Need not invent. There are supported claims:\n1. \"Very easy to install\" -> usability_installation / installation_difficulty positive. Evidence exact substring \"Very easy to install\" (appears twice; okay).\n2. \"good protection\" -> function_performance / protection_effectiveness positive. Evidence \"good protection\".\n\nCould \"protection.easy\" be a claim of protection plus easy? No, \"good protection.easy\" weird. \"easy\" maybe ease of use? But already included in install. If extracting \"easy\" as ease_of_use, evidence \"easy\". But likely too ambiguous and duplicate. The requirement: every claim choose exactly one valid taxonomy pair. If no supported product claim, empty. We have supported.\n\nNeed output JSON only. Ensure claims array. For first primary: usability_installation, secondary: installation_difficulty? But \"Very easy to install\" positive, yes. Could secondary be ease_of_use? The taxonomy includes \"ease_of_use\" under usability_installation. \"installation_difficulty\" is more specific. The phrase \"easy to install\" -> installation_difficulty. Good.\n\nSecond primary: function_performance, secondary: protection_effectiveness. Polarity positive. Evidence \"good protection\".\n\nNeed consider claim \"protection.easy\" maybe \"good protection.easy\" could be two claims? No.\n\nCheck exact substring: source_text includes \"Very easy to install, good protection.easy\\nVery easy to install, good protection.\"\nEvidence spans:\n- \"Very easy to install\" appears exactly.\n- \"good protection\" appears exactly. There is \"good protection.\" first has period after protection? Source: \"good protection.easy\" so substring \"good protection\" is continuous before period. Good.\n\nNo other claims? \"Very easy to install, good protection.easy\\nVery easy to install, good protection.\" The title same. Could maybe \"easy\" standalone at end of first line after period. But no.\n\nNeed output no markdown. Final JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "0641e2cf-6a18-4191-ba39-393ce37b2e6c-0",
+        "status": "completed"
+      },
+      {
+        "id": "820ec279-030f-4087-a6aa-ec526949cbf3",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"positive\",\"evidence_span\":\"Very easy to install\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"good protection\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211769.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1045,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 935,
+      "output_tokens_details": {
+        "reasoning_tokens": 866
+      },
+      "total_tokens": 1980
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"installation_difficulty\",\"polarity\":\"positive\",\"evidence_span\":\"Very easy to install\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"positive\",\"evidence_span\":\"good protection\"}]}"
+}

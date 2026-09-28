@@ -1,0 +1,28 @@
+{
+  "query_count": 90,
+  "relevant_id_count": 174,
+  "corpus_count": 2500,
+  "relevant_id_coverage": 1.0,
+  "relevant_ids_covered": 174,
+  "missing_relevant_ids": [],
+  "product_count": 5,
+  "products": [
+    "B01G0X56YU",
+    "B07H2V5YLH",
+    "B07P9S6R9Y",
+    "B0B1TCPH54",
+    "B0BYJ8ZVWH"
+  ],
+  "filter_coverage": {
+    "months": 76,
+    "ratings": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ]
+  },
+  "source_hash": "3b5e2ae64c8fced9386c83e1f0e8eb7420d6b99d6813a81383287d758e296752",
+  "status": "ready_for_isolated_qdrant_eval"
+}

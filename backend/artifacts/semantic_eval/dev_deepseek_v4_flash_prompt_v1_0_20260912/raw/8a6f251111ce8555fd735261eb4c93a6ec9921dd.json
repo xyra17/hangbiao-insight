@@ -1,0 +1,216 @@
+{
+  "review_id": "8a6f251111ce8555fd735261eb4c93a6ec9921dd",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "9c5c534c-a462-4453-bd48-2e2136b012a9",
+  "raw_response": {
+    "id": "9c5c534c-a462-4453-bd48-2e2136b012a9",
+    "created_at": 1789211961.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "47e12fde-d3ec-45ad-a914-2957e2cd5abb",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract product-review semantic claims. Need decide claims. Source text. We need taxonomy pairs. Review: \"YOOTECH WIRELESS CHARGERS ARE THE BEST... IPHONE XR 2019 RHH THENYKING\\nFast charging, durable, great quality wireless charger. Did my homework, read all reviews and decided to buy three of these wireless chargers. One for my bedside, one for the wife, and one for the car. All have worked flawlessly and I love when the phones actually starts charging moments before it makes contact with the pad. Then the halo-light reassures proper contact was made and then the charging chime sounds from your device. I will purchase more later in the year as Christmas gifts for everyone with an iPhone or Android device will love this charger.\"\n\nNeed extract claims. Each claim primary/secondary taxonomy. Polarity independently. Evidence exact continuous substring.\n\nPotential claims:\n1. Fast charging -> primary function_performance secondary charging_speed polarity positive evidence \"Fast charging\" or \"Fast charging, durable, great quality wireless charger.\" But claim maybe charging_speed.\n2. Durable -> reliability_durability general_durability positive evidence \"durable\"\n3. great quality wireless charger -> product_quality material_build_quality? positive \"great quality wireless charger.\" Or general quality? Taxonomy product_quality material_build_quality. Evidence \"great quality wireless charger\". \n4. All have worked flawlessly -> reliability_durability general_durability positive evidence \"All have worked flawlessly\"\n5. phones actually starts charging moments before it makes contact with pad -> function_performance charging_success positive? also usability positioning_alignment? Actually charging before contact indicates charging success? \"phones actually starts charging moments before it makes contact with the pad\" is about charging success and positioning? Primary function_performance secondary charging_success positive. Evidence exact.\n6. halo-light reassures proper contact was made -> usability_installation status_indicator_feedback positive evidence \"the halo-light reassures proper contact was made\"\n7. charging chime sounds from your device -> usability_installation status_indicator_feedback? Or function? The chime is device feedback, maybe status_indicator_feedback positive. But chime from device not charger? Could be status_indicator_feedback. Evidence \"then the charging chime sounds from your device.\" Polarity positive? Yes reassuring? Maybe neutral? It says love when... Then halo-light... and then chime. Positive overall.\n8. I will purchase more later... gifts for everyone with iPhone or Android device will love this charger -> compatibility_fit device_compatibility? It mentions iPhone or Android device compatibility. Evidence \"everyone with an iPhone or Android device will love this charger.\" Polarity positive. Primary compatibility_fit secondary device_compatibility. But this also purchase intent not product claim? \"with an iPhone or Android device will love this charger\" implies compatible with iPhone or Android. Could extract.\n9. One for bedside, wife, car -> convenience_value general_convenience? Maybe multiple locations? dual_port_multi_device? No dual port. Maybe general_convenience? It says bought three, one for bedside, wife, car. Not necessarily product claim, maybe use cases. Could skip.\n10. \"wireless charger\" maybe general performance. But need not overextract.\n\nNeed be careful: claims taxonomy: function_performance / charging_success, charging_speed, power_output, protection_effectiveness, general_performance; reliability_durability / general_durability, stopped_working, intermittent_failure, short_lifespan, cracking_breakage, wear_damage; compatibility_fit / device_compatibility, case_compatibility, accessory_compatibility, size_fit, port_fit, wall_socket_fit; safety_risk... usability_installation / positioning_alignment, installation_difficulty, bubbles_adhesion, ease_of_use, status_indicator_feedback, installation_accessories; convenience_value / dual_port_multi_device, portability_size, price_value, general_convenience; product_quality / material_build_quality, defective_on_arrival, accessory_condition; other_unknown / insufficient_information, uncategorized.\n\nNeed output JSON object {\"claims\":[...]}. Ensure exact evidence substring. Do not infer sentiment from star rating. But text explicit.\n\nLet's list claims. Need exactly one pair. We can include multiple if distinct. Should we include overlapping? likely okay. Need ensure evidence_span is exact continuous substring. Could use minimal phrases. Need case and punctuation exact. Source includes newline after title. Evidence can be substring within source_text, including punctuation. We can choose \"Fast charging\" etc. Need if duplicate? no.\n\nLet's parse source text exactly:\n\"YOOTECH WIRELESS CHARGERS ARE THE BEST... IPHONE XR 2019 RHH THENYKING\\nFast charging, durable, great quality wireless charger. Did my homework, read all reviews and decided to buy three of these wireless chargers. One for my bedside, one for the wife, and one for the car. All have worked flawlessly and I love when the phones actually starts charging moments before it makes contact with the pad. Then the halo-light reassures proper contact was made and then the charging chime sounds from your device. I will purchase more later in the year as Christmas gifts for everyone with an iPhone or Android device will love this charger.\"\n\nPotential claims:\nA) Fast charging: primary function_performance secondary charging_speed polarity positive evidence_span \"Fast charging\"\nB) durable: primary reliability_durability secondary general_durability polarity positive evidence_span \"durable\"\nC) great quality wireless charger: primary product_quality secondary material_build_quality? \"great quality\" not necessarily material. But product_quality/material_build_quality. Polarity positive evidence_span \"great quality wireless charger\"\nD) All have worked flawlessly: reliability_durability general_durability positive evidence \"All have worked flawlessly\"\nE) phones actually starts charging moments before it makes contact with the pad: function_performance charging_success positive evidence exact.\nF) halo-light reassures proper contact was made: usability_installation status_indicator_feedback positive evidence \"the halo-light reassures proper contact was made\" (or with Then? exact \"Then the halo-light reassures proper contact was made\" includes Then. Use \"the halo-light reassures proper contact was made\")\nG) charging chime sounds from your device: usability_installation status_indicator_feedback positive? evidence \"then the charging chime sounds from your device\" Or maybe function_performance? It indicates charging started? It's feedback. We'll use status_indicator_feedback positive, evidence \"then the charging chime sounds from your device\". But if G is not about charger? It is device chime, but part of charging feedback. \"and then the charging chime sounds from your device.\" Could be status indicator. Polarity positive because in context.\nH) iPhone or Android device compatibility: compatibility_fit device_compatibility positive evidence \"everyone with an iPhone or Android device will love this charger\" or \"iPhone or Android device\". Need continuous. Use \"everyone with an iPhone or Android device will love this charger\". This indicates compatible with iPhone or Android. Polarity positive.\nI) wireless charger general? \"YOOTECH WIRELESS CHARGERS ARE THE BEST\" general performance positive? Could be other? \"ARE THE BEST\" broad. But probably not necessary; could extract primary function_performance general_performance positive evidence \"YOOTECH WIRELESS CHARGERS ARE THE BEST...\"? But it's title. Might be product claim. However, \"BEST\" broad. But maybe no specific. We can skip to avoid overextraction.\nJ) \"great quality wireless charger\" could be product_quality material_build_quality. We can include.\nK) \"All have worked flawlessly\" already reliability. Could include as general_performance? But no, reliability_durability general_durability.\nL) \"I love when phones actually starts charging...\" That's charging success. Good.\nM) \"reassures proper contact was made\" is positioning_alignment? Actually proper contact with pad = positioning_alignment. Hmm taxonomy usability has positioning_alignment. The halo-light reassures proper contact was made: this is about proper contact / alignment. Could be usability_installation / positioning_alignment. Also status_indicator_feedback because halo-light indicates. Which secondary? The phrase \"reassures proper contact was made\" primarily positioning_alignment? But halo-light is status indicator feedback. \"halo-light reassures proper contact\" = status_indicator_feedback. If we have \"proper contact was made\" maybe positioning_alignment. Need choose exactly one. Could choose status_indicator_feedback because halo-light. Good.\nN) \"charging chime sounds from your device\" = status_indicator_feedback too. Maybe duplicate. Could include one or both? A review may contain multiple claims. Could combine? Evidence continuous maybe \"Then the halo-light reassures proper contact was made and then the charging chime sounds from your device.\" As one claim status_indicator_feedback? But each claim should one evidence span. Could include as one claim: \"the halo-light reassures proper contact was made and then the charging chime sounds from your device\" status_indicator_feedback positive. But that is long but exact? Source has \"Then the halo-light reassures proper contact was made and then the charging chime sounds from your device.\" If we include full sentence with Then. Could be one claim about feedback. But we can split? Need not overdo. Maybe one claim for indicator feedback. But if split, two claims same topic. Is that allowed? likely. But to avoid redundancy, one claim for \"the halo-light reassures proper contact was made and then the charging chime sounds from your device\" could cover both. But evidence span exact continuous substring from source. It is continuous. That might be one claim. But one semantic claim? It describes two feedback cues. It's okay? The instruction says extract semantic claims; a claim may contain multiple? Better separate. But output schema doesn't require minimal. We can include two feedback claims if distinct: halo-light and chime. But the chime sounds from device, maybe not product indicator. I'd include one combined? Hmm.\n\nNeed decide final set. Maybe 7 claims:\n1 Fast charging (function_performance/charging_speed positive)\n2 durable (reliability_durability/general_durability positive)\n3 great quality wireless charger (product_quality/material_build_quality positive)\n4 All have worked flawlessly (reliability_durability/general_durability positive)\n5 phones actually starts charging moments before it makes contact with the pad (function_performance/charging_success positive)\n6 the halo-light reassures proper contact was made (usability_installation/status_indicator_feedback positive)\n7 everyone with an iPhone or Android device will love this charger (compatibility_fit/device_compatibility positive)\n\nCould also add \"then the charging chime sounds from your device\" as status_indicator_feedback positive. But it might be redundant. We can include maybe 8. The instruction may contain zero/multiple. It's okay. But if too many, risk. Need ensure each claim is supported product-review semantic. \"charging chime sounds from your device\" is about device, not charger? But review context. It might be status indicator? Actually wireless charger doesn't have chime; phone does. But it's user experience. It doesn't explicitly say charger caused? It says then the charging chime sounds from your device. Could be feedback for charging. But secondary status_indicator_feedback? Could be product? It's device feedback, not charger status indicator. But okay? Maybe skip to be safe.\n\nWhat about \"I will purchase more later in year as Christmas gifts\" no product quality. \"One for bedside, wife, car\" no.\n\nLet's consider exact evidence spans. Need exact substring. If I choose \"Fast charging\" yes appears after newline: \"Fast charging, durable...\" exact. \"durable\" appears. \"great quality wireless charger\" appears exactly. \"All have worked flawlessly\" exact. \"phones actually starts charging moments before it makes contact with the pad\" exact. Wait source: \"I love when the phones actually starts charging moments before it makes contact with the pad.\" Yes exact substring \"the phones actually starts charging moments before it makes contact with the pad\" includes \"the \". If I use \"phones actually starts...\" without \"the\", source has \"the phones actually...\" The substring \"phones actually starts...\" appears? Source: \"the phones actually starts...\" so \"phones actually starts...\" is contiguous starting at p after \"the \". Yes substring \"phones actually starts charging moments before it makes contact with the pad\" exists (without \"the \" before phones? Actually string characters: \"the phones actually...\" There is \"the \" then \"phones\". The substring \"phones actually...\" starts at 'p' after \"the \". It is continuous. So okay. \"the halo-light reassures proper contact was made\" source: \"Then the halo-light reassures proper contact was made\" yes substring. \"everyone with an iPhone or Android device will love this charger\" source: \"as Christmas gifts for everyone with an iPhone or Android device will love this charger.\" yes substring.\n\nNeed polarity. For \"durable\" positive. \"great quality\" positive. \"All have worked flawlessly\" positive. \"charging success\" positive. \"status indicator\" positive? It reassures proper contact; positive. \"device compatibility\" positive. Fast charging positive.\n\nPotential issue: \"Fast charging, durable, great quality wireless charger.\" Three claims in one sentence. We separate. Good.\n\nCould also extract \"wireless charger\" general performance? no.\n\nNeed output JSON only, no markdown. Ensure valid JSON. The schema says additionalProperties false at top and claim. We can include claims array. Each claim fields exactly primary_topic, secondary_topic, polarity, evidence_span. No extra.\n\nNeed decide if to include product_quality/material_build_quality for \"great quality wireless charger\". Does \"great quality\" align material_build_quality? It's general quality, but taxonomy product_quality only material_build_quality, defective_on_arrival, accessory_condition. There is no general_product_quality. \"great quality wireless charger\" could be product_quality/material_build_quality. It's okay though material build quality? Maybe \"quality\" is broad. If no exact, could primary product_quality secondary material_build_quality. That's likely.\n\nCould \"durable\" also product_quality/material_build_quality instead of reliability_durability? Taxonomy has reliability_durability/general_durability. Durability directly. So yes reliability_durability/general_durability.\n\nCould \"All have worked flawlessly\" be function_performance/general_performance or reliability_durability/general_durability? It's reliability/durability because worked flawlessly over time. But could be general_performance. The taxonomy reliability_durability includes general_durability. \"worked flawlessly\" indicates reliability. Use reliability_durability/general_durability. Good.\n\nCould \"phones actually starts charging moments before it makes contact with the pad\" be usability_installation/positioning_alignment? It says before contact, so not alignment. It's charging_success. Good.\n\nCould \"the halo-light reassures proper contact was made\" be usability_installation/positioning_alignment? It reassures proper contact, but the mechanism is halo-light. If we choose status_indicator_feedback, evidence includes halo-light. Good. Could also be positioning_alignment. But only one. We can maybe use positioning_alignment instead? The phrase \"proper contact was made\" directly positioning alignment. But \"halo-light reassures\" is status indicator. Which is more salient? The claim: \"halo-light reassures proper contact was made\" = status_indicator_feedback (a light indicates correct contact). I'll keep status_indicator_feedback. If we also want positioning, could extract \"proper contact was made\" but no. Not necessary.\n\nCould \"then the charging chime sounds from your device\" be status_indicator_feedback too. But we already have. Maybe include? It is separate feedback. If include, total 8. But could be redundant. The instructions say extract semantic claims. Each distinct feedback cue: halo-light and chime. Maybe both are claims. However, the chime is from device, not necessarily charger. But it's part of experience. It says \"I love when... Then the halo-light... and then the charging chime...\" It indicates charging started. Could be function_performance/charging_success? Actually chime sounds when phone starts charging. But already claimed charging success. I'd skip to avoid overextraction.\n\nCould \"YOOTECH WIRELESS CHARGERS ARE THE BEST\" be a claim. It is general positive opinion. But no specific taxonomy? primary other_unknown/uncategorized? Not useful. Skip.\n\nNeed final JSON. Ensure no markdown. Let's craft.\n\nClaim order maybe as source. Evidence spans exact.\n\n1 evidence \"Fast charging\" primary function_performance secondary charging_speed polarity positive.\n2 \"durable\" primary reliability_durability secondary general_durability positive.\n3 \"great quality wireless charger\" primary product_quality secondary material_build_quality positive.\n4 \"All have worked flawlessly\" primary reliability_durability secondary general_durability positive.\n5 \"phones actually starts charging moments before it makes contact with the pad\" primary function_performance secondary charging_success positive.\n6 \"the halo-light reassures proper contact was made\" primary usability_installation secondary status_indicator_feedback positive.\n7 \"everyone with an iPhone or Android device will love this charger\" primary compatibility_fit secondary device_compatibility positive.\n\nNeed check if evidence_span exact includes punctuation? For \"great quality wireless charger\" source has \"great quality wireless charger.\" with period. If evidence without period, it's still substring. Yes. \"durable\" source \"durable,\" no comma included. Substring. \"Fast charging\" source \"Fast charging,\" no comma. Substring. \"All have worked flawlessly\" source \"All have worked flawlessly and...\" substring. Good. \"phones actually starts...\" source: \"the phones actually starts charging moments before it makes contact with the pad.\" If evidence starts \"phones\" yes. No period? It is followed by period. We omit period, substring. Good. \"the halo-light...\" source \"Then the halo-light reassures proper contact was made and then...\" substring. Good. \"everyone with...\" source \"for everyone with an iPhone or Android device will love this charger.\" substring. Good.\n\nPotential claim 5: \"phones actually starts charging\" grammar \"starts\" exact. Good.\n\nNow output.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "9c5c534c-a462-4453-bd48-2e2136b012a9-0",
+        "status": "completed"
+      },
+      {
+        "id": "dbf04d33-7d49-46f5-ac1d-5dd03e312f12",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"Fast charging\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"durable\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"great quality wireless charger\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"All have worked flawlessly\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"phones actually starts charging moments before it makes contact with the pad\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"positive\",\"evidence_span\":\"the halo-light reassures proper contact was made\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"everyone with an iPhone or Android device will love this charger\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211979.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1178,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 4199,
+      "output_tokens_details": {
+        "reasoning_tokens": 3944
+      },
+      "total_tokens": 5377
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"Fast charging\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"durable\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"great quality wireless charger\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"general_durability\",\"polarity\":\"positive\",\"evidence_span\":\"All have worked flawlessly\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"phones actually starts charging moments before it makes contact with the pad\"},{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"status_indicator_feedback\",\"polarity\":\"positive\",\"evidence_span\":\"the halo-light reassures proper contact was made\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"device_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"everyone with an iPhone or Android device will love this charger\"}]}"
+}

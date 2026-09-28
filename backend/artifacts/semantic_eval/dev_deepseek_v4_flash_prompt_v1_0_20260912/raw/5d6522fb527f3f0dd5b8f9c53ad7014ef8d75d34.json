@@ -1,0 +1,216 @@
+{
+  "review_id": "5d6522fb527f3f0dd5b8f9c53ad7014ef8d75d34",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "43e6cb5b-f4b7-4517-8ffd-4ca1d4725d05",
+  "raw_response": {
+    "id": "43e6cb5b-f4b7-4517-8ffd-4ca1d4725d05",
+    "created_at": 1789210603.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "96f7062b-430b-490a-91fe-9b3fa9ea5ce8",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer in JSON schema. Need extract claims from review. Need follow taxonomy. Source text: \"Stopped working after a couple months\\nStopped working after just 3 months. It was overheating very bad and when I contacted the seller he told me that he cannot do anything about it. Don’t recommend\"\n\nNeed extract product-review semantic claims. Zero/multiple. For every claim choose exactly one valid primary/secondary pair, independently polarity, evidence_span exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. Do not invent evidence/topics. If no supported product claim exists, empty list.\n\nWe need identify claims about product. There are:\n- \"Stopped working after just 3 months\" => reliability_durability / stopped_working, negative. Evidence exact substring maybe \"Stopped working after just 3 months\" or includes title? Source_text includes title at beginning: \"Stopped working after a couple months\\nStopped working after just 3 months...\" We can use exact continuous substring. The claim \"Stopped working after a couple months\" also reliability/stopped_working negative. But same product? Title and first sentence. We need maybe one or two? It says review may contain zero/multiple claims. Each claim maybe independent. \"Stopped working after a couple months\" and \"Stopped working after just 3 months\" are similar but repeated. Could extract both? But they overlap semantically same claim. Usually should extract distinct claims. The title says stopped working after a couple months, then body says after just 3 months. Could be same claim. We can choose one evidence span. Maybe \"Stopped working after just 3 months\" as stronger. But title also exact. Need avoid duplicate? The schema doesn't forbid duplicate but quality. We'll likely include one stopped_working claim.\n\n- \"It was overheating very bad\" => safety_risk / overheating, negative. Evidence \"It was overheating very bad\" exact substring. Is overheating safety risk. Polarity negative. Primary safety_risk secondary overheating.\n\n- Seller response: \"when I contacted the seller he told me that he cannot do anything about it.\" That's not product claim? It's customer service, not taxonomy. Could be other_unknown? But taxonomy has no customer service. Should not extract because no supported product claim? It's about seller, not product. Don't include.\n\n- \"Don’t recommend\" is general recommendation not specific product claim? Could be overall sentiment but not a semantic claim about product attribute. Probably not.\n\nNeed decide if \"overheating\" and \"stopped working\" are related? Separate claims. Maybe \"overheating very bad\" caused stopped working? But separate topics: safety_risk overheating; reliability stopped_working. Could also be electrical_fault? But explicitly overheating. Primary safety_risk / overheating.\n\nNeed ensure evidence_span exact substring. Source_text includes newline. Evidence can be \"Stopped working after just 3 months\" or \"Stopped working after a couple months\". If we include title, exact substring \"Stopped working after a couple months\" is in source_text. That may be enough. But body clarifies 3 months. Use body. Might include \"Stopped working after just 3 months.\" with period? continuous substring includes period? Source text: \"Stopped working after just 3 months.\" yes. Evidence span can include period. Better exact continuous substring: \"Stopped working after just 3 months.\" includes trailing period. Fine.\n\nFor overheating: \"It was overheating very bad\" exact substring? Source: \"It was overheating very bad and when...\" yes.\n\nCould there be claim about durability general: stopped working after 3 months indicates short_lifespan? Taxonomy has reliability_durability: general_durability, stopped_working, intermittent_failure, short_lifespan, cracking_breakage, wear_damage. \"Stopped working after just 3 months\" primarily stopped_working. Could secondary short_lifespan? But must choose exactly one primary/secondary pair. Which secondary? \"stopped_working\" is explicit. \"short_lifespan\" also possible. But review says stopped working. The primary topic reliability_durability, secondary stopped_working. Good.\n\nPotential claim \"Don’t recommend\" could be other_unknown / uncategorized? But no product attribute. The instruction: \"If no supported product claim exists, return empty list.\" A recommendation is not product claim. Don't include.\n\nNeed return JSON with claims array.\n\nLet's craft final exactly. Ensure no extra text. \n{\n  \"claims\": [\n    {\n      \"primary_topic\": \"reliability_durability\",\n      \"secondary_topic\": \"stopped_working\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"Stopped working after just 3 months.\"\n    },\n    {\n      \"primary_topic\": \"safety_risk\",\n      \"secondary_topic\": \"overheating\",\n      \"polarity\": \"negative\",\n      \"evidence_span\": \"It was overheating very bad\"\n    }\n  ]\n}\nCheck if \"overheating\" exact span? \"It was overheating very bad\" yes. Good.\n\nShould title claim also? Maybe if only body stopped working enough. The title \"Stopped working after a couple months\" is also exact. But including both duplicates not needed. The review has two instances; one claim can cite body. Fine.\n\nNeed ensure secondary allowed under primary. safety_risk includes overheating. reliability includes stopped_working. Good.\n\nPotential issue: \"It was overheating very bad\" grammar but exact. Good.\n\nPotential issue: Overheating is safety_risk? Could be function_performance? Taxonomy has safety_risk overheating, so use that.\n\nFinal.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "43e6cb5b-f4b7-4517-8ffd-4ca1d4725d05-0",
+        "status": "completed"
+      },
+      {
+        "id": "a107e50f-b9c8-443c-a07c-77de1079a033",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Stopped working after just 3 months.\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"overheating\",\"polarity\":\"negative\",\"evidence_span\":\"It was overheating very bad\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210608.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1072,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1292,
+      "output_tokens_details": {
+        "reasoning_tokens": 1213
+      },
+      "total_tokens": 2364
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"stopped_working\",\"polarity\":\"negative\",\"evidence_span\":\"Stopped working after just 3 months.\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"overheating\",\"polarity\":\"negative\",\"evidence_span\":\"It was overheating very bad\"}]}"
+}

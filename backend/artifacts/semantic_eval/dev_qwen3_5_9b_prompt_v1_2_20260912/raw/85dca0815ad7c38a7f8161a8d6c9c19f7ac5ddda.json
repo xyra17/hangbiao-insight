@@ -1,0 +1,50 @@
+{
+  "review_id": "85dca0815ad7c38a7f8161a8d6c9c19f7ac5ddda",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-umg7fcsa6fgfh70py18yes",
+  "raw_response": {
+    "id": "chatcmpl-umg7fcsa6fgfh70py18yes",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Only needed 2 but only got one to work right.\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"Wouldnt line up straight (yes, I followed included instructions)\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"bubbles_adhesion\", \"polarity\": \"negative\", \"evidence_span\": \"by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\"}]}"
+        }
+      }
+    ],
+    "created": 1789189126,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 153,
+      "prompt_tokens": 648,
+      "total_tokens": 801,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 152,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Only needed 2 but only got one to work right.\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"positioning_alignment\", \"polarity\": \"negative\", \"evidence_span\": \"Wouldnt line up straight (yes, I followed included instructions)\"}, {\"primary_topic\": \"usability_installation\", \"secondary_topic\": \"bubbles_adhesion\", \"polarity\": \"negative\", \"evidence_span\": \"by the time you peel off and try a couple times, the corner is pried up and wont stay flat.\"}]}"
+}

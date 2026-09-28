@@ -1,0 +1,27 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-98985a7857f4364b",
+      "review_id": "a8a42b06a0fe016ec406b4a4b61ac6d6637e21ca",
+      "product_id": "B07P9S6R9Y",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "accessory_condition",
+      "polarity": "negative",
+      "evidence_span": "It doesn't come with a plug.",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "292d9d14-e7fb-424f-9f42-e3cd1991dcfd"
+    }
+  ],
+  "accepted_count": 1,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

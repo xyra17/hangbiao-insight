@@ -1,0 +1,216 @@
+{
+  "review_id": "a8a42b06a0fe016ec406b4a4b61ac6d6637e21ca",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "292d9d14-e7fb-424f-9f42-e3cd1991dcfd",
+  "raw_response": {
+    "id": "292d9d14-e7fb-424f-9f42-e3cd1991dcfd",
+    "created_at": 1789211422.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "b38e35eb-69d2-488a-9e9b-1ef404682951",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims. Source only title/source_text: \"It doesn't come with a plug.\" Rating 1. Need taxonomy. Claim? Product? It doesn't come with a plug. This relates to product_quality maybe accessory_condition? The charger doesn't include plug. But taxonomy: product_quality/accessory_condition perhaps missing accessory. Or compatibility? Let's parse. It says doesn't come with a plug. Product likely wall charger? Missing plug? Need determine claim. Primary: product_quality, secondary: accessory_condition? Accessory condition covers condition of accessories maybe not missing. defective_on_arrival? No, missing plug. \"It doesn't come with a plug.\" That indicates missing accessory? Taxonomy includes installation_accessories under usability_installation: installation_accessories. Could be \"installation_accessories\" for installation accessories. But a plug is power accessory? Product likely \"USB wall charger\"? Missing plug maybe product itself? Let's think. If product is a charging cable? \"It doesn't come with a plug.\" Means no power adapter included. Primary could be convenience_value? Not. Product_quality/accessory_condition seems best: missing accessory/plug. Or other_unknown/uncategorized? We need exact valid pair. Polarity negative. Evidence exact \"It doesn't come with a plug.\" We need output JSON.\n\nNeed decide secondary. If it doesn't come with a plug, that's an accessory issue. product_quality includes accessory_condition. Yes. Primary product_quality, secondary accessory_condition, polarity negative. Evidence span exact. Ensure no star inference. Return claims array.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "292d9d14-e7fb-424f-9f42-e3cd1991dcfd-0",
+        "status": "completed"
+      },
+      {
+        "id": "46f577ed-d221-49ab-90ae-7e78d48111b6",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"accessory_condition\",\"polarity\":\"negative\",\"evidence_span\":\"It doesn't come with a plug.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211424.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1032,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 374,
+      "output_tokens_details": {
+        "reasoning_tokens": 333
+      },
+      "total_tokens": 1406
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"accessory_condition\",\"polarity\":\"negative\",\"evidence_span\":\"It doesn't come with a plug.\"}]}"
+}

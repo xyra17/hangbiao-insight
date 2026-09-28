@@ -1,0 +1,47 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "SP-7f5c6ffda0dfd706",
+      "review_id": "0b8042f308df4906faa175cc0d0c9b870f2ce9d9",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "product_quality",
+      "secondary_topic": "material_build_quality",
+      "polarity": "positive",
+      "evidence_span": "Sturdy",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "6bac3077-4857-44d7-b7ff-10cab3043bd6"
+    },
+    {
+      "prediction_id": "SP-65d2e97378ff8c6f",
+      "review_id": "0b8042f308df4906faa175cc0d0c9b870f2ce9d9",
+      "product_id": "B0BYJ8ZVWH",
+      "created_at": null,
+      "primary_topic": "other_unknown",
+      "secondary_topic": "uncategorized",
+      "polarity": "positive",
+      "evidence_span": "Great product",
+      "prediction_status": "accepted",
+      "quality_flags": [],
+      "provider": "deepseek",
+      "api_name": "responses",
+      "model_name": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "semantic_version": "review-semantic-v1.0",
+      "raw_response_ref": "6bac3077-4857-44d7-b7ff-10cab3043bd6"
+    }
+  ],
+  "accepted_count": 2,
+  "review_required_count": 0,
+  "rejected_count": 0
+}

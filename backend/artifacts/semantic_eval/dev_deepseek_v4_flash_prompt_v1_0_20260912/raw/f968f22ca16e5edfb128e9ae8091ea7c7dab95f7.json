@@ -1,0 +1,216 @@
+{
+  "review_id": "f968f22ca16e5edfb128e9ae8091ea7c7dab95f7",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "8f3aa5f0-ffa4-4432-a807-33e6d0c19a65",
+  "raw_response": {
+    "id": "8f3aa5f0-ffa4-4432-a807-33e6d0c19a65",
+    "created_at": 1789211173.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "f3ab55fb-f7b2-4ad8-b3d4-6c418308654e",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims from review. Source text: \"Great quality\\nGood product it works grear\" likely typo great. Need semantic claims. Review has maybe product quality material_build_quality positive \"Great quality\". And general performance positive \"it works grear\". Need decide taxonomy. \"Great quality\" primary product_quality secondary material_build_quality? It says quality, likely build quality. Evidence exact continuous substring \"Great quality\". Polarity positive.\n\nSecond \"Good product it works grear\" includes general praise plus works. Claim function_performance/general_performance positive evidence \"it works grear\" exact substring. But \"grear\" typo. Could include \"Good product it works grear\" as general_performance? The claim \"works\" indicates function performance. Evidence_span exact continuous substring from SOURCE_TEXT. It can be \"it works grear\". Need ensure exact. Source has \"Good product it works grear\" after newline. It says \"grear\" not \"great\". Evidence_span \"it works grear\" exact. If \"Good product\" general quality maybe another product_quality general? But taxonomy product_quality only material_build_quality/defective/accessory. Could be positive general product? But only one pair. Maybe \"Good product\" maps to other_unknown/uncategorized? But likely not; if no supported? Could avoid. We can include only two claims. Need output schema with claims array.\n\nNeed check if \"Great quality\" primary product_quality secondary material_build_quality. Polarity positive. Evidence_span exact \"Great quality\" from title/source? SOURCE_TEXT includes title? Given source_text: \"Great quality\\nGood product it works grear\". Yes.\n\nSecond: \"it works grear\" exact continuous substring? source_text has \"Good product it works grear\" -> substring \"it works grear\" yes. primary function_performance secondary general_performance polarity positive.\n\nCould \"Good product\" be convenience_value? No.\n\nNeed valid JSON only. Ensure no extra.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "8f3aa5f0-ffa4-4432-a807-33e6d0c19a65-0",
+        "status": "completed"
+      },
+      {
+        "id": "f2f00c48-4e4b-4b4a-81de-4427a2c02982",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Great quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"it works grear\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211176.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1028,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 496,
+      "output_tokens_details": {
+        "reasoning_tokens": 428
+      },
+      "total_tokens": 1524
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"Great quality\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"it works grear\"}]}"
+}

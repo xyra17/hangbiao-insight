@@ -1,0 +1,216 @@
+{
+  "review_id": "b5471ff34821689fc1b874a8c769d05fe91fdc02",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "89b3e366-d7cd-45b2-9301-8c1046e81b1b",
+  "raw_response": {
+    "id": "89b3e366-d7cd-45b2-9301-8c1046e81b1b",
+    "created_at": 1789211979.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "f20580bd-6d14-40a7-a30e-78f9d10c14a6",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer in JSON schema. Need extract product-review semantic claims. Need exact evidence spans from source_text. Let's parse review. We need zero or multiple claims. Each exactly one valid primary/secondary taxonomy pair. Polarity independent of star.\n\nReview: \"Great Charger, Great Value!\\nI bought this charger to use in the office or when working remotely. USB cords don't last long as it feels like they break too quickly. This was a GREAT investment. My phone sits right on top and charges and while it does I can be using my phone for conference calls as well. Great charger. I have a second one that I use at home as well.\"\n\nNeed identify claims about product. Product likely wireless charger? \"My phone sits right on top and charges\" indicates charging success. \"while it does I can be using my phone for conference calls as well\" maybe convenience dual? Actually charging while using phone? Maybe general convenience? Or dual_port_multi_device? No, not dual port. Could be usability? But taxonomy convenience_value general_convenience. \"Great Value!\" price_value positive. \"USB cords don't last long as it feels like they break too quickly.\" This is about USB cords, not necessarily product? Could be accessory? It says bought this charger, USB cords don't last long... Maybe complaint about cords in general, not product? Could be reliability_durability short_lifespan? But refers USB cords, maybe included? Need be careful: product_id B07P9S6R9Y maybe wireless charger? \"USB cords don't last long as it feels like they break too quickly\" This could be a claim about cords durability, but not necessarily charger product. If product includes cords? The review says \"USB cords don't last long...\" It may be reason for buying wireless charger. We can extract if supported product claim? It's about USB cords in general. Taxonomy reliability_durability short_lifespan or wear_damage? Polarity negative. But evidence exact string: \"USB cords don't last long as it feels like they break too quickly.\" Primary reliability_durability, secondary short_lifespan. Is that product claim? It might be about USB cords, not the charger. However if the charger maybe includes USB cords? Hmm.\n\n\"Great Charger, Great Value!\" Value claim price_value positive evidence \"Great Value!\" or title. Evidence can include title? Source_text includes title. \"Great Charger\" is general quality? Could map product_quality material_build_quality? Or function_performance general_performance? \"Great charger\" vague. Maybe general_performance positive. \"This was a GREAT investment.\" price_value positive. \"My phone sits right on top and charges\" charging_success positive. \"while it does I can be using my phone for conference calls as well\" general_convenience? Maybe positive. \"I have a second one that I use at home as well.\" general_convenience? Or price_value? It indicates satisfaction/repeat purchase. Could be general_convenience? Hmm.\n\nNeed only supported product claims. We can include claims. Need exact continuous substring. No hallucinated topics. Need decide set.\n\nLet's examine possible claims:\n\n1. \"Great Value!\" primary convenience_value secondary price_value polarity positive evidence_span \"Great Value!\".\n2. \"My phone sits right on top and charges\" primary function_performance secondary charging_success polarity positive.\n3. \"while it does I can be using my phone for conference calls as well\" primary convenience_value secondary general_convenience? It's convenient to use phone while charging. Polarity positive.\n4. \"This was a GREAT investment.\" primary convenience_value secondary price_value? This is value/worth. Evidence \"This was a GREAT investment.\" Polarity positive. But overlaps with Great Value. Could include one price value claim. Maybe use \"This was a GREAT investment.\" as price_value. \"Great Value!\" in title also price_value. Which one better? Both. Maybe avoid duplicate? Not prohibited. But maybe one claim per semantic. Could extract price value from \"Great Value!\" and general convenience from investment? \"Investment\" suggests value. We can include both? Might be redundant. Need maybe minimal.\n\n5. \"I have a second one that I use at home as well.\" primary convenience_value secondary general_convenience? Positive. Or product_quality? It implies satisfaction. But not a specific product attribute? It supports general convenience? Maybe not.\n\n6. \"USB cords don't last long as it feels like they break too quickly.\" primary reliability_durability secondary short_lifespan negative. But is it about product? It's about USB cords, not charger. However could be a claim about durability of cords, but not the charger. In product review, \"USB cords don't last long\" might be a general issue with cords, not this product. The taxonomy \"reliability_durability\" for product. If product includes USB cords? The charger maybe doesn't have cords. So likely not supported claim about product. But the instruction: Extract product-review semantic claims. A review may contain zero or multiple claims. Do not invent evidence or topics. If no supported product claim, empty. Does \"USB cords don't last long...\" count as product claim? It's a product review; but the product is charger, not cords. I'd exclude to avoid misattribution. However maybe it's an accessory_compatibility? No. Could be \"short_lifespan\" of USB cords. But not this item. I'd exclude.\n\nWhat about \"Great Charger\" as function_performance general_performance positive. Evidence \"Great charger.\" at end. It's a vague positive claim about charger. Could be general_performance. But if we already have charging success, maybe general. \"Great Charger, Great Value!\" includes \"Great Charger\" as general performance. Could extract: primary function_performance secondary general_performance polarity positive evidence \"Great Charger\". Or \"Great charger.\" exact. But duplicate with charging success? It is a general claim. Could include one. But maybe we should not over-extract vague. However review title contains \"Great Charger\". That's product claim. Maybe general_performance.\n\nNeed ensure each evidence_span exact continuous substring. For \"Great Charger\" in title with comma? Source: \"Great Charger, Great Value!\\nI bought...\" So \"Great Charger\" is exact substring. If evidence \"Great Charger\" okay. For \"Great Value!\" exact.\n\n\"My phone sits right on top and charges\" exact. Polarity positive. Primary function_performance, secondary charging_success.\n\n\"while it does I can be using my phone for conference calls as well\" exact? Source: \"and while it does I can be using my phone for conference calls as well.\" Evidence could be \"while it does I can be using my phone for conference calls as well\". This is convenient simultaneous use. Primary convenience_value, secondary general_convenience. Polarity positive. But is it about product? Yes, because it charges and allows use. It's a benefit.\n\n\"This was a GREAT investment.\" exact. Primary convenience_value, secondary price_value. Polarity positive. But \"Great Value!\" already price. Could include one. Maybe include \"This was a GREAT investment.\" as price_value because title \"Great Value!\" also. Hmm.\n\n\"I have a second one that I use at home as well.\" exact. This is repeat purchase, perhaps general convenience/value. Could be price_value? It indicates worth buying another, but not explicit. Maybe general_convenience? Polarity positive. But is it a product claim? It's about owning second one, not attribute. Could be general_convenience? I'd maybe exclude.\n\nNeed final JSON with claims list. The desired response likely expects claims extraction. Let's decide final set. Could have 4-5 claims. Need not include unsupported. Let's align with taxonomy.\n\nPotential claims:\n- primary: convenience_value, secondary: price_value, polarity positive, evidence_span: \"Great Value!\"\n- primary: function_performance, secondary: charging_success, polarity positive, evidence_span: \"My phone sits right on top and charges\"\n- primary: convenience_value, secondary: general_convenience, polarity positive, evidence_span: \"while it does I can be using my phone for conference calls as well\"\n- primary: convenience_value, secondary: price_value, polarity positive, evidence_span: \"This was a GREAT investment.\"\n- primary: function_performance, secondary: general_performance, polarity positive, evidence_span: \"Great charger.\"\n\nMaybe avoid duplicate price_value. But \"This was a GREAT investment.\" also value. Could include only one price. Which one? \"Great Value!\" is title and explicit. \"This was a GREAT investment\" also explicit value. Maybe one claim enough. But if multiple claims can include both. However duplicate same topic maybe not ideal. It asks every claim; if same meaning repeated, maybe one. I'd include one price_value claim with evidence \"This was a GREAT investment.\" because more substantive? But \"Great Value!\" is title and clear. Hmm.\n\n\"Great Charger\" and \"Great charger.\" duplicate general. Could include \"Great charger.\" as general_performance positive. But also \"Great Charger\" title. Maybe one.\n\nCould there be claim about durability of USB cords. Let's re-evaluate. The sentence: \"USB cords don't last long as it feels like they break too quickly.\" This is negative about USB cords. In a charger review, perhaps they bought this charger because cords break. It is not about the charger's durability. If product is a wireless charger, it implies no cords to break. But the sentence itself is not a claim about the charger. Exclude.\n\nWhat about \"I bought this charger to use in the office or when working remotely.\" primary convenience_value secondary portability_size? It indicates use in office/remote. Not really portability? The charger maybe portable? It says use in office or working remotely, so portability. But no explicit \"portable\". Could be general_convenience. But maybe not.\n\n\"charging and while it does I can be using my phone for conference calls as well\" Could be dual_port_multi_device? Actually you can charge phone and use it, not multi-device. No.\n\n\"Great charger.\" is general_performance. But if we already have charging_success, maybe no need. But \"Great Charger\" is product quality? Could map product_quality material_build_quality? No, not material.\n\nMaybe final claims:\n1. function_performance/general_performance positive evidence \"Great Charger\" (from title) or \"Great charger.\" Maybe use title \"Great Charger\" because title. But \"Great Charger\" also in title. Hmm.\n2. convenience_value/price_value positive evidence \"Great Value!\"\n3. function_performance/charging_success positive evidence \"My phone sits right on top and charges\"\n4. convenience_value/general_convenience positive evidence \"while it does I can be using my phone for conference calls as well\"\n5. convenience_value/price_value positive evidence \"This was a GREAT investment.\" (duplicate)\n6. convenience_value/general_convenience positive evidence \"I have a second one that I use at home as well.\" (maybe)\n\nToo many. Need robust.\n\nMaybe the expected extraction focuses on explicit attributes:\n- \"Great Value!\" -> price_value\n- \"My phone sits right on top and charges\" -> charging_success\n- \"while it does I can be using my phone for conference calls as well\" -> general_convenience\n- \"USB cords don't last long as it feels like they break too quickly\" -> short_lifespan negative (but about USB cords)\n\nWould they include USB cords? The taxonomy includes reliability_durability short_lifespan. The product might be a charger, but cords are accessories. The review says \"USB cords don't last long...\" This is a claim about USB cords not lasting long. It could be accessory condition or durability. But not the charger. However product-review semantic claims can include accessories? Maybe yes if accessory included. But it doesn't mention \"the USB cord\" of this product. It says \"USB cords\" general. So likely not.\n\nLet's consider product B07P9S6R9Y. Maybe it's a wireless charger stand? \"My phone sits right on top and charges\" yes. \"USB cords don't last long as it feels like they break too quickly.\" That's why they bought wireless charger. Not product claim.\n\nNeed output valid JSON only. The schema: {\"claims\": [ {primary_topic, secondary_topic, polarity, evidence_span} ] }.\n\nNeed ensure evidence_span exact continuous substring. Let's verify exact substrings from source_text:\n- \"Great Value!\" appears in title: \"Great Charger, Great Value!\" yes.\n- \"My phone sits right on top and charges\" yes.\n- \"while it does I can be using my phone for conference calls as well\" yes (without period? Source: \"and while it does I can be using my phone for conference calls as well.\" The substring \"while it does I can be using my phone for conference calls as well\" is continuous including no period. Good.)\n- \"This was a GREAT investment.\" yes.\n- \"Great charger.\" yes.\n- \"I have a second one that I use at home as well.\" yes.\n- \"USB cords don't last long as it feels like they break too quickly.\" yes.\n\nNeed choose final. Maybe include 5 claims. But duplicate price_value with \"Great Value!\" and \"This was a GREAT investment.\" Are these distinct claims? They are similar. We can combine? The evidence_span must be one exact substring; cannot combine non-contiguous. So if include both, two claims. The instruction \"A review may contain zero or multiple claims.\" It doesn't say deduplicate. But \"semantic claims\" maybe each assertion. Both are assertions of value. Could include both but maybe redundant. To avoid over-extraction, I'll include one price_value. Which evidence? \"This was a GREAT investment.\" is stronger. But \"Great Value!\" is title. I'd include \"Great Value!\" because explicit. Then \"This was a GREAT investment.\" could be another price/value claim. Hmm.\n\nMaybe also \"Great charger.\" general performance. Should we include? It's a general positive claim. If we include, primary function_performance secondary general_performance. Evidence \"Great charger.\" That is exact. But \"Great Charger\" title also. Use \"Great charger.\" at end to avoid title? Both exact. Maybe include one general performance claim. But then charging success also function performance. That's okay.\n\nLet's decide final claims:\n1. {\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Great Charger\"}? Wait title has \"Great Charger, Great Value!\" exact \"Great Charger\" yes. But if use \"Great charger.\" at end, it's exact. Which is better? The title \"Great Charger\" is a general claim. I'll use \"Great Charger\" maybe. But evidence span \"Great Charger\" is exact. However if title, okay.\n2. {\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great Value!\"}\n3. {\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"My phone sits right on top and charges\"}\n4. {\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"general_convenience\",\"polarity\":\"positive\",\"evidence_span\":\"while it does I can be using my phone for conference calls as well\"}\n5. {\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"This was a GREAT investment.\"} Maybe redundant. Could omit.\n\nWould \"This was a GREAT investment.\" be better as price_value than \"Great Value!\"? Both. I could include both. But final answer oververbosity 5. Hmm.\n\nMaybe include \"I have a second one that I use at home as well.\" as general_convenience? It indicates convenience? It's more satisfaction/repeat purchase. Not a specific attribute. Exclude.\n\nWhat about \"USB cords don't last long as it feels like they break too quickly.\" Could be reliability_durability short_lifespan negative. If included, it adds negative claim despite 5-star. The instruction says \"Do not infer sentiment from star rating.\" They might expect us to catch this negative. But it's about USB cords. In product reviews, sometimes people mention other products. The taxonomy has product_quality accessory_condition. \"USB cords don't last long\" could be accessory_condition? But the product might not come with USB cords? It says \"USB cords don't last long as it feels like they break too quickly.\" It could be a general complaint, not about this charger. If product is wireless charger, it may not have USB cords. The sentence starts \"USB cords don't last long...\" not \"The USB cord doesn't last long.\" So no.\n\nMaybe \"USB cords don't last long\" is a claim about reliability_durability of cords, but not product. The instruction: \"Extract product-review semantic claims.\" It might be a claim about the product category or reason for purchase, not product. Exclude.\n\nNeed ensure polarity for \"Great Charger\" positive. \"Great Value!\" positive. \"My phone sits right on top and charges\" positive. \"while it does I can be using my phone for conference calls as well\" positive. \"This was a GREAT investment.\" positive.\n\nCould there be \"Great charger\" at end instead of \"Great Charger\" title? The title is \"Great Charger, Great Value!\" It includes \"Great Charger\". If we include both \"Great Charger\" and \"Great charger.\" they are same. One.\n\nLet's final with 4 claims: general_performance, price_value, charging_success, general_convenience. Maybe include \"This was a GREAT investment.\" as price_value and drop \"Great Value!\"? The title \"Great Value!\" is explicit. I think include \"Great Value!\" only. The investment sentence is also value. But if I include both, it's okay. The schema allows multiple. I'll include both? It could be seen as redundant. The instruction \"semantic claims\" each sentence can be claim. \"This was a GREAT investment\" is a separate claim of value. \"Great Value!\" is also. I'll include one to avoid redundancy. But maybe evaluation expects \"Great Value!\" and \"This was a GREAT investment\" both? Hard to know.\n\nLet's think of typical extraction: They might want claims about:\n- value: \"Great Value!\" positive\n- charging: \"My phone sits right on top and charges\" positive\n- convenience: \"while it does I can be using my phone for conference calls as well\" positive\n- durability: \"USB cords don't last long as it feels like they break too quickly\" negative? Maybe.\n- general: \"Great charger.\" positive.\n\nMaybe final should include all explicit product claims. Let's include 6? But too many duplicates. The schema doesn't penalize? It might. The instruction says \"Do not invent evidence or topics.\" We can include all valid claims. Redundant claims are still valid. But maybe \"Great Charger\" and \"Great charger.\" are duplicates. I'd include one.\n\nLet's decide final set of 5:\n1. function_performance/general_performance positive evidence \"Great Charger\"\n2. convenience_value/price_value positive evidence \"Great Value!\"\n3. function_performance/charging_success positive evidence \"My phone sits right on top and charges\"\n4. convenience_value/general_convenience positive evidence \"while it does I can be using my phone for conference calls as well\"\n5. convenience_value/price_value positive evidence \"This was a GREAT investment.\"\n\nShould I include \"I have a second one that I use at home as well.\"? It is not a product attribute; it implies satisfaction. Exclude.\n\nWhat about \"USB cords don't last long as it feels like they break too quickly.\"? I'll exclude due to not product.\n\nNeed ensure JSON valid, no extra text. Use exact enum strings. Polarity \"positive\". Primary/secondary valid pairs. primary \"convenience_value\" secondary \"price_value\" and \"general_convenience\" are valid. primary \"function_performance\" secondary \"general_performance\" and \"charging_success\" valid.\n\nLet's output.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "89b3e366-d7cd-45b2-9301-8c1046e81b1b-0",
+        "status": "completed"
+      },
+      {
+        "id": "e5986fa5-de6b-4560-b46b-6ffa9ea49012",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Great Charger\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great Value!\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"My phone sits right on top and charges\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"general_convenience\",\"polarity\":\"positive\",\"evidence_span\":\"while it does I can be using my phone for conference calls as well\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"This was a GREAT investment.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211999.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1102,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 4501,
+      "output_tokens_details": {
+        "reasoning_tokens": 4326
+      },
+      "total_tokens": 5603
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Great Charger\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Great Value!\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_success\",\"polarity\":\"positive\",\"evidence_span\":\"My phone sits right on top and charges\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"general_convenience\",\"polarity\":\"positive\",\"evidence_span\":\"while it does I can be using my phone for conference calls as well\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"This was a GREAT investment.\"}]}"
+}

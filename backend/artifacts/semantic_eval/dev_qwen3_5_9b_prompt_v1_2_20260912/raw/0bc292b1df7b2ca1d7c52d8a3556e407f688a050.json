@@ -1,0 +1,50 @@
+{
+  "review_id": "0bc292b1df7b2ca1d7c52d8a3556e407f688a050",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-5cmta56pskwr9eb3lpxp9",
+  "raw_response": {
+    "id": "chatcmpl-5cmta56pskwr9eb3lpxp9",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"DOES NOT FIT IPHONE XR!\"}]}"
+        }
+      }
+    ],
+    "created": 1789189996,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 45,
+      "prompt_tokens": 623,
+      "total_tokens": 668,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 44,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"negative\", \"evidence_span\": \"DOES NOT FIT IPHONE XR!\"}]}"
+}

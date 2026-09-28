@@ -1,0 +1,216 @@
+{
+  "review_id": "3a604bb0e3fddbbf84c714490ab9eaaf98b62496",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "abc1c230-a774-4df7-acd3-ad37cf147503",
+  "raw_response": {
+    "id": "abc1c230-a774-4df7-acd3-ad37cf147503",
+    "created_at": 1789210711.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "25d6269b-cdb1-4992-a3cb-6e2967ee5020",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims from source_text. Need adhere schema. Review: \"This wall charger is amazing. We were having issues with our current ones ...\\nThis wall charger is amazing. We were having issues with our current ones from Apple and Samsung and so we tried  these out. They charge our cell phones *much* faster than our other big name chargers, which is great.\"\n\nNeed determine claims. Product wall charger. Claims: maybe general performance/charging speed positive. Evidence exact continuous substring. Need no infer from star. We can include claim about charger amazing? That's general positive maybe function_performance general_performance? Evidence \"This wall charger is amazing.\" But \"amazing\" maybe vague, product quality? Taxonomy. Need primary/secondary valid pair. They mention having issues with current ones from Apple/Samsung and tried these out. They charge phones much faster than other chargers. That is charging_speed positive. Primary function_performance secondary charging_speed polarity positive evidence \"They charge our cell phones *much* faster than our other big name chargers, which is great.\" Exact substring includes asterisks? Source has \"*much*\" yes. Evidence span exact continuous substring: \"They charge our cell phones *much* faster than our other big name chargers, which is great.\" Good.\n\nAlso first sentence \"This wall charger is amazing.\" Could be general_performance positive? Is that a product claim? It's semantic claim about charger. Primary function_performance secondary general_performance, polarity positive evidence \"This wall charger is amazing.\" Or product_quality material? \"amazing\" general. But schema wants exact. The second repeated \"This wall charger is amazing.\" same. We can extract one claim? Review may contain multiple claims; duplicates? We can include only distinct claims? The text repeats first sentence twice. We could include two claims identical? Probably avoid duplicates. But if exact evidence appears twice. Need perhaps include one for \"This wall charger is amazing.\" and one for faster charge. Could also mention \"We were having issues with our current ones from Apple and Samsung\" is not a claim about this product? It compares previous chargers issues, but not product itself. Not supported product claim? It could be compatibility? No, about current ones. We should not include. \"and so we tried these out\" no claim. \"They charge our cell phones *much* faster than our other big name chargers, which is great.\" claim speed positive.\n\nNeed decide primary/secondary for \"amazing\" maybe general_performance. But is it \"function_performance/general_performance\" or \"other_unknown/uncategorized\"? \"amazing\" generic positive evaluation, not specific. Taxonomy has general_performance under function_performance. Could be. But \"This wall charger is amazing\" is product quality? product_quality/material_build_quality? No. general_performance perhaps. Yet need not infer. It is a supported product claim? \"amazing\" is subjective overall. Could be other_unknown/uncategorized? But valid pair. In previous tasks, overall positive might be product_quality? There's no overall. Maybe \"general_performance\" appropriate.\n\nPotential issue: \"They charge our cell phones *much* faster than our other big name chargers, which is great.\" This is charging_speed. primary function_performance secondary charging_speed positive. Evidence exact. Great.\n\nCould include one claim only to avoid overextract. But review clearly has \"This wall charger is amazing\" repeated. Is that a claim? It is a claim. If output only charging speed, still okay? The instruction: \"A review may contain zero or multiple claims. For every claim...\" So should extract every supported product claim. \"This wall charger is amazing\" is a claim about product. Need include. But duplicate repeated? The source_text has two occurrences: first line \"This wall charger is amazing. We were having issues with our current ones ...\" then second line same. Actually source_text:\n\"This wall charger is amazing. We were having issues with our current ones ...\\nThis wall charger is amazing. We were having issues with our current ones from Apple and Samsung and so we tried  these out. They charge our cell phones *much* faster than our other big name chargers, which is great.\"\nThere is duplicate first sentence twice. Could extract one claim for first occurrence, one for second? But same semantic claim repeated. The schema doesn't forbid duplicates. But \"every claim\" maybe two text instances. However expected likely not penalize duplicates? Hmm.\n\nWe need final JSON. Need ensure evidence_span contiguous substring exactly. Use exact substrings. For first \"This wall charger is amazing.\" appears. For charging speed, exact.\n\nCould \"We were having issues with our current ones from Apple and Samsung and so we tried these out.\" contains \"these\" no claim about this product speed? Maybe implies previous chargers had issues, not product. No.\n\nLet's think taxonomy. primary_topic enum includes function_performance. secondary general_performance. For \"amazing\" maybe function_performance/general_performance. Polarity positive. Evidence \"This wall charger is amazing.\" For speed: \"They charge our cell phones *much* faster than our other big name chargers, which is great.\" primary function_performance secondary charging_speed positive.\n\nCould there be a claim about reliability? \"We were having issues with our current ones\" negative reliability of old chargers, not this product. Not target product. Exclude.\n\nNeed return {\"claims\":[...]}. If include duplicate amazing? Maybe one. The source has first occurrence in title? But source_text includes. If only one, okay. The phrase \"This wall charger is amazing.\" appears twice. Evidence substring doesn't uniquely identify but okay. The schema doesn't require unique. I'd include one, because repeated same claim likely not separate. But \"every claim\" maybe duplicates are separate occurrences? Hmm. In extraction tasks, claims are semantic, not occurrences; duplicate same sentence should not be duplicated. Good.\n\nNeed no markdown, just JSON. Ensure valid JSON. Use exact quotes, escape? Evidence includes asterisks no need escape. \"much\" has asterisks. Valid. final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "abc1c230-a774-4df7-acd3-ad37cf147503-0",
+        "status": "completed"
+      },
+      {
+        "id": "fec7a01b-ec2a-4a44-87c8-7d1c23057918",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This wall charger is amazing.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"They charge our cell phones *much* faster than our other big name chargers, which is great.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210717.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1091,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1373,
+      "output_tokens_details": {
+        "reasoning_tokens": 1288
+      },
+      "total_tokens": 2464
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"This wall charger is amazing.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"positive\",\"evidence_span\":\"They charge our cell phones *much* faster than our other big name chargers, which is great.\"}]}"
+}

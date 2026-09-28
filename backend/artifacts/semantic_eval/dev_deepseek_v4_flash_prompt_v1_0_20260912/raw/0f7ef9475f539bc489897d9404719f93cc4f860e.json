@@ -1,0 +1,216 @@
+{
+  "review_id": "0f7ef9475f539bc489897d9404719f93cc4f860e",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "f3cbdbfe-c5cd-4533-9a2b-ff9da1a00473",
+  "raw_response": {
+    "id": "f3cbdbfe-c5cd-4533-9a2b-ff9da1a00473",
+    "created_at": 1789210557.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "48cea0dc-770f-431f-aa8b-b84c7dd8db62",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON per schema. Need extract claims from source. Need be careful. Review text: WARNING: This made my fingertips peel! I bought this protector after my last one cracked. The size is off, but most importantly my fingers started peeling! I had no idea what was wrong with the skin or why it was only my thumbs, but then realized it must be the new screen protector. I put it on Wednesday night and it's Friday night now. I tried scrubbing the screen with a wet tissue and hopefully that helps; if not this was a total waste of money. No idea why this is Amazon's choice.\n\nNeed extract product-review semantic claims. For each claim choose exactly one valid primary/secondary pair, independently polarity, evidence_span exact continuous substring from SOURCE_TEXT. Do not infer sentiment from star rating. If no supported product claim, empty list. Need possible claims:\n- \"This made my fingertips peel\" / \"my fingers started peeling\" / \"my thumbs\" / \"must be new screen protector\" => safety_risk physical_injury_irritation negative. Evidence exact substring \"This made my fingertips peel!\" or \"my fingers started peeling!\" maybe claim about product causing skin peeling. Primary safety_risk, secondary physical_injury_irritation, negative. Evidence should be exact substring. Could use \"This made my fingertips peel!\" includes title? source_text includes title first line. Is title part of source_text? Yes source_text begins \"WARNING: This made my fingertips peel!\\nI bought...\" So exact. But maybe claim evidence from body \"my fingers started peeling!\" Better.\n- \"The size is off\" => compatibility_fit size_fit negative. Evidence \"The size is off\". Primary compatibility_fit secondary size_fit negative.\n- \"I bought this protector after my last one cracked.\" This refers last protector cracked, not this product? Not claim about current product? It says bought this protector after my last one cracked. Last one = previous protector, not current. No.\n- \"I tried scrubbing the screen with a wet tissue and hopefully that helps; if not this was a total waste of money.\" Could be price_value? \"total waste of money\" negative, primary convenience_value secondary price_value. But sentiment conditional? It says if not this was a total waste of money. That is claim about value. Evidence \"this was a total waste of money\" maybe exact. It's product? Yes. Polarity negative. But maybe \"total waste of money\" if not helps. Could be price_value. But do we include? It is supported.\n- \"No idea why this is Amazon's choice.\" Not product claim? Maybe other_unknown insufficient_information? Probably not.\n- Maybe \"I put it on Wednesday night and it's Friday night now.\" implies short lifespan? Only two days? It peeled fingertips. Not durability. No.\n\nNeed consider exact continuous substring. For first, evidence_span can include \"my fingers started peeling!\" exact. Or \"This made my fingertips peel!\" exact. Use that. Which is stronger? It is a direct claim. primary safety_risk, secondary physical_injury_irritation. Polarity negative.\n\nSecond: \"The size is off\" exact substring in source. Primary compatibility_fit, secondary size_fit, negative.\n\nThird: \"this was a total waste of money\" exact substring? Source: \"if not this was a total waste of money.\" So \"this was a total waste of money\" continuous. Primary convenience_value, secondary price_value, negative. But \"if not\" condition? Could still be claim that if product doesn't help, it's waste. Polarity negative. Is it an actual claim? It expresses value negative. likely.\n\nPotential issue: Safety risk taxonomy includes physical_injury_irritation. \"fingertips peel\" is physical injury/irritation. yes.\n\nNeed output JSON only, no markdown. Claims array.\n\nNeed ensure schema exactly: {\"claims\":[...]} each claim has primary_topic, secondary_topic, polarity, evidence_span. No extra.\n\nNeed maybe include claim about \"The size is off\" and \"This made my fingertips peel!\" and \"total waste of money\". Are there any claims regarding screen protector caused skin issue: \"it must be the new screen protector\" is inference/claim? Could evidence_span \"must be the new screen protector\" and primary safety_risk secondary physical_injury_irritation? But that claim is causal attribution. The earlier \"my fingers started peeling!\" plus context enough. We could include both? Avoid duplicate. Since claim extraction should extract distinct semantic claims. We can use \"my fingers started peeling!\" and maybe not also \"This made...\". The product claim is it made fingertips peel. Evidence \"This made my fingertips peel!\" is exact.\n\nPotential size claim: \"The size is off\" is ambiguous may mean screen protector size doesn't fit? It is compatibility_fit size_fit. Negative.\n\nPotential value claim: \"total waste of money\" might be general_convience? price_value. Negative.\n\nNeed check if \"The size is off, but most importantly my fingers started peeling!\" includes \"size is off\" and peeling. We separate.\n\nNeed ensure no unsupported claim about charging etc. no.\n\nLet's craft final JSON. Need no markdown. Use exact substrings:\n- \"This made my fingertips peel!\" from source_text first line. Is that exact? Source begins \"WARNING: This made my fingertips peel!\\n...\" Yes substring \"This made my fingertips peel!\" exact.\n- \"The size is off\" exact.\n- \"this was a total waste of money\" exact. Source has lowercase this after \"if not\". substring includes no period? \"this was a total waste of money\" exact.\n\nPolarity: negative for all.\n\nPrimary/secondary valid:\nfunction_performance etc. safety_risk physical_injury_irritation valid. compatibility_fit size_fit valid. convenience_value price_value valid.\n\nShould we include \"No idea why this is Amazon's choice.\" as other_unknown? It's about Amazon's choice not product claim? No.\n\nNeed final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "f3cbdbfe-c5cd-4533-9a2b-ff9da1a00473-0",
+        "status": "completed"
+      },
+      {
+        "id": "0cb16ffa-21f5-426c-8df9-0d98da753589",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"physical_injury_irritation\",\"polarity\":\"negative\",\"evidence_span\":\"This made my fingertips peel!\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"The size is off\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"this was a total waste of money\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210563.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1129,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1379,
+      "output_tokens_details": {
+        "reasoning_tokens": 1270
+      },
+      "total_tokens": 2508
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"physical_injury_irritation\",\"polarity\":\"negative\",\"evidence_span\":\"This made my fingertips peel!\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"size_fit\",\"polarity\":\"negative\",\"evidence_span\":\"The size is off\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"this was a total waste of money\"}]}"
+}

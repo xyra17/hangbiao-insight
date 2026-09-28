@@ -1,0 +1,50 @@
+{
+  "review_id": "b5471ff34821689fc1b874a8c769d05fe91fdc02",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-jddai63ya8i47p3s6vdfhl",
+  "raw_response": {
+    "id": "chatcmpl-jddai63ya8i47p3s6vdfhl",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Great Charger, Great Value!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"charges\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great Charger\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great charger\"}]}"
+        }
+      }
+    ],
+    "created": 1789187382,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 137,
+      "prompt_tokens": 666,
+      "total_tokens": 803,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 136,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"Great Charger, Great Value!\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"charges\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great Charger\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great charger\"}]}"
+}

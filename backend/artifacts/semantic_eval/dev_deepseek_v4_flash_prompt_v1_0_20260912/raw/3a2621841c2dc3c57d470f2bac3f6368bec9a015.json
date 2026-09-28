@@ -1,0 +1,216 @@
+{
+  "review_id": "3a2621841c2dc3c57d470f2bac3f6368bec9a015",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "f91f16b1-e994-4da2-8adf-2c409e537215",
+  "raw_response": {
+    "id": "f91f16b1-e994-4da2-8adf-2c409e537215",
+    "created_at": 1789210563.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "7ee9b3f8-e022-424f-a720-80d1ac998c1d",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer structured extraction. Need parse review. Need extract claims. Need exactly one valid primary/secondary taxonomy pair per claim, polarity, evidence exact substring. Empty if none. Need infer product-review semantic claims. Review about screen protector. Product likely screen protector. Claims:\n\n- \"After going through this three-pack in 2-3 months (I don't enjoy looking at my screen through cracks so I change it when that happens)\" indicates screen protectors cracked/needed replacement. Could be reliability_durability / cracking_breakage negative. Evidence exact.\n- \"One of them lasted a good month. One lasted a couple of weeks.\" lifespan? short_lifespan negative maybe primary reliability_durability secondary short_lifespan. Evidence maybe \"One of them lasted a good month. One lasted a couple of weeks.\" But \"good month\" maybe mixed? It lasted a good month, one couple weeks. Overall short lifespan negative. We can split? Claim: one lasted good month positive? One lasted couple weeks negative? But claims independently. Need product claims. \"One of them lasted a good month\" is about durability/lifespan positive? But the review context negative. Polarity from text, not star. It says lasted a good month maybe positive? Hmm. \"One lasted a couple of weeks\" negative short lifespan. Could extract separate claims. But evidence exact continuous substring. \"One of them lasted a good month.\" positive short_lifespan? But short_lifespan polarity positive? Hmm taxonomy secondary short_lifespan, positive if lasted long? Maybe \"good month\" relative? It could be positive. But short_lifespan implies negative length. If claim \"One lasted a couple of weeks\" negative short_lifespan. The first \"One of them lasted a good month\" maybe positive general_durability? But \"good month\" for screen protector? Maybe mixed? Let's decide.\n\n- \"I put the third one on today and, I kid you not, my phone just sat next to me on my bed. I picked it up a FEW MINUTES later and there was a crack through the darn thing.\" This is cracking_breakage under reliability_durability negative. Evidence exact maybe sentence.\n- \"I think it must have knocked against my book light. ??? That is ABSURD.\" Could be general performance? Not necessary.\n- \"Mind you, my phone's screen is fine, but how protective can this really be if it cracks while sitting on a bed?!?\" This is protection_effectiveness under function_performance negative. Evidence exact. Claim that product not protective. Good.\n- \"WASTE of Your Money!!!\" price_value? primary convenience_value secondary price_value negative. Evidence \"WASTE of Your Money!!!\" This is a product claim about value? Maybe yes. Use exact.\n- \"I will go to an actual store and purchase a good, quality screen protector.\" This is comparison/ intention, not claim about this product? Could be general quality? Maybe not.\n- \"I'm fairly careful with my phone, but want something just in case of an accident.\" not product claim.\n- \"my phone's screen is fine\" maybe protection_effectiveness positive? It says phone screen fine, but context cracks. Could be device protection? It might imply protector protected phone? But they say \"how protective can this really be if it cracks...\" Actually phone screen is fine despite protector cracked. Could be positive protection_effectiveness? Hmm but they question protectiveness. The claim \"my phone's screen is fine\" could support protection_effectiveness positive? But they are negative about protector cracking. We might not extract because ambiguous / not directly due to product. But could be a claim that it protected phone screen. However \"but how protective can this really be...\" indicates negative. Avoid mixed maybe.\n\nNeed output JSON. Need ensure evidence_span exact continuous substring from source_text. We can include multiple claims. Need primary/secondary valid pairs. Let's map taxonomy pairs:\n- reliability_durability -> cracking_breakage\n- reliability_durability -> short_lifespan\n- function_performance -> protection_effectiveness\n- convenience_value -> price_value\nMaybe product_quality -> material_build_quality? The crack while sitting on bed could indicate material_build_quality negative? But better cracking_breakage.\n\nNeed polarity. For each.\n\nLet's craft claims:\n1. primary convenience_value secondary price_value polarity negative evidence \"WASTE of Your Money!!!\" \n2. primary reliability_durability secondary cracking_breakage polarity negative evidence \"After going through this three-pack in 2-3 months\" Wait exact? The phrase includes \"After going through this three-pack in 2-3 months (I don't enjoy looking at my screen through cracks so I change it when that happens)\" Could use \"I don't enjoy looking at my screen through cracks so I change it when that happens\" as evidence of cracks. Exact substring: \"I don't enjoy looking at my screen through cracks so I change it when that happens\". That indicates cracking. But claim about going through three-pack due cracks. Use exact substring.\n3. primary reliability_durability secondary short_lifespan polarity negative evidence \"One lasted a couple of weeks.\" Exact from \"One lasted a couple of weeks.\" Yes source: \"One lasted a couple of weeks.\" Actually source: \"One of them lasted a good month.  One lasted a couple of weeks.\" Wait source says \"One of them lasted a good month.  One lasted a couple of weeks.\" It has \"One of them lasted a good month.\" and \"One lasted a couple of weeks.\" We can use \"One lasted a couple of weeks.\" exact.\nMaybe also \"One of them lasted a good month.\" positive short_lifespan? Hmm. Should we include? \"good month\" maybe positive lifespan. But \"short_lifespan\" secondary is inherently negative? Could be positive? The taxonomy is topic, polarity separate. If we say short_lifespan positive because lasted a good month, that's contradictory? Actually short_lifespan topic means lifespan shortness, so positive polarity would mean not short? But claim \"One of them lasted a good month\" is about lifespan; if topic short_lifespan, polarity positive? Hmm maybe not. Better skip or classify general_durability positive? But overall \"one lasted a good month\" is a positive durability claim. Primary reliability_durability secondary general_durability polarity positive evidence \"One of them lasted a good month.\" Could include. But is that useful? It is a claim. The instruction may contain zero/multiple. We can include. But then \"One lasted a couple of weeks\" negative short_lifespan. Need exact evidence. Let's verify source_text exact: \"One of them lasted a good month.  One lasted a couple of weeks.\" There's two spaces. Our evidence \"One of them lasted a good month.\" is exact continuous substring? Yes it includes period. \"One lasted a couple of weeks.\" exact from source after two spaces? It starts after two spaces but substring itself exact. Good.\n4. primary reliability_durability secondary cracking_breakage polarity negative evidence \"there was a crack through the darn thing\" or \"my phone just sat next to me on my bed... there was a crack...\" The crack through thing. Use exact \"there was a crack through the darn thing\".\n5. primary function_performance secondary protection_effectiveness polarity negative evidence \"how protective can this really be if it cracks while sitting on a bed?!?\" Exact includes ?!? Source: \"how protective can this really be if it cracks while sitting on a bed?!?\" yes.\n\nMaybe claim about \"my phone's screen is fine\" positive protection? Could be evidence of device protection effectiveness? The phrase \"my phone's screen is fine\" indicates protector may have absorbed crack? But then \"but how protective...\" negative. We can skip to avoid contradictory.\n\nNeed output only JSON. Ensure no markdown. The schema says additionalProperties false etc. We can just output {\"claims\":[...]}.\n\nNeed maybe include \"WASTE of Your Money!!!\" primary convenience_value secondary price_value polarity negative. Is \"waste of money\" definitely price_value? Yes.\n\nPotential issue: \"After going through this three-pack in 2-3 months...\" Could be general_durability? But cracks. Use cracking_breakage. Evidence exact \"After going through this three-pack in 2-3 months\" but doesn't explicitly mention cracks in that span. It says going through three-pack in 2-3 months. That's short lifespan? Actually \"going through this three-pack in 2-3 months\" indicates they used all three in 2-3 months. Could be short_lifespan. Then parentheses explains cracks. Better use \"I don't enjoy looking at my screen through cracks so I change it when that happens\" as cracking_breakage. The claim is they went through three-pack due cracks. Evidence span could be \"After going through this three-pack in 2-3 months\" but no crack. Hmm. For cracking_breakage, evidence should mention cracks: \"I don't enjoy looking at my screen through cracks\". That is exact. Use that.\n\nCould also extract short_lifespan from \"After going through this three-pack in 2-3 months\" negative. But we already have short_lifespan for \"One lasted a couple of weeks.\" Might be redundant but okay. Maybe not over-extract. Need claims per review. There are multiple. Keep concise.\n\nLet's think if \"One of them lasted a good month.\" positive general_durability. Is \"good month\" a product claim? It says one lasted a good month. In context, they are complaining; \"a good month\" might mean \"only a good month\"? Actually \"One of them lasted a good month.\" Could be positive relative to others but still short. But polarity in text? The phrase \"a good month\" suggests positive but maybe sarcastic? Not clear. If we include with positive, may conflict with overall negative. But polarity determined by claim. It's okay. But maybe not necessary. The system wants extract semantic claims. We can include. However if we include both positive and negative durability, might be fine.\n\nCould \"One lasted a couple of weeks.\" secondary short_lifespan negative. Evidence exact.\n\nPotential primary/secondary pair constraints: \"short_lifespan\" under reliability_durability. Good.\n\nNeed ensure evidence_span exact continuous substring from SOURCE_TEXT. Let's verify each:\n- \"WASTE of Your Money!!!\" appears title and source_text starts \"WASTE of Your Money!!!\\n\". Yes exact substring.\n- \"I don't enjoy looking at my screen through cracks so I change it when that happens\" Source: \"After going through this three-pack in 2-3 months (I don't enjoy looking at my screen through cracks so I change it when that happens), I will go to an actual store...\" Exact substring includes \"I don't enjoy looking at my screen through cracks so I change it when that happens\" yes.\n- \"One of them lasted a good month.\" Source: \"One of them lasted a good month.  One lasted...\" Yes.\n- \"One lasted a couple of weeks.\" Source: \"One lasted a couple of weeks.\" yes.\n- \"there was a crack through the darn thing\" Source: \"I picked it up a FEW MINUTES later and there was a crack through the darn thing.\" yes.\n- \"how protective can this really be if it cracks while sitting on a bed?!?\" Source: \"Mind you, my phone's screen is fine, but how protective can this really be if it cracks while sitting on a bed?!?\" yes.\n\nCould include \"my phone just sat next to me on my bed\" as evidence for not mishandled? Not needed.\n\nPolarity for \"One of them lasted a good month.\" Could be positive? But topic general_durability. Is \"general_durability\" under reliability_durability. Pair valid. If we include, maybe \"positive\" because lasted a good month. But the review is negative; \"good month\" could be positive. Hmm.\n\nMaybe omit \"One of them lasted a good month\" to avoid positive outlier? But instruction says extract all claims. It is a claim. I'd include. But maybe \"One of them lasted a good month\" in context means only a month, short. Actually \"a good month\" colloquially means at least a month, could be positive or neutral. The next \"One lasted a couple of weeks\" emphasizes short. If we classify \"One of them lasted a good month\" as neutral? Topic short_lifespan? Hmm.\n\nLet's parse: \"After going through this three-pack in 2-3 months ... One of them lasted a good month. One lasted a couple of weeks. I put the third one on today...\" They used three protectors in 2-3 months. \"One of them lasted a good month\" is relatively positive: one lasted a month. But as complaint, a screen protector should last longer? They say \"a good month\" maybe ironically? No, \"a good month\" means a full month. It could be positive but not enough. Polarity could be positive. But if claim is short_lifespan, positive would be \"not short\"? The taxonomy short_lifespan as topic: if it lasted a good month, that's not short? Actually a month is short for screen protector. But \"good month\" might mean it lasted a good amount. The overall claim is they don't last. I'd classify \"One of them lasted a good month\" as neutral? Hmm.\n\nMaybe avoid this claim entirely. The main clear claims are negative. The instruction doesn't require exhaustive if ambiguous. It says may contain zero/multiple. \"Extract product-review semantic claims.\" I can include only clear product claims. We have 5 clear claims. That's enough.\n\nCould there be claim \"my phone's screen is fine\" positive protection_effectiveness? Maybe not, because they question protection. If include, evidence \"my phone's screen is fine\" primary function_performance protection_effectiveness polarity positive? But then next says \"but how protective can this really be...\" negative. It's a bit contradictory but both can be claims: protector cracked but phone screen fine; however protector not protective because it cracked. Might be mixed. Better not.\n\nNeed final JSON. Ensure no extra text. Use double quotes. Claims array.\n\nLet's consider if \"WASTE of Your Money!!!\" is product claim about price_value. Yes.\n\nPotential issue: primary_topic \"convenience_value\" and secondary_topic \"price_value\" valid. Yes.\n\nPotential issue: \"cracking_breakage\" under reliability_durability. Yes.\n\nPotential issue: \"protection_effectiveness\" under function_performance. Yes.\n\nPotential issue: \"short_lifespan\" under reliability_durability. Yes.\n\nFor claim 2, \"I don't enjoy looking at my screen through cracks so I change it when that happens\" polarity negative. It indicates cracks. Good.\n\nCould there be overclaim \"After going through this three-pack in 2-3 months\" for short_lifespan. Maybe include as separate short_lifespan claim instead of using \"One lasted a couple weeks\". Actually \"After going through this three-pack in 2-3 months\" is a claim about short lifespan: three protectors in 2-3 months. Evidence exact. Polarity negative. Primary reliability_durability secondary short_lifespan. This is stronger than \"One lasted a couple of weeks\" which is specific. We can include both? Might be redundant. But okay. The review says \"After going through this three-pack in 2-3 months\" and \"One lasted a couple of weeks\". Both indicate short lifespan. Could extract one. Since multiple claims allowed, but avoid redundancy. Use \"After going through this three-pack in 2-3 months\" for short_lifespan and \"I don't enjoy...\" for cracking? But \"After going...\" doesn't mention cracks. It is about lifespan. Then \"One lasted a couple of weeks\" also short. We can skip one. Let's decide claims:\n\n1. price_value negative: WASTE...\n2. short_lifespan negative: After going through this three-pack in 2-3 months\n3. cracking_breakage negative: I don't enjoy looking at my screen through cracks so I change it when that happens\n4. cracking_breakage negative: there was a crack through the darn thing\n5. protection_effectiveness negative: how protective can this really be if it cracks while sitting on a bed?!?\n\nMaybe also \"One lasted a couple of weeks.\" short_lifespan negative. That's a specific claim. Could include as 6. But then 2 and 6 redundant. I can include both; not harmful? The task says extract every claim. But over-extraction can be penalized. We need balance. The review's core claims: waste of money, short lifespan, cracks, not protective. That's 4 claims. The \"One lasted a couple of weeks\" is evidence for short lifespan. The \"After going through...\" is also evidence. I can pick one. Which is exact continuous and clear? \"One lasted a couple of weeks.\" is clearly short_lifespan. Use that. For cracking, use \"I don't enjoy...\" and \"there was a crack...\". Maybe two cracking claims? One general multiple cracks, one specific third cracked. Could be considered same claim. But different evidence? The review has multiple instances. The extraction can have multiple claims. But maybe redundancy. Let's keep both? The specific incident is a separate claim: third one cracked minutes after placing on bed. The general statement is that they went through three-pack due cracks. Both are cracking_breakage. Could include both. The task likely expects multiple claims. Fine.\n\nMaybe extract \"my phone's screen is fine\" positive protection_effectiveness? Hmm.\n\nLet's think of taxonomy: \"protection_effectiveness\" under function_performance. The review says \"my phone's screen is fine, but how protective can this really be if it cracks while sitting on a bed?!?\" This is a mixed claim? The first part positive (screen fine), second negative (not protective). Could have two claims:\n- \"my phone's screen is fine\" positive protection_effectiveness.\n- \"how protective can this really be if it cracks while sitting on a bed?!?\" negative protection_effectiveness.\nBut the sentence contrasts. The first is a product claim? It says phone screen is fine, implying protector protected phone. But then questions protectiveness because protector cracked. Actually if protector cracked but phone fine, it did its job? But they think cracking while sitting is absurd, so it's not protective. The positive claim is maybe not a product claim about protector, just phone. I'd skip positive.\n\nPotential claim \"I will go to an actual store and purchase a good, quality screen protector.\" This implies this product not good quality. Could be product_quality material_build_quality negative? But it's future intention. Not necessary.\n\nNeed final JSON. Use exact evidence. Let's ensure no trailing spaces. Source text has newlines. Evidence can be substring without newlines. Fine.\n\nLet's produce:\n{\"claims\":[\n{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"WASTE of Your Money!!!\"},\n{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"One lasted a couple of weeks.\"},\n{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"I don't enjoy looking at my screen through cracks so I change it when that happens\"},\n{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"there was a crack through the darn thing\"},\n{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"how protective can this really be if it cracks while sitting on a bed?!?\"}\n]}\n\nCheck evidence exact \"One lasted a couple of weeks.\" In source: \"One lasted a couple of weeks.  I put...\" Yes. Good.\n\nShould we include \"After going through this three-pack in 2-3 months\" instead? The claim \"One lasted a couple weeks\" is clear. Good.\n\nMaybe \"I don't enjoy looking at my screen through cracks so I change it when that happens\" has no period? It is exact inside parentheses. Fine.\n\nPotential issue: \"WASTE of Your Money!!!\" appears in title and source_text. The SOURCE_TEXT includes title? The input has title and source_text separate. The source_text begins \"WASTE of Your Money!!!\\n...\" Yes. So exact.\n\nNeed final only JSON.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "f91f16b1-e994-4da2-8adf-2c409e537215-0",
+        "status": "completed"
+      },
+      {
+        "id": "0cd160a3-65cf-4fba-9596-0c574a326e7c",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"WASTE of Your Money!!!\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"One lasted a couple of weeks.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"I don't enjoy looking at my screen through cracks so I change it when that happens\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"there was a crack through the darn thing\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"how protective can this really be if it cracks while sitting on a bed?!?\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210584.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1207,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 4623,
+      "output_tokens_details": {
+        "reasoning_tokens": 4414
+      },
+      "total_tokens": 5830
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"WASTE of Your Money!!!\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"short_lifespan\",\"polarity\":\"negative\",\"evidence_span\":\"One lasted a couple of weeks.\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"I don't enjoy looking at my screen through cracks so I change it when that happens\"},{\"primary_topic\":\"reliability_durability\",\"secondary_topic\":\"cracking_breakage\",\"polarity\":\"negative\",\"evidence_span\":\"there was a crack through the darn thing\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"protection_effectiveness\",\"polarity\":\"negative\",\"evidence_span\":\"how protective can this really be if it cracks while sitting on a bed?!?\"}]}"
+}

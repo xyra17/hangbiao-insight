@@ -1,0 +1,8 @@
+﻿scenario_id,scenario_type,product_id,month,order_multiplier,refund_multiplier,expected_review_relation,design_note,product_name,source,version
+SYN-EXPLAIN-001,explainable_negative,B07P9S6R9Y,2020-06-01,0.78,1.8,supporting_evidence,经营异常与真实负向评论变化对齐；后续诊断只能说评论提供相关支持证据，不能宣称因果。,Yootech_Wireless_Charger,synthetic,business-metric-v1.0
+SYN-MIXED-001,mixed_conflict,B07P9S6R9Y,2022-02-01,1.35,1.7,partial_support,订单增长和退款恶化同时发生；评论可以解释质量侧风险，但不能解释订单为何增长。,Yootech_Wireless_Charger,synthetic,business-metric-v1.0
+SYN-POSREC-001,positive_recovery,B0BYJ8ZVWH,2022-07-01,1.28,0.72,supporting_evidence,正向经营变化与真实正向评论变化对齐；用于验证系统不能只分析负面异常。,AILKIN_USB_Wall_Charger,synthetic,business-metric-v1.0
+SYN-REVERSAL-001,negative_reversal,B0BYJ8ZVWH,2022-08-01,0.8,1.75,supporting_evidence,紧接 2022-07 正向月份之后出现经营反转；适合验证 Agent 是否能比较相邻月份并重新规划调查路径。,AILKIN_USB_Wall_Charger,synthetic,business-metric-v1.0
+SYN-POSREC-002,positive_recovery,B07H2V5YLH,2022-11-01,1.22,0.8,supporting_evidence,第一阶段正向恢复，用于观察多月持续改善。,Ailun_Screen_Protector,synthetic,business-metric-v1.0
+SYN-POSREC-002,positive_recovery,B07H2V5YLH,2022-12-01,1.28,0.72,supporting_evidence,第二阶段正向恢复，用于验证系统是否识别持续趋势而不是单月波动。,Ailun_Screen_Protector,synthetic,business-metric-v1.0
+SYN-NOEXP-001,no_review_explanation,B0BYJ8ZVWH,2019-06-01,0.68,1.55,no_explanation,该月份由 04 阶段 Review Stable Window 自动选择；经营指标异常为 synthetic 注入，用于验证系统是否能够明确回答“评论无法解释该异常”。,AILKIN_USB_Wall_Charger,synthetic,business-metric-v1.0

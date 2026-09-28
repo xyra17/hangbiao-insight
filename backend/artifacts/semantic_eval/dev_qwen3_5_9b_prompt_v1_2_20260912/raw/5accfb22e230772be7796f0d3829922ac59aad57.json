@@ -1,0 +1,50 @@
+{
+  "review_id": "5accfb22e230772be7796f0d3829922ac59aad57",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.2",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-7x06xpb1j8m0yga4yjvm9eq",
+  "raw_response": {
+    "id": "chatcmpl-7x06xpb1j8m0yga4yjvm9eq",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"Charger is great... When it works\"}]}"
+        }
+      }
+    ],
+    "created": 1789189510,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 43,
+      "prompt_tokens": 635,
+      "total_tokens": 678,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 42,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"Charger is great... When it works\"}]}"
+}

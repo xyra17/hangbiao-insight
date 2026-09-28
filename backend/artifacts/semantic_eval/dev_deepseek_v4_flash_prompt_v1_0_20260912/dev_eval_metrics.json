@@ -1,0 +1,126 @@
+{
+  "run_status": "completed",
+  "split": "dev",
+  "review_count": 216,
+  "golden_claim_count": 388,
+  "prediction_count": 496,
+  "processing_error_review_count": 0,
+  "bad_case_count": 145,
+  "actual_provider_config": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "api_name": "responses",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 3,
+    "timeout_seconds": 180.0,
+    "base_url": "https://api.deepseek.com"
+  },
+  "production_provider_config": {
+    "provider": "openai",
+    "model": "gpt-5.6-sol",
+    "api_name": "responses",
+    "reasoning_effort": "low",
+    "structured_output": "json_schema",
+    "strict": true,
+    "prompt_version": "semantic-prompt-v1.0",
+    "taxonomy_version": "taxonomy-v1.1",
+    "max_attempts": 3,
+    "timeout_seconds": 120.0,
+    "base_url": null
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "value": 0.7863277210663184,
+      "numerator": 6.290621768530547,
+      "denominator": 8,
+      "target": 0.85,
+      "passed": false
+    },
+    "secondary_topic_micro_f1": {
+      "value": 0.6970760233918128,
+      "numerator": 596,
+      "denominator": 855,
+      "target": 0.75,
+      "passed": false
+    },
+    "topic_polarity_micro_f1": {
+      "value": 0.6782407407407407,
+      "numerator": 586,
+      "denominator": 864,
+      "target": 0.7,
+      "passed": false
+    },
+    "matched_topic_polarity_accuracy": {
+      "value": 0.9630872483221476,
+      "numerator": 287,
+      "denominator": 298,
+      "target": 0.85,
+      "passed": true
+    },
+    "evidence_substring_validity": {
+      "value": 1.0,
+      "numerator": 496,
+      "denominator": 496,
+      "target": 1.0,
+      "passed": true
+    },
+    "invalid_taxonomy_rate": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 496,
+      "target": 0.0,
+      "passed": true
+    },
+    "unsupported_evidence_rate": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 496,
+      "target": 0.0,
+      "passed": true
+    },
+    "per_topic_support": {
+      "abnormal_noise": 4,
+      "accessory_compatibility": 1,
+      "accessory_condition": 1,
+      "bubbles_adhesion": 7,
+      "case_compatibility": 7,
+      "charging_speed": 34,
+      "charging_success": 59,
+      "cracking_breakage": 18,
+      "defective_on_arrival": 4,
+      "device_compatibility": 9,
+      "device_damage": 1,
+      "dual_port_multi_device": 10,
+      "ease_of_use": 14,
+      "electrical_fault": 1,
+      "general_convenience": 10,
+      "general_durability": 6,
+      "general_performance": 13,
+      "installation_accessories": 7,
+      "installation_difficulty": 19,
+      "insufficient_information": 10,
+      "intermittent_failure": 6,
+      "material_build_quality": 12,
+      "melting_fire": 3,
+      "overheating": 3,
+      "physical_injury_irritation": 1,
+      "port_fit": 1,
+      "portability_size": 7,
+      "positioning_alignment": 9,
+      "power_output": 3,
+      "price_value": 29,
+      "protection_effectiveness": 11,
+      "short_lifespan": 27,
+      "size_fit": 13,
+      "status_indicator_feedback": 5,
+      "stopped_working": 18,
+      "uncategorized": 1,
+      "wall_socket_fit": 4
+    },
+    "bad_cases": []
+  }
+}

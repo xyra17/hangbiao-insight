@@ -1,0 +1,216 @@
+{
+  "review_id": "b027500e2bb1c082661b431ca1e9d51910a923c8",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "787c06ca-f266-42f9-a05e-b2c831af3fa8",
+  "raw_response": {
+    "id": "787c06ca-f266-42f9-a05e-b2c831af3fa8",
+    "created_at": 1789210909.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "d1c035ba-c787-4363-8bae-e038ecb6e8a2",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer strict JSON. Need extract claims. Source text: \"It's a plug!\\nDoes exactly what I needed it to - provide more than one usb port so I can charge my items\"\n\nNeed semantic claims. Product likely USB charging plug. Claims: provides more than one USB port so can charge items. Taxonomy primary convenience_value secondary dual_port_multi_device. Polarity positive. Evidence span exact continuous substring. Could include \"provide more than one usb port so I can charge my items\" or full. Need zero/multiple. Also \"Does exactly what I needed it to\" general performance? But must choose valid pair. Could claim general_performance positive? Evidence \"Does exactly what I needed it to\". That's vague but product claim function? Primary function_performance secondary general_performance maybe. But it's more general satisfaction. Could be supported? Taxonomy says general_performance. But \"does exactly what needed\" is general performance claim. Also dual port. Need maybe extract both. Ensure evidence exact substring. Let's parse.\n\nSOURCE: \"It's a plug!\\nDoes exactly what I needed it to - provide more than one usb port so I can charge my items\"\n\nClaim 1: dual port multi device: \"provide more than one usb port so I can charge my items\" positive. primary convenience_value secondary dual_port_multi_device.\n\nClaim 2: general performance: \"Does exactly what I needed it to\" positive. primary function_performance secondary general_performance. Is this a product claim? It is vague but indicates function works as needed. Valid. But maybe \"It's a plug!\" is not claim, just identity. We can include only dual port. Need if no? There is supported product claim. The instruction: Extract product-review semantic claims. Could include general. But over-extract? The evidence \"Does exactly what I needed it to\" implies general performance, positive. I think okay.\n\nNeed output JSON only. Ensure claims array. Could include two claims. Evidence exact continuous substring from SOURCE_TEXT. \"Does exactly what I needed it to\" includes exact? Source: \"Does exactly what I needed it to - provide...\" Yes substring. \"provide more than one usb port so I can charge my items\" exact? Source has lower usb, yes. Good.\n\nNeed maybe polarity for dual port positive. For general positive.\n\nCheck schema: claims items require primary_topic, secondary_topic, polarity, evidence_span. No extra. Use $defs? final must JSON. We can just produce object. Ensure no markdown.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "787c06ca-f266-42f9-a05e-b2c831af3fa8-0",
+        "status": "completed"
+      },
+      {
+        "id": "04f9f7b7-d83c-406e-89a8-122aade8c355",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Does exactly what I needed it to\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"provide more than one usb port so I can charge my items\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210912.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1044,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 611,
+      "output_tokens_details": {
+        "reasoning_tokens": 528
+      },
+      "total_tokens": 1655
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"Does exactly what I needed it to\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"provide more than one usb port so I can charge my items\"}]}"
+}

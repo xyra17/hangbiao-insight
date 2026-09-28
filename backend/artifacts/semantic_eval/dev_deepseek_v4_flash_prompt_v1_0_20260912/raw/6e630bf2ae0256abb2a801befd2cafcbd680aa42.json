@@ -1,0 +1,216 @@
+{
+  "review_id": "6e630bf2ae0256abb2a801befd2cafcbd680aa42",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "dfedec0a-29b8-4645-9d94-23b00043c15b",
+  "raw_response": {
+    "id": "dfedec0a-29b8-4645-9d94-23b00043c15b",
+    "created_at": 1789210609.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "0d0cd956-aada-4e8d-b609-054b678a0a55",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer only JSON. Need extract claims. Need follow taxonomy. Source text. We need identify product-review semantic claims, zero/multiple. Each claim exactly one valid primary/secondary pair, polarity, evidence exact substring.\n\nWe need parse review: \"Good for the price. Don’t order if you have pop socket\\nIt seems to charge through a case. It does not charge through a pop socket. I was so bummed ! Charges a little slower than a normal charger. But , good for the price if you don’t have a pop socket on your phone.\"\n\nProduct likely wireless charger? B07P9S6R9Y maybe. Claims:\n- Good for price -> convenience_value/price_value positive. evidence \"Good for the price\"\n- Don’t order if you have pop socket -> compatibility_fit/case_compatibility? Actually pop socket obstructs charging. Maybe compatibility_fit/case_compatibility? Taxonomy: device_compatibility, case_compatibility, accessory_compatibility, size_fit, port_fit, wall_socket_fit. Pop socket is accessory on phone/case, not charging? Could be accessory_compatibility? \"Does not charge through a pop socket\" relates compatibility with accessory (pop socket) or case_compatibility? Pop socket attached to phone/case, blocking wireless charging. The taxonomy has accessory_compatibility. This seems accessory_compatibility negative. Evidence \"It does not charge through a pop socket.\" Or \"Don’t order if you have pop socket\" negative compatibility. Need exact continuous substring. Could choose evidence \"Don’t order if you have pop socket\" and polarity negative. Secondary accessory_compatibility maybe. But \"pop socket\" is accessory. Good.\n- \"It seems to charge through a case.\" -> compatibility_fit/case_compatibility positive. evidence exact \"It seems to charge through a case.\"\n- \"Charges a little slower than a normal charger.\" -> function_performance/charging_speed negative. evidence exact \"Charges a little slower than a normal charger.\"\n- \"good for the price if you don’t have a pop socket on your phone.\" Another price_value positive? Could duplicate. Maybe claim: convenience_value/price_value positive evidence \"good for the price if you don’t have a pop socket on your phone.\" But same topic as first. We can include if distinct? The schema says multiple claims. It repeats. We might include only one price claim? \"Good for the price\" at start and end. It may be same claim repeated. But semantic claims maybe can include both? We need avoid invent. Could include first and maybe not duplicate. But \"good for the price if you don’t have a pop socket\" combines price and compatibility condition. Primary convenience_value/price_value positive with evidence exact. But if already have first, duplication. The review may contain multiple claims; no need dedupe? Better include distinct evidence? The final answer should include all supported claims. We can include price claim once with evidence \"Good for the price\" positive. Maybe also later \"good for the price if you don’t have a pop socket on your phone.\" But same sentiment. Might be okay. However, over-extraction risk. Need exact continuous substring \"Good for the price\" is at start. \"good for the price if you don’t have a pop socket on your phone.\" includes lowercase good. Both price. The first is standalone. The last contextual. I'd include only one price_value to avoid duplicate.\n\nAlso \"Don’t order if you have pop socket\" could be compatibility_fit/accessory_compatibility negative. Maybe \"It does not charge through a pop socket\" is more specific. Evidence exact. Polarity negative. The title itself has \"Don’t order if you have pop socket\" which is evidence. But source_text includes title? source_text includes \"Good for the price. Don’t order if you have pop socket\\n...\" So yes.\n\nPotential claim \"It seems to charge through a case.\" positive case_compatibility. \"It seems\" uncertain. Polarity? positive/neutral? It charges through case, but \"seems\" indicates positive but uncertain. Polarity positive maybe. Could be neutral? The product works with case. \"It seems to charge through a case\" positive. If uncertain, could still positive.\n\n\"Charges a little slower than a normal charger.\" Negative charging_speed. \"a little slower\" negative.\n\nMaybe \"I was so bummed !\" No product claim alone? It's emotional reaction to pop socket compatibility; not separate claim. Could evidence for negative accessory compatibility? But already.\n\nNeed ensure taxonomy valid pairs: primary_topic and secondary_topic from lists. We can use:\n1 primary convenience_value secondary price_value polarity positive evidence \"Good for the price\"\n2 primary compatibility_fit secondary case_compatibility polarity positive evidence \"It seems to charge through a case.\"\n3 primary compatibility_fit secondary accessory_compatibility polarity negative evidence \"It does not charge through a pop socket.\"\n4 primary function_performance secondary charging_speed polarity negative evidence \"Charges a little slower than a normal charger.\"\n\nShould we include \"Don’t order if you have pop socket\" as another accessory compatibility negative? It's same as does not charge. Could include one. \"Don’t order if you have pop socket\" maybe advice. \"It does not charge through a pop socket\" is more directly product claim. Use that.\n\nNeed output JSON only. Check exact evidence spans continuous substrings from source_text. Source text: \"Good for the price. Don’t order if you have pop socket\\nIt seems to charge through a case. It does not charge through a pop socket. I was so bummed ! Charges a little slower than a normal charger. But , good for the price if you don’t have a pop socket on your phone.\"\n\nEvidence \"Good for the price\" appears. \"It seems to charge through a case.\" appears exact with period. \"It does not charge through a pop socket.\" appears exact. \"Charges a little slower than a normal charger.\" appears exact. Good.\n\nNeed final JSON. Ensure no extra. ",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "dfedec0a-29b8-4645-9d94-23b00043c15b-0",
+        "status": "completed"
+      },
+      {
+        "id": "cc3fd239-2dad-4c37-8c99-279fc3ee8985",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Good for the price\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"It seems to charge through a case.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"accessory_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"It does not charge through a pop socket.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Charges a little slower than a normal charger.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210615.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1093,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1412,
+      "output_tokens_details": {
+        "reasoning_tokens": 1266
+      },
+      "total_tokens": 2505
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"positive\",\"evidence_span\":\"Good for the price\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"case_compatibility\",\"polarity\":\"positive\",\"evidence_span\":\"It seems to charge through a case.\"},{\"primary_topic\":\"compatibility_fit\",\"secondary_topic\":\"accessory_compatibility\",\"polarity\":\"negative\",\"evidence_span\":\"It does not charge through a pop socket.\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Charges a little slower than a normal charger.\"}]}"
+}

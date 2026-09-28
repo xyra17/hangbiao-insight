@@ -1,0 +1,18 @@
+{
+  "run_id": "business-pilot-canary-20260913",
+  "input_hash": "3b5e2ae64c8fced9386c83e1f0e8eb7420d6b99d6813a81383287d758e296752",
+  "sample_rule": {
+    "products": [
+      "B01N5IB20Q",
+      "B07P9S6R9Y",
+      "B0BYJ8ZVWH"
+    ],
+    "limit": 20,
+    "min_per_product": 1
+  },
+  "processed": 20,
+  "record_count": 20,
+  "error_count": 0,
+  "elapsed_seconds": 337.134,
+  "status": "completed"
+}

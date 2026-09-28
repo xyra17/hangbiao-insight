@@ -1,0 +1,216 @@
+{
+  "review_id": "1fd50f3e570fab92a6f306e3e6b3b9219b0a1bdc",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "edc31d25-87a1-4b7f-8df9-51040ca8c2c2",
+  "raw_response": {
+    "id": "edc31d25-87a1-4b7f-8df9-51040ca8c2c2",
+    "created_at": 1789211059.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "8fc63566-c8ed-44d8-9354-fae668e0300b",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract product-review semantic claims. Need parse source_text: \"Excellent\\nEasy instructions. High quality\". Need claims zero or multiple. Need choose exactly one valid primary/secondary taxonomy pair, polarity independently, evidence_span exact continuous substring. Need not infer from star rating. Source has title \"Excellent\" maybe included? SOURCE_TEXT given includes \"Excellent\\nEasy instructions. High quality\". Need extract claims from source text. Claims: \"Easy instructions\" likely usability_installation / ease_of_use? Or installation_difficulty? Actually \"Easy instructions\" could mean instructions easy to follow, ease of use/installation. Primary usability_installation, secondary ease_of_use? But \"instructions\" may be installation instructions. Taxonomy includes installation_difficulty, ease_of_use, installation_accessories. \"Easy instructions\" could be ease_of_use or installation_difficulty (negative? ease). Better primary usability_installation, secondary ease_of_use? Maybe \"Easy instructions\" denotes instructions are easy, not product ease. Could be installation_difficulty positive? installation difficulty would be negative if difficult, positive if easy? \"installation_difficulty\" is about difficulty; if easy instructions, polarity positive. But secondary \"ease_of_use\" more general. Need \"High quality\" product_quality/material_build_quality? \"High quality\" is general quality, but taxonomy product_quality has material_build_quality, defective_on_arrival, accessory_condition. Does high quality map to material_build_quality? Maybe yes, quality of product material/build. Could be general_performance? But product_quality/material_build_quality is valid. \"Excellent\" alone? It's vague. Could be general_performance positive? But evidence \"Excellent\" is standalone. But \"Excellent\" could be general product satisfaction, not specific claim. Taxonomy other_unknown/uncategorized? But we need supported product claim? \"Excellent\" no specific claim. Could ignore. The main claims: Easy instructions -> usability_installation/ease_of_use positive; High quality -> product_quality/material_build_quality positive. Need exact evidence spans: \"Easy instructions\" and \"High quality\". Note source_text includes \"Excellent\\nEasy instructions. High quality\". Evidence_span must exact continuous substring from SOURCE_TEXT. \"Easy instructions\" is substring. \"High quality\" substring. Could include period? \"Easy instructions.\" includes period. But continuous substring exact; can use \"Easy instructions\" no period. \"High quality\" yes.\n\nNeed check \"Easy instructions\" maybe primary_topic usability_installation, secondary ease_of_use. Polarity positive. \"High quality\" primary product_quality, secondary material_build_quality. Polarity positive. Should we include \"Excellent\" as claim? It's just sentiment no product aspect. If no supported product claim? But there are supported. \"Excellent\" could be other_unknown/uncategorized? But review may contain zero/multiple; \"Excellent\" is evaluative but no product claim. The instructions: Extract product-review semantic claims. If no supported product claim exists, empty. \"Excellent\" might be a claim about general product quality? But taxonomy has no general_quality except general_performance under function_performance, material_build_quality. It's too vague. Don't invent. So exclude.\n\nNeed output JSON schema exactly. Ensure enum valid. No additional properties. JSON only. Claims array. Use exact fields. Let's produce.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "edc31d25-87a1-4b7f-8df9-51040ca8c2c2-0",
+        "status": "completed"
+      },
+      {
+        "id": "08df588d-dde5-417e-a5df-ba4c04bd7604",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy instructions\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"High quality\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211063.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1027,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 768
+      },
+      "output_tokens": 779,
+      "output_tokens_details": {
+        "reasoning_tokens": 710
+      },
+      "total_tokens": 1806
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"usability_installation\",\"secondary_topic\":\"ease_of_use\",\"polarity\":\"positive\",\"evidence_span\":\"Easy instructions\"},{\"primary_topic\":\"product_quality\",\"secondary_topic\":\"material_build_quality\",\"polarity\":\"positive\",\"evidence_span\":\"High quality\"}]}"
+}

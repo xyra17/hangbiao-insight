@@ -1,0 +1,50 @@
+{
+  "review_id": "eb6dd64cab21a29c547beec8e2363b26b022b5a4",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-uems33q8c9yi2j79pbsab",
+  "raw_response": {
+    "id": "chatcmpl-uems33q8c9yi2j79pbsab",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"Quick charging for all phones\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"you will have plenty of power to do what you need for quite a while\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"It may not be completely charged that quickly\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"This is the perfect solution. Just lay your phone flat on the disc and walk away foe a half hour or so.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"We never seem to have enough charger cards or blocked to satisfying the visiting Apple and Samsung uses.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Just lay your phone flat on the disc and walk away foe a half hour or so.\"}]}"
+        }
+      }
+    ],
+    "created": 1789186650,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 280,
+      "prompt_tokens": 657,
+      "total_tokens": 937,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 279,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"positive\", \"evidence_span\": \"Quick charging for all phones\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_success\", \"polarity\": \"positive\", \"evidence_span\": \"you will have plenty of power to do what you need for quite a while\"}, {\"primary_topic\": \"function_performance\", \"secondary_topic\": \"charging_speed\", \"polarity\": \"negative\", \"evidence_span\": \"It may not be completely charged that quickly\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"general_convenience\", \"polarity\": \"positive\", \"evidence_span\": \"This is the perfect solution. Just lay your phone flat on the disc and walk away foe a half hour or so.\"}, {\"primary_topic\": \"compatibility_fit\", \"secondary_topic\": \"device_compatibility\", \"polarity\": \"positive\", \"evidence_span\": \"We never seem to have enough charger cards or blocked to satisfying the visiting Apple and Samsung uses.\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"portability_size\", \"polarity\": \"positive\", \"evidence_span\": \"Just lay your phone flat on the disc and walk away foe a half hour or so.\"}]}"
+}

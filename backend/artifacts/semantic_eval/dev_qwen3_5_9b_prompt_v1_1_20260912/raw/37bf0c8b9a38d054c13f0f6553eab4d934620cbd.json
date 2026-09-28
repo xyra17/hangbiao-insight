@@ -1,0 +1,50 @@
+{
+  "review_id": "37bf0c8b9a38d054c13f0f6553eab4d934620cbd",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.1",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-mqrc1086e3j0xyw8iatbt2",
+  "raw_response": {
+    "id": "chatcmpl-mqrc1086e3j0xyw8iatbt2",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"stopped working shortly after buying\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Both pieces in the set have stopped charging within weeks of purchase\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"The quality of these chargers is terrible.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"within weeks of purchase\"}]}"
+        }
+      }
+    ],
+    "created": 1789186975,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 166,
+      "prompt_tokens": 633,
+      "total_tokens": 799,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 165,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"stopped working shortly after buying\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"stopped_working\", \"polarity\": \"negative\", \"evidence_span\": \"Both pieces in the set have stopped charging within weeks of purchase\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"negative\", \"evidence_span\": \"The quality of these chargers is terrible.\"}, {\"primary_topic\": \"reliability_durability\", \"secondary_topic\": \"short_lifespan\", \"polarity\": \"negative\", \"evidence_span\": \"within weeks of purchase\"}]}"
+}

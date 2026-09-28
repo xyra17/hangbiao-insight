@@ -1,0 +1,50 @@
+{
+  "review_id": "9ccc0e5fa416985d9bf2d11b4874ca5141b4c93d",
+  "provider": "lmstudio",
+  "api_name": "chat_completions_compatible",
+  "model": "stage55a-qwen3.5-9b",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "chatcmpl-uwjccemaf4m4w8kidcfb9d",
+  "raw_response": {
+    "id": "chatcmpl-uwjccemaf4m4w8kidcfb9d",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": [],
+          "reasoning_content": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"easy to install\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"great price\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Works great\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great price and fingerprint reader\"}]}"
+        }
+      }
+    ],
+    "created": 1789176860,
+    "model": "stage55a-qwen3.5-9b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "stage55a-qwen3.5-9b",
+    "usage": {
+      "completion_tokens": 140,
+      "prompt_tokens": 454,
+      "total_tokens": 594,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 139,
+        "rejected_prediction_tokens": null
+      },
+      "prompt_tokens_details": null
+    },
+    "stats": {}
+  },
+  "payload": "{\"claims\": [{\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"ease_of_use\", \"polarity\": \"positive\", \"evidence_span\": \"easy to install\"}, {\"primary_topic\": \"convenience_value\", \"secondary_topic\": \"price_value\", \"polarity\": \"positive\", \"evidence_span\": \"great price\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Works great\"}, {\"primary_topic\": \"product_quality\", \"secondary_topic\": \"general_performance\", \"polarity\": \"positive\", \"evidence_span\": \"Great price and fingerprint reader\"}]}"
+}

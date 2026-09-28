@@ -1,0 +1,216 @@
+{
+  "review_id": "e6bcab2a10e42018165fff5f72e71bda37ede872",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "b49fbf21-e16c-42e0-9551-7e8463b39918",
+  "raw_response": {
+    "id": "b49fbf21-e16c-42e0-9551-7e8463b39918",
+    "created_at": 1789210689.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "d73b07a0-da4e-4fca-af28-30ef884fd635",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer in JSON schema. Need extract claims from review. Need decide claims. Source: \"Mediocre\\nIt works, just charges slowly, overheats my phone sometimes. You get what you pay for\"\n\nNeed identify product-review semantic claims. Product likely charger? Title Mediocre. Claims:\n- \"It works\" positive? general_performance under function_performance. Does \"It works\" supported. polarity positive? Maybe neutral? It works indicates functional positive. primary function_performance secondary general_performance. evidence_span \"It works\"\n- \"just charges slowly\" negative charging_speed. primary function_performance secondary charging_speed. evidence_span \"charges slowly\" or \"just charges slowly\"? exact continuous substring. Use \"charges slowly\".\n- \"overheats my phone sometimes\" safety_risk? secondary overheating. Polarity negative. Evidence \"overheats my phone sometimes\". Primary safety_risk secondary overheating.\n- \"You get what you pay for\" maybe convenience_value price_value? This is ambiguous, could imply mediocre value. Does it make a product claim? It relates to price_value maybe negative/neutral? Need consider. \"You get what you pay for\" often means quality matches low price, not necessarily negative. It is about value/price. Primary convenience_value secondary price_value. Polarity? Could be neutral/mixed? It's an evaluative claim about price value. In context with mediocre and slow/overheat, likely negative (low price = low quality). But rule do not infer sentiment from star rating. The phrase itself \"You get what you pay for\" could be neutral or negative depending. It isn't clearly positive or negative, but with preceding complaints, it's negative? We can include as price_value negative? The span exact. Must be product claim. It says value. I'd include perhaps polarity negative. But we need be cautious: \"You get what you pay for\" alone perhaps indicates acceptable value? It says you get what you pay for after saying it works but charges slowly and overheats. This suggests poor quality justified by price. Could be negative price_value. But taxonomy includes price_value. I think include.\n\nNeed output claims array. Ensure each has exactly valid pair. Primary and secondary from taxonomy matching. Need no additional props. Polarity enum.\n\nLet's format JSON with claims. Need maybe claim \"overheats my phone sometimes\" primary safety_risk secondary overheating. Note taxonomy safety_risk overheat. Good.\n\nNeed decide if \"It works\" positive or neutral? \"It works\" is positive functional. Could be mixed with just? But separate span. \"It works\" positive. \"charges slowly\" negative. \"overheats my phone sometimes\" negative. \"You get what you pay for\" maybe neutral? Hmm polarity: It could be neutral statement? But in review context, it's a value judgment. The phrase alone: \"You get what you pay for\" often conveys you get quality commensurate with price; if price low, quality low. In context after negative, it's negative. I'd mark negative. But if ambiguous, maybe neutral. The task says independently determine polarity, don't infer from star rating. We can use context. I'd say negative because coupled with \"Mediocre\" and complaints indicates low value. But \"You get what you pay for\" can also be positive if cheap and works. However \"Mediocre\" plus complaints = negative. Let's include negative.\n\nNeed evidence_span exact continuous substring from SOURCE_TEXT. For \"It works\" exact. \"charges slowly\" exact substring (source \"just charges slowly\" contains). \"overheats my phone sometimes\" exact. \"You get what you pay for\" exact.\n\nPotential issue \"It works\" is general_performance. Yes.\n\nNeed output only JSON. Ensure no markdown. Final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "b49fbf21-e16c-42e0-9551-7e8463b39918-0",
+        "status": "completed"
+      },
+      {
+        "id": "e7f947b6-9412-4414-80f3-3c47585b73fb",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It works\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"charges slowly\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"overheating\",\"polarity\":\"negative\",\"evidence_span\":\"overheats my phone sometimes\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"You get what you pay for\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789210695.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1040,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 922,
+      "output_tokens_details": {
+        "reasoning_tokens": 790
+      },
+      "total_tokens": 1962
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"general_performance\",\"polarity\":\"positive\",\"evidence_span\":\"It works\"},{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"charges slowly\"},{\"primary_topic\":\"safety_risk\",\"secondary_topic\":\"overheating\",\"polarity\":\"negative\",\"evidence_span\":\"overheats my phone sometimes\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"price_value\",\"polarity\":\"negative\",\"evidence_span\":\"You get what you pay for\"}]}"
+}

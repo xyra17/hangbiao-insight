@@ -1,0 +1,114 @@
+{
+  "same_dev_split": true,
+  "versions": {
+    "v1.0": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.0",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    },
+    "v1.1": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.1",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    },
+    "v1.2": {
+      "provider": "lmstudio",
+      "model": "stage55a-qwen3.5-9b",
+      "api_name": "chat_completions_compatible",
+      "reasoning_effort": "low",
+      "structured_output": "json_schema",
+      "strict": true,
+      "prompt_version": "semantic-prompt-v1.2",
+      "taxonomy_version": "taxonomy-v1.1",
+      "max_attempts": 2,
+      "timeout_seconds": 180.0,
+      "base_url": "http://127.0.0.1:1234/v1"
+    }
+  },
+  "metrics": {
+    "primary_topic_macro_f1": {
+      "v1.0": 0.569058485890169,
+      "v1.1": 0.600328732461688,
+      "v1.2": 0.388546161602681
+    },
+    "secondary_topic_micro_f1": {
+      "v1.0": 0.5064102564102564,
+      "v1.1": 0.5322128851540616,
+      "v1.2": 0.3319838056680162
+    },
+    "topic_polarity_micro_f1": {
+      "v1.0": 0.5,
+      "v1.1": 0.5242718446601942,
+      "v1.2": 0.3286573146292585
+    },
+    "matched_topic_polarity_accuracy": {
+      "v1.0": 0.9873417721518988,
+      "v1.1": 0.9789473684210527,
+      "v1.2": 0.9878048780487805
+    },
+    "evidence_substring_validity": {
+      "v1.0": 0.9566929133858267,
+      "v1.1": 0.9211956521739131,
+      "v1.2": 0.9444444444444444
+    },
+    "invalid_taxonomy_rate": {
+      "v1.0": 0.051181102362204724,
+      "v1.1": 0.04891304347826087,
+      "v1.2": 0.015873015873015872
+    },
+    "unsupported_evidence_rate": {
+      "v1.0": 0.04330708661417323,
+      "v1.1": 0.07880434782608696,
+      "v1.2": 0.05555555555555555
+    }
+  },
+  "errors": {
+    "missing_topic": {
+      "v1.0": 171,
+      "v1.1": 151,
+      "v1.2": 194
+    },
+    "extra_topic": {
+      "v1.0": 64,
+      "v1.1": 88,
+      "v1.2": 26
+    },
+    "polarity_mismatch": {
+      "v1.0": 87,
+      "v1.1": 102,
+      "v1.2": 46
+    },
+    "guard_failure": {
+      "v1.0": 18,
+      "v1.1": 32,
+      "v1.2": 6
+    },
+    "bad_case_count": {
+      "v1.0": 178,
+      "v1.1": 178,
+      "v1.2": 197
+    }
+  },
+  "status_counts_vs_v1_1": {
+    "regressed": 26,
+    "unchanged": 171,
+    "fixed": 7
+  },
+  "representative_count": 60
+}

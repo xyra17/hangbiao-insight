@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  color: #243749;
+  background: #f3f6fa;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+.wb-layout {
+  min-height: 100vh;
+}
+.wb-sidebar.ant-layout-sider {
+  background: #eaf1f8;
+  border-right: 1px solid #d9e3ed;
+}
+.wb-brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 28px 24px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #244d77;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.wb-sidebar .ant-menu {
+  background: transparent;
+  border: 0;
+  padding: 8px;
+}
+.wb-sidebar .ant-menu-item {
+  margin-bottom: 8px;
+}
+.wb-sidebar-note {
+  padding: 28px;
+  color: #647589;
+  line-height: 1.9;
+  font-size: 12px;
+}
+.ant-layout-sider-collapsed .wb-brand {
+  padding: 28px 18px;
+}
+.ant-layout-sider-collapsed .wb-sidebar-note {
+  display: none;
+}
+.wb-header {
+  min-height: 76px;
+  padding: 16px 32px;
+  background: white;
+  border-bottom: 1px solid #dce4ed;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.wb-shop-select {
+  min-width: 245px;
+}
+.wb-content {
+  padding: 32px;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+.wb-page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.wb-page-heading h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+.wb-page-heading p {
+  margin: 0;
+  color: #647589;
+}
+.wb-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 14px 18px;
+  background: #eaf1f8;
+  margin-bottom: 20px;
+  border-left: 3px solid #285b83;
+  font-size: 13px;
+}
+.wb-secondary {
+  color: #647589;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.wb-history {
+  padding: 22px 0;
+  border-bottom: 1px solid #dce4ed;
+}
+.wb-history p {
+  color: #647589;
+}
+.wb-centered {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+.wb-form-alert {
+  margin: 16px 0;
+}
+.wb-source-toolbar {
+  margin-bottom: 20px;
+}
+.wb-source-upload {
+  background: #fff;
+  padding: 24px;
+  margin-bottom: 28px;
+  border: 1px solid #dce4ed;
+  border-radius: 6px;
+}
+.wb-source-upload p {
+  color: #647589;
+  max-width: 64em;
+  line-height: 1.7;
+}
+.wb-form-grid,
+.wb-field-mapping {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 22px;
+}
+.wb-publish {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 14px;
+  padding: 22px 0;
+}
+.wb-raw {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #f3f6fa;
+  padding: 12px;
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  .wb-form-grid,
+  .wb-field-mapping {
+    grid-template-columns: 1fr;
+  }
+}
+.wb-login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: white;
+}
+.wb-login-intro {
+  background: #eaf1f8;
+  padding: 5vw 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wb-login-intro .wb-brand {
+  padding: 0 0 60px;
+}
+.wb-login-intro h1 {
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+  color: #244d77;
+}
+.wb-login-intro p {
+  max-width: 28em;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #647589;
+}
+.wb-login-form {
+  width: min(420px, 90%);
+  margin: auto;
+  padding: 30px;
+}
+.wb-login-form p {
+  color: #647589;
+  margin-bottom: 28px;
+}
+.wb-login-form .ant-alert {
+  margin-bottom: 18px;
+}
+@media (max-width: 760px) {
+  .wb-login {
+    grid-template-columns: 1fr;
+  }
+  .wb-login-intro {
+    padding: 32px;
+  }
+  .wb-login-intro .wb-brand {
+    padding-bottom: 16px;
+  }
+  .wb-login-intro h1 {
+    font-size: 28px;
+  }
+  .wb-login-form {
+    padding: 32px 12px;
+  }
+  .wb-content {
+    padding: 20px 14px;
+  }
+  .wb-header {
+    padding: 14px;
+  }
+  .wb-shop-select {
+    min-width: 180px;
+  }
+}

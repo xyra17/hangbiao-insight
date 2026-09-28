@@ -1,0 +1,216 @@
+{
+  "review_id": "caf20012fd26673aee7407d61d94786bcb3fb125",
+  "provider": "deepseek",
+  "api_name": "responses",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "low",
+  "prompt_version": "semantic-prompt-v1.0",
+  "taxonomy_version": "taxonomy-v1.1",
+  "raw_response_ref": "d232086b-b6fc-40dd-8a98-bd60b506e5b3",
+  "raw_response": {
+    "id": "d232086b-b6fc-40dd-8a98-bd60b506e5b3",
+    "created_at": 1789211658.0,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "deepseek-flash",
+    "object": "response",
+    "output": [
+      {
+        "id": "253a38b4-0f9f-49a6-b95a-012424a8b850",
+        "summary": [],
+        "type": "reasoning",
+        "content": [
+          {
+            "text": "We need answer extract claims from review. Need follow schema. Need identify claims. Review title/source. Text: \"Not a \\\"fast charge\\\" charger.\\nThis charged my cell phone at the same rate an older charger did and mot as fast as an old charger from a Motorola Z3.<br />Too bad. The dual USB ports on the charger is why I bought it.\"\n\nNeed extract product-review semantic claims. Zero/multiple. Choose valid primary/secondary pair. Polarity. exact evidence substring.\n\nWe need parse. Claims:\n1. Charging speed not fast; charged at same rate older charger and not as fast as old charger Motorola Z3. Primary function_performance, secondary charging_speed, polarity negative. Evidence span exact continuous substring from SOURCE_TEXT. Could use \"Not a \\\"fast charge\\\" charger.\" or \"This charged my cell phone at the same rate an older charger did and mot as fast as an old charger from a Motorola Z3.\" Need exact. Source includes \"\\n\" and <br />. The evidence should be exact continuous substring. Better choose phrase: \"Not a \\\"fast charge\\\" charger.\" That contains escaped quotes? In source_text JSON it's \"Not a \\\"fast charge\\\" charger.\\n...\" actual text includes quotes. Evidence span should be exact substring likely \"Not a \\\"fast charge\\\" charger.\" But JSON response will escape. Could also choose \"This charged my cell phone at the same rate an older charger did and mot as fast as an old charger from a Motorola Z3.\" Note typo \"mot\" likely not. It is in source. Need exact. This supports charging_speed negative. Could include both? One claim maybe enough. But there's also dual USB ports reason bought it. \"The dual USB ports on the charger is why I bought it.\" That is a positive or neutral? Claim about dual port multi device? It says dual USB ports on charger is why I bought it. This is convenience_value dual_port_multi_device? Polarity positive (why bought it) maybe positive. Need exact evidence: \"The dual USB ports on the charger is why I bought it.\" It indicates feature motivation, positive. But \"Too bad.\" could be negative about overall? It follows prior issue. Could be separate? Maybe not product claim? \"Too bad.\" sentiment but no attribute. We can ignore.\n\nNeed maybe primary convenience_value secondary dual_port_multi_device polarity positive evidence_span \"The dual USB ports on the charger is why I bought it.\" Is that a product-review semantic claim? Yes, dual USB ports on charger is why bought. It's about dual port multi-device? The taxonomy secondary \"dual_port_multi_device\" under convenience_value. Evidence exact.\n\nPotential issue: The review title \"Not a 'fast charge' charger.\" Negative charging_speed. The body also \"This charged my cell phone at the same rate an older charger did and mot as fast as an old charger from a Motorola Z3.\" That is also charging_speed negative. Should we extract both as separate claims? They are same claim? \"A review may contain zero or multiple claims.\" Usually extract distinct claims. Title and sentence support same claim. Could one evidence span per claim. We can include one claim with title evidence or body. Need not duplicate. Maybe include one charging_speed claim with evidence title, and one dual port. But if evidence title only, it doesn't mention comparison? It's enough.\n\nNeed exact evidence_span as continuous substring. The title is in source_text? source_text begins \"Not a \\\"fast charge\\\" charger.\\nThis...\" Yes title is included at start. It ends with period then newline. The title field same. We can use source substring.\n\nNeed ensure no invalid taxonomy pair. Primary function_performance with secondary charging_speed valid. Primary convenience_value with secondary dual_port_multi_device valid.\n\nPolarity: For \"The dual USB ports on the charger is why I bought it.\" Positive? It says why I bought it, a desirable feature. But review rating 1.0 and \"Too bad\" maybe means it's too bad it didn't fast charge. The dual ports reason bought. Yes positive/neutral? They don't explicitly say they like it except purchased because of it. Polarity likely positive. Could be neutral? \"is why I bought it\" implies positive attribute. Use positive.\n\nFor charging_speed, negative.\n\nNeed output JSON exactly with claims array. No extra text.\n\nNeed maybe include \"Not a \\\"fast charge\\\" charger.\" Evidence exact. In JSON value must escape quotes. So \"evidence_span\": \"Not a \\\"fast charge\\\" charger.\" Good.\n\nBut there is an issue: source_text includes backslash escapes? In user content, source_text string is JSON object, actual source_text field has escaped quotes `\\\"`. Wait the entire user message is JSON-ish:\n{\"review_id\": \"...\", \"title\": \"Not a \\\"fast charge\\\" charger.\", \"source_text\": \"Not a \\\"fast charge\\\" charger.\\nThis charged...\" ...}\nThe actual string value includes the quote characters around fast charge, not backslashes. So evidence in output should be `Not a \"fast charge\" charger.` encoded as JSON with escaped quotes. Good.\n\nCould evidence span be \"This charged my cell phone at the same rate an older charger did and mot as fast as an old charger from a Motorola Z3.\" That also is exact. If choose title only, it's okay. But title might be considered not \"source_text\"? It is included in source_text. Yes.\n\nPotential duplicate: If we include both title and body for same claim, maybe over-extraction. Better not.\n\nLet's consider if \"The dual USB ports on the charger is why I bought it.\" qualifies as dual_port_multi_device? It mentions dual USB ports, not multi-device? It can charge multiple devices? The taxonomy secondary dual_port_multi_device likely for dual ports/multi device. Evidence explicitly dual USB ports. So yes.\n\nWhat about \"Too bad.\"? Could be general dissatisfaction but no topic. Not extract.\n\nCould there be a claim about compatibility with Motorola Z3? It says \"mot as fast as an old charger from a Motorola Z3.\" That's charging speed comparison, not compatibility. No.\n\nNeed maybe use \"charging_speed\" negative. Secondary \"charging_speed\" belongs function_performance. Good.\n\nLet's ensure schema: top-level {\"claims\":[...]} each claim exactly primary_topic, secondary_topic, polarity, evidence_span. Use enum values. Polarity \"negative\"/\"positive\".\n\nWe can include two claims. Need exact order? Not specified. We can order charging speed first, dual port second.\n\nLet's craft JSON.\n\nPotential concern: \"The dual USB ports on the charger is why I bought it.\" Is this exact? Source: \"The dual USB ports on the charger is why I bought it.\" Yes.\n\nCould there be a claim \"This charged my cell phone at the same rate an older charger did and mot as fast as an old charger...\" This is negative charging_speed. If we use title as evidence, okay. But maybe title \"Not a \"fast charge\" charger.\" contains exact substring but it's a negation. Good.\n\nNeed no markdown. final.",
+            "type": "reasoning_text"
+          }
+        ],
+        "encrypted_content": "d232086b-b6fc-40dd-8a98-bd60b506e5b3-0",
+        "status": "completed"
+      },
+      {
+        "id": "57d3d09f-5a46-4d63-a5a7-8be5c1dc3b0d",
+        "content": [
+          {
+            "annotations": [],
+            "text": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Not a \\\"fast charge\\\" charger.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"The dual USB ports on the charger is why I bought it.\"}]}",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": "final_answer"
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 1.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 1.0,
+    "background": false,
+    "completed_at": 1789211666.0,
+    "conversation": null,
+    "max_output_tokens": null,
+    "max_tool_calls": null,
+    "moderation": null,
+    "previous_response_id": null,
+    "prompt": null,
+    "prompt_cache_key": null,
+    "prompt_cache_options": null,
+    "prompt_cache_retention": null,
+    "reasoning": {
+      "context": null,
+      "effort": "low",
+      "generate_summary": null,
+      "mode": null,
+      "summary": null
+    },
+    "safety_identifier": null,
+    "service_tier": "default",
+    "status": "completed",
+    "text": {
+      "format": {
+        "name": "review_semantic_extraction",
+        "schema_": {
+          "$defs": {
+            "ExtractedClaim": {
+              "additionalProperties": false,
+              "description": "The only fields the LLM is asked to produce for one claim.",
+              "properties": {
+                "primary_topic": {
+                  "minLength": 1,
+                  "title": "Primary Topic",
+                  "type": "string",
+                  "enum": [
+                    "function_performance",
+                    "reliability_durability",
+                    "compatibility_fit",
+                    "safety_risk",
+                    "usability_installation",
+                    "convenience_value",
+                    "product_quality",
+                    "other_unknown"
+                  ]
+                },
+                "secondary_topic": {
+                  "minLength": 1,
+                  "title": "Secondary Topic",
+                  "type": "string",
+                  "enum": [
+                    "charging_success",
+                    "charging_speed",
+                    "power_output",
+                    "protection_effectiveness",
+                    "general_performance",
+                    "general_durability",
+                    "stopped_working",
+                    "intermittent_failure",
+                    "short_lifespan",
+                    "cracking_breakage",
+                    "wear_damage",
+                    "device_compatibility",
+                    "case_compatibility",
+                    "accessory_compatibility",
+                    "size_fit",
+                    "port_fit",
+                    "wall_socket_fit",
+                    "overheating",
+                    "melting_fire",
+                    "electrical_fault",
+                    "device_damage",
+                    "abnormal_noise",
+                    "physical_injury_irritation",
+                    "positioning_alignment",
+                    "installation_difficulty",
+                    "bubbles_adhesion",
+                    "ease_of_use",
+                    "status_indicator_feedback",
+                    "installation_accessories",
+                    "dual_port_multi_device",
+                    "portability_size",
+                    "price_value",
+                    "general_convenience",
+                    "material_build_quality",
+                    "defective_on_arrival",
+                    "accessory_condition",
+                    "insufficient_information",
+                    "uncategorized"
+                  ]
+                },
+                "polarity": {
+                  "$ref": "#/$defs/Polarity"
+                },
+                "evidence_span": {
+                  "minLength": 1,
+                  "title": "Evidence Span",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_topic",
+                "secondary_topic",
+                "polarity",
+                "evidence_span"
+              ],
+              "title": "ExtractedClaim",
+              "type": "object"
+            },
+            "Polarity": {
+              "enum": [
+                "positive",
+                "neutral",
+                "negative",
+                "mixed"
+              ],
+              "title": "Polarity",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "claims": {
+              "items": {
+                "$ref": "#/$defs/ExtractedClaim"
+              },
+              "title": "Claims",
+              "type": "array"
+            }
+          },
+          "required": [
+            "claims"
+          ],
+          "title": "StructuredExtraction",
+          "type": "object"
+        },
+        "type": "json_schema",
+        "description": null,
+        "strict": null
+      },
+      "verbosity": null
+    },
+    "top_logprobs": 0,
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 1072,
+      "input_tokens_details": {
+        "cache_write_tokens": null,
+        "cached_tokens": 896
+      },
+      "output_tokens": 1582,
+      "output_tokens_details": {
+        "reasoning_tokens": 1500
+      },
+      "total_tokens": 2654
+    },
+    "user": null,
+    "content_filters": null,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false
+  },
+  "payload": "{\"claims\":[{\"primary_topic\":\"function_performance\",\"secondary_topic\":\"charging_speed\",\"polarity\":\"negative\",\"evidence_span\":\"Not a \\\"fast charge\\\" charger.\"},{\"primary_topic\":\"convenience_value\",\"secondary_topic\":\"dual_port_multi_device\",\"polarity\":\"positive\",\"evidence_span\":\"The dual USB ports on the charger is why I bought it.\"}]}"
+}
