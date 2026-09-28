@@ -16,6 +16,8 @@ services:
   redis:
     image: redis:7.4
     restart: unless-stopped
+    environment:
+      INSIGHT_REDIS_PASSWORD: ${INSIGHT_REDIS_PASSWORD:?set INSIGHT_REDIS_PASSWORD}
     command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction", "--requirepass", "${INSIGHT_REDIS_PASSWORD:?set INSIGHT_REDIS_PASSWORD}"]
     volumes: ["redisdata:/data"]
     healthcheck:
@@ -65,7 +67,7 @@ services:
     depends_on:
       api: {condition: service_healthy}
     healthcheck:
-      test: ["CMD-SHELL", "pgrep -f 'celery.*worker' >/dev/null"]
+      test: ["CMD", "python", "-c", "import sys; c=open('/proc/1/cmdline','rb').read().lower(); sys.exit(0 if b'celery' in c and b'worker' in c else 1)"]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -86,7 +88,7 @@ services:
     depends_on:
       api: {condition: service_healthy}
     healthcheck:
-      test: ["CMD-SHELL", "pgrep -f 'celery.*beat' >/dev/null"]
+      test: ["CMD", "python", "-c", "import sys; c=open('/proc/1/cmdline','rb').read().lower(); sys.exit(0 if b'celery' in c and b'beat' in c else 1)"]
       interval: 10s
       timeout: 5s
       retries: 12
