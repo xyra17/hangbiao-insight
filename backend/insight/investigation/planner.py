@@ -53,6 +53,17 @@ class DeterministicPlanner:
                 if isinstance(signal, dict)
             )
             signals.append(str(item.get("metric", "")).lower())
+        # Safety is an independent, immediate-review path.  Do this before the
+        # normal review/text routing so a query such as “调查安全评论原因”
+        # cannot spend additional investigation steps after a safety signal has
+        # already been observed.
+        if any("safety" in signal or "安全" in signal for signal in signals):
+            return PlannerDecision(
+                stop_reason="安全线索已分流给人工核查，调查图不继续扩大读取范围。",
+                hypothesis="安全线索只能生成内部核查建议，不作自动经营变更。",
+                counter_evidence_query="核对原文是否为否定、假设或与对象无关的安全表述。",
+                confidence=0.95,
+            )
         wants_review = any(word in text for word in ("评论", "review", "退货", "退款", "安全", "原因"))
         wants_text = wants_review or any(word in text for word in ("原文", "评论", "原因", "why", "review"))
         if "metric_snapshot" not in seen and "metric_snapshot" in available_tools:
@@ -75,12 +86,6 @@ class DeterministicPlanner:
                 hypothesis="用冻结范围内的原文和售后记录验证候选解释。",
                 counter_evidence_query="检索反证：是否存在相反反馈或其他主题？",
                 confidence=0.65,
-            )
-        if evidence and any("safety" in signal or "安全" in signal for signal in signals):
-            return PlannerDecision(
-                stop_reason="安全线索已分流给人工核查，调查图不继续扩大读取范围。",
-                hypothesis="安全线索只能生成内部核查建议，不作自动经营变更。",
-                confidence=0.95,
             )
         return PlannerDecision(
             stop_reason="当前授权范围内已完成可验证取证，剩余结论需要人工判断。",

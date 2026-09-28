@@ -36,6 +36,28 @@ def test_fuzzy_route_returns_scoped_candidates_and_clarification_can_continue(me
     assert child.child_asin == "B000TEST02"
 
 
+def test_fuzzy_route_never_lists_a_product_from_another_shop(metric_scope, client):
+    users, shops = metric_scope
+    create_product(
+        users["admin"], shops[1],
+        {
+            "child_asin": "B000OTHER1", "seller_sku": "OTHER-SKU", "fulfillment": "FBA",
+            "name": "另一个店铺商品", "parent_asin": "", "owner": None,
+            "effective_from": date(2025, 1, 1), "reason": "test",
+        },
+        "test",
+    )
+    client.force_authenticate(users["a"])
+    response = client.post(
+        "/api/v1/investigations/",
+        {"shop": str(shops[0].pk), "query": "调查商品异常", "max_steps": 8, "idempotency_key": "fuzzy-scope-1"},
+        format="json",
+    )
+    run_job(response.data["id"])
+    run = InvestigationRun.objects.get(pk=response.data["result"]["investigation_id"])
+    assert all(item["child_asin"] != "B000OTHER1" for item in run.result["candidates"])
+
+
 def test_agent_receipts_have_budget_decisions_and_per_tool_authorization(metric_scope, client):
     users, shops = metric_scope
     client.force_authenticate(users["a"])
@@ -56,3 +78,31 @@ def test_agent_receipts_have_budget_decisions_and_per_tool_authorization(metric_
         "create_draft_task",
     }
     assert all(item["external_write"] is False for item in payload["tool_permissions"])
+
+
+def test_deterministic_planner_changes_route_after_evidence_and_stops_on_safety():
+    from insight.investigation.planner import DeterministicPlanner
+
+    planner = DeterministicPlanner()
+    first = planner.decide(
+        query="分析商品异常",
+        evidence=[],
+        history=[],
+        available_tools=["metric_snapshot", "review_claims", "text_evidence"],
+    )
+    assert first.next_tool == "metric_snapshot"
+    review_path = planner.decide(
+        query="调查评论原因",
+        evidence=[{"signals": [{"metric": "sales_units"}]}],
+        history=[{"tool": "metric_snapshot"}],
+        available_tools=["review_claims", "text_evidence"],
+    )
+    assert review_path.next_tool == "review_claims"
+    safety_path = planner.decide(
+        query="调查评论原因",
+        evidence=[{"signals": [{"metric": "safety_risk"}]}],
+        history=[{"tool": "metric_snapshot"}],
+        available_tools=["review_claims", "text_evidence"],
+    )
+    assert safety_path.next_tool == ""
+    assert "安全线索" in safety_path.stop_reason

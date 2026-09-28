@@ -43,3 +43,46 @@ def test_adapter_keeps_guard_rejections_for_coverage_and_trace():
     )]))
     claims=adapter.extract("actual review")
     assert claims == [Claim("invalid","invalid","negative","invented","rejected",("evidence_not_found",),"response-ref")]
+
+
+def test_structured_planner_accepts_evidence_driven_tool_change_and_counter_query():
+    from app.agent.planner import LLMPlanner
+    from app.agent.state import InvestigationState
+
+    class Gateway:
+        def __init__(self):
+            self.calls = []
+
+        def plan(self, *, system, user, schema):
+            self.calls.append({"system": system, "user": user, "schema": schema})
+            return {
+                "decision": "call_tool",
+                "tool_name": "text_evidence",
+                "arguments": {"query": "找相反反馈"},
+                "decision_summary": "指标与评论方向不一致，需要取反证。",
+                "target_hypothesis_id": "h1",
+                "stop_reason": None,
+                "final_answer": None,
+                "confidence": 0.72,
+                "missing_fields": "",
+                "counter_evidence_query": "是否存在相反极性评论？",
+            }
+
+    gateway = Gateway()
+    decision = LLMPlanner(gateway).decide(
+        InvestigationState(
+            request_id="planner-test",
+            user_query="调查退货异常",
+            product_id="product-1",
+            observations=[
+                {"tool_name": "metric_snapshot", "status": "success", "data": {"returns": 12}, "source_refs": ["snapshot-1"]}
+            ],
+            hypotheses=[{"id": "h1", "summary": "退货与产品问题有关"}],
+        ),
+        ("review_claims", "text_evidence"),
+    )
+    assert decision.decision == "call_tool"
+    assert decision.tool_name == "text_evidence"
+    assert decision.arguments == {"query": "找相反反馈"}
+    assert decision.counter_evidence_query
+    assert gateway.calls[0]["schema"]["additionalProperties"] is False

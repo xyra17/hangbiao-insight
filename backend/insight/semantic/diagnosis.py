@@ -100,6 +100,13 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
     start = date.fromisoformat(payload.get("daily", {}).get("baseline", {}).get("start", str(as_of - timedelta(days=56))))
     end = as_of - timedelta(days=1)
     facts, scenarios = [], {}
+    # Keep the linkage result as a first-class, auditable fact.  Previously it
+    # was only returned at the top level, which made it possible for a report
+    # consumer to miss the difference between one linked order experience and
+    # several unlinked source rows.  The linkage is still descriptive: it
+    # never changes metric denominators or turns a text match into an order
+    # identity.
+    experience = None
     for section in ("daily", "absolute", "cohort", "occurrence"):
         data = payload.get(section, {})
         for signal in data.get("signals", []):
@@ -114,6 +121,32 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
             facts.append(item)
     # Cross-source facts are linked by stable source references; they never increase review denominators.
     if snapshot and _manifest_is_resolvable(snapshot.source_manifest):
+        from .experiences import experience_links
+
+        experience = experience_links(snapshot, start, end)
+        linkage_refs = sorted({
+            str(ref.get("raw_row_id"))
+            for group in experience.get("groups", [])
+            for ref in group.get("records", [])
+            if ref.get("raw_row_id")
+        } | {
+            str(ref.get("raw_row_id"))
+            for ref in experience.get("unlinked", [])
+            if ref.get("raw_row_id")
+        })
+        if linkage_refs:
+            facts.append(_fact(
+                "experience_linkage",
+                "experience_links",
+                {
+                    "status": experience.get("status"),
+                    "linked_order_count": experience.get("linked_order_count", 0),
+                    "source_counts": experience.get("source_counts", {}),
+                    "unlinked_count": len(experience.get("unlinked", [])),
+                },
+                confidence="linked_order_identity" if experience.get("groups") else "unlinked",
+                refs=linkage_refs,
+            ))
         for kind in ("support", "operations"):
             for row in latest_facts(
                 snapshot.source_manifest, kind, snapshot.child_asin, snapshot.product_id
@@ -291,6 +324,14 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
             if f["polarity"] == "positive"
             and f.get("primary_topic") in {s.get("primary_topic") for s in supporting}
         ]
+        # A candidate is an investigation lead only.  Keep this explicit in
+        # the payload so the UI and downstream exports cannot mistake a
+        # ranked rule signal for an established causal explanation.  In
+        # particular, a missing Sessions denominator must remain visible as a
+        # hard limitation for traffic/conversion interpretation.
+        candidate_missing = [limitation]
+        if key in {"traffic", "price", "variant_mix"} and not checks.get("Sessions", False):
+            candidate_missing.append("缺少完整 Sessions 分母，禁止据此确定销量或转化因果")
         candidates.append(
             {
                 "candidate_id": key,
@@ -300,9 +341,11 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
                 "support_refs": refs,
                 "counter_evidence": counter,
                 "conflicting_facts": [],
-                "missing_checks": [limitation],
+                "missing_checks": candidate_missing,
                 "next_action": "回查原文、原始报表及商品实物并记录人工核查结论",
-                "limitations": [limitation],
+                "limitations": candidate_missing,
+                "causal_status": "not_established",
+                "causal_claim_allowed": False,
                 "ranking": {
                     "human_verified": False,
                     "object_match": True,
@@ -314,7 +357,19 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
             }
         )
     candidates.sort(key=lambda c: (c["ranking"]["unresolved_counter_count"], c["candidate_id"]))
-    coverage = {"gate": trends["status"], "windows": trends["windows"]}
+    coverage = {
+        "gate": trends["status"],
+        "windows": trends["windows"],
+        "effective_denominator": [
+            {"start": window.get("start"), "end": window.get("end"), "analyzed": window.get("analyzed", 0)}
+            for window in trends.get("windows", [])
+        ],
+        "gate_reason": (
+            "两个完整窗口均达到最小样本、覆盖率和来源完整性"
+            if trends.get("status") == "ready"
+            else "样本、覆盖率或来源完整性不足，禁止把主题趋势当作总体结论"
+        ),
+    }
     trend = trends
     safety = [
         i for i in claims if i.get("primary_topic") == "safety_risk" and i.get("polarity") == "negative"
@@ -322,7 +377,9 @@ def build_diagnostic_payload(snapshot, semantic_run=None):
     from .experiences import experience_links
 
     return {
-        "experience_links": experience_links(material, start, end) if material else None,
+        "experience_links": experience if experience is not None else (
+            experience_links(material, start, end) if material else None
+        ),
         "evidence_facts": facts,
         "scenarios": scenarios,
         "candidates": candidates,
@@ -501,6 +558,12 @@ def validate_diagnostic_payload(diagnosis, snapshot=None, semantic_run=None):
             }
             if not set(fact.get("source_refs", [])) <= valid_review_refs:
                 errors.append("文本事实引用不属于当前已接受语义结果")
+    fact_refs = {
+        str(ref)
+        for fact in facts
+        for ref in fact.get("source_refs", [])
+        if ref is not None
+    }
     for candidate in diagnosis.get("candidates", []):
         if not candidate.get("support_facts"):
             errors.append("候选缺少支持事实")
@@ -512,6 +575,14 @@ def validate_diagnostic_payload(diagnosis, snapshot=None, semantic_run=None):
         counters = candidate.get("counter_evidence", [])
         if not set(counters) <= fact_ids:
             errors.append("候选反证事实不存在")
+        support_refs = {str(ref) for ref in candidate.get("support_refs", [])}
+        counter_refs = {str(ref) for ref in candidate.get("counter_refs", [])}
+        if not support_refs <= fact_refs:
+            errors.append("候选支持引用不存在于事实来源")
+        if not counter_refs <= fact_refs:
+            errors.append("候选反证引用不存在于事实来源")
+        if candidate.get("causal_status") == "confirmed" or candidate.get("causal_claim_allowed") is True:
+            errors.append("规则候选不得声明已确认因果")
         if len(supports) > 100 or len(candidate.get("support_refs", [])) > 100:
             errors.append("候选引用数量超过上限")
     return {"valid": not errors, "errors": sorted(set(errors))}

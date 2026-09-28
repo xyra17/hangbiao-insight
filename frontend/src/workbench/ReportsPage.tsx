@@ -43,8 +43,15 @@ type Report = {
         status: string;
         support_refs: string[];
         missing_checks: string[];
+        causal_status?: string;
+        causal_claim_allowed?: boolean;
       }[];
-      coverage?: { gate: string; windows?: unknown[] };
+      coverage?: {
+        gate: string;
+        windows?: unknown[];
+        effective_denominator?: { start?: string; end?: string; analyzed?: number }[];
+        gate_reason?: string;
+      };
       safety?: { urgent: boolean; route: string };
       experience_links?: {
         status: string;
@@ -335,10 +342,23 @@ function ReportDetail({ report }: { report: Report }) {
             >
               覆盖：{payload.diagnosis.coverage?.gate ?? "缺失"}
             </Tag>
+            {payload.diagnosis.coverage?.effective_denominator && (
+              <Tag>
+                有效样本：
+                {payload.diagnosis.coverage.effective_denominator
+                  .map((window) => window.analyzed ?? 0)
+                  .join(" / ")}
+              </Tag>
+            )}
             {payload.diagnosis.safety?.urgent && (
               <Tag color="red">安全反馈：已生成人工核查任务</Tag>
             )}
           </Space>
+          {payload.diagnosis.coverage?.gate_reason && (
+            <Typography.Paragraph type="secondary">
+              覆盖门槛：{payload.diagnosis.coverage.gate_reason}
+            </Typography.Paragraph>
+          )}
           <Typography.Paragraph type="secondary">
             场景检查：
             {Object.values(payload.diagnosis.scenarios ?? {})
@@ -396,6 +416,12 @@ function ReportDetail({ report }: { report: Report }) {
                 {candidate.support_refs.length} 条；待核查：
                 {candidate.missing_checks.join("；")}
               </Typography.Paragraph>
+              <Typography.Text type="secondary">
+                因果状态：{candidate.causal_status ?? "not_established"}；
+                {candidate.causal_claim_allowed === true
+                  ? "允许直接归因"
+                  : "仅作待核查线索，不能直接归因"}
+              </Typography.Text>
             </Card>
           ))}
         </Card>

@@ -59,3 +59,16 @@ def test_operation_alone_does_not_explain_business_change(metric_scope):
     result = build_diagnostic_payload(snapshot(metric_scope))
     assert any(f["source"] == "operations" for f in result["evidence_facts"])
     assert not any(c["candidate_id"] in {"price", "variant_mix"} for c in result["candidates"])
+
+
+def test_diagnostic_payload_exposes_linkage_without_counting_unlinked_rows(metric_scope):
+    for kind in ("orders", "returns", "refunds"):
+        publish(metric_scope, kind)
+    publish(metric_scope, "support", order_line_id="O1-L1")
+    publish(metric_scope, "reviews")
+    result = build_diagnostic_payload(snapshot(metric_scope))
+    linkage = [fact for fact in result["evidence_facts"] if fact["source"] == "experience_links"]
+    assert len(linkage) == 1
+    assert linkage[0]["value"]["linked_order_count"] == 1
+    assert linkage[0]["value"]["unlinked_count"] == 1
+    assert result["experience_links"]["independence"] == "unknown"

@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build --config vite.config.ts",
     "preview": "vite preview --config vite.config.ts --host 127.0.0.1",
     "schema": "openapi-typescript ../docs/openapi.yaml -o src/workbench/schema.d.ts",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests --exclude 'e2e/**'",
     "test:e2e": "playwright test"
   },
   "dependencies": {
