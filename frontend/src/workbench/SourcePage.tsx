@@ -14,13 +14,19 @@ import {
   Table,
   Tag,
   Typography,
+  Modal,
 } from "antd";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { components } from "./schema";
 import { request, type Job, type Page, type Shop } from "./api";
 
 type Source = components["schemas"]["Source"];
-type Batch = components["schemas"]["Batch"];
+type Batch = components["schemas"]["Batch"] & {
+  revoked_revision?: number | null;
+  revoked_at?: string | null;
+  revoke_reason?: string;
+  retracted_rows?: number;
+};
 type Row = components["schemas"]["Row"];
 type Catalog = components["schemas"]["SourceCatalog"];
 const labels: Record<string, string> = {
@@ -79,6 +85,7 @@ const states: Record<string, string> = {
   preview: "待核对发布",
   invalid: "校验未通过",
   published: "已发布",
+  revoked: "已撤销当前影响",
 };
 
 export default function SourcePage({
@@ -102,6 +109,8 @@ export default function SourcePage({
   const [rowPage, setRowPage] = useState(1);
   const [batchPage, setBatchPage] = useState(1);
   const [onlyErrors, setOnlyErrors] = useState(false);
+  const [revokeOpen, setRevokeOpen] = useState(false);
+  const [revokeReason, setRevokeReason] = useState("");
   const [sourceForm] = Form.useForm();
   const [uploadForm] = Form.useForm();
   const sources = useQuery({
@@ -246,6 +255,20 @@ export default function SourcePage({
         confirm_contract: confirmed,
       }),
     onSuccess: (j) => setJobId(j.id),
+  });
+  const revoke = useMutation({
+    mutationFn: () =>
+      request<Job>(`imports/${batchId}/revoke-publication/`, "POST", {
+        reason: revokeReason,
+        idempotency_key: crypto.randomUUID(),
+      }),
+    onSuccess: (j) => {
+      setJobId(j.id);
+      setRevokeOpen(false);
+      setRevokeReason("");
+      void cache.invalidateQueries({ queryKey: ["imports"] });
+      void detail.refetch();
+    },
   });
   function openSource(source: Source | null) {
     setRevising(source);
@@ -460,6 +483,24 @@ export default function SourcePage({
               {
                 title: "发布版本",
                 render: (_, b) => b.published_revision ?? "未发布",
+              },
+              {
+                title: "纠错",
+                render: (_, b) =>
+                  b.status === "published" ? (
+                    <Button
+                      type="link"
+                      onClick={() => {
+                        setBatchId(b.id);
+                        setRevokeReason("");
+                        setRevokeOpen(true);
+                      }}
+                    >
+                      撤销当前影响
+                    </Button>
+                  ) : b.status === "revoked" ? (
+                    <Tag color="orange">已记录纠错</Tag>
+                  ) : null,
               },
               {
                 title: "操作",
@@ -694,6 +735,15 @@ export default function SourcePage({
                   label: "发布版本",
                   children: batch.published_revision ?? "未发布",
                 },
+                ...(batch.status === "revoked"
+                  ? [
+                      {
+                        key: "revoke",
+                        label: "纠错修订",
+                        children: `已撤销至修订 ${batch.revoked_revision ?? "—"}；${batch.retracted_rows ?? 0} 行影响已保留为审计占位。`,
+                      },
+                    ]
+                  : []),
               ]}
             />
             {batch.error && <Alert type="error" title={batch.error} />}
@@ -737,6 +787,18 @@ export default function SourcePage({
                   loading={publish.isPending}
                 >
                   确认发布
+                </Button>
+              </section>
+            )}
+            {batch.status === "published" && (
+              <section className="wb-publish">
+                <Alert
+                  type="warning"
+                  showIcon
+                  title="撤销只会纠正当前来源版本的影响，不会删除原文件、历史事实或其他修订。"
+                />
+                <Button danger onClick={() => setRevokeOpen(true)}>
+                  撤销当前发布影响
                 </Button>
               </section>
             )}
@@ -804,6 +866,24 @@ export default function SourcePage({
           </>
         )}
       </Drawer>
+      <Modal
+        title="记录来源纠错"
+        open={revokeOpen}
+        okText="提交纠错"
+        cancelText="取消"
+        okButtonProps={{ danger: true, disabled: revokeReason.trim().length < 3, loading: revoke.isPending }}
+        onCancel={() => setRevokeOpen(false)}
+        onOk={() => revoke.mutate()}
+      >
+        <p>系统会创建不可变的撤回占位并刷新派生指标，不会物理删除原始文件或历史审计。</p>
+        <Input.TextArea
+          rows={4}
+          value={revokeReason}
+          onChange={(event) => setRevokeReason(event.target.value)}
+          placeholder="例如：来源方重新生成了 2026-09-20 的评论报表，当前批次应按纠错处理。"
+        />
+        {revoke.error && <Alert type="error" title={revoke.error.message} />}
+      </Modal>
     </>
   );
 }

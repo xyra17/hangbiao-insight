@@ -91,7 +91,7 @@ def cohort_from_facts(
             for order_id, entries in groups.items()
             for row, shipped in entries
         }
-        affected, late, unmatched, raw_ids = set(), set(), 0, []
+        affected, late, unmatched, unclassified_statuses, raw_ids = set(), set(), 0, 0, []
         refund_chains = []
         if kind == "refunds":
             chains = defaultdict(list)
@@ -137,13 +137,18 @@ def cohort_from_facts(
                 continue
             convention = next(iter(conventions), "received")
             result["return_event"] = convention
+            eligible_statuses = {"requested", "received", "completed"} if convention == "requested" else {"received", "completed"}
             for row in rows:
                 timestamp = event_time(row, f"{convention}_at", f"{convention}_date", zone)
                 if (
                     timestamp is None
                     or timestamp >= as_of
-                    or row.status.lower() in {"cancelled", "canceled", "rejected"}
+                    or row.status.lower() not in eligible_statuses
                 ):
+                    if row.status.lower() not in {
+                        "requested", "received", "completed", "cancelled", "canceled", "rejected"
+                    }:
+                        unclassified_statuses += 1
                     continue
                 if row.order_line_id not in linked:
                     unmatched += 1
@@ -203,6 +208,7 @@ def cohort_from_facts(
         )
         if (
             unmatched
+            or unclassified_statuses
             or baseline["unverified_first_shipment_orders"]
             or current["unverified_first_shipment_orders"]
         ):
@@ -215,6 +221,7 @@ def cohort_from_facts(
             "difference_interval_95": interval,
             "late_order_count": len(late),
             "unmatched_records": unmatched,
+            "unclassified_status_records": unclassified_statuses,
             "raw_row_ids": raw_ids,
             "refund_chains": refund_chains,
             "observing_orders": sum(

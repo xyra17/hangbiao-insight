@@ -159,8 +159,17 @@ export default function ActionsPage({
   const create = useMutation({
     mutationFn: (data: Record<string, unknown>) =>
       request<Task>("action-tasks/", "POST", { shop: shop.id, ...data }),
-    onSuccess: () => {
+    onSuccess: (task) => {
       form.resetFields();
+      cache.setQueryData<Page<Task>>(["action-tasks", shop.id], (current) =>
+        current
+          ? {
+              ...current,
+              count: current.count + (current.results.some((item) => item.id === task.id) ? 0 : 1),
+              results: [task, ...current.results.filter((item) => item.id !== task.id)],
+            }
+          : current,
+      );
       void cache.invalidateQueries({ queryKey: ["action-tasks", shop.id] });
     },
   });
@@ -255,8 +264,17 @@ export default function ActionsPage({
         idempotency_key: values.idempotency_key,
       });
     },
-    onSuccess: () => {
+    onSuccess: (proposal) => {
       proposalForm.resetFields(["target_task", "assigned_to", "due_at", "target_json", "before_json", "after_json", "evidence_refs"]);
+      cache.setQueryData<Page<Proposal>>(["proposals", shop.id], (current) =>
+        current
+          ? {
+              ...current,
+              count: current.count + (current.results.some((item) => item.id === proposal.id) ? 0 : 1),
+              results: [proposal, ...current.results.filter((item) => item.id !== proposal.id)],
+            }
+          : current,
+      );
       void cache.invalidateQueries({ queryKey: ["proposals", shop.id] });
     },
   });
@@ -440,6 +458,7 @@ export default function ActionsPage({
         rowKey="id"
         dataSource={tasks.data?.results ?? []}
         loading={tasks.isLoading}
+        pagination={{ pageSize: 50, showSizeChanger: false }}
         locale={{ emptyText: <Empty description="暂无待核查任务" /> }}
         columns={[
           { title: "任务", dataIndex: "title" },
@@ -525,6 +544,7 @@ export default function ActionsPage({
         rowKey="id"
         dataSource={proposals.data?.results ?? []}
         loading={proposals.isLoading}
+        pagination={{ pageSize: 50, showSizeChanger: false }}
         locale={{ emptyText: <Empty description="暂无变更提案" /> }}
         columns={[
           { title: "提案编号", dataIndex: "idempotency_key" },

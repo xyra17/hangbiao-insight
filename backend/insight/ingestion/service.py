@@ -15,6 +15,7 @@ from insight.access import is_admin, require_role
 from insight.api_errors import Conflict
 from insight.models import (
     CoveragePartition,
+    FactRetraction,
     ImportBatch,
     Job,
     Outbox,
@@ -59,6 +60,7 @@ def create_source(actor, shop, data, request_id):
         coverage_basis=data.get("coverage_basis", "business_date"),
         return_event=data.get("return_event", "received"),
         empty_report_means_zero=data.get("empty_report_means_zero", False),
+        retention_days=data.get("retention_days", 180),
     )
     audit(actor, shop, "source.created", source.pk, after={"kind": source.kind}, request_id=request_id)
     return source
@@ -82,6 +84,7 @@ def revise_contract(actor, source, data, request_id):
         coverage_basis=data.get("coverage_basis", "business_date"),
         return_event=data.get("return_event", "received"),
         empty_report_means_zero=data.get("empty_report_means_zero", False),
+        retention_days=data.get("retention_days", current.retention_days),
     )
     audit(
         actor,
@@ -393,4 +396,80 @@ def publish_batch(actor, batch_id, *, allow_partial, confirm_contract, request_i
     from insight.metrics.scheduling import schedule_after_import
 
     schedule_after_import(actor, batch, sorted(affected_asins))
+    return batch
+
+
+@transaction.atomic
+def revoke_published_batch(actor, batch_id, *, reason, request_id):
+    """Create an auditable correction revision for the current published batch.
+
+    This command deliberately does not delete raw files, staged rows or facts.
+    It only accepts the current source revision, records tombstones for the
+    batch's exact business keys, marks the coverage partition as revoked, and
+    schedules the same derived refresh path used by a normal publish.
+    """
+    if not reason or not reason.strip():
+        raise ValidationError("撤销发布必须填写纠错原因。")
+    batch = ImportBatch.objects.select_related("contract__source__shop").select_for_update().get(pk=batch_id)
+    source = Source.objects.select_for_update().get(pk=batch.contract.source_id)
+    Shop.objects.select_for_update().get(pk=source.shop_id)
+    require_source_access(actor, source.shop)
+    if batch.status != "published" or not batch.published_revision:
+        raise Conflict("只有已发布批次可以撤销当前影响。")
+    if source.revision != batch.published_revision:
+        raise Conflict("该批次已经不是来源当前版本，请先使用后续修订纠正；历史版本不会被整批回退。")
+    partition = CoveragePartition.objects.select_for_update().get(batch=batch)
+    source.revision += 1
+    effective_revision = source.revision
+    source.save(update_fields=["revision"])
+    rows = batch.rows.filter(error="").values("business_key", "normalized", "raw")
+    keys = []
+    asin_by_key = {}
+    for row in rows:
+        key = row["business_key"]
+        if not key:
+            continue
+        keys.append(key)
+        normalized = row.get("normalized") or {}
+        asin_by_key[key] = normalized.get("child_asin") or normalized.get("asin") or ""
+    existing = set(
+        FactRetraction.objects.filter(
+            source=source, batch=batch, target_revision=batch.published_revision
+        ).values_list("business_key", flat=True)
+    )
+    retractions = [
+        FactRetraction(
+            source=source,
+            batch=batch,
+            business_key=key,
+            child_asin=asin_by_key.get(key, ""),
+            target_revision=batch.published_revision,
+            effective_revision=effective_revision,
+            actor=actor,
+            reason=reason.strip()[:500],
+        )
+        for key in sorted(set(keys) - existing)
+    ]
+    FactRetraction.objects.bulk_create(retractions)
+    partition.revision = effective_revision
+    partition.status = "revoked"
+    partition.save(update_fields=["revision", "status"])
+    batch.status = "revoked"
+    batch.revoked_revision = effective_revision
+    batch.revoked_at = timezone.now()
+    batch.revoke_reason = reason.strip()[:500]
+    batch.retracted_rows = len(retractions)
+    batch.save(update_fields=["status", "revoked_revision", "revoked_at", "revoke_reason", "retracted_rows"])
+    audit(
+        actor,
+        source.shop,
+        "import.revoked",
+        batch.pk,
+        before={"status": "published", "revision": batch.published_revision},
+        after={"status": "revoked", "revision": effective_revision, "retracted_rows": len(retractions)},
+        request_id=request_id,
+    )
+    from insight.metrics.scheduling import schedule_after_import
+
+    schedule_after_import(actor, batch, sorted(set(batch.declared_asins)))
     return batch

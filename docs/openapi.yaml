@@ -753,6 +753,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/Job'
           description: ''
+  /api/v1/imports/{id}/revoke-publication/:
+    post:
+      operationId: imports_revoke_publication_create
+      description: Create a queued correction command for the current publication.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 import batch 的 UUID 字符串。
+        required: true
+      tags:
+      - imports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeCommandRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RevokeCommandRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RevokeCommandRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+          description: ''
   /api/v1/imports/{id}/rows/:
     get:
       operationId: imports_rows_list
@@ -871,6 +906,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Investigation'
+          description: ''
+  /api/v1/investigations/{id}/clarify/:
+    post:
+      operationId: investigations_clarify_create
+      description: Continue a clarification as a linked run using only remaining budget.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: 标识此 investigation run 的 UUID 字符串。
+        required: true
+      tags:
+      - investigations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvestigationClarificationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InvestigationClarificationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InvestigationClarificationRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
           description: ''
   /api/v1/investigations/{id}/resume/:
     post:
@@ -2660,6 +2730,21 @@ components:
           format: date-time
           readOnly: true
           nullable: true
+        revoked_revision:
+          type: integer
+          readOnly: true
+          nullable: true
+        revoked_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        revoke_reason:
+          type: string
+          readOnly: true
+        retracted_rows:
+          type: integer
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -2684,6 +2769,10 @@ components:
       - id
       - published_at
       - published_revision
+      - retracted_rows
+      - revoke_reason
+      - revoked_at
+      - revoked_revision
       - source_id
       - status
       - total_rows
@@ -2824,6 +2913,9 @@ components:
         empty_report_means_zero:
           type: boolean
           readOnly: true
+        retention_days:
+          type: integer
+          readOnly: true
       required:
       - approved_at
       - column_mapping
@@ -2832,6 +2924,7 @@ components:
       - grain
       - id
       - ignored_columns
+      - retention_days
       - return_event
       - version
     ContractCommandRequest:
@@ -2865,6 +2958,11 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReturnEventEnum'
           default: received
+        retention_days:
+          type: integer
+          maximum: 3650
+          minimum: 1
+          default: 180
       required:
       - column_mapping
       - grain
@@ -3495,6 +3593,45 @@ components:
             type: object
             additionalProperties: {}
           readOnly: true
+        budget:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        tool_calls:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        tool_permissions:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          description: Expose the frozen matrix so a reviewer can audit available
+            tools.
+          readOnly: true
+        model_attempts:
+          type: integer
+          readOnly: true
+        model_tokens:
+          type: integer
+          readOnly: true
+        model_cost:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,12}(?:\.\d{0,8})?$
+          readOnly: true
+        elapsed_ms:
+          type: integer
+          readOnly: true
+        duplicate_queries:
+          type: integer
+          readOnly: true
+        decisions:
+          readOnly: true
+        counter_evidence:
+          readOnly: true
         created_at:
           type: string
           format: date-time
@@ -3505,13 +3642,21 @@ components:
             $ref: '#/components/schemas/InvestigationStep'
           readOnly: true
       required:
+      - budget
       - budget_units
       - checkpoint_version
       - child_asin
+      - counter_evidence
       - created_at
+      - decisions
+      - duplicate_queries
+      - elapsed_ms
       - id
       - input_versions
       - max_steps
+      - model_attempts
+      - model_cost
+      - model_tokens
       - previous_run
       - product
       - query
@@ -3526,6 +3671,32 @@ components:
       - steps
       - steps_used
       - stop_reason
+      - tool_calls
+      - tool_permissions
+    InvestigationClarificationRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 2
+          maxLength: 2000
+        child_asin:
+          oneOf:
+          - type: string
+            pattern: ^[A-Z0-9]{10}$
+          - type: string
+            maxLength: 0
+        product:
+          type: string
+          format: uuid
+          nullable: true
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - idempotency_key
+      - query
     InvestigationCommandRequest:
       type: object
       properties:
@@ -3551,6 +3722,15 @@ components:
           maximum: 12
           minimum: 3
           default: 6
+        planner_provider:
+          allOf:
+          - $ref: '#/components/schemas/PlannerProviderEnum'
+          default: deterministic
+          description: |-
+            默认使用确定性 planner；真实供应商须通过部署环境明确启用。
+
+            * `deterministic` - deterministic
+            * `deepseek` - deepseek
         allow_internal_task:
           type: boolean
           default: false
@@ -4540,6 +4720,14 @@ components:
       - member
       - password
       - reason
+    PlannerProviderEnum:
+      enum:
+      - deterministic
+      - deepseek
+      type: string
+      description: |-
+        * `deterministic` - deterministic
+        * `deepseek` - deepseek
     PolarityEnum:
       enum:
       - positive
@@ -4896,6 +5084,20 @@ components:
       required:
       - expected_version
       - status
+    RevokeCommandRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          minLength: 3
+          maxLength: 500
+        idempotency_key:
+          type: string
+          minLength: 1
+          maxLength: 150
+      required:
+      - idempotency_key
+      - reason
     RolesEnum:
       enum:
       - data_admin
@@ -5684,6 +5886,11 @@ components:
           allOf:
           - $ref: '#/components/schemas/ReturnEventEnum'
           default: received
+        retention_days:
+          type: integer
+          maximum: 3650
+          minimum: 1
+          default: 180
         shop:
           type: string
           format: uuid

@@ -20,6 +20,7 @@ class AgentDecision(BaseModel):
     final_answer: str | None = None
     confidence: float | None = Field(default=None, ge=0, le=1)
     missing_fields: list[str] = Field(default_factory=list)
+    counter_evidence_query: str = ""
     # legacy aliases retained for existing callers
     action: str | None = None
     params: dict | None = None

@@ -13,6 +13,7 @@ from insight.serializers import JobSerializer
 from insight.services import audit
 
 from .access import visible_investigations
+from .policy import permission_matrix
 
 
 class InvestigationCommand(serializers.Serializer):
@@ -21,10 +22,22 @@ class InvestigationCommand(serializers.Serializer):
     child_asin = serializers.RegexField(r"^[A-Z0-9]{10}$", required=False, allow_blank=True)
     product = serializers.UUIDField(required=False, allow_null=True)
     max_steps = serializers.IntegerField(min_value=3, max_value=12, default=6)
+    planner_provider = serializers.ChoiceField(
+        choices=["deterministic", "deepseek"],
+        default="deterministic",
+        help_text="默认使用确定性 planner；真实供应商须通过部署环境明确启用。",
+    )
     allow_internal_task = serializers.BooleanField(
         default=False,
         help_text="明确允许调查图在有证据时创建一个未指派的内部核查草稿；不授权任何外部经营变更。",
     )
+    idempotency_key = serializers.CharField(max_length=150)
+
+
+class InvestigationClarification(serializers.Serializer):
+    query = serializers.CharField(min_length=2, max_length=2000)
+    child_asin = serializers.RegexField(r"^[A-Z0-9]{10}$", required=False, allow_blank=True)
+    product = serializers.UUIDField(required=False, allow_null=True)
     idempotency_key = serializers.CharField(max_length=150)
 
 
@@ -48,10 +61,59 @@ class InvestigationStepSerializer(serializers.ModelSerializer):
 class InvestigationSerializer(serializers.ModelSerializer):
     steps = InvestigationStepSerializer(many=True, read_only=True)
     refreshes = serializers.SerializerMethodField()
+    budget = serializers.SerializerMethodField()
+    tool_calls = serializers.SerializerMethodField()
+    tool_permissions = serializers.SerializerMethodField()
 
     def get_refreshes(self, obj) -> list[dict]:
         from insight.derived import artifact_refreshes
         return artifact_refreshes("investigation", obj.pk)
+
+    def get_budget(self, obj) -> dict:
+        entries = list(obj.budget_ledger.order_by("sequence"))
+        return {
+            "max_steps": obj.max_steps,
+            "steps_used": obj.steps_used,
+            "remaining_units": obj.budget_units,
+            "model_attempts": obj.model_attempts,
+            "model_tokens": obj.model_tokens,
+            "model_cost": str(obj.model_cost),
+            "elapsed_ms": obj.elapsed_ms,
+            "duplicate_queries": obj.duplicate_queries,
+            "entries": [
+                {
+                    "sequence": item.sequence,
+                    "kind": item.kind,
+                    "operation": item.operation,
+                    "used_units": item.used_units,
+                    "tokens": item.tokens,
+                    "cost": str(item.cost),
+                    "duration_ms": item.duration_ms,
+                    "metadata": item.metadata,
+                }
+                for item in entries
+            ],
+        }
+
+    def get_tool_calls(self, obj) -> list[dict]:
+        return [
+            {
+                "sequence": call.sequence,
+                "tool_name": call.tool_name,
+                "scope": call.scope,
+                "authorization": call.authorization,
+                "grant_version": call.grant_version,
+                "status": call.status,
+                "output_refs": call.output_refs,
+                "error": call.error,
+            }
+            for call in obj.tool_calls.order_by("sequence")
+        ]
+
+    def get_tool_permissions(self, obj) -> list[dict]:
+        """Expose the frozen matrix so a reviewer can audit available tools."""
+
+        return permission_matrix()
 
 
     class Meta:
@@ -72,7 +134,10 @@ class InvestigationSerializer(serializers.ModelSerializer):
             "state",
             "result",
             "checkpoint_version",
-            "input_versions", "previous_run", "read_only_refresh", "refreshes",
+            "input_versions", "previous_run", "read_only_refresh", "refreshes", "budget", "tool_calls",
+            "tool_permissions",
+            "model_attempts", "model_tokens", "model_cost", "elapsed_ms", "duplicate_queries",
+            "decisions", "counter_evidence",
             "created_at",
             "steps",
         ]
@@ -105,6 +170,7 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
             "product_id": str(data["product"]) if data.get("product") else None,
             "max_steps": data["max_steps"],
             "allow_internal_task": data["allow_internal_task"],
+            "planner_provider": data["planner_provider"],
         }
         existing_job = Job.objects.filter(
             shop=shop, actor=request.user, kind="investigation_run", idempotency_key=data["idempotency_key"]
@@ -145,6 +211,11 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
                 budget_units=data["max_steps"],
                 state={"write_requested": True} if data["allow_internal_task"] else {},
             )
+            run.state = {
+                **run.state,
+                "planner_provider": data["planner_provider"],
+            }
+            run.save(update_fields=["state"])
             job_payload = {**payload, "run_id": str(run.pk)}
             job = Job.objects.create(
                 shop=shop,
@@ -204,10 +275,68 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
                     "product_id": str(run.product_id) if run.product_id else None,
                     "max_steps": run.max_steps,
                     "allow_internal_task": bool(run.state.get("write_requested")),
+                    "planner_provider": run.state.get("planner_provider", "deterministic"),
                     "run_id": str(run.pk),
                 },
             )
             Outbox.objects.create(job=job)
             audit(request.user, run.shop, "investigation.resumed", run.pk,
                   after={"job_id": str(job.pk), "steps_used": run.steps_used}, request_id=request.request_id)
+        return Response(JobSerializer(job).data, status=202)
+
+    @extend_schema(request=InvestigationClarification, responses={202: JobSerializer})
+    @action(detail=True, methods=["post"])
+    def clarify(self, request, pk=None):
+        """Continue a clarification as a linked run using only remaining budget."""
+        import uuid
+
+        command = InvestigationClarification(data=request.data)
+        command.is_valid(raise_exception=True)
+        data = command.validated_data
+        with transaction.atomic():
+            run = get_object_or_404(self.get_queryset().select_for_update(), pk=pk)
+            require_role(request.user, run.shop, "operator", "data_admin", "quality", "support")
+            if run.status != "needs_clarification":
+                raise Conflict("只有等待定位澄清的调查可以补充范围。")
+            remaining = max(run.max_steps - run.steps_used, 0)
+            if remaining < 3:
+                raise Conflict("当前调查剩余预算不足以继续，请发起新的调查并重新确认范围。")
+            child_asin = data.get("child_asin", "")
+            if child_asin:
+                authorize_object(request.user, run.shop, child_asin, data.get("product"))
+            child = InvestigationRun.objects.create(
+                previous_run=run,
+                shop=run.shop,
+                requested_by=request.user,
+                query=f"{run.query}\n补充定位：{data['query']}",
+                child_asin=child_asin,
+                product_id=data.get("product"),
+                max_steps=remaining,
+                budget_units=remaining,
+                state={
+                    "clarified_from": str(run.pk),
+                    "original_query": run.query,
+                    "planner_provider": run.state.get("planner_provider", "deterministic"),
+                    "write_requested": bool(run.state.get("write_requested")),
+                },
+            )
+            job = Job.objects.create(
+                shop=run.shop,
+                actor=request.user,
+                kind="investigation_run",
+                idempotency_key=f"clarify-{child.pk}-{uuid.uuid4().hex}",
+                payload={
+                    "query": child.query,
+                    "child_asin": child.child_asin,
+                    "product_id": str(child.product_id) if child.product_id else None,
+                    "max_steps": child.max_steps,
+                    "allow_internal_task": bool(run.state.get("write_requested")),
+                    "planner_provider": run.state.get("planner_provider", "deterministic"),
+                    "run_id": str(child.pk),
+                },
+                result={"investigation_id": str(child.pk), "status": "queued", "previous_run": str(run.pk)},
+            )
+            Outbox.objects.create(job=job)
+            audit(request.user, run.shop, "investigation.clarified", child.pk,
+                  after={"previous_run": str(run.pk), "steps_remaining": remaining}, request_id=request.request_id)
         return Response(JobSerializer(job).data, status=202)

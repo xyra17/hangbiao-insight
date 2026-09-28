@@ -18,6 +18,8 @@ type OccurrenceWindow = {
   amount_by_currency?: Record<string, string>;
   units?: number;
   event_basis?: string;
+  unclassified_records?: number;
+  unclassified_raw_row_ids?: string[];
   raw_row_ids: string[];
 };
 type Occurrence = {
@@ -217,6 +219,22 @@ export default function SnapshotDetails({
                           : "仓库收到"}
                         。
                       </p>
+                    )}
+                    {kind === "returns" && (window.unclassified_records ?? 0) > 0 && (
+                      <Alert
+                        type="warning"
+                        showIcon
+                        title={`${window.unclassified_records} 条退货状态暂不纳入发生量；请核对原始状态与来源契约。`}
+                        description={
+                          <Space wrap>
+                            {(window.unclassified_raw_row_ids ?? []).slice(0, 20).map((id, index) => (
+                              <Button key={id} onClick={() => onTrace(id)}>
+                                查看未识别状态原始行 {index + 1}
+                              </Button>
+                            ))}
+                          </Space>
+                        }
+                      />
                     )}
                     <Space wrap>
                       {window.raw_row_ids.slice(0, 20).map((id, index) => (

@@ -1,6 +1,9 @@
-import pytest
+from datetime import timedelta
 
-from insight.models import ActionExecution, ChangeProposal, Product
+import pytest
+from django.utils import timezone
+
+from insight.models import ActionExecution, ActionTask, ChangeProposal, Product
 from insight.proposals import action_policy
 
 pytestmark = pytest.mark.django_db
@@ -9,6 +12,62 @@ pytestmark = pytest.mark.django_db
 def test_action_policy_only_allows_internal_task_assignment():
     assert action_policy("internal_followup") == "internal_task_assignment"
     assert action_policy("price_change") == "manual_only"
+
+
+def test_new_pending_proposal_is_visible_before_older_terminal_proposals(metric_scope, client):
+    users, shops = metric_scope
+    client.force_authenticate(users["a"])
+    payload = {
+        "shop": str(shops[0].pk),
+        "child_asin": "B000TEST01",
+        "operation": "price_change",
+        "target": {"field": "price"},
+        "before": {"value": "20"},
+        "after": {"value": "19"},
+        "evidence_refs": ["snapshot:ordering"],
+    }
+    older = client.post(
+        "/api/v1/change-proposals/",
+        {**payload, "idempotency_key": "ordering-old"},
+        format="json",
+    )
+    assert older.status_code == 201
+    ChangeProposal.objects.filter(pk=older.data["id"]).update(
+        status="manual_authorized", created_at=timezone.now() - timedelta(days=1)
+    )
+    newer = client.post(
+        "/api/v1/change-proposals/",
+        {**payload, "idempotency_key": "ordering-new"},
+        format="json",
+    )
+    assert newer.status_code == 201
+
+    listing = client.get(f"/api/v1/change-proposals/?shop={shops[0].pk}")
+    assert listing.status_code == 200
+    assert listing.data["results"][0]["id"] == newer.data["id"]
+    assert listing.data["results"][0]["status"] == "pending"
+
+
+def test_new_action_draft_is_visible_before_older_tasks(metric_scope, client):
+    users, shops = metric_scope
+    client.force_authenticate(users["a"])
+    old = client.post(
+        "/api/v1/action-tasks/",
+        {"shop": str(shops[0].pk), "child_asin": "B000TEST01", "title": "旧任务"},
+        format="json",
+    )
+    assert old.status_code == 201
+    ActionTask.objects.filter(pk=old.data["id"]).update(created_at=timezone.now() - timedelta(days=1))
+    new = client.post(
+        "/api/v1/action-tasks/",
+        {"shop": str(shops[0].pk), "child_asin": "B000TEST01", "title": "新任务"},
+        format="json",
+    )
+    assert new.status_code == 201
+
+    listing = client.get(f"/api/v1/action-tasks/?shop={shops[0].pk}")
+    assert listing.status_code == 200
+    assert listing.data["results"][0]["id"] == new.data["id"]
 
 
 def test_action_task_review_and_proposal_need_version_and_approval(metric_scope, client):

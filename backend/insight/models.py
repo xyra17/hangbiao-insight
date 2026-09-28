@@ -166,6 +166,7 @@ class SourceContract(Entity):
     coverage_basis = models.CharField(max_length=30, default="business_date")
     return_event = models.CharField(max_length=20, default="received")
     empty_report_means_zero = models.BooleanField(default=False)
+    retention_days = models.PositiveIntegerField(default=180)
     approved_at = models.DateTimeField(null=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT)
 
@@ -177,6 +178,8 @@ class RawFile(Entity):
     sha256 = models.CharField(max_length=64, unique=True)
     storage_key = models.CharField(max_length=100)
     size = models.PositiveBigIntegerField()
+    deleted_at = models.DateTimeField(null=True)
+    deletion_reason = models.CharField(max_length=500, blank=True)
 
 
 class ImportBatch(Entity):
@@ -198,6 +201,10 @@ class ImportBatch(Entity):
     error = models.CharField(max_length=500, blank=True)
     published_revision = models.PositiveIntegerField(null=True)
     published_at = models.DateTimeField(null=True)
+    revoked_revision = models.PositiveIntegerField(null=True)
+    revoked_at = models.DateTimeField(null=True)
+    revoke_reason = models.CharField(max_length=500, blank=True)
+    retracted_rows = models.PositiveIntegerField(default=0)
     parse_cursor = models.PositiveIntegerField(default=0)
 
 
@@ -223,6 +230,32 @@ class CoveragePartition(Entity):
     status = models.CharField(max_length=20)
     # Explicit ASINs are the declared reporting scope, not the set of observed rows.
     child_asins = models.JSONField(default=list)
+
+
+class FactRetraction(Entity):
+    """Immutable tombstones for a published batch correction.
+
+    Facts and their original rows remain available for audit and historical
+    snapshots.  A retraction only hides the exact target revision from the
+    latest-facts view; a later corrected revision therefore remains visible.
+    """
+
+    source = models.ForeignKey(Source, on_delete=models.PROTECT, related_name="retractions")
+    batch = models.ForeignKey(ImportBatch, on_delete=models.PROTECT, related_name="retractions")
+    business_key = models.CharField(max_length=64)
+    child_asin = models.CharField(max_length=10)
+    target_revision = models.PositiveIntegerField()
+    effective_revision = models.PositiveIntegerField()
+    actor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    reason = models.CharField(max_length=500)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["source", "batch", "business_key", "target_revision"],
+                name="unique_fact_retraction",
+            )
+        ]
 
 
 class VersionedFact(Entity):
@@ -560,6 +593,14 @@ class InvestigationRun(Entity):
     checkpoint_version = models.PositiveIntegerField(default=0)
     input_versions = models.JSONField(default=dict)
     lease_token = models.PositiveBigIntegerField(default=0)
+    model_attempts = models.PositiveIntegerField(default=0)
+    model_tokens = models.PositiveBigIntegerField(default=0)
+    model_cost = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+    elapsed_ms = models.PositiveBigIntegerField(default=0)
+    duplicate_queries = models.PositiveIntegerField(default=0)
+    tool_grants = models.JSONField(default=dict)
+    decisions = models.JSONField(default=list)
+    counter_evidence = models.JSONField(default=list)
 
 
 class InvestigationStep(Entity):
@@ -692,6 +733,89 @@ class InvestigationCommandReceipt(Entity):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["run", "logical_action_id"], name="unique_investigation_write_command")]
+
+
+class InvestigationBudgetLedger(Entity):
+    """Append-only accounting for model and tool work in one investigation."""
+
+    run = models.ForeignKey(InvestigationRun, on_delete=models.PROTECT, related_name="budget_ledger")
+    sequence = models.PositiveIntegerField()
+    kind = models.CharField(max_length=30)
+    operation = models.CharField(max_length=100)
+    reserved_units = models.PositiveIntegerField(default=0)
+    used_units = models.PositiveIntegerField(default=0)
+    tokens = models.PositiveBigIntegerField(default=0)
+    cost = models.DecimalField(max_digits=20, decimal_places=8, default=0)
+    duration_ms = models.PositiveBigIntegerField(default=0)
+    idempotency_key = models.CharField(max_length=150)
+    metadata = models.JSONField(default=dict)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["run", "idempotency_key"], name="unique_investigation_budget_entry"),
+            models.UniqueConstraint(fields=["run", "sequence"], name="unique_investigation_budget_sequence"),
+        ]
+
+
+class InvestigationDecision(Entity):
+    """Auditable structured decision made by the investigation planner."""
+
+    run = models.ForeignKey(InvestigationRun, on_delete=models.PROTECT, related_name="decision_records")
+    sequence = models.PositiveIntegerField()
+    planner = models.CharField(max_length=80)
+    input_evidence = models.JSONField(default=list)
+    hypothesis = models.CharField(max_length=500, blank=True)
+    next_tool = models.CharField(max_length=80, blank=True)
+    tool_args = models.JSONField(default=dict)
+    counter_evidence_query = models.CharField(max_length=500, blank=True)
+    stop_reason = models.CharField(max_length=300, blank=True)
+    confidence = models.DecimalField(max_digits=5, decimal_places=4, null=True)
+    decision_hash = models.CharField(max_length=64)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["run", "sequence"], name="unique_investigation_decision_sequence"),
+            models.UniqueConstraint(fields=["run", "decision_hash"], name="unique_investigation_decision_hash"),
+        ]
+
+
+class InvestigationToolCall(Entity):
+    """Per-call permission and evidence receipt for every investigation tool."""
+
+    run = models.ForeignKey(InvestigationRun, on_delete=models.PROTECT, related_name="tool_calls")
+    sequence = models.PositiveIntegerField()
+    tool_name = models.CharField(max_length=80)
+    scope = models.JSONField(default=dict)
+    authorization = models.CharField(max_length=30)
+    grant_version = models.PositiveIntegerField(null=True)
+    input_snapshot = models.JSONField(default=dict)
+    output_refs = models.JSONField(default=list)
+    status = models.CharField(max_length=30)
+    error = models.CharField(max_length=300, blank=True)
+    idempotency_key = models.CharField(max_length=150)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["run", "idempotency_key"], name="unique_investigation_tool_call"),
+            models.UniqueConstraint(fields=["run", "sequence"], name="unique_investigation_tool_sequence"),
+        ]
+
+
+class RetentionTombstone(Entity):
+    """Placeholder proving a retention deletion without retaining the payload."""
+
+    workspace = models.ForeignKey(Workspace, on_delete=models.PROTECT)
+    object_type = models.CharField(max_length=60)
+    object_id = models.CharField(max_length=100)
+    content_hash = models.CharField(max_length=64, blank=True)
+    deleted_at = models.DateTimeField()
+    reason = models.CharField(max_length=500)
+    placeholder = models.JSONField(default=dict)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["workspace", "object_type", "object_id"], name="unique_retention_tombstone")
+        ]
 
 
 class EventGroupingReceipt(Entity):

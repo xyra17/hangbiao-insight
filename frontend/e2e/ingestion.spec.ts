@@ -66,5 +66,17 @@ test("登记来源、核对错误行、明确部分发布并保留追溯", async
   await expect(
     page.getByText("ordered_units 须为非负整数", { exact: true }),
   ).toBeVisible();
+  await page
+    .getByRole("button", { name: "撤销当前发布影响", exact: true })
+    .last()
+    .click();
+  const revokeDialog = page.getByRole("dialog");
+  await revokeDialog
+    .locator("textarea")
+    .fill("来源方重新生成报表，撤回当前批次影响并保留审计占位");
+  await revokeDialog.getByRole("button", { name: "提交纠错", exact: true }).click();
+  await expect(
+    page.getByText("已撤销至修订", { exact: false }),
+  ).toBeVisible({ timeout: 30000 });
   await page.screenshot({ path: "test-results/s2-import.png", fullPage: true });
 });

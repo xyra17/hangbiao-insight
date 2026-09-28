@@ -160,3 +160,13 @@ def test_requested_return_lifecycle_counts_request_then_cancellation(metric_scop
     for manifest, expected in [(requested,1),(received,1),(cancelled,0)]:
         result = calculate_occurrences(manifest,"B000TEST01",date(2026,9,2))
         assert result["returns"]["current"]["event_count"] == expected
+
+
+def test_unknown_return_status_is_traceable_but_not_counted(metric_scope):
+    users, shops, source, row = source_sample(metric_scope, "returns")
+    import_rows(users["admin"], source, [{**row, "status": "seller_specific_state", "received_date": ""}])
+    result = calculate_occurrences(source_manifest(shops[0]), "B000TEST01", date(2026, 9, 2))
+    current = result["returns"]["current"]
+    assert current["event_count"] == 0
+    assert current["unclassified_records"] == 1
+    assert current["unclassified_raw_row_ids"]

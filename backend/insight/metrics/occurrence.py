@@ -46,11 +46,16 @@ def calculate_occurrences(manifest, asin, today, product_id=None, rules=None):
                     "raw_row_ids": [str(row.raw_row_id) for row in selected],
                 }
             convention = next((row.batch.contract.return_event for row in selected), "received")
+            all_raw_row_ids = [str(row.raw_row_id) for row in selected]
+            eligible_statuses = {"requested", "received", "completed"} if convention == "requested" else {"received", "completed"}
+            unclassified_rows = [row for row in selected if row.status.lower() not in {
+                "requested", "received", "completed", "cancelled", "canceled", "rejected"
+            }]
             selected = [
                 row
                 for row in selected
                 if getattr(row, f"{convention}_date") is not None
-                and row.status.lower() not in {"cancelled", "canceled", "rejected"}
+                and row.status.lower() in eligible_statuses
             ]
             return {
                 "start": str(window_start),
@@ -58,7 +63,9 @@ def calculate_occurrences(manifest, asin, today, product_id=None, rules=None):
                 "event_count": len(selected),
                 "units": sum(row.quantity for row in selected),
                 "event_basis": convention,
-                "raw_row_ids": [str(row.raw_row_id) for row in selected],
+                "unclassified_records": len(unclassified_rows),
+                "unclassified_raw_row_ids": [str(row.raw_row_id) for row in unclassified_rows],
+                "raw_row_ids": all_raw_row_ids,
             }
 
         baseline, current = summarize(baseline_start, start - timedelta(days=1)), summarize(start, cutoff)

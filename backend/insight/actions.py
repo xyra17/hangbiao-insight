@@ -136,7 +136,10 @@ class ActionTaskViewSet(viewsets.ModelViewSet):
             qs = qs.filter(shop_id=shop)
         if event := self.request.query_params.get("event"):
             qs = qs.filter(event_id=event)
-        return qs.order_by("status", "due_at", "created_at")
+        # Keep newly created drafts and recent work at the front of the table.
+        # Sorting by status/due date can bury a just-created task behind old
+        # open tasks, making the post-create workflow appear to lose it.
+        return qs.order_by("-created_at", "-id")
 
     @transaction.atomic
     @extend_schema(request=ActionTaskCommand, responses={201: ActionTaskSerializer})
@@ -388,7 +391,10 @@ class ChangeProposalViewSet(viewsets.ReadOnlyModelViewSet):
         qs = scoped(ChangeProposal.objects.all(), self.request.user)
         if shop := self.request.query_params.get("shop"):
             qs = qs.filter(shop_id=shop)
-        return qs.order_by("status", "-created_at")
+        # Newly submitted proposals must be visible immediately, regardless of
+        # their status. Sorting by status first can hide a fresh pending
+        # proposal behind pages of already completed/manual hand-offs.
+        return qs.order_by("-created_at", "-id")
 
     @transaction.atomic
     @extend_schema(request=ProposalCommand, responses={201: ChangeProposalSerializer})

@@ -33,6 +33,13 @@ FACT_MODELS = {
     "ratings": RatingSnapshot,
     "operations": OperationEvent,
 }
+RETURN_STATUS_ALIASES = {
+    "canceled": "cancelled",
+    "cancel": "cancelled",
+    "complete": "completed",
+    "closed": "completed",
+}
+RETURN_STATUSES = {"requested", "received", "cancelled", "rejected", "completed", "unknown"}
 LABELS = {
     "sales_traffic": "销售与流量",
     "orders": "订单与发货",
@@ -197,6 +204,26 @@ def normalize_row(contract, batch, raw, identities):
             if parsed.get(date_name) and parsed[date_name] != local_date:
                 raise ValueError(f"{timestamp_name} 与 {date_name} 的站点本地日期不一致")
             parsed[date_name] = local_date
+    if source.kind == "returns":
+        status = str(parsed.get("status") or "").strip().lower()
+        status = RETURN_STATUS_ALIASES.get(status, status)
+        if status not in RETURN_STATUSES:
+            # Amazon and 3P exports use source-specific lifecycle labels. Keep
+            # the raw value on StagedRow, normalize unknown labels explicitly,
+            # and exclude them from rate/event calculations until the source
+            # contract is confirmed with a real sample.
+            status = "unknown"
+        parsed["status"] = status
+        requested = parsed.get("requested_date")
+        received = parsed.get("received_date")
+        if requested and received and received < requested:
+            raise ValueError("退货收到日期不能早于申请日期")
+        if status in {"received", "completed"} and not (received or parsed.get("received_at")):
+            raise ValueError("已收到或已完成的退货必须提供收到日期或时间")
+        if status == "requested" and not (requested or parsed.get("requested_at") or day):
+            raise ValueError("已申请的退货必须提供申请日期或时间")
+        if status in {"cancelled", "rejected"} and not (requested or received or day):
+            raise ValueError("取消或拒绝的退货必须保留申请或收到日期")
     coverage_day = parsed.get("shipped_date") if contract.coverage_basis == "shipped_date" else day
     if source.kind == "returns":
         event_day = parsed.get(f"{contract.return_event}_date")

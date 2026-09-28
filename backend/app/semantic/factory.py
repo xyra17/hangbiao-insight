@@ -6,8 +6,8 @@ import os
 from pathlib import Path
 
 from .config import PRIMARY_SEMANTIC_CONFIG, QWEN_FALLBACK_CONFIG
-from .model_gateway import DeepSeekResponsesGateway, LMStudioChatGateway, ModelGateway
 from .guard import SemanticGuard
+from .model_gateway import DeepSeekResponsesGateway, LMStudioChatGateway, ModelGateway
 from .parser import SemanticParser
 from .prompt_builder import PromptBuilder
 from .runner import SemanticExtractionService
@@ -22,6 +22,7 @@ def build_agent_planner():
         raise RuntimeError("DEEPSEEK_API_KEY is required for the agent planner")
     import httpx
     from openai import OpenAI
+
     from ..agent.runtime_config import InvestigationRuntimeConfig
     runtime = InvestigationRuntimeConfig()
     client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com", max_retries=0,
@@ -29,10 +30,17 @@ def build_agent_planner():
                     http_client=httpx.Client(trust_env=False, timeout=runtime.planner_timeout_seconds))
 
     class Gateway:
+        last_usage = {}
+
         def plan(self, *, system, user, schema):
             response = client.responses.create(model="deepseek-v4-flash", input=[
                 {"role": "system", "content": system}, {"role": "user", "content": user}],
                 reasoning={"effort": "low"}, text={"format": {"type": "json_schema", "name": "agent_planner", "strict": True, "schema": schema}}, store=False)
+            usage = getattr(response, "usage", None)
+            self.last_usage = {
+                "input_tokens": getattr(usage, "input_tokens", 0) if usage else 0,
+                "output_tokens": getattr(usage, "output_tokens", 0) if usage else 0,
+            }
             return response.output_text
     return LLMPlanner(Gateway())
 

@@ -13,6 +13,7 @@ import {
   Select,
   Space,
   Spin,
+  Table,
   Tag,
   Typography,
 } from "antd";
@@ -28,6 +29,40 @@ type Run = {
   max_steps: number;
   budget_units: number;
   stop_reason: string;
+  candidates?: { child_asin: string; product_id: string; seller_sku: string }[];
+  decisions?: {
+    phase?: string;
+    next_tool?: string;
+    hypothesis?: string;
+    counter_evidence_query?: string;
+    stop_reason?: string;
+    planner?: string;
+  }[];
+  counter_evidence?: unknown[];
+  budget?: {
+    remaining_units: number;
+    model_attempts: number;
+    model_tokens: number;
+    model_cost: string;
+    elapsed_ms: number;
+    duplicate_queries: number;
+  };
+  tool_calls?: {
+    sequence: number;
+    tool_name: string;
+    authorization: string;
+    grant_version?: number | null;
+    status: string;
+    output_refs: string[];
+    scope: Record<string, unknown>;
+  }[];
+  tool_permissions?: {
+    tool_name: string;
+    mode: string;
+    roles: string[];
+    description: string;
+    external_write: boolean;
+  }[];
   result: {
     hypotheses?: unknown[];
     evidence?: unknown[];
@@ -59,6 +94,7 @@ export default function InvestigationPage({
 }) {
   const [job, setJob] = useState<Job | null>(null);
   const [runId, setRunId] = useState<string>();
+  const [clarification, setClarification] = useState("");
   const start = useMutation({
     mutationFn: (data: Record<string, unknown>) =>
       request<Job>("investigations/", "POST", {
@@ -108,6 +144,19 @@ export default function InvestigationPage({
     onSuccess: (value) => {
       setJob(value);
       void run.refetch();
+    },
+  });
+  const clarify = useMutation({
+    mutationFn: (input: { query: string; child_asin?: string }) =>
+      request<Job>(`investigations/${resultId}/clarify/`, "POST", {
+        query: input.query,
+        child_asin: input.child_asin ?? "",
+        idempotency_key: crypto.randomUUID(),
+      }),
+    onSuccess: (value) => {
+      setJob(value);
+      setClarification("");
+      setRunId(undefined);
     },
   });
   const options = products.map((p) => ({
@@ -177,11 +226,11 @@ export default function InvestigationPage({
           />
         )}
       </Card>
-      {(cancel.error || resume.error || run.error) && (
+      {(cancel.error || resume.error || clarify.error || run.error) && (
         <Alert
           type="error"
           showIcon
-          title={(cancel.error || resume.error || run.error)?.message}
+          title={(cancel.error || resume.error || clarify.error || run.error)?.message}
         />
       )}
       {run.isLoading && <Spin tip="正在读取调查状态" />}
@@ -196,7 +245,12 @@ export default function InvestigationPage({
             run={run.data}
             onCancel={() => cancel.mutate()}
             onResume={() => resume.mutate()}
-            busy={cancel.isPending || resume.isPending}
+            onClarify={(asin) => {
+              clarify.mutate({ query: clarification, child_asin: asin });
+            }}
+            clarification={clarification}
+            setClarification={setClarification}
+            busy={cancel.isPending || resume.isPending || clarify.isPending}
           />
         </>
       ) : (
@@ -210,13 +264,20 @@ function RunDetail({
   run,
   onCancel,
   onResume,
+  onClarify,
+  clarification,
+  setClarification,
   busy,
 }: {
   run: Run;
   onCancel: () => void;
   onResume: () => void;
+  onClarify: (asin?: string) => void;
+  clarification: string;
+  setClarification: (value: string) => void;
   busy: boolean;
 }) {
+  const [selectedAsin, setSelectedAsin] = useState<string>();
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
       <Card
@@ -257,6 +318,84 @@ function RunDetail({
           </Space>
         }
       >
+        {run.budget && (
+          <Alert
+            type="info"
+            showIcon
+            message={`调查预算：剩余 ${run.budget.remaining_units} 单位；模型尝试 ${run.budget.model_attempts} 次；token ${run.budget.model_tokens}；累计 ${run.budget.elapsed_ms} ms；重复查询 ${run.budget.duplicate_queries} 次`}
+          />
+        )}
+        {run.tool_permissions && (
+          <Card size="small" title="调查工具权限矩阵" style={{ marginBottom: 12 }}>
+            <Table
+              size="small"
+              rowKey="tool_name"
+              pagination={false}
+              dataSource={run.tool_permissions}
+              columns={[
+                { title: "工具", dataIndex: "tool_name" },
+                { title: "能力", dataIndex: "description" },
+                { title: "模式", dataIndex: "mode" },
+                { title: "允许角色", dataIndex: "roles", render: (roles: string[]) => roles.join("、") },
+                { title: "外部写入", dataIndex: "external_write", render: (value: boolean) => value ? "允许" : "禁止" },
+              ]}
+            />
+          </Card>
+        )}
+        {run.status === "needs_clarification" && (
+          <Card size="small" title="需要补充定位" style={{ marginBottom: 12 }}>
+            <p>{run.stop_reason}</p>
+            <Space wrap>
+              <Select
+                allowClear
+                placeholder="选择授权范围内的候选 ASIN"
+                style={{ minWidth: 260 }}
+                value={selectedAsin}
+                onChange={(value) => {
+                  setSelectedAsin(value);
+                }}
+                options={(run.candidates ?? []).map((candidate) => ({
+                  value: candidate.child_asin,
+                  label: `${candidate.child_asin} / ${candidate.seller_sku}`,
+                }))}
+              />
+              <Input
+                value={clarification}
+                onChange={(event) => setClarification(event.target.value)}
+                placeholder="补充 SKU、名称或范围"
+                style={{ width: 260 }}
+              />
+              <Button
+                type="primary"
+                disabled={clarification.trim().length < 2}
+                loading={busy}
+                onClick={() => onClarify(selectedAsin)}
+              >
+                澄清后继续
+              </Button>
+            </Space>
+          </Card>
+        )}
+        {run.decisions?.length ? (
+          <Collapse
+            size="small"
+            items={run.decisions.map((decision, index) => ({
+              key: String(index),
+              label: `${decision.phase ?? "决策"}：${decision.next_tool || "停止"}`,
+              children: (
+                <Typography.Paragraph>
+                  {decision.hypothesis || decision.stop_reason || "已记录结构化决策"}
+                  {decision.counter_evidence_query ? `；反证：${decision.counter_evidence_query}` : ""}
+                </Typography.Paragraph>
+              ),
+            }))}
+          />
+        ) : null}
+        {run.tool_calls?.length ? (
+          <Typography.Paragraph type="secondary">
+            已调用工具：{run.tool_calls.map((call) => `${call.tool_name}（${call.authorization}）`).join("、")}
+          </Typography.Paragraph>
+        ) : null}
         <Typography.Paragraph>
           {run.stop_reason || "执行中"}
         </Typography.Paragraph>

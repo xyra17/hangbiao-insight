@@ -5,7 +5,7 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from insight.access import products_for, shops_for
 from insight.ingestion.contracts import FACT_MODELS
-from insight.models import CoveragePartition, Product, Source
+from insight.models import CoveragePartition, FactRetraction, Product, Source
 
 
 def authorize_object(actor, shop, asin, product_id=None):
@@ -41,8 +41,14 @@ def latest_facts(manifest, kind, asin, product_id=None):
         revision__gt=OuterRef("revision"),
         revision__lte=revision,
     )
+    retracted = FactRetraction.objects.filter(
+        source_id=source_id,
+        business_key=OuterRef("business_key"),
+        target_revision=OuterRef("revision"),
+        effective_revision__lte=revision,
+    )
     qs = model.objects.filter(source_id=source_id, child_asin=asin, revision__lte=revision).filter(
-        ~Exists(newer)
+        ~Exists(newer), ~Exists(retracted)
     )
     if product_id:
         qs = qs.filter(product_id=product_id)

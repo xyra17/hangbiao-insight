@@ -298,6 +298,22 @@ def run_job(job_id):
                     request_id=str(job.pk),
                 )
                 job.status, job.result = "completed", {"message": "报表已发布。", "batch_id": str(batch.pk)}
+            elif job.kind == "revoke_import":
+                from .ingestion.service import revoke_published_batch
+
+                heartbeat()
+                batch = revoke_published_batch(
+                    job.actor,
+                    job.payload["batch_id"],
+                    reason=job.payload["reason"],
+                    request_id=str(job.pk),
+                )
+                job.status, job.result = "completed", {
+                    "message": "当前发布影响已撤销并记录为纠错修订。",
+                    "batch_id": str(batch.pk),
+                    "revoked_revision": batch.revoked_revision,
+                    "retracted_rows": batch.retracted_rows,
+                }
             else:
                 job.status, job.error = "failed", "不支持的任务类型。"
         except DependencyPending as exc:

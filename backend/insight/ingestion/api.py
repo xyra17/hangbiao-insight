@@ -43,6 +43,7 @@ class ContractSerializer(serializers.ModelSerializer):
             "coverage_basis",
             "return_event",
             "empty_report_means_zero",
+            "retention_days",
         ]
         read_only_fields = fields
 
@@ -74,6 +75,7 @@ class ContractCommand(serializers.Serializer):
         choices=["business_date", "shipped_date"], default="business_date"
     )
     return_event = serializers.ChoiceField(choices=["received", "requested"], default="received")
+    retention_days = serializers.IntegerField(min_value=1, max_value=3650, default=180)
 
 
 class SourceCommand(ContractCommand):
@@ -113,6 +115,10 @@ class BatchSerializer(serializers.ModelSerializer):
             "error",
             "published_revision",
             "published_at",
+            "revoked_revision",
+            "revoked_at",
+            "revoke_reason",
+            "retracted_rows",
             "created_at",
             "coverage_status",
         ]
@@ -140,6 +146,11 @@ class UploadCommand(serializers.Serializer):
 class PublishCommand(serializers.Serializer):
     allow_partial = serializers.BooleanField(default=False)
     confirm_contract = serializers.BooleanField(default=False)
+
+
+class RevokeCommand(serializers.Serializer):
+    reason = serializers.CharField(min_length=3, max_length=500)
+    idempotency_key = serializers.CharField(max_length=150)
 
 
 def accessible_sources(user):
@@ -290,6 +301,8 @@ class BatchViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=["get"], url_path="original-file")
     def original_file(self, request, pk=None):
         batch = self.get_object()
+        if batch.raw_file.deleted_at:
+            return HttpResponse("原始文件已按保留期清理，校验值和审计占位仍可追溯。", status=410)
         from insight.services import audit
 
         stream = (Path(settings.STORAGE_ROOT) / batch.raw_file.storage_key).open("rb")
@@ -324,6 +337,29 @@ class BatchViewSet(viewsets.ReadOnlyModelViewSet):
                 actor=request.user,
                 kind="publish_import",
                 idempotency_key=digest({"batch": str(batch.pk), **serializer.validated_data}),
+                defaults={"payload": {"batch_id": str(batch.pk), **serializer.validated_data}},
+            )
+            if created:
+                Outbox.objects.create(job=job)
+        return Response(JobSerializer(job).data, status=202)
+
+    @extend_schema(request=RevokeCommand, responses={202: JobSerializer})
+    @action(detail=True, methods=["post"], url_path="revoke-publication")
+    def revoke_publication(self, request, pk=None):
+        """Create a queued correction command for the current publication."""
+        batch = self.get_object()
+        serializer = RevokeCommand(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        require_source_access(request.user, batch.contract.source.shop)
+        from .contracts import digest
+
+        key = digest({"batch": str(batch.pk), **serializer.validated_data})
+        with transaction.atomic():
+            job, created = Job.objects.get_or_create(
+                shop=batch.contract.source.shop,
+                actor=request.user,
+                kind="revoke_import",
+                idempotency_key=key,
                 defaults={"payload": {"batch_id": str(batch.pk), **serializer.validated_data}},
             )
             if created:
