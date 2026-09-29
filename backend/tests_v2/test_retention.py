@@ -34,3 +34,24 @@ def test_retention_removes_raw_payload_but_keeps_tombstone(metric_scope, setting
     raw.refresh_from_db()
     assert raw.deleted_at is not None and raw.storage_key == ""
     assert RetentionTombstone.objects.filter(object_id=str(raw.pk), object_type="raw_file").exists()
+
+
+def test_retention_cleanup_is_scheduled_independently_from_daily_scans(settings):
+    schedule = settings.CELERY_BEAT_SCHEDULE["retention-cleanup"]
+    assert schedule["task"] == "insight.tasks.cleanup_retention_task"
+    assert schedule["schedule"] == 86400.0
+
+
+def test_retention_task_delegates_to_domain_cleanup(monkeypatch):
+    from insight import tasks
+
+    expected = {"dry_run": False, "raw_files": 0}
+    called = []
+
+    def fake_cleanup():
+        called.append(True)
+        return expected
+
+    monkeypatch.setattr("insight.retention.cleanup_retention", fake_cleanup)
+    assert tasks.cleanup_retention_task() == expected
+    assert called == [True]

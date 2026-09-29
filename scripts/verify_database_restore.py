@@ -44,14 +44,62 @@ def execute(command, **kwargs):
 
 
 def counts(database):
-    sql = """SELECT json_build_object(
-      'migrations', (SELECT count(*) FROM django_migrations),
-      'sources', (SELECT count(*) FROM insight_source),
-      'raw_files', (SELECT count(*) FROM insight_rawfile),
-      'reviews', (SELECT count(*) FROM insight_review),
-      'snapshots', (SELECT count(*) FROM insight_metricsnapshot),
-      'reports', (SELECT count(*) FROM insight_standardreport),
-      'investigations', (SELECT count(*) FROM insight_investigationrun));"""
+    # Keep this list explicit: a restore drill must fail when a newly added
+    # business object is forgotten, rather than silently validating only the
+    # original small subset of tables.
+    objects = {
+        "migrations": "django_migrations",
+        "workspaces": "insight_workspace",
+        "shops": "insight_shop",
+        "products": "insight_product",
+        "audits": "insight_auditentry",
+        "jobs": "insight_job",
+        "outbox": "insight_outbox",
+        "sources": "insight_source",
+        "source_contracts": "insight_sourcecontract",
+        "raw_files": "insight_rawfile",
+        "import_batches": "insight_importbatch",
+        "staged_rows": "insight_stagedrow",
+        "retractions": "insight_factretraction",
+        "sales_traffic": "insight_salestrafficdaily",
+        "orders": "insight_orderline",
+        "refunds": "insight_refundtransaction",
+        "returns": "insight_returnlifecycle",
+        "reviews": "insight_review",
+        "support_cases": "insight_supportcase",
+        "inventory": "insight_inventorysnapshot",
+        "ratings": "insight_ratingsnapshot",
+        "operation_events": "insight_operationevent",
+        "snapshots": "insight_metricsnapshot",
+        "parent_snapshots": "insight_parentsnapshot",
+        "observation_leads": "insight_observationlead",
+        "semantic_runs": "insight_semanticrun",
+        "semantic_claims": "insight_semanticclaim",
+        "semantic_review_results": "insight_semanticreviewresult",
+        "reports": "insight_standardreport",
+        "action_tasks": "insight_actiontask",
+        "action_executions": "insight_actionexecution",
+        "change_proposals": "insight_changeproposal",
+        "investigations": "insight_investigationrun",
+        "investigation_steps": "insight_investigationstep",
+        "investigation_decisions": "insight_investigationdecision",
+        "investigation_tool_calls": "insight_investigationtoolcall",
+        "event_groups": "insight_eventgroup",
+        "business_events": "insight_businessevent",
+        "event_evidence": "insight_eventevidence",
+        "notifications": "insight_notification",
+        "daily_schedules": "insight_dailyscanschedule",
+        "rule_configurations": "insight_ruleconfiguration",
+        "command_receipts": "insight_investigationcommandreceipt",
+        "budget_ledger": "insight_investigationbudgetledger",
+        "retention_tombstones": "insight_retentiontombstone",
+        "grouping_receipts": "insight_eventgroupingreceipt",
+        "derived_refreshes": "insight_derivedrefresh",
+    }
+    expression = ",\n      ".join(
+        f"'{key}', (SELECT count(*) FROM {table})" for key, table in objects.items()
+    )
+    sql = f"SELECT json_build_object(\n      {expression});"
     result = execute(
         ["psql", "-U", args.user, "-d", database, "-At", "-c", sql],
         stdout=subprocess.PIPE,

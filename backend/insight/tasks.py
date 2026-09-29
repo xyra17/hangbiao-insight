@@ -29,6 +29,21 @@ def dispatch_daily_scans():
 
 
 @shared_task
+def cleanup_retention_task():
+    """Run the auditable retention pass from Celery beat.
+
+    Retention cleanup is deliberately a separate task from daily metric
+    dispatch.  A storage unlink failure or a database retry must not prevent
+    the operational scan loop from being scheduled, and the task can be
+    retried independently after a database outage.
+    """
+
+    from .retention import cleanup_retention
+
+    return cleanup_retention()
+
+
+@shared_task
 def scan_directories():
     from .ingestion.directory import scan_directory
     from .models import DirectorySource

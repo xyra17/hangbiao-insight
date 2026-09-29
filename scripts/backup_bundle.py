@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import tarfile
 import time
@@ -27,6 +28,49 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def build_dump_command(args, *, host_pg_dump: bool | None = None) -> tuple[list[str], str]:
+    """Choose a local pg_dump or the Compose PostgreSQL client.
+
+    The explicit override keeps this decision deterministic in tests while the
+    default checks the actual host.  The Compose path avoids requiring a
+    PostgreSQL client installation on a developer or single-server host.
+    """
+    if host_pg_dump is None:
+        host_pg_dump = shutil.which("pg_dump") is not None
+    if host_pg_dump:
+        return [
+            "pg_dump",
+            "--format=custom",
+            "--no-owner",
+            "-h",
+            args.host,
+            "-p",
+            args.port,
+            "-U",
+            args.user,
+            "-d",
+            args.database,
+        ], "host-pg_dump"
+    return [
+        "docker",
+        "compose",
+        "--env-file",
+        args.env_file,
+        "-f",
+        args.compose,
+        "exec",
+        "-T",
+        args.postgres_service,
+        "pg_dump",
+        "--format=custom",
+        "--no-owner",
+        "-U",
+        args.user,
+        "-d",
+        args.database,
+    ], "compose-pg_dump"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default=".local/backups")
@@ -35,6 +79,13 @@ def main() -> int:
     parser.add_argument("--user", default=os.getenv("PGUSER", "insight"))
     parser.add_argument("--host", default=os.getenv("PGHOST", "127.0.0.1"))
     parser.add_argument("--port", default=os.getenv("PGPORT", "55432"))
+    parser.add_argument(
+        "--compose",
+        default="compose.v2.yml",
+        help="Compose 文件；宿主机没有 pg_dump 时用于在 postgres 容器内导出",
+    )
+    parser.add_argument("--env-file", default=".env.local")
+    parser.add_argument("--postgres-service", default="postgres")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     started = time.monotonic()
@@ -57,17 +108,15 @@ def main() -> int:
     }
     if not args.dry_run:
         dump = bundle / "database.dump"
+        dump_command, dump_mode = build_dump_command(args)
         with dump.open("wb") as stream:
-            subprocess.run(
-                ["pg_dump", "--format=custom", "--no-owner", "-h", args.host, "-p", args.port, "-U", args.user, "-d", args.database],
-                check=True,
-                stdout=stream,
-            )
+            subprocess.run(dump_command, check=True, stdout=stream)
         if files:
             with tarfile.open(bundle / "storage.tar", "w") as archive:
                 for path in files:
                     archive.add(path, arcname=str(path.relative_to(storage)))
         manifest["database_dump_sha256"] = sha256(dump)
+        manifest["database_dump_mode"] = dump_mode
         manifest["storage_archive"] = "storage.tar" if files else None
     manifest["duration_seconds"] = round(time.monotonic() - started, 3)
     (bundle / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

@@ -77,6 +77,9 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
 CELERY_BEAT_SCHEDULE = {"outbox": {"task": "insight.tasks.dispatch_outbox", "schedule": 10.0}}
 CELERY_BEAT_SCHEDULE["directory-scan"] = {"task": "insight.tasks.scan_directories", "schedule": 60.0}
 CELERY_BEAT_SCHEDULE["daily-scans"] = {"task": "insight.tasks.dispatch_daily_scans", "schedule": 60.0}
+# Keep retention independent from scans: one failed unlink or a temporary DB
+# outage must not suppress anomaly detection for every shop.
+CELERY_BEAT_SCHEDULE["retention-cleanup"] = {"task": "insight.tasks.cleanup_retention_task", "schedule": 86400.0}
 DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024
 STORAGE_ROOT = Path(os.getenv("INSIGHT_STORAGE_ROOT", str(BASE_DIR / "storage")))
