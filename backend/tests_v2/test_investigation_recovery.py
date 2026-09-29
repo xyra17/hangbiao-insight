@@ -133,3 +133,52 @@ execute_investigation(InvestigationRun.objects.get(pk=sys.argv[1]))
     done = graph.execute_investigation(run)
     assert done.status == "completed" and done.steps.count() == done.steps_used == 6
     assert done.input_versions["metric_snapshot"] == str(first.pk)
+
+
+def test_planner_receipt_replays_after_decision_settlement_without_second_model_call(metric_scope, monkeypatch):
+    """A crash between planner settlement and the node checkpoint is replay-safe."""
+    from insight.investigation import planner as planner_module
+
+    run = make_run(metric_scope)
+    metric(run)
+    original_planner_for = planner_module.planner_for
+    calls = []
+
+    def counted_planner(provider=None):
+        planner = original_planner_for(provider)
+
+        class CountingPlanner:
+            def decide(self, **kwargs):
+                calls.append(kwargs["history"])
+                return planner.decide(**kwargs)
+
+        return CountingPlanner()
+
+    monkeypatch.setattr(planner_module, "planner_for", counted_planner)
+    original_persist = graph._persist
+    interrupted = {"done": False}
+
+    def interrupt_before_choose_checkpoint(run, node, state, output, tool=""):
+        if node == "choose" and not interrupted["done"]:
+            interrupted["done"] = True
+            raise RuntimeError("worker_interrupted_after_planner_receipt")
+        return original_persist(run, node, state, output, tool)
+
+    monkeypatch.setattr(graph, "_persist", interrupt_before_choose_checkpoint)
+    stopped = graph.execute_investigation(run)
+    assert stopped.status == "partial"
+    assert len(calls) == 1
+    assert stopped.budget_ledger.filter(kind="model").count() == 1
+    assert stopped.decision_records.count() == 1
+    assert stopped.budget_ledger.get(kind="model").metadata["decision"]["next_tool"] == "metric_snapshot"
+
+    monkeypatch.setattr(graph, "_persist", original_persist)
+    resumed = graph.execute_investigation(InvestigationRun.objects.get(pk=run.pk))
+    assert resumed.status == "completed"
+    # The route decision is replayed from the durable ledger.  Only the two
+    # subsequent planner phases are new calls.
+    assert len(calls) == 3
+    assert resumed.budget_ledger.filter(kind="model").count() == 3
+    assert resumed.decision_records.count() == 3
+    assert len(resumed.decisions) == 3
+    assert resumed.steps.filter(logical_key="choose").count() == 1

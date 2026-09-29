@@ -116,13 +116,18 @@ def _persist(run: InvestigationRun, node: str, state: InvestigationState, output
 def _plan(run: InvestigationRun, state: InvestigationState, available_tools: list[str], reason: str):
     """Run the configured structured planner and persist its decision receipt."""
     from .budget import MeasuredCall, reserve
-    from .planner import planner_for
+    from .planner import PlannerDecision, planner_for
 
     history = [
         {"tool": item.get("next_tool"), "stop_reason": item.get("stop_reason", "")}
         for item in state.get("decisions", [])
     ]
-    decision_key = digest({"run": str(run.pk), "phase": reason, "evidence": state.get("evidence", [])})
+    decision_key = digest({
+        "run": str(run.pk),
+        "phase": reason,
+        "evidence": state.get("evidence", []),
+        "input_versions": state.get("input_versions", {}),
+    })
     provider = state.get("planner_provider") or run.state.get("planner_provider") or None
     entry = reserve(
         run,
@@ -132,19 +137,39 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
         units=1,
             metadata={"provider": provider or "deterministic", "input_versions": state.get("input_versions", {})},
     )
-    measured = MeasuredCall(entry)
-    try:
-        decision = planner_for(provider).decide(
-            query=state.get("query", ""),
-            evidence=state.get("evidence", []),
-            history=history,
-            available_tools=available_tools,
+    # A worker can die after the durable budget reservation/settlement but
+    # before the LangGraph checkpoint is written.  Keep the structured
+    # decision on that same append-only ledger row so replay does not call a
+    # non-deterministic provider twice or spend a second model allowance.
+    cached = entry.metadata.get("decision") if isinstance(entry.metadata, dict) else None
+    cached_reason = entry.metadata.get("reason") if isinstance(entry.metadata, dict) else None
+    if isinstance(cached, dict) and cached_reason == reason:
+        try:
+            decision = PlannerDecision(**cached)
+        except (TypeError, ValueError):
+            decision = None
+    else:
+        decision = None
+    if decision is None:
+        measured = MeasuredCall(entry)
+        try:
+            decision = planner_for(provider).decide(
+                query=state.get("query", ""),
+                evidence=state.get("evidence", []),
+                history=history,
+                available_tools=available_tools,
+            )
+        except Exception as exc:
+            measured.finish(metadata={"error": type(exc).__name__})
+            raise
+        data = decision.as_dict()
+        decision_hash = digest({"run": str(run.pk), "phase": reason, "decision": data})
+        measured.finish(
+            tokens=decision.tokens,
+            cost=decision.cost,
+            metadata={"reason": reason, "decision": data, "decision_hash": decision_hash},
         )
-    except Exception as exc:
-        measured.finish(metadata={"error": type(exc).__name__})
-        raise
     data = decision.as_dict()
-    measured.finish(tokens=decision.tokens, cost=decision.cost, metadata={"reason": reason})
     decision_hash = digest({"run": str(run.pk), "phase": reason, "decision": data})
     with transaction.atomic():
         locked = InvestigationRun.objects.select_for_update().get(pk=run.pk)
@@ -164,9 +189,35 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
                 "confidence": decision.confidence,
             },
         )
-        locked.decisions = [*locked.decisions, {"phase": reason, **data}]
-        locked.save(update_fields=["decisions"])
-    state.setdefault("decisions", []).append({"phase": reason, **data})
+        receipt = {"phase": reason, "decision_hash": decision_hash, **data}
+        prior = locked.decisions if isinstance(locked.decisions, list) else []
+        already_recorded = any(
+            item.get("decision_hash") == decision_hash
+            or (
+                item.get("phase") == reason
+                and item.get("next_tool") == data.get("next_tool")
+                and item.get("stop_reason") == data.get("stop_reason")
+            )
+            for item in prior
+            if isinstance(item, dict)
+        )
+        if not already_recorded:
+            locked.decisions = [*prior, receipt]
+            locked.save(update_fields=["decisions"])
+    state_decisions = state.setdefault("decisions", [])
+    if not any(
+        isinstance(item, dict)
+        and (
+            item.get("decision_hash") == decision_hash
+            or (
+                item.get("phase") == reason
+                and item.get("next_tool") == data.get("next_tool")
+                and item.get("stop_reason") == data.get("stop_reason")
+            )
+        )
+        for item in state_decisions
+    ):
+        state_decisions.append({"phase": reason, "decision_hash": decision_hash, **data})
     state["planner"] = decision.planner
     if decision.counter_evidence_query:
         state["counter_evidence_query"] = decision.counter_evidence_query
