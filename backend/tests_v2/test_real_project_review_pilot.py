@@ -797,12 +797,12 @@ def test_real_project_review_pilot_runtime(setup_scope, settings, monkeypatch, p
         monkeypatch.setenv("EVIDENCE_CANDIDATE_MODE", "lexical")
         monkeypatch.setenv("INVESTIGATION_PLANNER_PROTOCOL", "legacy-v1")
 
-        from app.semantic import factory
-        from app.agent.planner import LLMPlanner
         from rest_framework.test import APIClient
+
+        from app.agent.planner import LLMPlanner
+        from app.semantic import factory
+        from insight.investigation.planner import ModelPlanner, _external_planner
         from insight.models import InvestigationBudgetLedger, InvestigationRun, Job, Product
-        from insight.investigation.planner import ModelPlanner
-        from insight.investigation.planner import _external_planner
         from insight.tasks import run_job
 
         if MODE == "offline":

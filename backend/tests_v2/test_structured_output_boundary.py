@@ -12,7 +12,6 @@ from app.semantic.structured_response import (
     validate_structured_object,
 )
 
-
 SCHEMA = {
     "type": "object",
     "additionalProperties": False,
