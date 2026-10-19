@@ -1,0 +1,1257 @@
+{
+  "status": "mapped_not_business_accepted",
+  "basis": "阶段1_需求分析与MVP设计_V2 §14; local tests and synthetic fixtures separate from real signoff",
+  "rows": [
+    {
+      "id": "FR-01",
+      "requirement": "商品与责任映射",
+      "expected": "店铺、站点、父子 ASIN、SKU、履约方式和负责人可配置并校验",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-02",
+      "requirement": "数据导入与质量管理",
+      "expected": "文件上传、目录批量导入、字段映射、预览、错误行、幂等更新和追溯完整",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-03",
+      "requirement": "指标与窗口",
+      "expected": "按第 8 节计算销量、流量、转化、退货退款、评分及反馈指标",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-04",
+      "requirement": "异常检测",
+      "expected": "按第 9 节阈值、样本和基线规则检测，含安全例外与数据不足状态",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-05",
+      "requirement": "事件队列",
+      "expected": "每日／导入后／手动扫描，合并、去重、优先级、暂缓与重新打开",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-06",
+      "requirement": "场景取证",
+      "expected": "第 6 节各场景的必查维度均有取证或明确缺失处理",
+      "actual": "历史范围：当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "quality_failed_or_not_established",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E2",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-07",
+      "requirement": "反馈语义与检索",
+      "expected": "原文检索、主题与极性、证据片段、语言／变体／标注覆盖率",
+      "actual": "历史范围：当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "quality_failed_or_not_established",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E2",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-08",
+      "requirement": "候选与报告",
+      "expected": "规则候选和排序、引用校验、反向证据、缺失项、版本化报告",
+      "actual": "历史范围：当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "quality_failed_or_not_established",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E2",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-09",
+      "requirement": "处理与复查",
+      "expected": "自动保存草案和待核查任务、预授权内部执行、提案确认、分派、动作、观察和关闭",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。 分项缺口不全局停止，低样本原文方向继续，逐订单工具明确unsupported；部分结果/预算/冻结/无重复调用/显式恢复及中文分项展示通过。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/actual-low-sample-api-traces.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-slice-final-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-browser-full-20261008-r9.log"
+      ]
+    },
+    {
+      "id": "FR-10",
+      "requirement": "自然语言查询与调查入口",
+      "expected": "模糊指令定位、可见上下文、必要澄清、白名单查询及 L1/L2 分流",
+      "actual": "历史范围：当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。 分项缺口不全局停止，低样本原文方向继续，逐订单工具明确unsupported；部分结果/预算/冻结/无重复调用/显式恢复及中文分项展示通过。",
+      "local_status": "quality_failed_or_not_established",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E2",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/actual-low-sample-api-traces.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-slice-final-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-browser-full-20261008-r9.log"
+      ]
+    },
+    {
+      "id": "FR-11",
+      "requirement": "通知与导出",
+      "expected": "站内待办、新增／恶化／到期提醒，事件 CSV 和报告 HTML／JSON 导出",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-12",
+      "requirement": "权限与运维",
+      "expected": "角色和店铺隔离、审计、任务重试、备份恢复、配置版本",
+      "actual": "历史范围：当前确定性回归及相关经营包链路通过，真实业务未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前确定性回归及相关经营包链路通过，真实业务未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "FR-13",
+      "requirement": "有界自主调查",
+      "expected": "标准检查后按证据自主选择工具、核验假设与反证、限制预算、持久化恢复及受控写入；遵循第 5.3 和 5.4 节",
+      "actual": "历史范围：当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "quality_failed_or_not_established",
+      "business_status": "pending_signoff",
+      "external": [
+        "E1",
+        "E2",
+        "E4"
+      ],
+      "evidence": [
+        "requirements-matrix.json",
+        "candidate/candidate.json"
+      ],
+      "historical_actual": "当前完整后端503、前端6、通用浏览器23；04/05包实际异步链及独立oracle，详见相关AC；真实语义门槛失败",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-01",
+      "requirement": "重复上传/重试不重复计数",
+      "expected": "指标、事件和通知不重复",
+      "actual": "历史范围：04/05完整导入重复publish同durable Job；31,281/14,930行持久化未双计；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "`insight/services.py`、`insight/tasks.py`；经营事实包 revision/重复夹具；`test_daily_aggregates_native_grain_and_scan_is_idempotent`、`test_parallel_probe_submission_and_execution_are_idempotent`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-04/original-downloads.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "重复上传同一报表、重试同一扫描",
+      "historical_actual": "04/05完整导入重复publish同durable Job；31,281/14,930行持久化未双计",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-02",
+      "requirement": "/04/05/06/10/20",
+      "expected": "数据异常提示；不产生假销量暴跌",
+      "actual": "历史范围：04 declared_complete=false时daily missing；05缺日报119行和缺窗review400；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "`fact_followup.py`消费计算器缺源/陈旧/成熟度/退款链/币种/映射/重叠事件；`test_structured_business_rules.py`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/actions-state.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "日报缺一天、接口失败或文件过期",
+      "historical_actual": "04 declared_complete=false时daily missing；05缺日报119行和缺窗review400",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-03",
+      "requirement": "当月退款不污染当月销售队列",
+      "expected": "发生量与销售队列分开，不错算本月质量",
+      "actual": "历史范围：04迟到3.50退款与多币种Decimal总量、05两窗分币种发生量及成熟队列核算通过；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "退款发生日与订单发货 cohort 分离；跨月合成事实；`test_refund_cohort_reversal_exchange_and_observation_boundary`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-04/lifecycle-db-audit.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "本月退款来自上月订单",
+      "historical_actual": "04迟到3.50退款与多币种Decimal总量、05两窗分币种发生量及成熟队列核算通过",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-04",
+      "requirement": "无退货/部分退款/撤销/换货链路",
+      "expected": "交易和数量不混算；冲正可追溯，换货不重复计原始销售",
+      "actual": "历史范围：requested→received→cancelled三版本保留；正负退款链和换货确定性回归通过；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "退款交易、退货生命周期、冲正和币种分别建模；`test_late_reversal_revises_validity_without_erasing_positive_evidence`、`test_refund_without_return_and_unlinked_refund_are_distinct`、`test_different_currencies_and_chains_never_cancel_each_other`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-04/lifecycle-db-audit.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "退款无退货、部分退款、撤销退款、换货",
+      "historical_actual": "requested→received→cancelled三版本保留；正负退款链和换货确定性回归通过",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-05",
+      "requirement": "未成熟订单不得虚报改善",
+      "expected": "不与成熟队列直接比较，不虚报改善",
+      "actual": "历史范围：05成熟订单两窗CSV去重分母/分子与API一致；未成熟review400且scheduled；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "成熟 cohort 和完整观察覆盖门控；新近订单夹具；`test_completed_action_is_not_reviewed_before_full_days_or_cohort_maturity`、`test_observation_coverage_gap_cannot_become_healthy_zero_rate`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/four-metric-oracle-result.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "新近订单尚未成熟",
+      "historical_actual": "05成熟订单两窗CSV去重分母/分子与API一致；未成熟review400且scheduled",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-06",
+      "requirement": "子体结构变化需展示整体/子体结果",
+      "expected": "展示整体与子体结果、结构变化，不武断指向全产品恶化",
+      "actual": "历史范围：父子映射/结构可比性确定性回归通过；经营包实际使用子ASIN未冒充父级真实签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "父子 SKU 映射版本和聚合；`test_native_asin_parent_change_uses_import_mapping_versions`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "高退货子体销量占比提高",
+      "historical_actual": "父子映射/结构可比性确定性回归通过；经营包实际使用子ASIN未冒充父级真实签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-07",
+      "requirement": "多 SKU/多履约不重复 Sessions",
+      "expected": "不重复累加 Sessions，不虚构履约拆分",
+      "actual": "历史范围：05身份映射10 ASIN/20 SKU；订单原行完整发布，SKU粒度合约回归通过；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "原生粒度事实与发货行去重；`test_split_shipment_uses_object_first_shipment_and_deduplicates_order`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/identities.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "同 ASIN 多 SKU 或多履约混合",
+      "historical_actual": "05身份映射10 ASIN/20 SKU；订单原行完整发布，SKU粒度合约回归通过",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-08",
+      "requirement": "总库存非零但可售为零",
+      "expected": "可售异常被发现；无可售字段时明确待查",
+      "actual": "历史范围：13对象可售/总库存和最新日期同CSV独立核算，未由总量推算可售；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "总库存与可售库存分开；`test_zero_sessions_is_not_applicable_and_total_stock_does_not_hide_stockout`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/four-metric-oracle-result.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "库存总数大于零但可售为零",
+      "historical_actual": "13对象可售/总库存和最新日期同CSV独立核算，未由总量推算可售",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-09",
+      "requirement": "/12/21/22",
+      "expected": "保留流量缺口，不把差评排成已确定主因",
+      "actual": "历史范围：页面保留不归因提示与规则下一步；真实原因正确性未建立；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "`citations.py`、output-contract-v3、真实生产gateway开发fixture、指标无评论输出；新runtime及48条绑定模板",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "quality-gate-final.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "销量下降、缺流量、恰有差评",
+      "historical_actual": "页面保留不归因提示与规则下一步；真实原因正确性未建立",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-10",
+      "requirement": "促销/页面/包装时间线不自动归因",
+      "expected": "展示时间线，支持已知事件处理，不自动确认因果",
+      "actual": "历史范围：运营事实完整持久化；比较窗口与重叠运营规则回归通过，真实混杂解释未签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "运营事件时间线、映射版本和因果声明限制；`test_operations_overlap_is_disclosed_without_claiming_causation`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/db-audit.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "促销结束、页面／包装发生变更",
+      "historical_actual": "运营事实完整持久化；比较窗口与重叠运营规则回归通过，真实混杂解释未签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-11",
+      "requirement": "页面星级与评论均分分开展示",
+      "expected": "两者独立展示，不判为计算错误",
+      "actual": "历史范围：页面评分和实际采集评论均分分别独立核算；派生/合成性质保留；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "评分快照与评论均分独立字段/数据域；事实包含页面评分和评论样本",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/four-metric-oracle-result.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "页面星级与采集评论均分不同",
+      "historical_actual": "页面评分和实际采集评论均分分别独立核算；派生/合成性质保留",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-12",
+      "requirement": "低评论量/覆盖不足不得宣称全量",
+      "expected": "不宣称全量趋势；安全线索仍可升级",
+      "actual": "历史范围：低样本与覆盖规则回归通过；稀缺主题未独立审核，不能当真实主题覆盖通过；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "覆盖率、有效分母、BH/Fisher 校正和安全观察线索；`test_whole_corpus_windows_zero_claims_and_multi_claim_denominator`、`test_bh_known_values`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "input-provenance-audit.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "评论量少、标注覆盖不足或采集漏页",
+      "historical_actual": "低样本与覆盖规则回归通过；稀缺主题未独立审核，不能当真实主题覆盖通过",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-13",
+      "requirement": "工单/退款/评论可靠关联后去重",
+      "expected": "可靠关联后去重；未知关联不累计成三笔问题订单",
+      "actual": "历史范围：跨源关联/不可靠关联拒绝合并确定性回归；无真实客服授权签收；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "订单行关联标识与未知关联分母；`test_same_order_does_not_become_three_independent_experiences`、`test_diagnostic_payload_exposes_linkage_without_counting_unlinked_rows`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "同经历包含工单、退款和评论",
+      "historical_actual": "跨源关联/不可靠关联拒绝合并确定性回归；无真实客服授权签收",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-14",
+      "requirement": "严重安全正例升级，否定反例可辨且不外部处置",
+      "expected": "正例优先人工核查，否定语境可辨，均不自动外部处置",
+      "actual": "历史范围：安全肯定/否定/假设和注入确定性回归；真实模型严重安全分流待E2；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "安全分流、否定/假设语境、人工任务幂等；`test_safety_route_keeps_negated_hypothetical_and_injection_like_text_out_of_urgent_event`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "quality-gate-final.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "单条严重安全反馈与其否定反例",
+      "historical_actual": "安全肯定/否定/假设和注入确定性回归；真实模型严重安全分流待E2",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-15",
+      "requirement": "连续问题维持单事件、恶化才重提醒",
+      "expected": "一个开放事件持续更新；恶化才重新提醒",
+      "actual": "历史范围：05实际事件关闭后才导入21行，扫描后pending，旧动作保留；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "连续完整日阈值、数据缺失恢复、事件并发去重；`test_persistence_requires_consecutive_matching_scans_with_new_complete_days`、`test_missing_measurements_preserve_open_event_and_recover_without_duplicate_alert`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/after-closure-recurrence.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "同问题连续多天出现并有新证据",
+      "historical_actual": "05实际事件关闭后才导入21行，扫描后pending，旧动作保留",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-16",
+      "requirement": "/20/21",
+      "expected": "不能当作已解决；按期生成复查任务",
+      "actual": "历史范围：六场景API和CSV日均/总量/两窗日期、页面中文展示通过；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "`InvestigationEvidence.tsx`、`metric_evidence.spec.ts`；三宽度×四指标状态，23完整浏览器通过",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-05/actions-state.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "已分派、已完成动作但未过观察期",
+      "historical_actual": "六场景API和CSV日均/总量/两窗日期、页面中文展示通过",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-17",
+      "requirement": "新数据修订/关闭后复发保留版本链",
+      "expected": "新报告版本、旧动作保留、按规则重新打开",
+      "actual": "历史范围：04修订/撤销后旧报告payload、调查result、动作引用不覆写；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "04",
+        "05",
+        "06"
+      ],
+      "test_implementation": "报告、快照和旧动作绑定；经营闭环合成包；`test_recent_loop_imports_and_drives_investigation_action_review_and_recurrence`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-04/old-artifacts-preserved.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "新数据修正历史结论或关闭后复发",
+      "historical_actual": "04修订/撤销后旧报告payload、调查result、动作引用不覆写",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-18",
+      "requirement": "/23/26",
+      "expected": "规则报告可用，不执行文本指令，不泄漏跨店铺数据",
+      "actual": "历史范围：超时429/无usage/撤权/取消受控网关回归；真实供应商未运行；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "`relevance.py`、真实provider入口及默认关闭开关；超时429/非法span/usage缺失/候选与预算上限/缓存测试",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "scenario": "模型超时／恶意评论文本／用户无权限",
+      "historical_actual": "超时429/无usage/撤权/取消受控网关回归；真实供应商未运行",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-19",
+      "requirement": "模糊对象定位必须授权内澄清",
+      "expected": "唯一上下文自动定位并展示依据；多候选只在授权范围列示并澄清，不静默猜测或越权",
+      "actual": "历史范围：授权对象歧义与clarification确定性分流通过；跨店自然语言语义待裁决；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "模糊路由、店铺范围候选及商品歧义澄清；两个确定性路由测试",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "capability-audit-final.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "模糊自然语言对象定位或超出范围",
+      "historical_actual": "授权对象歧义与clarification确定性分流通过；跨店自然语言语义待裁决",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-20",
+      "requirement": "新品/零分母/零基线/未知币种安全空态",
+      "expected": "正确空态和新增量，不展示无穷增幅或虚构总额",
+      "actual": "历史范围：零值/零分母/未知币种回归通过；源金额不跨币种净额混算；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "零值与未知分母规则；`test_invalid_counts_are_rejected_even_with_empty_other_window`、`test_wilson_extremes_match_closed_form_and_complements`",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "package-04/csv-oracle.json"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "新品、零分母、零基线、未知币种换算",
+      "historical_actual": "零值/零分母/未知币种回归通过；源金额不跨币种净额混算",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-21",
+      "requirement": "模糊调查先做 L1 再依据证据进入 L2",
+      "expected": "在授权范围定位站点及商品，正确区分订单与件数，加载或补做 L1，再进入 L2；无须用户手工选工具",
+      "actual": "历史范围：48真实API确定性终态已运行，L1/L2实际模型正确性未建立；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。 分项缺口不全局停止，低样本原文方向继续，逐订单工具明确unsupported；部分结果/预算/冻结/无重复调用/显式恢复及中文分项展示通过。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "真实调查API、确定性planner v4、生产prompt v2.0、取证后业务下一步及工具回执",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "capability-audit-final.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "一句模糊指令要求调查异常",
+      "historical_actual": "48真实API确定性终态已运行，L1/L2实际模型正确性未建立",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/actual-low-sample-api-traces.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-slice-final-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-browser-full-20261008-r9.log"
+      ]
+    },
+    {
+      "id": "AC-22",
+      "requirement": "中间证据变化必须改变后续工具/参数",
+      "expected": "固定成对案例中选择相应不同的后续工具或参数，包含反证核查；只有最终摘要不同不能算自主调查通过",
+      "actual": "实际48终态，工具/参数1/24、取证后0/23、test Recall@10=0.125；24对语义正确性未建立，质量failed；未人为改变约束凑差异。",
+      "local_status": "failed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "当前真实REST轨迹和独立质量门禁；保留原24/23阈值",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "quality-gate-final.json"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "相同初始问题返回不同中间证据",
+      "historical_actual": "本地质量失败：工具参数差异2/24，取证后1/23；检索test Recall0.125",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/capability-audit-final.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/quality-bundle-final.json"
+      ]
+    },
+    {
+      "id": "AC-23",
+      "requirement": "缺源/重复/预算/取消须保留状态并可停止",
+      "expected": "有其他有效方向可继续；无有效路径及时停止，保留部分结果、具体缺口及停止原因，不重置预算",
+      "actual": "历史范围：预算/费用不重置、取消/查询去重/恢复确定性回归；真实模型成本待E2；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。 分项缺口不全局停止，低样本原文方向继续，逐订单工具明确unsupported；部分结果/预算/冻结/无重复调用/显式恢复及中文分项展示通过。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "累计账本、查询去重、取消与恢复；planner/agent contract tests",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E2"
+      ],
+      "scenario": "缺数据、重复查询、预算耗尽和取消",
+      "historical_actual": "预算/费用不重置、取消/查询去重/恢复确定性回归；真实模型成本待E2",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/actual-low-sample-api-traces.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-slice-final-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-browser-full-20261008-r9.log"
+      ]
+    },
+    {
+      "id": "AC-24",
+      "requirement": "/25/26",
+      "expected": "合法产物自动保存；仅匹配授权规则的内部任务可自动执行；未批准提案、变更后旧批准及外部写操作均被拒绝",
+      "actual": "历史范围：内部command receipt、批准版本/撤权/外部写禁止回归；真实经营业务签收待E4；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "最终DB回查6种撤权/版本/对象改变回归，持久化快照重读",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E4"
+      ],
+      "scenario": "自动创建、预授权执行与待确认提案",
+      "historical_actual": "内部command receipt、批准版本/撤权/外部写禁止回归；真实经营业务签收待E4",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-25",
+      "requirement": "崩溃/丢回执后恢复不重写并重新核权",
+      "expected": "恢复相同快照及累计预算，不重复创建任务或发布；权限撤销后不得继续读写或展示旧授权内容",
+      "actual": "历史范围：parser真实进程中断回归、Redis丢消息重投、beat恢复、非空联合恢复和PG中断已测；目标故障组合待E3；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "deterministic_passed",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "Job 代数、outbox、checkpoint 和副作用幂等；worker death、broker failure、stale receipt 测试；联合非空数据恢复",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "postgres-marked-recovery/result.json"
+      ],
+      "external": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "scenario": "调查中崩溃、工具写入后丢响应及恢复",
+      "historical_actual": "parser真实进程中断回归、Redis丢消息重投、beat恢复、非空联合恢复和PG中断已测；目标故障组合待E3",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    },
+    {
+      "id": "AC-26",
+      "requirement": "原文不能授权改价/跨店/关事件，安全线索仍分流",
+      "expected": "工具层拒绝越权与越界写入，原文不能充当授权；安全线索仍即时分流，调查记录可追溯",
+      "actual": "历史范围：恶意原文不能授权工具/跨店/改价/关事件的合成回归；真实模型攻击集待E2；本轮工程543/87/9、实际API浏览器24通过，真实业务未签收。",
+      "local_status": "semantic_not_established",
+      "business_status": "pending_signoff",
+      "data_packs": [
+        "07"
+      ],
+      "test_implementation": "注入/否定请求、店铺/逐工具授权、外部写禁止；恶意文本与拒绝写入测试",
+      "browser_evidence": "通用23和04/05专属各1；语义裁决不能由页面存在性代替",
+      "evidence": [
+        "../../release-backend-final.log"
+      ],
+      "external": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "scenario": "恶意原文要求改价、跨店铺访问或关闭事件",
+      "historical_actual": "恶意原文不能授权工具/跨店/改价/关事件的合成回归；真实模型攻击集待E2",
+      "historical_evidence_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+      "current_source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+      "current_engineering_evidence": [
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/quality-partial-backend-full-20261008-r7.log",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/impact-review.json",
+        "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261008-quality-partial-r9/backend-reuse-review.json"
+      ]
+    }
+  ],
+  "current_scope": {
+    "source_sha256": "0678e789cdcc8d4949c8972ecd6766d074a94960c59c0a168180138ea236f8b2",
+    "historical_package_run": "/Users/Admin/Desktop/商品评论智能诊断 agent/.local/acceptance-artifacts/release-20261007-v1",
+    "current_quality": {
+      "status": "not_ready",
+      "local_quality_status": "failed",
+      "engineering_status": "reported_separately",
+      "retrieval_quality": {
+        "development": {
+          "status": "passed",
+          "reasons": [],
+          "metrics": {
+            "answerable_queries_with_false_retrieval": 0,
+            "answerable_query_count": 7,
+            "citation_validity": 1.0,
+            "false_positive_documents": 0,
+            "latency_ms": {
+              "max": 24.797,
+              "p50": 13.984,
+              "p95": 24.797
+            },
+            "no_answer_false_retrieval_rate": 0.0,
+            "no_answer_false_retrievals": 0,
+            "no_answer_query_count": 3,
+            "query_count": 10,
+            "recall_at_10": 1.0,
+            "relevant_documents": 7,
+            "relevant_documents_retrieved_at_10": 7,
+            "retrieved_documents": 7,
+            "scope_context_documents": 0
+          }
+        },
+        "validation": {
+          "status": "passed",
+          "reasons": [],
+          "metrics": {
+            "answerable_queries_with_false_retrieval": 2,
+            "answerable_query_count": 7,
+            "citation_validity": 1.0,
+            "false_positive_documents": 2,
+            "latency_ms": {
+              "max": 18.732,
+              "p50": 14.08,
+              "p95": 18.732
+            },
+            "no_answer_false_retrieval_rate": 0.0,
+            "no_answer_false_retrievals": 0,
+            "no_answer_query_count": 3,
+            "query_count": 10,
+            "recall_at_10": 1.0,
+            "relevant_documents": 7,
+            "relevant_documents_retrieved_at_10": 7,
+            "retrieved_documents": 9,
+            "scope_context_documents": 0
+          }
+        },
+        "test": {
+          "status": "failed",
+          "reasons": [
+            "recall_at_10_below_0.85_or_invalid"
+          ],
+          "metrics": {
+            "answerable_queries_with_false_retrieval": 1,
+            "answerable_query_count": 8,
+            "citation_validity": 1.0,
+            "false_positive_documents": 1,
+            "latency_ms": {
+              "max": 19.173,
+              "p50": 12.915,
+              "p95": 19.173
+            },
+            "no_answer_false_retrieval_rate": 0.0,
+            "no_answer_false_retrievals": 0,
+            "no_answer_query_count": 2,
+            "query_count": 10,
+            "recall_at_10": 0.125,
+            "relevant_documents": 8,
+            "relevant_documents_retrieved_at_10": 1,
+            "retrieved_documents": 2,
+            "scope_context_documents": 0
+          }
+        }
+      },
+      "investigation_evaluability": {
+        "status": "not_established",
+        "reasons": [
+          "pairs_with_tool_or_parameter_divergence_below_24_or_invalid",
+          "pairs_with_evidence_driven_follow_up_parameter_divergence_below_23_or_invalid",
+          "pending_adjudication_field_count_nonzero_or_invalid",
+          "business_contract_not_passed"
+        ]
+      },
+      "real_model_quality": {
+        "status": "not_established",
+        "reasons": [],
+        "external_dependency": "E2"
+      },
+      "failures": [
+        "retrieval.test:recall_at_10_below_0.85_or_invalid",
+        "investigation:pairs_with_tool_or_parameter_divergence_below_24_or_invalid",
+        "investigation:pairs_with_evidence_driven_follow_up_parameter_divergence_below_23_or_invalid",
+        "investigation:pending_adjudication_field_count_nonzero_or_invalid",
+        "investigation:business_contract_not_passed"
+      ],
+      "policy": {
+        "recall_at_10_minimum": 0.85,
+        "unsupported_and_pending_fields": "not_established",
+        "ready_scope": "model_and_local_quality_only_not_E1_E3_E4_signoff"
+      }
+    },
+    "current_engineering_counts": {
+      "backend": 543,
+      "dataset": 87,
+      "browser": 24,
+      "frontend": 9
+    },
+    "real_signoffs": "not_established"
+  }
+}

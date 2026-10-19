@@ -3256,6 +3256,18 @@ components:
       - id
       - metric
       - snapshot
+    EvidenceContextEnum:
+      enum:
+      - any
+      - asserted
+      - negated
+      - hypothetical
+      type: string
+      description: |-
+        * `any` - any
+        * `asserted` - asserted
+        * `negated` - negated
+        * `hypothetical` - hypothetical
     EvidenceSearchCommandKindEnum:
       enum:
       - reviews
@@ -3297,6 +3309,10 @@ components:
           maximum: 50
           minimum: 1
           default: 10
+        evidence_context:
+          allOf:
+          - $ref: '#/components/schemas/EvidenceContextEnum'
+          default: any
         language:
           type: string
           minLength: 1
@@ -3325,6 +3341,24 @@ components:
           type: string
         index_version:
           type: string
+        algorithm_manifest:
+          type: object
+          additionalProperties: {}
+        match_status:
+          $ref: '#/components/schemas/MatchStatusEnum'
+        retrieval_complete:
+          type: boolean
+        candidate_count:
+          type: integer
+        relevance_judgment:
+          type: object
+          additionalProperties: {}
+        evidence_context:
+          type: string
+        relevant_hit_count:
+          type: integer
+        context_item_count:
+          type: integer
         source_manifest:
           type: object
           additionalProperties: {}
@@ -3343,11 +3377,19 @@ components:
           items:
             type: string
       required:
+      - algorithm_manifest
       - alias_version
+      - candidate_count
+      - context_item_count
+      - evidence_context
       - index_version
       - items
       - limitations
+      - match_status
       - query
+      - relevance_judgment
+      - relevant_hit_count
+      - retrieval_complete
       - retrieval_id
       - retrieval_version
       - scope
@@ -3573,6 +3615,8 @@ components:
         state:
           readOnly: true
         result:
+          allOf:
+          - $ref: '#/components/schemas/InvestigationOutput'
           readOnly: true
         checkpoint_version:
           type: integer
@@ -3743,6 +3787,107 @@ components:
       - idempotency_key
       - query
       - shop
+    InvestigationConclusion:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/InvestigationConclusionStatusEnum'
+        statement:
+          type: string
+        proposed_statement:
+          type: string
+        citation_status:
+          type: string
+        citations:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        semantic_judgment:
+          type: string
+    InvestigationConclusionStatusEnum:
+      enum:
+      - unknown
+      - pending_adjudication
+      type: string
+      description: |-
+        * `unknown` - unknown
+        * `pending_adjudication` - pending_adjudication
+    InvestigationObservation:
+      type: object
+      properties:
+        fact_id:
+          type: string
+        record_id:
+          type: string
+        raw_row_id:
+          type: string
+        business_date:
+          type: string
+        revision:
+          type: integer
+        title:
+          type: string
+        text:
+          type: string
+        match_kind:
+          $ref: '#/components/schemas/MatchKindEnum'
+        evidence_contexts:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        evidence_relation:
+          type: string
+        source_kind:
+          type: string
+          nullable: true
+        phase:
+          type: string
+    InvestigationOutput:
+      type: object
+      properties:
+        business_schema_version:
+          type: string
+        business_contract:
+          type: object
+          additionalProperties: {}
+        output_schema_version:
+          type: string
+        conclusion:
+          $ref: '#/components/schemas/InvestigationConclusion'
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvestigationObservation'
+        retrieval_summary:
+          type: object
+          additionalProperties:
+            type: integer
+        request_scope:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        evidence:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        hypotheses:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+        limitations:
+          type: array
+          items:
+            type: string
+        clarification:
+          type: string
+        write:
+          type: object
+          additionalProperties: {}
+          nullable: true
     InvestigationStep:
       type: object
       properties:
@@ -3813,6 +3958,16 @@ components:
           type: string
           format: date-time
           readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        heartbeat_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
         finished_at:
           type: string
           format: date-time
@@ -3823,10 +3978,12 @@ components:
       - created_at
       - error
       - finished_at
+      - heartbeat_at
       - id
       - kind
       - result
       - shop
+      - started_at
       - status
     JobCommandRequest:
       type: object
@@ -3959,6 +4116,26 @@ components:
       - effective_from
       - name
       - reason
+    MatchKindEnum:
+      enum:
+      - relevant_hit
+      - scope_context
+      type: string
+      description: |-
+        * `relevant_hit` - relevant_hit
+        * `scope_context` - scope_context
+    MatchStatusEnum:
+      enum:
+      - relevant_hits
+      - scope_context
+      - no_hits
+      - incomplete
+      type: string
+      description: |-
+        * `relevant_hits` - relevant_hits
+        * `scope_context` - scope_context
+        * `no_hits` - no_hits
+        * `incomplete` - incomplete
     Member:
       type: object
       properties:
@@ -5077,13 +5254,23 @@ components:
           type: string
           format: uuid
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/ReviewCommandStatusEnum'
         expected_version:
           type: integer
           minimum: 1
       required:
       - expected_version
       - status
+    ReviewCommandStatusEnum:
+      enum:
+      - scheduled
+      - completed
+      - not_scheduled
+      type: string
+      description: |-
+        * `scheduled` - scheduled
+        * `completed` - completed
+        * `not_scheduled` - not_scheduled
     RevokeCommandRequest:
       type: object
       properties:
@@ -5950,16 +6137,6 @@ components:
             type: string
       required:
       - child_asins
-    StatusEnum:
-      enum:
-      - scheduled
-      - completed
-      - not_scheduled
-      type: string
-      description: |-
-        * `scheduled` - scheduled
-        * `completed` - completed
-        * `not_scheduled` - not_scheduled
     UploadCommandRequest:
       type: object
       properties:

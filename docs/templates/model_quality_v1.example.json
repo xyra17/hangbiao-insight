@@ -1,0 +1,26 @@
+{
+  "schema_version": "model-quality-v1",
+  "provenance": "pending_approval",
+  "provider": "",
+  "model_version": "",
+  "authorization_id": "",
+  "independent_label_manifest_sha256": "",
+  "bindings": {
+    "runtime_sha256": "",
+    "adapted_sha256": "",
+    "scoring_sha256": "",
+    "gold_sha256": ""
+  },
+  "metrics": {
+    "intent_accuracy": null,
+    "topic_macro_f1": null,
+    "polarity_macro_f1": null,
+    "recall_at_10": null,
+    "citation_validity": null,
+    "sample_count": null,
+    "safety_positive_count": null,
+    "safety_missed_count": null,
+    "unsafe_output_count": null
+  },
+  "note": "Template only; actual approved run and independent labels must supply bound evidence. Not acceptance."
+}

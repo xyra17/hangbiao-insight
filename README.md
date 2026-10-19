@@ -1,97 +1,98 @@
 # 航标 Insight
 
-> **当前开发基线（2026-09-21）**：按 V2 与总体技术方案迁移，阶段目标及验收方式见 [开发阶段与验收计划](docs/开发阶段与验收计划.md)。主体架构迁移已由用户确认；S1 基础功能、S2 主导入链路已实现并验证，S3 开发中。新工作台地址 `http://127.0.0.1:5184`；操作与验证范围见 [阶段验收记录](docs/阶段验收记录.md)。下方 Stage 5/6 状态属于历史原型，不代表本次 FR-01—13 已完成或已验收。
+面向跨境电商经营团队的商品经营异动分析工作台。当前工程主线是 **Django/DRF + PostgreSQL + Celery/Redis + LangGraph**，前端位于 `frontend/`。`backend/app/` 内保留 FastAPI 原型和部分被主线复用的模块；它不是默认启动入口，也不应整目录删除。
 
-```yaml
-stage6a-p0-engineering: accepted
-stage6a-p0-semantic-release: pending
-stage6b-p1-claim-store: accepted
-stage6b-p1-review-signal: accepted
-stage6b-p1-retrieval-rag: qdrant_experimental
-stage6b-core-mvp: accepted_local
-stage6b-real-e2e: deferred_external_model
-keyword-retrieval: default
-char-bigram-hybrid: experimental_fallback
-qdrant: smoke_tested
-stage6b-business-enrichment: deferred_external_model
-stage6b-local-mode: deterministic_local
-stage6b-core-productization: completed
-stage6b-local-release: rc1
+## 架构一览
+
+```mermaid
+flowchart LR
+  A[数据源<br/>评论 / 销量 / 订单 / 退款 / 客服] --> B[导入与版本化<br/>ImportBatch · VersionedFact]
+  B --> C[指标快照<br/>MetricSnapshot]
+  C --> D[异动与事件<br/>ObservationLead · BusinessEvent]
+  D --> E[调查图<br/>LangGraph · Planner · Tools]
+  E --> F[证据与引用<br/>EvidenceRef · SemanticClaim]
+  F --> G[报告<br/>StandardReport]
+  G --> H[动作与复查<br/>ActionTask · ActionExecution]
+  H --> D
 ```
 
-面向跨境电商运营的商品经营异常诊断工作台。当前版本完成 Stage 5 可运行纵向切片，并落地 Stage 5.2 Metric Engine、Stage 5.3 Anomaly Engine、Stage 5.4 Multi-Metric Engine 与 Stage 5.5A Review Semantic Layer 的模型选型：从经营总览发现异常，使用确定性算法核对单指标和联合经营状态，再进入调查轨迹回查评论原文证据。
+完整的分层图、调查时序、关键设计与代码地图见 **[架构总览](docs/架构总览.md)**。
 
-## 文档
+| 登录 | 发起一次有界调查 |
+| --- | --- |
+| ![登录](docs/assets/login-1440.png) | ![发起调查](docs/assets/investigation-form-1440.png) |
 
-- **需求与设计主文档**：[需求分析与开发范围冻结基线 V2](docs/阶段1_需求分析与MVP设计_V2.md)。2026-09-20 修订为一次性交付范围，统一经营核查、数据口径、事件队列、证据报告、处理复查与验收，不再按产品版本拆分核心能力。**本文描述的是实现现状，V2 描述的是目标态；两者冲突时以 V2 为准。**
-- **总体技术设计与实施方案**：[总体技术设计与开发实施方案](docs/总体技术设计与开发实施方案.md)。从需求独立设计数据接入、计算、追溯及运营处理；第 11 节补齐完整技术推荐；11.3 节拆解 46 个业务任务，11.12 节明确 LangGraph 自主调查、模糊指令定位、受控内部写入与恢复契约。自主调查范围、分级执行权限及推荐主体架构已确认；方案中的早期“待确认”状态以 2026-09-21 开发计划确认记录为准，具体依赖兼容、模型与故障验证尚未全部完成，不受历史代码及模型选择约束。
-- **运行时现状与本地发布**：[运行时状态与本地发布](docs/运行时状态与本地发布.md)。
-- **S1—S7剩余缺口执行清单**：[按 Gate、输入、命令、证据和退出条件执行](docs/S1-S7剩余缺口执行清单_2026-09-28.md)。
-- **S7 运行手册与发布门槛**：[部署、联合备份、保留期、容量和回退](docs/S7运行手册与发布门槛.md)。
-- **数据源字段**：[数据源导入说明](docs/数据源导入说明.md)。
-- **语义模型选型**：[语义模型选型记录](docs/语义模型选型记录.md)。
-- **前端交付说明**：[前端开发交付说明](docs/前端开发交付说明.md)。描述历史单页交付范围，不作为新开发验收依据；目标页面以 V2 第 12 节为准。
+| 调查结论与证据边界（含缺口与"结论未知"降级） | 移动端同一结论 |
+| --- | --- |
+| ![调查结论](docs/assets/investigation-result-1440.png) | ![移动端](docs/assets/investigation-result-390.png) |
 
-## 当前能力
 
-- 经营总览：订单量、退款率、评分、评论量及月度趋势。
-- 商品中心：商品健康度、异常数量与数据覆盖。
-- 异常中心：按风险等级筛选并进入诊断。
-- AI 深度诊断：展示路由、指标核对、假设、检索、评估与停止原因。
-- 评论洞察：标准化业务 Review 关键词检索和评论原文回查；Topic × Polarity 聚合接口已接入 Prediction Claim Store（未把预测当作 Ground Truth）。
-- 产品化操作：评论正/负向筛选、异常列表 CSV 导出、调查 JSON 导出与本地继续追问入口。
-- 本地数据源：支持经营指标、退款原因、售后和库存 CSV 导入，以及只读探测本地 SQLite；字段和质量校验见 [数据源导入说明](docs/数据源导入说明.md)。
-- 数据边界：GMV、CVR、广告 ROAS、库存可售天数在缺少事实数据时显示为待接入。
-- Metric Engine：支持日、周、月查询与聚合，以及当前区间和 Baseline 对比。
-- Anomaly Engine：支持 Baseline Delta、Rolling Z-Score、Robust Z-Score/MAD 和 Change Point。
-- Multi-Metric Engine：联合订单与退款信号，识别健康增长、增长伴随售后风险、综合恶化、需求走弱、经营恢复、经营反转、混合信号和稳定状态。
+## 当前交付边界
 
-经营指标来自可复现的 synthetic 数据；评论及标签来自项目内 Amazon Reviews 2023 数据集。Stage 5 调查页是确定性演示轨迹，不读取黄金诊断预期，也不代表真实 LangGraph Agent 已接入。
+这是可复现的内部演示和工程验收项目，不是已生产上线的系统。经营事实包主要是合成或派生数据；公开评论包含真实文本。确定性调查能验证受控工具路由、证据绑定和人工处理链路，不等同于真实模型正确性、真实商家业务收益或生产稳定性。
 
-Stage 5.5A 当前冻结 `DeepSeek v4 flash + semantic-prompt-v1.0 + taxonomy-v1.1` 作为主要语义候选，Qwen 3.5 9B 作为本地开发和降级模型。语义抽取定位为离线任务，运行时 API 不读取 Golden Review 标签，也不会在每次 Agent 调查中实时批量调用模型。完整决策见 [语义模型选型记录](docs/语义模型选型记录.md)。
+截至 2026-10-19，最新智能质量候选 `internal-demo-real-quality-20261014-full-budget-v35` 的离线协议检查为 `offline_protocol_passed`（300 分类、30 检索、48 调查，474 个替代请求，真实模型调度 0 次），`quality_accepted=false`。本轮 `make verify` 已完整通过；免费 planner comparison 和 05 号合成业务包也完成工程验收。它们不构成真实模型质量或真实商家收益验收。协议与引用检查通过不代表语义正确；独立评分和用户裁决仍未完成。评测既有失败材料保留，不能把历史部分结果拼成整轮通过。完整执行边界见[智能质量当前执行入口](docs/智能质量当前执行入口.md)。
 
-DeepSeek 凭据仅从 `DEEPSEEK_API_KEY` 环境变量读取。可复制 `backend/.env.example` 作为本机配置参考，但不要把真实 Key 写入仓库。
+## 安装与启动
 
-## 本地启动
+需要 Python 3.11+、`uv`、Node.js 22.19+、pnpm 11 和 Docker Compose。先在仓库根目录准备本机配置：
 
-需要 Node.js 20+、pnpm 与 Python 3.11+，并安装 `uv`。
+```bash
+cp backend/.env.example .env.local
+```
+
+编辑 `.env.local` 中的 Django 密钥、PostgreSQL 密码和 Redis 密码。该文件只用于本机，不要提交。示例文件已将本地 PostgreSQL/Redis 端口与开发数据库设为 `55433`/`56380` 和 `insight_dev`。默认开发服务使用独立 Compose 项目 `insight-local-dev`、命名 Celery 队列 `insight_dev` 和独立存储目录，不会复用或重建原有 `insight-v2` Compose 项目。
 
 ```bash
 make install
 make dev
 ```
 
-启动后访问 <http://127.0.0.1:5174>。API 文档位于 <http://127.0.0.1:8200/docs>。本机 5173 已被其他 Globex 工作区占用，API 端口 8000 留给 PlanPilot。
+工作台地址 <http://127.0.0.1:5184>，Django API 地址 <http://127.0.0.1:8280>，API schema 位于 <http://127.0.0.1:8280/api/schema/>。`make dev` 会启动本仓库隔离的 PostgreSQL/Redis、执行迁移，并监督 Django、Celery worker、Celery beat 与 Vite。API 或前端端口被占用、任一子进程启动失败或运行中退出时，`make dev` 会报告失败并停止本次启动的同组进程。`make dev-infra-down` 只停止 `insight-local-dev` 项目，不删除其持久化卷。
 
-也可以分别启动：
+也可以分开运行 `make dev-infra`、`make migrate`、`make backend`、`make worker`、`make beat` 和 `make frontend`。若已有 `backend/.venv` 或 `frontend/node_modules`，`make install` 会使用锁文件做可复现安装。
 
-```bash
-cd backend
-uv sync --dev
-uv run uvicorn app.main:app --host 127.0.0.1 --port 8200
-```
+## 验证入口
 
 ```bash
-cd frontend
-pnpm install
-pnpm dev
+make verify
 ```
 
-## 验证
+该入口包含 Django 检查、迁移差异检查、OpenAPI schema 验证、后端回归、前端单元测试和前端生产构建。默认后端回归排除带 `capacity` 标记的 502,400 行容量场景，不触发真实模型或付费评测。`make test` 使用单独的 Django 测试数据库（`test_insight_dev`）和隔离的 Redis 项目配置；测试数据库由 Django 建立并在结束后删除，开发数据库仅作连接入口。
 
 ```bash
-make test
-make build
-make preflight
+make test-capacity       # 显式运行大容量导入验收，耗时和资源占用较高
+make planner-comparison # 同输入/8步预算下固定流程与确定性 planner 的免费对照
+make test-legacy         # 保留的 FastAPI 原型测试，不属于默认主线
+make frontend-test       # 前端 Vitest
+make build               # 前端 TypeScript 检查与生产构建
 ```
 
-本地发布、SQLite 备份/恢复和 Docker 启动方式见 [运行时状态与本地发布](docs/运行时状态与本地发布.md)。
-本地验收记录见 `backend/artifacts/semantic_eval/stage6b_local_release_report.json`。
+GitHub Actions 使用独立 PostgreSQL/Redis 服务，运行 Django 检查、迁移差异、全部非容量后端测试、Ruff、Vitest 和生产构建。浏览器全链路需要本地验收账号和隔离数据，未放进普通 CI。
 
-## 后续阶段
+## 可复现的业务案例
 
-Stage 6A P0 技术闭环已完成，保留两个语义发布债务（A 最终答案措辞、B abstain 语义）并行推进 P1 Claim Store。广告、价格、库存、流量和促销等数据需要在获得真实数据源后接入，当前界面不会为这些指标生成占位数值。
+`backend/tests_v2/test_extended_acceptance_workflow.py` 提供快速集成回归。真实 API/Celery 和浏览器演示复用 `dataset/data/05_近期经营闭环_v1`、`dataset/data/06_S5动作效果场景_v1` 与 `scripts/run_business_package_acceptance.py`：
 
-V2 冻结范围包含销售与流量、转化指标、退款退货、可获得的售后反馈、库存／可售状态、购物车、价格促销和评论证据；数据缺失时的能力边界见第 8 节。广告归因、竞品分析和自动外部处置明确不在范围内。全部 FR 统一验收，W0 至 W6 仅为工程工作包。
+```bash
+make business-acceptance DELIVERY_RUN=20261017T120000Z_internal-delivery DELIVERY_AS_OF=2026-10-01
+```
 
-Stage 6A 已接入 Evidence Guard、Investigation State、Task Router、Tool Registry、真实 Planner/Tool Loop、SQLite 持久化与 SSE。Stage 6B 已完成 Claim Store、ReviewSignal、Keyword 默认检索、Qdrant smoke 和 Review Detail 回查；Qdrant 仍为实验后端，真实业务 Enrichment Pilot 与三类黑盒 E2E 因 DeepSeek 凭据欠费而阻塞。运行时不读取 Golden，也不把 Prediction 当作 Ground Truth。
+该命令会先确保 `insight-local-dev` 的 PostgreSQL/Redis 健康，再按同一个新运行目录和隔离数据库依次执行导入与指标、动作/复查/复发、浏览器阶段。它显式使用 PostgreSQL 55433、Redis 56380、确定性 planner，并禁用语义、相关性和所有外部模型 provider；不会依赖旧 55432 服务或机器已有的付费模型配置。业务日期固定为合成数据包日期，不能替换成运行当天。输入、结果与隔离数据库保存在 `.local/acceptance-artifacts/` 和 `.local/acceptance-storage/`，不上传外部服务。最近一轮结果、范围限制及指纹记录在[内部交付状态](docs/内部交付状态_2026-10-19.md)。
+
+`make planner-comparison` 在固定流程与项目确定性 planner 两组中使用同一组 48 个任务、同一数据包和 8 步上限，输出分组绑定的独立结果文件。合成契约分数为开发回归；真实模型组需要新的整轮预算与数据传输授权，未授权时不会发起。
+
+## 重要文档
+
+- [经营异动 PRD](<完成经营异动项目需要的文档/01、经营异动-需求规格说明书（PRD）.md>)、[TDD](<完成经营异动项目需要的文档/02、经营异动-技术设计文档（TDD）.md>)、[开发步骤](<完成经营异动项目需要的文档/03、经营异动-开发步骤文档.md>)：v1.2 内部交付基线。
+- [智能质量当前执行入口](docs/智能质量当前执行入口.md)：协议、语义、任务完成和业务收益的验收边界。
+- [内部演示数据适用性核查](docs/内部演示现有数据适用性核查_2026-10-13.md)：评论来源、合成经营事实、黄金标注和切分限制。
+- [S1–S7 剩余缺口执行清单](docs/S1-S7剩余缺口执行清单_2026-09-28.md)：历史工程记录，按最新交接状态解释。
+- [S7 运行手册与发布门槛](docs/S7运行手册与发布门槛.md)：部署、备份、容量、恢复和上线门槛。
+
+## 评测与业务数据边界
+
+- 评论数据只覆盖当前授权的本地数据范围；固定验收子集上的召回指标不能外推为全库效果。评论文本是真实公开文本，经营指标和经营事件主要为合成或派生数据。
+- 旧 gold 标签有 AI 标注和重复切分限制。开发调试中反复使用的样本只能作开发回归；独立评审由用户或独立评审者完成。
+- 单次调用、单个调查 run 与评测轮次预算分别受运行时账本和评测脚本约束。新 run 会获得新的 run 级额度，不得借此绕过已批准的跨轮上限。新增工作空间日/月预算须由产品责任人确定金额后再配置。
+- 真实模型 planner 对照、独立语义裁决、真实商家影子运行、收益签收和生产部署仍需各自授权与验收；免费替代执行不能作为真实模型质量结论。
