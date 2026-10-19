@@ -1,6 +1,6 @@
 import pytest
 
-from insight.models import AuditEntry, Membership, Product, ShopGrant
+from insight.models import AuditEntry, Membership, Product, ShopGrant, WorkspaceModelBudgetPolicy
 
 pytestmark = pytest.mark.django_db
 
@@ -84,3 +84,56 @@ def test_grant_revoke_is_scoped_conflict_checked_and_audited(client, setup_scope
     assert AuditEntry.objects.filter(action="grant.updated").count() == 2
     client.force_authenticate(users["admin"])
     assert any(row["action"] == "grant.updated" for row in client.get("/api/v1/audit/").json()["results"])
+
+
+def test_workspace_model_budget_requires_admin_and_explicit_limits(client, setup_scope, monkeypatch):
+    users, shops = setup_scope
+    workspace = shops[0].workspace
+    url = f"/api/v1/workspaces/{workspace.pk}/model-budget/"
+    client.force_authenticate(users["a"])
+    assert client.get(url).status_code == 403
+    client.force_authenticate(users["admin"])
+    assert client.get(url).json() == {"configured": False, "external_dispatch": "blocked_until_admin_configuration"}
+    payload = {
+        "enabled": True, "currency": "USD", "daily_cost_limit": "1.00", "monthly_cost_limit": "20.00",
+        "max_concurrent_external": 2, "lease_seconds": 90,
+    }
+    response = client.put(url, payload, format="json")
+    assert response.status_code == 200
+    policy = WorkspaceModelBudgetPolicy.objects.get(workspace=workspace)
+    assert policy.enabled and policy.daily_cost_limit == 1 and policy.max_concurrent_external == 2
+    assert client.get(url).json()["configured"] is True
+
+    from insight.investigation.budget import reserve_workspace_call
+
+    monkeypatch.setenv("INVESTIGATION_COST_CURRENCY", "USD")
+    reserve_workspace_call(
+        workspace_id=workspace.pk, reservation_key="currency-change-guard", provider="controlled",
+        operation="test_only", reserved_cost="0.01",
+    )
+    rejected_currency_change = client.put(
+        url,
+        {**payload, "currency": "CAD"},
+        format="json",
+    )
+    assert rejected_currency_change.status_code == 400
+    policy.refresh_from_db()
+    assert policy.currency == "USD"
+
+
+def test_workspace_execution_policy_is_separate_from_free_run_cost_policy(client, setup_scope):
+    from insight.models import WorkspaceExecutionPolicy
+
+    users, shops = setup_scope
+    url = f"/api/v1/workspaces/{shops[0].workspace_id}/execution-policy/"
+    client.force_authenticate(users["a"])
+    assert client.get(url).status_code == 403
+    client.force_authenticate(users["admin"])
+    before = client.get(url).json()
+    assert before["configured"] is False
+    assert before["free_deterministic_runs"] == "allowed_with_execution_limit"
+    response = client.put(url, {"max_concurrent_investigations": 2, "lease_seconds": 600}, format="json")
+    assert response.status_code == 200
+    policy = WorkspaceExecutionPolicy.objects.get(workspace=shops[0].workspace)
+    assert policy.max_concurrent_investigations == 2 and policy.lease_seconds == 600
+    assert response.json()["free_deterministic_runs"] == "allowed_with_execution_limit"

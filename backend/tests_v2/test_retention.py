@@ -36,6 +36,66 @@ def test_retention_removes_raw_payload_but_keeps_tombstone(metric_scope, setting
     assert RetentionTombstone.objects.filter(object_id=str(raw.pk), object_type="raw_file").exists()
 
 
+def test_retention_uses_shorter_source_window_and_honors_180_day_boundary(
+    metric_scope, settings, tmp_path
+):
+    users, shops = metric_scope
+    settings.STORAGE_ROOT = tmp_path
+    now = timezone.now()
+    files = {}
+    batches = {}
+    for label, retention_days, age_days in (
+        ("short", 30, 31),
+        ("default", 180, 31),
+        ("boundary", 180, 180),
+    ):
+        storage_key = f"{label}.csv"
+        (tmp_path / storage_key).write_text(label, encoding="utf-8")
+        raw = RawFile.objects.create(
+            sha256=label.ljust(64, "0"), storage_key=storage_key, size=len(label)
+        )
+        source = Source.objects.create(
+            shop=shops[0], name=f"保留期来源 {label}", kind="sales_traffic", is_primary=False
+        )
+        contract = SourceContract.objects.create(
+            source=source,
+            version=1,
+            grain="asin_day",
+            column_mapping={"child_asin": "asin", "business_date": "date"},
+            retention_days=retention_days,
+        )
+        batch = ImportBatch.objects.create(
+            contract=contract,
+            raw_file=raw,
+            actor=users["admin"],
+            filename=storage_key,
+            processing_key=(label + "p").ljust(64, "p"),
+            coverage_start=date(2026, 1, 1),
+            coverage_end=date(2026, 1, 1),
+            generated_at=datetime(2026, 1, 2, tzinfo=UTC),
+            declared_asins=["B000TEST01"],
+        )
+        ImportBatch.objects.filter(pk=batch.pk).update(
+            created_at=now - timedelta(days=age_days)
+        )
+        files[label] = raw
+        batches[label] = batch
+
+    preview = cleanup_retention(
+        now=now, dry_run=True, workspace_id=shops[0].workspace_id
+    )
+    assert preview["raw_files"] == 1
+    result = cleanup_retention(now=now, workspace_id=shops[0].workspace_id)
+    assert result["raw_files"] == 1
+    assert not (tmp_path / "short.csv").exists()
+    assert (tmp_path / "default.csv").exists()
+    assert (tmp_path / "boundary.csv").exists()
+    assert ImportBatch.objects.filter(pk=batches["short"].pk).exists()
+    assert RetentionTombstone.objects.filter(
+        object_id=str(files["short"].pk), content_hash=files["short"].sha256
+    ).exists()
+
+
 def test_retention_cleanup_is_scheduled_independently_from_daily_scans(settings):
     schedule = settings.CELERY_BEAT_SCHEDULE["retention-cleanup"]
     assert schedule["task"] == "insight.tasks.cleanup_retention_task"

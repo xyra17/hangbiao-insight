@@ -92,6 +92,45 @@ def test_daily_aggregates_native_grain_and_scan_is_idempotent(metric_scope, clie
     assert client.get("/api/v1/events/").json()["count"] == 0
 
 
+def test_snapshot_list_caches_raw_source_permission_per_shop_for_one_request(metric_scope):
+    from unittest.mock import patch
+    from uuid import uuid4
+
+    from django.test import RequestFactory
+
+    from insight.metrics.api import SnapshotSerializer
+    from insight.models import MetricSnapshot
+
+    users, shops = metric_scope
+    snapshots = []
+    for index, shop in enumerate([shops[0], shops[0], shops[1]], start=1):
+        product = Product.objects.filter(shop=shop).first()
+        snapshots.append(
+            MetricSnapshot.objects.create(
+                shop=shop,
+                child_asin=product.child_asin,
+                product=product,
+                actor=users["admin"],
+                fingerprint=uuid4().hex,
+                rule_version="permission-cache-test",
+                source_manifest={},
+                payload={"cohort": {"refunds": {"baseline": {"order_ids": [f"order-{index}"]}}}},
+                local_date=date(2026, 9, 1),
+            )
+        )
+
+    request = RequestFactory().get("/api/v1/snapshots/")
+    request.user = users["a"]
+    with patch("insight.metrics.api.can_read_raw_source", return_value=False) as check_access:
+        rows = SnapshotSerializer(snapshots, many=True, context={"request": request}).data
+
+    assert check_access.call_count == 2
+    assert rows[0]["payload"]["cohort"]["refunds"]["baseline"] == {}
+    assert rows[1]["payload"]["cohort"]["refunds"]["baseline"] == {}
+    assert rows[2]["payload"]["cohort"]["refunds"]["baseline"] == {}
+    assert snapshots[0].payload["cohort"]["refunds"]["baseline"]["order_ids"] == ["order-1"]
+
+
 def test_missing_day_and_stale_data_never_create_false_sales_signal(metric_scope):
     users, shops = metric_scope
     start, today = date(2026, 8, 1), date(2026, 9, 5)

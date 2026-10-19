@@ -4,10 +4,12 @@ import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
-from threading import Barrier
+from threading import Barrier, Event, Thread
 
 import pytest
-from django.db import close_old_connections, connection, connections
+from django.conf import settings
+from django.db import close_old_connections, connection, connections, transaction
+from django.test.utils import CaptureQueriesContext
 from django.utils import timezone
 from rest_framework.test import APIClient
 
@@ -16,6 +18,11 @@ from insight.services import create_probe
 from insight.tasks import dispatch_outbox, run_job
 
 pytestmark = pytest.mark.django_db(transaction=True)
+
+
+def test_outbox_dispatch_interval_uses_the_explicit_runtime_setting():
+    assert settings.CELERY_BEAT_SCHEDULE["outbox"]["schedule"] == settings.INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS
+    assert settings.INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS > 0
 
 
 def parallel(call):
@@ -75,6 +82,77 @@ def test_parallel_probe_submission_and_execution_are_idempotent(setup_scope):
     parallel(lambda: run_job(ids[0]))
     assert Job.objects.get().status == "completed"
     assert AuditEntry.objects.filter(action="job.completed").count() == 1
+
+
+def test_job_claim_locks_only_job_row_and_not_shared_actor(setup_scope):
+    users, shops = setup_scope
+    job = create_probe(users["admin"], shops[0], "claim-lock-scope", "test")
+
+    with CaptureQueriesContext(connection) as captured:
+        run_job(str(job.pk))
+
+    claim_query = next(
+        query["sql"]
+        for query in captured.captured_queries
+        if "FOR UPDATE" in query["sql"] and 'FROM "insight_job"' in query["sql"]
+    )
+    assert 'FOR UPDATE OF "insight_job"' in claim_query
+    assert 'OF "auth_user"' not in claim_query
+
+
+def test_job_read_api_exposes_worker_heartbeat_for_queue_timing(setup_scope):
+    users, shops = setup_scope
+    job = create_probe(users["admin"], shops[0], "queue-timing-observation", "test")
+    run_job(str(job.pk))
+
+    client = APIClient()
+    client.force_authenticate(users["admin"])
+    response = client.get(f"/api/v1/jobs/{job.pk}/")
+
+    assert response.status_code == 200
+    assert response.data["created_at"]
+    assert response.data["heartbeat_at"]
+    assert response.data["finished_at"]
+
+
+def test_job_claim_does_not_wait_on_an_unrelated_actor_row_lock(setup_scope):
+    from django.contrib.auth import get_user_model
+
+    users, shops = setup_scope
+    job = create_probe(users["admin"], shops[1], "actor-lock-behavior", "test")
+    finished = Event()
+    errors = []
+
+    def execute():
+        close_old_connections()
+        try:
+            run_job(str(job.pk))
+        except BaseException as exc:  # Surface worker-thread failures in the assertion below.
+            errors.append(exc)
+        finally:
+            finished.set()
+            connections.close_all()
+
+    worker = Thread(target=execute, daemon=True)
+    with transaction.atomic():
+        get_user_model().objects.select_for_update().get(pk=users["admin"].pk)
+        worker.start()
+        deadline = time.monotonic() + 5
+        claimed_while_locked = False
+        while time.monotonic() < deadline:
+            job.refresh_from_db()
+            if job.status == "running" and job.attempts == 1:
+                claimed_while_locked = True
+                break
+            time.sleep(0.05)
+    worker.join(timeout=5)
+
+    assert claimed_while_locked, "job claim waited on the shared actor row"
+    assert finished.is_set(), "job did not finish after the actor lock was released"
+    assert not worker.is_alive()
+    assert not errors
+    job.refresh_from_db()
+    assert job.status == "completed"
 
 
 def test_worker_process_death_rolls_back_partial_write_and_retry_completes_once(setup_scope, tmp_path):

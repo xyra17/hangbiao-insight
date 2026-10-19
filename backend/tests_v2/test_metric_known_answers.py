@@ -114,6 +114,38 @@ def test_different_currencies_and_chains_never_cancel_each_other():
     assert calculate([order("line-1")], refunds)["refunds"]["current"]["numerator"] == 1
 
 
+def test_cohort_coverage_ranges_are_reused_for_repeated_shipment_dates(monkeypatch):
+    from insight.metrics import cohort
+
+    start = date(2026, 1, 1)
+    days = {start + timedelta(days=index): "ready" for index in range(300)}
+    orders = [
+        order(f"line-{index}", order_id=f"order-{index}", shipped=date(2026, 8, 20), purchased=date(2026, 8, 20))
+        for index in range(2000)
+    ]
+    calls = {}
+    original = cohort.complete_range
+
+    def tracked(coverage_days, first, last):
+        key = (id(coverage_days), first, last)
+        calls[key] = calls.get(key, 0) + 1
+        return original(coverage_days, first, last)
+
+    monkeypatch.setattr(cohort, "complete_range", tracked)
+    result = cohort.cohort_from_facts(
+        days,
+        {"refunds": days, "returns": days},
+        orders,
+        [],
+        [],
+        date(2026, 10, 4),
+        "America/Los_Angeles",
+    )
+
+    assert result["refunds"]["current"]["denominator"] == 2000
+    assert sum(calls.values()) <= 8
+
+
 @pytest.mark.parametrize(
     "successes,total", [(1, 0), (-1, 0), (0, -1), (2, 1), (0.5, 1), (1, 1.5), (True, 1), (0, float("nan"))]
 )

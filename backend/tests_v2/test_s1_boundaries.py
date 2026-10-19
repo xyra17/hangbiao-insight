@@ -66,7 +66,15 @@ def test_expired_disabled_and_logged_out_sessions_cannot_read(setup_scope):
         assert not client.get("/api/v1/session/").data["authenticated"]
 
 
-def test_login_throttle_rejects_excess_attempts_with_retry_header():
+def test_login_throttle_rejects_excess_attempts_with_retry_header(monkeypatch):
+    from types import SimpleNamespace
+
+    from django.utils import timezone
+
+    # All eleven requests must exercise one fixed minute bucket. A real
+    # minute rollover tests a different contract and made this assertion flaky.
+    fixed = timezone.now().replace(second=10, microsecond=0)
+    monkeypatch.setattr("insight.throttling.timezone", SimpleNamespace(now=lambda: fixed))
     cache.clear()
     client = APIClient(enforce_csrf_checks=True)
     token = client.get("/api/v1/session/").data["csrf_token"]

@@ -50,7 +50,7 @@ def review_report(metric_scope, request):
             {
                 **template,
                 "record_id": item["id"],
-                "title": "",
+                "title": item.get("title", ""),
                 "text": item["text"],
                 "language": item.get("language", "en"),
             }

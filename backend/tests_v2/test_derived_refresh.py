@@ -38,14 +38,16 @@ def test_refresh_report_preserves_original_action_and_is_idempotent(metric_scope
 
 def test_refresh_investigation_frozen_and_original_unchanged(metric_scope):
     users, shops = metric_scope
-    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 退货异常", status="completed", max_steps=6)
+    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 销量异常", status="completed", max_steps=6)
     _, batch = revision(metric_scope)
     receipt = DerivedRefresh.objects.get(artifact_id=original.pk)
     result = refresh_derived(receipt.job, lambda: None)
     assert result["status"] == "completed", result
     new = InvestigationRun.objects.get(pk=result["replacement_id"])
     assert new.previous_run_id == original.pk and new.read_only_refresh
-    assert new.input_versions["source_manifest"] and new.steps.count() == 6
+    assert new.input_versions["source_manifest"] and new.steps.count() == 4
+    assert new.result["business_contract"]["expected_next_step"] == "repair_daily_source_before_comparison"
+    assert not new.steps.filter(tool_name__in=["review_claims", "text_evidence"]).exists()
     original.refresh_from_db()
     assert original.steps.count() == 0 and original.result == {}
     assert refresh_derived(receipt.job, lambda: None) == result
@@ -93,7 +95,7 @@ def test_refresh_report_audit_failure_rolls_back_new_artifact(metric_scope, monk
 def test_investigation_refresh_resumes_existing_successor_after_interruption(metric_scope, monkeypatch):
     from insight.investigation import graph
     users, shops = metric_scope
-    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 退货异常", status="completed", max_steps=6)
+    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 销量异常", status="completed", max_steps=6)
     revision(metric_scope)
     receipt = DerivedRefresh.objects.get(artifact_id=original.pk)
     execute = graph.execute_investigation
@@ -128,11 +130,15 @@ def test_pending_dependency_does_not_exhaust_job_retries(metric_scope):
 
 
 def test_refresh_failure_retry_is_scoped_and_audited(metric_scope, client):
+    from insight.derived import artifact_refreshes
     from insight.models import AuditEntry
     old, _ = revision(metric_scope)
-    job = DerivedRefresh.objects.get(artifact_id=old.pk).job
+    receipt = DerivedRefresh.objects.get(artifact_id=old.pk)
+    job = receipt.job
     job.status, job.attempts = "failed", 3
     job.save()
+    receipt.status, receipt.detail = "failed", "上次刷新中断"
+    receipt.save(update_fields=["status", "detail"])
     client.force_authenticate(metric_scope[0]["b"])
     assert client.post(f"/api/v1/jobs/{job.pk}/retry-refresh/").status_code == 404
     client.force_authenticate(metric_scope[0]["admin"])
@@ -140,12 +146,23 @@ def test_refresh_failure_retry_is_scoped_and_audited(metric_scope, client):
     assert response.status_code == 202
     job.refresh_from_db()
     assert job.status == "queued" and job.attempts == 0
+    receipt.refresh_from_db()
+    assert receipt.status == "queued" and receipt.detail == ""
+    assert artifact_refreshes("report", old.pk)[0]["status"] == "queued"
     assert AuditEntry.objects.filter(action="artifact.refresh_retried", target_id=str(job.pk)).exists()
+    from insight.models import WorkspaceExecutionLease
+    from insight.tasks import run_job
+
+    run_job(str(job.pk))
+    job.refresh_from_db()
+    receipt.refresh_from_db()
+    assert job.status == "completed" and receipt.status == "completed"
+    assert WorkspaceExecutionLease.objects.get(job=job).status == "released"
 
 
 def test_two_imports_before_refresh_coalesce_same_current_versions(metric_scope):
     users, shops = metric_scope
-    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 退货异常", status="completed", max_steps=6)
+    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 销量异常", status="completed", max_steps=6)
     old, batch = revision(metric_scope)
     report(metric_scope, "sales_traffic", [{"business_date":"2026-09-20", "ordered_units":9, "sessions":10}], date(2026,9,20), date(2026,9,20), existing=batch.contract.source)
     receipts = list(DerivedRefresh.objects.order_by("created_at"))
@@ -159,7 +176,7 @@ def test_two_imports_before_refresh_coalesce_same_current_versions(metric_scope)
 
 def test_partial_refresh_is_not_reported_as_completed(metric_scope):
     users, shops = metric_scope
-    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 退货异常", status="completed", max_steps=3)
+    original = InvestigationRun.objects.create(shop=shops[0], requested_by=users["a"], child_asin="B000TEST01", query="调查 B000TEST01 销量异常", status="completed", max_steps=3)
     revision(metric_scope)
     receipt = DerivedRefresh.objects.get(artifact_id=original.pk)
     result = refresh_derived(receipt.job, lambda: None)

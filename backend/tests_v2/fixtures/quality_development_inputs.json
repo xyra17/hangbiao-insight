@@ -1,0 +1,70 @@
+{
+  "source_nature": "independent_synthetic_development",
+  "contains_labels": false,
+  "cases": [
+    {
+      "case_id": "DEV-PACK-A",
+      "pair_id": "DEV-PACK",
+      "query": "Investigate packaging damage for BDEV000001",
+      "asin": "BDEV000001",
+      "start": "2026-10-01",
+      "end": "2026-10-03",
+      "documents": [
+        {
+          "record_id": "DEV-DOC-01",
+          "asin": "BDEV000001",
+          "date": "2026-10-02",
+          "text": "The carton arrived crushed and the protective insert was torn."
+        }
+      ]
+    },
+    {
+      "case_id": "DEV-PACK-B",
+      "pair_id": "DEV-PACK",
+      "query": "Investigate packaging damage for BDEV000001",
+      "asin": "BDEV000001",
+      "start": "2026-10-01",
+      "end": "2026-10-03",
+      "documents": [
+        {
+          "record_id": "DEV-DOC-02",
+          "asin": "BDEV000001",
+          "date": "2026-10-02",
+          "text": "The carton and protective insert were intact. There was no packaging damage."
+        }
+      ]
+    },
+    {
+      "case_id": "DEV-SCOPE-A",
+      "pair_id": "DEV-SCOPE",
+      "query": "Investigate packaging damage for BDEV000002",
+      "asin": "BDEV000002",
+      "start": "2026-10-01",
+      "end": "2026-10-03",
+      "documents": [
+        {
+          "record_id": "DEV-DOC-03",
+          "asin": "BDEV000009",
+          "date": "2026-10-02",
+          "text": "The packaging was damaged."
+        }
+      ]
+    },
+    {
+      "case_id": "DEV-SCOPE-B",
+      "pair_id": "DEV-SCOPE",
+      "query": "Investigate packaging damage for BDEV000002",
+      "asin": "BDEV000002",
+      "start": "2026-10-01",
+      "end": "2026-10-03",
+      "documents": [
+        {
+          "record_id": "DEV-DOC-04",
+          "asin": "BDEV000002",
+          "date": "2026-10-02",
+          "text": "Delivery was prompt and the charger worked."
+        }
+      ]
+    }
+  ]
+}

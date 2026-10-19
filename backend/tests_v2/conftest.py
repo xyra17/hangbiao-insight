@@ -54,6 +54,29 @@ def client():
 
 
 @pytest.fixture
+def enable_workspace_model_budget(monkeypatch):
+    """Explicit XTS-only budget for controlled provider fixtures."""
+    def configure(workspace, actor, *, daily="100", monthly="1000", concurrency=4, lease_seconds=300):
+        from insight.models import WorkspaceModelBudgetPolicy
+
+        monkeypatch.setenv("INVESTIGATION_COST_CURRENCY", "XTS")
+        return WorkspaceModelBudgetPolicy.objects.update_or_create(
+            workspace=workspace,
+            defaults={
+                "enabled": True,
+                "currency": "XTS",
+                "daily_cost_limit": daily,
+                "monthly_cost_limit": monthly,
+                "max_concurrent_external": concurrency,
+                "lease_seconds": lease_seconds,
+                "updated_by": actor,
+            },
+        )[0]
+
+    return configure
+
+
+@pytest.fixture
 def metric_scope(setup_scope, settings, tmp_path):
     settings.STORAGE_ROOT = tmp_path
     users, shops = setup_scope

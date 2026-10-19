@@ -66,6 +66,10 @@
     {
       "id": "EN-10",
       "text": "The blue version looks good."
+    },
+    {
+      "id": "EN-11",
+      "text": "Refund reversal is recorded in the same transaction chain."
     }
   ],
   "queries": [
@@ -111,6 +115,12 @@
       "relevant": [
         "CN-1",
         "EN-1"
+      ]
+    },
+    {
+      "query": "查找退款冲正链",
+      "relevant": [
+        "EN-11"
       ]
     }
   ]
