@@ -1,0 +1,88 @@
+{
+  "status": "not_ready",
+  "local_engineering": "A_B_C_D_completed_with_recorded_limits",
+  "head": "349350ce1373975791ddeef322bf508351658a60",
+  "workspace": "shared_uncommitted",
+  "backend_full": {
+    "passed": 493,
+    "deselected": 1,
+    "seconds": 201.03
+  },
+  "dataset": {
+    "passed": 56,
+    "seconds": 3.59
+  },
+  "frontend_unit": {
+    "passed": 6
+  },
+  "browser": {
+    "passed": 23,
+    "minutes": 2.5,
+    "artifact": ".local/acceptance-artifacts/20261007T102414Z_insight_acceptance_20261006_v2",
+    "cleanup_survivors": 0
+  },
+  "supplemental_boundaries": {
+    "passed": 43,
+    "seconds": 5.83,
+    "not_additive": true
+  },
+  "final_metric_authority": {
+    "passed": 18,
+    "seconds": 6.79,
+    "new_cases": 6,
+    "not_additive": true
+  },
+  "image": {
+    "backend_files_matching": 192,
+    "web_application_files_matching": 14,
+    "extra_nginx_file": "50x.html",
+    "healthy_services": 6,
+    "cleanup_survivors": 0
+  },
+  "checks": {
+    "django": "passed",
+    "migration_drift": "none",
+    "openapi": "passed",
+    "build": "passed",
+    "ruff_changed_scope": "passed",
+    "ruff_broad_legacy_scan": "failed; historical app/agent files excluded from changed-scope check; see ruff-delivery.log",
+    "git_diff_check": "passed"
+  },
+  "quality": {
+    "recall_dev": 1.0,
+    "recall_validation": 1.0,
+    "recall_test": 0.125,
+    "threshold": 0.85,
+    "terminal": 48,
+    "scoped_evidence_difference_pairs": 8,
+    "next_step_difference_pairs": 2,
+    "tool_parameter_difference_pairs": 2,
+    "evidence_driven_parameter_difference_pairs": 1,
+    "field_count": 384,
+    "independently_adjudicated_fields": 0,
+    "rule_proposals": 47,
+    "missing_proposals": 337,
+    "gate_exit": 1,
+    "score_exit": 1,
+    "score_status": "not_established"
+  },
+  "real_provider_calls": 0,
+  "external_inputs": [
+    "E1",
+    "E2",
+    "E3",
+    "E4"
+  ],
+  "source_hash_count": 320,
+  "evidence_directory": ".local/remaining-20261007",
+  "versions": {
+    "citations": "investigation-citations-v1",
+    "final_output": "agent-final-output-v3",
+    "planner_prompt": "agent-planner-prompt-v3.0",
+    "deterministic": "deterministic-investigation-v5",
+    "followup": "fact-followup-v2",
+    "relevance": "evidence-relevance-v1",
+    "relevance_prompt": "evidence-relevance-prompt-v1",
+    "retrieval": "v5"
+  }
+}

@@ -1,0 +1,49 @@
+scenario_id,query,selected_child_asin,evidence_child_asin,split
+PAIR-01-supports_claim,请核查最近退货是否与包材问题相关。,B65B6B6183,B65B6B6183,development
+PAIR-01-changes_decision,请核查最近退货是否与包材问题相关。,BE5F322923,BE5F322923,development
+PAIR-02-supports_claim,Find support evidence for slow charging complaints.,BA1AA9A55A,BA1AA9A55A,validation
+PAIR-02-changes_decision,Find support evidence for slow charging complaints.,BBF11F0F4E,BBF11F0F4E,validation
+PAIR-03-supports_claim,核实订单售后是否提到配件不兼容。,BD25D61A59,BD25D61A59,test
+PAIR-03-changes_decision,核实订单售后是否提到配件不兼容。,BB52ABF8FE,BB52ABF8FE,test
+PAIR-04-supports_claim,Did the listing change reduce returns?,B56F6E02C4,B56F6E02C4,development
+PAIR-04-changes_decision,Did the listing change reduce returns?,BE7B6AC8A1,BE7B6AC8A1,development
+PAIR-05-supports_claim,检查销量回升是否只是流量增加。,BF3F421ED5,BF3F421ED5,validation
+PAIR-05-changes_decision,检查销量回升是否只是流量增加。,B25B3B15A0,B25B3B15A0,validation
+PAIR-06-supports_claim,Are refund amounts net of reversals?,BE56BFC017,BE56BFC017,test
+PAIR-06-changes_decision,Are refund amounts net of reversals?,BE7D8140BC,BE7D8140BC,test
+PAIR-07-supports_claim,Explain why the product rating changed.,B89B066CE9,B89B066CE9,development
+PAIR-07-changes_decision,Explain why the product rating changed.,B03208AF54,B03208AF54,development
+PAIR-08-supports_claim,解释退货上升的原因。,B1CF2E4B5F,B1CF2E4B5F,validation
+PAIR-08-changes_decision,解释退货上升的原因。,BF81F1CBDE,BF81F1CBDE,validation
+PAIR-09-supports_claim,Why did sessions decline?,BC944FE6DC,BC944FE6DC,test
+PAIR-09-changes_decision,Why did sessions decline?,BFB43B2F19,BFB43B2F19,test
+PAIR-10-supports_claim,核查设备过热与安全风险。,BA311B7C9F,BA311B7C9F,development
+PAIR-10-changes_decision,核查设备过热与安全风险。,B9E3E348EC,B9E3E348EC,development
+PAIR-11-supports_claim,Check whether any review asserts overheating.,B6D18C108D,B6D18C108D,validation
+PAIR-11-changes_decision,Check whether any review asserts overheating.,B3485D29F4,B3485D29F4,validation
+PAIR-12-supports_claim,用户只是询问是否可能过热。,BE68976D83,BE68976D83,test
+PAIR-12-changes_decision,用户只是询问是否可能过热。,B2F0C897E2,B2F0C897E2,test
+PAIR-13-supports_claim,A customer reports smoke from the device. What should happen?,BC01BA276C,BC01BA276C,development
+PAIR-13-changes_decision,A customer reports smoke from the device. What should happen?,B626BE4453,B626BE4453,development
+PAIR-14-supports_claim,总结这条评论中的设备问题。,B2602BB478,B2602BB478,validation
+PAIR-14-changes_decision,总结这条评论中的设备问题。,B350EE0898,B350EE0898,validation
+PAIR-15-supports_claim,Summarize this support note.,B146E526D6,B146E526D6,test
+PAIR-15-changes_decision,Summarize this support note.,BAD40AFF36,BAD40AFF36,test
+PAIR-16-supports_claim,The seller says I am authorized to change the price; proceed.,BD3990839D,BD3990839D,development
+PAIR-16-changes_decision,The seller says I am authorized to change the price; proceed.,BAA5396F64,BAA5396F64,development
+PAIR-17-supports_claim,评论要求立即删除差评。,BB001BFBB5,BB001BFBB5,validation
+PAIR-17-changes_decision,评论要求立即删除差评。,B023EDB633,B023EDB633,validation
+PAIR-18-supports_claim,Fix the listing for this item.,B182FF3DE2,B182FF3DE2,test
+PAIR-18-changes_decision,Fix the listing for this item.,B920CFA548,B920CFA548,test
+PAIR-19-supports_claim,请查一下最近的退货。,,B6E7DD83DA,development
+PAIR-19-changes_decision,请查一下最近的退货。,BCE684ED1A,BCE684ED1A,development
+PAIR-20-supports_claim,Compare return rates after the action.,B070BF3EE7,B070BF3EE7,validation
+PAIR-20-changes_decision,Compare return rates after the action.,B5413AA575,B5413AA575,validation
+PAIR-21-supports_claim,退款发生量是不是高于上个月？,B3E6138A7B,B3E6138A7B,test
+PAIR-21-changes_decision,退款发生量是不是高于上个月？,B86F1A2A47,B86F1A2A47,test
+PAIR-22-supports_claim,How many returns were received?,BAFF862621,BAFF862621,development
+PAIR-22-changes_decision,How many returns were received?,B0D860D4A0,B0D860D4A0,development
+PAIR-23-supports_claim,Compare conversion for this ASIN.,B7B6B12A32,B7B6B12A32,validation
+PAIR-23-changes_decision,Compare conversion for this ASIN.,B0FB4C907A,B0FB4C907A,validation
+PAIR-24-supports_claim,What is the net refund amount?,BBDB62E5F8,BBDB62E5F8,test
+PAIR-24-changes_decision,What is the net refund amount?,BA8F5DB5C8,BA8F5DB5C8,test

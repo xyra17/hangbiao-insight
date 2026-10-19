@@ -1,0 +1,81 @@
+{
+  "captured_at": "2026-10-05T13:54:57.218155+00:00",
+  "project": "s1s7-post-acceptance-fix-20261005",
+  "ports": {
+    "postgres": 55448,
+    "redis": 56388,
+    "api": 8288,
+    "web": 18088
+  },
+  "services": [
+    {
+      "service": "api",
+      "state": "running",
+      "health": "healthy",
+      "image": "s1s7-post-acceptance-fix-20261005-api"
+    },
+    {
+      "service": "beat",
+      "state": "running",
+      "health": "healthy",
+      "image": "s1s7-post-acceptance-fix-20261005-beat"
+    },
+    {
+      "service": "postgres",
+      "state": "running",
+      "health": "healthy",
+      "image": "postgres:18"
+    },
+    {
+      "service": "redis",
+      "state": "running",
+      "health": "healthy",
+      "image": "redis:7.4"
+    },
+    {
+      "service": "web",
+      "state": "running",
+      "health": "healthy",
+      "image": "s1s7-post-acceptance-fix-20261005-web"
+    },
+    {
+      "service": "worker",
+      "state": "running",
+      "health": "healthy",
+      "image": "s1s7-post-acceptance-fix-20261005-worker"
+    }
+  ],
+  "checks": {
+    "compose_config": {
+      "returncode": 0,
+      "output": ""
+    },
+    "compose_up": {
+      "returncode": 0,
+      "output": "Sending build context to Docker daemon  9.964MB\nSending build context to Docker daemon  11.54MB\nSending build context to Docker daemon  13.11MB\nSending build context to Docker daemon  14.68MB\nSending build context to Docker daemon  16.26MB\nSending build context to Docker daemon  17.83MB\nSending build context to Docker daemon   19.4MB\nSending build context to Docker daemon  22.02MB\nSending build context to Docker daemon   25.7MB\nSending build context to Docker daemon  29.37MB\nSending build context to Docker daemon  31.46MB\nSending build context to Docker daemon  32.51MB\nSending build context to Docker daemon  33.56MB\nSending build context to Docker daemon  34.61MB\nSending build context to Docker daemon  35.66MB\nSending build context to Docker daemon  36.71MB\nSending build context to Docker daemon  37.76MB\nSending build context to Docker daemon  38.81MB\nSending build context to Docker daemon  39.85MB\nSending build context to Docker daemon   40.9MB\nSending build context to Docker daemon  41.95MB\nSending build context to Docker daemon     43MB\nSending build context to Docker daemon  44.05MB\nSending build context to Docker daemon   45.1MB\nSending build context to Docker daemon  46.15MB\nSending build context to Docker daemon   47.2MB\nSending build context to Docker daemon  48.24MB\nSending build context to Docker daemon  49.29MB\nSending build context to Docker daemon  50.34MB\nSending build context to Docker daemon  51.39MB\nSending build context to Docker daemon  52.44MB\nSending build context to Docker daemon  53.49MB\nSending build context to Docker daemon  54.54MB\nSending build context to Docker daemon  55.59MB\nSending build context to Docker daemon  56.64MB\nSending build context to Docker daemon  57.68MB\nSending build context to Docker daemon  58.73MB\nSending build context to Docker daemon  59.78MB\nSending build context to Docker daemon  60.83MB\nSending build context to Docker daemon  61.88MB\nSending build context to Docker daemon  62.93MB\nSending build context to Docker daemon  63.98MB\nSending build context to Docker daemon  65.03MB\nSending build context to Docker daemon  66.07MB\nSending build context to Docker daemon  67.12MB\nSending build context to Docker daemon  68.17MB\nSending build context to Docker daemon  69.22MB\nSending build context to Docker daemon  70.27MB\nSending build context to Docker daemon  71.32MB\nSending build context to Docker daemon  72.37MB\nSending build context to Docker daemon  78.67MB\nSending build context to Docker daemon  80.24MB\n\nStep 1/12 : FROM node:24-alpine AS build\n ---> 0e3c736f1019\nStep 2/12 : WORKDIR /app\n ---> Using cache\n ---> 3bfc577a6908\nStep 3/12 : RUN corepack enable\n ---> Using cache\n ---> 145c4573e614\nStep 4/12 : COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml ./\n ---> Using cache\n ---> 5ee5bb98f959\nStep 5/12 : RUN pnpm install --frozen-lockfile\n ---> Using cache\n ---> b4c7222c7b99\nStep 6/12 : COPY frontend/ .\n ---> Using cache\n ---> 7a60678a50e1\nStep 7/12 : RUN pnpm build\n ---> Using cache\n ---> afde4f01808c\nStep 8/12 : FROM nginx:1.27-alpine\n ---> 96868d9fa38f\nStep 9/12 : COPY frontend/nginx.v2.conf /etc/nginx/conf.d/default.conf\n ---> Using cache\n ---> 3e599ffba5f8\nStep 10/12 : COPY --from=build /app/dist /usr/share/nginx/html\n ---> Using cache\n ---> 33e64612dac9\nStep 11/12 : EXPOSE 80\n ---> Using cache\n ---> 6e2873e304b0\nStep 12/12 : LABEL com.docker.compose.image.builder=classic\n ---> Using cache\n ---> a57233e787cd\nSuccessfully built a57233e787cd\nSuccessfully tagged s1s7-post-acceptance-fix-20261005-web:latest\n Image s1s7-post-acceptance-fix-20261005-api Building \n Image s1s7-post-acceptance-fix-20261005-api Building \n Image s1s7-post-acceptance-fix-20261005-api Built \n Image s1s7-post-acceptance-fix-20261005-api Built \n Image s1s7-post-acceptance-fix-20261005-worker Building \n Image s1s7-post-acceptance-fix-20261005-beat Building \n Image s1s7-post-acceptance-fix-20261005-worker Building \n Image s1s7-post-acceptance-fix-20261005-beat Building \n Image s1s7-post-acceptance-fix-20261005-beat Built \n Image s1s7-post-acceptance-fix-20261005-beat Built \n Image s1s7-post-acceptance-fix-20261005-worker Built \n Image s1s7-post-acceptance-fix-20261005-worker Built \n Image s1s7-post-acceptance-fix-20261005-web Building \n Image s1s7-post-acceptance-fix-20261005-web Building \n Image s1s7-post-acceptance-fix-20261005-web Built \n Image s1s7-post-acceptance-fix-20261005-web Built \n Network s1s7-post-acceptance-fix-20261005_default Creating \n Network s1s7-post-acceptance-fix-20261005_default Created \n Volume s1s7-post-acceptance-fix-20261005_redisdata Creating \n Volume s1s7-post-acceptance-fix-20261005_redisdata Created \n Volume s1s7-post-acceptance-fix-20261005_appdata Creating \n Volume s1s7-post-acceptance-fix-20261005_appdata Created \n Volume s1s7-post-acceptance-fix-20261005_pgdata Creating \n Volume s1s7-post-acceptance-fix-20261005_pgdata Created \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Creating \n Container s1s7-post-acceptance-fix-20261005-redis-1 Creating \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Created \n Container s1s7-post-acceptance-fix-20261005-redis-1 Created \n Container s1s7-post-acceptance-fix-20261005-api-1 Creating \n Container s1s7-post-acceptance-fix-20261005-api-1 Created \n Container s1s7-post-acceptance-fix-20261005-worker-1 Creating \n Container s1s7-post-acceptance-fix-20261005-beat-1 Creating \n Container s1s7-post-acceptance-fix-20261005-beat-1 Created \n Container s1s7-post-acceptance-fix-20261005-worker-1 Created \n Container s1s7-post-acceptance-fix-20261005-web-1 Creating \n Container s1s7-post-acceptance-fix-20261005-web-1 Created \n Container s1s7-post-acceptance-fix-20261005-redis-1 Starting \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Starting \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Started \n Container s1s7-post-acceptance-fix-20261005-redis-1 Started \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-redis-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-redis-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-api-1 Starting \n Container s1s7-post-acceptance-fix-20261005-api-1 Started \n Container s1s7-post-acceptance-fix-20261005-api-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-api-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-api-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-worker-1 Starting \n Container s1s7-post-acceptance-fix-20261005-api-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-beat-1 Starting \n Container s1s7-post-acceptance-fix-20261005-worker-1 Started \n Container s1s7-post-acceptance-fix-20261005-beat-1 Started \n Container s1s7-post-acceptance-fix-20261005-api-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-worker-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-beat-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-api-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-worker-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-beat-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-web-1 Starting \n Container s1s7-post-acceptance-fix-20261005-web-1 Started \n Container s1s7-post-acceptance-fix-20261005-redis-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-api-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-worker-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-beat-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-web-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Waiting \n Container s1s7-post-acceptance-fix-20261005-api-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-redis-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-worker-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-beat-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Healthy \n Container s1s7-post-acceptance-fix-20261005-web-1 Healthy"
+    },
+    "api_health": {
+      "returncode": 0,
+      "body": "{\"status\":\"ready\"}"
+    },
+    "web_http": {
+      "returncode": 0,
+      "status_code": "200"
+    },
+    "django_check": {
+      "returncode": 0,
+      "output": "System check identified no issues (0 silenced)."
+    },
+    "worker_ping": {
+      "returncode": 0,
+      "output": "->  celery@281c5b476064: OK\n        pong\n\n1 node online."
+    }
+  },
+  "cleanup": {
+    "returncode": 0,
+    "output": "Container s1s7-post-acceptance-fix-20261005-web-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-web-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-web-1 Removing \n Container s1s7-post-acceptance-fix-20261005-web-1 Removed \n Container s1s7-post-acceptance-fix-20261005-beat-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-worker-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-beat-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-beat-1 Removing \n Container s1s7-post-acceptance-fix-20261005-beat-1 Removed \n Container s1s7-post-acceptance-fix-20261005-worker-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-worker-1 Removing \n Container s1s7-post-acceptance-fix-20261005-worker-1 Removed \n Container s1s7-post-acceptance-fix-20261005-api-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-api-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-api-1 Removing \n Container s1s7-post-acceptance-fix-20261005-api-1 Removed \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-redis-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Removing \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Removed \n Container s1s7-post-acceptance-fix-20261005-redis-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-redis-1 Removing \n Container s1s7-post-acceptance-fix-20261005-redis-1 Removed \n Volume s1s7-post-acceptance-fix-20261005_appdata Removing \n Network s1s7-post-acceptance-fix-20261005_default Removing \n Volume s1s7-post-acceptance-fix-20261005_redisdata Removing \n Volume s1s7-post-acceptance-fix-20261005_pgdata Removing \n Volume s1s7-post-acceptance-fix-20261005_appdata Removed \n Volume s1s7-post-acceptance-fix-20261005_redisdata Removed \n Volume s1s7-post-acceptance-fix-20261005_pgdata Removed \n Network s1s7-post-acceptance-fix-20261005_default Removed",
+    "isolated_project_volumes_removed": true
+  },
+  "status": "passed",
+  "generated_at_final": "2026-10-05T13:56:23.580545+00:00"
+}

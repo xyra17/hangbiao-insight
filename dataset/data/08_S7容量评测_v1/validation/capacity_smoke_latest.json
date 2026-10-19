@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "environment": "loopback_only",
+  "generated_at": "2026-10-01T15:46:00Z",
+  "worker_count": 10,
+  "target_count": 2,
+  "measurements": {
+    "query_p95_ms": 53.274,
+    "scan_total_ms": 4901.299,
+    "concurrent_wall_ms": 5187.249,
+    "index_build_ms": null,
+    "queue_backlog": 2,
+    "queue_backlog_source": "local_database_active_jobs",
+    "queue_backlog_sample_count": 5,
+    "queue_backlog_error": null,
+    "error_rate_pct": 0.0,
+    "server_peak_cpu_pct": null,
+    "server_peak_memory_mb": null,
+    "server_stats_status": "not_configured",
+    "runtime_sample_count": 5
+  },
+  "target_environment_status": "local_measurement_only_target_acceptance_not_implied",
+  "completed": [
+    {
+      "index": 1,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600001",
+      "job_id": "20f94f48-ba71-4cd3-bb42-7b560b2652a0",
+      "snapshot_id": "71245411-362a-4647-84cf-4dca4aa7d408",
+      "scan_total_ms": 4901.299,
+      "query_ms": 53.274,
+      "status": "completed"
+    },
+    {
+      "index": 2,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600501",
+      "job_id": "da429408-98a7-4181-a5cc-f9edde8331d2",
+      "snapshot_id": "558826af-ef18-49d8-adcd-c4e2c93977ff",
+      "scan_total_ms": 4181.777,
+      "query_ms": 38.044,
+      "status": "completed"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Requires the S7 fixture to be imported into the two supplied isolated shops before running.",
+    "The default run scans all 1,000 imported ASINs with a maximum of 10 concurrent scan workers.",
+    "Queue backlog is the maximum local-database count of queued, running, and retry_wait jobs sampled once per second.",
+    "Index build time is measured during import and is not inferred from scan timing.",
+    "Server CPU and memory are reported only when an explicit loopback stats endpoint provides them.",
+    "A local API run does not constitute target-environment or production capacity acceptance."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "source_file": "dataset/data/04_经营事实增强/lifecycle_revisions/sales_traffic_revision_v2.csv",
+  "import_file": "dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/sales_traffic_revision_v2.csv",
+  "provenance": "synthetic_revision_fixture",
+  "source_payload": {
+    "shop": "<目标测试店铺 UUID>",
+    "name": "边界夹具：sales_traffic 修订/撤销",
+    "kind": "sales_traffic",
+    "is_primary": true,
+    "grain": "asin_day",
+    "column_mapping": {
+      "child_asin": "child_asin",
+      "seller_sku": "seller_sku",
+      "fulfillment": "fulfillment",
+      "business_date": "business_date",
+      "ordered_units": "ordered_units",
+      "order_count": "order_count",
+      "sessions": "sessions",
+      "buybox_percent": "buybox_percent",
+      "sales_amount": "sales_amount",
+      "currency": "currency"
+    },
+    "ignored_columns": [
+      "provenance_class",
+      "is_real",
+      "is_derived",
+      "is_synthetic",
+      "source_reference",
+      "source_row_id",
+      "generation_version",
+      "scenario_id",
+      "boundary_case",
+      "currency_case",
+      "synthetic_from_review"
+    ],
+    "coverage_basis": "business_date"
+  },
+  "upload_payload": {
+    "coverage_start": "2018-11-05",
+    "coverage_end": "2018-11-05",
+    "generated_at": "2026-10-01T00:00:00Z",
+    "declared_complete": false,
+    "declared_asins": [
+      "B07H2V5YLH"
+    ]
+  },
+  "warning": "每个修订文件须作为新批次依次上传到同一来源；不要把重复 business_key 合并到同一个 CSV。"
+}

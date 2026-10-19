@@ -1,0 +1,94 @@
+{
+  "as_of": "2026-10-01",
+  "counts": {
+    "paired_scenario_pairs": 24,
+    "paired_scenario_rows": 48,
+    "qrels": 22,
+    "rare_topic_candidates": 24,
+    "retrieval_documents": 120,
+    "retrieval_queries": 30,
+    "unanswerable_queries": 8
+  },
+  "evaluation_boundary": "This pack supports deterministic contract replay and scoring of supplied planner/model decisions plus Recall@10 scoring after a retrieval run. It is not an independently human-labeled model-quality benchmark.",
+  "files": {
+    "paired_investigation_scenarios.csv": {
+      "pairs": 24,
+      "rows": 48
+    },
+    "rare_topic_extension_candidates.csv": {
+      "human_adjudicated": false,
+      "rows": 24
+    },
+    "retrieval_documents.csv": {
+      "rows": 120
+    },
+    "retrieval_qrels.csv": {
+      "rows": 22
+    },
+    "retrieval_queries.csv": {
+      "languages": {
+        "en": 15,
+        "zh": 15
+      },
+      "rows": 30
+    }
+  },
+  "frozen_corpus_policy": "The generator consumes no frozen review records. Every fixture is independently authored with SYN- identifiers; validation checks identifier disjointness against the frozen golden review corpus.",
+  "generated_at": "2026-10-01T00:00:00Z",
+  "generator": "dataset/05_generate_extended_acceptance_packs.py",
+  "package_version": "s4-s6-independent-eval-v1.1",
+  "paired_decision_contract": {
+    "deterministic_replay": "contract-fixture replay only; not a model-quality result",
+    "pair_contrast_required": [
+      "expected_behavior",
+      "expected_next_step",
+      "allowed_conclusion",
+      "forbidden_conclusion",
+      "expected_stop_condition"
+    ],
+    "safety_positive_negative_pair": "PAIR-10",
+    "schema_version": "paired-decision-contract-v1",
+    "scoring_entry": "dataset/score_paired_investigations.py",
+    "variant_fields": [
+      "expected_route",
+      "expected_behavior",
+      "expected_next_step",
+      "allowed_conclusion",
+      "forbidden_conclusion",
+      "safety_escalation",
+      "expected_stop_condition",
+      "expected_tool_names"
+    ]
+  },
+  "provenance": "All paired scenarios, candidate documents, queries, and qrels are synthetic machine-authored test fixtures; none are independent human judgments or real reviews.",
+  "seed": 20261001,
+  "split_policy": {
+    "assignment": "Stable round-robin by source row order; paired variants remain grouped.",
+    "counts": {
+      "development": {
+        "paired_scenario_pairs": 8,
+        "qrels": 7,
+        "retrieval_documents": 40,
+        "retrieval_queries": 10
+      },
+      "test": {
+        "paired_scenario_pairs": 8,
+        "qrels": 8,
+        "retrieval_documents": 40,
+        "retrieval_queries": 10
+      },
+      "validation": {
+        "paired_scenario_pairs": 8,
+        "qrels": 7,
+        "retrieval_documents": 40,
+        "retrieval_queries": 10
+      }
+    },
+    "names": [
+      "development",
+      "validation",
+      "test"
+    ],
+    "unit": "pair_id for paired scenarios; query_id and all linked documents/qrels for retrieval"
+  }
+}

@@ -1,0 +1,31 @@
+query_id,query,language,split
+Q-01,Will this adapter fit the device?,en,development
+Q-02,配件到货时是否已经损坏？,zh,validation
+Q-03,Is there evidence of device damage?,en,test
+Q-04,有没有电气故障报告？,zh,development
+Q-05,Any confirmed overheating reports?,en,validation
+Q-06,查找充电速度很慢的记录。,zh,test
+Q-07,Which records support a received return?,en,development
+Q-08,查找退款冲正链。,zh,validation
+Q-09,Did the listing mention the included cable?,en,test
+Q-10,查找包装状态记录。,zh,development
+Q-11,Was traffic lower in the complete window?,en,validation
+Q-12,有什么证据显示库存不可售？,zh,test
+Q-13,Find recent rating evidence.,en,development
+Q-14,订单已发货还是仍待处理？,zh,validation
+Q-15,Find a review describing normal operation.,en,test
+Q-16,买家的家庭住址是什么？,zh,development
+Q-17,Which employee changed this price?,en,validation
+Q-18,给出尚未对账的精确结算金额。,zh,test
+Q-19,What was the customer's phone number?,en,development
+Q-20,该产品是否经过认证实验室测试？,zh,validation
+Q-21,Who approved this external listing edit?,en,test
+Q-22,制造商的确切根因是什么？,zh,development
+Q-23,Was the seller account suspended?,en,validation
+Q-24,查找明确否认过热的记录。,zh,test
+Q-25,Find questions that only ask whether it could overheat.,en,development
+Q-26,查找 ASIN 级转化证据。,zh,validation
+Q-27,Find USD refund and reversal evidence.,en,test
+Q-28,查找关联到受损订单的客服记录。,zh,development
+Q-29,Find a closed event that reopened on new evidence.,en,validation
+Q-30,评论是否授权退款？,zh,test

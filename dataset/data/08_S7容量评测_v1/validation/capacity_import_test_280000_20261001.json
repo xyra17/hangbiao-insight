@@ -1,0 +1,25 @@
+{
+  "as_of": "2026-10-01",
+  "command": "uv run --env-file ../.env.local pytest -c pytest-v2.ini tests_v2/test_extended_acceptance_workflow.py -m capacity -q",
+  "dataset": "08_S7容量评测_v1",
+  "duration_seconds": 107.89,
+  "environment": "local isolated PostgreSQL Django test database",
+  "fact_rows_published": 280000,
+  "measurement_scope": "Two isolated shops; upload, parse_import job, preview validation, publish_import job, and database row-count/version assertions through the Django ingestion API.",
+  "resource_measurements": {
+    "error_rate_pct": 0.0,
+    "index_build_ms": null,
+    "query_p95_ms": null,
+    "scan_total_ms": null,
+    "server_peak_cpu_pct": null,
+    "server_peak_memory_mb": null
+  },
+  "result": "passed",
+  "test_result": "1 passed, 1 deselected",
+  "target_environment_status": "not_run_target_environment_not_provided",
+  "limitations": [
+    "The duration is a local test-run import duration, not a production throughput guarantee.",
+    "This run validates ingestion and revision publication; ten-worker API scan/query measurements are a separate runner step.",
+    "No target-server CPU, memory, queue, or query latency measurements were available in this isolated test run."
+  ]
+}

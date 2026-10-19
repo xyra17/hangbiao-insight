@@ -1,0 +1,245 @@
+{
+  "status": "passed",
+  "as_of": "2026-10-05",
+  "package_version": "s7-capacity-v1.1",
+  "workspace": "s7-capacity-v1.1 local capacity acceptance",
+  "workspace_is_test": true,
+  "shop_count": 2,
+  "synthetic_load_account_count": 10,
+  "synthetic_load_account_class": "synthetic_isolated_capacity_load",
+  "shops": [
+    {
+      "slot": "shop_a",
+      "shop_id": "075b34ac-ce2d-4947-89a0-a0d07a978496"
+    },
+    {
+      "slot": "shop_b",
+      "shop_id": "35c28eee-259f-4aea-aab2-49f959510a6d"
+    }
+  ],
+  "coverage_window": {
+    "days": 180,
+    "end": "2026-10-04",
+    "start": "2026-04-08"
+  },
+  "imported_batch_count": 18,
+  "auto_scan_jobs_cancelled": 0,
+  "primary_sources_promoted": 6,
+  "import_duration_seconds": 241.69,
+  "fact_counts": {
+    "sales_traffic_daily_rows": 181000,
+    "order_lines": 320400,
+    "support_cases": 1000,
+    "published_import_rows": 502400
+  },
+  "expected_fact_counts": {
+    "sales_traffic_daily_rows": 181000,
+    "order_lines": 320400,
+    "support_cases": 1000,
+    "published_import_rows": 502400
+  },
+  "index_build_ms": null,
+  "imported_batches": [
+    {
+      "filename": "sales_traffic_v1.csv",
+      "batch_id": "86088f3d-6311-482d-acaf-434e1137809c",
+      "source_id": "7186cf4a-ca47-493f-a2c4-8ec4faeee229",
+      "rows": 90000,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-10-04"
+    },
+    {
+      "filename": "orders_window_01.csv",
+      "batch_id": "fb09a774-c337-4eea-8ba8-76dc8f16249b",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-05-07",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 1,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "orders_window_02.csv",
+      "batch_id": "03758809-6dfe-4cc4-80b1-fbbbf6aa9392",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-05-08",
+      "coverage_end": "2026-06-06",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 2,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "orders_window_03.csv",
+      "batch_id": "dcf073a0-5d3e-4ac3-be8b-d42dc997d792",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-06-07",
+      "coverage_end": "2026-07-06",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 3,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "orders_window_04.csv",
+      "batch_id": "f079d1e8-d1bd-4bcd-89f4-59508c177f51",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-07-07",
+      "coverage_end": "2026-08-05",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 4,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "orders_window_05.csv",
+      "batch_id": "639d553e-14ec-4002-af06-870958a48b0f",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-08-06",
+      "coverage_end": "2026-09-04",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 5,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "orders_window_06.csv",
+      "batch_id": "443441d7-7a46-499a-a0a6-e4b8de261197",
+      "source_id": "fc3ce2d9-7b69-46dc-8da2-761032ada103",
+      "rows": 38400,
+      "status": "published",
+      "coverage_start": "2026-09-05",
+      "coverage_end": "2026-10-04",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 6,
+      "prepared_row_count": 38400
+    },
+    {
+      "filename": "support_cases_v1.csv",
+      "batch_id": "3a4a40ba-35d9-4813-997b-de26bdff5edb",
+      "source_id": "ba2d25a4-9b20-4ccd-919e-79e46a35a44e",
+      "rows": 500,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-10-04"
+    },
+    {
+      "filename": "sales_traffic_revision_v2.csv",
+      "batch_id": "0a929252-9594-4453-a018-7f63366730ce",
+      "source_id": "7186cf4a-ca47-493f-a2c4-8ec4faeee229",
+      "rows": 500,
+      "status": "published",
+      "coverage_start": "2026-10-04",
+      "coverage_end": "2026-10-04"
+    },
+    {
+      "filename": "sales_traffic_v1.csv",
+      "batch_id": "0194abc6-4269-43d3-a198-d2544d627e5a",
+      "source_id": "7465e695-aad2-4602-ae49-0204d2b75a8f",
+      "rows": 90000,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-10-04"
+    },
+    {
+      "filename": "orders_window_01.csv",
+      "batch_id": "63ecf271-0f18-46c5-a911-b875fe2ed748",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-05-07",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 1,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "orders_window_02.csv",
+      "batch_id": "925e536a-5522-44f9-92a4-0aeb5ca2b241",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-05-08",
+      "coverage_end": "2026-06-06",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 2,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "orders_window_03.csv",
+      "batch_id": "2c1066c2-1014-438a-a778-08469e2a8141",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-06-07",
+      "coverage_end": "2026-07-06",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 3,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "orders_window_04.csv",
+      "batch_id": "716bf3bd-6083-4882-86c7-f91992a64d6d",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-07-07",
+      "coverage_end": "2026-08-05",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 4,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "orders_window_05.csv",
+      "batch_id": "56c4c5eb-548c-4df6-8e19-007094257066",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-08-06",
+      "coverage_end": "2026-09-04",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 5,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "orders_window_06.csv",
+      "batch_id": "36312c9c-4571-4273-93ef-ac1efcab1ed8",
+      "source_id": "c4d1691b-eeb9-45bc-805b-bd906328404d",
+      "rows": 15000,
+      "status": "published",
+      "coverage_start": "2026-09-05",
+      "coverage_end": "2026-10-04",
+      "source_filename": "orders_v1.csv",
+      "coverage_shard": 6,
+      "prepared_row_count": 15000
+    },
+    {
+      "filename": "support_cases_v1.csv",
+      "batch_id": "b15a3a04-cbc0-47a4-9e6c-cf9d281f4eed",
+      "source_id": "e91f6934-b1cf-491f-969d-c1c437840d27",
+      "rows": 500,
+      "status": "published",
+      "coverage_start": "2026-04-08",
+      "coverage_end": "2026-10-04"
+    },
+    {
+      "filename": "sales_traffic_revision_v2.csv",
+      "batch_id": "60038da5-139d-4e5d-8813-9aaa7af1f7a0",
+      "source_id": "7465e695-aad2-4602-ae49-0204d2b75a8f",
+      "rows": 500,
+      "status": "published",
+      "coverage_start": "2026-10-04",
+      "coverage_end": "2026-10-04"
+    }
+  ],
+  "environment": "persistent_local_database_loopback_ingestion_api",
+  "target_environment_status": "local_measurement_only_target_acceptance_not_implied",
+  "scope_note": "Synthetic S7 data was published into a versioned is_test workspace through the local ingestion API. Index-build time is not independently exposed by the application and remains null."
+}

@@ -1,0 +1,52 @@
+{
+  "source_file": "dataset/data/04_经营事实增强/operations_v1.csv",
+  "import_file": "dataset/data/04_经营事实增强/import_ready/operations_v1.csv",
+  "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+  "source_payload": {
+    "shop": "<目标测试店铺 UUID>",
+    "name": "增强数据：operations（business-facts-augmentation-v1.0）",
+    "kind": "operations",
+    "is_primary": true,
+    "grain": "asin_record",
+    "column_mapping": {
+      "child_asin": "child_asin",
+      "seller_sku": "seller_sku",
+      "fulfillment": "fulfillment",
+      "business_date": "business_date",
+      "record_id": "record_id",
+      "event_type": "event_type",
+      "description": "description",
+      "ends_on": "ends_on",
+      "price": "price",
+      "currency": "currency",
+      "mechanism": "mechanism"
+    },
+    "ignored_columns": [
+      "provenance_class",
+      "is_real",
+      "is_derived",
+      "is_synthetic",
+      "source_reference",
+      "source_row_id",
+      "generation_version",
+      "scenario_id",
+      "boundary_case",
+      "currency_case",
+      "synthetic_from_review"
+    ],
+    "coverage_basis": "business_date",
+    "empty_report_means_zero": false
+  },
+  "upload_payload": {
+    "coverage_start": "2017-08-19",
+    "coverage_end": "2023-09-01",
+    "generated_at": "2026-10-01T00:00:00Z",
+    "declared_complete": false,
+    "declared_asins": [
+      "B07H2V5YLH",
+      "B07P9S6R9Y",
+      "B0BYJ8ZVWH"
+    ]
+  },
+  "warning": "这些行仍是项目合成/派生数据；发布前须在目标店铺配置真实 ProductMapping、时区和契约。"
+}

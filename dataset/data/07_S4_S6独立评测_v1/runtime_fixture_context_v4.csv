@@ -1,0 +1,4 @@
+scenario_id,scope_selection,runtime_evidence_text
+PAIR-19-supports_claim,omit,
+PAIR-21-supports_claim,evidence_asin,退款报表：上个月退款发生量汇总完整，但数据截止日期已超过两天，当前报表已过期。
+PAIR-21-changes_decision,evidence_asin,退款报表：上个月退款发生量汇总完整，数据截止到昨天，报表当前有效且两个期间币种一致。

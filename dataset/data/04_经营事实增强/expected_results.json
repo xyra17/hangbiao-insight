@@ -1,0 +1,36 @@
+{
+  "version": "business-facts-augmentation-expected-v1.0",
+  "row_counts": {
+    "sales_traffic_daily_v1.csv": 5952,
+    "ratings_daily_v1.csv": 5952,
+    "inventory_daily_v1.csv": 5952,
+    "operations_v1.csv": 414,
+    "orders_v1.csv": 5958,
+    "refunds_v1.csv": 6082,
+    "returns_v1.csv": 313,
+    "support_cases_v1.csv": 658
+  },
+  "required_boundary_counts_minimum": {
+    "late_arrival": 1,
+    "partial_refund": 1,
+    "full_refund": 1,
+    "reversal": 1,
+    "cross_month_return": 1,
+    "unknown_status_code": 1,
+    "unknown_currency": 1,
+    "synthetic_from_review": 1
+  },
+  "support_categories": [
+    "product_failure",
+    "performance_issue",
+    "compatibility_issue",
+    "safety_issue",
+    "logistics_issue"
+  ],
+  "fixtures": {
+    "invalid_rows": 4,
+    "empty_refunds_rows": 0,
+    "same_key_revisions": 5,
+    "retraction_candidate_rows": 1
+  }
+}

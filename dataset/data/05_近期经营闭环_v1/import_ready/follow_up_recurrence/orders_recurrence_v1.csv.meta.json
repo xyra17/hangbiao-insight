@@ -1,0 +1,51 @@
+{
+  "fact_kind": "orders",
+  "grain": "product_record",
+  "import_file": "dataset/data/05_近期经营闭环_v1/import_ready/follow_up_recurrence/orders_recurrence_v1.csv",
+  "package_version": "recent-operational-loop-v1.0",
+  "provenance": "synthetic_acceptance_fixture",
+  "row_count": 14,
+  "source_action": "reuse_existing_primary",
+  "source_payload": {
+    "column_mapping": {
+      "business_date": "business_date",
+      "child_asin": "child_asin",
+      "fulfillment": "fulfillment",
+      "is_exchange": "is_exchange",
+      "order_id": "order_id",
+      "original_line_id": "original_line_id",
+      "quantity": "quantity",
+      "record_id": "record_id",
+      "seller_sku": "seller_sku",
+      "shipped_at": "shipped_at",
+      "shipped_date": "shipped_date",
+      "shipped_quantity": "shipped_quantity",
+      "status": "status"
+    },
+    "coverage_basis": "shipped_date",
+    "grain": "product_record",
+    "ignored_columns": [
+      "provenance_class",
+      "is_real",
+      "is_derived",
+      "is_synthetic",
+      "source_reference",
+      "source_row_id",
+      "generation_version",
+      "scenario_id"
+    ],
+    "is_primary": true,
+    "kind": "orders",
+    "name": "验收数据：orders（recent-operational-loop-v1.0）",
+    "shop": "<隔离验收店铺 UUID>"
+  },
+  "upload_payload": {
+    "coverage_end": "2026-10-07",
+    "coverage_start": "2026-10-01",
+    "declared_asins": [
+      "D5X2600010"
+    ],
+    "declared_complete": true,
+    "generated_at": "2026-10-08T18:00:00Z"
+  }
+}

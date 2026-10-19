@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-10-05T13:53:32.533118+00:00",
+  "project": "s1s7-post-acceptance-fix-20261005",
+  "ports": {
+    "postgres": 55448,
+    "redis": 56388,
+    "api": 8288,
+    "web": 18088
+  },
+  "services": {},
+  "checks": {
+    "compose_config": {
+      "returncode": 1,
+      "output": "invalid IP address: \\\"127.0.0.1"
+    }
+  },
+  "cleanup": {
+    "returncode": 1,
+    "output": "invalid IP address: \\\"127.0.0.1",
+    "isolated_project_volumes_removed": false
+  },
+  "status": "failed",
+  "error": "RuntimeError: Compose config validation failed",
+  "generated_at_final": "2026-10-05T13:53:32.842719+00:00"
+}

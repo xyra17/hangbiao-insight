@@ -1,0 +1,44 @@
+{
+  "captured_at": "2026-10-05T13:54:10.558147+00:00",
+  "project": "s1s7-post-acceptance-fix-20261005",
+  "ports": {
+    "postgres": 55448,
+    "redis": 56388,
+    "api": 8288,
+    "web": 18088
+  },
+  "services": [],
+  "checks": {
+    "compose_config": {
+      "returncode": 0,
+      "output": ""
+    },
+    "compose_up": {
+      "returncode": 1,
+      "output": "Network s1s7-post-acceptance-fix-20261005_default Creating \n Network s1s7-post-acceptance-fix-20261005_default Created \n Volume s1s7-post-acceptance-fix-20261005_pgdata Creating \n Volume s1s7-post-acceptance-fix-20261005_pgdata Created \n Volume s1s7-post-acceptance-fix-20261005_redisdata Creating \n Volume s1s7-post-acceptance-fix-20261005_redisdata Created \n Volume s1s7-post-acceptance-fix-20261005_appdata Creating \n Volume s1s7-post-acceptance-fix-20261005_appdata Created \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Creating \n Container s1s7-post-acceptance-fix-20261005-redis-1 Creating \n Container s1s7-post-acceptance-fix-20261005-redis-1 Created \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Created \n Container s1s7-post-acceptance-fix-20261005-api-1 Creating \n service:api:1 Error response from daemon: No such image: s1s7-post-acceptance-fix-20261005-api:latest \n Container s1s7-post-acceptance-fix-20261005-beat-1 Creating \n Container s1s7-post-acceptance-fix-20261005-worker-1 Creating \nError response from daemon: No such image: s1s7-post-acceptance-fix-20261005-api:latest"
+    },
+    "api_health": {
+      "returncode": 7,
+      "body": ""
+    },
+    "web_http": {
+      "returncode": 7,
+      "status_code": "000"
+    },
+    "django_check": {
+      "returncode": 1,
+      "output": "service \"api\" is not running"
+    },
+    "worker_ping": {
+      "returncode": 1,
+      "output": "service \"worker\" is not running"
+    }
+  },
+  "cleanup": {
+    "returncode": 0,
+    "output": "Container s1s7-post-acceptance-fix-20261005-postgres-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-redis-1 Stopping \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Removing \n Container s1s7-post-acceptance-fix-20261005-redis-1 Stopped \n Container s1s7-post-acceptance-fix-20261005-redis-1 Removing \n Container s1s7-post-acceptance-fix-20261005-postgres-1 Removed \n Container s1s7-post-acceptance-fix-20261005-redis-1 Removed \n Volume s1s7-post-acceptance-fix-20261005_redisdata Removing \n Volume s1s7-post-acceptance-fix-20261005_pgdata Removing \n Network s1s7-post-acceptance-fix-20261005_default Removing \n Volume s1s7-post-acceptance-fix-20261005_appdata Removing \n Volume s1s7-post-acceptance-fix-20261005_pgdata Removed \n Volume s1s7-post-acceptance-fix-20261005_redisdata Removed \n Volume s1s7-post-acceptance-fix-20261005_appdata Removed \n Network s1s7-post-acceptance-fix-20261005_default Removed",
+    "isolated_project_volumes_removed": true
+  },
+  "status": "failed",
+  "generated_at_final": "2026-10-05T13:54:11.365165+00:00"
+}

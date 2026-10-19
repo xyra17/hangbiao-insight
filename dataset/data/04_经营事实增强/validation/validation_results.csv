@@ -1,0 +1,62 @@
+check,status,detail
+sales_traffic_daily_v1.csv:row_count,passed,"{""actual"": 5952, ""manifest_expected"": 5952, ""pinned_expected"": 5952}"
+sales_traffic_daily_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+sales_traffic_daily_v1.csv:business_date_parse,passed,[]
+sales_traffic_daily_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}}"
+sales_traffic_daily_v1.csv:unique_business_key,passed,[]
+sales_traffic_daily_v1.csv:provenance_flags,passed,[]
+ratings_daily_v1.csv:row_count,passed,"{""actual"": 5952, ""manifest_expected"": 5952, ""pinned_expected"": 5952}"
+ratings_daily_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/01_标准化评论数据/评论数据集_v1.csv""], ""provenance"": ""derived_from_real_reviews"", ""license"": ""评论聚合衍生结果；上游仓库 MIT 文件不明确授权评论内容，限本仓库内部验收，外发前需核实数据权利。"", ""unclassified_fields"": []}"
+ratings_daily_v1.csv:business_date_parse,passed,[]
+ratings_daily_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}}"
+ratings_daily_v1.csv:unique_business_key,passed,[]
+ratings_daily_v1.csv:provenance_flags,passed,[]
+inventory_daily_v1.csv:row_count,passed,"{""actual"": 5952, ""manifest_expected"": 5952, ""pinned_expected"": 5952}"
+inventory_daily_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+inventory_daily_v1.csv:business_date_parse,passed,[]
+inventory_daily_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}}"
+inventory_daily_v1.csv:unique_business_key,passed,[]
+inventory_daily_v1.csv:provenance_flags,passed,[]
+operations_v1.csv:row_count,passed,"{""actual"": 414, ""manifest_expected"": 414, ""pinned_expected"": 414}"
+operations_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+operations_v1.csv:business_date_parse,passed,[]
+operations_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-01""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-01""}}"
+operations_v1.csv:unique_business_key,passed,[]
+operations_v1.csv:provenance_flags,passed,[]
+orders_v1.csv:row_count,passed,"{""actual"": 5958, ""manifest_expected"": 5958, ""pinned_expected"": 5958}"
+orders_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+orders_v1.csv:business_date_parse,passed,[]
+orders_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}}"
+orders_v1.csv:unique_business_key,passed,[]
+orders_v1.csv:provenance_flags,passed,[]
+refunds_v1.csv:row_count,passed,"{""actual"": 6082, ""manifest_expected"": 6082, ""pinned_expected"": 6082}"
+refunds_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+refunds_v1.csv:business_date_parse,passed,[]
+refunds_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}, ""expected"": {""min"": ""2017-08-19"", ""max"": ""2023-09-02""}}"
+refunds_v1.csv:unique_business_key,passed,[]
+refunds_v1.csv:provenance_flags,passed,[]
+returns_v1.csv:row_count,passed,"{""actual"": 313, ""manifest_expected"": 313, ""pinned_expected"": 313}"
+returns_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv""], ""provenance"": ""derived_or_synthetic_from_business_metric_v1.0"", ""license"": ""项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。"", ""unclassified_fields"": []}"
+returns_v1.csv:business_date_parse,passed,[]
+returns_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-08-26"", ""max"": ""2023-08-25""}, ""expected"": {""min"": ""2017-08-26"", ""max"": ""2023-08-25""}}"
+returns_v1.csv:unique_business_key,passed,[]
+returns_v1.csv:provenance_flags,passed,[]
+support_cases_v1.csv:row_count,passed,"{""actual"": 658, ""manifest_expected"": 658, ""pinned_expected"": 658}"
+support_cases_v1.csv:manifest_provenance,passed,"{""source"": [""dataset/data/03_黄金评论集/黄金评论标签表_v1_0.csv""], ""provenance"": ""synthetic_from_golden_review_theme"", ""license"": ""黄金主题用于生成合成文本和关联；仅供本项目内部测试，不能视作真实客服数据。"", ""unclassified_fields"": []}"
+support_cases_v1.csv:business_date_parse,passed,[]
+support_cases_v1.csv:date_coverage,passed,"{""actual"": {""min"": ""2017-12-24"", ""max"": ""2023-06-14""}, ""expected"": {""min"": ""2017-12-24"", ""max"": ""2023-06-14""}}"
+support_cases_v1.csv:unique_business_key,passed,[]
+support_cases_v1.csv:provenance_flags,passed,[]
+support_cases_v1.csv:synthetic_from_review,passed,[]
+support_cases_v1.csv:required_categories,passed,[]
+refunds_v1.csv:order_line_linkage,passed,[]
+returns_v1.csv:order_line_linkage,passed,[]
+support_cases_v1.csv:order_line_linkage,passed,[]
+boundary:required_cases,passed,[]
+boundary:pinned_minimum_counts,passed,{}
+boundary:invalid_fixtures_present,passed,"[{""file"": ""orders_invalid_v1.csv"", ""rows"": 1, ""expected_error"": ""child_asin 须为 10 位大写字母或数字""}, {""file"": ""orders_duplicate_v1.csv"", ""rows"": 2, ""expected_error"": ""同一文件内业务键重复""}, {""file"": ""refunds_invalid_v1.csv"", ""rows"": 1, ""expected_error"": ""currency 须为三位大写代码""}, {""file"": ""returns_invalid_v1.csv"", ""rows"": 1, ""expected_error"": ""退货收到日期不能早于申请日期""}]"
+boundary:empty_report,passed,"{""rows"": 0, ""requires"": ""empty_report_means_zero=true""}"
+revision:sales_same_key_changed_payload,passed,"{""v1"": {""child_asin"": ""B07H2V5YLH"", ""seller_sku"": """", ""fulfillment"": """", ""business_date"": ""2018-11-05"", ""ordered_units"": ""100"", ""order_count"": ""90"", ""sessions"": ""750"", ""buybox_percent"": ""92.00"", ""sales_amount"": ""1999.00"", ""currency"": ""USD"", ""provenance_class"": ""synthetic_revision_fixture"", ""is_real"": ""false"", ""is_derived"": ""false"", ""is_synthetic"": ""true"", ""source_reference"": ""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"", ""source_row_id"": ""metric:B07H2V5YLH:2018-11-05"", ""generation_version"": ""business-facts-augmentation-v1.0"", ""scenario_id"": """", ""boundary_case"": ""revision_v1"", ""currency_case"": """", ""synthetic_from_review"": """"}, ""v2"": {""child_asin"": ""B07H2V5YLH"", ""seller_sku"": """", ""fulfillment"": """", ""business_date"": ""2018-11-05"", ""ordered_units"": ""100"", ""order_count"": ""90"", ""sessions"": ""900"", ""buybox_percent"": ""88.00"", ""sales_amount"": ""1999.00"", ""currency"": ""USD"", ""provenance_class"": ""synthetic_revision_fixture"", ""is_real"": ""false"", ""is_derived"": ""false"", ""is_synthetic"": ""true"", ""source_reference"": ""dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"", ""source_row_id"": ""metric:B07H2V5YLH:2018-11-05"", ""generation_version"": ""business-facts-augmentation-v1.0"", ""scenario_id"": """", ""boundary_case"": ""revision_v2"", ""currency_case"": """", ""synthetic_from_review"": """"}}"
+revision:return_requested_received_cancelled,passed,"{""record_ids"": [""RT-TRANSITION-B07H2V5YLH"", ""RT-TRANSITION-B07H2V5YLH"", ""RT-TRANSITION-B07H2V5YLH""], ""statuses"": [""requested"", ""received"", ""cancelled""]}"
+boundary:late_batch_arrival,passed,"{""business_date"": ""2018-12-22"", ""generated_at"": ""2019-01-31T12:00:00Z"", ""arrival_lag_days"": 40}"
+revision:retraction_fixture,passed,"{""rows"": 1, ""steps"": [""upload and publish the candidate"", ""call POST /api/v1/imports/{batch_id}/revoke/ with a reason"", ""verify latest-facts hides the row while original raw row and fact remain auditable""]}"

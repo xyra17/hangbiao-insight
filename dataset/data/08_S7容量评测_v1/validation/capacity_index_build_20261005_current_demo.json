@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "entrypoint": "docker compose exec api python manage.py rebuild_evidence_index",
+  "compose_project": "s1s7-capacity-remeasure-20261005",
+  "elapsed_ms": 5459.727,
+  "index_version": "jieba-0.42.1-feedback-v1",
+  "rows": {
+    "Review": {
+      "total": 0,
+      "indexed": 0
+    },
+    "SupportCase": {
+      "total": 1000,
+      "indexed": 1000
+    }
+  },
+  "import_report": "dataset/data/08_S7容量评测_v1/validation/capacity_persistent_import_20261005_current_demo_remeasure.json",
+  "import_report_sha256": "d66768238573cdf3dd50931cb752c211aa3dfbbcfc718298c582110361b860f7",
+  "stdout": "Review: indexed 0 rows\nSupportCase: indexed 1000 rows",
+  "scope": "all review and support evidence imported into the isolated S7 capacity workspace",
+  "limitations": [
+    "This times index construction for the 1,000 synthetic support cases in this fixture; it is not the target labelled-review corpus build.",
+    "It does not establish the 8-core/16-GB/SSD target-server performance gate."
+  ]
+}

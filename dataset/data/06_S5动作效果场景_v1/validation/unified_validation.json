@@ -1,0 +1,391 @@
+{
+  "as_of": "2026-10-01",
+  "generation_contract": {
+    "checks": [
+      {
+        "detail": {
+          "order_lines": 10800,
+          "sales_rows": 1200
+        },
+        "name": "sales_aggregates_match_orders",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "asins": 10,
+          "rows": 1200
+        },
+        "name": "ten_asins_120_complete_daily_rows",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "as_of": "2026-10-01",
+          "end": "2026-09-30",
+          "start": "2026-06-03"
+        },
+        "name": "coverage_has_120_consecutive_site_days",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "rows": 118
+        },
+        "name": "refund_order_line_links",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "rows": 112
+        },
+        "name": "return_order_line_links",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "rows": 88
+        },
+        "name": "support_order_line_links_and_synthetic_marker",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "missing_day": "2026-09-26",
+          "rows": 119
+        },
+        "name": "incomplete_window_is_separate_and_not_declared_complete",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "all_business_rows_are_marked_synthetic",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "same_asin_sessions_are_one_asin_grain_value",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "order_lines": 14,
+          "sales_rows": 7
+        },
+        "name": "recurrence_fixture_matches_order_lines",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "action_pack_has_six_outcomes",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "comparable_rows": 4
+        },
+        "name": "action_catalog_compares_daily_means_with_window_totals_preserved",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "expected": {
+            "closed_then_recurrence": "reopened_on_new_evidence",
+            "improved_after_action": "improved",
+            "missing_data": "not_reviewable",
+            "no_improvement": "no_material_change",
+            "window_not_mature": "not_reviewable",
+            "worsening": "worsened"
+          },
+          "scenario_count": 6
+        },
+        "name": "action_catalog_covers_all_six_known_outcomes",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "action_catalog_uses_effective_date_windows_and_expected_totals",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "fixture_asins": [
+            "D5X2600010"
+          ],
+          "scenario_asin": "D5X2600010"
+        },
+        "name": "recurrence_fixture_matches_closed_scenario_asin",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "pairs": 24,
+          "rows": 48
+        },
+        "name": "evaluation_has_24_complete_pairs",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "contrast_fields": [
+            "expected_behavior",
+            "expected_next_step",
+            "allowed_conclusion",
+            "expected_stop_condition"
+          ],
+          "pairs": 24
+        },
+        "name": "paired_scenarios_have_variant_specific_decision_conclusions_escalation_and_stop",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "pair_10_separates_asserted_overheating_from_denial",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "documents": 120,
+          "qrels": 22,
+          "queries": 30
+        },
+        "name": "retrieval_query_language_and_qrels",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "no_answer_queries_have_no_positive_qrels",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "rare_topics_are_synthetic_candidates_not_frozen_gold",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "actual": {
+            "development": {
+              "paired_scenario_pairs": 8,
+              "qrels": 7,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            },
+            "test": {
+              "paired_scenario_pairs": 8,
+              "qrels": 8,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            },
+            "validation": {
+              "paired_scenario_pairs": 8,
+              "qrels": 7,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            }
+          },
+          "manifest": {
+            "development": {
+              "paired_scenario_pairs": 8,
+              "qrels": 7,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            },
+            "test": {
+              "paired_scenario_pairs": 8,
+              "qrels": 8,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            },
+            "validation": {
+              "paired_scenario_pairs": 8,
+              "qrels": 7,
+              "retrieval_documents": 40,
+              "retrieval_queries": 10
+            }
+          }
+        },
+        "name": "evaluation_development_validation_test_splits_are_grouped",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "generated_ids": 192,
+          "golden_ids": 360,
+          "overlap": []
+        },
+        "name": "evaluation_has_no_frozen_golden_identifier_leakage",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "actual_counts": {
+            "asin_count": 1000,
+            "asins_per_shop": 500,
+            "coverage_days": 180,
+            "daily_sales_rows": 180000,
+            "high_volume_asins": 20,
+            "high_volume_orders_per_day": 40,
+            "long_support_text_characters": 4096,
+            "order_lines": 320400,
+            "shop_count": 2,
+            "support_cases": 1000,
+            "total_fact_rows": 502400,
+            "version_2_corrections": 1000
+          },
+          "file_counts": {
+            "shop_a": {
+              "orders_v1.csv": 230400,
+              "sales_traffic_revision_v2.csv": 500,
+              "sales_traffic_v1.csv": 90000,
+              "support_cases_v1.csv": 500
+            },
+            "shop_b": {
+              "orders_v1.csv": 90000,
+              "sales_traffic_revision_v2.csv": 500,
+              "sales_traffic_v1.csv": 90000,
+              "support_cases_v1.csv": 500
+            }
+          }
+        },
+        "name": "capacity_pack_materializes_1000_asins_and_180_days",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "asin_count": 1000,
+          "asins_per_shop": 500,
+          "coverage_days": 180,
+          "daily_sales_rows": 180000,
+          "high_volume_asins": 20,
+          "high_volume_orders_per_day": 40,
+          "long_support_text_characters": 4096,
+          "order_lines": 320400,
+          "shop_count": 2,
+          "support_cases": 1000,
+          "total_fact_rows": 502400,
+          "version_2_corrections": 1000
+        },
+        "name": "capacity_pack_has_two_stores_skew_long_text_and_revisions",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "capacity_package_has_ten_person_runner_contract",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "expected": "s7-capacity-v1.1"
+        },
+        "name": "capacity_rows_and_sidecars_use_s7_package_version",
+        "status": "passed"
+      }
+    ],
+    "failed": [],
+    "status": "passed"
+  },
+  "package_file_contract": {
+    "checks": [
+      {
+        "detail": {},
+        "name": "05_近期经营闭环_v1:readme",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "05_近期经营闭环_v1:field_dictionary",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "05_近期经营闭环_v1:manifest",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "06_S5动作效果场景_v1:readme",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "06_S5动作效果场景_v1:field_dictionary",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "06_S5动作效果场景_v1:manifest",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "07_S4_S6独立评测_v1:readme",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "07_S4_S6独立评测_v1:field_dictionary",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "07_S4_S6独立评测_v1:manifest",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "08_S7容量评测_v1:readme",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "08_S7容量评测_v1:field_dictionary",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "08_S7容量评测_v1:manifest",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "sidecars": 20
+        },
+        "name": "import_sidecar_row_counts_match_csv",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "rows": 517470
+        },
+        "name": "imported_fixture_rows_are_explicitly_synthetic",
+        "status": "passed"
+      },
+      {
+        "detail": {
+          "package_version": "s7-capacity-v1.1"
+        },
+        "name": "s7_sidecars_and_rows_use_package_version",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "s7_runner_entry_exists",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "paired_decision_scorer_entry_exists",
+        "status": "passed"
+      },
+      {
+        "detail": {},
+        "name": "capacity_persistent_import_entry_exists",
+        "status": "passed"
+      }
+    ],
+    "failed": [],
+    "status": "passed"
+  },
+  "scope_note": "Synthetic fixtures and deterministic checks only; this report is not human-labeled model-quality acceptance or target-environment capacity acceptance.",
+  "status": "passed"
+}

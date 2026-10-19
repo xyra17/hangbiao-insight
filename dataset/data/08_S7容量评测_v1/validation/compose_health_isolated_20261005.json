@@ -1,0 +1,100 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-05T11:46:37+00:00",
+  "scope": "isolated local Compose health check; no production services or shared volumes",
+  "project": "s1s7-final-check",
+  "compose_files": [
+    "compose.v2.yml"
+  ],
+  "port_overrides": {
+    "postgres": "56432",
+    "redis": "57379",
+    "api": "8281",
+    "web": "8081"
+  },
+  "config_parse": "passed",
+  "runtime_image_build": "classic_builder_passed",
+  "services": [
+    {
+      "service": "api",
+      "name": "s1s7-final-check-api-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083"
+    },
+    {
+      "service": "beat",
+      "name": "s1s7-final-check-beat-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083"
+    },
+    {
+      "service": "postgres",
+      "name": "s1s7-final-check-postgres-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:d8a40176c29aa0c7a20a19f85ddddc47f72d8d6789a7a86a21f3713e71fb4ad6"
+    },
+    {
+      "service": "redis",
+      "name": "s1s7-final-check-redis-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:24e81cffaba832bcd71068a6ff772a531076bafdbb1d684195766ae9b6511f5c"
+    },
+    {
+      "service": "web",
+      "name": "s1s7-final-check-web-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:a57233e787cde9c6c575d397c99256d635b316dd6e283408263a5309bb293115"
+    },
+    {
+      "service": "worker",
+      "name": "s1s7-final-check-worker-1",
+      "state": "running",
+      "health": "healthy",
+      "image_id": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083"
+    }
+  ],
+  "service_count": 6,
+  "all_healthy": true,
+  "api_http": {
+    "status_code": 200,
+    "payload": {
+      "status": "ready"
+    }
+  },
+  "web_http": {
+    "status_code": 200,
+    "bytes": 765
+  },
+  "django_check": "System check identified no issues (0 silenced).",
+  "latest_applied_insight_migration": [
+    "[X] 0032_job_started_at"
+  ],
+  "celery_worker_ping": "pong",
+  "job_count": 0,
+  "api_image_source_sha256": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf  /app/backend/insight/action_review.py\n0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a  /app/backend/insight/tasks.py",
+  "web_image_artifact_sha256": "c70707fa169d97fb7238fb1b30148f220b8e27a5470a87c09e42b2c3c1daa6ec  /usr/share/nginx/html/index.html",
+  "appdata_mount": "s1s7-final-check_appdata -> /data;",
+  "image_ids": {
+    "api": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083",
+    "worker": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083",
+    "beat": "sha256:7a9f3ba07d00b5fce45720b9c420f0835922105e81a215d2f7d8f22466154083",
+    "web": "sha256:a57233e787cde9c6c575d397c99256d635b316dd6e283408263a5309bb293115"
+  },
+  "limits_note": "This isolated health check is not a performance/capacity run; target host remains 8 cores/16 GB/SSD external acceptance.",
+  "compose_override": {
+    "purpose": "Use free loopback host ports alongside the existing development PostgreSQL/Redis stack.",
+    "ports": {
+      "postgres": "127.0.0.1:56432:5432",
+      "redis": "127.0.0.1:57379:6379",
+      "api": "127.0.0.1:8281:8000",
+      "web": "127.0.0.1:8081:80"
+    },
+    "merge_semantics": "Temporary Compose v2 !override overlay changed published ports only; no service image, command, environment, network, or volume setting was changed.",
+    "overlay_file_removed_after_check": true
+  }
+}

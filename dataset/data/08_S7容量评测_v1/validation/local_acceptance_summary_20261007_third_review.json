@@ -1,0 +1,233 @@
+{
+  "status": "not_ready",
+  "generated_at": "2026-10-07T06:13:40.487402+00:00",
+  "head": "349350ce1373975791ddeef322bf508351658a60",
+  "working_tree": "shared_uncommitted",
+  "scope": "G1 and locally executable G2",
+  "engineering": {
+    "affected_backend": {
+      "passed": 30,
+      "seconds": 29.34,
+      "log": ".local/third-review-fixes-20261007/affected-final.log"
+    },
+    "final_proposal_origin_slice": {
+      "passed": 16,
+      "seconds": 6.08,
+      "log": ".local/third-review-fixes-20261007/provenance-final.log"
+    },
+    "dataset": {
+      "passed": 56,
+      "seconds": 3.06,
+      "log": ".local/third-review-fixes-20261007/dataset-final3.log"
+    },
+    "browser": {
+      "passed": 3,
+      "seconds": 30.5,
+      "screenshots": 12,
+      "artifacts": ".local/acceptance-artifacts/20261007T060816Z_insight_acceptance_20261006_v2",
+      "owned_service_survivors": 0
+    },
+    "frontend_build": "passed",
+    "ruff": "passed",
+    "django_check": "passed",
+    "historical_full_suite": {
+      "backend": 440,
+      "dataset": 55,
+      "browser": 22,
+      "current_full_rerun": false
+    },
+    "image_rebuilt": false,
+    "capacity_rerun": false
+  },
+  "versions": {
+    "retrieval": "lexical-evidence-v5",
+    "prompt": "agent-planner-prompt-v2.0",
+    "final_wire": "agent-final-output-v2",
+    "business_schema": "investigation-business-contract-v1",
+    "deterministic_planner": "deterministic-investigation-v4",
+    "fact_followup": "fact-followup-v1"
+  },
+  "retrieval": {
+    "splits": {
+      "development": {
+        "answerable_queries_with_false_retrieval": 0,
+        "answerable_query_count": 7,
+        "citation_validity": 1.0,
+        "false_positive_documents": 0,
+        "latency_ms": {
+          "max": 16.823,
+          "p50": 13.465,
+          "p95": 16.823
+        },
+        "no_answer_false_retrieval_rate": 0.0,
+        "no_answer_false_retrievals": 0,
+        "no_answer_query_count": 3,
+        "query_count": 10,
+        "recall_at_10": 1.0,
+        "relevant_documents": 7,
+        "relevant_documents_retrieved_at_10": 7,
+        "retrieved_documents": 7,
+        "scope_context_documents": 0
+      },
+      "test": {
+        "answerable_queries_with_false_retrieval": 1,
+        "answerable_query_count": 8,
+        "citation_validity": 1.0,
+        "false_positive_documents": 1,
+        "latency_ms": {
+          "max": 19.053,
+          "p50": 12.0,
+          "p95": 19.053
+        },
+        "no_answer_false_retrieval_rate": 0.0,
+        "no_answer_false_retrievals": 0,
+        "no_answer_query_count": 2,
+        "query_count": 10,
+        "recall_at_10": 0.125,
+        "relevant_documents": 8,
+        "relevant_documents_retrieved_at_10": 1,
+        "retrieved_documents": 2,
+        "scope_context_documents": 0
+      },
+      "validation": {
+        "answerable_queries_with_false_retrieval": 2,
+        "answerable_query_count": 7,
+        "citation_validity": 1.0,
+        "false_positive_documents": 2,
+        "latency_ms": {
+          "max": 15.567,
+          "p50": 11.928,
+          "p95": 15.567
+        },
+        "no_answer_false_retrieval_rate": 0.0,
+        "no_answer_false_retrievals": 0,
+        "no_answer_query_count": 3,
+        "query_count": 10,
+        "recall_at_10": 1.0,
+        "relevant_documents": 7,
+        "relevant_documents_retrieved_at_10": 7,
+        "retrieved_documents": 9,
+        "scope_context_documents": 0
+      }
+    },
+    "test_is_blind": false,
+    "candidate_selection": "retain_v5",
+    "independent_development_experiment": {
+      "v5_baseline": {
+        "recall_at_10": 0.36363636363636365,
+        "false_documents": 0,
+        "no_answer_false_hits": 0,
+        "no_answer_queries": 5
+      },
+      "core_only": {
+        "recall_at_10": 1.0,
+        "false_documents": 7,
+        "no_answer_false_hits": 4,
+        "no_answer_queries": 5
+      },
+      "core_plus_first_auxiliary": {
+        "recall_at_10": 0.45454545454545453,
+        "false_documents": 1,
+        "no_answer_false_hits": 1,
+        "no_answer_queries": 5
+      }
+    },
+    "report": "dataset/data/07_S4_S6独立评测_v1/validation/real_retrieval_runtime_third_review_20261007_final.json"
+  },
+  "investigation": {
+    "terminal_success_count": 48,
+    "pending_missing_field_count": 337,
+    "deterministic_rule_proposals": 47,
+    "independently_adjudicated_fields": 0,
+    "fields_requiring_independent_review": 384,
+    "unsupported_fields": 0,
+    "different_scoped_evidence_pairs": 8,
+    "different_known_next_step_pairs": 2,
+    "tool_or_parameter_difference_pairs": 2,
+    "evidence_driven_parameter_difference_pairs": 1,
+    "correctness": "not_established",
+    "real_model_quality": "not_established"
+  },
+  "quality_gate": {
+    "status": "not_ready",
+    "exit_code": 1,
+    "failures": [
+      "retrieval.test:recall_at_10_below_0.85_or_invalid",
+      "investigation:pairs_with_tool_or_parameter_divergence_below_24_or_invalid",
+      "investigation:pairs_with_evidence_driven_follow_up_parameter_divergence_below_23_or_invalid",
+      "investigation:pending_adjudication_field_count_nonzero_or_invalid",
+      "investigation:business_contract_not_passed"
+    ],
+    "report": "dataset/data/07_S4_S6独立评测_v1/validation/quality_gate_third_review_20261007.json"
+  },
+  "controlled_production_chain": {
+    "status": "protocol_chain_passed",
+    "real_model_quality": "not_established",
+    "commands": [
+      {
+        "command": [
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/bin/python",
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/adapt_investigation_outputs.py",
+          "--runtime-report",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/runtime.json",
+          "--adjudications",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/adjudications.csv",
+          "--output",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/adapted.json"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0
+      },
+      {
+        "command": [
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/bin/python",
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/score_paired_investigations.py",
+          "--runtime-report",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/runtime.json",
+          "--adapted",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/adapted.json",
+          "--pack-dir",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/controlled-pack",
+          "--output",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/score.json"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0
+      },
+      {
+        "command": [
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/bin/python",
+          "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/quality_gate.py",
+          "--retrieval",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/retrieval.json",
+          "--paired",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/runtime.json",
+          "--adapted",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/adapted.json",
+          "--scoring",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/score.json",
+          "--bundle-output",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/bundle.json",
+          "--output",
+          "../.local/third-review-fixes-20261007/production-cli-provenance-final/gate.json"
+        ],
+        "exit_code": 1,
+        "expected_exit": 1
+      }
+    ],
+    "score": "passed",
+    "gate": "not_ready",
+    "independent_adjudication_complete": false
+  },
+  "source_hash_manifest": ".local/third-review-fixes-20261007/final-source-hashes.json",
+  "source_count": 276,
+  "frozen_historical_hash_checks_passed": true,
+  "external_dependencies": {
+    "E1": "real source and financial reconciliation",
+    "E2": "approved model region budget transmission and independent annotation",
+    "E3": "target hardware TLS backup numeric RPO/RTO duty owner",
+    "E4": "two operators ten ASIN three weeks thirty events"
+  },
+  "delivery": "docs/执行三次复核修复交付_2026-10-07.md",
+  "no_commit_publish_paid_call_or_data_transfer": true
+}

@@ -1,0 +1,274 @@
+{
+  "status": "passed_with_external_blockers",
+  "generated_at": "2026-10-06T15:08:32.591838+00:00",
+  "code_version": {
+    "head": "349350ce1373975791ddeef322bf508351658a60",
+    "working_tree_modified_or_untracked_paths": 99,
+    "committed": false,
+    "published": false,
+    "relevant_source_sha256": {
+      "backend/config/settings.py": "084e64e13681c74b6f7d487a4c52e3816813414ec11f14b6381020c978022e58",
+      "backend/insight/action_review.py": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+      "backend/insight/management/commands/_acceptance.py": "7892b96eed30c0a3652c660a45a68b807b26bab671752bf550dda58f74da648f",
+      "backend/insight/management/commands/seed_acceptance_browser_fixtures.py": "67e02cd8b6c5f0ecb3b5d85bb3f374e0676bcf6f21348630431646f10b8c7c03",
+      "backend/insight/metrics/comparability.py": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+      "backend/insight/tasks.py": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+      "backend/insight/throttling.py": "6a65898b28fe34f7768fecb403f583688caaf41b43853872b1f94090d6e33c14",
+      "backend/tests_v2/test_extended_acceptance_workflow.py": "85e445e0512b3a72e64c310edabd0c4a015e5f57f1c6566810c8c5c104b74e7a",
+      "frontend/e2e/000_responsive_visual.spec.ts": "e9a00127cea99d747466d152196d6f55b462f20f633be4fb5b23e4e7d3c264e0",
+      "frontend/e2e/acceptance_boundaries.spec.ts": "3cffcf57ea61eac706d49369e18ce2d067e25a8fbe467931b4d3d44909aab39a",
+      "frontend/e2e/s5-actions.spec.ts": "d4c751210be652bf36caa3b8be35cc0a248f47e8c9cb4b2482168ed69244dc3e",
+      "frontend/src/workbench/ActionsPage.tsx": "70ecf9d3cf662821f8bd77bd08f3296d5764fa41a39670e83439e351b90dfacf",
+      "frontend/src/workbench/workbench.css": "97e34ce078324380767740b5d8a6c53a93b734e5f6a83e5254b3d6f9655e5f2c",
+      "scripts/prepare_browser_acceptance.sh": "6985c0943bab8b549477446b50699a3e408413aae09ef5134c4ca28d62365f4c",
+      "scripts/run_browser_acceptance.sh": "76d8b5b1c7b8d979e2256dd5efedb8e872e0546cbe36655c16ada71090c1a557"
+    }
+  },
+  "verification": {
+    "backend_non_capacity": {
+      "command": "cd backend && uv run --env-file ../.env.local pytest -c pytest-v2.ini -m 'not capacity' -q",
+      "status": "passed",
+      "result": "425 passed, 1 deselected",
+      "duration_s": 176.37,
+      "teardown_warnings": 0
+    },
+    "dataset_tests": {
+      "command": "uv run --project dataset pytest -q dataset/tests",
+      "status": "passed",
+      "result": "21 passed",
+      "duration_s": 2.79
+    },
+    "login_throttle_regression": {
+      "command": "cd backend && uv run --env-file ../.env.local pytest -c pytest-v2.ini tests_v2/test_s1_boundaries.py::test_login_throttle_rejects_excess_attempts_with_retry_header tests_v2/test_s1_concurrency.py::test_login_limit_is_shared_by_concurrent_connections_and_does_not_store_identity -q",
+      "status": "passed",
+      "result": "2 passed",
+      "duration_s": 4.39,
+      "default_account_limit_per_minute": 10,
+      "browser_runner_only_account_limit_per_minute": 100
+    },
+    "acceptance_pack_validation": {
+      "status": "passed",
+      "frozen_replay": {
+        "path": "dataset/data/acceptance_runs/frozen-replay_2026-10-01_full_v2/run_manifest.json",
+        "sha256": "98a6ea6392a741133199aea04262a8d9baf5cee7b28169d5eecaefd6efeb5861",
+        "frozen_as_of": "2026-10-01",
+        "runtime_site_date": "2026-10-05",
+        "file_count": 68
+      },
+      "current_demo": {
+        "path": "dataset/data/acceptance_runs/current-demo_2026-10-06_full/run_manifest.json",
+        "sha256": "a6e1a6debaa583f59ad3954f76b718a8dbc422e3c73c3b6b454527ceeea6fee5",
+        "frozen_as_of": "2026-10-06",
+        "runtime_site_date": "2026-10-06",
+        "file_count": 68
+      },
+      "per_pack_generation": "27/27",
+      "per_pack_file_checks": "18/18",
+      "current_capacity_manifest": {
+        "generator_sha256": "155f12cf8cfad7d5c3291509c634e67cefa254d7fafd6dfd49a226e37706a8a8",
+        "seed": 20261001,
+        "package_version": "s7-capacity-v1.1",
+        "targets": 1000,
+        "fact_rows": 502400,
+        "note": "Same generated workload shape as the 2026-10-05 package with a one-day window shift; no duplicate 502,400-row import/full scan was run."
+      }
+    },
+    "django_and_migrations": {
+      "status": "passed",
+      "commands": [
+        "uv run --env-file ../.env.local python manage.py check",
+        "uv run --env-file ../.env.local python manage.py makemigrations --check --dry-run"
+      ],
+      "result": "no issues; no changes detected"
+    },
+    "ruff": {
+      "status": "passed",
+      "command": "uv run ruff check insight tests_v2",
+      "result": "All checks passed"
+    },
+    "openapi": {
+      "status": "passed",
+      "command": "uv run --env-file ../.env.local python manage.py spectacular --file /tmp/openapi-generated-20261006.yaml --validate && cmp ../docs/openapi.yaml /tmp/openapi-generated-20261006.yaml",
+      "result": "schema valid and byte-identical"
+    },
+    "frontend": {
+      "status": "passed",
+      "unit_tests": "3 passed",
+      "build": "TypeScript and Vite production build passed"
+    },
+    "browser": {
+      "status": "passed",
+      "result": "21/21",
+      "duration_min": 1.6,
+      "as_of": "2026-10-06",
+      "database": "insight_acceptance_20261006",
+      "artifact_dir": ".local/acceptance-artifacts/20261006T144532Z",
+      "command": "ACCEPTANCE_ACCOUNTS_FILE=.local/acceptance-accounts-browser-20261006.json bash scripts/run_browser_acceptance.sh 2026-10-06",
+      "fixed_date_boundary_recheck": {
+        "status": "passed",
+        "result": "2/2",
+        "as_of": "2026-10-05",
+        "database": "insight_acceptance_20261005",
+        "artifact_dir": ".local/acceptance-artifacts/20261006T144501Z"
+      },
+      "resolved_shared_database_failures": [
+        ".local/acceptance-artifacts/20261006T143022Z",
+        ".local/acceptance-artifacts/20261006T143347Z",
+        ".local/acceptance-artifacts/20261006T144142Z"
+      ],
+      "resolution": "The runner passes ACCEPTANCE_AS_OF, selects the matching snapshot date, and creates a dedicated local acceptance database per date. Historical fixtures were preserved.",
+      "screenshots_visually_checked": [
+        ".local/acceptance-artifacts/20261006T144532Z/screenshots/390-actions.png",
+        ".local/acceptance-artifacts/20261006T144532Z/screenshots/768-investigations.png",
+        ".local/acceptance-artifacts/20261006T144532Z/screenshots/1440-actions.png",
+        ".local/acceptance-artifacts/20261006T144532Z/screenshots/1440-event-evidence-drawer.png"
+      ],
+      "local_runner_cleanup": "API, worker, beat, and Vite stopped by runner; ports 8280 and 5184 free after run."
+    },
+    "capacity": {
+      "status": "passed_local_full_run_only_target_environment_pending",
+      "report": "dataset/data/08_S7容量评测_v1/validation/capacity_run_20261005_current_demo_1000target_10accounts_optimized.json",
+      "targets": 1000,
+      "requests_jobs_correctness": "1000/1000",
+      "errors": 0,
+      "scan_wall_ms": 143673.118,
+      "measurement_wall_ms": 149331.83,
+      "snapshot_list_p95_ms": 223.812,
+      "max_business_endpoint_p95_ms": 664.041,
+      "new_snapshots": 990,
+      "valid_cached_snapshots": 10,
+      "target_environment": "pending_external_8_core_16_gb_ssd_environment",
+      "historical_failed_report": "dataset/data/08_S7容量评测_v1/validation/capacity_run_latest.json",
+      "resources_peak_by_component": {
+        "api": {
+          "peak_cpu_pct": 125.25,
+          "peak_memory_mb": 340.64,
+          "sample_count": 29
+        },
+        "beat": {
+          "peak_cpu_pct": 2.7,
+          "peak_memory_mb": 96.24,
+          "sample_count": 29
+        },
+        "database": {
+          "peak_cpu_pct": 72.2,
+          "peak_memory_mb": 659.3,
+          "sample_count": 29
+        },
+        "redis": {
+          "peak_cpu_pct": 1.04,
+          "peak_memory_mb": 10.31,
+          "sample_count": 116
+        },
+        "worker": {
+          "peak_cpu_pct": 75.54,
+          "peak_memory_mb": 286.9,
+          "sample_count": 29
+        }
+      },
+      "queue_wait_p95_ms": 994.379,
+      "job_worker_runtime_p95_ms": 199.303,
+      "index_build_report": "dataset/data/08_S7容量评测_v1/validation/capacity_index_build_20261005_current_demo.json",
+      "index_build_ms": 5459.727,
+      "index_scope": "1000 support cases, jieba-0.42.1-feedback-v1; no review rows, not the target review corpus",
+      "profile_reports": [
+        "dataset/data/08_S7容量评测_v1/validation/capacity_scan_profile_20261005_current_demo_hot_target.json",
+        "dataset/data/08_S7容量评测_v1/validation/capacity_scan_profile_20261005_optimized_skewed_target.json"
+      ],
+      "comparability_profile_ms": {
+        "before": 526.158,
+        "after": 45.24,
+        "scope": "one representative isolated target per run"
+      },
+      "latest_measured_package_as_of": "2026-10-05",
+      "current_demo_2026_10_06": {
+        "status": "not_measured",
+        "reason": "The 2026-10-06 package has the same generator hash, seed, version, 1,000 targets, 180-day span, and 502,400-row shape as the 2026-10-05 package, shifted by one day. No metric code/workload-shape change justified another expensive full import and scan.",
+        "do_not_infer_from_2026_10_05": true
+      }
+    },
+    "runtime_fingerprint": {
+      "status": "passed",
+      "report": "dataset/data/08_S7容量评测_v1/validation/runtime_fingerprint_20261005_post_acceptance_fix.json",
+      "report_sha256": "30b48bf2597da2a81eb9ee208e4c7c8297149f713eb3f3afbe4ece7eaf26ba50",
+      "as_of": "2026-10-05",
+      "note": "Production source inputs to the fingerprint were unchanged by this follow-up; changed files are acceptance database guard, test, and local runner."
+    },
+    "compose_health": {
+      "status": "passed",
+      "services": "6/6 healthy",
+      "report": "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix.json",
+      "isolated_resources_removed": true,
+      "dev_postgres_redis_preserved": true,
+      "failed_setup_attempts_preserved": [
+        "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix_failed_override.json",
+        "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix_failed_no_build.json"
+      ],
+      "as_of": "2026-10-05"
+    },
+    "restore_and_retention": {
+      "status": "passed_local_drills",
+      "restore_rto_s": 2.2,
+      "rpo": "not measured",
+      "retention_clone": "cleanup passed; source file returns 410; tombstone retained",
+      "report_root": ".local/restore-drills/"
+    },
+    "diff_check": {
+      "status": "passed",
+      "commands": [
+        "git diff --check",
+        "bash -n scripts/run_browser_acceptance.sh",
+        "sh -n scripts/prepare_browser_acceptance.sh"
+      ]
+    },
+    "acceptance_environment_guard": {
+      "status": "passed",
+      "command": "cd backend && uv run --env-file ../.env.local pytest -c pytest-v2.ini tests_v2/test_extended_acceptance_workflow.py::test_acceptance_environment_only_allows_base_or_date_scoped_database -q",
+      "result": "3 passed",
+      "duration_s": 0.11,
+      "accepted_database_names": [
+        "insight_acceptance",
+        "insight_acceptance_20261005"
+      ],
+      "rejected_database_name": "insight_acceptance_dev"
+    }
+  },
+  "external_blockers": [
+    {
+      "id": "E1",
+      "input": "Nine redacted source exports plus finance/refund/return/rating/support samples and field/timezone/currency definitions",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E2",
+      "input": "Approved model provider/region/version, budget, transfer/de-identification boundary, secret injection, independent labels and adjudication",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E3",
+      "input": "Target 8-core/16GB/SSD server, domain/TLS, image registry digest, backup target, numeric RPO/RTO and on-call acceptance",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E4",
+      "input": "Two operators, ten real ASINs, at least three weeks and thirty verified events",
+      "owner": "to be assigned"
+    }
+  ],
+  "safety_boundary": "No paid model calls, outbound data transfer, production deployment, real business writes, commit, merge, or destructive actions on shared data.",
+  "ledger_refresh": {
+    "verified_at": "2026-10-06T15:08:32.591838+00:00",
+    "documents": [
+      "docs/扩展数据包执行结果审阅_2026-10-01.md",
+      "docs/S7运行手册与发布门槛.md",
+      "docs/S1-S7后续全部执行任务_2026-10-03.md",
+      "docs/S1-S7需求代码测试核对表.md"
+    ],
+    "working_tree_modified_or_untracked_paths": 99,
+    "relevant_source_hashes_reverified": 15,
+    "ac_matrix_rows": 26,
+    "git_diff_check": "passed",
+    "browser_acceptance_ports_8280_5184": "free",
+    "scope": "ledger-only follow-up; no code, data package, service, or acceptance results changed"
+  }
+}

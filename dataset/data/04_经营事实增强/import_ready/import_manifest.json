@@ -1,0 +1,191 @@
+{
+  "generated_from": "manifest.json",
+  "files": [
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/sales_traffic_daily_v1.csv",
+      "rows": 5952,
+      "kind": "sales_traffic",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/ratings_daily_v1.csv",
+      "rows": 5952,
+      "kind": "ratings",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/inventory_daily_v1.csv",
+      "rows": 5952,
+      "kind": "inventory",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/operations_v1.csv",
+      "rows": 414,
+      "kind": "operations",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/orders_v1.csv",
+      "rows": 5958,
+      "kind": "orders",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/refunds_v1.csv",
+      "rows": 6082,
+      "kind": "refunds",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/returns_v1.csv",
+      "rows": 313,
+      "kind": "returns",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/support_cases_v1.csv",
+      "rows": 658,
+      "kind": "support",
+      "ignored_columns": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ]
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/sales_traffic_revision_v1.csv",
+      "rows": 1,
+      "kind": "sales_traffic",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/sales_traffic_revision_v2.csv",
+      "rows": 1,
+      "kind": "sales_traffic",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/returns_requested_v1.csv",
+      "rows": 1,
+      "kind": "returns",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/returns_received_v2.csv",
+      "rows": 1,
+      "kind": "returns",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/returns_cancelled_v3.csv",
+      "rows": 1,
+      "kind": "returns",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/order_retraction_candidate.csv",
+      "rows": 1,
+      "kind": "orders",
+      "fixture": true
+    },
+    {
+      "file": "/Users/Admin/Desktop/商品评论智能诊断 agent/dataset/data/04_经营事实增强/import_ready/lifecycle_revisions/refund_late_arrival.csv",
+      "rows": 1,
+      "kind": "refunds",
+      "fixture": true
+    }
+  ]
+}

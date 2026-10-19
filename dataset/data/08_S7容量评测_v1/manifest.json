@@ -1,0 +1,53 @@
+{
+  "actual_counts": {
+    "asin_count": 1000,
+    "asins_per_shop": 500,
+    "coverage_days": 180,
+    "daily_sales_rows": 180000,
+    "high_volume_asins": 20,
+    "high_volume_orders_per_day": 40,
+    "long_support_text_characters": 4096,
+    "order_lines": 320400,
+    "shop_count": 2,
+    "support_cases": 1000,
+    "total_fact_rows": 502400,
+    "version_2_corrections": 1000
+  },
+  "as_of": "2026-10-01",
+  "coverage_window": {
+    "days": 180,
+    "end": "2026-09-30",
+    "start": "2026-04-04"
+  },
+  "execution_entry": "dataset/run_capacity_acceptance.py",
+  "files": {
+    "shop_a": {
+      "orders_v1.csv": 230400,
+      "sales_traffic_revision_v2.csv": 500,
+      "sales_traffic_v1.csv": 90000,
+      "support_cases_v1.csv": 500
+    },
+    "shop_b": {
+      "orders_v1.csv": 90000,
+      "sales_traffic_revision_v2.csv": 500,
+      "sales_traffic_v1.csv": 90000,
+      "support_cases_v1.csv": 500
+    }
+  },
+  "generated_at": "2026-10-01T00:00:00Z",
+  "generator": "dataset/05_generate_extended_acceptance_packs.py",
+  "package_version": "s7-capacity-v1.1",
+  "provenance": "All capacity records, orders, long support notes, and corrections are synthetic. The 1,000 ASINs are deterministic test identifiers and are not Amazon catalog claims.",
+  "required_measurements": [
+    "query_p95_ms",
+    "scan_total_ms",
+    "index_build_ms",
+    "queue_backlog",
+    "error_rate_pct",
+    "server_peak_memory_mb",
+    "server_peak_cpu_pct"
+  ],
+  "seed": 20261001,
+  "target_environment_status": "not_run_target_environment_not_provided",
+  "timezone": "America/Los_Angeles"
+}

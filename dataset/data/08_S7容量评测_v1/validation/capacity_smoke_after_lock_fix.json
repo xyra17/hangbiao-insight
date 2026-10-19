@@ -1,0 +1,134 @@
+{
+  "status": "passed",
+  "environment": "loopback_only",
+  "generated_at": "2026-10-01T16:18:30Z",
+  "worker_count": 10,
+  "target_count": 10,
+  "measurements": {
+    "query_p95_ms": 150.985,
+    "scan_total_ms": 7238.636,
+    "concurrent_wall_ms": 7921.114,
+    "index_build_ms": null,
+    "queue_backlog": 10,
+    "queue_backlog_source": "local_database_active_jobs",
+    "queue_backlog_sample_count": 8,
+    "queue_backlog_error": null,
+    "error_rate_pct": 0.0,
+    "server_peak_cpu_pct": null,
+    "server_peak_memory_mb": null,
+    "server_stats_status": "not_configured",
+    "runtime_sample_count": 8
+  },
+  "target_environment_status": "local_measurement_only_target_acceptance_not_implied",
+  "completed": [
+    {
+      "index": 1,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600001",
+      "job_id": "f17c7f66-ee03-4d3c-b468-1490aed0f3e9",
+      "snapshot_id": "71245411-362a-4647-84cf-4dca4aa7d408",
+      "scan_total_ms": 7238.636,
+      "query_ms": 98.768,
+      "status": "completed"
+    },
+    {
+      "index": 2,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600002",
+      "job_id": "4306c749-4240-4164-a747-9ce2d0cf50e3",
+      "snapshot_id": "146bdb07-f7d6-4a48-80a2-70e9e35d14f3",
+      "scan_total_ms": 6314.362,
+      "query_ms": 86.322,
+      "status": "completed"
+    },
+    {
+      "index": 3,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600003",
+      "job_id": "345e2edc-a68a-4eb0-b306-c9128dd3124a",
+      "snapshot_id": "c452a249-df21-4903-a7ec-72fdab2b90e3",
+      "scan_total_ms": 6473.913,
+      "query_ms": 150.985,
+      "status": "completed"
+    },
+    {
+      "index": 4,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600004",
+      "job_id": "faa1f591-3e2f-4a0b-b2f8-f4ac2e938f90",
+      "snapshot_id": "439f1ae1-b49a-4188-a8f8-052e584a9869",
+      "scan_total_ms": 6951.512,
+      "query_ms": 98.649,
+      "status": "completed"
+    },
+    {
+      "index": 5,
+      "shop": "5c6da219-6b6b-4ad9-820d-b2af7050fd69",
+      "asin": "CAP2600005",
+      "job_id": "fbf3ae1f-34cf-438b-8c4b-ea95bc685c6b",
+      "snapshot_id": "6e7fcf99-ea5b-4c05-a690-629a7fcd9c4b",
+      "scan_total_ms": 6644.317,
+      "query_ms": 131.374,
+      "status": "completed"
+    },
+    {
+      "index": 6,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600501",
+      "job_id": "5322f772-f044-4257-8618-c1f93b947793",
+      "snapshot_id": "558826af-ef18-49d8-adcd-c4e2c93977ff",
+      "scan_total_ms": 6717.01,
+      "query_ms": 105.826,
+      "status": "completed"
+    },
+    {
+      "index": 7,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600502",
+      "job_id": "0cfc5288-5716-4ef4-8cba-a24967252caf",
+      "snapshot_id": "8001d66a-d435-4c15-9985-2229e0323db0",
+      "scan_total_ms": 6862.26,
+      "query_ms": 78.466,
+      "status": "completed"
+    },
+    {
+      "index": 8,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600503",
+      "job_id": "95cd4a38-a766-4587-b12b-698f6288c0bb",
+      "snapshot_id": "099072d0-9214-48c3-8761-582dcdf58477",
+      "scan_total_ms": 6446.869,
+      "query_ms": 79.309,
+      "status": "completed"
+    },
+    {
+      "index": 9,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600504",
+      "job_id": "11aa2bd4-9fd3-4986-973b-d9100e214c1d",
+      "snapshot_id": "62e8131c-1d15-43a0-9587-bdfdc046abea",
+      "scan_total_ms": 7142.076,
+      "query_ms": 77.668,
+      "status": "completed"
+    },
+    {
+      "index": 10,
+      "shop": "bdc30f3c-1692-4350-b515-4796306579dd",
+      "asin": "CAP2600505",
+      "job_id": "23caba78-0e06-481e-baaa-66e88c9263c9",
+      "snapshot_id": "a60d38b6-340c-4565-8e65-13548d352fd7",
+      "scan_total_ms": 6854.291,
+      "query_ms": 108.604,
+      "status": "completed"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Requires the S7 fixture to be imported into the two supplied isolated shops before running.",
+    "The default run scans all 1,000 imported ASINs with a maximum of 10 concurrent scan workers.",
+    "Queue backlog is the maximum local-database count of queued, running, and retry_wait jobs sampled once per second.",
+    "Index build time is measured during import and is not inferred from scan timing.",
+    "Server CPU and memory are reported only when an explicit loopback stats endpoint provides them.",
+    "A local API run does not constitute target-environment or production capacity acceptance."
+  ]
+}

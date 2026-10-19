@@ -1,0 +1,2 @@
+child_asin,seller_sku,fulfillment,business_date,ordered_units,order_count,sessions,buybox_percent,sales_amount,currency,provenance_class,is_real,is_derived,is_synthetic,source_reference,source_row_id,generation_version,scenario_id,boundary_case,currency_case,synthetic_from_review
+B07H2V5YLH,,,2018-11-05,100,90,900,88.00,1999.00,USD,synthetic_revision_fixture,false,false,true,dataset/data/02_构造经营指标/经营指标日宽表_v1.csv,metric:B07H2V5YLH:2018-11-05,business-facts-augmentation-v1.0,,revision_v2,,

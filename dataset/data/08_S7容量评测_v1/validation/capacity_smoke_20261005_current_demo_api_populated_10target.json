@@ -1,0 +1,1048 @@
+{
+  "status": "passed",
+  "status_semantics": "Status means every requested scan was accepted and its job completed; correctness, API sampling, performance, resource observation, and target environment gates are separate.",
+  "acceptance_status": {
+    "requests": "passed",
+    "job_completion": "passed",
+    "correctness": "passed",
+    "sampling": "passed",
+    "api_query_performance": "passed_local_smoke_thresholds",
+    "performance": "not_evaluated_smoke_only",
+    "resource_observability": "sampled_all_required_components",
+    "target_environment": "pending_external_8_core_16_gb_ssd_environment"
+  },
+  "environment": "loopback_only",
+  "generated_at": "2026-10-05T12:54:22Z",
+  "worker_count": 5,
+  "scan_client_worker_count": 5,
+  "configured_worker_limit": 10,
+  "celery_worker_runtime": {
+    "status": "observed",
+    "worker_count": 1,
+    "total_concurrency": 2,
+    "reported_pool_capacities": [
+      2
+    ]
+  },
+  "distinct_authenticated_account_count": 10,
+  "account_classes": [
+    "synthetic_isolated_capacity_load"
+  ],
+  "authenticated_account_status": "10_distinct_users",
+  "host_profile": {
+    "platform": "macOS-15.7.5-arm64-arm-64bit-Mach-O",
+    "cpu_count": 8,
+    "memory_bytes": 25769803776,
+    "disk_type": "not_measured",
+    "docker_runtime": {
+      "status": "observed",
+      "cpu_count": 3,
+      "memory_bytes": 8322502656,
+      "container_limits": {
+        "beat": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        },
+        "worker": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        },
+        "api": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        },
+        "database": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        },
+        "redis": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      }
+    }
+  },
+  "target_count": 10,
+  "measurements": {
+    "request_success_count": 10,
+    "job_success_count": 10,
+    "correctness_pass_count": 10,
+    "request_error_count": 0,
+    "error_rate_pct": 0.0,
+    "snapshot_list_sample_ms": {
+      "sample_count": 10,
+      "p50": 59.866,
+      "p95": 92.988,
+      "max": 92.988
+    },
+    "query_p95_ms": 92.988,
+    "api_endpoint_p95_ms": {
+      "action_detail": 180.129,
+      "actions": 191.89,
+      "event_detail": 297.047,
+      "event_evidence": 130.941,
+      "events": 653.253,
+      "evidence_search": 126.82,
+      "investigation_detail": 171.814,
+      "investigations": 205.381,
+      "jobs": 351.541,
+      "products": 105.12,
+      "report_detail": 166.276,
+      "reports": 198.453,
+      "snapshot_detail": 135.753,
+      "snapshots": 179.954,
+      "sources": 158.857
+    },
+    "enqueued_to_terminal_ms": {
+      "sample_count": 10,
+      "p50": 767.254,
+      "p95": 1492.752,
+      "max": 1492.752
+    },
+    "scan_total_ms": 1492.752,
+    "longest_target_elapsed_ms": 1492.752,
+    "scan_concurrent_wall_ms": 2691.496,
+    "api_sampling_wall_ms": 3173.015,
+    "full_measurement_wall_ms": 9263.316,
+    "concurrent_wall_ms": 9263.316,
+    "index_build_ms": null,
+    "index_build_status": "not_measured_by_capacity_runner",
+    "job_queue_wait_ms": {
+      "sample_count": 10,
+      "p50": 590.799,
+      "p95": 989.311
+    },
+    "job_worker_runtime_ms": {
+      "sample_count": 10,
+      "p50": 14.828,
+      "p95": 22.603
+    },
+    "queue_backlog": 0,
+    "queue_backlog_source": "local_database_active_jobs",
+    "queue_backlog_sample_count": 4,
+    "queue_backlog_error": null,
+    "server_peak_cpu_pct": null,
+    "server_peak_memory_mb": null,
+    "server_stats_status": "not_configured",
+    "runtime_sample_count": 4,
+    "resource_sample_count": 2,
+    "resource_usage_by_component": {
+      "api": {
+        "sample_count": 2,
+        "peak_cpu_pct": 55.79,
+        "peak_memory_mb": 338.94,
+        "effective_memory_limit_mb": 15874.048,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 2,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        }
+      },
+      "beat": {
+        "sample_count": 2,
+        "peak_cpu_pct": 0.7,
+        "peak_memory_mb": 96.23,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      },
+      "database": {
+        "sample_count": 2,
+        "peak_cpu_pct": 29.08,
+        "peak_memory_mb": 623.7,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      },
+      "redis": {
+        "sample_count": 6,
+        "peak_cpu_pct": 0.91,
+        "peak_memory_mb": 10.5,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 1,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats",
+          "psutil_host_process"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      },
+      "worker": {
+        "sample_count": 2,
+        "peak_cpu_pct": 2.43,
+        "peak_memory_mb": 229.3,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      }
+    },
+    "resource_errors": []
+  },
+  "business_api_samples": {
+    "status": "passed",
+    "distinct_account_count": 10,
+    "concurrent_account_count": 10,
+    "request_success": "expected_authorization_denials_only",
+    "expected_permission_denial_count": 10,
+    "population_check": "passed",
+    "required_populated_endpoints": [
+      "actions",
+      "events",
+      "evidence_search",
+      "investigations",
+      "reports",
+      "snapshots"
+    ],
+    "endpoint_stats": {
+      "action_detail": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 153.984,
+          "p95": 180.129,
+          "max": 180.129
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "actions": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 165.053,
+          "p95": 191.89,
+          "max": 191.89
+        },
+        "row_counts": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "failures": []
+      },
+      "event_detail": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 208.421,
+          "p95": 297.047,
+          "max": 297.047
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "event_evidence": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 125.063,
+          "p95": 130.941,
+          "max": 130.941
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "events": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 410.484,
+          "p95": 653.253,
+          "max": 653.253
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "evidence_search": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 116.545,
+          "p95": 126.82,
+          "max": 126.82
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "investigation_detail": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 150.127,
+          "p95": 171.814,
+          "max": 171.814
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "investigations": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 190.273,
+          "p95": 205.381,
+          "max": 205.381
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "jobs": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 5,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 237.643,
+          "p95": 351.541,
+          "max": 351.541
+        },
+        "row_counts": [
+          3,
+          0,
+          3,
+          3,
+          0,
+          0,
+          0,
+          3,
+          0,
+          3
+        ],
+        "failures": []
+      },
+      "products": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 94.456,
+          "p95": 105.12,
+          "max": 105.12
+        },
+        "row_counts": [
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500
+        ],
+        "failures": []
+      },
+      "report_detail": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 144.507,
+          "p95": 166.276,
+          "max": 166.276
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "reports": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 176.3,
+          "p95": 198.453,
+          "max": 198.453
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "snapshot_detail": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 125.7,
+          "p95": 135.753,
+          "max": 135.753
+        },
+        "row_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "failures": []
+      },
+      "snapshots": {
+        "sample_count": 10,
+        "request_success_count": 10,
+        "expected_permission_denial_count": 0,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 10,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 171.799,
+          "p95": 179.954,
+          "max": 179.954
+        },
+        "row_counts": [
+          7,
+          7,
+          5,
+          7,
+          7,
+          5,
+          5,
+          7,
+          5,
+          5
+        ],
+        "failures": []
+      },
+      "sources": {
+        "sample_count": 10,
+        "request_success_count": 0,
+        "expected_permission_denial_count": 10,
+        "unexpected_failure_count": 0,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "shop_ids": [
+          "075b34ac-ce2d-4947-89a0-a0d07a978496",
+          "35c28eee-259f-4aea-aab2-49f959510a6d"
+        ],
+        "latency_ms": {
+          "p50": 120.551,
+          "p95": 158.857,
+          "max": 158.857
+        },
+        "row_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "failures": []
+      }
+    },
+    "limitations": [
+      "Ten distinct authorized accounts are required for the 10-user sample.",
+      "Events, actions, investigations, reports, snapshots, and evidence search must contain representative rows.",
+      "Successful empty-list responses are recorded but do not count as representative business-interface samples.",
+      "A 403 for the admin-only source registry is an expected authorization outcome for explicitly scoped synthetic operator accounts; it remains visible separately from 2xx request counts."
+    ]
+  },
+  "target_environment_status": "pending_external_8_core_16_gb_ssd_environment",
+  "completed": [
+    {
+      "index": 1,
+      "shop": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+      "asin": "CAP2600001",
+      "job_id": "4b066405-59f0-430b-b70d-68dc7554ffac",
+      "snapshot_id": "dbbf4f61-707a-414e-b6b4-25057a5007f9",
+      "enqueued_to_terminal_ms": 1357.742,
+      "snapshot_list_ms": 67.129,
+      "job_queue_wait_ms": 976.627,
+      "job_worker_runtime_ms": 10.758,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 2,
+      "shop": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+      "asin": "CAP2600002",
+      "job_id": "63d7a5c3-4fef-4789-8757-40dc40d65f1e",
+      "snapshot_id": "25b12046-befb-4d48-ac90-3b700e35f75b",
+      "enqueued_to_terminal_ms": 1310.436,
+      "snapshot_list_ms": 92.988,
+      "job_queue_wait_ms": 831.388,
+      "job_worker_runtime_ms": 10.412,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 3,
+      "shop": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+      "asin": "CAP2600003",
+      "job_id": "7ae2d3ff-f3df-4d88-8eff-9662ee40df02",
+      "snapshot_id": "5ca09295-a039-46da-9999-e519203df3bf",
+      "enqueued_to_terminal_ms": 1401.755,
+      "snapshot_list_ms": 72.946,
+      "job_queue_wait_ms": 961.956,
+      "job_worker_runtime_ms": 15.273,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 4,
+      "shop": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+      "asin": "CAP2600004",
+      "job_id": "0195fbbc-01ca-40b7-90c4-79662d86d5c4",
+      "snapshot_id": "6566f593-361b-4100-ba0f-295c0c815ff0",
+      "enqueued_to_terminal_ms": 1472.787,
+      "snapshot_list_ms": 57.289,
+      "job_queue_wait_ms": 989.311,
+      "job_worker_runtime_ms": 14.965,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 5,
+      "shop": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+      "asin": "CAP2600005",
+      "job_id": "e703892f-80c7-4b3d-a790-aabec1a3c695",
+      "snapshot_id": "9547c5b8-3943-46b3-a781-530033fd947d",
+      "enqueued_to_terminal_ms": 1492.752,
+      "snapshot_list_ms": 63.182,
+      "job_queue_wait_ms": 969.981,
+      "job_worker_runtime_ms": 19.614,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 6,
+      "shop": "35c28eee-259f-4aea-aab2-49f959510a6d",
+      "asin": "CAP2600501",
+      "job_id": "ae14d376-c804-4c65-9524-54676d4b5645",
+      "snapshot_id": "13f85f79-29b5-4d28-85db-14dab613b734",
+      "enqueued_to_terminal_ms": 767.254,
+      "snapshot_list_ms": 59.866,
+      "job_queue_wait_ms": 554.785,
+      "job_worker_runtime_ms": 11.797,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 7,
+      "shop": "35c28eee-259f-4aea-aab2-49f959510a6d",
+      "asin": "CAP2600502",
+      "job_id": "1492b6eb-04d9-4152-95e0-5767f02f25f1",
+      "snapshot_id": "f7b8bc8c-a1a3-4bb0-b1ae-076f4b32c56d",
+      "enqueued_to_terminal_ms": 671.101,
+      "snapshot_list_ms": 45.89,
+      "job_queue_wait_ms": 476.982,
+      "job_worker_runtime_ms": 12.765,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 8,
+      "shop": "35c28eee-259f-4aea-aab2-49f959510a6d",
+      "asin": "CAP2600503",
+      "job_id": "1f192072-837a-4151-b3a7-d99f8a803b40",
+      "snapshot_id": "d6c8f6d0-ecd9-431c-ba8e-9fa7fdd4d378",
+      "enqueued_to_terminal_ms": 734.662,
+      "snapshot_list_ms": 67.978,
+      "job_queue_wait_ms": 463.526,
+      "job_worker_runtime_ms": 22.603,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 9,
+      "shop": "35c28eee-259f-4aea-aab2-49f959510a6d",
+      "asin": "CAP2600504",
+      "job_id": "d576860a-afe8-4c31-824f-e8535bfe3219",
+      "snapshot_id": "677199d7-ac48-4ad3-ac1e-17f6ba03e96c",
+      "enqueued_to_terminal_ms": 743.371,
+      "snapshot_list_ms": 32.72,
+      "job_queue_wait_ms": 590.799,
+      "job_worker_runtime_ms": 14.828,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    },
+    {
+      "index": 10,
+      "shop": "35c28eee-259f-4aea-aab2-49f959510a6d",
+      "asin": "CAP2600505",
+      "job_id": "55779cd1-ceb5-44d1-98be-0f226df59c9a",
+      "snapshot_id": "309e2d82-f4dc-4687-96ef-31e16ad948e0",
+      "enqueued_to_terminal_ms": 739.195,
+      "snapshot_list_ms": 34.034,
+      "job_queue_wait_ms": 575.838,
+      "job_worker_runtime_ms": 19.15,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "passed"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Requires the S7 fixture to be imported into the two supplied isolated shops before running.",
+    "The default run scans all 1,000 imported ASINs with a maximum of 10 concurrent scan clients; client workers and Celery worker concurrency are reported separately.",
+    "Ten scan client threads are not ten users unless the credential file contains ten distinct authorized accounts.",
+    "API sampling records list/detail and evidence-search latency separately and marks empty fixtures as insufficient samples; evidence search writes a normal audit entry.",
+    "scan_total_ms is retained as a legacy alias for the longest target elapsed time; scan_concurrent_wall_ms measures the batch and excludes API sampling.",
+    "Queue backlog is the maximum local-database count of queued, running, and retry_wait jobs sampled once per second.",
+    "Index build time is not measured by this runner; it must come from a real index build/import measurement and is never inferred from scan time.",
+    "Host processes are sampled with psutil once per second; Docker stats sample containers every five seconds. Process and container configured/effective limits are reported separately where available.",
+    "A smoke-test cap never evaluates the 1,000-target, 900-second scan gate; local measurements do not constitute target-environment or production capacity acceptance."
+  ]
+}

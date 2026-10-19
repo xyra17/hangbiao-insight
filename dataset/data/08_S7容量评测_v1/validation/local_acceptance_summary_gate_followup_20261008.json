@@ -1,0 +1,22 @@
+{
+  "status": "not_ready",
+  "task_status_counts": {
+    "passed": 16,
+    "failed": 1,
+    "blocked_external": 6
+  },
+  "source_sha256": "42920287fc5271b5f750f329e2d8c8330edd2957e7b1c22e3bd6b96f52b2acd5",
+  "new_dataset_tests": 81,
+  "local_quality_status": "failed",
+  "old_runtime_results_are_historical": true,
+  "images": {
+    "backend": {
+      "local_tag": "insight-release-local:20261008-final",
+      "digest": "sha256:76da21dd3a87ddbf4f46d3402b657a6af7f600c8aec54f9bc88d9bb333d1acb8"
+    },
+    "web": {
+      "local_tag": "insight-release-web-local:20261008-final",
+      "digest": "sha256:94ef09134d9a0112451f933054eb9065d0cfa812136717a08453c1a2594e8750"
+    }
+  }
+}

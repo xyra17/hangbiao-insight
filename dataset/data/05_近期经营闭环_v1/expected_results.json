@@ -1,0 +1,733 @@
+{
+  "action_review": {
+    "D5X2600001": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600002": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 352,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 28,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600003": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600004": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 84,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 21,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600005": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 352,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600006": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600007": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 384,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 14,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600008": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600009": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 112,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600010": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-22",
+        "ordered_units": 448,
+        "start": "2026-08-26"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "ordered_units": 14,
+        "start": "2026-09-24"
+      },
+      "effective_date": "2026-09-23",
+      "status": "ready"
+    },
+    "D5X2600011": {
+      "effective_date": "2026-09-23",
+      "missing_day": "2026-09-26",
+      "status": "partial",
+      "stop_reason": "coverage_gap"
+    }
+  },
+  "as_of": "2026-10-01",
+  "cohorts": {
+    "D5X2600001": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 2,
+        "refund_rate": "0.008928571428571428571428571429",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600002": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 3,
+        "return_rate": "0.01339285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 0,
+        "refund_rate": "0",
+        "return_numerator": 4,
+        "return_rate": "0.01785714285714285714285714286",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600003": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 0,
+        "refund_rate": "0",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 40,
+        "refund_rate": "0.1785714285714285714285714286",
+        "return_numerator": 38,
+        "return_rate": "0.1696428571428571428571428571",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600004": {
+      "baseline": {
+        "denominator": 84,
+        "end": "2026-08-03",
+        "refund_numerator": 2,
+        "refund_rate": "0.02380952380952380952380952381",
+        "return_numerator": 0,
+        "return_rate": "0",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 84,
+        "end": "2026-08-31",
+        "refund_numerator": 2,
+        "refund_rate": "0.02380952380952380952380952381",
+        "return_numerator": 1,
+        "return_rate": "0.01190476190476190476190476190",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": true,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600005": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 0,
+        "refund_rate": "0",
+        "return_numerator": 6,
+        "return_rate": "0.02678571428571428571428571429",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 2,
+        "refund_rate": "0.008928571428571428571428571429",
+        "return_numerator": 4,
+        "return_rate": "0.01785714285714285714285714286",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600006": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 2,
+        "return_rate": "0.008928571428571428571428571429",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 2,
+        "refund_rate": "0.008928571428571428571428571429",
+        "return_numerator": 2,
+        "return_rate": "0.008928571428571428571428571429",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600007": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 2,
+        "refund_rate": "0.008928571428571428571428571429",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 0,
+        "refund_rate": "0",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600008": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 3,
+        "refund_rate": "0.01339285714285714285714285714",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600009": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 4,
+        "refund_rate": "0.01785714285714285714285714286",
+        "return_numerator": 4,
+        "return_rate": "0.01785714285714285714285714286",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 1,
+        "return_rate": "0.004464285714285714285714285714",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    },
+    "D5X2600010": {
+      "baseline": {
+        "denominator": 224,
+        "end": "2026-08-03",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 3,
+        "return_rate": "0.01339285714285714285714285714",
+        "start": "2026-07-07"
+      },
+      "current": {
+        "denominator": 224,
+        "end": "2026-08-31",
+        "refund_numerator": 1,
+        "refund_rate": "0.004464285714285714285714285714",
+        "return_numerator": 0,
+        "return_rate": "0",
+        "start": "2026-08-04"
+      },
+      "cutoff": "2026-08-31",
+      "low_sample": false,
+      "observation_days": 30,
+      "status": "ready"
+    }
+  },
+  "coverage": {
+    "complete_asins": [
+      "D5X2600001",
+      "D5X2600002",
+      "D5X2600003",
+      "D5X2600004",
+      "D5X2600005",
+      "D5X2600006",
+      "D5X2600007",
+      "D5X2600008",
+      "D5X2600009",
+      "D5X2600010"
+    ],
+    "complete_daily_rows_per_domain": 1200,
+    "gap_day": "2026-09-26",
+    "gap_rows": 119,
+    "incomplete_asin": "D5X2600011",
+    "incomplete_source_declared_complete": false
+  },
+  "daily": {
+    "D5X2600001": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 224,
+        "ordered_units": 448,
+        "sales_amount": "5258.00",
+        "sessions": 14198,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1319.00",
+        "sessions": 3332,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600002": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 170,
+        "ordered_units": 340,
+        "sales_amount": "3998.00",
+        "sessions": 14312,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 14,
+        "ordered_units": 28,
+        "sales_amount": "329.00",
+        "sessions": 3451,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [
+        "sales_units"
+      ],
+      "status": "ready"
+    },
+    "D5X2600003": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 224,
+        "ordered_units": 448,
+        "sales_amount": "5258.00",
+        "sessions": 14426,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1319.00",
+        "sessions": 3570,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600004": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 84,
+        "ordered_units": 84,
+        "sales_amount": "988.50",
+        "sessions": 14178,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 21,
+        "ordered_units": 21,
+        "sales_amount": "246.00",
+        "sessions": 3689,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600005": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 176,
+        "ordered_units": 352,
+        "sales_amount": "4130.00",
+        "sessions": 14292,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1319.00",
+        "sessions": 3808,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600006": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 224,
+        "ordered_units": 448,
+        "sales_amount": "5270.00",
+        "sessions": 14406,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1313.00",
+        "sessions": 3927,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600007": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 186,
+        "ordered_units": 370,
+        "sales_amount": "4344.50",
+        "sessions": 14158,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 14,
+        "ordered_units": 14,
+        "sales_amount": "164.50",
+        "sessions": 3684,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [
+        "sales_units"
+      ],
+      "status": "ready"
+    },
+    "D5X2600008": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 224,
+        "ordered_units": 448,
+        "sales_amount": "5270.00",
+        "sessions": 14272,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1313.00",
+        "sessions": 3622,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600009": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 224,
+        "ordered_units": 448,
+        "sales_amount": "5258.00",
+        "sessions": 14386,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 56,
+        "ordered_units": 112,
+        "sales_amount": "1319.00",
+        "sessions": 3560,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [],
+      "status": "ready"
+    },
+    "D5X2600010": {
+      "baseline": {
+        "days": 28,
+        "end": "2026-09-23",
+        "order_count": 218,
+        "ordered_units": 434,
+        "sales_amount": "5102.50",
+        "sessions": 14138,
+        "start": "2026-08-27"
+      },
+      "current": {
+        "days": 7,
+        "end": "2026-09-30",
+        "order_count": 14,
+        "ordered_units": 14,
+        "sales_amount": "164.50",
+        "sessions": 3317,
+        "start": "2026-09-24"
+      },
+      "cutoff": "2026-09-30",
+      "signals_expected": [
+        "sales_units"
+      ],
+      "status": "ready"
+    },
+    "D5X2600011": {
+      "cutoff": "2026-09-30",
+      "missing_day": "2026-09-26",
+      "signals_expected": [],
+      "status": "partial",
+      "stop_reason": "coverage_gap"
+    }
+  },
+  "daily_windows": {
+    "baseline_days": 28,
+    "baseline_rule": "as_of-35 through as_of-8 inclusive",
+    "current_rule": "as_of-7 through as_of-1 inclusive",
+    "observation_days": 7
+  },
+  "expected_event_scenarios": {
+    "deliberate_coverage_gap": {
+      "asin": "D5X2600011",
+      "expected_metrics": [],
+      "stop_reason": "coverage_gap"
+    },
+    "low_sample": {
+      "asin": "D5X2600004",
+      "expected_metrics": [],
+      "observation_status": "low_sample",
+      "stop_reason": "sample_below_threshold"
+    },
+    "persistent_sales_drop": {
+      "asin": "D5X2600002",
+      "expected_metrics": [
+        "sales_units"
+      ],
+      "stop_reason": null
+    },
+    "refund_return_spike": {
+      "asin": "D5X2600003",
+      "expected_metrics": [
+        "cohort_refunds",
+        "cohort_returns"
+      ],
+      "stop_reason": null
+    }
+  },
+  "join_counts": {
+    "distinct_orders": 8728,
+    "order_lines": 10800,
+    "refund_transactions": 118,
+    "return_lifecycle_records": 112,
+    "support_cases": 88,
+    "synthetic_review_records": 172
+  },
+  "linked_record_counts": {
+    "refunds_to_order_lines": 118,
+    "returns_to_order_lines": 112,
+    "support_to_order_lines": 88
+  },
+  "mature_cohort_windows": {
+    "baseline_rule": "28 fully mature shipped-date cohorts",
+    "current_rule": "28 fully mature shipped-date cohorts",
+    "gap_rule": "none; baseline and current cohorts are adjacent",
+    "maturity_cutoff": "2026-08-31",
+    "observation_days": 30
+  },
+  "package_version": "recent-operational-loop-v1.0",
+  "site_timezone": "America/Los_Angeles"
+}

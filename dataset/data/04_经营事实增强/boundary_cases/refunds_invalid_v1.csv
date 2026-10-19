@@ -1,0 +1,2 @@
+child_asin,seller_sku,fulfillment,business_date,record_id,order_line_id,transaction_chain_id,amount,currency,quantity,occurred_at,provenance_class,is_real,is_derived,is_synthetic,source_reference,source_row_id,generation_version,scenario_id,boundary_case,currency_case,synthetic_from_review
+B07P9S6R9Y,B07P9S6R9Y-FBA,FBA,2023-01-01,INVALID-REFUND,OL-B07P9S6R9Y-2023-01-01,CHAIN-INVALID,1.00,US,1,2023-01-01T12:00:00Z,invalid_boundary_fixture,false,false,true,dataset/data/04_经营事实增强/boundary_cases/,refunds_invalid_v1.csv:1,business-facts-augmentation-v1.0,,invalid_currency,,

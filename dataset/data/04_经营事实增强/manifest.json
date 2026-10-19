@@ -1,0 +1,1123 @@
+{
+  "manifest_version": "business-facts-augmentation-v1.0",
+  "generated_at": "2026-10-01T00:00:00Z",
+  "generator": "dataset/04_generate_business_facts.py",
+  "seed": 20260929,
+  "coverage": {
+    "start": "2017-08-19",
+    "end": "2023-09-02",
+    "timezone": "UTC for event timestamps; business_date is marketplace-local fixture date"
+  },
+  "inputs": [
+    {
+      "path": "dataset/data/01_标准化评论数据/评论数据集_v1.csv",
+      "source": "McAuley-Lab/Amazon-Reviews-2023（项目已固定的抽取子集）",
+      "provenance": "real",
+      "license": "上游仓库含 MIT LICENSE 文件，但该文件是否覆盖 Amazon 评论内容并不明确；本包不复制评论正文，公开/外发前仍须核实数据内容权利。",
+      "url": "https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023",
+      "used_by": [
+        "ratings_daily",
+        "support_cases themes"
+      ]
+    },
+    {
+      "path": "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv",
+      "source": "project-generated business-metric-v1.0",
+      "provenance": "synthetic",
+      "license": "项目生成内容；按本项目仓库许可使用。",
+      "used_by": [
+        "sales_traffic_daily",
+        "inventory_daily",
+        "operations",
+        "orders",
+        "refunds",
+        "returns"
+      ]
+    },
+    {
+      "path": "dataset/data/03_黄金评论集/黄金评论标签表_v1_0.csv",
+      "source": "project-curated golden annotation set",
+      "provenance": "derived/curated",
+      "license": "项目内部标注产物；仅作为生成输入，不读入运行时答案。",
+      "used_by": [
+        "support_cases themes"
+      ]
+    },
+    {
+      "path": "generated_at",
+      "source": "2026-10-01T00:00:00Z",
+      "provenance": "generation metadata",
+      "license": "n/a",
+      "used_by": []
+    }
+  ],
+  "fact_contracts": {
+    "nine_contracts": [
+      "sales_traffic",
+      "orders",
+      "refunds",
+      "returns",
+      "reviews",
+      "support",
+      "inventory",
+      "ratings",
+      "operations"
+    ],
+    "reviews": {
+      "status": "unchanged",
+      "path": "dataset/data/01_标准化评论数据/评论数据集_v1.csv",
+      "included_in_generated_files": false
+    }
+  },
+  "files": {
+    "sales_traffic_daily_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "sales_traffic",
+      "grain": "asin_day",
+      "rows": 5952,
+      "path": "dataset/data/04_经营事实增强/sales_traffic_daily_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "ordered_units",
+        "order_count",
+        "sessions",
+        "buybox_percent",
+        "sales_amount",
+        "currency",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "ordered_units",
+        "order_count",
+        "sessions",
+        "buybox_percent",
+        "sales_amount",
+        "currency"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "ordered_units",
+        "order_count",
+        "sessions",
+        "buybox_percent",
+        "sales_amount",
+        "currency"
+      ],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "ordered_units",
+        "order_count",
+        "sessions",
+        "buybox_percent",
+        "sales_amount",
+        "currency"
+      ],
+      "field_provenance": {
+        "child_asin": "derived_from_synthetic_metrics",
+        "seller_sku": "derived_from_synthetic_metrics",
+        "fulfillment": "derived_from_synthetic_metrics",
+        "business_date": "derived_from_synthetic_metrics",
+        "ordered_units": "derived_from_synthetic_metrics",
+        "order_count": "derived_from_synthetic_metrics",
+        "sessions": "derived_from_synthetic_metrics",
+        "buybox_percent": "derived_from_synthetic_metrics",
+        "sales_amount": "derived_from_synthetic_metrics",
+        "currency": "derived_from_synthetic_metrics",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-02",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "derived_from_synthetic_metrics"
+      ],
+      "real": false,
+      "derived": true,
+      "synthetic": true,
+      "intended_use": "销售、流量、转化和金额的可重复本地验收；全部行来自已有合成经营指标并补充派生字段。"
+    },
+    "ratings_daily_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "ratings",
+      "grain": "asin_day",
+      "rows": 5952,
+      "path": "dataset/data/04_经营事实增强/ratings_daily_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "rating",
+        "rating_count",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "rating",
+        "rating_count"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/01_标准化评论数据/评论数据集_v1.csv"
+      ],
+      "provenance": "derived_from_real_reviews",
+      "license": "评论聚合衍生结果；上游仓库 MIT 文件不明确授权评论内容，限本仓库内部验收，外发前需核实数据权利。",
+      "real_fields": [
+        "child_asin",
+        "business_date"
+      ],
+      "derived_fields": [
+        "rating",
+        "rating_count"
+      ],
+      "synthetic_fields": [
+        "seller_sku",
+        "fulfillment"
+      ],
+      "field_provenance": {
+        "child_asin": "real_reference_from_reviews",
+        "seller_sku": "synthetic",
+        "fulfillment": "synthetic",
+        "business_date": "real_reference_from_reviews",
+        "rating": "derived_from_real_reviews",
+        "rating_count": "derived_from_real_reviews",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-02",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "derived_from_real_reviews"
+      ],
+      "real": false,
+      "derived": true,
+      "synthetic": false,
+      "intended_use": "页面星级与累计评分数验收；星级由现有真实评论聚合得到，不表示实时 Amazon 页面快照。"
+    },
+    "inventory_daily_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "inventory",
+      "grain": "asin_day",
+      "rows": 5952,
+      "path": "dataset/data/04_经营事实增强/inventory_daily_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "available",
+        "reserved",
+        "inbound",
+        "unsellable",
+        "total",
+        "listing_status",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "available",
+        "reserved",
+        "inbound",
+        "unsellable",
+        "total",
+        "listing_status"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "available",
+        "reserved",
+        "inbound",
+        "unsellable",
+        "total",
+        "listing_status"
+      ],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "available",
+        "reserved",
+        "inbound",
+        "unsellable",
+        "total",
+        "listing_status"
+      ],
+      "field_provenance": {
+        "child_asin": "derived_from_synthetic_metrics",
+        "seller_sku": "derived_from_synthetic_metrics",
+        "fulfillment": "derived_from_synthetic_metrics",
+        "business_date": "derived_from_synthetic_metrics",
+        "available": "derived_from_synthetic_metrics",
+        "reserved": "derived_from_synthetic_metrics",
+        "inbound": "derived_from_synthetic_metrics",
+        "unsellable": "derived_from_synthetic_metrics",
+        "total": "derived_from_synthetic_metrics",
+        "listing_status": "derived_from_synthetic_metrics",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-02",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "derived_from_synthetic_metrics"
+      ],
+      "real": false,
+      "derived": true,
+      "synthetic": true,
+      "intended_use": "库存、预留、在途、不可售和 listing 状态的契约与缺货边界验收。"
+    },
+    "operations_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "operations",
+      "grain": "asin_record",
+      "rows": 414,
+      "path": "dataset/data/04_经营事实增强/operations_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "event_type",
+        "description",
+        "ends_on",
+        "price",
+        "currency",
+        "mechanism",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "event_type",
+        "description",
+        "ends_on",
+        "price",
+        "currency",
+        "mechanism"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "event_type",
+        "description",
+        "ends_on",
+        "price",
+        "currency",
+        "mechanism"
+      ],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "event_type",
+        "description",
+        "ends_on",
+        "price",
+        "currency",
+        "mechanism"
+      ],
+      "field_provenance": {
+        "child_asin": "derived_from_synthetic_metrics",
+        "seller_sku": "derived_from_synthetic_metrics",
+        "fulfillment": "derived_from_synthetic_metrics",
+        "business_date": "derived_from_synthetic_metrics",
+        "record_id": "derived_from_synthetic_metrics",
+        "event_type": "derived_from_synthetic_metrics",
+        "description": "derived_from_synthetic_metrics",
+        "ends_on": "derived_from_synthetic_metrics",
+        "price": "derived_from_synthetic_metrics",
+        "currency": "derived_from_synthetic_metrics",
+        "mechanism": "derived_from_synthetic_metrics",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-01",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "derived_from_synthetic_metrics"
+      ],
+      "real": false,
+      "derived": true,
+      "synthetic": true,
+      "intended_use": "价格、促销、库存运营事件的导入和版本刷新验收。"
+    },
+    "orders_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "orders",
+      "grain": "product_record",
+      "rows": 5958,
+      "path": "dataset/data/04_经营事实增强/orders_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_id",
+        "quantity",
+        "shipped_date",
+        "shipped_at",
+        "shipped_quantity",
+        "original_line_id",
+        "is_exchange",
+        "status",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_id",
+        "quantity",
+        "shipped_date",
+        "shipped_at",
+        "shipped_quantity",
+        "original_line_id",
+        "is_exchange",
+        "status"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_id",
+        "quantity",
+        "shipped_date",
+        "shipped_at",
+        "shipped_quantity",
+        "original_line_id",
+        "is_exchange",
+        "status"
+      ],
+      "field_provenance": {
+        "child_asin": "synthetic",
+        "seller_sku": "synthetic",
+        "fulfillment": "synthetic",
+        "business_date": "synthetic",
+        "record_id": "synthetic",
+        "order_id": "synthetic",
+        "quantity": "synthetic",
+        "shipped_date": "synthetic",
+        "shipped_at": "synthetic",
+        "shipped_quantity": "synthetic",
+        "original_line_id": "synthetic",
+        "is_exchange": "synthetic",
+        "status": "synthetic",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-02",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "synthetic"
+      ],
+      "real": false,
+      "derived": false,
+      "synthetic": true,
+      "intended_use": "订单、拆分发货、修订、取消、迟到发货和撤销候选的生命周期验收。"
+    },
+    "refunds_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "refunds",
+      "grain": "product_record",
+      "rows": 6082,
+      "path": "dataset/data/04_经营事实增强/refunds_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "transaction_chain_id",
+        "amount",
+        "currency",
+        "quantity",
+        "occurred_at",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review",
+        "refund_type"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "transaction_chain_id",
+        "amount",
+        "currency",
+        "quantity",
+        "occurred_at"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "transaction_chain_id",
+        "amount",
+        "currency",
+        "quantity",
+        "occurred_at"
+      ],
+      "field_provenance": {
+        "child_asin": "synthetic",
+        "seller_sku": "synthetic",
+        "fulfillment": "synthetic",
+        "business_date": "synthetic",
+        "record_id": "synthetic",
+        "order_line_id": "synthetic",
+        "transaction_chain_id": "synthetic",
+        "amount": "synthetic",
+        "currency": "synthetic",
+        "quantity": "synthetic",
+        "occurred_at": "synthetic",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance",
+        "refund_type": "synthetic"
+      },
+      "coverage_start": "2017-08-19",
+      "coverage_end": "2023-09-02",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "synthetic"
+      ],
+      "real": false,
+      "derived": false,
+      "synthetic": true,
+      "intended_use": "部分/全额退款、迟到退款、冲正、多币种和未知币种的成熟队列验收。"
+    },
+    "returns_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "returns",
+      "grain": "product_record",
+      "rows": 313,
+      "path": "dataset/data/04_经营事实增强/returns_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "quantity",
+        "reason",
+        "status",
+        "requested_date",
+        "received_date",
+        "requested_at",
+        "received_at",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "quantity",
+        "reason",
+        "status",
+        "requested_date",
+        "received_date",
+        "requested_at",
+        "received_at"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/02_构造经营指标/经营指标日宽表_v1.csv"
+      ],
+      "provenance": "derived_or_synthetic_from_business_metric_v1.0",
+      "license": "项目生成的合成/派生测试数据，按本项目仓库许可；不含真实 Amazon 经营报表。",
+      "real_fields": [],
+      "derived_fields": [],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "quantity",
+        "reason",
+        "status",
+        "requested_date",
+        "received_date",
+        "requested_at",
+        "received_at"
+      ],
+      "field_provenance": {
+        "child_asin": "synthetic",
+        "seller_sku": "synthetic",
+        "fulfillment": "synthetic",
+        "business_date": "synthetic",
+        "record_id": "synthetic",
+        "order_line_id": "synthetic",
+        "quantity": "synthetic",
+        "reason": "synthetic",
+        "status": "synthetic",
+        "requested_date": "synthetic",
+        "received_date": "synthetic",
+        "requested_at": "synthetic",
+        "received_at": "synthetic",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance"
+      },
+      "coverage_start": "2017-08-26",
+      "coverage_end": "2023-08-25",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "synthetic"
+      ],
+      "real": false,
+      "derived": false,
+      "synthetic": true,
+      "intended_use": "requested→received→completed/cancelled/rejected、跨月及未知状态归一化验收。"
+    },
+    "support_cases_v1.csv": {
+      "version": "business-facts-augmentation-v1.0",
+      "generated_at": "2026-10-01T00:00:00Z",
+      "fact_kind": "support",
+      "grain": "asin_record",
+      "rows": 658,
+      "path": "dataset/data/04_经营事实增强/support_cases_v1.csv",
+      "columns": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "text",
+        "status",
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review",
+        "case_category",
+        "primary_topic",
+        "secondary_topic",
+        "polarity"
+      ],
+      "contract_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "text",
+        "status"
+      ],
+      "metadata_fields": [
+        "provenance_class",
+        "is_real",
+        "is_derived",
+        "is_synthetic",
+        "source_reference",
+        "source_row_id",
+        "generation_version",
+        "scenario_id",
+        "boundary_case",
+        "currency_case",
+        "synthetic_from_review"
+      ],
+      "source": [
+        "dataset/data/03_黄金评论集/黄金评论标签表_v1_0.csv"
+      ],
+      "provenance": "synthetic_from_golden_review_theme",
+      "license": "黄金主题用于生成合成文本和关联；仅供本项目内部测试，不能视作真实客服数据。",
+      "real_fields": [],
+      "derived_fields": [],
+      "synthetic_fields": [
+        "child_asin",
+        "seller_sku",
+        "fulfillment",
+        "business_date",
+        "record_id",
+        "order_line_id",
+        "text",
+        "status"
+      ],
+      "field_provenance": {
+        "child_asin": "synthetic",
+        "seller_sku": "synthetic",
+        "fulfillment": "synthetic",
+        "business_date": "synthetic",
+        "record_id": "synthetic",
+        "order_line_id": "synthetic",
+        "text": "synthetic",
+        "status": "synthetic",
+        "provenance_class": "metadata_provenance",
+        "is_real": "metadata_provenance",
+        "is_derived": "metadata_provenance",
+        "is_synthetic": "metadata_provenance",
+        "source_reference": "metadata_provenance",
+        "source_row_id": "metadata_provenance",
+        "generation_version": "metadata_provenance",
+        "scenario_id": "metadata_provenance",
+        "boundary_case": "metadata_provenance",
+        "currency_case": "metadata_provenance",
+        "synthetic_from_review": "metadata_provenance",
+        "case_category": "synthetic",
+        "primary_topic": "synthetic",
+        "secondary_topic": "synthetic",
+        "polarity": "synthetic"
+      },
+      "coverage_start": "2017-12-24",
+      "coverage_end": "2023-06-14",
+      "asins": [
+        "B07H2V5YLH",
+        "B07P9S6R9Y",
+        "B0BYJ8ZVWH"
+      ],
+      "row_provenance_classes": [
+        "synthetic_from_golden_review_theme"
+      ],
+      "real": false,
+      "derived": false,
+      "synthetic": true,
+      "intended_use": "从黄金评论主题生成的客服工单检索和关联验收；不是 Amazon 或真实客服系统导出。"
+    }
+  },
+  "boundary_cases": {
+    "invalid_fixtures": [
+      {
+        "kind": "orders",
+        "file": "orders_invalid_v1.csv",
+        "boundary_case": "invalid_encoding",
+        "expected_error": "child_asin 须为 10 位大写字母或数字",
+        "notes": "故意的非法长度/格式 ASIN；不进入主导入文件。"
+      },
+      {
+        "kind": "orders",
+        "file": "orders_duplicate_v1.csv",
+        "boundary_case": "duplicate",
+        "expected_error": "同一文件内业务键重复",
+        "notes": "同一 record_id 重复两行；用于导入解析拒绝。"
+      },
+      {
+        "kind": "refunds",
+        "file": "refunds_invalid_v1.csv",
+        "boundary_case": "invalid_currency",
+        "expected_error": "currency 须为三位大写代码",
+        "notes": "两位币种；不进入主导入文件。"
+      },
+      {
+        "kind": "returns",
+        "file": "returns_invalid_v1.csv",
+        "boundary_case": "invalid_date_order",
+        "expected_error": "退货收到日期不能早于申请日期",
+        "notes": "received_date 早于 requested_date；不进入主导入文件。"
+      }
+    ],
+    "empty_report": {
+      "file": "boundary_cases/refunds_empty_report_v1.csv",
+      "kind": "refunds",
+      "rows": 0,
+      "requires_contract_flag": "empty_report_means_zero=true"
+    }
+  },
+  "revision_and_retraction_fixtures": {
+    "same_business_key_files": [
+      {
+        "file": "lifecycle_revisions/sales_traffic_revision_v1.csv",
+        "key": [
+          "B07H2V5YLH",
+          "2018-11-05"
+        ],
+        "step": "first publish"
+      },
+      {
+        "file": "lifecycle_revisions/sales_traffic_revision_v2.csv",
+        "key": [
+          "B07H2V5YLH",
+          "2018-11-05"
+        ],
+        "step": "corrected revision"
+      },
+      {
+        "file": "lifecycle_revisions/returns_requested_v1.csv",
+        "key": [
+          "RT-TRANSITION-B07H2V5YLH"
+        ],
+        "step": "publish requested"
+      },
+      {
+        "file": "lifecycle_revisions/returns_received_v2.csv",
+        "key": [
+          "RT-TRANSITION-B07H2V5YLH"
+        ],
+        "step": "received state revision"
+      },
+      {
+        "file": "lifecycle_revisions/returns_cancelled_v3.csv",
+        "key": [
+          "RT-TRANSITION-B07H2V5YLH"
+        ],
+        "step": "source correction after receipt"
+      }
+    ],
+    "retraction_file": "lifecycle_revisions/order_retraction_candidate.csv",
+    "late_arrival_file": "lifecycle_revisions/refund_late_arrival.csv",
+    "late_arrival_generated_at": "2019-01-31T12:00:00Z",
+    "late_arrival_business_date": "2018-12-22",
+    "retraction_steps": [
+      "upload and publish the candidate",
+      "call POST /api/v1/imports/{batch_id}/revoke/ with a reason",
+      "verify latest-facts hides the row while original raw row and fact remain auditable"
+    ]
+  },
+  "provenance_rules": {
+    "is_real": "仅表示该行是否直接复制真实业务事实；本包生成行均为 false。",
+    "is_derived": "由已有评论或合成经营指标按固定规则聚合/补齐。",
+    "is_synthetic": "按固定种子构造、重演或从主题模板生成。",
+    "provenance_class": "机器可读的来源组合；不得把 synthetic_from_review 当作真实客服来源。",
+    "synthetic_from_review": "support_cases 必填，保存其对应黄金评论 review_id。"
+  },
+  "intended_use": [
+    "本地导入契约、版本修订、撤销发布、日期覆盖、退款退货成熟队列、检索关联和指标已知答案验收。",
+    "不能代替真实 Amazon Seller Central/财务/客服数据的业务口径、授权、站点时区和生产故障验收。"
+  ]
+}

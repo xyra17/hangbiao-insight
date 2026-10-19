@@ -1,0 +1,46 @@
+{
+  "document_count": 168,
+  "files": {
+    "paired_runtime_inputs.csv": {
+      "bytes": 4138,
+      "sha256": "2e3e8b100043cbdb6db4a5feb4ad7a3379fcb6896b0efeb97b647953cb4f252d"
+    },
+    "retrieval_runtime_queries.csv": {
+      "bytes": 1716,
+      "sha256": "bfa70df4b8f2ac45566e69c67c65b03b80a34bc34b49a172bc2305d471f9e770"
+    },
+    "support_cases.csv": {
+      "bytes": 20757,
+      "sha256": "18136477f1b6184431cc89fd8397f1e631c68ceeb7c372775a3a7c20d728b98d"
+    }
+  },
+  "generated_at": "2026-10-04",
+  "paired_evidence_document_count": 48,
+  "paired_scenario_count": 48,
+  "provenance": "Synthetic runtime corpus. Search rows contain original evidence text only after explicit metadata cleanup.",
+  "query_count": 30,
+  "removed_searchable_metadata": [
+    "query_id",
+    "topic",
+    "qrels",
+    "answerable",
+    "review_id",
+    "expected_*"
+  ],
+  "retrieval_document_count": 120,
+  "retrieval_scope_asin": "D5X2600001",
+  "retrieval_splits": {
+    "development": 10,
+    "test": 10,
+    "validation": 10
+  },
+  "searchable_document_fields": [
+    "child_asin",
+    "business_date",
+    "record_id",
+    "text",
+    "status"
+  ],
+  "source_pack": "07_S4_S6独立评测_v1",
+  "version": "s4-s6-runtime-corpus-v2"
+}

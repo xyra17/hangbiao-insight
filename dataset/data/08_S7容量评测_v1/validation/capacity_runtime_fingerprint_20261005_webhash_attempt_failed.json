@@ -1,0 +1,154 @@
+{
+  "status": "failed",
+  "captured_at": "2026-10-05T21:00:00+08:00",
+  "compose_project": "s1s7-capacity-remeasure-20261005",
+  "services": [
+    {
+      "Service": "api",
+      "Name": "s1s7-capacity-remeasure-20261005-api-1",
+      "Health": "healthy",
+      "Image": "insight-v2-api:latest"
+    },
+    {
+      "Service": "beat",
+      "Name": "s1s7-capacity-remeasure-20261005-beat-1",
+      "Health": "healthy",
+      "Image": "insight-v2-beat:latest"
+    },
+    {
+      "Service": "postgres",
+      "Name": "s1s7-capacity-remeasure-20261005-postgres-1",
+      "Health": "healthy",
+      "Image": "postgres:18"
+    },
+    {
+      "Service": "redis",
+      "Name": "s1s7-capacity-remeasure-20261005-redis-1",
+      "Health": "healthy",
+      "Image": "redis:7.4"
+    },
+    {
+      "Service": "web",
+      "Name": "s1s7-capacity-remeasure-20261005-web-1",
+      "Health": "healthy",
+      "Image": "insight-v2-web:latest"
+    },
+    {
+      "Service": "worker",
+      "Name": "s1s7-capacity-remeasure-20261005-worker-1",
+      "Health": "healthy",
+      "Image": "insight-v2-worker:latest"
+    }
+  ],
+  "application_image_ids": {
+    "api": "sha256:0f957d3ccfc568e5fd66d12488cc5c1cbe7f6d8fa0b59044dffce18d15eb88e3",
+    "worker": "sha256:0f957d3ccfc568e5fd66d12488cc5c1cbe7f6d8fa0b59044dffce18d15eb88e3",
+    "beat": "sha256:0f957d3ccfc568e5fd66d12488cc5c1cbe7f6d8fa0b59044dffce18d15eb88e3",
+    "web": "sha256:a57233e787cde9c6c575d397c99256d635b316dd6e283408263a5309bb293115"
+  },
+  "workspace_container_source_sha256": {
+    "api": {
+      "insight/metrics/comparability.py": {
+        "workspace_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+        "container_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+        "matches": true
+      },
+      "insight/tasks.py": {
+        "workspace_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "container_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "matches": true
+      },
+      "insight/action_review.py": {
+        "workspace_sha256": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+        "container_sha256": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+        "matches": true
+      },
+      "insight/management/commands/seed_s7_capacity_api_fixtures.py": {
+        "workspace_sha256": "bd04522558c4bed9309c368ceda7e6d0b2c22f39e46975c75215a556af90d131",
+        "container_sha256": "bd04522558c4bed9309c368ceda7e6d0b2c22f39e46975c75215a556af90d131",
+        "matches": true
+      }
+    },
+    "worker": {
+      "insight/metrics/comparability.py": {
+        "workspace_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+        "container_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+        "matches": true
+      },
+      "insight/tasks.py": {
+        "workspace_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "container_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "matches": true
+      }
+    },
+    "beat": {
+      "insight/tasks.py": {
+        "workspace_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "container_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+        "matches": true
+      }
+    }
+  },
+  "web_dist_file_count": 14,
+  "web_dist_all_files_match_container": false,
+  "health_endpoints": {
+    "api": {
+      "http_status": 200,
+      "body_status": "ready"
+    },
+    "web": {
+      "http_status": 200,
+      "body_status": null
+    }
+  },
+  "checks": {
+    "django_check": {
+      "returncode": 0,
+      "output": "System check identified no issues (0 silenced)."
+    },
+    "migration_drift": {
+      "returncode": 0,
+      "output": "No changes detected"
+    },
+    "compose_config": {
+      "returncode": 0,
+      "output": ""
+    }
+  },
+  "latest_insight_migrations": [
+    "0032_job_started_at",
+    "0031_rawfile_deleted_at_rawfile_deletion_reason_and_more",
+    "0030_importbatch_retracted_rows_importbatch_revoke_reason_and_more"
+  ],
+  "code_version": {
+    "head": "349350ce1373975791ddeef322bf508351658a60",
+    "modified_or_untracked_path_count": 95,
+    "relevant_source_sha256": {
+      "backend/insight/metrics/comparability.py": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+      "backend/insight/management/commands/seed_s7_capacity_api_fixtures.py": "bd04522558c4bed9309c368ceda7e6d0b2c22f39e46975c75215a556af90d131",
+      "dataset/run_capacity_acceptance.py": "31fd0ccd4c88ec8e637fd6f6b09974c7f5ba1bc86e17bb728c53f8d1e3a8a38d",
+      "dataset/prepare_capacity_acceptance.py": "b67238c5a8bb30c81d59e0231585b9f9ed7025ea3abd930c53614767cc695a4a",
+      "scripts/profile_s7_capacity_target.py": "f3f9cc3a4fb1b60e45d171d903d83b146aab53ace381509e42c4ed4834c564c0",
+      "scripts/measure_s7_capacity_index_build.py": "bf99073b15521f08ac9f0f8760e5b6313e4bc18ac31d3a8597c5afb235e14ad0",
+      "scripts/run_s7_capacity_local.py": "a001104cab72cb29cfd51069474568d572630344e1e1d0a92513d34ce5acb150"
+    }
+  },
+  "current_demo_capacity_manifest": {
+    "path": "dataset/data/acceptance_runs/current-demo_2026-10-05_full/08_S7容量评测_v1/manifest.json",
+    "sha256": "1f781f8461601c268f058e4084524ab969ea97f0b8e0f6088474d8d3d4a70912",
+    "as_of": "2026-10-05"
+  },
+  "current_demo_run_manifest": {
+    "path": "dataset/data/acceptance_runs/current-demo_2026-10-05_full/run_manifest.json",
+    "sha256": "6b7c75b9f38520a6a6c14112093713640d55c9d925196b7d73d56f5c109d6616"
+  },
+  "evidence_report_sha256": {
+    "capacity_persistent_import_20261005_current_demo_remeasure.json": "d66768238573cdf3dd50931cb752c211aa3dfbbcfc718298c582110361b860f7",
+    "capacity_index_build_20261005_current_demo.json": "c87ed2e5373804db60707779cecc344b14ec4febc191fb078dfa3af5583d68d8",
+    "capacity_scan_profile_20261005_current_demo_hot_target.json": "35e4e9e803f6e1c0c3e303f84b6392b839dcee0d6851f6496201029753b4753c",
+    "capacity_scan_profile_20261005_optimized_skewed_target.json": "5a46fa482570d032c93b4d36c4c7fa36e3e19c4195a3308bdf4dd1f2c4705cf6",
+    "capacity_smoke_20261005_current_demo_api_populated_10target.json": "f2069271f5466fa9968c2239155129f0863fdb3c7dfb66a0418665d71f20fb34",
+    "capacity_run_20261005_current_demo_1000target_10accounts_optimized.json": "da9753f0ae9b58cecac8920a929a5070261ba00b484b42b944caf899aa7bb916"
+  },
+  "scope_note": "Isolated current-demo S7 capacity stack only. Target server, disk type, TLS, production rollout and business sign-off are not asserted."
+}

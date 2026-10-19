@@ -1,0 +1,305 @@
+{
+  "as_of": "2026-10-01",
+  "coverage_window": {
+    "complete_window_declared_complete": true,
+    "days": 120,
+    "end": "2026-09-30",
+    "start": "2026-06-03"
+  },
+  "files": {
+    "gap_fixture": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600011"
+      ],
+      "declared_complete": false,
+      "fact_kind": "sales_traffic",
+      "grain": "asin_day",
+      "path": "import_ready/boundary_cases/sales_traffic_gap_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 119,
+      "sidecar": "import_ready/boundary_cases/sales_traffic_gap_v1.csv.meta.json"
+    },
+    "inventory": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "inventory",
+      "grain": "asin_day",
+      "path": "import_ready/inventory_daily_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 1200,
+      "sidecar": "import_ready/inventory_daily_v1.csv.meta.json"
+    },
+    "operations": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "operations",
+      "grain": "asin_record",
+      "path": "import_ready/operations_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 40,
+      "sidecar": "import_ready/operations_v1.csv.meta.json"
+    },
+    "orders": {
+      "coverage_basis": "shipped_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "orders",
+      "grain": "product_record",
+      "path": "import_ready/orders_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 10800,
+      "sidecar": "import_ready/orders_v1.csv.meta.json"
+    },
+    "ratings": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "ratings",
+      "grain": "asin_day",
+      "path": "import_ready/ratings_daily_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 1200,
+      "sidecar": "import_ready/ratings_daily_v1.csv.meta.json"
+    },
+    "recurrence_fixture": [
+      {
+        "coverage_basis": "business_date",
+        "coverage_end": "2026-10-07",
+        "coverage_start": "2026-10-01",
+        "declared_asins": [
+          "D5X2600010"
+        ],
+        "declared_complete": true,
+        "fact_kind": "sales_traffic",
+        "grain": "asin_day",
+        "path": "import_ready/follow_up_recurrence/sales_traffic_recurrence_v1.csv",
+        "provenance_class": "synthetic_acceptance_fixture",
+        "rows": 7,
+        "sidecar": "import_ready/follow_up_recurrence/sales_traffic_recurrence_v1.csv.meta.json"
+      },
+      {
+        "coverage_basis": "shipped_date",
+        "coverage_end": "2026-10-07",
+        "coverage_start": "2026-10-01",
+        "declared_asins": [
+          "D5X2600010"
+        ],
+        "declared_complete": true,
+        "fact_kind": "orders",
+        "grain": "product_record",
+        "path": "import_ready/follow_up_recurrence/orders_recurrence_v1.csv",
+        "provenance_class": "synthetic_acceptance_fixture",
+        "rows": 14,
+        "sidecar": "import_ready/follow_up_recurrence/orders_recurrence_v1.csv.meta.json"
+      }
+    ],
+    "refunds": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "refunds",
+      "grain": "product_record",
+      "path": "import_ready/refunds_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 118,
+      "sidecar": "import_ready/refunds_v1.csv.meta.json"
+    },
+    "returns": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "returns",
+      "grain": "product_record",
+      "path": "import_ready/returns_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 112,
+      "sidecar": "import_ready/returns_v1.csv.meta.json"
+    },
+    "reviews": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "reviews",
+      "grain": "asin_record",
+      "path": "import_ready/reviews_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 172,
+      "sidecar": "import_ready/reviews_v1.csv.meta.json"
+    },
+    "sales_traffic": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "sales_traffic",
+      "grain": "asin_day",
+      "path": "import_ready/sales_traffic_daily_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 1200,
+      "sidecar": "import_ready/sales_traffic_daily_v1.csv.meta.json"
+    },
+    "support": {
+      "coverage_basis": "business_date",
+      "coverage_end": "2026-09-30",
+      "coverage_start": "2026-06-03",
+      "declared_asins": [
+        "D5X2600001",
+        "D5X2600002",
+        "D5X2600003",
+        "D5X2600004",
+        "D5X2600005",
+        "D5X2600006",
+        "D5X2600007",
+        "D5X2600008",
+        "D5X2600009",
+        "D5X2600010"
+      ],
+      "declared_complete": true,
+      "fact_kind": "support",
+      "grain": "product_record",
+      "path": "import_ready/support_cases_v1.csv",
+      "provenance_class": "synthetic_acceptance_fixture",
+      "rows": 88,
+      "sidecar": "import_ready/support_cases_v1.csv.meta.json"
+    }
+  },
+  "generated_at": "2026-10-01T00:00:00Z",
+  "generator": "dataset/05_generate_extended_acceptance_packs.py",
+  "package_version": "recent-operational-loop-v1.0",
+  "provenance": "All newly generated business, rating, review, and support facts in this pack are synthetic. The review/support text is independently authored for test fixtures and is not copied from or joined to the frozen golden review corpus.",
+  "seed": 20261001,
+  "source_population": {
+    "complete_asins": [
+      "D5X2600001",
+      "D5X2600002",
+      "D5X2600003",
+      "D5X2600004",
+      "D5X2600005",
+      "D5X2600006",
+      "D5X2600007",
+      "D5X2600008",
+      "D5X2600009",
+      "D5X2600010"
+    ],
+    "complete_sku_count": 20,
+    "deliberate_gap_asin": "D5X2600011",
+    "fulfillments": [
+      "FBA",
+      "FBM"
+    ]
+  },
+  "timezone": "America/Los_Angeles",
+  "totals": {
+    "complete_fact_rows": 14930,
+    "gap_fixture_rows": 119,
+    "recurrence_fixture_rows": 21
+  }
+}

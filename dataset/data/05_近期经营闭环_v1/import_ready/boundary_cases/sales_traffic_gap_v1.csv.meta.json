@@ -1,0 +1,48 @@
+{
+  "fact_kind": "sales_traffic",
+  "grain": "asin_day",
+  "import_file": "dataset/data/05_近期经营闭环_v1/import_ready/boundary_cases/sales_traffic_gap_v1.csv",
+  "package_version": "recent-operational-loop-v1.0",
+  "provenance": "synthetic_acceptance_fixture",
+  "row_count": 119,
+  "source_action": "reuse_existing_primary",
+  "source_payload": {
+    "column_mapping": {
+      "business_date": "business_date",
+      "buybox_percent": "buybox_percent",
+      "child_asin": "child_asin",
+      "currency": "currency",
+      "fulfillment": "fulfillment",
+      "order_count": "order_count",
+      "ordered_units": "ordered_units",
+      "sales_amount": "sales_amount",
+      "seller_sku": "seller_sku",
+      "sessions": "sessions"
+    },
+    "coverage_basis": "business_date",
+    "grain": "asin_day",
+    "ignored_columns": [
+      "provenance_class",
+      "is_real",
+      "is_derived",
+      "is_synthetic",
+      "source_reference",
+      "source_row_id",
+      "generation_version",
+      "scenario_id"
+    ],
+    "is_primary": true,
+    "kind": "sales_traffic",
+    "name": "验收数据：sales_traffic（recent-operational-loop-v1.0）",
+    "shop": "<隔离验收店铺 UUID>"
+  },
+  "upload_payload": {
+    "coverage_end": "2026-09-30",
+    "coverage_start": "2026-06-03",
+    "declared_asins": [
+      "D5X2600011"
+    ],
+    "declared_complete": false,
+    "generated_at": "2026-10-01T00:00:00Z"
+  }
+}

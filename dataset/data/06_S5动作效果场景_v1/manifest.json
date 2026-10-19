@@ -1,0 +1,34 @@
+{
+  "as_of": "2026-10-01",
+  "fact_dependency": "../05_近期经营闭环_v1/manifest.json (recent-operational-loop-v1.0)",
+  "files": {
+    "recurrence_fixture": {
+      "declared_complete": true,
+      "files": 2,
+      "import_only_after_event_closure": true,
+      "rows": 14
+    },
+    "scenario_catalog.csv": {
+      "role": "action review scenarios and stop reasons",
+      "rows": 6
+    },
+    "task_templates.json": {
+      "role": "API command payload templates with placeholders",
+      "rows": 6
+    }
+  },
+  "generated_at": "2026-10-01T00:00:00Z",
+  "generator": "dataset/05_generate_extended_acceptance_packs.py",
+  "package_version": "s5-action-effects-v1.0",
+  "provenance": "All values and evidence are synthetic. Outcome labels are executable expected behavior, not causal findings or human-reviewed business labels.",
+  "scenario_count": 6,
+  "scenarios": [
+    "improved_after_action",
+    "no_improvement",
+    "worsening",
+    "window_not_mature",
+    "missing_data",
+    "closed_then_recurrence"
+  ],
+  "seed": 20261001
+}

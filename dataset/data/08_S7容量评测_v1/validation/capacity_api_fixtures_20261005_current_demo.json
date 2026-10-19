@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "synthetic fixtures in isolated is_test shops only",
+  "shop_ids": [
+    "075b34ac-ce2d-4947-89a0-a0d07a978496",
+    "35c28eee-259f-4aea-aab2-49f959510a6d"
+  ],
+  "snapshot_ids": {
+    "shop_a": "dbbf4f61-707a-414e-b6b4-25057a5007f9",
+    "shop_b": "13f85f79-29b5-4d28-85db-14dab613b734"
+  },
+  "account_count": 10,
+  "created": {
+    "events": 2,
+    "reports": 2,
+    "actions": 10,
+    "investigations": 10,
+    "steps": 10
+  },
+  "checked_at": "2026-10-05T12:50:40.680599+00:00"
+}

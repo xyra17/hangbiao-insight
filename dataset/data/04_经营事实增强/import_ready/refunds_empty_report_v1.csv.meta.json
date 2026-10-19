@@ -1,0 +1,39 @@
+{
+  "source_file": "dataset/data/04_经营事实增强/boundary_cases/refunds_empty_report_v1.csv",
+  "import_file": "dataset/data/04_经营事实增强/import_ready/refunds_empty_report_v1.csv",
+  "source_payload": {
+    "shop": "<目标测试店铺 UUID>",
+    "name": "边界夹具：完整零退款报表",
+    "kind": "refunds",
+    "is_primary": true,
+    "grain": "product_record",
+    "column_mapping": {
+      "child_asin": "child_asin",
+      "seller_sku": "seller_sku",
+      "fulfillment": "fulfillment",
+      "business_date": "business_date",
+      "record_id": "record_id",
+      "order_line_id": "order_line_id",
+      "transaction_chain_id": "transaction_chain_id",
+      "amount": "amount",
+      "currency": "currency",
+      "quantity": "quantity",
+      "occurred_at": "occurred_at"
+    },
+    "ignored_columns": [],
+    "coverage_basis": "business_date",
+    "empty_report_means_zero": true
+  },
+  "upload_payload": {
+    "coverage_start": "2023-09-03",
+    "coverage_end": "2023-09-03",
+    "generated_at": "2026-10-01T00:00:00Z",
+    "declared_complete": true,
+    "declared_asins": [
+      "B07H2V5YLH",
+      "B07P9S6R9Y",
+      "B0BYJ8ZVWH"
+    ]
+  },
+  "warning": "仅在业务确认‘完整空报表表示零事件’后使用；不得用它覆盖已有历史退款。"
+}

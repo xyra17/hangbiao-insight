@@ -1,0 +1,240 @@
+{
+  "schema_version": "release-local-delivery-20261008-v1",
+  "status": "not_ready",
+  "local_quality_status": "failed",
+  "task_status_counts": {
+    "passed": 16,
+    "failed": 1,
+    "blocked_external": 6
+  },
+  "task_results": {
+    "inventory": {
+      "status": "passed",
+      "actual": {
+        "pack_count": 9
+      },
+      "external_input": null
+    },
+    "validate04": {
+      "status": "passed",
+      "actual": {
+        "exit_code": 0
+      },
+      "external_input": null
+    },
+    "data04": {
+      "status": "passed",
+      "actual": {
+        "main_rows": 31281,
+        "as_of": "2023-09-03",
+        "scope": "initial main package, historical/frozen; no real-business signoff"
+      },
+      "external_input": null
+    },
+    "data05": {
+      "status": "passed",
+      "actual": {
+        "main_rows": 14930,
+        "as_of": "2026-10-01",
+        "scope": "initial main package, historical/frozen; no real-business signoff"
+      },
+      "external_input": null
+    },
+    "lifecycle04": {
+      "status": "passed",
+      "actual": "04 revisions, cancellation, retraction, invalid/empty batches and immutable old artifacts",
+      "external_input": null
+    },
+    "actions06": {
+      "status": "passed",
+      "actual": "06 six API outcomes, CSV oracle and actual page totals/windows/lineage; recurrence imported after closure",
+      "external_input": null
+    },
+    "package_browser": {
+      "status": "passed",
+      "actual": "two imported shops, 390/768/1440, separate from general fixture browser suite",
+      "external_input": null
+    },
+    "frac": {
+      "status": "passed",
+      "actual": "FR01-13/AC01-26 mapped; local contracts versus quality failures and external signoff split per row",
+      "external_input": null
+    },
+    "default_quality": {
+      "status": "failed",
+      "actual": "actual default runtime; local quality failed, independent fields pending",
+      "external_input": null
+    },
+    "real_quality": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E2"
+    },
+    "real_sources": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E1"
+    },
+    "preflight": {
+      "status": "passed",
+      "actual": "offline validator only; actual target config and TLS blocked E3",
+      "external_input": null
+    },
+    "security": {
+      "status": "passed",
+      "actual": "DRF/urllib3 security floors, production imported modules, known-dependency scan and redacted source scan; target security separate",
+      "external_input": null
+    },
+    "integration": {
+      "status": "passed",
+      "actual": {
+        "backend": 503,
+        "capacity_deselected": 1,
+        "dataset": "71",
+        "frontend": 6,
+        "general_browser": 23,
+        "package_browser": "separate 04/05",
+        "site_as_of": "2026-10-07"
+      },
+      "external_input": null
+    },
+    "target_security": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E3"
+    },
+    "capacity": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E3"
+    },
+    "local_recovery": {
+      "status": "passed",
+      "actual": "local fault/backup/retention engineering evidence plus final backend recovery cases; target SLA and previous production digest remain E3",
+      "external_input": null
+    },
+    "target_recovery": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E3"
+    },
+    "pilot": {
+      "status": "blocked_external",
+      "actual": null,
+      "external_input": "E4"
+    },
+    "candidate": {
+      "status": "passed",
+      "actual": {
+        "images": {
+          "backend": {
+            "local_tag": "insight-release-local:20261008-final",
+            "digest": "sha256:76da21dd3a87ddbf4f46d3402b657a6af7f600c8aec54f9bc88d9bb333d1acb8"
+          },
+          "web": {
+            "local_tag": "insight-release-web-local:20261008-final",
+            "digest": "sha256:94ef09134d9a0112451f933054eb9065d0cfa812136717a08453c1a2594e8750"
+          }
+        },
+        "scope": "local candidate, no publish or production rollback signoff"
+      },
+      "external_input": null
+    },
+    "input_audit": {
+      "status": "passed",
+      "actual": "02 daily synthetic rate differs from 04 mature cohort/transaction chains; legacy 03 product overlap explicitly reported, independent scarce-topic labels pending",
+      "external_input": null
+    },
+    "originals01": {
+      "status": "passed",
+      "actual": "81,277 unique originals inventoried read-only; 600 scoped rows via real worker, hit original text/fact/raw-row references; no all-corpus recall or language inference claim",
+      "external_input": null
+    },
+    "current_demo": {
+      "status": "passed",
+      "actual": "separate current site-day synthetic 05/06; main calendar freshness as_of 10/07; post-close recurrence explicit 10/14 replay; no 08 regeneration",
+      "external_input": null
+    }
+  },
+  "source_sha256": "9d26cd8737486ab91791eccd2a088c5df60022de09971e2ac27d5accf7de1fdd",
+  "candidate_source_sha256": "25e3b0e55d8de4b98b4d4609c22e539ffe5421db843d0004a6730bf84b78f26f",
+  "head": "349350ce1373975791ddeef322bf508351658a60",
+  "images": {
+    "backend": {
+      "local_tag": "insight-release-local:20261008-final",
+      "digest": "sha256:76da21dd3a87ddbf4f46d3402b657a6af7f600c8aec54f9bc88d9bb333d1acb8"
+    },
+    "web": {
+      "local_tag": "insight-release-web-local:20261008-final",
+      "digest": "sha256:94ef09134d9a0112451f933054eb9065d0cfa812136717a08453c1a2594e8750"
+    }
+  },
+  "tests": {
+    "backend_complete_noncapacity": 503,
+    "capacity_deselected": 1,
+    "dataset_complete": 71,
+    "frontend_unit": 6,
+    "general_browser_passed": 23,
+    "general_browser_skipped_separate_package": 1,
+    "separate_package_browsers": {
+      "04": 1,
+      "05_frozen": 1,
+      "05_current_site_day": 1
+    },
+    "legacy_production_modules_slice": 32,
+    "broker_drill_separate": 1
+  },
+  "quality": {
+    "test_recall_at_10": 0.125,
+    "tool_difference_pairs": "2/24",
+    "evidence_driven_pairs": "1/23",
+    "independent_adjudicated_fields": 0,
+    "unreviewed_fields": 384,
+    "real_model_run": "blocked_E2"
+  },
+  "recovery": {
+    "local_marker_loss_window_seconds": 0.859713,
+    "local_business_http_rto_seconds": 2.187,
+    "target_sla": "blocked_E3"
+  },
+  "capacity": "historical results preserved; no new 08 full import/scan; target E3 blocked",
+  "no_shared_commit_or_publish": true,
+  "evidence_hash_mismatches": [],
+  "gate_failures": [
+    {
+      "task": "default_quality",
+      "status": "failed",
+      "external_input": null
+    },
+    {
+      "task": "real_quality",
+      "status": "blocked_external",
+      "external_input": "E2"
+    },
+    {
+      "task": "real_sources",
+      "status": "blocked_external",
+      "external_input": "E1"
+    },
+    {
+      "task": "target_security",
+      "status": "blocked_external",
+      "external_input": "E3"
+    },
+    {
+      "task": "capacity",
+      "status": "blocked_external",
+      "external_input": "E3"
+    },
+    {
+      "task": "target_recovery",
+      "status": "blocked_external",
+      "external_input": "E3"
+    },
+    {
+      "task": "pilot",
+      "status": "blocked_external",
+      "external_input": "E4"
+    }
+  ]
+}

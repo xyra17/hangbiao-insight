@@ -1,0 +1,380 @@
+{
+  "status": "passed",
+  "scope": "one profile scan in the isolated S7 capacity workspace",
+  "shop_id": "075b34ac-ce2d-4947-89a0-a0d07a978496",
+  "asin": "CAP2600001",
+  "snapshot_id": "dbbf4f61-707a-414e-b6b4-25057a5007f9",
+  "daily_status": "ready",
+  "wall_ms": 910.002,
+  "database_execute_ms": 378.385,
+  "database_query_count": 34,
+  "top_query_fingerprints": [
+    {
+      "fingerprint": "84f3e811f14b343f",
+      "count": 1,
+      "total_ms": 220.57462501106784,
+      "max_ms": 220.57462501106784
+    },
+    {
+      "fingerprint": "3aa06d85902b35e0",
+      "count": 1,
+      "total_ms": 82.65441699768417,
+      "max_ms": 82.65441699768417
+    },
+    {
+      "fingerprint": "56545b3f1bce1c7f",
+      "count": 1,
+      "total_ms": 21.52587499585934,
+      "max_ms": 21.52587499585934
+    },
+    {
+      "fingerprint": "e3d2082eaf2efb3a",
+      "count": 1,
+      "total_ms": 7.0473340165335685,
+      "max_ms": 7.0473340165335685
+    },
+    {
+      "fingerprint": "24c72b87fe881d86",
+      "count": 1,
+      "total_ms": 5.289749999064952,
+      "max_ms": 5.289749999064952
+    },
+    {
+      "fingerprint": "97b5d50a285b53d6",
+      "count": 2,
+      "total_ms": 5.076251021819189,
+      "max_ms": 2.5816670095082372
+    },
+    {
+      "fingerprint": "cb1bae4fca20271d",
+      "count": 1,
+      "total_ms": 4.335917008575052,
+      "max_ms": 4.335917008575052
+    },
+    {
+      "fingerprint": "7284ad7348b98991",
+      "count": 1,
+      "total_ms": 4.035167017718777,
+      "max_ms": 4.035167017718777
+    },
+    {
+      "fingerprint": "51b87352fc8095cb",
+      "count": 1,
+      "total_ms": 2.168709004763514,
+      "max_ms": 2.168709004763514
+    },
+    {
+      "fingerprint": "9014a8b6913bd8a6",
+      "count": 1,
+      "total_ms": 2.14491700171493,
+      "max_ms": 2.14491700171493
+    },
+    {
+      "fingerprint": "17010bded78fbf28",
+      "count": 1,
+      "total_ms": 2.043999993475154,
+      "max_ms": 2.043999993475154
+    },
+    {
+      "fingerprint": "9761b235f905ed84",
+      "count": 4,
+      "total_ms": 2.0439580257516354,
+      "max_ms": 0.6800410046707839
+    },
+    {
+      "fingerprint": "5c0b27c8f671882a",
+      "count": 1,
+      "total_ms": 1.6964579990599304,
+      "max_ms": 1.6964579990599304
+    },
+    {
+      "fingerprint": "53f34054f2091118",
+      "count": 1,
+      "total_ms": 1.6842909972183406,
+      "max_ms": 1.6842909972183406
+    },
+    {
+      "fingerprint": "3cffbc4ba6a96bfc",
+      "count": 1,
+      "total_ms": 1.6462499916087836,
+      "max_ms": 1.6462499916087836
+    },
+    {
+      "fingerprint": "376c789bf6f5e632",
+      "count": 1,
+      "total_ms": 1.5573339769616723,
+      "max_ms": 1.5573339769616723
+    },
+    {
+      "fingerprint": "5833240f5e7e7cc0",
+      "count": 1,
+      "total_ms": 1.4128749899100512,
+      "max_ms": 1.4128749899100512
+    },
+    {
+      "fingerprint": "53f632b5a1390b3f",
+      "count": 1,
+      "total_ms": 1.4073750062379986,
+      "max_ms": 1.4073750062379986
+    },
+    {
+      "fingerprint": "85badd14acb52ce1",
+      "count": 2,
+      "total_ms": 1.401209010509774,
+      "max_ms": 0.7650420011486858
+    },
+    {
+      "fingerprint": "1fae1d082ade3863",
+      "count": 1,
+      "total_ms": 1.3595840136986226,
+      "max_ms": 1.3595840136986226
+    }
+  ],
+  "top_functions": [
+    {
+      "function": "/Users/Admin/miniconda3/lib/python3.13/contextlib.py:82:inner",
+      "calls": 1,
+      "cumulative_ms": 909.969,
+      "self_ms": 0.031
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/insight/metrics/service.py:63:scan_object",
+      "calls": 1,
+      "cumulative_ms": 905.953,
+      "self_ms": 15.261
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:1952:_fetch_all",
+      "calls": 33,
+      "cumulative_ms": 819.502,
+      "self_ms": 3.4
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:371:__iter__",
+      "calls": 22,
+      "cumulative_ms": 816.898,
+      "self_ms": 0.011
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:87:__iter__",
+      "calls": 8709,
+      "cumulative_ms": 816.1,
+      "self_ms": 5.366
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/insight/metrics/comparability.py:11:assess_comparability",
+      "calls": 1,
+      "cumulative_ms": 526.158,
+      "self_ms": 19.018
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py:1593:execute_sql",
+      "calls": 30,
+      "cumulative_ms": 517.953,
+      "self_ms": 0.145
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/connection.py:479:wait",
+      "calls": 37,
+      "cumulative_ms": 382.122,
+      "self_ms": 341.679
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/backends/utils.py:120:execute",
+      "calls": 34,
+      "cumulative_ms": 379.468,
+      "self_ms": 0.064
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/backends/utils.py:78:execute",
+      "calls": 34,
+      "cumulative_ms": 379.071,
+      "self_ms": 0.032
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/backends/utils.py:88:_execute_with_wrappers",
+      "calls": 34,
+      "cumulative_ms": 379.039,
+      "self_ms": 0.05
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/../scripts/profile_s7_capacity_target.py:57:measure",
+      "calls": 34,
+      "cumulative_ms": 378.989,
+      "self_ms": 0.212
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/backends/utils.py:94:_execute",
+      "calls": 34,
+      "cumulative_ms": 378.349,
+      "self_ms": 0.074
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/cursor.py:100:execute",
+      "calls": 34,
+      "cumulative_ms": 378.263,
+      "self_ms": 0.048
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/insight/metrics/cohort.py:23:calculate_cohort",
+      "calls": 1,
+      "cumulative_ms": 270.81,
+      "self_ms": 2.306
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/base.py:576:from_db",
+      "calls": 11606,
+      "cumulative_ms": 159.785,
+      "self_ms": 8.002
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/base.py:462:__init__",
+      "calls": 11608,
+      "cumulative_ms": 150.606,
+      "self_ms": 77.597
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py:1534:apply_converters",
+      "calls": 1492,
+      "cumulative_ms": 138.425,
+      "self_ms": 1.514
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/fields/json.py:84:from_db_value",
+      "calls": 3050,
+      "cumulative_ms": 136.909,
+      "self_ms": 1.17
+    },
+    {
+      "function": "/Users/Admin/miniconda3/lib/python3.13/json/__init__.py:304:loads",
+      "calls": 3050,
+      "cumulative_ms": 135.458,
+      "self_ms": 1.504
+    },
+    {
+      "function": "/Users/Admin/miniconda3/lib/python3.13/json/decoder.py:340:decode",
+      "calls": 3050,
+      "cumulative_ms": 133.48,
+      "self_ms": 2.55
+    },
+    {
+      "function": "/Users/Admin/miniconda3/lib/python3.13/json/decoder.py:351:raw_decode",
+      "calls": 3050,
+      "cumulative_ms": 128.837,
+      "self_ms": 128.837
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py:2165:cursor_iter",
+      "calls": 119,
+      "cumulative_ms": 120.7,
+      "self_ms": 0.087
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py:2171:<lambda>",
+      "calls": 119,
+      "cumulative_ms": 120.57,
+      "self_ms": 0.11
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/utils.py:96:inner",
+      "calls": 124,
+      "cumulative_ms": 120.269,
+      "self_ms": 0.147
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/cursor.py:255:fetchmany",
+      "calls": 119,
+      "cumulative_ms": 120.088,
+      "self_ms": 41.037
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/backends/postgresql/psycopg_any.py:33:load",
+      "calls": 23205,
+      "cumulative_ms": 78.915,
+      "self_ms": 8.71
+    },
+    {
+      "function": "~:0:<built-in method builtins.setattr>",
+      "calls": 250874,
+      "cumulative_ms": 69.147,
+      "self_ms": 24.745
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/types/datetime.py:493:load",
+      "calls": 23205,
+      "cumulative_ms": 67.351,
+      "self_ms": 5.366
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/types/datetime.py:496:_load_iso",
+      "calls": 23205,
+      "cumulative_ms": 61.985,
+      "self_ms": 37.941
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:2742:populate",
+      "calls": 2913,
+      "cumulative_ms": 50.799,
+      "self_ms": 1.847
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/fields/related_descriptors.py:91:__set__",
+      "calls": 50700,
+      "cumulative_ms": 44.371,
+      "self_ms": 24.799
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/_cursor_base.py:195:_execute_gen",
+      "calls": 1761,
+      "cumulative_ms": 40.424,
+      "self_ms": 0.755
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/insight/metrics/daily.py:44:calculate_daily",
+      "calls": 1,
+      "cumulative_ms": 36.519,
+      "self_ms": 0.074
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/psycopg/_cursor_base.py:275:_maybe_prepare_gen",
+      "calls": 1760,
+      "cumulative_ms": 35.577,
+      "self_ms": 34.256
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py:755:as_sql",
+      "calls": 29,
+      "cumulative_ms": 23.431,
+      "self_ms": 0.53
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:1505:_filter_or_exclude",
+      "calls": 86,
+      "cumulative_ms": 19.719,
+      "self_ms": 0.087
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:1516:_filter_or_exclude_inplace",
+      "calls": 86,
+      "cumulative_ms": 18.82,
+      "self_ms": 0.151
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/sql/query.py:1630:add_q",
+      "calls": 86,
+      "cumulative_ms": 18.454,
+      "self_ms": 0.135
+    },
+    {
+      "function": "/Users/Admin/Desktop/商品评论智能诊断 agent/backend/.venv/lib/python3.13/site-packages/django/db/models/query.py:1489:filter",
+      "calls": 80,
+      "cumulative_ms": 18.376,
+      "self_ms": 0.045
+    }
+  ],
+  "limitations": [
+    "One representative target does not predict the 1,000-target wall time.",
+    "SQL parameters, raw text, and review/customer data are not recorded.",
+    "The scan creates a normal immutable metric snapshot in the isolated test workspace."
+  ]
+}

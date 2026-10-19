@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "captured_at": "2026-10-05T13:22:44.288337+00:00",
+  "head": "349350ce1373975791ddeef322bf508351658a60",
+  "modified_or_untracked_path_count": 96,
+  "application_image_ids": {
+    "api": "sha256:915385b6d7cf53390dbb94e8047818586a8173cdd7b39d347caeee832f6ffc20",
+    "worker": "sha256:915385b6d7cf53390dbb94e8047818586a8173cdd7b39d347caeee832f6ffc20",
+    "beat": "sha256:915385b6d7cf53390dbb94e8047818586a8173cdd7b39d347caeee832f6ffc20"
+  },
+  "api_worker_beat_image_ids_match": true,
+  "workspace_container_source_sha256": {
+    "config/settings.py": {
+      "workspace_sha256": "084e64e13681c74b6f7d487a4c52e3816813414ec11f14b6381020c978022e58",
+      "container_sha256": "084e64e13681c74b6f7d487a4c52e3816813414ec11f14b6381020c978022e58",
+      "matches": true
+    },
+    "insight/throttling.py": {
+      "workspace_sha256": "6a65898b28fe34f7768fecb403f583688caaf41b43853872b1f94090d6e33c14",
+      "container_sha256": "6a65898b28fe34f7768fecb403f583688caaf41b43853872b1f94090d6e33c14",
+      "matches": true
+    },
+    "insight/metrics/comparability.py": {
+      "workspace_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+      "container_sha256": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+      "matches": true
+    },
+    "insight/tasks.py": {
+      "workspace_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+      "container_sha256": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+      "matches": true
+    },
+    "insight/action_review.py": {
+      "workspace_sha256": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+      "container_sha256": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+      "matches": true
+    }
+  },
+  "web_dist_file_count": 14,
+  "web_dist_all_files_match_container": true,
+  "web_container_extra_files": [
+    "50x.html"
+  ],
+  "django_check": {
+    "returncode": 0,
+    "output": "System check identified no issues (0 silenced)."
+  },
+  "compose_config": {
+    "returncode": 0,
+    "output": ""
+  },
+  "scope_note": "Source/image consistency check after browser-only login throttle override; no Compose services or persistent volumes were started by this check. Existing isolated health report remains at compose_health_isolated_20261005.json."
+}

@@ -1,0 +1,60 @@
+{
+  "fact_kind": "reviews",
+  "grain": "asin_record",
+  "import_file": "dataset/data/05_近期经营闭环_v1/import_ready/reviews_v1.csv",
+  "package_version": "recent-operational-loop-v1.0",
+  "provenance": "synthetic_acceptance_fixture",
+  "row_count": 172,
+  "source_action": "create_primary",
+  "source_payload": {
+    "column_mapping": {
+      "business_date": "business_date",
+      "child_asin": "child_asin",
+      "collected_at": "collected_at",
+      "fulfillment": "fulfillment",
+      "is_deleted": "is_deleted",
+      "is_vine": "is_vine",
+      "language": "language",
+      "rating": "rating",
+      "record_id": "record_id",
+      "seller_sku": "seller_sku",
+      "text": "text",
+      "title": "title",
+      "verified_purchase": "verified_purchase"
+    },
+    "coverage_basis": "business_date",
+    "grain": "asin_record",
+    "ignored_columns": [
+      "provenance_class",
+      "is_real",
+      "is_derived",
+      "is_synthetic",
+      "source_reference",
+      "source_row_id",
+      "generation_version",
+      "scenario_id"
+    ],
+    "is_primary": true,
+    "kind": "reviews",
+    "name": "验收数据：reviews（recent-operational-loop-v1.0）",
+    "shop": "<隔离验收店铺 UUID>"
+  },
+  "upload_payload": {
+    "coverage_end": "2026-09-30",
+    "coverage_start": "2026-06-03",
+    "declared_asins": [
+      "D5X2600001",
+      "D5X2600002",
+      "D5X2600003",
+      "D5X2600004",
+      "D5X2600005",
+      "D5X2600006",
+      "D5X2600007",
+      "D5X2600008",
+      "D5X2600009",
+      "D5X2600010"
+    ],
+    "declared_complete": true,
+    "generated_at": "2026-10-01T00:00:00Z"
+  }
+}

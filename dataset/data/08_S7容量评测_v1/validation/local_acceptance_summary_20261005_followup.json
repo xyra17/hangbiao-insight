@@ -1,0 +1,219 @@
+{
+  "status": "passed_with_external_blockers",
+  "generated_at": "2026-10-05T15:07:18.858307+00:00",
+  "code_version": {
+    "head": "349350ce1373975791ddeef322bf508351658a60",
+    "working_tree_modified_or_untracked_paths": 98,
+    "committed": false,
+    "published": false,
+    "relevant_source_sha256": {
+      "backend/config/settings.py": "084e64e13681c74b6f7d487a4c52e3816813414ec11f14b6381020c978022e58",
+      "backend/insight/throttling.py": "6a65898b28fe34f7768fecb403f583688caaf41b43853872b1f94090d6e33c14",
+      "backend/insight/metrics/comparability.py": "b6922be70101b9fd8f721ccccb63bef73f1e3fd2641f1b0efbbf423833c8c35e",
+      "backend/insight/action_review.py": "23e93631cd163905d0320d850240863c8ca05fac5c8c7edae3e624014dcdbfbf",
+      "backend/insight/tasks.py": "0b0b4043f6e5ab1dad631befb6139a0504f90c084fd3f53218622e551813d06a",
+      "backend/insight/management/commands/seed_acceptance_browser_fixtures.py": "67e02cd8b6c5f0ecb3b5d85bb3f374e0676bcf6f21348630431646f10b8c7c03",
+      "scripts/run_browser_acceptance.sh": "98801d7f2d58b471fcdb00de76b4e3ce6538cfa850907d8781a32c0bc6ebe65c",
+      "frontend/src/workbench/ActionsPage.tsx": "70ecf9d3cf662821f8bd77bd08f3296d5764fa41a39670e83439e351b90dfacf",
+      "frontend/src/workbench/workbench.css": "97e34ce078324380767740b5d8a6c53a93b734e5f6a83e5254b3d6f9655e5f2c",
+      "frontend/e2e/000_responsive_visual.spec.ts": "e9a00127cea99d747466d152196d6f55b462f20f633be4fb5b23e4e7d3c264e0",
+      "frontend/e2e/acceptance_boundaries.spec.ts": "2716502e9546668cb51a25918f2611a493835bbe96294a5541ad2ff25e9787ef",
+      "frontend/e2e/s5-actions.spec.ts": "d4c751210be652bf36caa3b8be35cc0a248f47e8c9cb4b2482168ed69244dc3e"
+    }
+  },
+  "verification": {
+    "backend_non_capacity": {
+      "command": "cd backend && uv run --env-file ../.env.local pytest -c pytest-v2.ini -m 'not capacity' -q",
+      "status": "passed",
+      "result": "422 passed, 1 deselected",
+      "duration_s": 177.55
+    },
+    "dataset_tests": {
+      "command": "uv run --project dataset pytest -q dataset/tests",
+      "status": "passed",
+      "result": "21 passed",
+      "duration_s": 3.17
+    },
+    "login_throttle_regression": {
+      "command": "cd backend && uv run --env-file ../.env.local pytest -c pytest-v2.ini tests_v2/test_s1_boundaries.py::test_login_throttle_rejects_excess_attempts_with_retry_header tests_v2/test_s1_concurrency.py::test_login_limit_is_shared_by_concurrent_connections_and_does_not_store_identity -q",
+      "status": "passed",
+      "result": "2 passed",
+      "duration_s": 4.39,
+      "default_account_limit_per_minute": 10,
+      "browser_runner_only_account_limit_per_minute": 100
+    },
+    "acceptance_pack_validation": {
+      "status": "passed",
+      "frozen_replay": {
+        "path": "dataset/data/acceptance_runs/frozen-replay_2026-10-01_full_v2/run_manifest.json",
+        "sha256": "98a6ea6392a741133199aea04262a8d9baf5cee7b28169d5eecaefd6efeb5861",
+        "frozen_as_of": "2026-10-01",
+        "runtime_site_date": "2026-10-05"
+      },
+      "current_demo": {
+        "path": "dataset/data/acceptance_runs/current-demo_2026-10-05_full/run_manifest.json",
+        "sha256": "6b7c75b9f38520a6a6c14112093713640d55c9d925196b7d73d56f5c109d6616",
+        "frozen_as_of": "2026-10-05",
+        "runtime_site_date": "2026-10-05"
+      },
+      "per_pack_generation": "27/27",
+      "per_pack_file_checks": "18/18"
+    },
+    "django_and_migrations": {
+      "status": "passed",
+      "commands": [
+        "python manage.py check",
+        "python manage.py makemigrations --check --dry-run"
+      ]
+    },
+    "ruff": {
+      "status": "passed",
+      "command": "uv run ruff check insight tests_v2"
+    },
+    "openapi": {
+      "status": "passed",
+      "command": "python manage.py spectacular --file /tmp/openapi-generated.yaml --validate && cmp ../docs/openapi.yaml /tmp/openapi-generated.yaml"
+    },
+    "frontend": {
+      "status": "passed",
+      "unit_tests": "3 passed",
+      "build": "TypeScript and Vite production build passed",
+      "responsive_action_review_mobile": {
+        "status": "passed",
+        "behavior": "At 390px the long review column is hidden from the wide table; the explicit review-details action opens the full text, both windows, denominators and source trace. At 768px and 1440px inline details remain visible."
+      }
+    },
+    "browser": {
+      "status": "passed",
+      "result": "21/21",
+      "duration_min": 1.8,
+      "artifact_dir": ".local/acceptance-artifacts/20261005T150143Z",
+      "initial_failure_artifact_dir": ".local/acceptance-artifacts/20261005T131038Z",
+      "initial_failure": "First browser run hit the isolated acceptance account rate limit at 10/min; runner-only override is 100/min and the default remains 10/min.",
+      "screenshots_visually_checked": [
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/390-actions-scrolled.png",
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/390-sources.png",
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/768-investigations.png",
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/1440-actions.png",
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/1440-event-evidence-drawer.png",
+        ".local/acceptance-artifacts/20261005T150143Z/screenshots/1440-navigation.png"
+      ],
+      "manual_visual_review": "Final 390/768/1440 evidence reviewed for responsive layout, compact mobile action rows with the complete detail dialog, action table horizontal scrolling, source form, investigation page, navigation, and event evidence drawer. Desktop inline metrics remain visible.",
+      "targeted_recheck": {
+        "status": "passed",
+        "result": "5/5",
+        "duration_s": 14.6,
+        "artifact_dir": ".local/acceptance-artifacts/20261005T144055Z",
+        "scope": "Earlier targeted S5 review and stale-source, missing-window and derived-refresh retry API boundaries; final full run also covers these."
+      },
+      "command": "ACCEPTANCE_ACCOUNTS_FILE=.local/acceptance-accounts-20261004.json bash scripts/run_browser_acceptance.sh 2026-10-05",
+      "local_runner_cleanup": "API, worker, beat and Vite stopped by runner; ports 8280 and 5184 free after run."
+    },
+    "capacity": {
+      "status": "passed_local_full_run_only_target_environment_pending",
+      "report": "dataset/data/08_S7容量评测_v1/validation/capacity_run_20261005_current_demo_1000target_10accounts_optimized.json",
+      "targets": 1000,
+      "requests_jobs_correctness": "1000/1000",
+      "errors": 0,
+      "scan_wall_ms": 143673.118,
+      "measurement_wall_ms": 149331.83,
+      "snapshot_list_p95_ms": 223.812,
+      "max_business_endpoint_p95_ms": 664.041,
+      "new_snapshots": 990,
+      "valid_cached_snapshots": 10,
+      "target_environment": "pending_external_8_core_16_gb_ssd_environment",
+      "historical_failed_report": "dataset/data/08_S7容量评测_v1/validation/capacity_run_latest.json",
+      "resources_peak_by_component": {
+        "api": {
+          "peak_cpu_pct": 125.25,
+          "peak_memory_mb": 340.64,
+          "sample_count": 29
+        },
+        "beat": {
+          "peak_cpu_pct": 2.7,
+          "peak_memory_mb": 96.24,
+          "sample_count": 29
+        },
+        "database": {
+          "peak_cpu_pct": 72.2,
+          "peak_memory_mb": 659.3,
+          "sample_count": 29
+        },
+        "redis": {
+          "peak_cpu_pct": 1.04,
+          "peak_memory_mb": 10.31,
+          "sample_count": 116
+        },
+        "worker": {
+          "peak_cpu_pct": 75.54,
+          "peak_memory_mb": 286.9,
+          "sample_count": 29
+        }
+      },
+      "queue_wait_p95_ms": 994.379,
+      "job_worker_runtime_p95_ms": 199.303,
+      "index_build_report": "dataset/data/08_S7容量评测_v1/validation/capacity_index_build_20261005_current_demo.json",
+      "index_build_ms": 5459.727,
+      "index_scope": "1000 support cases, jieba-0.42.1-feedback-v1; no review rows, not the target review corpus",
+      "profile_reports": [
+        "dataset/data/08_S7容量评测_v1/validation/capacity_scan_profile_20261005_current_demo_hot_target.json",
+        "dataset/data/08_S7容量评测_v1/validation/capacity_scan_profile_20261005_optimized_skewed_target.json"
+      ],
+      "comparability_profile_ms": {
+        "before": 526.158,
+        "after": 45.24,
+        "scope": "one representative isolated target per run"
+      }
+    },
+    "runtime_fingerprint": {
+      "status": "passed",
+      "report": "dataset/data/08_S7容量评测_v1/validation/runtime_fingerprint_20261005_post_acceptance_fix.json",
+      "report_sha256": "30b48bf2597da2a81eb9ee208e4c7c8297149f713eb3f3afbe4ece7eaf26ba50"
+    },
+    "compose_health": {
+      "status": "passed",
+      "services": "6/6 healthy",
+      "report": "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix.json",
+      "isolated_resources_removed": true,
+      "dev_postgres_redis_preserved": true,
+      "failed_setup_attempts_preserved": [
+        "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix_failed_override.json",
+        "dataset/data/08_S7容量评测_v1/validation/compose_health_isolated_20261005_post_acceptance_fix_failed_no_build.json"
+      ]
+    },
+    "restore_and_retention": {
+      "status": "passed_local_drills",
+      "restore_rto_s": 2.2,
+      "rpo": "not measured",
+      "retention_clone": "cleanup passed; source file returns 410; tombstone retained",
+      "report_root": ".local/restore-drills/"
+    },
+    "diff_check": {
+      "status": "passed",
+      "command": "git diff --check"
+    }
+  },
+  "external_blockers": [
+    {
+      "id": "E1",
+      "input": "nine real redacted source exports plus finance/refund/return/rating/support samples and field/timezone/currency definitions",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E2",
+      "input": "approved model provider/region/version, budget, transfer/de-identification boundary, secret injection, independent labels and adjudication",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E3",
+      "input": "target 8-core/16GB/SSD server, domain/TLS, image registry digest, backup target, numeric RPO/RTO and on-call acceptance",
+      "owner": "to be assigned"
+    },
+    {
+      "id": "E4",
+      "input": "two operators, ten real ASINs, at least three weeks and thirty verified events",
+      "owner": "to be assigned"
+    }
+  ],
+  "safety_boundary": "No paid model calls, outbound data transfer, production deployment, real business writes, commit, merge, or destructive actions on shared data."
+}

@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-10-01T00:00:00Z",
+  "scenarios": [
+    {
+      "action_type": "listing",
+      "asin": "D5X2600005",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-23T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "improved_after_action",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：improved_after_action"
+    },
+    {
+      "action_type": "listing",
+      "asin": "D5X2600001",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-23T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "no_improvement",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：no_improvement"
+    },
+    {
+      "action_type": "listing",
+      "asin": "D5X2600007",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-23T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "worsening",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：worsening"
+    },
+    {
+      "action_type": "listing",
+      "asin": "D5X2600008",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-28T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "window_not_mature",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：window_not_mature"
+    },
+    {
+      "action_type": "listing",
+      "asin": "D5X2600011",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-23T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "missing_data",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：missing_data"
+    },
+    {
+      "action_type": "listing",
+      "asin": "D5X2600010",
+      "assigned_to": "<隔离工作区操作员 ID>",
+      "completion_criteria": "使用实际已发布指标快照比较基线与观察窗口；只记录变化，不宣称因果。",
+      "due_at": "2026-10-03T18:00:00Z",
+      "effective_at": "2026-09-23T12:00:00-07:00",
+      "evidence_refs": [
+        "event:<事件 UUID>",
+        "snapshot:<指标快照 UUID>"
+      ],
+      "observed_metrics": [
+        "ordered_units"
+      ],
+      "question": "动作生效后的完整站点日窗口是否出现预期指标变化？",
+      "scenario_id": "closed_then_recurrence",
+      "shop": "<隔离验收店铺 UUID>",
+      "title": "验收动作：closed_then_recurrence"
+    }
+  ]
+}

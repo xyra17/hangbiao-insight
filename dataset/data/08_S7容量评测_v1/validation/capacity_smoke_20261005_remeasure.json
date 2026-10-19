@@ -1,0 +1,624 @@
+{
+  "status": "passed",
+  "status_semantics": "Status means every requested scan was accepted and its job completed; correctness, API sampling, performance, resource observation, and target environment gates are separate.",
+  "acceptance_status": {
+    "requests": "passed",
+    "job_completion": "passed",
+    "correctness": "failed",
+    "sampling": "partial",
+    "api_query_performance": "not_evaluated_incomplete_samples",
+    "performance": "not_evaluated_smoke_only",
+    "resource_observability": "sampled_all_required_components",
+    "target_environment": "pending_external_8_core_16_gb_ssd_environment"
+  },
+  "environment": "loopback_only",
+  "generated_at": "2026-10-05T12:11:13Z",
+  "worker_count": 1,
+  "scan_client_worker_count": 1,
+  "configured_worker_limit": 10,
+  "celery_worker_runtime": {
+    "status": "no_workers_responded",
+    "worker_count": 0,
+    "total_concurrency": 0,
+    "reported_pool_capacities": []
+  },
+  "distinct_authenticated_account_count": 1,
+  "account_classes": [
+    "unspecified"
+  ],
+  "authenticated_account_status": "insufficient_distinct_users",
+  "host_profile": {
+    "platform": "macOS-15.7.5-arm64-arm-64bit-Mach-O",
+    "cpu_count": 8,
+    "memory_bytes": 25769803776,
+    "disk_type": "not_measured",
+    "docker_runtime": {
+      "status": "observed",
+      "cpu_count": 3,
+      "memory_bytes": 8322502656,
+      "container_limits": {
+        "api": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        },
+        "beat": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        },
+        "worker": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        },
+        "redis": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        },
+        "database": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        }
+      }
+    }
+  },
+  "target_count": 10,
+  "measurements": {
+    "request_success_count": 10,
+    "job_success_count": 10,
+    "correctness_pass_count": 0,
+    "request_error_count": 0,
+    "error_rate_pct": 0.0,
+    "snapshot_list_sample_ms": {
+      "sample_count": 10,
+      "p50": 30.959,
+      "p95": 37.122,
+      "max": 37.122
+    },
+    "query_p95_ms": 37.122,
+    "api_endpoint_p95_ms": {
+      "actions": 22.334,
+      "events": 24.51,
+      "evidence_search": 436.7,
+      "investigations": 28.203,
+      "jobs": 67.679,
+      "products": 18.346,
+      "reports": 27.033,
+      "snapshot_detail": 24.826,
+      "snapshots": 30.94,
+      "sources": 18.279
+    },
+    "enqueued_to_terminal_ms": {
+      "sample_count": 10,
+      "p50": 10008.929,
+      "p95": 10220.306,
+      "max": 10220.306
+    },
+    "scan_total_ms": 10220.306,
+    "longest_target_elapsed_ms": 10220.306,
+    "scan_concurrent_wall_ms": 99088.841,
+    "api_sampling_wall_ms": 864.757,
+    "full_measurement_wall_ms": 101635.561,
+    "concurrent_wall_ms": 101635.561,
+    "index_build_ms": null,
+    "index_build_status": "not_measured_by_capacity_runner",
+    "job_queue_wait_ms": {
+      "sample_count": 10,
+      "p50": 9146.404,
+      "p95": 9835.724
+    },
+    "job_worker_runtime_ms": {
+      "sample_count": 10,
+      "p50": 91.095,
+      "p95": 749.037
+    },
+    "queue_backlog": 1,
+    "queue_backlog_source": "local_database_active_jobs",
+    "queue_backlog_sample_count": 59,
+    "queue_backlog_error": null,
+    "server_peak_cpu_pct": null,
+    "server_peak_memory_mb": null,
+    "server_stats_status": "not_configured",
+    "runtime_sample_count": 59,
+    "resource_sample_count": 19,
+    "resource_usage_by_component": {
+      "api": {
+        "sample_count": 19,
+        "peak_cpu_pct": 19.34,
+        "peak_memory_mb": 164.355,
+        "effective_memory_limit_mb": 15874.048,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 2,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        }
+      },
+      "beat": {
+        "sample_count": 19,
+        "peak_cpu_pct": 0.84,
+        "peak_memory_mb": 94.01,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      },
+      "database": {
+        "sample_count": 19,
+        "peak_cpu_pct": 26.61,
+        "peak_memory_mb": 448.79999999999995,
+        "effective_memory_limit_mb": 15874.048,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 2,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        }
+      },
+      "redis": {
+        "sample_count": 78,
+        "peak_cpu_pct": 2.52,
+        "peak_memory_mb": 21.68,
+        "effective_memory_limit_mb": 15874.048,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 1,
+        "peak_container_count": 2,
+        "sources": [
+          "docker_stats",
+          "psutil_host_process"
+        ],
+        "container_configured_limits": {
+          "container_count": 2,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 2,
+          "unlimited_memory_container_count": 2
+        }
+      },
+      "worker": {
+        "sample_count": 19,
+        "peak_cpu_pct": 18.15,
+        "peak_memory_mb": 1455.104,
+        "effective_memory_limit_mb": 7937.024,
+        "process_address_space_limit_mb": null,
+        "peak_process_count": 0,
+        "peak_container_count": 1,
+        "sources": [
+          "docker_stats"
+        ],
+        "container_configured_limits": {
+          "container_count": 1,
+          "configured_cpu_limit_cores": null,
+          "configured_memory_limit_mb": null,
+          "unlimited_cpu_container_count": 1,
+          "unlimited_memory_container_count": 1
+        }
+      }
+    },
+    "resource_errors": []
+  },
+  "business_api_samples": {
+    "status": "partial",
+    "distinct_account_count": 1,
+    "concurrent_account_count": 1,
+    "request_success": "passed",
+    "population_check": "incomplete_required_interfaces_not_all_populated",
+    "required_populated_endpoints": [
+      "actions",
+      "events",
+      "evidence_search",
+      "investigations",
+      "reports",
+      "snapshots"
+    ],
+    "endpoint_stats": {
+      "actions": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 22.334,
+          "p95": 22.334,
+          "max": 22.334
+        },
+        "row_counts": [
+          0
+        ],
+        "failures": []
+      },
+      "events": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 24.51,
+          "p95": 24.51,
+          "max": 24.51
+        },
+        "row_counts": [
+          0
+        ],
+        "failures": []
+      },
+      "evidence_search": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 436.7,
+          "p95": 436.7,
+          "max": 436.7
+        },
+        "row_counts": [
+          0
+        ],
+        "failures": []
+      },
+      "investigations": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 28.203,
+          "p95": 28.203,
+          "max": 28.203
+        },
+        "row_counts": [
+          0
+        ],
+        "failures": []
+      },
+      "jobs": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 1,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 67.679,
+          "p95": 67.679,
+          "max": 67.679
+        },
+        "row_counts": [
+          23
+        ],
+        "failures": []
+      },
+      "products": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 1,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 18.346,
+          "p95": 18.346,
+          "max": 18.346
+        },
+        "row_counts": [
+          500
+        ],
+        "failures": []
+      },
+      "reports": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 0,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 27.033,
+          "p95": 27.033,
+          "max": 27.033
+        },
+        "row_counts": [
+          0
+        ],
+        "failures": []
+      },
+      "snapshot_detail": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 1,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 24.826,
+          "p95": 24.826,
+          "max": 24.826
+        },
+        "row_counts": [
+          1
+        ],
+        "failures": []
+      },
+      "snapshots": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 1,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 30.94,
+          "p95": 30.94,
+          "max": 30.94
+        },
+        "row_counts": [
+          5
+        ],
+        "failures": []
+      },
+      "sources": {
+        "sample_count": 1,
+        "request_success_count": 1,
+        "nonempty_sample_count": 1,
+        "account_indices": [
+          1
+        ],
+        "shop_ids": [
+          "763eda28-73f5-451d-b62b-1aa1c6385f12"
+        ],
+        "latency_ms": {
+          "p50": 18.279,
+          "p95": 18.279,
+          "max": 18.279
+        },
+        "row_counts": [
+          3
+        ],
+        "failures": []
+      }
+    },
+    "limitations": [
+      "Ten distinct authorized accounts are required for the 10-user sample.",
+      "Events, actions, investigations, reports, snapshots, and evidence search must contain representative rows.",
+      "Successful empty-list responses are recorded but do not count as representative business-interface samples."
+    ]
+  },
+  "target_environment_status": "pending_external_8_core_16_gb_ssd_environment",
+  "completed": [
+    {
+      "index": 1,
+      "shop": "763eda28-73f5-451d-b62b-1aa1c6385f12",
+      "asin": "CAP2600001",
+      "job_id": "c29a0b49-7027-4169-8fae-cb53b064219f",
+      "snapshot_id": "8591b6a0-49cf-4660-a331-705a052eaa8b",
+      "enqueued_to_terminal_ms": 9502.928,
+      "snapshot_list_ms": 33.326,
+      "job_queue_wait_ms": 8612.555,
+      "job_worker_runtime_ms": 749.037,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 2,
+      "shop": "763eda28-73f5-451d-b62b-1aa1c6385f12",
+      "asin": "CAP2600002",
+      "job_id": "5e9cd2ed-8260-43dd-8942-158d50297cb9",
+      "snapshot_id": "8c811b6e-335f-4acb-867e-f70976dafe8c",
+      "enqueued_to_terminal_ms": 10220.306,
+      "snapshot_list_ms": 31.995,
+      "job_queue_wait_ms": 9054.222,
+      "job_worker_runtime_ms": 608.902,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 3,
+      "shop": "763eda28-73f5-451d-b62b-1aa1c6385f12",
+      "asin": "CAP2600003",
+      "job_id": "d24ce34a-c8f6-4ef1-9a0e-9103e233fe96",
+      "snapshot_id": "b2cd26c0-901f-4c4c-94c7-830a21cca184",
+      "enqueued_to_terminal_ms": 9495.019,
+      "snapshot_list_ms": 30.959,
+      "job_queue_wait_ms": 8820.968,
+      "job_worker_runtime_ms": 577.0,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 4,
+      "shop": "763eda28-73f5-451d-b62b-1aa1c6385f12",
+      "asin": "CAP2600004",
+      "job_id": "d185f2c4-00d7-48a3-906a-e031897c59d7",
+      "snapshot_id": "850b9fee-bd4b-4a33-8e84-79fa7032e7d0",
+      "enqueued_to_terminal_ms": 10099.42,
+      "snapshot_list_ms": 31.096,
+      "job_queue_wait_ms": 9294.222,
+      "job_worker_runtime_ms": 551.019,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 5,
+      "shop": "763eda28-73f5-451d-b62b-1aa1c6385f12",
+      "asin": "CAP2600005",
+      "job_id": "c271a58b-d3e8-4bd8-8037-eac9df5c6085",
+      "snapshot_id": "79154f27-780f-449c-8f8c-1283922e256f",
+      "enqueued_to_terminal_ms": 10118.756,
+      "snapshot_list_ms": 32.369,
+      "job_queue_wait_ms": 9146.404,
+      "job_worker_runtime_ms": 580.744,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 6,
+      "shop": "68430e6e-3df9-4ef7-92d4-39cc8b7ef400",
+      "asin": "CAP2600501",
+      "job_id": "560ba32e-c007-498e-bf26-769ec21d4909",
+      "snapshot_id": "d9bcaa8f-6917-402a-9126-a1feb4c2ed9c",
+      "enqueued_to_terminal_ms": 9506.949,
+      "snapshot_list_ms": 30.51,
+      "job_queue_wait_ms": 8996.106,
+      "job_worker_runtime_ms": 74.874,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 7,
+      "shop": "68430e6e-3df9-4ef7-92d4-39cc8b7ef400",
+      "asin": "CAP2600502",
+      "job_id": "95b82c77-b886-4e5d-9c36-0e1f6e7d8aca",
+      "snapshot_id": "ac1e086f-aee6-44f7-8853-ed6ba266c42d",
+      "enqueued_to_terminal_ms": 10087.077,
+      "snapshot_list_ms": 30.206,
+      "job_queue_wait_ms": 9466.826,
+      "job_worker_runtime_ms": 74.972,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 8,
+      "shop": "68430e6e-3df9-4ef7-92d4-39cc8b7ef400",
+      "asin": "CAP2600503",
+      "job_id": "bb409ad6-5e40-4a46-adb3-02ca7cec5dd9",
+      "snapshot_id": "a816ac02-f1e0-4cf8-b71a-5d34796a0204",
+      "enqueued_to_terminal_ms": 10008.929,
+      "snapshot_list_ms": 37.122,
+      "job_queue_wait_ms": 9358.492,
+      "job_worker_runtime_ms": 91.095,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 9,
+      "shop": "68430e6e-3df9-4ef7-92d4-39cc8b7ef400",
+      "asin": "CAP2600504",
+      "job_id": "f92748a2-450d-4bb3-8259-b4af5583f47c",
+      "snapshot_id": "727f4c4a-fef5-44b0-ae20-17c253193951",
+      "enqueued_to_terminal_ms": 9454.722,
+      "snapshot_list_ms": 30.522,
+      "job_queue_wait_ms": 9307.744,
+      "job_worker_runtime_ms": 88.038,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    },
+    {
+      "index": 10,
+      "shop": "68430e6e-3df9-4ef7-92d4-39cc8b7ef400",
+      "asin": "CAP2600505",
+      "job_id": "a28f21d7-1c41-4736-b33f-88f98c7aa628",
+      "snapshot_id": "38c0b64a-9531-4098-9609-a928559a8412",
+      "enqueued_to_terminal_ms": 10029.603,
+      "snapshot_list_ms": 30.754,
+      "job_queue_wait_ms": 9835.724,
+      "job_worker_runtime_ms": 85.624,
+      "job_timing_status": "observed",
+      "request_success": true,
+      "job_status": "completed",
+      "correctness_status": "failed"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Requires the S7 fixture to be imported into the two supplied isolated shops before running.",
+    "The default run scans all 1,000 imported ASINs with a maximum of 10 concurrent scan clients; client workers and Celery worker concurrency are reported separately.",
+    "Ten scan client threads are not ten users unless the credential file contains ten distinct authorized accounts.",
+    "API sampling records list/detail and evidence-search latency separately and marks empty fixtures as insufficient samples; evidence search writes a normal audit entry.",
+    "scan_total_ms is retained as a legacy alias for the longest target elapsed time; scan_concurrent_wall_ms measures the batch and excludes API sampling.",
+    "Queue backlog is the maximum local-database count of queued, running, and retry_wait jobs sampled once per second.",
+    "Index build time is not measured by this runner; it must come from a real index build/import measurement and is never inferred from scan time.",
+    "Host processes are sampled with psutil once per second; Docker stats sample containers every five seconds. Process and container configured/effective limits are reported separately where available.",
+    "A smoke-test cap never evaluates the 1,000-target, 900-second scan gate; local measurements do not constitute target-environment or production capacity acceptance."
+  ]
+}
