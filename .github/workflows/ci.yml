@@ -39,7 +39,7 @@ jobs:
       INVESTIGATION_EVAL_PROVIDER: deterministic
       EVIDENCE_RELEVANCE_ENABLED: "0"
       INSIGHT_ENABLED_MODEL_PROVIDERS: ""
-      INSIGHT_STORAGE_ROOT: ${{ runner.temp }}/insight-storage
+      INSIGHT_STORAGE_ROOT: ${{ github.workspace }}/ci-storage
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
