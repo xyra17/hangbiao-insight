@@ -1,3 +1,4 @@
+from decimal import Decimal
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from django.contrib.auth import get_user_model
@@ -5,6 +6,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from drf_spectacular.utils import extend_schema
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
@@ -13,7 +15,17 @@ from rest_framework.response import Response
 
 from .access import ROLES
 from .api_errors import Conflict
-from .models import AuditEntry, Membership, Product, SessionVersion, Shop, ShopGrant, Workspace
+from .models import (
+    AuditEntry,
+    Membership,
+    Product,
+    SessionVersion,
+    Shop,
+    ShopGrant,
+    Workspace,
+    WorkspaceExecutionPolicy,
+    WorkspaceModelBudgetPolicy,
+)
 from .serializers import ShopSerializer
 
 
@@ -123,6 +135,40 @@ class NewShopCommand(serializers.Serializer):
         return value
 
 
+class WorkspaceModelBudgetPolicyCommand(serializers.Serializer):
+    enabled = serializers.BooleanField()
+    currency = serializers.RegexField(r"^[A-Z]{3}$")
+    daily_cost_limit = serializers.DecimalField(max_digits=20, decimal_places=8, min_value=Decimal("0.00000001"))
+    monthly_cost_limit = serializers.DecimalField(max_digits=20, decimal_places=8, min_value=Decimal("0.00000001"))
+    max_concurrent_external = serializers.IntegerField(min_value=1, max_value=100)
+    lease_seconds = serializers.IntegerField(min_value=30, max_value=3600, default=300)
+
+    def validate(self, data):
+        if data["monthly_cost_limit"] < data["daily_cost_limit"]:
+            raise serializers.ValidationError("月预算不能低于日预算。")
+        return data
+
+
+class WorkspaceModelBudgetPolicySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkspaceModelBudgetPolicy
+        fields = ["enabled", "currency", "daily_cost_limit", "monthly_cost_limit", "max_concurrent_external",
+                  "lease_seconds", "updated_by", "updated_at"]
+        read_only_fields = fields
+
+
+class WorkspaceExecutionPolicyCommand(serializers.Serializer):
+    max_concurrent_investigations = serializers.IntegerField(min_value=1, max_value=100)
+    lease_seconds = serializers.IntegerField(min_value=60, max_value=3600, default=900)
+
+
+class WorkspaceExecutionPolicySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkspaceExecutionPolicy
+        fields = ["max_concurrent_investigations", "lease_seconds", "updated_by", "updated_at"]
+        read_only_fields = fields
+
+
 class WorkspaceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = WorkspaceSerializer
 
@@ -130,6 +176,81 @@ class WorkspaceViewSet(viewsets.ReadOnlyModelViewSet):
         if getattr(self, "swagger_fake_view", False):
             return Workspace.objects.none()
         return Workspace.objects.filter(membership__user=self.request.user).distinct().order_by("name", "id")
+
+    @extend_schema(request=WorkspaceModelBudgetPolicyCommand, responses=WorkspaceModelBudgetPolicySerializer)
+    @action(detail=True, methods=["get", "put"], url_path="model-budget")
+    def model_budget(self, request, pk=None):
+        workspace = self.get_object()
+        require_workspace_admin(request.user, workspace)
+        policy = WorkspaceModelBudgetPolicy.objects.filter(workspace=workspace).first()
+        if request.method == "GET":
+            if policy is None:
+                return Response({"configured": False, "external_dispatch": "blocked_until_admin_configuration"})
+            return Response({"configured": True, **WorkspaceModelBudgetPolicySerializer(policy).data})
+        command = WorkspaceModelBudgetPolicyCommand(data=request.data)
+        command.is_valid(raise_exception=True)
+        data = command.validated_data
+        with transaction.atomic():
+            Workspace.objects.select_for_update().get(pk=workspace.pk)
+            policy = WorkspaceModelBudgetPolicy.objects.select_for_update().filter(workspace=workspace).first()
+            if policy and policy.currency != data["currency"]:
+                from insight.investigation.budget import _committed_cost
+                from insight.models import WorkspaceModelReservation
+
+                local_day = timezone.now().astimezone(ZoneInfo(workspace.timezone)).date()
+                local_month = local_day.replace(day=1)
+                reservations = WorkspaceModelReservation.objects.filter(
+                    workspace=workspace,
+                    status__in=["reserved", "dispatching", "settled", "settled_overrun", "unknown"],
+                )
+                daily = _committed_cost(reservations.filter(budget_day=local_day))
+                monthly = _committed_cost(reservations.filter(budget_month=local_month))
+                if daily > 0 or monthly > 0:
+                    raise ValidationError({
+                        "currency": "当前日/月预算周期仍有预留、未知或已结金额，暂不能更改币种。"
+                    })
+            before = WorkspaceModelBudgetPolicySerializer(policy).data if policy else {}
+            policy, _ = WorkspaceModelBudgetPolicy.objects.update_or_create(
+                workspace=workspace,
+                defaults={**data, "updated_by": request.user},
+            )
+            after = WorkspaceModelBudgetPolicySerializer(policy).data
+            workspace_audit(request.user, workspace, "workspace.model_budget_updated", policy.pk,
+                            before, after, request.request_id)
+        return Response(after)
+
+    @extend_schema(request=WorkspaceExecutionPolicyCommand, responses=WorkspaceExecutionPolicySerializer)
+    @action(detail=True, methods=["get", "put"], url_path="execution-policy")
+    def execution_policy(self, request, pk=None):
+        workspace = self.get_object()
+        require_workspace_admin(request.user, workspace)
+        policy = WorkspaceExecutionPolicy.objects.filter(workspace=workspace).first()
+        if request.method == "GET":
+            if policy is None:
+                from .investigation.budget import _execution_policy_defaults
+
+                return Response({
+                    "configured": False,
+                    "effective_default": _execution_policy_defaults(),
+                    "free_deterministic_runs": "allowed_with_execution_limit",
+                })
+            return Response({"configured": True, **WorkspaceExecutionPolicySerializer(policy).data,
+                             "free_deterministic_runs": "allowed_with_execution_limit"})
+        command = WorkspaceExecutionPolicyCommand(data=request.data)
+        command.is_valid(raise_exception=True)
+        data = command.validated_data
+        with transaction.atomic():
+            Workspace.objects.select_for_update().get(pk=workspace.pk)
+            policy = WorkspaceExecutionPolicy.objects.filter(workspace=workspace).first()
+            before = WorkspaceExecutionPolicySerializer(policy).data if policy else {}
+            policy, _ = WorkspaceExecutionPolicy.objects.update_or_create(
+                workspace=workspace,
+                defaults={**data, "updated_by": request.user},
+            )
+            after = WorkspaceExecutionPolicySerializer(policy).data
+            workspace_audit(request.user, workspace, "workspace.execution_policy_updated", policy.pk,
+                            before, after, request.request_id)
+        return Response({**after, "free_deterministic_runs": "allowed_with_execution_limit"})
 
     @extend_schema(responses=WorkspaceMemberSerializer(many=True))
     @action(detail=True, methods=["get"])

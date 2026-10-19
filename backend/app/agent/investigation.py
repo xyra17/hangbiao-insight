@@ -81,8 +81,12 @@ class AgentInvestigation:
                     tool_params["allowed_source_refs"] = state.allowed_source_refs()
                 result = self.tools.execute(
                     decision.tool_name,
-                    ToolRequest(request_id=state.request_id, investigation_id=state.request_id,
-                                product_id=state.product_id or "", params=tool_params),
+                    ToolRequest(
+                        request_id=state.request_id,
+                        investigation_id=state.request_id,
+                        product_id=state.product_id or "",
+                        params=tool_params,
+                    ),
                 )
             except Exception as exc:
                 state.record_tool_failure(tool_name=decision.tool_name, params=decision.arguments, error=exc)

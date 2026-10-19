@@ -24,7 +24,7 @@ REQUIRED_KEYS = (
 
 
 def input_fingerprint(input_versions: dict[str, Any]) -> str:
-    return digest({key: input_versions.get(key) for key in REQUIRED_KEYS})
+    return digest({key: input_versions.get(key) for key in (*REQUIRED_KEYS, "request_scope")})
 
 
 def validate_frozen_inputs(input_versions: dict[str, Any]) -> None:

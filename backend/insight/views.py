@@ -206,16 +206,19 @@ class JobViewSet(viewsets.ReadOnlyModelViewSet):
     @transaction.atomic
     def retry_refresh(self, request, pk=None):
         from .api_errors import Conflict
-        from .models import Outbox
+        from .models import DerivedRefresh, Outbox
         from .services import audit
         job = self.get_object()
         job = Job.objects.select_for_update().get(pk=job.pk)
         require_role(request.user, job.shop, "operator", "quality", "support", "data_admin")
         if job.kind != "refresh_derived" or job.status not in {"failed", "cancelled"}:
             raise Conflict("只有已失败或取消的派生刷新任务可重新排队。")
+        refresh = get_object_or_404(DerivedRefresh.objects.select_for_update(), job=job)
         job.status, job.error, job.attempts = "queued", "", 0
-        job.next_run_at, job.finished_at = None, None
-        job.save(update_fields=["status", "error", "attempts", "next_run_at", "finished_at"])
+        job.next_run_at, job.started_at, job.finished_at = None, None, None
+        job.save(update_fields=["status", "error", "attempts", "next_run_at", "started_at", "finished_at"])
+        refresh.status, refresh.detail = "queued", ""
+        refresh.save(update_fields=["status", "detail"])
         Outbox.objects.filter(job=job).update(sent_at=None)
         audit(request.user, job.shop, "artifact.refresh_retried", job.pk, request_id=request.request_id)
         return Response(JobSerializer(job).data, status=202)

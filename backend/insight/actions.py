@@ -19,6 +19,7 @@ from insight.models import (
     ActionTask,
     BusinessEvent,
     ChangeProposal,
+    InvestigationRun,
     Notification,
     StandardReport,
 )
@@ -27,6 +28,19 @@ from insight.services import audit
 
 
 class ActionTaskSerializer(serializers.ModelSerializer):
+    source_lineage = serializers.SerializerMethodField()
+
+    def get_source_lineage(self, task):
+        if not task.source_report_id and not task.source_investigation_id:
+            return None
+        report_versions = task.source_report.input_versions if task.source_report_id else {}
+        investigation_versions = task.source_investigation.input_versions if task.source_investigation_id else {}
+        return {
+            "source_manifest": report_versions.get("source_manifest") or investigation_versions.get("source_manifest", {}),
+            "metric_snapshot": report_versions.get("metric_snapshot") or investigation_versions.get("metric_snapshot"),
+            "mapping_versions": report_versions.get("mapping_versions") or investigation_versions.get("mapping_versions", {}),
+        }
+
     class Meta:
         model = ActionTask
         fields = [
@@ -34,6 +48,11 @@ class ActionTaskSerializer(serializers.ModelSerializer):
             "shop",
             "event",
             "source_report",
+            "source_investigation",
+            "human_confirmed_by",
+            "human_confirmed_at",
+            "human_confirmation_note",
+            "source_lineage",
             "child_asin",
             "product",
             "title",
@@ -60,17 +79,28 @@ class ActionDetails(serializers.Serializer):
     evidence_refs = serializers.ListField(child=serializers.CharField(max_length=200), required=False)
     observed_metrics = serializers.ListField(child=serializers.ChoiceField(choices=["ordered_units", "sessions", "unit_session_percent", "refunds", "returns"]), required=False)
     is_formal = serializers.BooleanField(default=False)
+    confirm_source = serializers.BooleanField(default=False)
+    confirmation_note = serializers.CharField(max_length=1000, required=False, allow_blank=True)
 
     def validate(self, data):
         refs = data.get("evidence_refs", [])
         validate_evidence_refs(refs)
         if data.get("is_formal") and not all(data.get(field) for field in ("assigned_to", "due_at", "question", "completion_criteria", "observed_metrics")):
             raise serializers.ValidationError("正式动作需要负责人、截止日期、核查问题、完成标准和观察指标。")
+        has_report = bool(data.get("source_report"))
+        has_investigation = bool(data.get("source_investigation"))
+        if has_investigation and not has_report:
+            raise serializers.ValidationError("调查来源必须与其报告一起绑定。")
+        if has_report and has_investigation and (not data.get("confirm_source") or not data.get("confirmation_note", "").strip()):
+            raise serializers.ValidationError("绑定报告与调查前必须由操作者明确确认并填写确认说明。")
+        if data.get("confirm_source") and not (has_report and has_investigation):
+            raise serializers.ValidationError("来源确认需要同时指定报告和调查。")
         return data
 
 
 class ActionTaskCommand(ActionDetails):
     source_report = serializers.UUIDField(required=False, allow_null=True)
+    source_investigation = serializers.UUIDField(required=False, allow_null=True)
     shop = serializers.UUIDField()
     child_asin = serializers.RegexField(r"^[A-Z0-9]{10}$")
     product = serializers.UUIDField(required=False, allow_null=True)
@@ -154,6 +184,33 @@ class ActionTaskViewSet(viewsets.ModelViewSet):
             report = get_object_or_404(scoped(StandardReport.objects.all(), request.user), pk=data["source_report"])
             if (report.shop_id, report.child_asin, report.product_id) != (shop.pk, data["child_asin"], data.get("product")):
                 raise serializers.ValidationError("动作必须绑定同一店铺和商品范围的报告版本。")
+            if data.get("source_investigation"):
+                investigation = get_object_or_404(
+                    scoped(InvestigationRun.objects.all(), request.user), pk=data["source_investigation"]
+                )
+                if (investigation.shop_id, investigation.child_asin, investigation.product_id) != (
+                    shop.pk, data["child_asin"], data.get("product")
+                ):
+                    raise serializers.ValidationError("动作必须绑定同一店铺和商品范围的调查版本。")
+                report_versions = report.input_versions
+                investigation_versions = investigation.input_versions
+                if (
+                    not report.metric_snapshot_id
+                    or str(report.metric_snapshot_id) != investigation_versions.get("metric_snapshot")
+                    or report_versions.get("source_manifest") != investigation_versions.get("source_manifest")
+                    or report_versions.get("mapping_versions", {}) != investigation_versions.get("mapping_versions", {})
+                    or not investigation_versions.get("mapping_versions")
+                ):
+                    raise serializers.ValidationError("报告与调查的快照、来源清单或 mapping 版本不一致或缺失。")
+                if investigation.status not in {"completed", "partial"} or not investigation_versions.get("source_manifest"):
+                    raise serializers.ValidationError("只能确认已完成且具有冻结来源版本的调查。")
+                required_refs = {
+                    f"report:{report.pk}",
+                    f"investigation:{investigation.pk}",
+                    f"snapshot:{report.metric_snapshot_id}",
+                }
+                if not required_refs.issubset(set(data.get("evidence_refs", []))):
+                    raise serializers.ValidationError("来源闭环任务必须引用所绑定的报告、调查和快照编号。")
         if data.get("event"):
             event = get_object_or_404(scoped(BusinessEvent.objects.all(), request.user), pk=data["event"])
             if (event.shop_id, event.child_asin, event.product_id) != (
@@ -172,6 +229,10 @@ class ActionTaskViewSet(viewsets.ModelViewSet):
             shop=shop,
             event_id=data.get("event"),
             source_report_id=data.get("source_report"),
+            source_investigation_id=data.get("source_investigation"),
+            human_confirmed_by=request.user if data.get("confirm_source") else None,
+            human_confirmed_at=timezone.now() if data.get("confirm_source") else None,
+            human_confirmation_note=data.get("confirmation_note", "") if data.get("confirm_source") else "",
             child_asin=data["child_asin"],
             product_id=data.get("product"),
             title=data["title"],

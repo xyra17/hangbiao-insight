@@ -45,7 +45,10 @@ def calculate_occurrences(manifest, asin, today, product_id=None, rules=None):
                     "amount_by_currency": {currency: str(amount) for currency, amount in by_currency.items()},
                     "raw_row_ids": [str(row.raw_row_id) for row in selected],
                 }
-            convention = next((row.batch.contract.return_event for row in selected), "received")
+            # An empty window retains the observed source contract, rather than
+            # silently converting a requested-return source into received.
+            convention = next((row.batch.contract.return_event for row in selected),
+                              next((row.batch.contract.return_event for row in rows), "received"))
             all_raw_row_ids = [str(row.raw_row_id) for row in selected]
             eligible_statuses = {"requested", "received", "completed"} if convention == "requested" else {"received", "completed"}
             unclassified_rows = [row for row in selected if row.status.lower() not in {

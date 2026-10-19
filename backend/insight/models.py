@@ -22,6 +22,44 @@ class Workspace(Entity):
     timezone = models.CharField(max_length=64, default="Asia/Shanghai")
 
 
+class WorkspaceModelBudgetPolicy(Entity):
+    workspace = models.OneToOneField(Workspace, on_delete=models.PROTECT, related_name="model_budget_policy")
+    enabled = models.BooleanField(default=False)
+    currency = models.CharField(max_length=3)
+    daily_cost_limit = models.DecimalField(max_digits=20, decimal_places=8)
+    monthly_cost_limit = models.DecimalField(max_digits=20, decimal_places=8)
+    max_concurrent_external = models.PositiveSmallIntegerField()
+    lease_seconds = models.PositiveIntegerField(default=300)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class WorkspaceExecutionPolicy(Entity):
+    """Admission limits for paid and free workspace background investigations."""
+
+    workspace = models.OneToOneField(Workspace, on_delete=models.PROTECT, related_name="execution_policy")
+    max_concurrent_investigations = models.PositiveSmallIntegerField(default=4)
+    lease_seconds = models.PositiveIntegerField(default=900)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class WorkspaceExecutionLease(Entity):
+    """Cross-worker execution slot for an investigation or derived refresh job."""
+
+    workspace = models.ForeignKey(Workspace, on_delete=models.PROTECT, related_name="execution_leases")
+    job = models.OneToOneField("Job", on_delete=models.PROTECT, related_name="workspace_execution_lease")
+    job_lease_token = models.PositiveBigIntegerField(default=0)
+    status = models.CharField(max_length=20, default="active")
+    lease_expires_at = models.DateTimeField(null=True)
+    heartbeat_at = models.DateTimeField(null=True)
+    released_at = models.DateTimeField(null=True)
+    metadata = models.JSONField(default=dict)
+
+    class Meta:
+        indexes = [models.Index(fields=["workspace", "status", "lease_expires_at"], name="workspace_exec_lease_idx")]
+
+
 class Membership(Entity):
     workspace = models.ForeignKey(Workspace, on_delete=models.PROTECT)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
@@ -127,6 +165,7 @@ class Job(Entity):
     finished_at = models.DateTimeField(null=True)
     payload = models.JSONField(default=dict)
     heartbeat_at = models.DateTimeField(null=True)
+    started_at = models.DateTimeField(null=True)
     next_run_at = models.DateTimeField(null=True)
 
     class Meta:
@@ -507,6 +546,12 @@ class ActionTask(Entity):
     shop = models.ForeignKey(Shop, on_delete=models.PROTECT)
     event = models.ForeignKey("BusinessEvent", null=True, on_delete=models.PROTECT)
     source_report = models.ForeignKey(StandardReport, null=True, on_delete=models.PROTECT)
+    source_investigation = models.ForeignKey("InvestigationRun", null=True, on_delete=models.PROTECT)
+    human_confirmed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name="confirmed_action_tasks"
+    )
+    human_confirmed_at = models.DateTimeField(null=True)
+    human_confirmation_note = models.TextField(blank=True)
     child_asin = models.CharField(max_length=10)
     product = models.ForeignKey(Product, null=True, on_delete=models.PROTECT)
     title = models.CharField(max_length=240)
@@ -755,6 +800,39 @@ class InvestigationBudgetLedger(Entity):
             models.UniqueConstraint(fields=["run", "idempotency_key"], name="unique_investigation_budget_entry"),
             models.UniqueConstraint(fields=["run", "sequence"], name="unique_investigation_budget_sequence"),
         ]
+
+
+class WorkspaceModelReservation(Entity):
+    """Durable cross-run cost reservation and external-dispatch lease."""
+
+    workspace = models.ForeignKey(Workspace, on_delete=models.PROTECT, related_name="model_reservations")
+    investigation_entry = models.OneToOneField(
+        InvestigationBudgetLedger, null=True, on_delete=models.PROTECT, related_name="workspace_reservation"
+    )
+    reservation_key = models.CharField(max_length=200)
+    provider = models.CharField(max_length=60)
+    operation = models.CharField(max_length=100)
+    currency = models.CharField(max_length=3)
+    budget_day = models.DateField()
+    budget_month = models.DateField()
+    status = models.CharField(max_length=20, default="reserved")
+    reserved_cost = models.DecimalField(max_digits=20, decimal_places=8)
+    actual_cost = models.DecimalField(max_digits=20, decimal_places=8, null=True)
+    dispatch_count = models.PositiveSmallIntegerField(default=0)
+    lease_expires_at = models.DateTimeField(null=True)
+    dispatched_at = models.DateTimeField(null=True)
+    settled_at = models.DateTimeField(null=True)
+    object_type = models.CharField(max_length=40, blank=True)
+    object_id = models.CharField(max_length=100, blank=True)
+    metadata = models.JSONField(default=dict)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["workspace", "reservation_key"], name="unique_workspace_model_reservation"),
+            models.CheckConstraint(condition=Q(reserved_cost__gte=0), name="workspace_model_reserved_cost_nonnegative"),
+            models.CheckConstraint(condition=Q(actual_cost__isnull=True) | Q(actual_cost__gte=0), name="workspace_model_actual_cost_nonnegative"),
+        ]
+        indexes = [models.Index(fields=["workspace", "status", "budget_day"], name="workspace_model_day_idx")]
 
 
 class InvestigationDecision(Entity):

@@ -9,7 +9,6 @@ from typing import Any
 from .schemas import EvaluationReport, MetricValue, SemanticPrediction
 from .taxonomy import Taxonomy
 
-
 THRESHOLDS = {
     "primary": 0.85,
     "secondary": 0.75,
@@ -31,11 +30,15 @@ def _f1(tp: int, fp: int, fn: int) -> float:
 
 
 def _higher_metric(value: float, numerator: int, denominator: int, target: float) -> MetricValue:
-    return MetricValue(value=value, numerator=numerator, denominator=denominator, target=target, passed=value >= target)
+    return MetricValue(
+        value=value, numerator=numerator, denominator=denominator, target=target, passed=value >= target
+    )
 
 
 def _lower_metric(value: float, numerator: int, denominator: int, target: float) -> MetricValue:
-    return MetricValue(value=value, numerator=numerator, denominator=denominator, target=target, passed=value <= target)
+    return MetricValue(
+        value=value, numerator=numerator, denominator=denominator, target=target, passed=value <= target
+    )
 
 
 class SemanticEvaluator:
@@ -100,11 +103,16 @@ class SemanticEvaluator:
             unsupported += int(not valid_evidence)
             if not valid_topic or not valid_evidence:
                 bad_cases.append(
-                    {"review_id": rid, "primary_topic": primary, "secondary_topic": secondary,
-                     "evidence_span": evidence, "reasons": [
-                         *([] if valid_topic else ["invalid_taxonomy"]),
-                         *([] if valid_evidence else ["unsupported_evidence"]),
-                     ]}
+                    {
+                        "review_id": rid,
+                        "primary_topic": primary,
+                        "secondary_topic": secondary,
+                        "evidence_span": evidence,
+                        "reasons": [
+                            *([] if valid_topic else ["invalid_taxonomy"]),
+                            *([] if valid_evidence else ["unsupported_evidence"]),
+                        ],
+                    }
                 )
 
         support = Counter(str(_claim_value(c, "secondary_topic")) for c in golden)
@@ -117,12 +125,27 @@ class SemanticEvaluator:
             primary_topic_macro_f1=_higher_metric(
                 primary_macro, sum(per_primary_f1), len(per_primary_f1), THRESHOLDS["primary"]
             ),
-            secondary_topic_micro_f1=_higher_metric(_f1(sec_tp, sec_fp, sec_fn), 2 * sec_tp, 2 * sec_tp + sec_fp + sec_fn, THRESHOLDS["secondary"]),
-            topic_polarity_micro_f1=_higher_metric(_f1(pair_tp, pair_fp, pair_fn), 2 * pair_tp, 2 * pair_tp + pair_fp + pair_fn, THRESHOLDS["topic_polarity"]),
-            matched_topic_polarity_accuracy=_higher_metric(polarity_accuracy, correct, matched, THRESHOLDS["polarity_accuracy"]),
-            evidence_substring_validity=_higher_metric(evidence_rate, evidence_valid, pred_count, THRESHOLDS["evidence_validity"]),
-            invalid_taxonomy_rate=_lower_metric(invalid_rate, invalid_taxonomy, pred_count, THRESHOLDS["invalid_taxonomy"]),
-            unsupported_evidence_rate=_lower_metric(unsupported_rate, unsupported, pred_count, THRESHOLDS["unsupported_evidence"]),
+            secondary_topic_micro_f1=_higher_metric(
+                _f1(sec_tp, sec_fp, sec_fn), 2 * sec_tp, 2 * sec_tp + sec_fp + sec_fn, THRESHOLDS["secondary"]
+            ),
+            topic_polarity_micro_f1=_higher_metric(
+                _f1(pair_tp, pair_fp, pair_fn),
+                2 * pair_tp,
+                2 * pair_tp + pair_fp + pair_fn,
+                THRESHOLDS["topic_polarity"],
+            ),
+            matched_topic_polarity_accuracy=_higher_metric(
+                polarity_accuracy, correct, matched, THRESHOLDS["polarity_accuracy"]
+            ),
+            evidence_substring_validity=_higher_metric(
+                evidence_rate, evidence_valid, pred_count, THRESHOLDS["evidence_validity"]
+            ),
+            invalid_taxonomy_rate=_lower_metric(
+                invalid_rate, invalid_taxonomy, pred_count, THRESHOLDS["invalid_taxonomy"]
+            ),
+            unsupported_evidence_rate=_lower_metric(
+                unsupported_rate, unsupported, pred_count, THRESHOLDS["unsupported_evidence"]
+            ),
             per_topic_support=dict(sorted(support.items())),
             bad_cases=bad_cases,
         )
@@ -153,4 +176,6 @@ class SemanticEvaluator:
             raw[str(_claim_value(claim, "review_id"))][str(_claim_value(claim, "secondary_topic"))].add(
                 str(_claim_value(claim, "polarity"))
             )
-        return {rid: {topic: frozenset(values) for topic, values in topics.items()} for rid, topics in raw.items()}
+        return {
+            rid: {topic: frozenset(values) for topic, values in topics.items()} for rid, topics in raw.items()
+        }

@@ -6,7 +6,7 @@ from uuid import UUID
 from rest_framework import serializers
 
 EVIDENCE_REF_PREFIXES = frozenset(
-    {"snapshot", "report", "event", "review", "retrieval", "raw", "semantic", "task", "claim", "metric"}
+    {"snapshot", "report", "investigation", "event", "review", "retrieval", "raw", "semantic", "task", "claim", "metric"}
 )
 _REFERENCE_VALUE = re.compile(r"^[A-Za-z0-9._-]{1,180}$")
 

@@ -9,7 +9,6 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-
 METRICS = (
     "primary_topic_macro_f1",
     "secondary_topic_micro_f1",
@@ -58,13 +57,10 @@ def compare(*, runs: dict[str, Path], output_dir: Path) -> dict[str, Any]:
     reports = {name: _read_json(path / "dev_eval_metrics.json") for name, path in runs.items()}
     cases = {name: _read_jsonl(path / "bad_cases.jsonl") for name, path in runs.items()}
     metric_table = {
-        metric: {name: reports[name]["metrics"][metric]["value"] for name in runs}
-        for metric in METRICS
+        metric: {name: reports[name]["metrics"][metric]["value"] for name in runs} for metric in METRICS
     }
     error_table = {
-        error: {
-            name: sum(error in _error_types(case) for case in cases[name]) for name in runs
-        }
+        error: {name: sum(error in _error_types(case) for case in cases[name]) for name in runs}
         for error in ERROR_TYPES
     }
     error_table["evidence_invalid_claims"] = {
@@ -75,8 +71,7 @@ def compare(*, runs: dict[str, Path], output_dir: Path) -> dict[str, Any]:
         for name in runs
     }
     error_table["unsupported_evidence_claims"] = {
-        name: reports[name]["metrics"]["unsupported_evidence_rate"]["numerator"]
-        for name in runs
+        name: reports[name]["metrics"]["unsupported_evidence_rate"]["numerator"] for name in runs
     }
     error_table["matched_topic_polarity_incorrect_claims"] = {
         name: (
@@ -90,8 +85,7 @@ def compare(*, runs: dict[str, Path], output_dir: Path) -> dict[str, Any]:
     deepseek = "deepseek-v4-flash / prompt-v1.0"
     qwen = "qwen3.5-9b / prompt-v1.0"
     delta_vs_qwen_v10 = {
-        metric: metric_table[metric][deepseek] - metric_table[metric][qwen]
-        for metric in METRICS
+        metric: metric_table[metric][deepseek] - metric_table[metric][qwen] for metric in METRICS
     }
     result = {
         "scope": {

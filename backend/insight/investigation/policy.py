@@ -17,6 +17,7 @@ from insight.models import InvestigationRun, InvestigationToolCall, ShopGrant
 
 _READ_ROLES = ("operator", "quality", "support", "data_admin")
 TOOL_POLICIES = {
+    "order_records": {"mode": "read", "roles": ("data_admin",), "description": "读取授权冻结订单、退款和退货样本"},
     "metric_snapshot": {"mode": "read", "roles": _READ_ROLES, "description": "读取冻结指标快照"},
     "review_claims": {"mode": "read", "roles": _READ_ROLES, "description": "读取已接受语义 claim"},
     "text_evidence": {"mode": "read", "roles": _READ_ROLES, "description": "读取授权范围原文证据"},
@@ -41,6 +42,24 @@ def permission_matrix() -> list[dict]:
         }
         for name, policy in TOOL_POLICIES.items()
     ]
+
+
+def permitted_read_tools(run, names):
+    """Only advertise current capabilities; execution still checks them again."""
+    allowed = []
+    for name in names:
+        policy = TOOL_POLICIES.get(name)
+        if not policy or policy["mode"] != "read":
+            continue
+        try:
+            require_role(run.requested_by, run.shop, *policy["roles"])
+            if name == "order_records":
+                from insight.ingestion.service import require_source_access
+                require_source_access(run.requested_by, run.shop)
+        except PermissionDenied:
+            continue
+        allowed.append(name)
+    return allowed
 
 
 def _record_denial(run: InvestigationRun, tool_name: str, state: dict, *, key: str, reason: str):
@@ -81,7 +100,7 @@ def _record_denial(run: InvestigationRun, tool_name: str, state: dict, *, key: s
         return None
 
 
-def authorize_tool(run: InvestigationRun, tool_name: str, state: dict, *, idempotency_key: str):
+def _authorize_tool(run: InvestigationRun, tool_name: str, state: dict, *, idempotency_key: str):
     denial_key = f"denied:{idempotency_key}"
     policy = TOOL_POLICIES.get(tool_name)
     if not policy:
@@ -103,6 +122,9 @@ def authorize_tool(run: InvestigationRun, tool_name: str, state: dict, *, idempo
             if locked.lease_token != run.lease_token:
                 raise PermissionDenied("调查执行代数已过期。")
             require_role(locked.requested_by, locked.shop, *policy["roles"])
+            if tool_name == "order_records":
+                from insight.ingestion.service import require_source_access
+                require_source_access(locked.requested_by, locked.shop)
             if asin:
                 authorize_object(locked.requested_by, locked.shop, asin, product_id)
             grant = ShopGrant.objects.filter(user=locked.requested_by, shop=locked.shop).first()
@@ -139,3 +161,12 @@ def record_tool_result(call: InvestigationToolCall, *, refs: list[str] | None = 
     InvestigationToolCall.objects.filter(pk=call.pk).update(
         output_refs=refs or [], status=status, error=error[:300]
     )
+
+
+def authorize_tool(run: InvestigationRun, tool_name: str, state: dict, *, idempotency_key: str):
+    try:
+        return _authorize_tool(run, tool_name, state, idempotency_key=idempotency_key)
+    except PermissionDenied as exc:
+        # Persist after the authorization transaction rolls back.
+        _record_denial(run, tool_name, state, key=f"denied:{idempotency_key}", reason=str(exc))
+        raise

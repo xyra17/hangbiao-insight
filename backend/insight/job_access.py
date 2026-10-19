@@ -32,7 +32,7 @@ def visible_jobs(qs, user):
         except PermissionDenied:
             pass
         else:
-            visible |= Q(shop=shop, kind__in=["probe", "parse_import", "publish_import", "preview_rules"])
+            visible |= Q(shop=shop, kind__in=["probe", "parse_import", "publish_import", "revoke_import", "preview_rules"])
         for job in qs.filter(shop=shop, kind="summarize_parent"):
             snapshot = ParentSnapshot.objects.filter(pk=job.result.get("parent_snapshot_id")).first()
             try:

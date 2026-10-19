@@ -168,6 +168,7 @@ class EvidenceSearchCommand(serializers.Serializer):
     end = serializers.DateField()
     kind = serializers.ChoiceField(choices=["reviews", "support"], default="reviews")
     limit = serializers.IntegerField(min_value=1, max_value=50, default=10)
+    evidence_context = serializers.ChoiceField(choices=["any", "asserted", "negated", "hypothetical"], default="any")
     language = serializers.CharField(max_length=20, required=False)
     topic = serializers.CharField(max_length=100, required=False)
     polarity = serializers.ChoiceField(choices=["positive", "negative", "neutral", "mixed"], required=False)
@@ -183,6 +184,14 @@ class EvidenceSearchResult(serializers.Serializer):
     retrieval_version = serializers.CharField()
     alias_version = serializers.CharField()
     index_version = serializers.CharField()
+    algorithm_manifest = serializers.DictField()
+    match_status = serializers.ChoiceField(choices=["relevant_hits", "scope_context", "no_hits", "incomplete"])
+    retrieval_complete = serializers.BooleanField()
+    candidate_count = serializers.IntegerField()
+    relevance_judgment = serializers.DictField()
+    evidence_context = serializers.CharField()
+    relevant_hit_count = serializers.IntegerField()
+    context_item_count = serializers.IntegerField()
     source_manifest = serializers.DictField()
     scope = serializers.DictField()
     query = serializers.CharField()
@@ -210,6 +219,7 @@ class EvidenceSearchView(APIView):
                 product_id=data.get("product"),
                 kind=data["kind"],
                 limit=data["limit"],
+                evidence_context=data["evidence_context"],
                 language=data.get("language"), topic=data.get("topic"), polarity=data.get("polarity"),
             )
         )

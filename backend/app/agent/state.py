@@ -30,8 +30,11 @@ class InvestigationState(BaseModel):
     parent_investigation_id: str | None = None
     product_id: str | None = None
     period: str | None = None
+    frozen_scope: dict[str, Any] = Field(default_factory=dict)
     task_type: str = "diagnose_business_anomaly"
-    status: Literal["pending", "running", "completed", "stopped", "failed", "timeout", "planner_unavailable", "cancelled"] = "pending"
+    status: Literal[
+        "pending", "running", "completed", "stopped", "failed", "timeout", "planner_unavailable", "cancelled"
+    ] = "pending"
     observations: list[dict[str, Any]] = Field(default_factory=list)
     hypotheses: list[dict[str, Any]] = Field(default_factory=list)
     actions: list[ActionRecord] = Field(default_factory=list)
@@ -52,26 +55,71 @@ class InvestigationState(BaseModel):
     def record_tool_result(self, *, tool_name: str, params: dict[str, Any], result: ToolResult) -> None:
         self.step_count += 1
         error = "; ".join(result.warnings) if result.status == "error" else None
-        self.actions.append(ActionRecord(tool_name=tool_name, params=params, status=result.status, trace_id=result.trace_id, error=error))
-        self.observations.append({"tool_name": tool_name, "status": result.status, "data": result.data, "source_refs": result.evidence_refs})
+        self.actions.append(
+            ActionRecord(
+                tool_name=tool_name,
+                params=params,
+                status=result.status,
+                trace_id=result.trace_id,
+                error=error,
+            )
+        )
+        self.observations.append(
+            {
+                "tool_name": tool_name,
+                "status": result.status,
+                "data": result.data,
+                "source_refs": result.evidence_refs,
+            }
+        )
         evidence_status = result.data.get("evidence_status")
         if evidence_status == "verified":
             self.evidence.extend(result.data.get("validated_evidence", []))
         elif evidence_status == "conflict":
             self.conflicts.append({"tool_name": tool_name, "validation": result.data})
-        self.trace.append(TraceEvent(event_type="tool_completed", detail={"tool_name": tool_name, "status": result.status, "trace_id": result.trace_id}))
+        self.trace.append(
+            TraceEvent(
+                event_type="tool_completed",
+                detail={"tool_name": tool_name, "status": result.status, "trace_id": result.trace_id},
+            )
+        )
 
     def record_tool_failure(self, *, tool_name: str, params: dict[str, Any], error: Exception) -> None:
         self.step_count += 1
         trace_id = f"failed-{self.request_id}-{self.step_count}"
-        self.actions.append(ActionRecord(tool_name=tool_name, params=params, status="error", trace_id=trace_id, error=type(error).__name__))
-        self.observations.append({"tool_name": tool_name, "status": "error", "error_type": type(error).__name__, "retryable": False, "message": str(error)[:240], "source_refs": []})
-        self.trace.append(TraceEvent(event_type="tool_failed", detail={"tool_name": tool_name, "error_type": type(error).__name__, "trace_id": trace_id}))
+        self.actions.append(
+            ActionRecord(
+                tool_name=tool_name,
+                params=params,
+                status="error",
+                trace_id=trace_id,
+                error=type(error).__name__,
+            )
+        )
+        self.observations.append(
+            {
+                "tool_name": tool_name,
+                "status": "error",
+                "error_type": type(error).__name__,
+                "retryable": False,
+                "message": str(error)[:240],
+                "source_refs": [],
+            }
+        )
+        self.trace.append(
+            TraceEvent(
+                event_type="tool_failed",
+                detail={"tool_name": tool_name, "error_type": type(error).__name__, "trace_id": trace_id},
+            )
+        )
 
     def stop(self, reason: str, *, failed: bool = False) -> None:
-        if reason == "timeout": self.status = "timeout"
-        elif reason == "planner_unavailable": self.status = "planner_unavailable"
-        else: self.status = "failed" if failed else "stopped"
+        if reason == "timeout":
+            self.status = "timeout"
+        elif reason == "planner_unavailable":
+            self.status = "planner_unavailable"
+        else:
+            self.status = "failed" if failed else "stopped"
         self.stop_reason = reason
         self.next_action = None
         self.trace.append(TraceEvent(event_type="investigation_stopped", detail={"reason": reason}))

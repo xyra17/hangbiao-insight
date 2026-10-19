@@ -23,8 +23,13 @@ class SemanticExtractionService:
         self.parser = parser
         self.guard = guard
 
-    def extract(self, review: ReviewInput) -> GuardResult:
+    def extract(self, review: ReviewInput, *, receipt_binding: str | None = None) -> GuardResult:
+        # A failed attempt must never inherit the previous row's usage receipt.
+        self.last_response = None
+        self.last_response_binding = None
         prompt = self.prompt_builder.build(review)
         response = self.gateway.extract(review, prompt)
+        self.last_response = response
+        self.last_response_binding = receipt_binding
         predictions = self.parser.parse(review, response)
         return self.guard.apply(review, predictions)

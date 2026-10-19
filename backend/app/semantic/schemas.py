@@ -8,7 +8,6 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-
 PROMPT_VERSION = "semantic-prompt-v1.0"
 SEMANTIC_VERSION = "review-semantic-v1.0"
 

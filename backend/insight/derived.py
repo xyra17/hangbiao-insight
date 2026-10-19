@@ -96,6 +96,10 @@ def refresh_derived(job, heartbeat):
             preparer = get_user_model().objects.get(pk=job.payload["prepared_by"])
             semantic = run_semantic(preparer, job.shop, snapshot.child_asin, snapshot.product_id, provider="deterministic", frozen_manifest=snapshot.source_manifest, request_id=str(job.pk))
             successor = InvestigationRun.objects.create(shop=job.shop, requested_by=job.actor, child_asin=previous.child_asin, product_id=previous.product_id, query=previous.query, max_steps=previous.max_steps, budget_units=previous.budget_units, previous_run=previous, read_only_refresh=True, state={"source_manifest": snapshot.source_manifest, "input_versions": {"metric_snapshot": str(snapshot.pk), "semantic_run": str(semantic.pk)}})
+            for key in ("request_scope", "search_start", "search_end", "scope_query"):
+                if key in previous.state:
+                    successor.state[key] = previous.state[key]
+            successor.save(update_fields=["state"])
             refresh.replacement_id, refresh.status = successor.pk, "running"
             refresh.save(update_fields=["replacement_id", "status"])
             audit(job.actor, job.shop, "investigation.refresh_created", successor.pk, after={"previous_run":str(previous.pk), "batch":str(refresh.batch_id), "read_only_refresh":True}, request_id=str(job.pk))

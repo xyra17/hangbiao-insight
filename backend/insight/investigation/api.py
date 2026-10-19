@@ -1,12 +1,14 @@
 from django.db import transaction
 from django.shortcuts import get_object_or_404
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_field
 from rest_framework import serializers, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from app.agent.output_contract import BUSINESS_JSON_SCHEMA, LEGACY_BUSINESS_JSON_SCHEMA
 from insight.access import require_role, shops_for
 from insight.api_errors import Conflict
+from insight.ingestion.contracts import digest
 from insight.metrics.facts import authorize_object
 from insight.models import InvestigationRun, InvestigationStep, Job, Outbox
 from insight.serializers import JobSerializer
@@ -58,12 +60,72 @@ class InvestigationStepSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
+class InvestigationConclusion(serializers.Serializer):
+    status = serializers.ChoiceField(choices=["unknown", "pending_adjudication"], required=False)
+    statement = serializers.CharField(required=False)
+    proposed_statement = serializers.CharField(required=False)
+    citation_status = serializers.CharField(required=False)
+    citations = serializers.ListField(child=serializers.DictField(), required=False)
+    semantic_judgment = serializers.CharField(required=False)
+
+
+class InvestigationObservation(serializers.Serializer):
+    fact_id = serializers.CharField(required=False)
+    record_id = serializers.CharField(required=False)
+    raw_row_id = serializers.CharField(required=False)
+    business_date = serializers.CharField(required=False)
+    revision = serializers.IntegerField(required=False)
+    title = serializers.CharField(required=False, allow_blank=True)
+    text = serializers.CharField(required=False)
+    match_kind = serializers.ChoiceField(choices=["relevant_hit", "scope_context"], required=False)
+    evidence_contexts = serializers.ListField(child=serializers.DictField(), required=False)
+    evidence_relation = serializers.CharField(required=False)
+    source_kind = serializers.CharField(required=False, allow_null=True)
+    phase = serializers.CharField(required=False)
+
+
+
+
+@extend_schema_field({"oneOf": [LEGACY_BUSINESS_JSON_SCHEMA, BUSINESS_JSON_SCHEMA]})
+class BusinessContractField(serializers.DictField):
+    """Native-v2 arrays and legacy-v1 strings remain explicitly versioned."""
+
+
+class InvestigationOutput(serializers.Serializer):
+    business_schema_version = serializers.CharField(required=False)
+    business_contract = BusinessContractField(required=False)
+    business_contract_registry_sha256 = serializers.CharField(required=False)
+    business_contract_validation = serializers.DictField(required=False)
+    output_schema_version = serializers.CharField(required=False)
+    conclusion = InvestigationConclusion(required=False)
+    observations = InvestigationObservation(many=True, required=False)
+    retrieval_summary = serializers.DictField(child=serializers.IntegerField(), required=False)
+    request_scope = serializers.DictField(required=False, allow_null=True)
+    evidence = serializers.ListField(child=serializers.DictField(), required=False)
+    hypotheses = serializers.ListField(child=serializers.DictField(), required=False)
+    limitations = serializers.ListField(child=serializers.CharField(), required=False)
+    clarification = serializers.CharField(required=False)
+    write = serializers.DictField(required=False, allow_null=True)
+
+
 class InvestigationSerializer(serializers.ModelSerializer):
+    result = serializers.SerializerMethodField()
     steps = InvestigationStepSerializer(many=True, read_only=True)
     refreshes = serializers.SerializerMethodField()
     budget = serializers.SerializerMethodField()
     tool_calls = serializers.SerializerMethodField()
     tool_permissions = serializers.SerializerMethodField()
+
+    def to_representation(self, instance):
+        from insight.metrics.api import can_read_raw_source
+
+        from .orders import redact_order_ids
+        data = super().to_representation(instance)
+        return data if can_read_raw_source(self.context["request"].user, instance.shop) else redact_order_ids(data)
+
+    @extend_schema_field(InvestigationOutput)
+    def get_result(self, obj):
+        return obj.result
 
     def get_refreshes(self, obj) -> list[dict]:
         from insight.derived import artifact_refreshes
@@ -288,8 +350,6 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=["post"])
     def clarify(self, request, pk=None):
         """Continue a clarification as a linked run using only remaining budget."""
-        import uuid
-
         command = InvestigationClarification(data=request.data)
         command.is_valid(raise_exception=True)
         data = command.validated_data
@@ -301,21 +361,33 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
             remaining = max(run.max_steps - run.steps_used, 0)
             if remaining < 3:
                 raise Conflict("当前调查剩余预算不足以继续，请发起新的调查并重新确认范围。")
-            child_asin = data.get("child_asin", "")
+            date_correction = (run.result.get("request_scope") or {}).get("status") == "needs_clarification"
+            child_asin = data.get("child_asin") or (run.child_asin if date_correction else "")
+            product_id = data.get("product", run.product_id if date_correction and child_asin == run.child_asin else None)
             if child_asin:
-                authorize_object(request.user, run.shop, child_asin, data.get("product"))
+                authorize_object(request.user, run.shop, child_asin, product_id)
+            command_scope = {"query": data["query"], "child_asin": child_asin,
+                             "product_id": str(product_id) if product_id else None, "previous_run": str(run.pk)}
+            command_key = "clarify-" + digest({"parent": str(run.pk), "key": data["idempotency_key"]})
+            existing = Job.objects.filter(shop=run.shop, actor=request.user, kind="investigation_run",
+                                          idempotency_key=command_key).first()
+            if existing:
+                if existing.payload.get("clarification_request") != command_scope:
+                    raise Conflict("同一澄清请求标识不能用于不同日期或对象。")
+                return Response(JobSerializer(existing).data, status=202)
             child = InvestigationRun.objects.create(
                 previous_run=run,
                 shop=run.shop,
                 requested_by=request.user,
                 query=f"{run.query}\n补充定位：{data['query']}",
                 child_asin=child_asin,
-                product_id=data.get("product"),
+                product_id=product_id,
                 max_steps=remaining,
                 budget_units=remaining,
                 state={
                     "clarified_from": str(run.pk),
                     "original_query": run.query,
+                    **({"scope_query": data["query"]} if date_correction else {}),
                     "planner_provider": run.state.get("planner_provider", "deterministic"),
                     "write_requested": bool(run.state.get("write_requested")),
                 },
@@ -324,8 +396,9 @@ class InvestigationViewSet(viewsets.ReadOnlyModelViewSet):
                 shop=run.shop,
                 actor=request.user,
                 kind="investigation_run",
-                idempotency_key=f"clarify-{child.pk}-{uuid.uuid4().hex}",
+                idempotency_key=command_key,
                 payload={
+                    "clarification_request": command_scope,
                     "query": child.query,
                     "child_asin": child.child_asin,
                     "product_id": str(child.product_id) if child.product_id else None,

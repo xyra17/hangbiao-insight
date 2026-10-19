@@ -21,7 +21,11 @@ def _jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def _claim_tuple(claim: dict[str, Any]) -> tuple[str, str, str]:
-    return (str(claim.get("secondary_topic", "")), str(claim.get("polarity", "")), str(claim.get("evidence_span", "")))
+    return (
+        str(claim.get("secondary_topic", "")),
+        str(claim.get("polarity", "")),
+        str(claim.get("evidence_span", "")),
+    )
 
 
 def _error_types(case: dict[str, Any]) -> list[str]:
@@ -29,7 +33,15 @@ def _error_types(case: dict[str, Any]) -> list[str]:
     return [raw] if isinstance(raw, str) else list(raw)
 
 
-def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, reviews_path: Path, claims_path: Path, output_dir: Path) -> dict[str, Any]:
+def analyze(
+    *,
+    metrics_path: Path,
+    bad_cases_path: Path,
+    parsed_dir: Path,
+    reviews_path: Path,
+    claims_path: Path,
+    output_dir: Path,
+) -> dict[str, Any]:
     metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
     cases = _jsonl(bad_cases_path)
     reviews = {row["review_id"]: row for row in _csv(reviews_path)}
@@ -74,7 +86,9 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
         for topic, count in (pred_topics - gold_topics).items():
             extra[topic] += count
         gold_pairs = Counter((row["secondary_topic"], row["polarity"]) for row in golden)
-        pred_pairs = Counter((str(row.get("secondary_topic", "")), str(row.get("polarity", ""))) for row in predicted)
+        pred_pairs = Counter(
+            (str(row.get("secondary_topic", "")), str(row.get("polarity", ""))) for row in predicted
+        )
         for (gold_topic, _), count in (gold_pairs - pred_pairs).items():
             if gold_topic in pred_topics:
                 matched_polarity_errors += count
@@ -87,7 +101,9 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
             for pred_topic in pred_topics:
                 if gold_topic != pred_topic:
                     # Count review-level topic confusion, preserving direction.
-                    confusion[(gold_topic, pred_topic)] += min(gold_topics[gold_topic], pred_topics[pred_topic])
+                    confusion[(gold_topic, pred_topic)] += min(
+                        gold_topics[gold_topic], pred_topics[pred_topic]
+                    )
 
         for prediction in predicted:
             primary = str(prediction.get("primary_topic", ""))
@@ -107,7 +123,9 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
                 evidence_errors["not_continuous_substring"] += 1
             elif len(evidence) > 120 or len(evidence) > max(1, int(len(source) * 0.6)):
                 evidence_errors["too_long"] += 1
-            if primary not in {row["primary_topic"] for row in golden} or secondary not in {row["secondary_topic"] for row in golden}:
+            if primary not in {row["primary_topic"] for row in golden} or secondary not in {
+                row["secondary_topic"] for row in golden
+            }:
                 evidence_errors["topic_unsupported"] += 1
 
         note_parts = []
@@ -120,14 +138,16 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
             note_parts.append("Topic 已匹配但 Polarity 不一致")
         if "guard_failure" in types:
             note_parts.append("输出触发 Taxonomy 或 Evidence Guard")
-        representative_rows.append({
-            "review_id": rid,
-            "review_text": case.get("text", reviews.get(rid, {}).get("text", "")),
-            "golden_claims": golden,
-            "predicted_claims": predicted,
-            "error_type": types,
-            "analysis_note": "；".join(note_parts) or "综合错误，需人工复核",
-        })
+        representative_rows.append(
+            {
+                "review_id": rid,
+                "review_text": case.get("text", reviews.get(rid, {}).get("text", "")),
+                "golden_claims": golden,
+                "predicted_claims": predicted,
+                "error_type": types,
+                "analysis_note": "；".join(note_parts) or "综合错误，需人工复核",
+            }
+        )
 
     representative_rows.sort(key=lambda row: (len(row["error_type"]), row["review_id"]), reverse=True)
     representatives = representative_rows[: max(30, min(60, len(representative_rows)))]
@@ -147,13 +167,22 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
             "bad_case_count": total_cases,
         },
         "error_type_distribution": error_distribution,
-        "topic_missed": [{"golden_topic": topic, "count": count, "ratio": count / max(1, sum(missed.values()))} for topic, count in missed.most_common()],
+        "topic_missed": [
+            {"golden_topic": topic, "count": count, "ratio": count / max(1, sum(missed.values()))}
+            for topic, count in missed.most_common()
+        ],
         "topic_extra": [{"predicted_topic": topic, "count": count} for topic, count in extra.most_common()],
-        "topic_confusion": [{"golden_topic": gold, "predicted_topic": pred, "count": count} for (gold, pred), count in confusion.most_common()],
+        "topic_confusion": [
+            {"golden_topic": gold, "predicted_topic": pred, "count": count}
+            for (gold, pred), count in confusion.most_common()
+        ],
         "invalid_taxonomy": {
             "invalid_parent_topic": dict(invalid_parent.most_common()),
             "invalid_secondary_topic": dict(invalid_secondary.most_common()),
-            "parent_secondary_mismatch": [{"parent_topic": parent, "secondary_topic": secondary, "count": count} for (parent, secondary), count in invalid_pairs.most_common()],
+            "parent_secondary_mismatch": [
+                {"parent_topic": parent, "secondary_topic": secondary, "count": count}
+                for (parent, secondary), count in invalid_pairs.most_common()
+            ],
         },
         "evidence_errors": dict(evidence_errors.most_common()),
         "polarity_errors": {
@@ -163,7 +192,9 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
         "representative_count": len(representatives),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "bad_case_error_summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (output_dir / "bad_case_error_summary.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     with (output_dir / "bad_case_error_summary.csv").open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["category", "key", "value", "ratio"])
@@ -174,7 +205,9 @@ def analyze(*, metrics_path: Path, bad_cases_path: Path, parsed_dir: Path, revie
         for row in result["topic_extra"]:
             writer.writerow(["topic_extra", row["predicted_topic"], row["count"], ""])
         for row in result["topic_confusion"]:
-            writer.writerow(["topic_confusion", f"{row['golden_topic']} -> {row['predicted_topic']}", row["count"], ""])
+            writer.writerow(
+                ["topic_confusion", f"{row['golden_topic']} -> {row['predicted_topic']}", row["count"], ""]
+            )
         for key, value in result["evidence_errors"].items():
             writer.writerow(["evidence_error", key, value, ""])
     with (output_dir / "bad_case_representatives.jsonl").open("w", encoding="utf-8") as handle:
@@ -192,7 +225,20 @@ def main() -> None:
     parser.add_argument("--claims", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
-    print(json.dumps(analyze(metrics_path=args.metrics, bad_cases_path=args.bad_cases, parsed_dir=args.parsed_dir, reviews_path=args.reviews, claims_path=args.claims, output_dir=args.output_dir), ensure_ascii=False, indent=2))
+    print(
+        json.dumps(
+            analyze(
+                metrics_path=args.metrics,
+                bad_cases_path=args.bad_cases,
+                parsed_dir=args.parsed_dir,
+                reviews_path=args.reviews,
+                claims_path=args.claims,
+                output_dir=args.output_dir,
+            ),
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

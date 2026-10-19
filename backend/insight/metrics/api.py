@@ -101,11 +101,21 @@ class RecomputeRangeCommand(ScanCommand):
 class SnapshotSerializer(serializers.ModelSerializer):
     payload = serializers.DictField(child=serializers.JSONField(), read_only=True)
 
+    @staticmethod
+    def _request_can_read_raw_source(request, shop):
+        access_by_shop = getattr(request, "_snapshot_raw_source_access", None)
+        if access_by_shop is None:
+            access_by_shop = {}
+            request._snapshot_raw_source_access = access_by_shop
+        if shop.pk not in access_by_shop:
+            access_by_shop[shop.pk] = can_read_raw_source(request.user, shop)
+        return access_by_shop[shop.pk]
+
     def to_representation(self, instance):
         from copy import deepcopy
 
         data = super().to_representation(instance)
-        if not can_read_raw_source(self.context["request"].user, instance.shop):
+        if not self._request_can_read_raw_source(self.context["request"], instance.shop):
             data["payload"] = deepcopy(data["payload"])
             for kind in ["refunds", "returns"]:
                 for window in ["baseline", "current"]:
@@ -190,7 +200,7 @@ class SnapshotViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         if getattr(self, "swagger_fake_view", False):
             return MetricSnapshot.objects.none()
-        qs = scoped(MetricSnapshot.objects.all(), self.request.user).order_by("-created_at")
+        qs = scoped(MetricSnapshot.objects.select_related("shop"), self.request.user).order_by("-created_at")
         if shop := self.request.query_params.get("shop"):
             qs = qs.filter(shop_id=shop)
         if asin := self.request.query_params.get("child_asin"):

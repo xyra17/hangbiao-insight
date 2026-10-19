@@ -37,11 +37,15 @@ class SemanticGuard:
                 status = PredictionStatus.REJECTED
             else:
                 status = PredictionStatus.ACCEPTED
-            guarded.append(prediction.model_copy(update={"quality_flags": flags, "prediction_status": status}))
+            guarded.append(
+                prediction.model_copy(update={"quality_flags": flags, "prediction_status": status})
+            )
 
         return GuardResult(
             predictions=guarded,
             accepted_count=sum(p.prediction_status == PredictionStatus.ACCEPTED for p in guarded),
-            review_required_count=sum(p.prediction_status == PredictionStatus.REVIEW_REQUIRED for p in guarded),
+            review_required_count=sum(
+                p.prediction_status == PredictionStatus.REVIEW_REQUIRED for p in guarded
+            ),
             rejected_count=sum(p.prediction_status == PredictionStatus.REJECTED for p in guarded),
         )

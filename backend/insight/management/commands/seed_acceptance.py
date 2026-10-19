@@ -12,14 +12,18 @@ from django.db import transaction
 from insight.models import Membership, Shop, ShopGrant, Workspace
 from insight.services import create_product
 
+from ._acceptance import require_isolated_acceptance_environment
+
 
 class Command(BaseCommand):
     help = "创建隔离的本地验收工作区；不改写已有用户密码或正式数据。"
 
+    def add_arguments(self, parser):
+        parser.add_argument("--credentials-output", type=Path, default=None)
+
     @transaction.atomic
     def handle(self, *args, **options):
-        if not settings.DEBUG:
-            raise CommandError("验收种子只允许在本地开发配置运行。")
+        require_isolated_acceptance_environment()
         workspace, _ = Workspace.objects.get_or_create(name="航标验收工作区", is_test=True)
         users, credentials = {}, []
         for username in ["accept_admin", "accept_operator_a", "accept_operator_b"]:
@@ -58,10 +62,18 @@ class Command(BaseCommand):
                     "seed-acceptance",
                 )
         if credentials:
-            target = Path(settings.BASE_DIR).parent / ".local" / "acceptance-accounts.json"
-            target.parent.mkdir(mode=0o700, exist_ok=True)
-            # Exclusive creation prevents overwriting credentials from an earlier acceptance run.
+            target = options["credentials_output"]
+            target = (
+                (Path(settings.BASE_DIR).parent / target).resolve()
+                if target is not None and not target.is_absolute()
+                else target
+            )
+            target = target or (Path(settings.BASE_DIR).parent / ".local" / "acceptance-accounts.json")
+            target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            # Never replace credentials that may be the only record for an existing test database.
             if target.exists():
+                if options["credentials_output"] is not None:
+                    raise CommandError("The requested credentials file already exists; choose a new local path.")
                 target = target.with_name(f"acceptance-accounts-{secrets.token_hex(4)}.json")
             with target.open("x") as handle:
                 os.chmod(target, 0o600)

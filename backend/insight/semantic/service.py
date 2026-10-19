@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from django.db import transaction
@@ -98,12 +100,22 @@ class ProviderAdapter:
         )
         if not taxonomy_path.exists():
             raise AdapterError("语义 taxonomy 文件不存在，禁止启动模型取证。")
+        output_limit = os.getenv("SEMANTIC_MAX_OUTPUT_TOKENS")
+        if not output_limit:
+            raise AdapterError("语义模型调用必须配置有限的最大输出 token 数。")
+        try:
+            output_limit = int(output_limit)
+            if not 1 <= output_limit <= 32768:
+                raise ValueError
+        except ValueError as exc:
+            raise AdapterError("语义模型最大输出 token 配置无效。") from exc
         gateway = build_semantic_gateway(
             provider,
             runtime_overrides={
                 "timeout_seconds": 30,
-                "max_attempts": 2,
+                "max_attempts": 1,
                 "prompt_version": PROMPT_VERSION,
+                "max_output_tokens": output_limit,
             },
         )
         self.service = build_semantic_service(taxonomy_path, gateway=gateway)
@@ -111,11 +123,89 @@ class ProviderAdapter:
         self.model_name = self.service.gateway.config.model
         self._review_input = ReviewInput
 
-    def extract(self, text: str, title: str = "") -> list[Claim]:
+    def extract(self, text: str, title: str = "", *, run=None, source_row=None) -> list[Claim]:
         review = self._review_input(
             review_id="runtime-review", product_id="runtime-product", title=title, text=text
         )
-        guarded = self.service.extract(review)
+        prompt = self.service.prompt_builder.build(review)
+        request_bytes = len((prompt.system + prompt.user + json.dumps(prompt.response_schema, ensure_ascii=False)).encode("utf-8")) + 1024
+        max_bytes = int(os.getenv("SEMANTIC_MAX_REQUEST_BYTES", "12000"))
+        if not 1 <= max_bytes <= 65536 or request_bytes > max_bytes:
+            raise AdapterError("语义模型请求超过批准的字节上限。")
+        rates = (os.getenv("INVESTIGATION_INPUT_COST_PER_MILLION", ""),
+                 os.getenv("INVESTIGATION_OUTPUT_COST_PER_MILLION", ""))
+        try:
+            input_rate, output_rate = (Decimal(value) for value in rates)
+            max_cost = Decimal(os.getenv("SEMANTIC_MAX_CALL_COST", ""))
+            if not all(value.is_finite() and value > 0 for value in (input_rate, output_rate, max_cost)):
+                raise ValueError
+        except (InvalidOperation, ValueError) as exc:
+            raise AdapterError("语义模型请求缺少有效的单次费用上限或费率。") from exc
+        max_tokens = self.service.gateway.config.max_output_tokens
+        upper_cost = (Decimal(max_bytes) * input_rate + Decimal(max_tokens) * output_rate) / Decimal(1_000_000)
+        if upper_cost > max_cost:
+            raise AdapterError("语义模型请求超过批准的单次费用上限。")
+        reservation = None
+        if run is None or source_row is None:
+            raise AdapterError("语义模型调用缺少持久化工作区预算对象。")
+        from insight.investigation.budget import (
+            begin_workspace_dispatch,
+            release_workspace_reservation,
+            reserve_workspace_call,
+            settle_workspace_reservation,
+        )
+        reservation = reserve_workspace_call(
+            workspace_id=run.shop.workspace_id,
+            reservation_key=f"semantic-review:{run.pk}:{source_row.pk}",
+            provider=self.provider,
+            operation="semantic_review_extraction",
+            reserved_cost=upper_cost,
+            dispatch_timeout_seconds=self.service.gateway.config.timeout_seconds,
+            object_type="semantic_run",
+            object_id=str(run.pk),
+            metadata={"review_id": str(source_row.pk), "max_request_bytes": max_bytes,
+                      "request_bytes": request_bytes, "max_output_tokens": max_tokens},
+        )
+        receipt_binding = str(reservation.pk)
+        try:
+            begin_workspace_dispatch(reservation)
+        except Exception as exc:
+            release_workspace_reservation(reservation, reason=f"dispatch_revalidation:{type(exc).__name__}")
+            raise
+        try:
+            guarded = self.service.extract(review, receipt_binding=receipt_binding)
+        except Exception:
+            usage = self._response_usage(receipt_binding)
+            if usage is not None:
+                actual = (Decimal(usage[0]) * input_rate + Decimal(usage[1]) * output_rate) / Decimal(1_000_000)
+                settle_workspace_reservation(
+                    reservation, actual_cost=actual, cost_known=True,
+                    metadata={"receipt_binding": receipt_binding, "provider_response_id": self._response_id(receipt_binding),
+                              "usage_source": "current_bound_response"},
+                )
+            else:
+                settle_workspace_reservation(
+                    reservation, actual_cost=0, cost_known=False,
+                    metadata={"receipt_binding": receipt_binding, "response_received": False,
+                              "usage_source": "none_current_attempt"},
+                )
+            raise
+        usage = self._response_usage(receipt_binding)
+        if usage is None:
+            settle_workspace_reservation(
+                reservation, actual_cost=0, cost_known=False,
+                metadata={"receipt_binding": receipt_binding, "response_received": self._response_id(receipt_binding) is not None,
+                          "usage_source": "missing_current_response_usage"},
+            )
+            raise AdapterError("模型已返回结果，但未提供可核验的 token 用量；预算按未知费用保留。")
+        actual_cost = (Decimal(usage[0]) * input_rate + Decimal(usage[1]) * output_rate) / Decimal(1_000_000)
+        settle_workspace_reservation(
+            reservation, actual_cost=actual_cost, cost_known=True,
+            metadata={"receipt_binding": receipt_binding, "provider_response_id": self._response_id(receipt_binding),
+                      "usage_source": "current_bound_response"},
+        )
+        if usage[0] > max_bytes or usage[1] > max_tokens:
+            raise AdapterError("语义模型实际 token 用量超出预留上限；费用已计入工作区账本。")
         return [
             Claim(
                 p.primary_topic,
@@ -128,6 +218,31 @@ class ProviderAdapter:
             )
             for p in guarded.predictions
         ]
+
+    def _current_response(self, receipt_binding):
+        if getattr(self.service, "last_response_binding", None) != receipt_binding:
+            return None
+        return getattr(self.service, "last_response", None)
+
+    def _response_usage(self, receipt_binding):
+        response = self._current_response(receipt_binding)
+        raw = getattr(response, "raw_response", None) or {}
+        usage = raw.get("usage") if isinstance(raw, dict) else None
+        if not isinstance(usage, dict):
+            return None
+        input_tokens = usage.get("input_tokens", usage.get("prompt_tokens"))
+        output_tokens = usage.get("output_tokens", usage.get("completion_tokens"))
+        if type(input_tokens) is not int or type(output_tokens) is not int or min(input_tokens, output_tokens) < 0:
+            return None
+        return input_tokens, output_tokens
+
+    def _response_id(self, receipt_binding):
+        response = self._current_response(receipt_binding)
+        if response is None:
+            return None
+        raw = getattr(response, "raw_response", None) or {}
+        response_id = raw.get("id") if isinstance(raw, dict) else None
+        return str(response_id) if response_id else getattr(response, "raw_response_ref", None)
 
 
 def adapter_for(provider: str | None = None):
@@ -222,7 +337,10 @@ def _run_semantic(
             run=run, review=row, defaults={"status": "running", "detail": ""}
         )
         try:
-            claims = adapter.extract(*_review_input(row))
+            if isinstance(adapter, ProviderAdapter):
+                claims = adapter.extract(*_review_input(row), run=run, source_row=row)
+            else:
+                claims = adapter.extract(*_review_input(row))
         except Exception:
             errors += 1
             receipt.status = "failed"

@@ -3,7 +3,7 @@ from datetime import date
 
 from django.db.models import Q
 
-from insight.models import ProductMapping
+from insight.models import ImportBatch, ProductMapping
 
 from .facts import latest_facts, source_for
 
@@ -65,43 +65,58 @@ def assess_comparability(manifest, asin, daily, cohort, product_id=None):
         kind: list(
             latest_facts(manifest, kind, asin, product_id)
             .filter(business_date__range=(start, end))
-            .select_related("mapping", "batch")
+            .values("mapping_id", "batch_id", "business_date", "raw_row_id")
         )
         for kind in ("sales_traffic", "orders")
     }
-    identifiers = {
-        identifier
+    batch_ids = {
+        row["batch_id"]
         for rows in rows_by_kind.values()
         for row in rows
-        for identifier in row.batch.mapping_manifest
     }
-    for mapping in ProductMapping.objects.filter(
-        product_id__in=identifiers, product__child_asin=asin
-    ).order_by("-effective_from", "-version"):
-        mappings[str(mapping.product_id)].append(mapping)
+    batch_manifests = dict(
+        ImportBatch.objects.filter(pk__in=batch_ids).values_list("pk", "mapping_manifest")
+    )
+    identifiers = {
+        identifier
+        for mapping_manifest in batch_manifests.values()
+        for identifier in mapping_manifest
+    }
+    direct_mapping_ids = {
+        row["mapping_id"] for rows in rows_by_kind.values() for row in rows if row["mapping_id"]
+    }
+    mapping_rows = ProductMapping.objects.filter(
+        Q(pk__in=direct_mapping_ids)
+        | Q(product_id__in=identifiers, product__child_asin=asin)
+    ).select_related("product").order_by("-effective_from", "-version")
+    mappings_by_id = {mapping.pk: mapping for mapping in mapping_rows}
+    for mapping in mapping_rows:
+        if str(mapping.product_id) in identifiers and mapping.product.child_asin == asin:
+            mappings[str(mapping.product_id)].append(mapping)
     for kind, rows in rows_by_kind.items():
         parents, refs = defaultdict(set), defaultdict(set)
         for row in rows:
+            mapping_manifest = batch_manifests[row["batch_id"]]
             selected = (
-                [row.mapping]
-                if row.mapping_id
+                [mappings_by_id[row["mapping_id"]]]
+                if row["mapping_id"]
                 else [
                     next(
                         (
                             mapping
                             for mapping in mappings[identifier]
-                            if mapping.version <= version and mapping.effective_from <= row.business_date
+                            if mapping.version <= version and mapping.effective_from <= row["business_date"]
                         ),
                         None,
                     )
-                    for identifier, version in row.batch.mapping_manifest.items()
+                    for identifier, version in mapping_manifest.items()
                 ]
             )
             for mapping in selected:
                 if mapping is not None:
                     identifier = str(mapping.product_id)
                     parents[identifier].add(mapping.parent_asin)
-                    refs[identifier].add(str(row.raw_row_id))
+                    refs[identifier].add(str(row["raw_row_id"]))
         for identifier, values in parents.items():
             if len(values) > 1:
                 result["structure_changes"].append(

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import os
 import re
-from datetime import date, timedelta
+from datetime import date
 from typing import Any, TypedDict
 from zoneinfo import ZoneInfo
 
@@ -26,13 +27,18 @@ from insight.services import audit
 
 from .checkpoints import FencedPostgresSaver
 from .freeze import assert_same_inputs, validate_frozen_inputs
+from .output import compose_output
 
 
 class InvestigationState(TypedDict, total=False):
     query: str
+    request_scope: dict
+    content_query: str
+    scope_query: str
     asin: str
     product_id: str | None
     tools: list[str]
+    next_tool: str
     evidence: list[dict[str, Any]]
     hypotheses: list[dict[str, Any]]
     clarification: str
@@ -50,6 +56,10 @@ class InvestigationState(TypedDict, total=False):
     planner: str
     candidates: list[dict[str, Any]]
     planner_provider: str
+    tool_args: dict
+    tool_decision: dict
+    text_search_rounds: int
+    executed_text_requests: list[list[str]]
 
 
 def assert_execution_owner(run, locked):
@@ -68,6 +78,37 @@ def assert_execution_owner(run, locked):
 
 def selected_product_id(run, state):
     return state.get("product_id") or (str(run.product_id) if run.product_id else None)
+
+
+def evidence_driven_counter_search(query: str, results: list[dict[str, Any]]) -> dict:
+    """Separate evidence intent from topic anchors and the immutable authorized scope."""
+    from insight.semantic.retrieval import ALIASES, contains_term, context_anchor_groups
+    from insight.semantic.safety_context import record_contexts
+
+    groups = context_anchor_groups(query)
+    properties = {ALIASES[index] for index in (0, 1, 2, 5)}
+    if not any(group in properties for group in groups) and (contains_term(query, "safety") or "安全" in query):
+        groups = [ALIASES[0]]
+    contexts = {context["context"]
+                for result in results for item in result.get("items", [])
+                if item.get("match_kind", "relevant_hit") == "relevant_hit"
+                for group in groups if group in properties
+                for context in record_contexts(title=item.get("title", ""), text=item.get("text", ""), terms=group)}
+    if "asserted" in contexts:
+        context, rationale = "negated", "在原查询约束内查找对该属性的否定原文"
+    elif contexts & {"negated", "hypothetical"}:
+        context, rationale = "asserted", "在原查询约束内核查该属性是否实际发生"
+    else:
+        context, rationale = "any", "尚无可分类属性证据，保持原查询，不将未命中作为反证"
+    return {"schema_version": "evidence-search-intent-v2", "query": query,
+            "evidence_context": context, "optional_terms": [], "instruction": rationale,
+            "observed_contexts": sorted(contexts),
+            "scope_policy": "inherit_authorized_frozen_scope"}
+
+
+def evidence_driven_counter_query(query: str, results: list[dict[str, Any]], fallback: str = "") -> str:
+    # Compatibility helper returns only executable content anchors, never instructions.
+    return evidence_driven_counter_search(query, results)["query"]
 
 
 def _persist(run: InvestigationRun, node: str, state: InvestigationState, output: dict[str, Any], tool=""):
@@ -94,7 +135,7 @@ def _persist(run: InvestigationRun, node: str, state: InvestigationState, output
             input={"query": state.get("query", ""), "asin": state.get("asin", "")},
             output=output,
             evidence_refs=[item.get("id") for item in state.get("evidence", []) if item.get("id")],
-            logical_key=tool or node,
+            logical_key=(f"text_evidence:{state['text_search_rounds'] - 1}" if tool == "text_evidence" and state.get("text_search_rounds", 0) > 1 else tool or node),
             state_snapshot=dict(state),
         )
         locked.steps_used = sequence
@@ -115,11 +156,14 @@ def _persist(run: InvestigationRun, node: str, state: InvestigationState, output
 
 def _plan(run: InvestigationRun, state: InvestigationState, available_tools: list[str], reason: str):
     """Run the configured structured planner and persist its decision receipt."""
+    require_role(run.requested_by, run.shop, "operator", "quality", "support", "data_admin")
     from .budget import MeasuredCall, reserve
-    from .planner import PlannerDecision, planner_for
+    from .planner import ModelPlanner, PlannerDecision, planner_for
 
     history = [
-        {"tool": item.get("next_tool"), "stop_reason": item.get("stop_reason", "")}
+        {"tool": item.get("next_tool"), "stop_reason": item.get("stop_reason", ""),
+         "hypothesis": item.get("hypothesis", ""), "counter_evidence_query": item.get("counter_evidence_query", ""),
+         "tool_args": item.get("tool_args", {})}
         for item in state.get("decisions", [])
     ]
     decision_key = digest({
@@ -129,13 +173,25 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
         "input_versions": state.get("input_versions", {}),
     })
     provider = state.get("planner_provider") or run.state.get("planner_provider") or None
+    from .execution_config import configuration_snapshot
+    from .model_limits import validate_cost_envelope
+    config = configuration_snapshot()
+    external_planner = (provider or config['environment_default_planner']) in {'deepseek', 'deepseek-v4-flash'}
+    if external_planner or config['relevance_enabled']:
+        try:
+            validate_cost_envelope(planner_active=external_planner, relevance_active=config['relevance_enabled'], max_steps=run.max_steps)
+        except ValueError as exc:
+            raise RuntimeError(str(exc)) from exc
+
     entry = reserve(
         run,
         kind="model",
         operation=reason,
         idempotency_key=decision_key,
         units=1,
-            metadata={"provider": provider or "deterministic", "input_versions": state.get("input_versions", {})},
+            metadata={"provider": provider or "deterministic", "input_versions": state.get("input_versions", {}),
+                      "execution_configuration": config,
+                      **({"reserved_max_cost": os.getenv("INVESTIGATION_MAX_CALL_COST", "")} if external_planner else {})},
     )
     # A worker can die after the durable budget reservation/settlement but
     # before the LangGraph checkpoint is written.  Keep the structured
@@ -152,22 +208,51 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
         decision = None
     if decision is None:
         measured = MeasuredCall(entry)
+        selected_planner = None
         try:
-            decision = planner_for(provider).decide(
+            selected_planner = planner_for(provider)
+            planner_context = {}
+            if isinstance(selected_planner, ModelPlanner):
+                from .policy import permitted_read_tools
+                available_tools = permitted_read_tools(run, available_tools)
+                planner_context = {"request_context": {
+                    "shop": str(run.shop_id), "asin": state.get("asin"),
+                    "product_id": selected_product_id(run, state),
+                    "start": state.get("search_start"), "end": state.get("search_end"),
+                    "source_kinds": sorted({source.get("kind") for source in state.get("source_manifest", {}).values() if source.get("kind")}),
+                }}
+            if external_planner:
+                gateway = getattr(getattr(selected_planner, "planner", None), "gateway", None)
+                if gateway is not None:
+                    entry.metadata = {**entry.metadata,
+                                      "dispatch_timeout_seconds": getattr(gateway, "timeout_seconds", 0)}
+                    entry.save(update_fields=["metadata"])
+                from .budget import begin_external_attempt
+                begin_external_attempt(entry)
+            decision = selected_planner.decide(
                 query=state.get("query", ""),
                 evidence=state.get("evidence", []),
                 history=history,
                 available_tools=available_tools,
+                **planner_context,
             )
         except Exception as exc:
-            measured.finish(metadata={"error": type(exc).__name__})
+            from app.semantic.structured_response import usage_cost
+            gateway = getattr(getattr(selected_planner, "planner", None), "gateway", None)
+            receipt = getattr(gateway, "last_model_receipt", {})
+            accounting = usage_cost(getattr(gateway, "last_usage", {})) if receipt.get("response_received") else {"tokens": 0, "cost": "0", "cost_known": False}
+            measured.finish(tokens=accounting["tokens"], cost=accounting["cost"], metadata={
+                "error": type(exc).__name__, "failure_code": getattr(exc, "code", None),
+                "model_receipt": receipt, "usage": getattr(gateway, "last_usage", {}),
+                "charge_outcome": "recorded_by_usage" if accounting["cost_known"] else "unknown_until_receipt"})
             raise
         data = decision.as_dict()
         decision_hash = digest({"run": str(run.pk), "phase": reason, "decision": data})
         measured.finish(
             tokens=decision.tokens,
             cost=decision.cost,
-            metadata={"reason": reason, "decision": data, "decision_hash": decision_hash},
+            metadata={"reason": reason, "decision": data, "decision_hash": decision_hash,
+                      "charge_outcome": "recorded_by_usage" if decision.cost_estimate_known else "unknown"},
         )
     data = decision.as_dict()
     decision_hash = digest({"run": str(run.pk), "phase": reason, "decision": data})
@@ -193,11 +278,6 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
         prior = locked.decisions if isinstance(locked.decisions, list) else []
         already_recorded = any(
             item.get("decision_hash") == decision_hash
-            or (
-                item.get("phase") == reason
-                and item.get("next_tool") == data.get("next_tool")
-                and item.get("stop_reason") == data.get("stop_reason")
-            )
             for item in prior
             if isinstance(item, dict)
         )
@@ -207,18 +287,15 @@ def _plan(run: InvestigationRun, state: InvestigationState, available_tools: lis
     state_decisions = state.setdefault("decisions", [])
     if not any(
         isinstance(item, dict)
-        and (
-            item.get("decision_hash") == decision_hash
-            or (
-                item.get("phase") == reason
-                and item.get("next_tool") == data.get("next_tool")
-                and item.get("stop_reason") == data.get("stop_reason")
-            )
-        )
+        and item.get("decision_hash") == decision_hash
         for item in state_decisions
     ):
         state_decisions.append({"phase": reason, "decision_hash": decision_hash, **data})
+    state["tool_decision"] = {"decision_hash": decision_hash, "phase": reason, "next_tool": decision.next_tool}
+    state["tool_args"] = decision.tool_args or {}
     state["planner"] = decision.planner
+    if decision.clarification:
+        state["clarification"] = decision.clarification
     if decision.counter_evidence_query:
         state["counter_evidence_query"] = decision.counter_evidence_query
     return decision
@@ -235,9 +312,23 @@ def build_graph(run: InvestigationRun, checkpointer=None):
                 assert_same_inputs(run.input_versions, state["input_versions"])
         if "source_manifest" not in state:
             state["source_manifest"] = source_manifest(run.shop)
-        if "search_start" not in state:
-            end = timezone.now().astimezone(ZoneInfo(run.shop.timezone)).date()
-            state["search_start"], state["search_end"] = str(end - timedelta(days=90)), str(end)
+        from .scope import corrected_content_query, resolve_scope
+        if "request_scope" not in state:
+            frozen_scope = state.get("input_versions", {}).get("request_scope")
+            end = date.fromisoformat(state["search_end"]) if state.get("search_end") else timezone.now().astimezone(ZoneInfo(run.shop.timezone)).date()
+            state["request_scope"] = frozen_scope or resolve_scope(state.get("scope_query", state["query"]), today=end, timezone=run.shop.timezone)
+            if not frozen_scope and state.get("scope_query"):
+                if state["request_scope"]["status"] == "default":
+                    state["request_scope"].update(status="needs_clarification", start=None, end=None,
+                        reason="补充内容尚未明确原请求的日期限定，请提供完整起止日期；不会改用默认窗口。")
+                state["request_scope"]["resolution_query"] = state["scope_query"]
+                state["request_scope"]["content_query"] = corrected_content_query(state["query"])
+        scope = state["request_scope"]
+        state["content_query"] = scope["content_query"]
+        if scope["status"] == "needs_clarification":
+            state["clarification"] = scope["reason"]
+        else:
+            state["search_start"], state["search_end"] = scope["start"], scope["end"]
         query = state["query"]
         asin = state.get("asin") or next(iter(re.findall(r"\b[A-Z0-9]{10}\b", query.upper())), "")
         if not asin:
@@ -329,17 +420,18 @@ def build_graph(run: InvestigationRun, checkpointer=None):
                 "source_manifest": state["source_manifest"],
                 "mapping_versions": frozen_metric.payload.get("mapping_versions", {}) if frozen_metric else {},
                 "rule_version": frozen_metric.rule_version if frozen_metric else None,
-                "workflow_version": "investigation-fixed-v2",
+                "workflow_version": state.get("input_versions", {}).get("workflow_version", "investigation-evidence-v3"),
+                "request_scope": state["request_scope"],
             }
             validate_frozen_inputs(state["input_versions"])
         else:
-            state["product_id"] = None
+            state["product_id"] = str(run.product_id) if scope["status"] == "needs_clarification" and run.child_asin and run.product_id else None
         _persist(run, "locate", state, {"asin": asin, "candidates": state.get("candidates", []), "clarification": state.get("clarification", "")})
         return state
 
     def choose(state: InvestigationState):
         text = state["query"].lower()
-        decision = _plan(run, state, ["metric_snapshot", "review_claims", "text_evidence"], "route")
+        decision = _plan(run, state, ["metric_snapshot", "order_records", "review_claims", "text_evidence"], "route")
         tools = [decision.next_tool] if decision.next_tool else []
         # Internal writes are explicit and bounded.  A normal investigation stays
         # read-only; only a request for a follow-up/check task enables the write node.
@@ -356,6 +448,9 @@ def build_graph(run: InvestigationRun, checkpointer=None):
         # accepted only when the query is affirmative; negated text can never
         # turn on a write capability by itself.
         state["write_requested"] = bool(state.get("write_requested")) or (explicit_write and not refusal)
+        if any(cue in state.get("query", "") for cue in ("修改价格", "修改库存", "修改Listing", "批准变更")):
+            state.setdefault("evidence", []).append({"type": "authorization_boundary", "external_change_requested": True,
+                                                     "external_write_authorized": False})
         state["tools"] = list(dict.fromkeys(tools))
         state["next_tool"] = decision.next_tool
         _persist(run, "choose", state, {"tools": state["tools"], "write_requested": state["write_requested"], "planner": decision.as_dict()})
@@ -374,11 +469,21 @@ def build_graph(run: InvestigationRun, checkpointer=None):
             .first()
         )
         if snapshot:
+            from insight.metrics.api import can_read_raw_source
+
+            from .orders import redact_order_ids
+            metrics = snapshot.payload if can_read_raw_source(run.requested_by, run.shop) else redact_order_ids(snapshot.payload)
             signals = []
             for section in ("daily", "absolute", "cohort", "occurrence"):
                 signals.extend(snapshot.payload.get(section, {}).get("signals", []))
+            from .citations import metric_catalog
             state.setdefault("evidence", []).append(
-                {"id": str(snapshot.pk), "type": "metric_snapshot", "signals": signals}
+                {"id": str(snapshot.pk), "type": "metric_snapshot", "signals": signals,
+                 "metrics": metrics, "request_scope": state.get("request_scope"),
+                 "metric_evidence": metric_catalog(snapshot_id=snapshot.pk, snapshot_fingerprint=snapshot.fingerprint,
+                                                   source_manifest=snapshot.source_manifest, shop_id=snapshot.shop_id,
+                                                   child_asin=snapshot.child_asin, product_id=snapshot.product_id,
+                                                   metrics=snapshot.payload)}
             )
             state.setdefault("hypotheses", []).extend(
                 {
@@ -391,12 +496,25 @@ def build_graph(run: InvestigationRun, checkpointer=None):
             )
         else:
             state.setdefault("evidence", []).append(
-                {"id": "metric:none", "type": "metric_snapshot", "status": "missing"}
+                {"id": "metric:none", "type": "metric_snapshot", "status": "missing", "request_scope": state.get("request_scope")}
             )
         record_tool_result(call, refs=[str(snapshot.pk)] if snapshot else ["metric:none"])
         _persist(run, "execute", state, {"found": bool(snapshot)}, "metric_snapshot")
-        decision = _plan(run, state, ["review_claims", "text_evidence"], "after_metric")
+        decision = _plan(run, state, ["order_records", "review_claims", "text_evidence"], "after_metric")
         state["next_tool"] = decision.next_tool
+        return state
+
+    def orders(state: InvestigationState):
+        from .orders import read_order_records
+        from .policy import authorize_tool, record_tool_result
+        call = authorize_tool(run, "order_records", state, idempotency_key=f"orders:{state.get('steps', 0)}")
+        result = read_order_records(actor=run.requested_by, shop=run.shop, asin=state["asin"],
+                                    product_id=selected_product_id(run, state), manifest=state["source_manifest"],
+                                    start=state["search_start"], end=state["search_end"])
+        state.setdefault("evidence", []).append(result)
+        record_tool_result(call, refs=[item["fact_id"] for section in result["sections"].values() for item in section["items"]])
+        _persist(run, "execute", state, result, "order_records")
+        _plan(run, state, [], "after_orders")
         return state
 
     def reviews(state: InvestigationState):
@@ -417,13 +535,16 @@ def build_graph(run: InvestigationRun, checkpointer=None):
             .first()
         )
         claims = (
-            list(SemanticClaim.objects.filter(run=semantic, prediction_status="accepted")[:50])
+            list(SemanticClaim.objects.filter(
+                run=semantic, prediction_status="accepted",
+                review__business_date__range=(state["search_start"], state["search_end"]),
+            ).order_by("review__business_date", "pk")[:50])
             if semantic
             else []
         )
         if claims:
             state.setdefault("evidence", []).append(
-                {"id": str(semantic.pk), "type": "semantic_run", "claim_count": len(claims)}
+                {"id": str(semantic.pk), "type": "semantic_run", "claim_count": len(claims), "request_scope": state.get("request_scope")}
             )
             state.setdefault("hypotheses", []).extend(
                 {
@@ -432,6 +553,7 @@ def build_graph(run: InvestigationRun, checkpointer=None):
                     "polarity": claim.polarity,
                     "evidence_span": claim.evidence_span,
                     "claim_id": str(claim.pk),
+                    "business_date": claim.review.business_date.isoformat(),
                 }
                 for claim in claims
             )
@@ -453,10 +575,9 @@ def build_graph(run: InvestigationRun, checkpointer=None):
         call = authorize_tool(run, "text_evidence", state, idempotency_key=f"text:{state.get('steps', 0)}")
 
         results = []
-        queries = [state["query"]]
-        if state.get("counter_evidence_query"):
-            queries.append(state["counter_evidence_query"])
-        for query in queries:
+
+        def search(query: str, phase: str, evidence_context="any", intent=None, parents=None):
+            phase_results = []
             for kind in ("reviews", "support"):
                 result = retrieve(
                     run.requested_by,
@@ -469,26 +590,101 @@ def build_graph(run: InvestigationRun, checkpointer=None):
                     kind=kind,
                     limit=10,
                     manifest=state["source_manifest"],
+                    evidence_context=evidence_context,
+                    budget_run=run,
                 )
+                result["origin_decision_hash"] = state.get("tool_decision", {}).get("decision_hash")
+                result["derived_from_retrieval_ids"] = parents or []
+                if query_binding and query == search_query:
+                    result["query_scope_binding"] = query_binding
+                result["request_scope"] = state.get("request_scope")
+                result["request_query"] = state["query"]
                 results.append(result)
+                phase_results.append(result)
                 state.setdefault("evidence", []).append(
                     {
                         "id": result["retrieval_id"],
                         "type": "text_retrieval",
+                        "phase": phase,
+                        "retrieval_id": result["retrieval_id"],
+                        "origin_decision_hash": result["origin_decision_hash"],
+                        "derived_from_retrieval_ids": result["derived_from_retrieval_ids"],
                         "query": query,
+                        "search_intent": intent,
+                        **({"query_scope_binding": query_binding} if query_binding and query == search_query else {}),
+                        "evidence_context": result["evidence_context"],
+                        "retrieval_complete": result["retrieval_complete"],
+                        "relevance_judgment": result["relevance_judgment"],
+                        "candidate_stage": result.get("candidate_stage", {}),
                         "scope": result["scope"],
+                        "request_scope": state.get("request_scope"),
+                        "request_query": state["query"],
                         "source_manifest": result["source_manifest"],
                         "items": result["items"],
                         "limitations": result["limitations"],
+                        "match_status": result["match_status"],
+                        "retrieval_version": result["retrieval_version"],
+                        "algorithm_manifest": result["algorithm_manifest"],
                     }
                 )
-                if query == state.get("counter_evidence_query"):
-                    state.setdefault("counter_evidence", []).append(
-                        {"query": query, "retrieval_id": result["retrieval_id"], "kind": kind,
-                         "items": result["items"], "scope": result["scope"]}
-                    )
+            return phase_results
+
+        args = state.get("tool_args", {})
+        if not isinstance(args, dict) or set(args) - {"query", "evidence_context"}:
+            raise RuntimeError("unsupported_text_evidence_arguments")
+        search_query = args.get("query", state.get("content_query", state["query"]))
+        context = args.get("evidence_context", "any")
+        if not isinstance(search_query, str) or not 2 <= len(search_query.strip()) <= 2000:
+            raise RuntimeError("invalid_text_evidence_query")
+        if context not in {"any", "asserted", "negated", "hypothetical"}:
+            raise RuntimeError("invalid_text_evidence_context")
+        # The planner chooses content; redundant identical scope is bound by
+        # the server, conflicting/ambiguous scope still fails before retrieval.
+        from .query_binding import bind_text_query
+        try:
+            search_query, query_binding = bind_text_query(search_query, {
+                "shop": str(run.shop_id), "asin": state["asin"], "product_id": selected_product_id(run, state),
+                "start": state["search_start"], "end": state["search_end"],
+            })
+        except ValueError as exc:
+            raise RuntimeError(str(exc)) from exc
+        previous_requests = state.get("executed_text_requests", [])
+        if [search_query, context] in previous_requests:
+            raise RuntimeError("duplicate_text_evidence_request")
+        state["executed_text_requests"] = previous_requests + [[search_query, context]]
+        model_driven = (state.get("planner_provider") or os.getenv("INVESTIGATION_PLANNER_PROVIDER", "deterministic")) in {"deepseek", "deepseek-v4-flash"}
+        rounds = int(state.get("text_search_rounds", 0))
+        parents = [item["id"] for item in state.get("evidence", []) if item.get("type") == "text_retrieval"]
+        initial_results = search(search_query, "model_follow_up" if model_driven and rounds else "initial", context,
+                                 parents=parents if rounds else None)
+
+        intent = evidence_driven_counter_search(search_query, initial_results)
+        follow_up_query = intent["query"]
+        state["counter_evidence_query"] = follow_up_query
+        state["counter_evidence_search_intent"] = intent
+        from insight.semantic.retrieval import query_groups
+        if model_driven or intent["evidence_context"] == "any" and query_groups(follow_up_query) == query_groups(search_query):
+            counter_results = []
+            state["counter_search_status"] = "planner_controls_follow_up" if model_driven else "no_distinct_search_intent"
+        else:
+            counter_results = search(follow_up_query, "counter_evidence", intent["evidence_context"], intent, [row["retrieval_id"] for row in initial_results])
+            state["counter_search_status"] = "executed"
+        for result in counter_results:
+            state.setdefault("counter_evidence", []).append(
+                {
+                    "query": follow_up_query,
+                    "retrieval_id": result["retrieval_id"],
+                    "kind": result["scope"]["kind"],
+                    "items": result["items"],
+                    "scope": result["scope"],
+                }
+            )
         record_tool_result(call, refs=[item["id"] for item in state.get("evidence", []) if item.get("type") == "text_retrieval"])
+        state["text_search_rounds"] = rounds + 1
         _persist(run, "execute", state, {"retrievals": results}, "text_evidence")
+        follow_up_tools = ["text_evidence"] if model_driven and rounds < 1 and state["steps"] + 2 < run.max_steps else []
+        decision = _plan(run, state, follow_up_tools, "after_text")
+        state["next_tool"] = decision.next_tool
         return state
 
     def compose(state: InvestigationState):
@@ -498,8 +694,22 @@ def build_graph(run: InvestigationRun, checkpointer=None):
                 "status": "skipped",
                 "reason": "调查剩余步骤不足以安全完成内部任务写入和结果保存。",
             }
+
+        from .citations import recheck_metric_evidence
+        recheck_metric_evidence(run, state.get("evidence", []))
+        from .orders import read_order_records
+        for entry in state.get("evidence", []):
+            if entry.get("type") == "order_records":
+                fresh = read_order_records(actor=run.requested_by, shop=run.shop, asin=state["asin"],
+                                           product_id=selected_product_id(run, state), manifest=state["source_manifest"],
+                                           start=state["search_start"], end=state["search_end"])
+                if fresh != entry:
+                    raise RuntimeError("frozen_order_records_changed")
+        composed = compose_output(state.get("evidence", []), state.get("decisions", []))
         state["result"] = {
+            **composed,
             "asin": state.get("asin", ""),
+            "request_scope": state.get("request_scope"),
             "product_id": state.get("product_id") or (str(run.product_id) if run.product_id else None),
             "hypotheses": state.get("hypotheses", []),
             "evidence": state.get("evidence", []),
@@ -509,8 +719,8 @@ def build_graph(run: InvestigationRun, checkpointer=None):
             "write": state.get("write_result"),
             "limitations": [
                 "未配置真实供应商时使用确定性 planner；真实模型质量和成本仍待业务验收。",
-                "原文检索默认最近 90 天，检索样本不能证明因果或代表总体频率。",
-            ],
+                f"原文检索按冻结请求窗口 {state.get('search_start')} 至 {state.get('search_end')}；检索样本不能证明因果或代表总体频率。",
+            ] + composed["limitations"],
         }
         state["stop_reason"] = (
             state.get("decisions", [])[-1].get("stop_reason")
@@ -566,22 +776,55 @@ def build_graph(run: InvestigationRun, checkpointer=None):
     def replayable(key, function):
         def invoke(state):
             require_role(run.requested_by, run.shop, "operator", "quality", "support", "data_admin")
+            if key == "text_evidence" and int(state.get("text_search_rounds", 0)) >= 2:
+                raise RuntimeError("text_evidence_round_limit")
             current = InvestigationRun.objects.get(pk=run.pk)
             assert_execution_owner(run, current)
-            if current.input_versions:
-                assert_same_inputs(current.input_versions, state.get("input_versions", {}))
             if current.status == "cancelled":
                 raise RuntimeError("investigation_cancelled")
             if current.child_asin:
                 authorize_object(run.requested_by, run.shop, current.child_asin, current.product_id)
             logical_keys = [key]
+            if key == "text_evidence" and state.get("text_search_rounds", 0):
+                logical_keys = [f"text_evidence:{state['text_search_rounds']}"]
             if key == "write_task":
                 # The persisted command receipt uses the concrete tool name;
                 # the graph node is named after the user-facing capability.
                 logical_keys.append("create_draft_task")
             saved = InvestigationStep.objects.filter(run=run, logical_key__in=logical_keys).order_by("sequence").first()
             if saved:
-                return saved.state_snapshot
+                restored = dict(saved.state_snapshot)
+                from .scope import validate_scope_state
+
+                validate_scope_state(restored)
+                if current.input_versions:
+                    # The node receipt is committed before its LangGraph
+                    # checkpoint. After a worker dies in that gap, the graph
+                    # may replay from an older checkpoint with empty inputs;
+                    # validate the durable node snapshot that will actually be
+                    # replayed before trusting it.
+                    assert_same_inputs(current.input_versions, restored.get("input_versions", {}))
+                # Tool facts commit before their following model decision. A crash
+                # in that gap must reuse the durable decision ledger, not loop on
+                # the previous next_tool or re-read/re-dispatch the tool.
+                tools_and_phase = {"metric_snapshot": (["order_records", "review_claims", "text_evidence"], "after_metric"),
+                                   "review_claims": (["text_evidence"], "after_reviews"), "order_records": ([], "after_orders")}
+                if key == "text_evidence":
+                    external = (restored.get("planner_provider") or os.getenv("INVESTIGATION_PLANNER_PROVIDER", "deterministic")) in {"deepseek", "deepseek-v4-flash"}
+                    rounds = int(restored.get("text_search_rounds", 1))
+                    tools_and_phase[key] = (["text_evidence"] if external and rounds < 2 and restored["steps"] + 2 < run.max_steps else [], "after_text")
+                if key in tools_and_phase:
+                    tools, phase = tools_and_phase[key]
+                    restored["next_tool"] = _plan(run, restored, tools, phase).next_tool
+                return restored
+            from .scope import validate_scope_state
+
+            # A successor inherits the parent's window before its own locate
+            # freezes the new input version. Resumed runs must still validate.
+            if key != "locate" or current.input_versions or current.steps.exists():
+                validate_scope_state(state)
+            if current.input_versions:
+                assert_same_inputs(current.input_versions, state.get("input_versions", {}))
             # Each domain command and checkpoint owns its own transaction.  Do
             # not wrap the whole node in one outer transaction: an internal
             # task may commit before a worker crashes while recording the
@@ -595,7 +838,7 @@ def build_graph(run: InvestigationRun, checkpointer=None):
 
     graph = StateGraph(InvestigationState)
     for key, function in (("locate", locate), ("choose", choose), ("metric_snapshot", metric),
-                          ("review_claims", reviews), ("text_evidence", search_text),
+                          ("order_records", orders), ("review_claims", reviews), ("text_evidence", search_text),
                           ("write_task", write_task), ("compose", compose)):
         graph.add_node(key, replayable(key, function))
     graph.add_edge(START, "locate")
@@ -606,33 +849,41 @@ def build_graph(run: InvestigationRun, checkpointer=None):
     )
     graph.add_conditional_edges(
         "choose",
-        lambda state: state.get("next_tool") or "compose",
-        {"metric_snapshot": "metric_snapshot", "review_claims": "review_claims",
-         "text_evidence": "text_evidence", "compose": "compose"},
+        lambda state: "clarify" if state.get("clarification") else state.get("next_tool") or "compose",
+        {"metric_snapshot": "metric_snapshot", "order_records": "order_records", "review_claims": "review_claims",
+         "text_evidence": "text_evidence", "compose": "compose", "clarify": END},
     )
     graph.add_conditional_edges(
         "metric_snapshot",
-        lambda state: state.get("next_tool") if state.get("next_tool") in {"review_claims", "text_evidence"} else (
+        lambda state: "clarify" if state.get("clarification") else state.get("next_tool") if state.get("next_tool") in {"order_records", "review_claims", "text_evidence"} else (
             "write_task"
             if state.get("write_requested") and int(state.get("steps", run.steps_used)) + 2 <= run.max_steps
             else "compose"
         ),
-        {"review_claims": "review_claims", "write_task": "write_task", "compose": "compose"},
+        {
+            "order_records": "order_records",
+            "review_claims": "review_claims",
+            "text_evidence": "text_evidence",
+            "write_task": "write_task",
+            "compose": "compose",
+            "clarify": END,
+        },
     )
     graph.add_conditional_edges(
         "review_claims",
-        lambda state: state.get("next_tool") if state.get("next_tool") == "text_evidence" else (
+        lambda state: "clarify" if state.get("clarification") else state.get("next_tool") if state.get("next_tool") == "text_evidence" else (
             "write_task" if state.get("write_requested") and int(state.get("steps", run.steps_used)) + 2 <= run.max_steps else "compose"
         ),
-        {"text_evidence": "text_evidence", "write_task": "write_task", "compose": "compose"},
+        {"text_evidence": "text_evidence", "write_task": "write_task", "compose": "compose", "clarify": END},
     )
     graph.add_conditional_edges(
         "text_evidence",
-        lambda state: "write_task"
+        lambda state: "clarify" if state.get("clarification") else "text_evidence" if state.get("next_tool") == "text_evidence" else "write_task"
         if state.get("write_requested") and int(state.get("steps", run.steps_used)) + 2 <= run.max_steps
         else "compose",
-        {"write_task": "write_task", "compose": "compose"},
+        {"text_evidence": "text_evidence", "write_task": "write_task", "compose": "compose", "clarify": END},
     )
+    graph.add_conditional_edges("order_records", lambda state: "clarify" if state.get("clarification") else "compose", {"clarify": END, "compose": "compose"})
     graph.add_edge("write_task", "compose")
     graph.add_edge("compose", END)
     return graph.compile(checkpointer=checkpointer)
@@ -652,10 +903,24 @@ def execute_investigation(run: InvestigationRun):
         "candidates": list(run.state.get("candidates", [])),
         "planner_provider": str(run.state.get("planner_provider") or ""),
     }
+    if run.state.get("scope_query"):
+        state["scope_query"] = run.state["scope_query"]
+    if run.input_versions:
+        # A worker may die after the node transaction commits but before its
+        # LangGraph checkpoint. Replay must use the durable frozen manifest
+        # and input IDs already written by that node, even for a normal run.
+        state["source_manifest"] = run.input_versions.get("source_manifest", {})
+        state["input_versions"] = run.input_versions
     if run.read_only_refresh and "source_manifest" in run.state:
         state["source_manifest"] = run.state["source_manifest"]
-        state["input_versions"] = run.state["input_versions"]
-    config = {"configurable": {"thread_id": str(run.pk)}}
+        if not run.input_versions and "input_versions" in run.state:
+            # Refresh successors are created with explicit parent snapshot IDs
+            # before their own first node freezes the complete manifest.
+            state["input_versions"] = run.state["input_versions"]
+        for key in ("request_scope", "search_start", "search_end"):
+            if key in run.state:
+                state[key] = run.state[key]
+    config = {"configurable": {"thread_id": str(run.pk)}, "recursion_limit": max(8, run.max_steps * 2 + 4)}
     db = connection.settings_dict
     conninfo = make_conninfo(
         dbname=db["NAME"], user=db["USER"], password=db["PASSWORD"], host=db["HOST"], port=db["PORT"]
@@ -688,6 +953,14 @@ def execute_investigation(run: InvestigationRun):
             graph = build_graph(run, checkpointer=saver)
             existing = graph.get_state(config)
             result = graph.invoke(None if existing.values else state, config=config)
+        except PermissionDenied:
+            with transaction.atomic():
+                locked = InvestigationRun.objects.select_for_update().get(pk=run.pk)
+                assert_execution_owner(run, locked)
+                if locked.status != "cancelled":
+                    locked.status, locked.stop_reason = "partial", "investigation_permission_denied"
+                    locked.save(update_fields=["status", "stop_reason"])
+            raise
         except RuntimeError as exc:
             with transaction.atomic():
                 locked = InvestigationRun.objects.select_for_update().get(pk=run.pk)
@@ -707,7 +980,9 @@ def execute_investigation(run: InvestigationRun):
             if result.get("clarification"):
                 locked.status, locked.stop_reason, locked.result = (
                     "needs_clarification", result["clarification"], {
+                        **compose_output([], []),
                         "clarification": result["clarification"],
+                        "request_scope": result.get("request_scope"),
                         "candidates": result.get("candidates", []),
                         "input_versions": result.get("input_versions", {}),
                     },

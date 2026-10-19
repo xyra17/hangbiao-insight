@@ -96,10 +96,17 @@ def run_job(job_id):
                 raise RuntimeError("Job lock connection lost")
         if not Job.objects.filter(pk=job_id, lease_token=job.lease_token).update(heartbeat_at=timezone.now()):
             raise RuntimeError("Job lease superseded")
+        if job.kind in {"investigation_run", "refresh_derived"}:
+            from .investigation.budget import renew_workspace_execution
+
+            renew_workspace_execution(job, lease_token=job.lease_token)
 
     try:
         with transaction.atomic():
-            job = Job.objects.select_for_update().select_related("actor", "shop__workspace").get(pk=job_id)
+            # Claim only this job row. Locking the joined actor/shop/workspace
+            # rows serialized unrelated jobs and could deadlock workers that
+            # process different shops for the same actor.
+            job = Job.objects.select_for_update(of=("self",)).select_related("actor", "shop__workspace").get(pk=job_id)
             if job.status not in {"queued", "running", "retry_wait"}:
                 return
             if job.status == "retry_wait" and job.next_run_at and job.next_run_at > timezone.now():
@@ -108,11 +115,30 @@ def run_job(job_id):
                 job.status, job.error = "failed", "任务多次中断，请核查后重新提交。"
                 job.finished_at = timezone.now()
                 job.save(update_fields=["status", "error", "finished_at"])
+                if job.kind in {"investigation_run", "refresh_derived"}:
+                    from .investigation.budget import release_workspace_execution
+
+                    release_workspace_execution(job, lease_token=job.lease_token)
                 return
+            next_lease_token = job.lease_token + 1
+            if job.kind in {"investigation_run", "refresh_derived"}:
+                from .investigation.budget import acquire_workspace_execution
+
+                if not acquire_workspace_execution(job, lease_token=next_lease_token):
+                    job.status = "retry_wait"
+                    job.error = "workspace_investigation_concurrency_limit_reached"
+                    job.next_run_at = timezone.now() + timedelta(seconds=30)
+                    job.heartbeat_at = timezone.now()
+                    job.save(update_fields=["status", "error", "next_run_at", "heartbeat_at"])
+                    return
             job.attempts += 1
-            job.lease_token += 1
-            job.status, job.heartbeat_at = "running", timezone.now()
-            job.save()
+            job.lease_token = next_lease_token
+            job.started_at = timezone.now()
+            job.status, job.heartbeat_at = "running", job.started_at
+            # Do not rewrite unchanged foreign keys during claim. PostgreSQL
+            # validates those references and can wait on a concurrent actor
+            # row lock even though the worker no longer locks the actor row.
+            job.save(update_fields=["attempts", "lease_token", "status", "heartbeat_at", "started_at"])
         execution_context = current_execution.set((job.pk, job.lease_token, backend_pid, key))
         try:
             require_role(
@@ -286,16 +312,18 @@ def run_job(job_id):
                     job.status, job.result = "cancelled", {"message": "调查已在执行前取消。", "investigation_id": str(run.pk), "status": run.status}
                 else:
                     run = execute_investigation(run)
-                    job.status, job.result = (
-                        "completed",
-                        {
-                            "message": "自主调查完成."
-                            if run.status == "completed"
-                            else "自主调查需要继续处理。",
-                            "investigation_id": str(run.pk),
-                            "status": run.status,
-                        },
-                    )
+                    job.status = "cancelled" if run.status == "cancelled" else "completed"
+                    if run.status == "cancelled":
+                        message = "调查已在执行中取消。"
+                    elif run.status == "completed":
+                        message = "自主调查完成。"
+                    else:
+                        message = "自主调查需要继续处理。"
+                    job.result = {
+                        "message": message,
+                        "investigation_id": str(run.pk),
+                        "status": run.status,
+                    }
             elif job.kind == "parse_import":
                 from .ingestion.service import parse_batch
 
@@ -359,6 +387,10 @@ def run_job(job_id):
             )
             if not updated:
                 raise RuntimeError("Job lease superseded")
+            if job.kind in {"investigation_run", "refresh_derived"}:
+                from .investigation.budget import release_workspace_execution
+
+                release_workspace_execution(job, lease_token=job.lease_token)
             audit(job.actor, job.shop, "job.execution_recorded", job.pk,
                   after={"kind": job.kind, "status": job.status, "attempt": job.attempts,
                          "error": job.error, "lease": job.lease_token}, request_id=str(job.pk))

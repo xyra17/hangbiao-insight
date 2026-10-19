@@ -2,6 +2,7 @@
 from collections.abc import Mapping
 from datetime import timedelta
 
+from django.conf import settings
 from django.db import transaction
 from django.utils import timezone
 from django.utils.crypto import salted_hmac
@@ -16,7 +17,10 @@ class LoginThrottle(BaseThrottle):
         window = now.replace(second=0, microsecond=0)
         self.retry_after = max(1, (window + timedelta(minutes=1) - now).total_seconds())
         username = str(request.data.get("username", ""))[:150].casefold() if isinstance(request.data, Mapping) else ""
-        identifiers = [("account", username, 10), ("address", self.get_ident(request), 60)]
+        identifiers = [
+            ("account", username, settings.LOGIN_THROTTLE_ACCOUNT_LIMIT),
+            ("address", self.get_ident(request), settings.LOGIN_THROTTLE_ADDRESS_LIMIT),
+        ]
         allowed = True
         with transaction.atomic():
             LoginThrottleBucket.objects.filter(window_start__lt=window - timedelta(minutes=2)).delete()

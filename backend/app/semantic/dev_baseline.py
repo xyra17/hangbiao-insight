@@ -10,10 +10,21 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from .config import DEEPSEEK_FALLBACK_CONFIG, LOCAL_DEV_CONFIG, LOCAL_DEV_V12_CONFIG, OPENAI_PRODUCTION_CONFIG, ProviderConfig
+from .config import (
+    DEEPSEEK_FALLBACK_CONFIG,
+    LOCAL_DEV_CONFIG,
+    LOCAL_DEV_V12_CONFIG,
+    OPENAI_PRODUCTION_CONFIG,
+)
 from .evaluator import SemanticEvaluator
 from .guard import SemanticGuard
-from .model_gateway import DeepSeekResponsesGateway, LMStudioChatGateway, ModelGateway, ModelGatewayError, OpenAIResponsesGateway
+from .model_gateway import (
+    DeepSeekResponsesGateway,
+    LMStudioChatGateway,
+    ModelGateway,
+    ModelGatewayError,
+    OpenAIResponsesGateway,
+)
 from .parser import SemanticParseError, SemanticParser
 from .prompt_builder import PromptBuilder
 from .schemas import PredictionStatus, ReviewInput, SemanticPrediction
@@ -138,8 +149,7 @@ def run_dev_baseline(
         for parsed_path in (output_dir / "parsed").glob("*.json"):
             parsed_value = json.loads(parsed_path.read_text(encoding="utf-8"))
             all_predictions.extend(
-                SemanticPrediction.model_validate(value)
-                for value in parsed_value.get("predictions", [])
+                SemanticPrediction.model_validate(value) for value in parsed_value.get("predictions", [])
             )
 
     # Inference reads only review rows and the split manifest. Golden claims are loaded afterwards.
@@ -287,7 +297,11 @@ def main() -> None:
     parser.add_argument("--split-file", type=Path, required=True)
     parser.add_argument("--taxonomy", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--prompt-version", choices=("semantic-prompt-v1.0", "semantic-prompt-v1.1", "semantic-prompt-v1.2"), default="semantic-prompt-v1.1")
+    parser.add_argument(
+        "--prompt-version",
+        choices=("semantic-prompt-v1.0", "semantic-prompt-v1.1", "semantic-prompt-v1.2"),
+        default="semantic-prompt-v1.1",
+    )
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     result = run_dev_baseline(

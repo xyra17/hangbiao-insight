@@ -11,11 +11,14 @@ from django.utils import timezone
 from insight.ingestion.service import accept_upload, create_source, parse_batch, publish_batch
 from insight.models import Membership, Product, ProductMapping, Shop, ShopGrant, Source
 
+from ._acceptance import require_isolated_acceptance_environment
+
 
 class Command(BaseCommand):
     help = "在测试工作区导入合成指标样本，不操作正式工作区。"
 
     def handle(self, *args, **options):
+        require_isolated_acceptance_environment()
         user = get_user_model().objects.filter(username="accept_admin", is_active=True).first()
         membership = Membership.objects.filter(user=user, is_admin=True, workspace__is_test=True).first()
         if not membership:

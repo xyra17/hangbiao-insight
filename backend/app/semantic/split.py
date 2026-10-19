@@ -9,7 +9,6 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-
 SPLIT_VERSION = "golden-semantic-split-v1.0"
 SPLIT_SEED = 20260912
 SPLIT_RATIOS = {"dev": 0.6, "validation": 0.2, "frozen_test": 0.2}

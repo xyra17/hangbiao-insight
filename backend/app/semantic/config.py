@@ -16,6 +16,7 @@ class ProviderConfig(BaseModel):
     model: str = Field(min_length=1)
     api_name: Literal["responses", "chat_completions_compatible"]
     reasoning_effort: str = "low"
+    max_output_tokens: int | None = Field(default=None, ge=1, le=32768)
     structured_output: Literal["json_schema"] = "json_schema"
     strict: Literal[True] = True
     prompt_version: str = PROMPT_VERSION
@@ -46,9 +47,7 @@ LOCAL_DEV_CONFIG = ProviderConfig(
     base_url="http://127.0.0.1:1234/v1",
 )
 
-QWEN_FALLBACK_CONFIG = LOCAL_DEV_CONFIG.model_copy(
-    update={"prompt_version": "semantic-prompt-v1.0"}
-)
+QWEN_FALLBACK_CONFIG = LOCAL_DEV_CONFIG.model_copy(update={"prompt_version": "semantic-prompt-v1.0"})
 LOCAL_DEV_V12_CONFIG = LOCAL_DEV_CONFIG.model_copy(update={"prompt_version": "semantic-prompt-v1.2"})
 
 DEEPSEEK_FALLBACK_CONFIG = ProviderConfig(

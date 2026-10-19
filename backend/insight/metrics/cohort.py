@@ -35,10 +35,32 @@ def calculate_cohort(manifest, asin, today, zone, product_id=None, observation_d
 
 
 def cohort_from_facts(
-    order_coverage, event_coverage, orders, refunds, returns, today, zone, observation_days=30, rules=None
+    order_coverage,
+    event_coverage,
+    orders,
+    refunds,
+    returns,
+    today,
+    zone,
+    observation_days=30,
+    rules=None,
+    cohort_windows=None,
 ):
     """Compute from original lines, so parent totals deduplicate orders before counting."""
     p = numbers(rules)
+
+    # Many order lines share the same shipment and purchase dates. Checking
+    # complete_range for every order repeats the same day-by-day coverage walk
+    # thousands of times on high-volume ASINs, so memoize by coverage map and
+    # inclusive date range for this immutable calculation.
+    complete_ranges = {}
+
+    def range_is_complete(days, start, end):
+        key = (id(days), start, end)
+        if key not in complete_ranges:
+            complete_ranges[key] = complete_range(days, start, end)
+        return complete_ranges[key]
+
     if rules is not None:
         observation_days = int(p["observation_days"])
     result = {
@@ -64,13 +86,28 @@ def cohort_from_facts(
             datetime.combine(data_end + timedelta(days=1), time.min, ZoneInfo(zone)).astimezone(timezone.utc),
         )
         # Use the last fully observed shipment day, never partially matured orders from that day.
-        cutoff = min(
+        mature_cutoff = min(
             today - timedelta(days=observation_days + 1), data_end - timedelta(days=observation_days)
         )
-        baseline_start, current_start = cutoff - timedelta(days=55), cutoff - timedelta(days=27)
+        if cohort_windows is None:
+            cutoff = mature_cutoff
+            # Compare adjacent, complete 28-day shipped-date cohorts. Action
+            # reviews construct their own effective-date-aligned windows.
+            baseline_start, current_start = cutoff - timedelta(days=55), cutoff - timedelta(days=27)
+            baseline_end, current_end = current_start - timedelta(days=1), cutoff
+            coverage_end = data_end
+        else:
+            baseline_start = cohort_windows["baseline"]["start"]
+            baseline_end = cohort_windows["baseline"]["end"]
+            current_start = cohort_windows["current"]["start"]
+            current_end = cohort_windows["current"]["end"]
+            cutoff = max(baseline_end, current_end)
+            coverage_end = current_end + timedelta(days=observation_days)
         status = "stale" if (today - data_end).days > 2 else "ready"
-        if not complete_range(order_coverage, baseline_start, cutoff) or not complete_range(
-            days, baseline_start, data_end
+        if cohort_windows is not None and current_end > mature_cutoff:
+            status = "partial"
+        if not range_is_complete(order_coverage, baseline_start, cutoff) or coverage_end > data_end or not range_is_complete(
+            days, baseline_start, coverage_end
         ):
             status = "partial"
         groups = defaultdict(list)
@@ -105,9 +142,14 @@ def cohort_from_facts(
                 references = [str(row.raw_row_id) for row, _ in entries]
                 raw_ids.extend(references)
                 net_amount = sum(row.amount for row, _ in entries)
+                positive_times = [moment for row, moment in entries if row.amount > 0]
+                reversal_count = sum(row.amount < 0 for row, _ in entries)
                 chain_evidence = {
                     "currency": currency,
                     "net_amount": str(net_amount),
+                    "positive_transaction_count": len(positive_times),
+                    "reversal_transaction_count": reversal_count,
+                    "chain_status": "reversal_without_positive_anchor" if reversal_count and not positive_times else "observed_chain",
                     "raw_row_ids": references,
                     "classification": "unmatched" if line not in linked else "reversed",
                 }
@@ -119,7 +161,6 @@ def cohort_from_facts(
                 first = min(moment for _, moment in groups[order_id])
                 if net_amount <= 0:
                     continue
-                positive_times = [moment for row, moment in entries if row.amount > 0]
                 if any(
                     first <= moment < first + timedelta(days=observation_days) for moment in positive_times
                 ):
@@ -169,12 +210,12 @@ def cohort_from_facts(
                 if not start <= day <= end:
                     continue
                 purchase_day = min(row.business_date for row, _ in entries)
-                if not complete_range(order_coverage, purchase_day, day):
+                if not range_is_complete(order_coverage, purchase_day, day):
                     unverified_first += 1
                     continue
                 last_instant = first + timedelta(days=observation_days)
                 last_day = (last_instant - timedelta(microseconds=1)).astimezone(ZoneInfo(zone)).date()
-                if last_instant > now or not complete_range(days, day, last_day):
+                if last_instant > now or not range_is_complete(days, day, last_day):
                     immature += 1
                 else:
                     included.append(order_id)
@@ -201,8 +242,8 @@ def cohort_from_facts(
                 ],
             }
 
-        baseline = count(baseline_start, current_start - timedelta(days=1))
-        current = count(current_start, cutoff)
+        baseline = count(baseline_start, baseline_end)
+        current = count(current_start, current_end)
         interval = newcombe(
             current["numerator"], current["denominator"], baseline["numerator"], baseline["denominator"]
         )

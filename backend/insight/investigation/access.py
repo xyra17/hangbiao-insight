@@ -11,4 +11,14 @@ def visible_investigations(user):
     # record.  Metadata such as the selected planner provider must not make it
     # disappear from the cancel/clarify endpoints.
     unresolved = owned.filter(child_asin="")
-    return owned.filter(Q(pk__in=scoped(owned, user).values("pk")) | Q(pk__in=unresolved.values("pk")))
+    visible = owned.filter(Q(pk__in=scoped(owned, user).values("pk")) | Q(pk__in=unresolved.values("pk")))
+
+    from rest_framework.exceptions import PermissionDenied
+
+    from insight.ingestion.service import require_source_access
+    for shop in shops_for(user):
+        try:
+            require_source_access(user, shop)
+        except PermissionDenied:
+            visible = visible.exclude(pk__in=InvestigationRun.objects.filter(shop=shop, tool_calls__tool_name="order_records", tool_calls__authorization="allowed").values("pk"))
+    return visible

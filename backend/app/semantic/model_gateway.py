@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import time
 from abc import ABC, abstractmethod
@@ -11,12 +12,43 @@ from typing import Any
 from .config import ProviderConfig
 from .prompt_builder import PromptPackage
 from .schemas import GatewayResponse, ReviewInput
+from .structured_response import StructuredOutputError
+
+
+def bind_extraction_payload(payload, prompt):
+    """Expand only the explicit frozen pair; preserve raw provider output elsewhere."""
+    from .structured_response import StructuredOutputError, parse_structured_object, validate_wire_value
+
+    value, normalized, _normalization = parse_structured_object(payload)
+    try:
+        validate_wire_value(value, prompt.response_schema)
+    except ValueError as exc:
+        raise StructuredOutputError("structured_output_schema_invalid", str(exc)) from None
+    if prompt.topic_bindings is None:
+        return normalized
+    canonical = []
+    for claim in value["claims"]:
+        primary, secondary = prompt.topic_bindings[claim["topic_ref" if prompt.prompt_version == "semantic-prompt-v1.7" else "topic_pair"]]
+        canonical.append({"primary_topic": primary, "secondary_topic": secondary,
+            "polarity": claim["polarity"], "evidence_span": (prompt.evidence_bindings[claim["evidence_ref"]]
+                if prompt.evidence_bindings is not None else claim["evidence_span"])})
+    return json.dumps({"claims": canonical}, ensure_ascii=False)
 
 
 class ModelGatewayError(RuntimeError):
     def __init__(self, message: str, *, attempts: int) -> None:
         super().__init__(message)
         self.attempts = attempts
+
+
+class SemanticResponseError(ModelGatewayError):
+    """A received response is unusable; never redispatch to repair it."""
+
+    def __init__(self, code: str, response: Any) -> None:
+        super().__init__(code, attempts=1)
+        self.code = code
+        self.response_id = getattr(response, "id", None)
+        self.raw_response = response.model_dump(mode="json") if hasattr(response, "model_dump") else None
 
 
 class ModelGateway(ABC):
@@ -121,9 +153,13 @@ class OpenAIResponsesGateway(_RetryingGateway):
 
         response = self._run_with_retry(request)
         raw = response.model_dump(mode="json") if hasattr(response, "model_dump") else None
+        try:
+            payload = bind_extraction_payload(response.output_text, prompt)
+        except StructuredOutputError as exc:
+            raise SemanticResponseError(exc.code, response) from None
         return self._response(
             prompt=prompt,
-            payload=response.output_text,
+            payload=payload,
             response_id=getattr(response, "id", None),
             raw_response=raw,
         )
@@ -132,9 +168,21 @@ class OpenAIResponsesGateway(_RetryingGateway):
 class DeepSeekResponsesGateway(_RetryingGateway):
     """DeepSeek Responses-compatible fallback; key is read only from DEEPSEEK_API_KEY."""
 
-    def __init__(self, *, config: ProviderConfig, client: Any | None = None, sleep: Callable[[float], None] = time.sleep) -> None:
+    def __init__(
+        self,
+        *,
+        config: ProviderConfig,
+        client: Any | None = None,
+        sleep: Callable[[float], None] = time.sleep,
+    ) -> None:
         if config.provider != "deepseek" or config.api_name != "responses" or not config.base_url:
             raise ValueError("DeepSeekResponsesGateway requires the DeepSeek Responses configuration")
+        if config.reasoning_effort not in {"none", "low", "high", "max", "minimal", "medium", "xhigh"}:
+            raise ValueError("unsupported DeepSeek Responses reasoning effort")
+        if config.max_output_tokens is not None and (
+            type(config.max_output_tokens) is not int or not 1 <= config.max_output_tokens <= 32768
+        ):
+            raise ValueError("invalid DeepSeek output token limit")
         if client is None:
             api_key = os.environ.get("DEEPSEEK_API_KEY")
             if not api_key:
@@ -154,16 +202,51 @@ class DeepSeekResponsesGateway(_RetryingGateway):
 
     def extract(self, review: ReviewInput, prompt: PromptPackage) -> GatewayResponse:
         def request() -> Any:
+            limits = {} if self.config.max_output_tokens is None else {"max_output_tokens": self.config.max_output_tokens}
+            from .structured_response import sampling_options
+            limits.update(sampling_options())
             return self.client.responses.create(
                 model=self.config.model,
-                input=[{"role": "system", "content": prompt.system}, {"role": "user", "content": prompt.user}],
+                input=[
+                    {"role": "system", "content": prompt.system},
+                    {"role": "user", "content": prompt.user},
+                ],
                 reasoning={"effort": self.config.reasoning_effort},
-                text={"format": {"type": "json_schema", "name": "review_semantic_extraction", "schema": prompt.response_schema}},
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "review_semantic_extraction",
+                        "schema": prompt.response_schema,
+                        "strict": self.config.strict,
+                    }
+                },
                 store=False,
+                **limits,
             )
+
         response = self._run_with_retry(request)
+        # Response checks stay outside the transport retry loop. Even syntactically
+        # valid text from an incomplete response must not be promoted to success.
+        status = getattr(response, "status", None)
+        details = getattr(response, "incomplete_details", None)
+        reason = details.get("reason") if isinstance(details, dict) else getattr(details, "reason", None)
+        if status == "incomplete":
+            raise SemanticResponseError("output_truncated" if reason == "max_output_tokens" else "response_incomplete", response)
+        if status is not None and status != "completed":
+            raise SemanticResponseError("response_not_completed", response)
+        if not isinstance(response.output_text, str) or not response.output_text.strip():
+            raise SemanticResponseError("empty_output_text", response)
         raw = response.model_dump(mode="json") if hasattr(response, "model_dump") else None
-        return self._response(prompt=prompt, payload=response.output_text, response_id=getattr(response, "id", None), raw_response=raw)
+        try:
+            payload = bind_extraction_payload(response.output_text, prompt)
+        except StructuredOutputError as exc:
+            raise SemanticResponseError(exc.code, response) from None
+        return self._response(
+            prompt=prompt,
+            payload=payload,
+            response_id=getattr(response, "id", None),
+            raw_response=raw,
+        )
 
 
 class LMStudioChatGateway(_RetryingGateway):
@@ -218,9 +301,7 @@ class LMStudioChatGateway(_RetryingGateway):
         raw = response.model_dump(mode="json") if hasattr(response, "model_dump") else None
         message = response.choices[0].message
         reasoning_content = (
-            message.model_extra.get("reasoning_content", "")
-            if getattr(message, "model_extra", None)
-            else ""
+            message.model_extra.get("reasoning_content", "") if getattr(message, "model_extra", None) else ""
         )
         return self._response(
             prompt=prompt,
