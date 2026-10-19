@@ -1,0 +1,203 @@
+PGDATABASE=insight_dev PGPORT=55433 REDIS_PORT=56380 docker compose -p insight-local-dev -f compose.v2.yml --env-file .env.local up -d --wait postgres redis
+ Container insight-local-dev-postgres-1 Running 
+ Container insight-local-dev-redis-1 Running 
+ Container insight-local-dev-postgres-1 Waiting 
+ Container insight-local-dev-redis-1 Waiting 
+ Container insight-local-dev-redis-1 Healthy 
+ Container insight-local-dev-postgres-1 Healthy 
+cd backend && uv run --env-file ../.env.local ruff check config insight tests_v2
+All checks passed!
+cd backend && PGDATABASE=insight_dev PGHOST=127.0.0.1 PGPORT=55433 PGUSER=insight DJANGO_DEBUG=1 INSIGHT_REDIS_HOST=127.0.0.1 INSIGHT_REDIS_PORT=56380 INSIGHT_CELERY_NAMESPACE=insight_dev INSIGHT_STORAGE_ROOT=../.local/dev/storage INSIGHT_BEAT_SCHEDULE=../.local/dev/celerybeat.db INVESTIGATION_PLANNER_PROVIDER=deterministic INVESTIGATION_EVAL_PROVIDER=deterministic EVIDENCE_RELEVANCE_ENABLED=0 EVIDENCE_RELEVANCE_PROVIDER= SEMANTIC_PROVIDER=disabled INSIGHT_ENABLED_MODEL_PROVIDERS= uv run --env-file ../.env.local python manage.py check
+System check identified no issues (0 silenced).
+cd backend && PGDATABASE=insight_dev PGHOST=127.0.0.1 PGPORT=55433 PGUSER=insight DJANGO_DEBUG=1 INSIGHT_REDIS_HOST=127.0.0.1 INSIGHT_REDIS_PORT=56380 INSIGHT_CELERY_NAMESPACE=insight_dev INSIGHT_STORAGE_ROOT=../.local/dev/storage INSIGHT_BEAT_SCHEDULE=../.local/dev/celerybeat.db INVESTIGATION_PLANNER_PROVIDER=deterministic INVESTIGATION_EVAL_PROVIDER=deterministic EVIDENCE_RELEVANCE_ENABLED=0 EVIDENCE_RELEVANCE_PROVIDER= SEMANTIC_PROVIDER=disabled INSIGHT_ENABLED_MODEL_PROVIDERS= uv run --env-file ../.env.local python manage.py makemigrations --check --dry-run
+No changes detected
+cd backend && PGDATABASE=insight_dev PGHOST=127.0.0.1 PGPORT=55433 PGUSER=insight DJANGO_DEBUG=1 INSIGHT_REDIS_HOST=127.0.0.1 INSIGHT_REDIS_PORT=56380 INSIGHT_CELERY_NAMESPACE=insight_dev INSIGHT_STORAGE_ROOT=../.local/dev/storage INSIGHT_BEAT_SCHEDULE=../.local/dev/celerybeat.db INVESTIGATION_PLANNER_PROVIDER=deterministic INVESTIGATION_EVAL_PROVIDER=deterministic EVIDENCE_RELEVANCE_ENABLED=0 EVIDENCE_RELEVANCE_PROVIDER= SEMANTIC_PROVIDER=disabled INSIGHT_ENABLED_MODEL_PROVIDERS= uv run --env-file ../.env.local python manage.py spectacular --file /tmp/insight-openapi.yaml --validate
+/Users/Admin/Desktop/商品评论智能诊断 agent/backend/insight/actions.py:30: Warning [ActionTaskViewSet > ActionTaskSerializer]: unable to resolve type hint for function "get_source_lineage". Consider using a type hint or @extend_schema_field. Defaulting to string.
+
+Schema generation summary:
+Warnings: 1 (1 unique)
+Errors:   0 (0 unique)
+
+cd backend && INVESTIGATION_EVAL_REPORT_SUFFIX=local_20261019T141641Z_e95f1b61 PGDATABASE=insight_dev PGHOST=127.0.0.1 PGPORT=55433 PGUSER=insight DJANGO_DEBUG=1 INSIGHT_REDIS_HOST=127.0.0.1 INSIGHT_REDIS_PORT=56380 INSIGHT_CELERY_NAMESPACE=insight_test INSIGHT_STORAGE_ROOT=../.local/test/storage INSIGHT_BEAT_SCHEDULE=../.local/test/celerybeat.db INVESTIGATION_PLANNER_PROVIDER=deterministic INVESTIGATION_EVAL_PROVIDER=deterministic EVIDENCE_RELEVANCE_ENABLED=0 EVIDENCE_RELEVANCE_PROVIDER= SEMANTIC_PROVIDER=disabled INSIGHT_ENABLED_MODEL_PROVIDERS= uv run --env-file ../.env.local pytest -m 'not capacity'
+============================= test session starts ==============================
+platform darwin -- Python 3.13.13, pytest-8.4.2, pluggy-1.6.0
+django: version: 5.2.17, settings: config.settings (from ini)
+rootdir: /Users/Admin/Desktop/商品评论智能诊断 agent/backend
+configfile: pyproject.toml
+testpaths: tests_v2
+plugins: django-4.14.0, anyio-4.15.1, hypothesis-6.168.0, langsmith-0.13.0
+collected 931 items / 1 deselected / 930 selected
+
+tests_v2/test_absolute_boundaries.py .....                               [  0%]
+tests_v2/test_account_security.py ......                                 [  1%]
+tests_v2/test_action_review.py .........                                 [  2%]
+tests_v2/test_actions.py .........                                       [  3%]
+tests_v2/test_administration.py .....                                    [  3%]
+tests_v2/test_business_fact_package_contract.py ...                      [  3%]
+tests_v2/test_command_audit.py ....                                      [  4%]
+tests_v2/test_core_execution_contract.py .                               [  4%]
+tests_v2/test_daily_boundaries.py .......                                [  5%]
+tests_v2/test_directory_boundaries.py ....                               [  5%]
+tests_v2/test_event_boundaries.py .                                      [  5%]
+tests_v2/test_event_commands.py ....                                     [  6%]
+tests_v2/test_event_grouping.py .....                                    [  6%]
+tests_v2/test_evidence_adaptive_quality.py ...                           [  7%]
+tests_v2/test_evidence_refs.py ..........                                [  8%]
+tests_v2/test_experience_links.py .....                                  [  8%]
+tests_v2/test_exports.py .............                                   [ 10%]
+tests_v2/test_extended_acceptance_workflow.py .                          [ 10%]
+tests_v2/test_foundation.py ......                                       [ 10%]
+tests_v2/test_historical_recovery.py ..........                          [ 11%]
+tests_v2/test_hybrid_evidence_candidates.py ..s                          [ 12%]
+tests_v2/test_import_recovery.py ........                                [ 13%]
+tests_v2/test_import_retraction.py .                                     [ 13%]
+tests_v2/test_ingestion.py ........                                      [ 14%]
+tests_v2/test_ingestion_boundaries.py ......................             [ 16%]
+tests_v2/test_investigation_writes.py ....                               [ 16%]
+tests_v2/test_metric_citations.py ......                                 [ 17%]
+tests_v2/test_metrics.py .....................                           [ 19%]
+tests_v2/test_model_contract.py ..                                       [ 20%]
+tests_v2/test_occurrence_boundaries.py ....                              [ 20%]
+tests_v2/test_occurrence_workplan.py ..                                  [ 20%]
+tests_v2/test_parent_metrics.py ....                                     [ 21%]
+tests_v2/test_proposal_execution.py ........                             [ 21%]
+tests_v2/test_quality_candidate_stage.py ...                             [ 22%]
+tests_v2/test_quality_response_repair.py .                               [ 22%]
+tests_v2/test_release_job_receipts.py ..                                 [ 22%]
+tests_v2/test_retention.py ....                                          [ 23%]
+tests_v2/test_retrieval_mechanisms.py .                                  [ 23%]
+tests_v2/test_retrieval_strategy_experiment.py .                         [ 23%]
+tests_v2/test_review_probes.py .....                                     [ 23%]
+tests_v2/test_rule_configuration.py ....                                 [ 24%]
+tests_v2/test_s1_boundaries.py ......................................... [ 28%]
+.............................................................            [ 35%]
+tests_v2/test_s1_scope_matrix.py ............                            [ 36%]
+tests_v2/test_s4_diagnosis.py .....................                      [ 38%]
+tests_v2/test_s5_real_sample_acceptance.py ..                            [ 38%]
+tests_v2/test_s7_tools.py .                                              [ 39%]
+tests_v2/test_schedule_recovery.py .......                               [ 39%]
+tests_v2/test_semantic.py ......                                         [ 40%]
+tests_v2/test_semantic_relevance.py ...                                  [ 40%]
+tests_v2/test_version_freezing.py .....                                  [ 41%]
+tests_v2/test_workspace_model_budget.py .........                        [ 42%]
+tests_v2/test_acceptance_isolation.py .                                  [ 42%]
+tests_v2/test_core_execution_contract.py ....                            [ 42%]
+tests_v2/test_derived_refresh.py ...........                             [ 43%]
+tests_v2/test_event_boundaries.py .                                      [ 44%]
+tests_v2/test_evidence_adaptive_quality.py ...                           [ 44%]
+tests_v2/test_ingestion.py .                                             [ 44%]
+tests_v2/test_ingestion_process_recovery.py .                            [ 44%]
+tests_v2/test_investigation.py ...........                               [ 45%]
+tests_v2/test_investigation_agent_contract.py .......                    [ 46%]
+tests_v2/test_investigation_date_scope.py ...............                [ 48%]
+tests_v2/test_investigation_output.py ..                                 [ 48%]
+tests_v2/test_investigation_recovery.py .......                          [ 49%]
+tests_v2/test_metric_citations.py .                                      [ 49%]
+tests_v2/test_model_cost_readiness.py .                                  [ 49%]
+tests_v2/test_model_evidence_followup.py ...                             [ 49%]
+tests_v2/test_native_business_api.py ....                                [ 50%]
+tests_v2/test_occurrence_workplan.py ......                              [ 50%]
+tests_v2/test_paid_development_diagnostic.py s                           [ 50%]
+tests_v2/test_quality_candidate_stage.py ....                            [ 51%]
+tests_v2/test_quality_response_repair.py .                               [ 51%]
+tests_v2/test_real_project_review_pilot.py s                             [ 51%]
+tests_v2/test_real_review_quality_round.py s                             [ 51%]
+tests_v2/test_rule_configuration.py .                                    [ 51%]
+tests_v2/test_s1_concurrency.py ............                             [ 53%]
+tests_v2/test_s4_s6_runtime_acceptance.py .                              [ 53%]
+tests_v2/test_schedule_recovery.py .                                     [ 53%]
+tests_v2/test_unified_quality_round.py s                                 [ 53%]
+tests_v2/test_workspace_model_budget.py .                                [ 53%]
+tests_v2/test_addressed_citations.py ......................              [ 55%]
+tests_v2/test_business_fact_package_contract.py .                        [ 55%]
+tests_v2/test_core_execution_contract.py .......                         [ 56%]
+tests_v2/test_evidence_adaptive_quality.py ............................  [ 59%]
+tests_v2/test_extended_acceptance_workflow.py .....                      [ 60%]
+tests_v2/test_fact_followup.py ..                                        [ 60%]
+tests_v2/test_hybrid_evidence_candidates.py ....                         [ 60%]
+tests_v2/test_investigation_date_scope.py .............................. [ 64%]
+.................................                                        [ 67%]
+tests_v2/test_investigation_freeze.py ..                                 [ 67%]
+tests_v2/test_investigation_output.py ..                                 [ 68%]
+tests_v2/test_metric_citations.py ............                           [ 69%]
+tests_v2/test_metric_known_answers.py ..................                 [ 71%]
+tests_v2/test_model_contract.py ...                                      [ 71%]
+tests_v2/test_model_cost_readiness.py .........                          [ 72%]
+tests_v2/test_model_evidence_followup.py .                               [ 72%]
+tests_v2/test_model_version_receipts.py ........                         [ 73%]
+tests_v2/test_occurrence_workplan.py .......................             [ 76%]
+tests_v2/test_planner_query_binding.py ...............                   [ 77%]
+tests_v2/test_planner_request_capacity.py ..........                     [ 78%]
+tests_v2/test_production_planner_protocol.py ............                [ 80%]
+tests_v2/test_quality_candidate_stage.py ......                          [ 80%]
+tests_v2/test_quality_response_repair.py .......................         [ 83%]
+tests_v2/test_real_review_independent_scoring.py ....................... [ 85%]
+.........                                                                [ 86%]
+tests_v2/test_real_review_stage_gate.py ..........                       [ 87%]
+tests_v2/test_real_review_window_repair.py ...........                   [ 88%]
+tests_v2/test_real_review_worker.py ..                                   [ 89%]
+tests_v2/test_relevance_segments.py .........                            [ 90%]
+tests_v2/test_review_probes.py ....                                      [ 90%]
+tests_v2/test_s4_s6_runtime_acceptance.py .                              [ 90%]
+tests_v2/test_s7_tools.py ..                                             [ 90%]
+tests_v2/test_semantic_relevance.py ....................                 [ 92%]
+tests_v2/test_shared_business_contract.py .............................  [ 96%]
+tests_v2/test_structured_business_rules.py ................              [ 97%]
+tests_v2/test_structured_output_boundary.py ................             [ 99%]
+tests_v2/test_unified_quality_guard.py .....                             [100%]
+
+=========== 925 passed, 5 skipped, 1 deselected in 286.88s (0:04:46) ===========
+cd backend && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 uv run pytest -c /dev/null ../scripts/tests -q -p no:cacheprovider
+.........                                                                [100%]
+9 passed in 0.42s
+cd frontend && pnpm test
+$ vitest run --passWithNoTests --exclude 'e2e/**'
+
+ RUN  v3.2.7 /Users/Admin/Desktop/商品评论智能诊断 agent/frontend
+
+ ✓ src/workbench/executionStatus.test.ts (5 tests) 3ms
+ ✓ src/workbench/actionReviewFormat.test.ts (3 tests) 2ms
+ ✓ src/workbench/InvestigationEvidence.test.tsx (9 tests) 70ms
+ ✓ src/workbench/useServerPage.test.tsx (10 tests) 1352ms
+ ✓ src/workbench/EvidenceSearch.test.tsx (4 tests) 822ms
+   ✓ retrieval item relevance boundaries > renders future_kind without inventing relevance  435ms
+ ✓ src/workbench/QualityWorkflow.test.tsx (15 tests) 13613ms
+   ✓ investigation mode and state workflow > sends explicit conservative default without requesting DeepSeek implicitly  315ms
+   ✓ investigation mode and state workflow > stops investigation job and run polling after terminal states  1434ms
+   ✓ semantic report job lifecycle > polls through active states then stops at completed and refreshes both lists  4144ms
+   ✓ semantic report job lifecycle > polls through active states then stops at failed and refreshes both lists  4110ms
+   ✓ semantic report job lifecycle > follows a second successful task without carrying the first report forward  373ms
+   ✓ semantic report job lifecycle > clears previous generated and selected report on another submission, including rejection and a late revision  385ms
+   ✓ semantic report job lifecycle > pauses on network failure and manually retries status reads only  1729ms
+
+ Test Files  6 passed (6)
+      Tests  46 passed (46)
+   Start at  22:21:32
+   Duration  15.50s (transform 335ms, setup 0ms, collect 3.35s, tests 15.86s, environment 2.04s, prepare 499ms)
+
+cd frontend && pnpm build
+$ tsc -b && vite build --config vite.config.ts
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 3250 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.77 kB │ gzip:   0.40 kB
+dist/assets/index-CYTrNsew.css              17.15 kB │ gzip:   4.28 kB
+dist/assets/ListError-D60eDVBY.js            1.23 kB │ gzip:   0.77 kB
+dist/assets/RefreshHistory-DRO1w_oy.js       1.34 kB │ gzip:   0.89 kB
+dist/assets/JobPage-BPNXNDVI.js              1.90 kB │ gzip:   1.14 kB
+dist/assets/executionStatus-rQ-Qa1g8.js      3.41 kB │ gzip:   1.56 kB
+dist/assets/icons-FrfZSojB.js                3.58 kB │ gzip:   1.64 kB
+dist/assets/SettingsPage-BnaF1HDC.js         8.24 kB │ gzip:   3.19 kB
+dist/assets/ReportsPage-D3WdBmJy.js         13.45 kB │ gzip:   5.21 kB
+dist/assets/SourcePage-QIJqPhlX.js          16.22 kB │ gzip:   6.57 kB
+dist/assets/InvestigationPage-CyezPnBl.js   20.07 kB │ gzip:   7.92 kB
+dist/assets/ActionsPage-CRsIBHno.js         23.86 kB │ gzip:   7.47 kB
+dist/assets/EventPage-D7HpUcRw.js           35.21 kB │ gzip:  11.75 kB
+dist/assets/query-SpDI6X33.js               35.26 kB │ gzip:  10.38 kB
+dist/assets/index-BfJWzWOa.js               53.66 kB │ gzip:  19.90 kB
+dist/assets/react-inT8qRXa.js              222.29 kB │ gzip:  69.21 kB
+dist/assets/antd-CVoSRKUJ.js               854.20 kB │ gzip: 276.71 kB
+✓ built in 2.87s
+EXIT=0

@@ -1,0 +1,62 @@
+{
+  "schema_version": "make-verify-receipt-v1",
+  "generated_at_utc": "2026-10-19T14:22:05Z",
+  "git": {
+    "commit": "3639dffc634d8259b087b00dc8cc008ca521008d",
+    "tree": "b20fc3272cc36ba34d70435588ce78131f1315ba",
+    "branch": "main",
+    "working_tree_clean": true,
+    "commit_subject": "style(tests): 修正导入分组与多余空行以通过 Ruff"
+  },
+  "command": "make verify",
+  "environment": {
+    "os": "Darwin-arm64",
+    "node": "v24.19.0",
+    "pnpm": "11.25.0",
+    "uv": "0.12.15",
+    "python": "3.13.13",
+    "django": "5.2.17"
+  },
+  "results": {
+    "ruff_lint": "passed",
+    "django_check": "passed",
+    "migrations_drift": "none",
+    "openapi": {
+      "warnings": 1,
+      "errors": 0
+    },
+    "backend": {
+      "passed": 925,
+      "skipped": 5,
+      "deselected": 1,
+      "duration_seconds": 286.88
+    },
+    "scripts": {
+      "passed": 9
+    },
+    "frontend": {
+      "test_files": 6,
+      "tests": 46
+    },
+    "production_build": "passed",
+    "exit_code": 0
+  },
+  "skipped": [
+    "test_hybrid_evidence_candidates.py: QUALITY_LOCAL_EMBEDDING_RUN not set",
+    "test_paid_development_diagnostic.py: QUALITY_DEVELOPMENT_RUN not set",
+    "test_real_review_quality_round.py: QUALITY_REAL_REVIEW_RUN not set",
+    "test_unified_quality_round.py: QUALITY_UNIFIED_RUN not set",
+    "test_real_project_review_pilot.py: PROJECT_REVIEW_PILOT_MODE not in {offline, paid}"
+  ],
+  "deselected": [
+    "test_capacity_package_imports_all_502400_rows_through_ingestion_api (capacity marker)"
+  ],
+  "log": {
+    "path": "docs/verification/2026-10-19-make-verify-3639dff.log",
+    "sha256": "beeeb85b8a582603012cb785e15064b674b0326c7cf32f2297db9917cada28e0"
+  },
+  "scope_limits": [
+    "Local deterministic acceptance environment; no external model or paid dispatch.",
+    "This receipt proves the engineering gates pass on the recorded commit; it does not establish model quality, human review, business acceptance or production readiness."
+  ]
+}

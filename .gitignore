@@ -50,3 +50,7 @@ dataset/data/acceptance_runs/
 # 评测/容量生成物：由 dataset 脚本重建，体积大，不入库。
 dataset/data/07_S4_S6独立评测_v1/validation/
 dataset/data/08_S7容量评测_v1/import_ready/
+
+# 可复现的验证回执与其原始日志（体积小，随 commit 一起冻结证据）。
+!docs/verification/
+!docs/verification/*.log
