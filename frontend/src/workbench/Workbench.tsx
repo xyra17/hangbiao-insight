@@ -38,6 +38,7 @@ import {
   Database,
   FileText,
   LogOut,
+  Menu as MenuIcon,
   Plus,
   Radar,
 } from "lucide-react";
@@ -51,6 +52,7 @@ import {
   type Shop,
 } from "./api";
 import "./workbench.css";
+const JobPage = lazy(() => import("./JobPage"));
 const ReportsPage = lazy(() => import("./ReportsPage"));
 const ActionsPage = lazy(() => import("./ActionsPage"));
 const InvestigationPage = lazy(() => import("./InvestigationPage"));
@@ -62,13 +64,6 @@ const SourcePage = lazy(() => import("./SourcePage"));
 const EventPage = lazy(() => import("./EventPage"));
 const SettingsPage = lazy(() => import("./SettingsPage"));
 const { Title, Text } = Typography;
-const statusNames: Record<string, string> = {
-  queued: "等待执行",
-  running: "执行中",
-  completed: "已完成",
-  cancelled: "已取消",
-  failed: "失败",
-};
 
 function Login({ onLogin }: { onLogin: () => void }) {
   const login = useMutation({
@@ -398,73 +393,11 @@ function ProductPage({ shop, canEdit }: { shop: Shop; canEdit: boolean }) {
   );
 }
 
-function JobPage({ shop, canEdit }: { shop: Shop; canEdit: boolean }) {
-  const cache = useQueryClient();
-  const jobs = useQuery({
-    queryKey: ["jobs", shop.id],
-    queryFn: () => request<Page<Job>>(`jobs/?shop=${shop.id}`),
-    refetchInterval: 5000,
-  });
-  const probe = useMutation({
-    mutationFn: () =>
-      request("jobs/probe/", "POST", {
-        shop: shop.id,
-        idempotency_key: crypto.randomUUID(),
-      }),
-    onSuccess: () => {
-      void cache.invalidateQueries({ queryKey: ["jobs"] });
-    },
-  });
-  return (
-    <>
-      <div className="wb-page-heading">
-        <div>
-          <Title level={2}>后台任务</Title>
-          <p>任务会保存执行状态，离开页面后仍可回来查看。</p>
-        </div>
-        {canEdit && (
-          <Button onClick={() => probe.mutate()} loading={probe.isPending}>
-            检查后台服务
-          </Button>
-        )}
-      </div>
-      {(jobs.error || probe.error) && (
-        <Alert type="error" title={(jobs.error || probe.error)?.message} />
-      )}
-      <Table<Job>
-        rowKey="id"
-        dataSource={jobs.data?.results}
-        loading={jobs.isLoading}
-        columns={[
-          {
-            title: "任务",
-            render: (_, j) => (j.kind === "probe" ? "后台服务检查" : j.kind),
-          },
-          {
-            title: "状态",
-            render: (_, j) => <Tag>{statusNames[j.status] ?? j.status}</Tag>,
-          },
-          {
-            title: "发起时间",
-            render: (_, j) => new Date(j.created_at).toLocaleString("zh-CN"),
-          },
-          {
-            title: "结果",
-            render: (_, j) =>
-              j.error ||
-              (typeof j.result.message === "string"
-                ? j.result.message
-                : "等待执行结果"),
-          },
-        ]}
-      />
-    </>
-  );
-}
 
 function Shell() {
   const cache = useQueryClient();
   const navigate = useNavigate();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   useEffect(() => {
     const expired = (event: Event) => {
       cache.clear();
@@ -526,7 +459,7 @@ function Shell() {
   if (session.isLoading)
     return (
       <div className="wb-centered">
-        <Spin tip="正在确认登录状态" size="large">
+        <Spin description="正在确认登录状态" size="large">
           <div />
         </Spin>
       </div>
@@ -558,7 +491,20 @@ function Shell() {
       <Layout.Sider
         width={208}
         breakpoint="lg"
-        collapsedWidth={64}
+        collapsedWidth={0}
+        collapsed={sidebarCollapsed}
+        onCollapse={setSidebarCollapsed}
+        onBreakpoint={(broken) => setSidebarCollapsed(broken)}
+        trigger={
+          <button
+            type="button"
+            className="wb-sidebar-trigger"
+            aria-label="切换导航菜单"
+            aria-expanded={!sidebarCollapsed}
+          >
+            <MenuIcon size={18} aria-hidden="true" />
+          </button>
+        }
         className="wb-sidebar"
       >
         <div className="wb-brand">
@@ -568,7 +514,10 @@ function Shell() {
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]}
-          onClick={({ key }) => navigate(key)}
+          onClick={({ key }) => {
+            navigate(key);
+            if (window.innerWidth <= 992) setSidebarCollapsed(true);
+          }}
           items={[
             {
               key: "/events",
@@ -743,10 +692,22 @@ export default function Workbench() {
       button={{ autoInsertSpace: false }}
       theme={{
         token: {
-          colorPrimary: "#285b83",
-          borderRadius: 6,
-          fontFamily: '"PingFang SC", "Microsoft YaHei", sans-serif',
-          colorBgLayout: "#f3f6fa",
+          colorPrimary: "#087f7c",
+          colorInfo: "#087f7c",
+          colorSuccess: "#0a9b82",
+          colorWarning: "#c98513",
+          colorError: "#d5545c",
+          colorText: "#152238",
+          colorTextSecondary: "#526174",
+          colorTextDescription: "#526174",
+          colorTextPlaceholder: "#647184",
+          colorBorder: "#dce4e8",
+          borderRadius: 8,
+          controlHeight: 38,
+          fontSize: 14,
+          lineHeight: 1.6,
+          fontFamily: '"Avenir Next", "Inter", "Noto Sans SC", "PingFang SC", sans-serif',
+          colorBgLayout: "#f6f8f6",
         },
       }}
     >

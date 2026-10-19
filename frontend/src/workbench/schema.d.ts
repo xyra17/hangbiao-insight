@@ -437,6 +437,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/imports/{id}/revoke-publication/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Create a queued correction command for the current publication. */
+        post: operations["imports_revoke_publication_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/imports/{id}/rows/": {
         parameters: {
             query?: never;
@@ -496,6 +513,23 @@ export interface paths {
         put?: never;
         /** @description Stop a run at the next graph checkpoint; no budget is refunded. */
         post: operations["investigations_cancel_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/investigations/{id}/clarify/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Continue a clarification as a linked run using only remaining budget. */
+        post: operations["investigations_clarify_create"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1483,6 +1517,11 @@ export interface components {
             readonly published_revision: number | null;
             /** Format: date-time */
             readonly published_at: string | null;
+            readonly revoked_revision: number | null;
+            /** Format: date-time */
+            readonly revoked_at: string | null;
+            readonly revoke_reason: string;
+            readonly retracted_rows: number;
             /** Format: date-time */
             readonly created_at: string;
             readonly coverage_status: string | null;
@@ -1543,6 +1582,7 @@ export interface components {
             readonly coverage_basis: string;
             readonly return_event: string;
             readonly empty_report_means_zero: boolean;
+            readonly retention_days: number;
         };
         ContractCommandRequest: {
             /** @default false */
@@ -1557,6 +1597,8 @@ export interface components {
             coverage_basis: components["schemas"]["CoverageBasisEnum"];
             /** @default received */
             return_event: components["schemas"]["ReturnEventEnum"];
+            /** @default 180 */
+            retention_days: number;
         };
         /**
          * @description * `business_date` - business_date
@@ -1671,6 +1713,14 @@ export interface components {
             readonly created_at: string;
         };
         /**
+         * @description * `any` - any
+         *     * `asserted` - asserted
+         *     * `negated` - negated
+         *     * `hypothetical` - hypothetical
+         * @enum {string}
+         */
+        EvidenceContextEnum: "any" | "asserted" | "negated" | "hypothetical";
+        /**
          * @description * `reviews` - reviews
          *     * `support` - support
          * @enum {string}
@@ -1691,6 +1741,8 @@ export interface components {
             kind: components["schemas"]["EvidenceSearchCommandKindEnum"];
             /** @default 10 */
             limit: number;
+            /** @default any */
+            evidence_context: components["schemas"]["EvidenceContextEnum"];
             language?: string;
             topic?: string;
             polarity?: components["schemas"]["PolarityEnum"];
@@ -1701,6 +1753,18 @@ export interface components {
             retrieval_version: string;
             alias_version: string;
             index_version: string;
+            algorithm_manifest: {
+                [key: string]: unknown;
+            };
+            match_status: components["schemas"]["MatchStatusEnum"];
+            retrieval_complete: boolean;
+            candidate_count: number;
+            relevance_judgment: {
+                [key: string]: unknown;
+            };
+            evidence_context: string;
+            relevant_hit_count: number;
+            context_item_count: number;
             source_manifest: {
                 [key: string]: unknown;
             };
@@ -1798,7 +1862,7 @@ export interface components {
             readonly budget_units: number;
             readonly stop_reason: string;
             readonly state: unknown;
-            readonly result: unknown;
+            readonly result: components["schemas"]["InvestigationOutput"];
             readonly checkpoint_version: number;
             readonly input_versions: unknown;
             /** Format: uuid */
@@ -1807,9 +1871,34 @@ export interface components {
             readonly refreshes: {
                 [key: string]: unknown;
             }[];
+            readonly budget: {
+                [key: string]: unknown;
+            };
+            readonly tool_calls: {
+                [key: string]: unknown;
+            }[];
+            /** @description Expose the frozen matrix so a reviewer can audit available tools. */
+            readonly tool_permissions: {
+                [key: string]: unknown;
+            }[];
+            readonly model_attempts: number;
+            readonly model_tokens: number;
+            /** Format: decimal */
+            readonly model_cost: string;
+            readonly elapsed_ms: number;
+            readonly duplicate_queries: number;
+            readonly decisions: unknown;
+            readonly counter_evidence: unknown;
             /** Format: date-time */
             readonly created_at: string;
             readonly steps: components["schemas"]["InvestigationStep"][];
+        };
+        InvestigationClarificationRequest: {
+            query: string;
+            child_asin?: string;
+            /** Format: uuid */
+            product?: string | null;
+            idempotency_key: string;
         };
         InvestigationCommandRequest: {
             /** Format: uuid */
@@ -1821,11 +1910,74 @@ export interface components {
             /** @default 6 */
             max_steps: number;
             /**
+             * @description 默认使用确定性 planner；真实供应商须通过部署环境明确启用。
+             *
+             *     * `deterministic` - deterministic
+             *     * `deepseek` - deepseek
+             * @default deterministic
+             */
+            planner_provider: components["schemas"]["PlannerProviderEnum"];
+            /**
              * @description 明确允许调查图在有证据时创建一个未指派的内部核查草稿；不授权任何外部经营变更。
              * @default false
              */
             allow_internal_task: boolean;
             idempotency_key: string;
+        };
+        InvestigationConclusion: {
+            status?: components["schemas"]["InvestigationConclusionStatusEnum"];
+            statement?: string;
+            proposed_statement?: string;
+            citation_status?: string;
+            citations?: {
+                [key: string]: unknown;
+            }[];
+            semantic_judgment?: string;
+        };
+        /**
+         * @description * `unknown` - unknown
+         *     * `pending_adjudication` - pending_adjudication
+         * @enum {string}
+         */
+        InvestigationConclusionStatusEnum: "unknown" | "pending_adjudication";
+        InvestigationObservation: {
+            fact_id?: string;
+            record_id?: string;
+            raw_row_id?: string;
+            business_date?: string;
+            revision?: number;
+            title?: string;
+            text?: string;
+            match_kind?: components["schemas"]["MatchKindEnum"];
+            evidence_contexts?: {
+                [key: string]: unknown;
+            }[];
+            evidence_relation?: string;
+            source_kind?: string | null;
+            phase?: string;
+        };
+        InvestigationOutput: {
+            business_schema_version?: string;
+            business_contract?: {
+                [key: string]: unknown;
+            };
+            output_schema_version?: string;
+            conclusion?: components["schemas"]["InvestigationConclusion"];
+            observations?: components["schemas"]["InvestigationObservation"][];
+            retrieval_summary?: {
+                [key: string]: number;
+            };
+            evidence?: {
+                [key: string]: unknown;
+            }[];
+            hypotheses?: {
+                [key: string]: unknown;
+            }[];
+            limitations?: string[];
+            clarification?: string;
+            write?: {
+                [key: string]: unknown;
+            } | null;
         };
         InvestigationStep: {
             /** Format: uuid */
@@ -1854,6 +2006,10 @@ export interface components {
             readonly error: string;
             /** Format: date-time */
             readonly created_at: string;
+            /** Format: date-time */
+            readonly started_at: string | null;
+            /** Format: date-time */
+            readonly heartbeat_at: string | null;
             /** Format: date-time */
             readonly finished_at: string | null;
         };
@@ -1898,6 +2054,20 @@ export interface components {
             reason: string;
             expected_version?: number;
         };
+        /**
+         * @description * `relevant_hit` - relevant_hit
+         *     * `scope_context` - scope_context
+         * @enum {string}
+         */
+        MatchKindEnum: "relevant_hit" | "scope_context";
+        /**
+         * @description * `relevant_hits` - relevant_hits
+         *     * `scope_context` - scope_context
+         *     * `no_hits` - no_hits
+         *     * `incomplete` - incomplete
+         * @enum {string}
+         */
+        MatchStatusEnum: "relevant_hits" | "scope_context" | "no_hits" | "incomplete";
         Member: {
             id: number;
             username: string;
@@ -2314,6 +2484,12 @@ export interface components {
             password: string;
         };
         /**
+         * @description * `deterministic` - deterministic
+         *     * `deepseek` - deepseek
+         * @enum {string}
+         */
+        PlannerProviderEnum: "deterministic" | "deepseek";
+        /**
          * @description * `positive` - positive
          *     * `negative` - negative
          *     * `neutral` - neutral
@@ -2451,8 +2627,19 @@ export interface components {
             result?: string;
             /** Format: uuid */
             snapshot?: string;
-            status: components["schemas"]["StatusEnum"];
+            status: components["schemas"]["ReviewCommandStatusEnum"];
             expected_version: number;
+        };
+        /**
+         * @description * `scheduled` - scheduled
+         *     * `completed` - completed
+         *     * `not_scheduled` - not_scheduled
+         * @enum {string}
+         */
+        ReviewCommandStatusEnum: "scheduled" | "completed" | "not_scheduled";
+        RevokeCommandRequest: {
+            reason: string;
+            idempotency_key: string;
         };
         /**
          * @description * `data_admin` - data_admin
@@ -2724,6 +2911,8 @@ export interface components {
             coverage_basis: components["schemas"]["CoverageBasisEnum"];
             /** @default received */
             return_event: components["schemas"]["ReturnEventEnum"];
+            /** @default 180 */
+            retention_days: number;
             /** Format: uuid */
             shop: string;
             name: string;
@@ -2745,13 +2934,6 @@ export interface components {
         SourceObjects: {
             child_asins: string[];
         };
-        /**
-         * @description * `scheduled` - scheduled
-         *     * `completed` - completed
-         *     * `not_scheduled` - not_scheduled
-         * @enum {string}
-         */
-        StatusEnum: "scheduled" | "completed" | "not_scheduled";
         UploadCommandRequest: {
             /** Format: binary */
             file: string;
@@ -3490,6 +3672,34 @@ export interface operations {
             };
         };
     };
+    imports_revoke_publication_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description 标识此 import batch 的 UUID 字符串。 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RevokeCommandRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["RevokeCommandRequest"];
+                "multipart/form-data": components["schemas"]["RevokeCommandRequest"];
+            };
+        };
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Job"];
+                };
+            };
+        };
+    };
     imports_rows_list: {
         parameters: {
             query?: {
@@ -3602,6 +3812,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Investigation"];
+                };
+            };
+        };
+    };
+    investigations_clarify_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description 标识此 investigation run 的 UUID 字符串。 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InvestigationClarificationRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["InvestigationClarificationRequest"];
+                "multipart/form-data": components["schemas"]["InvestigationClarificationRequest"];
+            };
+        };
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Job"];
                 };
             };
         };

@@ -1,11 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
+import { accounts } from "./support/accounts";
 
 test("运营扫描已发布事实，查看事件及分子分母", async ({ page }) => {
   test.setTimeout(90000);

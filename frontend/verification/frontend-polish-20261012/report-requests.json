@@ -1,0 +1,166 @@
+{
+  "authenticated": true,
+  "failReports": false,
+  "failDetail": false,
+  "failJobs": false,
+  "reportCount": 51,
+  "jobCount": 51,
+  "jobReads": 2,
+  "submissions": 2,
+  "requests": [
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/",
+      "method": "POST",
+      "body": {
+        "shop": "shop-a",
+        "child_asin": "B000TEST01",
+        "provider": "deterministic",
+        "idempotency_key": "6a938a4a-dbfe-46a6-be29-bc02c9bd4d8c"
+      }
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/report-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/report-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/",
+      "method": "POST",
+      "body": {
+        "shop": "shop-a",
+        "child_asin": "B000TEST01",
+        "provider": "deterministic",
+        "idempotency_key": "9b4d3c43-7e6d-48d1-96d9-b3a1edc3218a"
+      }
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/report-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/report-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-b",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-b/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "errors": [],
+  "console": [
+    "error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+}

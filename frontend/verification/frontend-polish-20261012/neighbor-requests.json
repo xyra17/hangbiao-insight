@@ -1,0 +1,125 @@
+{
+  "authenticated": true,
+  "failReports": false,
+  "failDetail": false,
+  "failJobs": false,
+  "reportCount": 51,
+  "jobCount": 51,
+  "jobReads": 0,
+  "submissions": 0,
+  "requests": [
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/members/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "action-tasks/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "change-proposals/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "action-tasks/?shop=shop-a&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "change-proposals/?shop=shop-a&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "scan-schedules/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "notifications/?shop=shop-a&unread=1&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "rule-configurations/shop-a/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "observations/?shop=shop-a&status=open&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "events/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "rule-configurations/shop-a/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "observations/?shop=shop-a&status=open&page=2",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "errors": [],
+  "console": [
+    "error: Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.",
+    "error: Failed to load resource: the server responded with a status of 501 (Not Implemented)",
+    "error: Failed to load resource: the server responded with a status of 501 (Not Implemented)",
+    "error: Failed to load resource: the server responded with a status of 501 (Not Implemented)",
+    "error: Failed to load resource: the server responded with a status of 501 (Not Implemented)"
+  ]
+}

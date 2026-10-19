@@ -2,6 +2,10 @@
   "name": "crossborder-insight-console",
   "private": true,
   "version": "0.1.0",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.19.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 127.0.0.1",

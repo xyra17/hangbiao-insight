@@ -1,0 +1,52 @@
+
+> crossborder-insight-console@0.1.0 test
+> vitest run --passWithNoTests --exclude 'e2e/**' --reporter=default
+
+
+ RUN  v3.2.7 /Users/Admin/Desktop/商品评论智能诊断 agent/frontend
+
+ ✓ src/workbench/executionStatus.test.ts (3 tests) 4ms
+ ✓ src/workbench/actionReviewFormat.test.ts (3 tests) 2ms
+ ✓ src/workbench/InvestigationEvidence.test.tsx (9 tests) 77ms
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > stops investigation job and run polling after terminal states
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > keeps incomplete business checks distinct from completed execution without enabling unsupported resume
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > renders completed with unconfirmed cost and execution mode kept unknown
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > renders partial with unconfirmed cost and execution mode kept unknown
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > renders failed with unconfirmed cost and execution mode kept unknown
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > renders cancelled with unconfirmed cost and execution mode kept unknown
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > investigation mode and state workflow > renders needs_clarification with unconfirmed cost and execution mode kept unknown
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > semantic report job lifecycle > follows a second successful task without carrying the first report forward
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > semantic report job lifecycle > clears previous generated and selected report on another submission, including rejection and a late revision
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+stderr | src/workbench/QualityWorkflow.test.tsx > semantic report job lifecycle > clears previous generated and selected report on another submission, including rejection and a late revision
+Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+
+ ✓ src/workbench/QualityWorkflow.test.tsx (15 tests) 13474ms
+   ✓ investigation mode and state workflow > sends explicit conservative default without requesting DeepSeek implicitly  327ms
+   ✓ investigation mode and state workflow > stops investigation job and run polling after terminal states  1443ms
+   ✓ semantic report job lifecycle > polls through active states then stops at completed and refreshes both lists  4120ms
+   ✓ semantic report job lifecycle > polls through active states then stops at failed and refreshes both lists  4062ms
+   ✓ semantic report job lifecycle > pauses on network failure and manually retries status reads only  1675ms
+
+ Test Files  4 passed (4)
+      Tests  30 passed (30)
+   Start at  12:32:20
+   Duration  15.43s (transform 199ms, setup 0ms, collect 2.06s, tests 13.56s, environment 741ms, prepare 433ms)
+

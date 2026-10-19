@@ -1,12 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { accounts } from "./support/accounts";
 
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
 
 test("登记来源、核对错误行、明确部分发布并保留追溯", async ({ page }) => {
   test.setTimeout(90000);
@@ -18,6 +12,11 @@ test("登记来源、核对错误行、明确部分发布并保留追溯", async
   await expect(
     page.getByRole("heading", { name: "数据源", exact: true }),
   ).toBeVisible();
+  await page.getByLabel("选择店铺", { exact: true }).click();
+  await page
+    .locator(".ant-select-dropdown:visible .ant-select-item-option-content")
+    .getByText("测试店铺 A / US", { exact: true })
+    .click();
   await page.getByRole("button", { name: "登记数据源", exact: true }).click();
   await page
     .getByLabel("来源名称", { exact: true })

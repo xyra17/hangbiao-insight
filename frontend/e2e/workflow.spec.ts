@@ -1,17 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
-const accounts = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
-const fixture = JSON.parse(
-  readFileSync(
-    new URL("../../.local/workflow-acceptance.json", import.meta.url),
-    "utf8",
-  ),
-);
+import { accounts } from "./support/accounts";
+const fixture = { asin: "BWFLOW2601" };
 
 test("事件领取、关联动作执行、进入观察和有依据关闭", async ({ page }) => {
   test.setTimeout(90000);
@@ -48,7 +37,7 @@ test("事件领取、关联动作执行、进入观察和有依据关闭", async
   await expect(
     panel.getByRole("heading", { name: "处理事件 · 处理中", exact: true }),
   ).toBeVisible();
-  const title = `核查包装-${fixture.asin}`;
+  const title = `核查包装-${fixture.asin}-${Date.now()}`;
   await panel.getByLabel("核查任务", { exact: true }).fill(title);
   await panel
     .getByRole("button", { name: "建立关联任务", exact: true })
@@ -116,6 +105,7 @@ test("事件领取、关联动作执行、进入观察和有依据关闭", async
   await page
     .locator(".ant-select-dropdown:visible")
     .getByText(/^指标快照 /)
+    .first()
     .click();
   await panel
     .getByLabel("处理依据", { exact: true })

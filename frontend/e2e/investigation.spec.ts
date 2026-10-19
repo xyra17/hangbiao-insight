@@ -1,12 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { accounts } from "./support/accounts";
 
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
 
 test("自主调查明确区分内部草稿权限和外部经营变更边界", async ({ page }) => {
   const user = accounts.find((item) => item.username === "accept_admin")!;

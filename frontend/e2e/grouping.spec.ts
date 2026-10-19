@@ -1,17 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
-const accounts = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
-const fixture = JSON.parse(
-  readFileSync(
-    new URL("../../.local/workflow-acceptance.json", import.meta.url),
-    "utf8",
-  ),
-);
+import { accounts } from "./support/accounts";
+const fixture = { asin: "BWFLOW2601" };
 test("跨问题族人工合并与拆分保留原事件", async ({ page }) => {
   const user = accounts.find(
     (a: { username: string }) => a.username === "accept_admin",

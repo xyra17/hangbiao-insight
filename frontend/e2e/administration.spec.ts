@@ -1,12 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { accounts } from "./support/accounts";
 import { randomBytes } from "node:crypto";
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
 
 test("管理员登记店铺及普通成员并授予范围，成员登录后仅见该店铺", async ({
   page,

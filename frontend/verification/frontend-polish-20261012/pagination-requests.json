@@ -1,0 +1,143 @@
+{
+  "authenticated": true,
+  "failReports": false,
+  "failDetail": false,
+  "failJobs": false,
+  "reportCount": 51,
+  "jobCount": 50,
+  "jobReads": 0,
+  "submissions": 0,
+  "requests": [
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-b",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-b/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-b/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/?shop=shop-b&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/?shop=shop-b&page=2",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "errors": [],
+  "console": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

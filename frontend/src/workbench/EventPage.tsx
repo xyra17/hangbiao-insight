@@ -1,3 +1,5 @@
+import useServerPage from "./useServerPage";
+import ListError from "./ListError";
 import { useState } from "react";
 import EventCommands from "./EventCommands";
 import ParentSummary from "./ParentSummary";
@@ -77,6 +79,13 @@ const status: Record<string, string> = {
 };
 const priorities = ["紧急", "高", "普通", "观察"];
 const display = (value: number | string | null | undefined) => value ?? "缺失";
+const evidenceMetricLabels: Record<string, string> = {
+  ordered_units: "订购件数",
+  sessions: "Sessions",
+  unit_session_percent: "件数／会话转化率",
+  refunds: "成熟退款订单率",
+  returns: "成熟退货订单率",
+};
 
 export default function EventPage({
   shop,
@@ -128,11 +137,7 @@ export default function EventPage({
       label: `${asin} / ASIN 原生汇总`,
     });
   const selected = object ?? options[0]?.value;
-  const observations = useQuery({
-    queryKey: ["observations", shop.id],
-    queryFn: () =>
-      request<Page<Observation>>(`observations/?shop=${shop.id}&status=open`),
-  });
+  const observations = useServerPage<Observation>({ key: "observations", scope: shop.id, path: `observations/?shop=${shop.id}&status=open` });
   const events = useQuery({
     queryKey: ["events", shop.id, page, eventStatus],
     queryFn: () =>
@@ -243,7 +248,7 @@ export default function EventPage({
       </div>
       <ScanControls shop={shop} canEdit={canEdit} onEvent={setEventId} />
       {error && <Alert type="error" title={error.message} />}
-      <Space wrap style={{ margin: "22px 0" }}>
+      <Space wrap className="wb-event-controls">
         <Select
           aria-label="扫描分析对象"
           style={{ minWidth: 320 }}
@@ -327,7 +332,7 @@ export default function EventPage({
         />
       </Space>
       {canEdit && (
-        <Space wrap style={{ marginBottom: 20 }}>
+        <Space wrap className="wb-event-history-controls">
           <Input
             aria-label="历史重算日期"
             type="date"
@@ -384,12 +389,14 @@ export default function EventPage({
         type="info"
         title="样本不足只进入观察线索，不创建异常事件，也不发送通知。"
       />
+      <ListError title="观察线索读取失败" error={observations.error} retry={() => observations.refetch()} />
       <Table<Observation>
         rowKey="id"
         size="small"
         dataSource={observations.data?.results}
         loading={observations.isLoading}
-        pagination={false}
+        scroll={{ x: 780 }}
+        pagination={observations.pagination}
         columns={[
           { title: "子 ASIN", dataIndex: "child_asin" },
           { title: "线索", dataIndex: "title" },
@@ -466,19 +473,34 @@ export default function EventPage({
       <Drawer
         title="事件证据"
         size="large"
+        className="wb-event-evidence-drawer"
         open={!!eventId}
         onClose={() => setEventId(undefined)}
       >
-        {eventId && <EventCommands key={eventId} eventId={eventId} />}{" "}
         <Table<Evidence>
           rowKey="id"
           dataSource={evidence.data?.results}
+          loading={evidence.isLoading}
           pagination={false}
+          scroll={{ x: 660 }}
           columns={[
-            { title: "指标", dataIndex: "metric" },
-            { title: "发现时间", dataIndex: "created_at" },
+            {
+              title: "指标",
+              dataIndex: "metric",
+              width: 210,
+              onCell: () => ({ style: { whiteSpace: "nowrap" } }),
+              render: (metric: string) => evidenceMetricLabels[metric] ?? metric,
+            },
+            {
+              title: "发现时间",
+              dataIndex: "created_at",
+              width: 290,
+              onCell: () => ({ style: { whiteSpace: "nowrap" } }),
+            },
             {
               title: "计算依据",
+              width: 160,
+              onCell: () => ({ style: { whiteSpace: "nowrap" } }),
               render: (_, e) => (
                 <Button onClick={() => setSnapshotId(e.snapshot)}>
                   查看快照
@@ -490,6 +512,7 @@ export default function EventPage({
         {evidence.data && evidence.data.count > 50 && (
           <Typography.Text>当前显示最近 50 条证据。</Typography.Text>
         )}
+        {eventId && <EventCommands key={eventId} eventId={eventId} />}
       </Drawer>
       <Drawer
         title="计算依据与数据范围"

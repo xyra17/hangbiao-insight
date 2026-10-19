@@ -1,0 +1,18 @@
+{
+  "scope": "frontend controlled validation only; no paid calls or deployment",
+  "tests": {
+    "files_passed": 4,
+    "tests_passed": 30
+  },
+  "build": "passed",
+  "sha256": {
+    "frontend/src/workbench/InvestigationPage.tsx": "0059d939ecbf44e315fc6fe8cd45ca91aaae5fbc0fe01433a55f41cad54d7aa6",
+    "frontend/src/workbench/ReportsPage.tsx": "e0f44d77e35fcd388d637903ec0c1c233a40635b47dbd80fadcf7060c5f5c56e",
+    "frontend/src/workbench/executionStatus.ts": "06e2a7eee924b29c06498e792778906d26add40aa0aef11675810db97585ab6b",
+    "frontend/src/workbench/QualityWorkflow.test.tsx": "1e5d0293ccce136faf6f8eccb08bdded3805ddb55723de44569011c5abf01beb",
+    "frontend/src/workbench/executionStatus.test.ts": "78ae2c25a408b6e6630a98e82c1be1778c9a4a86b66874c39e2a1994a1f2581c",
+    "frontend/verification/frontend-quality-20261012/REPORT.md": "8b98b659081942b3b78728512dd9432295525e01a08548549dffa37911aab2d2",
+    "frontend/verification/frontend-quality-20261012/test-output.txt": "a9677e07741fb9bc1b5a7555b2fc22fba1604d5480e294c8db6747c9368fceb5",
+    "frontend/verification/frontend-quality-20261012/build-output.txt": "585c4f1939edebdea643cba79f3b5551ef83a12dbd53f09ac4b99e137a8e83ee"
+  }
+}

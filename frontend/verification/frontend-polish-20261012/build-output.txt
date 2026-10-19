@@ -1,0 +1,32 @@
+
+> crossborder-insight-console@0.1.0 build
+> tsc -b && vite build --config vite.config.ts
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 3250 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.77 kB │ gzip:   0.40 kB
+dist/assets/index-CJJJNgCA.css              17.04 kB │ gzip:   4.25 kB
+dist/assets/ListError-DjHTxizn.js            1.23 kB │ gzip:   0.77 kB
+dist/assets/RefreshHistory-C-ZK7kym.js       1.34 kB │ gzip:   0.89 kB
+dist/assets/JobPage-DmduB6gy.js              1.90 kB │ gzip:   1.14 kB
+dist/assets/executionStatus-rQ-Qa1g8.js      3.41 kB │ gzip:   1.56 kB
+dist/assets/icons-FrfZSojB.js                3.58 kB │ gzip:   1.64 kB
+dist/assets/SettingsPage-Bvfe1Hrs.js         8.24 kB │ gzip:   3.19 kB
+dist/assets/ReportsPage-Cu0SN-KX.js         13.45 kB │ gzip:   5.21 kB
+dist/assets/SourcePage-BWl7ZL2k.js          16.22 kB │ gzip:   6.57 kB
+dist/assets/InvestigationPage-_9D_pn6o.js   20.07 kB │ gzip:   7.92 kB
+dist/assets/ActionsPage-Dt-QnJ2X.js         21.71 kB │ gzip:   6.91 kB
+dist/assets/EventPage-DaiWXB6H.js           35.21 kB │ gzip:  11.75 kB
+dist/assets/query-SpDI6X33.js               35.26 kB │ gzip:  10.38 kB
+dist/assets/index-CMENZY0r.js               53.66 kB │ gzip:  19.90 kB
+dist/assets/react-inT8qRXa.js              222.29 kB │ gzip:  69.21 kB
+dist/assets/antd-CVoSRKUJ.js               854.20 kB │ gzip: 276.71 kB
+✓ built in 3.46s
+npm notice
+npm notice New major version of npm available! 11.13.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

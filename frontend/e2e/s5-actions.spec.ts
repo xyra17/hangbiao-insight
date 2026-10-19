@@ -1,9 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { accounts } from "./support/accounts";
 
-const accounts = JSON.parse(
-  readFileSync(new URL("../../.local/acceptance-accounts.json", import.meta.url), "utf8"),
-);
 
 test("S5 运营可修订开放任务草稿并看到复查字段", async ({ page }) => {
   const user = accounts.find((item: { username: string }) => item.username === "accept_admin");
@@ -74,7 +71,7 @@ test("S5 提案页面展示策略并记录外部人工交接", async ({ page }) 
   await expect(row.getByText("已交接", { exact: false })).toBeVisible();
 });
 
-test("S5 复查页面展示基线、变化、窗口、方法和成熟度", async ({ page }) => {
+test("S5 复查页面展示中文指标、两窗日期、百分比单位和追溯", async ({ page }) => {
   const user = accounts.find((item: { username: string }) => item.username === "accept_admin");
   await page.goto("/actions");
   await page.getByLabel("用户名", { exact: true }).fill(user.username);
@@ -93,11 +90,24 @@ test("S5 复查页面展示基线、变化、窗口、方法和成熟度", async
     row = actionTable.getByRole("row").filter({ hasText: "S5 复查展示验收" });
   }
   await expect(row).toHaveCount(1);
-  await expect(row).toContainText("变化 -0.04");
-  await expect(row).toContainText("cohort_mature_queue_v1");
-  await row.getByRole("button", { name: "安排复查", exact: true }).click();
+  await expect(row).toContainText("合成复查结果：成熟发货队列完整");
+  await expect(row.getByRole("button", { name: "记录执行", exact: true })).toBeDisabled();
+  await expect(row).toContainText("成熟退货订单率");
+  await expect(row).toContainText("基线：12.00%");
+  await expect(row).toContainText("观察：8.00%");
+  await expect(row).toContainText("-4.00 个百分点");
+  await expect(row).toContainText("成熟订单分母：100 → 100 单");
+  await expect(row).toContainText("件数／会话转化率");
+  await expect(row).toContainText("基线：12.50%");
+  await expect(row).toContainText("观察：10.25%");
+  await expect(row).toContainText("变化：-2.25 个百分点");
+  await row.getByRole("button", { name: "复查详情", exact: true }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog.getByText("复查已完成", { exact: true })).toBeVisible();
-  await expect(dialog.getByText("观察窗口 2026-09-10 至 2026-09-16", { exact: false })).toBeVisible();
-  await expect(dialog.getByText("成熟度 ready", { exact: false })).toBeVisible();
+  await expect(dialog.getByText("基线窗口：", { exact: false }).first()).toBeVisible();
+  await expect(dialog.getByText("观察窗口：", { exact: false }).first()).toBeVisible();
+  await expect(dialog.getByText("成熟度：已成熟", { exact: false }).first()).toBeVisible();
+  await dialog.locator("details").first().click();
+  await expect(dialog.getByText("计算版本：action_review_v2", { exact: true }).first()).toBeVisible();
+  await expect(dialog.getByText("快照编号：synthetic-action-review-fixture", { exact: true }).first()).toBeVisible();
 });

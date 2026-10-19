@@ -1,6 +1,9 @@
 import RefreshHistory from "./RefreshHistory";
 import EvidenceSearch from "./EvidenceSearch";
-import { useState } from "react";
+import useServerPage from "./useServerPage";
+import ListError from "./ListError";
+import { useEffect, useRef, useState } from "react";
+import { isActiveJob, jobStatusLabel } from "./executionStatus";
 import {
   Alert,
   Button,
@@ -49,7 +52,11 @@ type Report = {
       coverage?: {
         gate: string;
         windows?: unknown[];
-        effective_denominator?: { start?: string; end?: string; analyzed?: number }[];
+        effective_denominator?: {
+          start?: string;
+          end?: string;
+          analyzed?: number;
+        }[];
         gate_reason?: string;
       };
       safety?: { urgent: boolean; route: string };
@@ -79,7 +86,14 @@ type Claim = {
   source_refs: { type: string; raw_row_id: string }[];
 };
 
-export default function ReportsPage({
+export default function ReportsPage(props: {
+  shop: Shop;
+  products: Product[];
+}) {
+  return <ReportsContent key={props.shop.id} {...props} />;
+}
+
+function ReportsContent({
   shop,
   products,
 }: {
@@ -89,13 +103,23 @@ export default function ReportsPage({
   const cache = useQueryClient();
   const [selected, setSelected] = useState<Report | null>(null);
   const [job, setJob] = useState<Job | null>(null);
+  const generation = useRef(0);
   const openRevision = useMutation({
-    mutationFn: (id: string) => request<Report>(`reports/${id}/`),
-    onSuccess: setSelected,
+    mutationFn: async (id: string) => {
+      const openedGeneration = generation.current;
+      return {
+        report: await request<Report>(`reports/${id}/`),
+        generation: openedGeneration,
+      };
+    },
+    onSuccess: (value) => {
+      if (value.generation === generation.current) setSelected(value.report);
+    },
   });
-  const reports = useQuery({
-    queryKey: ["reports", shop.id],
-    queryFn: () => request<Page<Report>>(`reports/?shop=${shop.id}`),
+  const reports = useServerPage<Report>({
+    key: "reports",
+    scope: shop.id,
+    path: `reports/?shop=${shop.id}`,
   });
   const runs = useQuery({
     queryKey: ["semantic-runs", shop.id],
@@ -123,23 +147,40 @@ export default function ReportsPage({
         ...data,
         idempotency_key: crypto.randomUUID(),
       }),
+    onMutate: () => {
+      generation.current += 1;
+      setJob(null);
+      setSelected(null);
+    },
     onSuccess: (value) => {
       setJob(value);
       void cache.invalidateQueries({ queryKey: ["semantic-runs", shop.id] });
     },
   });
   const selectedJob = useQuery({
-    queryKey: ["semantic-job", job?.id],
+    queryKey: ["semantic-job", shop.id, job?.id],
     queryFn: () => request<Job>(`jobs/${job?.id}/`),
-    enabled:
-      !!job?.id &&
-      ["queued", "running", "retry_wait"].includes(job?.status ?? ""),
-    refetchInterval: 1200,
+    enabled: (query) =>
+      !!job?.id && isActiveJob(query.state.data?.status ?? job.status),
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: (query) =>
+      query.state.status !== "error" &&
+      isActiveJob(query.state.data?.status ?? job?.status)
+        ? 1200
+        : false,
   });
   const activeJob = selectedJob.data ?? job;
-  const reportId = activeJob?.result?.report_id;
+  useEffect(() => {
+    if (!activeJob || isActiveJob(activeJob.status)) return;
+    void cache.invalidateQueries({ queryKey: ["semantic-runs", shop.id] });
+    void cache.invalidateQueries({ queryKey: ["reports", shop.id] });
+  }, [activeJob?.id, activeJob?.status, cache, shop.id]);
+  const reportId =
+    activeJob?.status === "completed" ? activeJob.result?.report_id : undefined;
   const report = useQuery({
-    queryKey: ["report", reportId],
+    queryKey: ["report", shop.id, reportId],
     queryFn: () => request<Report>(`reports/${reportId}/`),
     enabled: typeof reportId === "string",
   });
@@ -157,11 +198,11 @@ export default function ReportsPage({
           </p>
         </div>
       </div>
-      <EvidenceSearch shopId={shop.id} products={products} />
       <Card title="运行语义取证" style={{ marginBottom: 20 }}>
         <Form
           name="semantic-run"
-          layout="inline"
+          className="wb-semantic-form"
+          layout="vertical"
           onFinish={(data) => start.mutate(data)}
           initialValues={{ provider: "deterministic" }}
         >
@@ -188,7 +229,13 @@ export default function ReportsPage({
               ]}
             />
           </Form.Item>
-          <Button type="primary" htmlType="submit" loading={start.isPending}>
+          <Button
+            type="primary"
+            aria-label="开始取证"
+            aria-busy={start.isPending}
+            htmlType="submit"
+            loading={start.isPending}
+          >
             开始取证
           </Button>
         </Form>
@@ -202,16 +249,30 @@ export default function ReportsPage({
         )}
         {activeJob && (
           <Alert
-            type={
-              activeJob.status === "completed"
-                ? "success"
-                : activeJob.status === "failed"
-                  ? "error"
-                  : "info"
-            }
+            type={activeJob.status === "failed" ? "error" : "info"}
             showIcon
-            title={`后台任务：${activeJob.status}${activeJob.error ? `；${activeJob.error}` : ""}`}
+            title={`后台任务：${jobStatusLabel(activeJob.status)}${activeJob.error ? `；${activeJob.error}` : ""}`}
             style={{ marginTop: 12 }}
+          />
+        )}
+        {selectedJob.error && (
+          <Alert
+            type="error"
+            showIcon
+            title="任务状态读取失败，已暂停自动刷新"
+            description={selectedJob.error.message}
+            action={
+              <Button onClick={() => void selectedJob.refetch()}>
+                重新读取状态
+              </Button>
+            }
+          />
+        )}
+        {report.error && (
+          <ListError
+            title="报告读取失败"
+            error={report.error}
+            retry={() => report.refetch()}
           />
         )}
         {report.data && (
@@ -234,19 +295,52 @@ export default function ReportsPage({
           style={{ marginBottom: 16 }}
         />
       )}
+      <div className="wb-section-heading">
+        <Typography.Title level={4}>历史报告</Typography.Title>
+        <Space wrap>
+          <Typography.Text type="secondary">
+            按店铺查看已保存版本
+          </Typography.Text>
+          <Button
+            onClick={() => void reports.refetch()}
+            loading={reports.isFetching}
+          >
+            刷新报告列表
+          </Button>
+        </Space>
+      </div>
+      <ListError
+        title="报告列表读取失败"
+        error={reports.error}
+        retry={() => reports.refetch()}
+      />
+      <ListError
+        title="取证记录读取失败"
+        error={runs.error}
+        retry={() => runs.refetch()}
+      />
       <Table<Report>
         rowKey="id"
         dataSource={reports.data?.results ?? []}
         loading={reports.isLoading}
-        locale={{ emptyText: <Empty description="还没有标准报告" /> }}
-        pagination={{ pageSize: 20 }}
+        locale={{
+          emptyText: (
+            <Empty
+              description={
+                reports.error ? "报告列表读取失败" : "还没有标准报告"
+              }
+            />
+          ),
+        }}
+        scroll={{ x: 850 }}
+        pagination={reports.pagination}
         columns={[
           { title: "子 ASIN", dataIndex: "child_asin" },
           {
             title: "状态",
             render: (_, r) => (
-              <Tag color={r.status === "published" ? "green" : "gold"}>
-                {r.status}
+              <Tag color={r.status === "published" ? "default" : "gold"}>
+                {r.status === "published" ? "已发布" : r.status}
               </Tag>
             ),
           },
@@ -302,6 +396,7 @@ export default function ReportsPage({
             : []
         }
       />
+      <EvidenceSearch shopId={shop.id} products={products} />
     </>
   );
 }
@@ -309,7 +404,7 @@ export default function ReportsPage({
 function ReportDetail({ report }: { report: Report }) {
   const payload = report.payload;
   return (
-    <Space direction="vertical" style={{ width: "100%" }}>
+    <Space orientation="vertical" style={{ width: "100%" }}>
       <Space>
         <Button href={`/api/v1/reports/${report.id}/export/?file_type=html`}>
           下载报告 HTML
@@ -374,32 +469,63 @@ function ReportDetail({ report }: { report: Report }) {
             />
           )}
           {payload.diagnosis.experience_links && (
-            <Card size="small" title="订单经历关联" style={{ marginBottom: 12 }}>
+            <Card
+              size="small"
+              title="订单经历关联"
+              style={{ marginBottom: 12 }}
+            >
               <Typography.Paragraph>
-                状态：{payload.diagnosis.experience_links.status}；已关联订单经历：
+                状态：{payload.diagnosis.experience_links.status}
+                ；已关联订单经历：
                 {payload.diagnosis.experience_links.linked_order_count ?? 0}
               </Typography.Paragraph>
               <Typography.Text type="secondary">
-                未关联记录：{payload.diagnosis.experience_links.unlinked?.length ?? 0} 条。未关联来源不会合并为独立受影响订单。
+                未关联记录：
+                {payload.diagnosis.experience_links.unlinked?.length ?? 0}{" "}
+                条。未关联来源不会合并为独立受影响订单。
               </Typography.Text>
-              {(payload.diagnosis.experience_links.limitations ?? []).map((item) => (
-                <Typography.Paragraph key={item} type="secondary">{item}</Typography.Paragraph>
-              ))}
+              {(payload.diagnosis.experience_links.limitations ?? []).map(
+                (item) => (
+                  <Typography.Paragraph key={item} type="secondary">
+                    {item}
+                  </Typography.Paragraph>
+                ),
+              )}
             </Card>
           )}
-          {(payload.diagnosis.evidence_facts ?? []).some((fact) => fact.statistics) && (
+          {(payload.diagnosis.evidence_facts ?? []).some(
+            (fact) => fact.statistics,
+          ) && (
             <Card size="small" title="指标事实" style={{ marginBottom: 12 }}>
               {(payload.diagnosis.evidence_facts ?? [])
                 .filter((fact) => fact.statistics)
                 .slice(0, 12)
                 .map((fact, index) => (
-                  <Descriptions key={`${fact.metric}-${index}`} size="small" column={2} bordered style={{ marginBottom: 8 }}>
-                    <Descriptions.Item label="指标">{fact.metric ?? "未知"}</Descriptions.Item>
-                    <Descriptions.Item label="单位">{String(fact.statistics?.unit ?? "未知")}</Descriptions.Item>
-                    <Descriptions.Item label="基线">{String(fact.statistics?.baseline ?? "未知")}</Descriptions.Item>
-                    <Descriptions.Item label="当前">{String(fact.statistics?.current ?? "未知")}</Descriptions.Item>
-                    <Descriptions.Item label="变化">{String(fact.statistics?.delta ?? "未知")}</Descriptions.Item>
-                    <Descriptions.Item label="计算方法">{String(fact.statistics?.method ?? "未知")}</Descriptions.Item>
+                  <Descriptions
+                    key={`${fact.metric}-${index}`}
+                    size="small"
+                    column={2}
+                    bordered
+                    style={{ marginBottom: 8 }}
+                  >
+                    <Descriptions.Item label="指标">
+                      {fact.metric ?? "未知"}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="单位">
+                      {String(fact.statistics?.unit ?? "未知")}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="基线">
+                      {String(fact.statistics?.baseline ?? "未知")}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="当前">
+                      {String(fact.statistics?.current ?? "未知")}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="变化">
+                      {String(fact.statistics?.delta ?? "未知")}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="计算方法">
+                      {String(fact.statistics?.method ?? "未知")}
+                    </Descriptions.Item>
                   </Descriptions>
                 ))}
             </Card>

@@ -1,0 +1,7 @@
+{
+  "gallery": "http://127.0.0.1:5198/index.html",
+  "image_loading": "passed",
+  "selectors": "passed",
+  "mobile_overflow": false,
+  "pageerrors": []
+}

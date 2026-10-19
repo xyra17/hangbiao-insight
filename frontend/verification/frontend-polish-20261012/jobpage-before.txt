@@ -1,0 +1,63 @@
+function JobPage({ shop, canEdit }: { shop: Shop; canEdit: boolean }) {
+  const cache = useQueryClient();
+  const jobs = useQuery({
+    queryKey: ["jobs", shop.id],
+    queryFn: () => request<Page<Job>>(`jobs/?shop=${shop.id}`),
+    refetchInterval: 5000,
+  });
+  const probe = useMutation({
+    mutationFn: () =>
+      request("jobs/probe/", "POST", {
+        shop: shop.id,
+        idempotency_key: crypto.randomUUID(),
+      }),
+    onSuccess: () => {
+      void cache.invalidateQueries({ queryKey: ["jobs"] });
+    },
+  });
+  return (
+    <>
+      <div className="wb-page-heading">
+        <div>
+          <Title level={2}>后台任务</Title>
+          <p>任务会保存执行状态，离开页面后仍可回来查看。</p>
+        </div>
+        {canEdit && (
+          <Button onClick={() => probe.mutate()} loading={probe.isPending}>
+            检查后台服务
+          </Button>
+        )}
+      </div>
+      {(jobs.error || probe.error) && (
+        <Alert type="error" title={(jobs.error || probe.error)?.message} />
+      )}
+      <Table<Job>
+        rowKey="id"
+        dataSource={jobs.data?.results}
+        loading={jobs.isLoading}
+        columns={[
+          {
+            title: "任务",
+            render: (_, j) => (j.kind === "probe" ? "后台服务检查" : j.kind),
+          },
+          {
+            title: "状态",
+            render: (_, j) => <Tag>{statusNames[j.status] ?? j.status}</Tag>,
+          },
+          {
+            title: "发起时间",
+            render: (_, j) => new Date(j.created_at).toLocaleString("zh-CN"),
+          },
+          {
+            title: "结果",
+            render: (_, j) =>
+              j.error ||
+              (typeof j.result.message === "string"
+                ? j.result.message
+                : "等待执行结果"),
+          },
+        ]}
+      />
+    </>
+  );
+}

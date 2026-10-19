@@ -1,0 +1,174 @@
+{
+  "requests": [
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "login/",
+      "method": "POST",
+      "body": {
+        "username": "controlled_preview",
+        "password": "fixture-only"
+      }
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/",
+      "method": "POST",
+      "body": {
+        "shop": "shop-a",
+        "query": "请核查便携充电器的包装反馈",
+        "planner_provider": "deterministic",
+        "max_steps": 6,
+        "idempotency_key": "4625942f-da0a-4015-8fab-a8e64fe9a8ae"
+      }
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/report-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "evidence-search/",
+      "method": "POST",
+      "body": {
+        "child_asin": "B000TEST01",
+        "kind": "reviews",
+        "start": "2026-10-01",
+        "end": "2026-10-12",
+        "query": "包装",
+        "shop": "shop-a"
+      }
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "reports/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "semantic-runs/?shop=shop-a",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "pageerrors": [],
+  "console": [
+    "error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+}

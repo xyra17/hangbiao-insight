@@ -1,11 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
+import { accounts } from "./support/accounts";
 
 test("报告与事件能从工作台下载，保留版本与数据范围", async ({ page }) => {
   test.setTimeout(60000);

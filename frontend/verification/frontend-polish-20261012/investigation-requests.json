@@ -1,0 +1,106 @@
+{
+  "authenticated": true,
+  "failReports": false,
+  "failDetail": false,
+  "failJobs": false,
+  "reportCount": 51,
+  "jobCount": 51,
+  "jobReads": 2,
+  "submissions": 2,
+  "requests": [
+    {
+      "path": "session/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-a/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-a&page=1",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/",
+      "method": "POST",
+      "body": {
+        "shop": "shop-a",
+        "query": "请核查便携充电器的包装反馈",
+        "planner_provider": "deterministic",
+        "max_steps": 6,
+        "idempotency_key": "b0876d2c-6b87-42d1-b280-eca64ac93266"
+      }
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-1/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/",
+      "method": "POST",
+      "body": {
+        "shop": "shop-a",
+        "query": "请核查便携充电器的包装反馈",
+        "planner_provider": "deepseek",
+        "max_steps": 6,
+        "idempotency_key": "d1439743-8334-4935-adc6-7f973b67996e"
+      }
+    },
+    {
+      "path": "jobs/current-job-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "investigations/run-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "jobs/current-job-2/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "shops/shop-b/capabilities/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "path": "products/?shop=shop-b&page=1",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "errors": [],
+  "console": []
+}

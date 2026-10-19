@@ -1,12 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { accounts } from "./support/accounts";
 
-const accounts: { username: string; password: string }[] = JSON.parse(
-  readFileSync(
-    new URL("../../.local/acceptance-accounts.json", import.meta.url),
-    "utf8",
-  ),
-);
 
 test("管理员登录、维护映射、真实队列执行并退出", async ({ page }) => {
   const user = accounts.find((u) => u.username === "accept_admin")!;

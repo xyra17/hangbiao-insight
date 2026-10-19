@@ -1,0 +1,12 @@
+[WebServer] (node:80975) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:80987) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 verification/frontend-polish-20261012/workflows.browser.ts:213:3 › keyboard focus and local table scroll 390 (5.1s)
+  ✓  2 verification/frontend-polish-20261012/workflows.browser.ts:213:3 › keyboard focus and local table scroll 768 (4.7s)
+  ✓  3 verification/frontend-polish-20261012/workflows.browser.ts:213:3 › keyboard focus and local table scroll 1440 (4.3s)
+
+  3 passed (15.1s)

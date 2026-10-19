@@ -1,0 +1,17 @@
+[WebServer] (node:90962) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:90969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 verification/frontend-polish-20261012/workflows.browser.ts:12:1 › investigation default, explicit DeepSeek, terminal polling and shop reset (7.0s)
+  ✓  2 verification/frontend-polish-20261012/workflows.browser.ts:32:1 › second report task replaces result; network read failures retry without POST; store resets result (8.4s)
+  ✓  3 verification/frontend-polish-20261012/workflows.browser.ts:50:1 › reports and jobs page 51, shop reset, disappearing last page and visible read retries (4.1s)
+  ✓  4 verification/frontend-polish-20261012/workflows.browser.ts:68:1 › neighbor lists expose 51st task, proposal and observation without unbounded reads (3.1s)
+  ✓  5 verification/frontend-polish-20261012/workflows.browser.ts:79:1 › generated report read failure offers GET retry without another model task (4.1s)
+  ✓  6 verification/frontend-polish-20261012/workflows.browser.ts:85:39 › keyboard focus and local table scroll 390 (4.2s)
+  ✓  7 verification/frontend-polish-20261012/workflows.browser.ts:85:39 › keyboard focus and local table scroll 768 (4.2s)
+  ✓  8 verification/frontend-polish-20261012/workflows.browser.ts:85:39 › keyboard focus and local table scroll 1440 (4.3s)
+
+  8 passed (40.6s)

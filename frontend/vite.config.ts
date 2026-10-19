@@ -27,7 +27,7 @@ export default defineConfig({
     port: 5184,
     strictPort: true,
     proxy: {
-      "/api": "http://127.0.0.1:8280",
+      "/api": process.env.ACCEPTANCE_API_PROXY || "http://127.0.0.1:8280",
     },
   },
 });

@@ -3,10 +3,11 @@ import {
   Alert,
   Button,
   Card,
+  Collapse,
   Form,
   Input,
   Select,
-  Space,
+  Tag,
   Typography,
 } from "antd";
 import { useMutation } from "@tanstack/react-query";
@@ -14,6 +15,13 @@ import { request, type Product } from "./api";
 
 type SearchResult = {
   retrieval_id: string;
+  match_status?: string;
+  retrieval_complete?: boolean;
+  relevance_judgment?: {
+    enabled?: boolean;
+    complete?: boolean;
+    status?: string;
+  };
   limitations: string[];
   items: {
     fact_id: string;
@@ -23,6 +31,7 @@ type SearchResult = {
     title: string;
     text: string;
     revision: number;
+    match_kind?: string;
   }[];
 };
 
@@ -45,21 +54,23 @@ export default function EvidenceSearch({
     onSuccess: () => setSearched(true),
   });
   return (
-    <Card title="查询评论与售后原文" style={{ marginBottom: 20 }}>
+    <Card className="wb-evidence-search" title="查询评论与售后原文">
+      <p className="wb-field-note">
+        在授权对象与日期范围内查询原文。未完成检索不能作为确定无答案。
+      </p>
       <Form
         name="evidence-search"
         layout="vertical"
         initialValues={{ kind: "reviews" }}
         onFinish={(values) => search.mutate(values)}
       >
-        <Space wrap align="start">
+        <div className="wb-search-grid">
           <Form.Item
             name="child_asin"
             label="查询商品"
             rules={[{ required: true }]}
           >
             <Select
-              style={{ width: 220 }}
               showSearch
               options={[...new Set(products.map((p) => p.child_asin))].map(
                 (asin) => ({ value: asin, label: asin }),
@@ -68,38 +79,9 @@ export default function EvidenceSearch({
           </Form.Item>
           <Form.Item name="kind" label="证据来源">
             <Select
-              style={{ width: 150 }}
               options={[
                 { value: "reviews", label: "评论" },
                 { value: "support", label: "售后工单" },
-              ]}
-            />
-          </Form.Item>
-          <Form.Item name="product" label="SKU范围">
-            <Select
-              allowClear
-              style={{ width: 180 }}
-              options={products.map((p) => ({
-                value: p.id,
-                label: `${p.child_asin} / ${p.seller_sku}`,
-              }))}
-            />
-          </Form.Item>
-          <Form.Item name="language" label="评论语言">
-            <Input placeholder="如 en、zh" maxLength={20} />
-          </Form.Item>
-          <Form.Item name="topic" label="主题代码">
-            <Input placeholder="如 stopped_working" maxLength={100} />
-          </Form.Item>
-          <Form.Item name="polarity" label="极性">
-            <Select
-              allowClear
-              style={{ width: 120 }}
-              options={[
-                { value: "negative", label: "负向" },
-                { value: "positive", label: "正向" },
-                { value: "mixed", label: "混合" },
-                { value: "neutral", label: "中性" },
               ]}
             />
           </Form.Item>
@@ -110,13 +92,55 @@ export default function EvidenceSearch({
             <Input type="date" />
           </Form.Item>
           <Form.Item
+            className="wb-search-query"
             name="query"
             label="问题词或原文短语"
             rules={[{ required: true }]}
           >
             <Input maxLength={200} placeholder="例如：充电慢" />
           </Form.Item>
-        </Space>
+        </div>
+        <Collapse
+          className="wb-search-filters"
+          size="small"
+          items={[
+            {
+              key: "filters",
+              label: "更多筛选：SKU、语言、主题与极性",
+              forceRender: true,
+              children: (
+                <div className="wb-search-grid">
+                  <Form.Item name="product" label="SKU范围">
+                    <Select
+                      allowClear
+                      options={products.map((p) => ({
+                        value: p.id,
+                        label: `${p.child_asin} / ${p.seller_sku}`,
+                      }))}
+                    />
+                  </Form.Item>
+                  <Form.Item name="language" label="评论语言">
+                    <Input placeholder="如 en、zh" maxLength={20} />
+                  </Form.Item>
+                  <Form.Item name="topic" label="主题代码">
+                    <Input placeholder="如 stopped_working" maxLength={100} />
+                  </Form.Item>
+                  <Form.Item name="polarity" label="极性">
+                    <Select
+                      allowClear
+                      options={[
+                        { value: "negative", label: "负向" },
+                        { value: "positive", label: "正向" },
+                        { value: "mixed", label: "混合" },
+                        { value: "neutral", label: "中性" },
+                      ]}
+                    />
+                  </Form.Item>
+                </div>
+              ),
+            },
+          ]}
+        />
         <Button type="primary" htmlType="submit" loading={search.isPending}>
           查询证据
         </Button>
@@ -129,8 +153,47 @@ export default function EvidenceSearch({
           <Typography.Paragraph style={{ marginTop: 16 }}>
             检索记录：{search.data.retrieval_id}
           </Typography.Paragraph>
+          {search.data.relevance_judgment?.enabled &&
+            search.data.relevance_judgment.complete === false && (
+              <Alert
+                type="warning"
+                showIcon
+                title="语义相关性判定未完成"
+                description="供应商不可用、预算限制或候选不确定；不能作为确定无答案。"
+              />
+            )}
+          {search.data.retrieval_complete === false && (
+            <Alert
+              type="warning"
+              showIcon
+              title="检索未完成，不能据此判断没有证据"
+            />
+          )}
+          {search.data.match_status === "scope_context" && (
+            <Alert
+              type="warning"
+              showIcon
+              title="仅范围上下文，未找到相关主题证据"
+              description="以下原文用于了解当前授权范围，不计为相关命中。"
+            />
+          )}
           {search.data.items.map((item) => (
             <Card size="small" key={item.fact_id} style={{ marginBottom: 8 }}>
+              <Tag
+                color={
+                  item.match_kind === "scope_context"
+                    ? "gold"
+                    : item.match_kind === "relevant_hit"
+                      ? "cyan"
+                      : "default"
+                }
+              >
+                {item.match_kind === "scope_context"
+                  ? "仅范围上下文"
+                  : item.match_kind === "relevant_hit"
+                    ? "相关命中"
+                    : "相关性待确认"}
+              </Tag>
               <Typography.Text strong>
                 {item.title || item.record_id}
               </Typography.Text>
@@ -143,12 +206,14 @@ export default function EvidenceSearch({
               </Typography.Text>
             </Card>
           ))}
-          {searched && !search.data.items.length && (
-            <Alert
-              type="info"
-              title="当前范围没有命中；这不代表该问题不存在，可调整关键词或核对数据覆盖。"
-            />
-          )}
+          {searched &&
+            !search.data.items.length &&
+            search.data.retrieval_complete !== false && (
+              <Alert
+                type="info"
+                title="当前范围没有命中；这不代表该问题不存在，可调整关键词或核对数据覆盖。"
+              />
+            )}
           {search.data.limitations.map((item) => (
             <Typography.Paragraph type="secondary" key={item}>
               {item}
