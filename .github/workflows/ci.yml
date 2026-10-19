@@ -1,13 +1,74 @@
-name: local-core-mvp
+name: django-mainline
 on: [push, pull_request]
 jobs:
   verify:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: insight_ci
+          POSTGRES_USER: insight
+          POSTGRES_PASSWORD: insight_ci_password
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U insight -d insight_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+      redis:
+        image: redis:7.4
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings
+      DJANGO_SECRET_KEY: ci-only-not-a-production-secret
+      DJANGO_DEBUG: "1"
+      INSIGHT_DB_PASSWORD: insight_ci_password
+      PGDATABASE: insight_ci
+      PGUSER: insight
+      PGHOST: 127.0.0.1
+      PGPORT: "5432"
+      CELERY_BROKER_URL: redis://127.0.0.1:6379/0
+      INVESTIGATION_EVAL_REPORT_SUFFIX: ci_${{ github.run_id }}_${{ github.run_attempt }}
+      INVESTIGATION_PLANNER_PROVIDER: deterministic
+      INVESTIGATION_EVAL_PROVIDER: deterministic
+      EVIDENCE_RELEVANCE_ENABLED: "0"
+      INSIGHT_ENABLED_MODEL_PROVIDERS: ""
+      INSIGHT_STORAGE_ROOT: ${{ runner.temp }}/insight-storage
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - run: cd backend && uv sync --dev && uv run pytest
-      - run: cd backend && uv run python -m compileall app
-      - run: cd frontend && corepack enable && pnpm install --frozen-lockfile && pnpm build
+        with: { node-version: 22.19.0 }
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - name: Install backend dependencies
+        run: cd backend && uv sync --dev --frozen
+      - name: Install isolated Redis worker test binary
+        run: sudo apt-get update && sudo apt-get install --yes redis-server
+      - name: Django system and migration checks
+        run: |
+          cd backend
+          uv run python manage.py check
+          uv run python manage.py makemigrations --check --dry-run
+      - name: Backend regression (capacity suite excluded)
+        run: cd backend && uv run pytest -m 'not capacity' -q
+      - name: Backend lint
+        run: cd backend && uv run ruff check config insight tests_v2
+      - name: Local supervisor regression
+        run: cd backend && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 uv run pytest -c /dev/null ../scripts/tests -q -p no:cacheprovider
+      - name: Install frontend dependencies
+        run: cd frontend && pnpm install --frozen-lockfile
+      - name: Frontend unit tests
+        run: cd frontend && pnpm test
+      - name: Frontend production build
+        run: cd frontend && pnpm build

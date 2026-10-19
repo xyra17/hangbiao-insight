@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from urllib.parse import quote
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
@@ -31,7 +32,7 @@ DATABASES = {
         "USER": os.getenv("PGUSER", "insight"),
         "PASSWORD": os.environ["INSIGHT_DB_PASSWORD"],
         "HOST": os.getenv("PGHOST", "127.0.0.1"),
-        "PORT": os.getenv("PGPORT", "55432"),
+        "PORT": os.getenv("PGPORT", "55433"),
         "CONN_MAX_AGE": 0,
     }
 }
@@ -62,19 +63,46 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {"login": "10/min"},
     "NUM_PROXIES": int(os.getenv("LOGIN_TRUSTED_PROXY_COUNT", "0")),
 }
+LOGIN_THROTTLE_ACCOUNT_LIMIT = int(os.getenv("INSIGHT_LOGIN_THROTTLE_ACCOUNT_LIMIT", "10"))
+LOGIN_THROTTLE_ADDRESS_LIMIT = int(os.getenv("INSIGHT_LOGIN_THROTTLE_ADDRESS_LIMIT", "60"))
+if LOGIN_THROTTLE_ACCOUNT_LIMIT < 1 or LOGIN_THROTTLE_ADDRESS_LIMIT < 1:
+    raise ValueError("Login throttle limits must be positive integers")
 SPECTACULAR_SETTINGS = {
     "TITLE": "航标经营工作台", "VERSION": "2.0.0", "COMPONENT_SPLIT_REQUEST": True,
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
     "ENUM_NAME_OVERRIDES": {"EventGroupOperationEnum": ["merge", "split"]},
 }
-CELERY_BROKER_URL = os.environ["CELERY_BROKER_URL"]
+if redis_host := os.getenv("INSIGHT_REDIS_HOST"):
+    redis_password = quote(os.environ["INSIGHT_REDIS_PASSWORD"], safe="")
+    redis_port = int(os.getenv("INSIGHT_REDIS_PORT", "6379"))
+    redis_database = int(os.getenv("INSIGHT_REDIS_DATABASE", "0"))
+    CELERY_BROKER_URL = f"redis://:{redis_password}@{redis_host}:{redis_port}/{redis_database}"
+else:
+    CELERY_BROKER_URL = os.environ["CELERY_BROKER_URL"]
+CELERY_NAMESPACE = os.getenv("INSIGHT_CELERY_NAMESPACE", "").strip()
+ACCEPTANCE_ENVIRONMENT = os.getenv("INSIGHT_ACCEPTANCE_ENV", "").strip()
+CELERY_TASK_DEFAULT_QUEUE = CELERY_NAMESPACE or "celery"
+CELERY_TASK_DEFAULT_EXCHANGE = CELERY_TASK_DEFAULT_QUEUE
+CELERY_TASK_DEFAULT_ROUTING_KEY = CELERY_TASK_DEFAULT_QUEUE
+CELERY_TASK_ROUTES = {"*": {"queue": CELERY_TASK_DEFAULT_QUEUE}}
+CELERY_BEAT_SCHEDULE_FILENAME = os.getenv("INSIGHT_BEAT_SCHEDULE", str(BASE_DIR / ".local" / "celerybeat-schedule"))
 CELERY_TASK_IGNORE_RESULT = True
 CELERY_TASK_ACKS_LATE = True
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1
 CELERY_TASK_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
-CELERY_BEAT_SCHEDULE = {"outbox": {"task": "insight.tasks.dispatch_outbox", "schedule": 10.0}}
+if CELERY_NAMESPACE:
+    CELERY_BROKER_TRANSPORT_OPTIONS["global_keyprefix"] = CELERY_NAMESPACE + ":"
+INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS = float(os.getenv("INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS", "1.0"))
+if INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS <= 0:
+    raise ValueError("INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS must be greater than zero")
+CELERY_BEAT_SCHEDULE = {
+    "outbox": {
+        "task": "insight.tasks.dispatch_outbox",
+        "schedule": INSIGHT_OUTBOX_DISPATCH_INTERVAL_SECONDS,
+    }
+}
 CELERY_BEAT_SCHEDULE["directory-scan"] = {"task": "insight.tasks.scan_directories", "schedule": 60.0}
 CELERY_BEAT_SCHEDULE["daily-scans"] = {"task": "insight.tasks.dispatch_daily_scans", "schedule": 60.0}
 # Keep retention independent from scans: one failed unlink or a temporary DB
