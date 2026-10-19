@@ -82,6 +82,36 @@ make business-acceptance DELIVERY_RUN=20261017T120000Z_internal-delivery DELIVER
 
 `make planner-comparison` 在固定流程与项目确定性 planner 两组中使用同一组 48 个任务、同一数据包和 8 步上限，输出分组绑定的独立结果文件。合成契约分数为开发回归；真实模型组需要新的整轮预算与数据传输授权，未授权时不会发起。
 
+## 数据与产物重建
+
+仓库只版本化可复现所需的**输入**与**脚本**，不提交可重建的大体积产物：
+
+| 路径 | 是否入库 | 说明 |
+| --- | --- | --- |
+| `dataset/data/01`–`06` | 是 | 评论、经营指标、黄金集、经营事实增强、近期经营闭环、动作效果场景 |
+| `dataset/data/07_S4_S6独立评测_v1/`（除 `validation/`） | 是 | 成对调查场景、双语检索查询、qrels 与候选文档 |
+| `dataset/data/07_.../validation/` | 否 | 评分/回放结果，重新运行即生成 |
+| `dataset/data/08_S7容量评测_v1/import_ready/` | 否 | 502,400 行容量包，由生成器按需构建 |
+| `dataset/data/acceptance_runs/` | 否 | `make business-acceptance` 的运行目录 |
+| `.local/` | 否 | 本机凭据、运行状态与验收产物 |
+
+重建方式：
+
+```bash
+# 容量包（502,400 行）与容量回归
+cd backend && uv run --env-file ../.env.local python ../dataset/prepare_capacity_acceptance.py \
+  --api-base-url http://127.0.0.1:8280
+make test-capacity
+
+# S4/S6 成对契约回放（确定性，不呼叫模型）
+python dataset/score_paired_investigations.py --replay-contracts
+
+# 端到端业务包验收（导入 → 指标 → 动作/复查 → 浏览器）
+make business-acceptance DELIVERY_RUN=20261017T120000Z_internal-delivery DELIVERY_AS_OF=2026-10-01
+```
+
+重建后的结果文件会回到 `validation/` 与 `.local/acceptance-artifacts/` 的相同路径，`.gitignore` 已覆盖这些目录。
+
 ## 重要文档
 
 - [经营异动 PRD](<完成经营异动项目需要的文档/01、经营异动-需求规格说明书（PRD）.md>)、[TDD](<完成经营异动项目需要的文档/02、经营异动-技术设计文档（TDD）.md>)、[开发步骤](<完成经营异动项目需要的文档/03、经营异动-开发步骤文档.md>)：v1.2 内部交付基线。
