@@ -37,3 +37,16 @@ backend/artifacts/*.sqlite3
 backend/artifacts/**/*.sqlite3
 backend/backend/
 backend/storage/
+
+# Legacy beat state is runtime data, never a source artifact.
+backend/celerybeat-schedule*
+
+# 生成的验收运行目录（可由 make business-acceptance 重建），不入库。
+dataset/data/acceptance_runs/
+
+# 本地 pnpm 内容寻址缓存
+.pnpm-store/
+
+# 评测/容量生成物：由 dataset 脚本重建，体积大，不入库。
+dataset/data/07_S4_S6独立评测_v1/validation/
+dataset/data/08_S7容量评测_v1/import_ready/
