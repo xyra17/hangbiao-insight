@@ -16,6 +16,11 @@ from psycopg import sql
 from redis import Redis
 from redis.exceptions import ConnectionError
 
+# 共享 CI runner 上冷启动与 SIGTERM 收敛都可能超过 15 秒；wrapper 自身在 10 秒后
+# 会 SIGKILL 子进程组，这里的上限只用于避免慢机器上误报，断言语义不变。
+WORKER_READY_TIMEOUT_SECONDS = float(os.getenv("ACCEPTANCE_WORKER_READY_TIMEOUT", "60"))
+WORKER_SHUTDOWN_TIMEOUT_SECONDS = float(os.getenv("ACCEPTANCE_WORKER_SHUTDOWN_TIMEOUT", "60"))
+
 
 @pytest.mark.django_db(transaction=True)
 def test_two_celery_environments_do_not_consume_each_others_tasks(tmp_path, monkeypatch):
@@ -39,7 +44,7 @@ def test_two_celery_environments_do_not_consume_each_others_tasks(tmp_path, monk
     processes, databases, logs = [], [], []
 
     def wait_until(predicate):
-        deadline = time.monotonic() + 20
+        deadline = time.monotonic() + WORKER_READY_TIMEOUT_SECONDS
         while time.monotonic() < deadline:
             if predicate():
                 return
@@ -93,7 +98,7 @@ def test_two_celery_environments_do_not_consume_each_others_tasks(tmp_path, monk
         for process in processes:
             process.terminate()
         for process in processes:
-            process.wait(timeout=15)
+            process.wait(timeout=WORKER_SHUTDOWN_TIMEOUT_SECONDS)
         for log in logs:
             log.close()
         for db in databases:
