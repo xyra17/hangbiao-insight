@@ -1,0 +1,80 @@
+{
+  "schema_version": "make-verify-receipt-v1",
+  "generated_at_utc": "2026-10-19T14:59:54Z",
+  "git": {
+    "commit": "f3417a365ea6c211d12f64ae6b2e7a0f3536e05e",
+    "tree": "30a7b76d2d78c18c24aea980d57837799a4f956c",
+    "branch": "main",
+    "working_tree_clean": false,
+    "commit_subject": "fix(test): 验收 wrapper 不再在信号处理器内重入 wait"
+  },
+  "environment": {
+    "os": "Darwin-arm64",
+    "node": "v24.19.0",
+    "pnpm": "11.25.0",
+    "uv": "0.12.15",
+    "python": "3.13.13",
+    "django": "5.2.17"
+  },
+  "local_make_verify": {
+    "command": "make verify",
+    "exit_code": 0,
+    "ruff_lint": "passed",
+    "django_check": "passed",
+    "migrations_drift": "none",
+    "openapi": {
+      "warnings": 1,
+      "errors": 0
+    },
+    "backend": {
+      "passed": 925,
+      "skipped": 5,
+      "deselected": 1,
+      "duration_seconds": 274.48
+    },
+    "scripts": {
+      "passed": 9
+    },
+    "frontend": {
+      "test_files": 6,
+      "tests": 46
+    },
+    "production_build": "passed",
+    "log": {
+      "path": "docs/verification/2026-10-19-make-verify-f3417a3.log",
+      "sha256": "7b5ddd4c517d20b2bfa6690925004dd1a8fb48b3015d06501a9033e7e061079e"
+    }
+  },
+  "ci": {
+    "provider": "github-actions",
+    "repository": "xyra17/hangbiao-insight",
+    "workflow": ".github/workflows/ci.yml",
+    "run_id": 39272666317,
+    "run_url": "https://github.com/xyra17/hangbiao-insight/actions/runs/39272666317",
+    "commit": "f3417a365ea6c211d12f64ae6b2e7a0f3536e05e",
+    "conclusion": "success",
+    "started_at_utc": "2026-10-19T14:51:04Z",
+    "finished_at_utc": "2026-10-19T14:59:23Z",
+    "job_steps": 15,
+    "backend": {
+      "passed": 920,
+      "skipped": 10,
+      "deselected": 1,
+      "duration_seconds": 359.43
+    },
+    "scripts": {
+      "passed": 9
+    },
+    "frontend": {
+      "test_files": 6,
+      "tests": 46
+    },
+    "lint": "passed",
+    "production_build": "passed"
+  },
+  "skip_note": "两组跳过项都是显式 opt-in 门；CI 比本地多 5 项，来自本机资源可用性差异（未逐项核对原因）。",
+  "scope_limits": [
+    "确定性验收环境；无外部模型、无付费派发。",
+    "该回执只证明工程门在记录 commit 上通过，不证明模型质量、人工评审、业务收益或生产就绪。"
+  ]
+}
